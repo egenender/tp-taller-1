@@ -17,7 +17,7 @@
  *                      FUNCIONES AUXILIARES
  * *****************************************************************/
 
-/* Funcion auxiliar para imprimir si estuvo OK o no. */
+/* Funcion auxiliar para imprimir si estuvo OK (prueba correcta) o no. */
 void print_test(const char* name, bool result){
     printf("%s: %s\n", name, result? "OK" : "ERROR");
 }
