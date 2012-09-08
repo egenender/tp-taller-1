@@ -1,4 +1,3 @@
-
 #ifndef CUERPO_H_
 #define CUERPO_H_
 #include <stddef.h>
@@ -15,7 +14,7 @@ protected:
 public:
 	Cuerpo(Area*, Animacion*);
 	virtual ~Cuerpo();
-	void mover(Posicion);
+	virtual void mover(Posicion)=0; //Cuerpo es abstracto
 	void animar();
 	bool estaVivo();
 };
