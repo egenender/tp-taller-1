@@ -1,9 +1,3 @@
-/*
- * Posicion.cpp
- *
- *  Created on: 06/09/2012
- *      Author: martin
- */
 
 #include "Posicion.h"
 

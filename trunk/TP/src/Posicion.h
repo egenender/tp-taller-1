@@ -1,9 +1,3 @@
-/*
- * Posicion.h
- *
- *  Created on: 06/09/2012
- *      Author: martin
- */
 
 #ifndef POSICION_H_
 #define POSICION_H_
