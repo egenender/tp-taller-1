@@ -2,7 +2,7 @@
 #include "Area.h"
 
 Area::Area(int height, int weight) {
-	this(height, weight, new Posicion(0,0));
+	Area(height, weight, new Posicion(0,0));
 }
 
 Area::Area(int height, int weight, Posicion *pos_inicial){
