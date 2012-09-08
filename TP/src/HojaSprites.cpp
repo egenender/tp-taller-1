@@ -51,6 +51,7 @@ bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
 	return true;
 }
 
+/** Redimenciona la hoja de sprites en ancho y alto. **/
 bool HojaSprites::escala(Uint16 ancho, Uint16 alto) {
 	if(!superficie)
 		return false;
