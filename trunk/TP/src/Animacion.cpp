@@ -1,5 +1,4 @@
 #include "Animacion.h"
-#include "FPS.h"
 
 Animacion::~Animacion() {
 	delete(frames);
