@@ -7,12 +7,25 @@
 
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo() {
-	// TODO Auto-generated constructor stub
-
+Cuerpo::Cuerpo(Area* sup, Animacion* anim) {
+	superficieOcupada = sup;
+	animado = anim;
+	vivo = true;
 }
 
 Cuerpo::~Cuerpo() {
-	// TODO Auto-generated destructor stub
+	delete superficieOcupada;
+	delete animado;
 }
 
+void Cuerpo::animar(){
+	//animado.HacerAnimarOComoSeLlameElMetodo();
+}
+
+bool Cuerpo::estaVivo(){
+	return vivo;
+}
+
+void Cuerpo::mover(Posicion pos){
+	superficieOcupada->mover(pos);
+}
