@@ -11,7 +11,7 @@ Posicion::~Posicion() {
 }
 
 Posicion::Posicion(int a, int b){
-	(if a < 0 || b < 0){
+	if (a < 0 || b < 0) {
 		//Lanzo Excepcion
 	}
 	x = a;

@@ -4,6 +4,8 @@
 
 /* Las Areas estaran definidas como cuadrados, para simplificar el verificar las colisiones*/
 
+#include "Posicion.h"
+
 class Area {
 private:
 	int ancho, alto;

@@ -3,6 +3,9 @@
 #define CUERPO_H_
 #include <stddef.h>
 
+#include "Area.h"
+#include "Animacion.h"
+
 class Cuerpo {
 protected:
 	bool vivo; // esta vivo un cuerpo?
