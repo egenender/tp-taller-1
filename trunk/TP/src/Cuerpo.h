@@ -4,6 +4,7 @@
 
 #include "Area.h"
 #include "Animacion.h"
+#include <stdbool.h>
 
 class Cuerpo {
 protected:
