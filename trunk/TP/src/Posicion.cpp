@@ -6,7 +6,7 @@
  */
 
 #include "Posicion.h"
-#include <cmath>
+
 
 Posicion::Posicion() {
 	x = y = 0;
