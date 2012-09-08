@@ -1,9 +1,3 @@
-/*
- * Cuerpo.h
- *
- *  Created on: 08/09/2012
- *      Author: martin
- */
 
 #ifndef CUERPO_H_
 #define CUERPO_H_
