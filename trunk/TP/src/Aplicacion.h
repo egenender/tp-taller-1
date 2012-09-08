@@ -2,7 +2,6 @@
 #define APLICACION_H
 
 #include "SDL/SDL.h"
-#include "ManejadorEstados.h"
 #include "Evento.h"
 
 #define ANCHO_VENTANA 640
