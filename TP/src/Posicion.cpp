@@ -17,6 +17,9 @@ Posicion::~Posicion() {
 }
 
 Posicion::Posicion(int a, int b){
+	(if a < 0 || b < 0){
+		//Lanzo Excepcion
+	}
 	x = a;
 	y = b;
 }
@@ -70,4 +73,11 @@ void Posicion::moverHorizontalmente(int deltaX){
 
 void Posicion::moverVerticalmente(int deltaY){
 	y *= deltaY;
+}
+
+Posicion Posicion::operator+(Posicion sumando){
+	Posicion pos(x,y); //hago una copia
+	pos.moverHorizontalmente(sumando.x);
+	pos.moverVerticalmente(sumando.y);
+	return pos;
 }

@@ -36,6 +36,7 @@ public:
 	//Para mover la posicion
 	void moverHorizontalmente(int);
 	void moverVerticalmente(int);
+	Posicion operator + (Posicion);
 };
 
 #endif /* POSICION_H_ */
