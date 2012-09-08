@@ -22,30 +22,27 @@ class Animacion {
 		void inicializar();
 		void cargarFrames(HojaSprites* frames);
 
+	// Contructores y Destructor:
 	public:
 		Animacion(HojaSprites* frames);
 		Animacion(HojaSprites* frames, int duracion);
 		Animacion(HojaSprites* frames, vector<int>* frameDelays);
+
 		~Animacion();
 
-	public:
+	// Metodos:
 		void animar();
 		void detener();
 		void detenerEn(int frame);
 		void resetear();
 		void continuar();
-
-		void setearCantidadFrames(int frames);
 		void setearDelayFrame(int delay);
 		void setearFrameActual(int frame);
 		void setearDuracion(int duracion);
 		int obtenerFrameActual();
 		int obtenerFramesTotales();
 		bool estaCorriendo();
-
 		bool dibujar(SDL_Surface* supDest, int x, int y);
-
-
 };
 
 #endif
