@@ -1,4 +1,5 @@
 #include "Aplicacion.h"
+#include "ManejadorEstados.h"
 
 /** Constructor **/
 Aplicacion::Aplicacion() {
