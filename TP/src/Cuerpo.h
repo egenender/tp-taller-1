@@ -6,6 +6,8 @@
 #include "Animacion.h"
 #include <stdbool.h>
 
+//habria que ver que otros metodos tiene, alguno que tenga que ser definido mas abajo..
+
 class Cuerpo {
 protected:
 	bool vivo; // esta vivo un cuerpo?
@@ -15,8 +17,8 @@ protected:
 public:
 	Cuerpo(Area*, Animacion*);
 	virtual ~Cuerpo();
-	virtual void mover(Posicion)=0; //Cuerpo es abstracto
-	void animar();
+	void mover(Posicion*);
+	virtual void animar()=0;
 	bool estaVivo();
 };
 

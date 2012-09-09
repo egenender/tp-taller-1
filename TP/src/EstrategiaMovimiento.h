@@ -3,14 +3,12 @@
 #include "Personaje.h"
 
 class EstrategiaMovimiento {
-protected:
-	Personaje* personaje;
+
 public:
-	EstrategiaMovimiento(Personaje*);
+	//Deberia tener conocimiento del mundo, o algo asi
 	EstrategiaMovimiento();
-	void asignarPersonaje(Personaje*);
 	virtual ~EstrategiaMovimiento();
-	virtual void actuar() = 0;
+	virtual void actuar(Personaje*) = 0;
 
 	//Faltaria ver de agregar el actuar(Evento) o algo por el estilo
 };
