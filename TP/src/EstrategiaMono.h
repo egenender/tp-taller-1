@@ -1,5 +1,6 @@
 #ifndef ESTRATEGIAMONO_H_
 #define ESTRATEGIAMONO_H_
+#include "EstrategiaMovimiento.h"
 #include "Personaje.h"
 
 class EstrategiaMono: public EstrategiaMovimiento {
