@@ -19,3 +19,7 @@ void Cuerpo::animar(){
 bool Cuerpo::estaVivo(){
 	return vivo;
 }
+
+void Cuerpo::mover(Posicion* pos){
+	superficieOcupada->cambiarPosicion(pos);
+}

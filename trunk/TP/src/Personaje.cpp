@@ -1,5 +1,4 @@
 #include "Personaje.h"
-#include "lista.h"
 
 Personaje::Personaje(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Cuerpo(sup,anim) {
 	//Llama al constructor de la clase madre con los parametros de la animacion
@@ -8,9 +7,18 @@ Personaje::Personaje(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Cue
 }
 
 Personaje::~Personaje() : ~Cuerpo(){
-
+	delete estrategia;
 }
 
 void Personaje::jugar(){
-	estrategia->actuar();
+	estrategia->actuar(this); //Revisar si estoy pasando el objeto o la referencia
+}
+
+void Personaje::morir(){
+	vivo = false;
+	//algo mas?
+}
+
+void Personaje::trasladarA(Posicion* pos){
+	superficieOcupada->cambiarPosicion(pos);
 }
