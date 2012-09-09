@@ -6,7 +6,6 @@
 
 class Princesa:public Personaje {
 public:
-	Princesa(Area*, Animacion*);
 	Princesa(Area*, Animacion*, EstrategiaMovimiento*);
 	virtual ~Princesa();
 

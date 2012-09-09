@@ -1,10 +1,6 @@
 #include "Mario.h"
 #include "Posicion.h"
 
-Mario::Mario(Area* sup, Animacion* anim) {
-	//Idem Mono
-}
-
 Mario::Mario(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Personaje(sup,anim,estr) {
 
 }
