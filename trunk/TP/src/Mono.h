@@ -9,7 +9,6 @@ class Mono: public Personaje{
 private:
 	//fabrica de cosas para tirar
 public:
-	Mono(Area*, Animacion*);
 	Mono(Area*, Animacion*, EstrategiaMovimiento*);
 	virtual ~Mono();
 

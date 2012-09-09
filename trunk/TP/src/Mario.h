@@ -7,7 +7,6 @@
 
 class Mario: public Personaje {
 public:
-	Mario(Area*, Animacion*);
 	Mario(Area*, Animacion*, EstrategiaMovimiento*);
 	virtual ~Mario();
 
