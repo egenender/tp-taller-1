@@ -3,7 +3,7 @@
 Princesa::Princesa(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Personaje(sup,anim,estr){
 
 }
-Princesa::~Princesa():~Personaje(){
+Princesa::~Princesa(){
 
 }
 

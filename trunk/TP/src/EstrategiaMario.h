@@ -6,7 +6,6 @@
 class EstrategiaMario: public EstrategiaMovimiento {
 public:
 	EstrategiaMario();
-	virtual ~EstrategiaMario();
 	void actuar(Personaje*);
 };
 

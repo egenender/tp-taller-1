@@ -6,12 +6,12 @@ Personaje::Personaje(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Cue
 	estrategia = estr;
 }
 
-Personaje::~Personaje() : ~Cuerpo(){
+Personaje::~Personaje(){
 	delete estrategia;
 }
 
 void Personaje::jugar(){
-	estrategia->actuar(this); //Revisar si estoy pasando el objeto o la referencia
+	estrategia->actuar(); //Revisar si estoy pasando el objeto o la referencia
 }
 
 void Personaje::morir(){

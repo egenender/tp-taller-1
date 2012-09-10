@@ -6,7 +6,6 @@
 class EstrategiaPrincesa:public EstrategiaMovimiento {
 public:
 	EstrategiaPrincesa();
-	virtual ~EstrategiaPrincesa();
 	void actuar(Personaje*);
 };
 

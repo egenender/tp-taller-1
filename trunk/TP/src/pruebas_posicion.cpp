@@ -80,7 +80,7 @@ void pruebas(){
 	pruebas_posicionVerficarAdyacencia();
 }
 
-int main (void){
+/*int main (void){
 	pruebas();
 	return 0;
-}
+}*/

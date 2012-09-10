@@ -5,7 +5,7 @@ Mono::Mono(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Personaje(sup
 
 }
 
-Mono::~Mono():~Personaje() {
+Mono::~Mono() {
 
 }
 

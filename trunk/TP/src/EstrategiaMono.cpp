@@ -4,7 +4,7 @@ EstrategiaMono::EstrategiaMono() {
 
 }
 
-EstrategiaMono::~EstrategiaMono():~EstrategiaMovimiento() {
+EstrategiaMono::~EstrategiaMono() {
 
 }
 void EstrategiaMono::actuar(Personaje* pers){
