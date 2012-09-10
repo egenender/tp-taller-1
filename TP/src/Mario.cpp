@@ -5,7 +5,7 @@ Mario::Mario(Area* sup, Animacion* anim, EstrategiaMovimiento* estr):Personaje(s
 
 }
 
-Mario::~Mario():~Personaje() {
+Mario::~Mario() {
 
 }
 

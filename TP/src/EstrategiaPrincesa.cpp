@@ -5,9 +5,6 @@ EstrategiaPrincesa::EstrategiaPrincesa() {
 
 }
 
-EstrategiaPrincesa::~EstrategiaPrincesa():~EstrategiaMovimiento() {
-	// TODO Auto-generated destructor stub
-}
 void EstrategiaPrincesa::actuar(Personaje* personaje){
 	//No hace nada por ahora
 }
