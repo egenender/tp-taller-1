@@ -4,6 +4,6 @@ EstrategiaMario::EstrategiaMario() {
 
 }
 
-void EstrategiaMario::actuar(Personaje* pers){
+void EstrategiaMario::actuar(){
 	//No hace nada por ahora
 }

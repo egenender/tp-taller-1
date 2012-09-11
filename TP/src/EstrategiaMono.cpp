@@ -4,9 +4,6 @@ EstrategiaMono::EstrategiaMono() {
 
 }
 
-EstrategiaMono::~EstrategiaMono() {
-
-}
-void EstrategiaMono::actuar(Personaje* pers){
+void EstrategiaMono::actuar(){
 	//No hace nada por ahora
 }
