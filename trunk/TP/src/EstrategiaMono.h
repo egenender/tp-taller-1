@@ -1,13 +1,11 @@
 #ifndef ESTRATEGIAMONO_H_
 #define ESTRATEGIAMONO_H_
 #include "EstrategiaMovimiento.h"
-#include "Personaje.h"
 
 class EstrategiaMono: public EstrategiaMovimiento {
 public:
 	EstrategiaMono();
-	virtual ~EstrategiaMono();
-	void actuar(Personaje*);
+	void actuar();
 };
 
 #endif /* ESTRATEGIAMONO_H_ */

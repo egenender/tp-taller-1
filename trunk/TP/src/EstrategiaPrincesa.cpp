@@ -5,6 +5,6 @@ EstrategiaPrincesa::EstrategiaPrincesa() {
 
 }
 
-void EstrategiaPrincesa::actuar(Personaje* personaje){
+void EstrategiaPrincesa::actuar(){
 	//No hace nada por ahora
 }
