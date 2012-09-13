@@ -1,6 +1,6 @@
 #include "Automatico.h"
 
-Automatico::Automatico(Area* sup): Cuerpo(sup) {
+Automatico::Automatico(const char* nombrecito, Area* sup): Cuerpo(nombrecito,sup) {
 
 }
 

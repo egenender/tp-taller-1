@@ -4,8 +4,9 @@
 #include "Cuerpo.h"
 
 class Automatico: public Cuerpo{
+
 public:
-	Automatico(Area*);
+	Automatico(const char*, Area*);
 	virtual ~Automatico();
 
 	void actualizar();

@@ -1,10 +1,10 @@
 #include "Manual.h"
 
-Manual::Manual(Area* sup): Cuerpo(sup) {
+Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
 }
 
-Manual::Manual(Area* sup, int vel):Cuerpo(sup){
+Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
 		//Lanzo excepcion?
 		//Por ahora hago esto:

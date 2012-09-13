@@ -8,8 +8,8 @@ class Manual:public Cuerpo {
 private:
 	int velocidad;
 public:
-	Manual(Area*);
-	Manual(Area*, int);
+	Manual(const char*, Area*);
+	Manual(const char*, Area*, int);
 	virtual ~Manual();
 	void moverALaIzquierda();
 	void moverALaDerecha();
