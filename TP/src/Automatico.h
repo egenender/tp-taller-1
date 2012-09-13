@@ -8,6 +8,7 @@ public:
 	Automatico(Area*);
 	virtual ~Automatico();
 
+	void actualizar();
 };
 
 #endif /* AUTOMATICO_H_ */
