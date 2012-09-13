@@ -11,7 +11,7 @@ HojaSprites::HojaSprites() {
  *  Debe haber una correspondencia entre el ancho y alto de la imagen completa
  *  con cada sprite individual... Ej: archivo de 64x256 pixeles, sprites de
  *  64x64 pixeles -> tenemos 4 sprites en total. **/
-HojaSprites::HojaSprites(const char* archivo, int ancho, int alto) : Superficie(archivo) {
+HojaSprites::HojaSprites(const char* archivo, unsigned int ancho, unsigned int alto) : Superficie(archivo) {
 
 	HojaSprites();
 
@@ -51,7 +51,11 @@ bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
 	return true;
 }
 
-/** Redimenciona la hoja de sprites en ancho y alto. **/
+/** Redimenciona la hoja de sprites en ancho y alto.
+ * ATENCION: pueden ocurrir efectos raros al utilizar este metodo, ya que
+ * no se asegura que se puedan definir bien las dimensiones de los sprites
+ * Se recomienda utilizar escala(factor). Aun asi, este metodo queda por si
+ * llega a ser util en algun momento **/
 bool HojaSprites::escala(Uint16 ancho, Uint16 alto) {
 	if(!superficie)
 		return false;
@@ -66,4 +70,18 @@ bool HojaSprites::escala(Uint16 ancho, Uint16 alto) {
 	anchoSprite *= factorAncho;
 
 	return true;
+}
+
+/** Redimenciona la hoja de sprites en ancho y alto. **/
+bool HojaSprites::escala(Uint16 factor) {
+	return escala(ancho*factor,alto*factor);
+}
+/** Devuelve el alto de un Sprite **/
+int HojaSprites::obtenerAltoSprite() {
+	return altoSprite;
+}
+
+/** Devuelve el ancho de un Sprite **/
+int HojaSprites::obtenerAnchoSprite() {
+	return anchoSprite;
 }

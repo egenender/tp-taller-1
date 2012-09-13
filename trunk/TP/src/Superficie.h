@@ -4,6 +4,9 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 
+#define VERTICALMENTE 0x00000001
+#define HORIZONTALMENTE 0x00000010
+
 class Superficie {
 
 	protected:
@@ -12,6 +15,7 @@ class Superficie {
 		int ancho;
 
 	public:
+		Superficie(SDL_Surface* superficie);
 		Superficie(const char* archivo);
 		~Superficie();
 
@@ -29,7 +33,10 @@ class Superficie {
 		bool dibujar(SDL_Surface* supDest, int xDest, int yDest, int xOri, int yOri, int Ancho, int Altura);
 		void transparencia(unsigned int R, unsigned int G, unsigned int B);
 		bool escala(Uint16 width, Uint16 height);
-		bool scale(Uint16 factor);
+		bool escala(Uint16 factor);
+		int obtenerAlto();
+		int obtenerAncho();
+		Superficie* voltear(int flags);
 };
 
 #endif

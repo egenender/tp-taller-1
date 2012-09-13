@@ -31,7 +31,7 @@ Animacion::Animacion(HojaSprites* frames) {
 }
 
 /** Crea una Animacion a partir de una HojaSprites, con una duracion total definida **/
-Animacion::Animacion(HojaSprites* frames, int duracion) {
+/*Animacion::Animacion(HojaSprites* frames, int duracion) {
 
 	inicializar();
 	cargarFrames(frames);
@@ -39,9 +39,19 @@ Animacion::Animacion(HojaSprites* frames, int duracion) {
 	if (duracion > 0) {
 		delayFrame = duracion/framesTotales;
 	}
+}*/
+
+/** Crea una Animacion a partir de una HojaSprites, con duracion de frames definido **/
+Animacion::Animacion(HojaSprites* frames, int delayFrame) {
+
+	inicializar();
+	cargarFrames(frames);
+
+	this->delayFrame = delayFrame;
 }
 
-/** Crea una Animacion a partir de una HojaSprites, con duracion de frames definidos **/
+
+/** Crea una Animacion a partir de una HojaSprites, con duracion de frames definidos (pueden variar) **/
 Animacion::Animacion(HojaSprites* frames, vector<int>* frameDelays) {
 
 	inicializar();
