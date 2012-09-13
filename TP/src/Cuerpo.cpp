@@ -1,14 +1,16 @@
 
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(Area* sup) {
+Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	superficieOcupada = sup;
 	lista_observadores = lista_crear();
+	nombre = nombrecito;
 }
 
 Cuerpo::~Cuerpo() {
 	delete superficieOcupada;
 	lista_destruir(lista_observadores, NULL);
+	delete nombre;
 	//Podría pasarse una función que destruya a los observadores...
 }
 

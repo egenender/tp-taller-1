@@ -12,9 +12,10 @@ class Cuerpo {
 protected:
 	Area* superficieOcupada;
 	lista_t* lista_observadores;
+	const char* nombre;
 
 public:
-	Cuerpo(Area*);
+	Cuerpo(const char*, Area*);
 	virtual ~Cuerpo();
 	void moverA(Posicion*);
 	//void agregarObservador(Observador* observer); Lo dejo comentado para cuando lo hagamos
