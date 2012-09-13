@@ -25,7 +25,7 @@ class Animacion {
 	// Contructores y Destructor:
 	public:
 		Animacion(HojaSprites* frames);
-		Animacion(HojaSprites* frames, int duracion);
+		Animacion(HojaSprites* frames, int delayFrame);
 		Animacion(HojaSprites* frames, vector<int>* frameDelays);
 
 		~Animacion();
