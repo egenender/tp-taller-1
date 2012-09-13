@@ -1,25 +1,23 @@
 
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(Area* sup, Animacion* anim) {
+Cuerpo::Cuerpo(Area* sup) {
 	superficieOcupada = sup;
-	animado = anim;
-	vivo = true;
+	lista_observadores = lista_crear();
 }
 
 Cuerpo::~Cuerpo() {
 	delete superficieOcupada;
-	delete animado;
+	lista_destruir(lista_observadores, NULL);
+	//Podría pasarse una función que destruya a los observadores...
 }
 
-void Cuerpo::animar(){
-	//animado.HacerAnimarOComoSeLlameElMetodo();
-}
-
-bool Cuerpo::estaVivo(){
-	return vivo;
-}
-
-void Cuerpo::mover(Posicion* pos){
+void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
 }
+
+/*
+void Cuerpo::agregarObservador(Observador* observer){
+	lista_insertar_utlimo(lista_observadores, observer);
+}
+ * */

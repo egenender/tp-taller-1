@@ -3,23 +3,22 @@
 #include <stddef.h>
 
 #include "Area.h"
-#include "Animacion.h"
 #include <stdbool.h>
+#include "lista.h"
 
 //habria que ver que otros metodos tiene, alguno que tenga que ser definido mas abajo..
 
 class Cuerpo {
 protected:
-	bool vivo; // esta vivo un cuerpo?
 	Area* superficieOcupada;
-	Animacion* animado; //lo mas sensato es que un cuerpo tenga una animacion -> preguntar si esto esta bien
+	lista_t* lista_observadores;
 
 public:
-	Cuerpo(Area*, Animacion*);
+	Cuerpo(Area*);
 	virtual ~Cuerpo();
-	void mover(Posicion*);
-	virtual void animar()=0;
-	bool estaVivo();
+	void moverA(Posicion*);
+	//void agregarObservador(Observador* observer); Lo dejo comentado para cuando lo hagamos
+	virtual void actualizar()=0; //o que reciba o devuelva algo ?
 };
 
 #endif /* CUERPO_H_ */

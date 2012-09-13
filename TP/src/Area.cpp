@@ -24,9 +24,9 @@ void Area::cambiarPosicion(Posicion* pos_nueva){
 	pos = pos_nueva;
 }
 
-void Area::mover(Posicion traslado){
+void Area::mover(Posicion* traslado){
 	Posicion *pos_nueva = NULL;
-	*pos_nueva = *pos + traslado;
+	*pos_nueva = *pos + *traslado;
 	delete pos;
 	pos = pos_nueva;
 }
@@ -37,4 +37,16 @@ bool Area::verificarColision(Area otraArea){
 	//Falta hacer la verificacion de choques..
 
 	return choque;
+}
+
+int Area::getAlto(){
+	return alto;
+}
+
+int Area::getAncho(){
+	return ancho;
+}
+
+Posicion* Area::getPosicion(){
+	return pos;
 }

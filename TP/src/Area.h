@@ -14,9 +14,12 @@ class Area {
 		Area(int, int);
 		Area(int, int, Posicion*); //revisar si no deberia ser Posicion a secas
 		void cambiarPosicion(Posicion*); //idem
-		void mover(Posicion);
+		void mover(Posicion*);
 		bool verificarColision(Area);
 		virtual ~Area();
+		int getAncho();
+		int getAlto();
+		Posicion* getPosicion();
 };
 
 #endif /* AREA_H_ */
