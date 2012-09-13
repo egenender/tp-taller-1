@@ -7,6 +7,7 @@
 class EstadoIntroduccion : public Estado {
     private:
         static EstadoIntroduccion instancia;
+        Superficie* fondo;
         Animacion* yoshiNormal;
         Animacion* yoshiGigante;
         Superficie* original;
