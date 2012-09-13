@@ -1,5 +1,5 @@
-
 #include "Area.h"
+#include "Posicion.h"
 
 Area::Area(int height, int weight) {
 	Area(height, weight, new Posicion(0,0));
