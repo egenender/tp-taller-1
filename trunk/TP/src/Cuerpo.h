@@ -20,6 +20,7 @@ public:
 	void moverA(Posicion*);
 	//void agregarObservador(Observador* observer); Lo dejo comentado para cuando lo hagamos
 	virtual void actualizar()=0; //o que reciba o devuelva algo ?
+	const char* getNombre();
 };
 
 #endif /* CUERPO_H_ */
