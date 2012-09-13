@@ -17,7 +17,7 @@ public:
 	void saltar();
 	void atacar();
 	void especial();
-
+	void actualizar();
 private:
 	void trasladar(int);
 };
