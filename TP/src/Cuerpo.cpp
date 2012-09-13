@@ -18,6 +18,9 @@ void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
 }
 
+const char* Cuerpo::getNombre(){
+	return nombre;
+}
 /*
 void Cuerpo::agregarObservador(Observador* observer){
 	lista_insertar_utlimo(lista_observadores, observer);
