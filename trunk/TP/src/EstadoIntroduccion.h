@@ -12,6 +12,7 @@ class EstadoIntroduccion : public Estado {
         Animacion* yoshiGigante;
         Superficie* original;
         Superficie* espejada;
+        int x,y,dx,dy;
 
     private:
         EstadoIntroduccion();

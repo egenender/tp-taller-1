@@ -11,6 +11,7 @@ EstadoIntroduccion::EstadoIntroduccion() {
 	yoshiGigante = NULL;
 	espejada = NULL;
 	original = NULL;
+	x = y = dx = dy =0;
 }
 
 /** Inicializa el estado **/
@@ -23,6 +24,9 @@ void EstadoIntroduccion::iniciar() {
 	HojaSprites* gigante = new HojaSprites("src/yoshi.bmp", 64, 64);
 	gigante->escala(2);
 	gigante->transparencia(255, 0, 255);
+
+	// TODO: hacer que funcione esta linea:
+//	gigante = gigante->voltear(HORIZONTALMENTE);
 
 	yoshiNormal = new Animacion(normal);
 	yoshiGigante = new Animacion(gigante);
@@ -55,6 +59,26 @@ void EstadoIntroduccion::terminar() {
 /** Actualiza el estado **/
 void EstadoIntroduccion::actualizar() {
 
+	Uint8 *keystates = SDL_GetKeyState(NULL);
+
+	if (keystates[SDLK_UP])
+		dy-=1;
+
+	if (keystates[SDLK_DOWN])
+		dy+=1;
+
+	if (keystates[SDLK_LEFT])
+		dx-=1;
+
+	if (keystates[SDLK_RIGHT])
+		dx+=1;
+
+	if (!keystates[SDLK_UP] && !keystates[SDLK_DOWN] && !keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT])
+		dx = dy = 0;
+
+	x += dx;
+	y += dy;
+
 	yoshiNormal->animar();
 	yoshiGigante->animar();
 	// Aca se deberia cambiar a otro estado cuando se cumple una condicion
@@ -67,7 +91,7 @@ void EstadoIntroduccion::dibujar(SDL_Surface* display) {
 
 	yoshiNormal->dibujar(display, 0, 0);
 	yoshiNormal->dibujar(display, 32, 0);
-	yoshiGigante->dibujar(display, 400, 30);
+	yoshiGigante->dibujar(display, x, y);
 	original->dibujar(display, 200, 0);
 	espejada->dibujar(display, 300, 0);
 
