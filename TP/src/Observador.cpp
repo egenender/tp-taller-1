@@ -1,4 +1,4 @@
-#import "Observador.h"
+#include "Observador.h"
 
 Observador::Observador() {}
 
