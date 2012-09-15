@@ -14,8 +14,20 @@ Cuerpo::~Cuerpo() {
 	//Podría pasarse una función que destruya a los observadores...
 }
 
+Posicion* Cuerpo::obtenerPosicion() {
+	return superficieOcupada->getPosicion();
+}
+
 void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
+}
+
+int Cuerpo::obtenerAncho() {
+	return superficieOcupada->getAncho();
+}
+
+int Cuerpo::obtenerAlto() {
+	return superficieOcupada->getAlto();
 }
 
 const char* Cuerpo::getNombre(){
