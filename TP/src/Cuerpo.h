@@ -11,7 +11,6 @@
 class Cuerpo {
 protected:
 	Area* superficieOcupada;
-	lista_t* lista_observadores;
 	const char* nombre;
 
 public:

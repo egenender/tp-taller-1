@@ -3,6 +3,7 @@
 #define VELOCIDAD_STANDARD 5
 #include "Area.h"
 #include "Cuerpo.h"
+#include "Observable.h"
 
 class Manual:public Cuerpo, public Observable {
 private:
