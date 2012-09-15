@@ -1,18 +1,25 @@
 #include "Aplicacion.h"
 #include "ManejadorEstados.h"
+#include "Log.h"
 
 /** Constructor **/
 Aplicacion::Aplicacion() {
 	display = NULL;
 	corriendo = true;
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Aplicacion creada correctamente.");
 }
 
 /** Iniciar las cosas: **/
 bool Aplicacion::iniciar() {
 
 	// Iniciamos SDL:
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        return false;
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+    	Log::getInstance()->writeToLogFile(Log::ERROR, "Imposible iniciar SDL.");
+    	return false;
+    }
+
+
+    Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "SDL iniciada correctamente.");
 
     // Creamos la ventana:
     if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
@@ -62,6 +69,7 @@ void Aplicacion::limpiar() {
 /** Al salir de la aplicacion **/
 void Aplicacion::salir() {
 	corriendo = false;
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Fin de aplicación.");
 }
 
 /** Gameloop */

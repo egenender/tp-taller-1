@@ -7,20 +7,18 @@
 using namespace std;
 
 class Log{
+	private:
+		static Log instance;
+		Log();
+
 	public:
 		static const string INFORMATIVO; // Tipo de severidad
 		static const string ADVERTENCIA; // Tipo de severidad
 		static const string ERROR;      // Tipo de severidad
-		static const string RUTA;
+		static const char* RUTA;
 
-		static Log* Instance();
+		static Log* getInstance();
 		void writeToLogFile(string severity, string description);
-
-	private:
-		Log(){};  // Constructor privado para que no lo puedan llamar
-		Log(Log const&){};  // Copia del const.
-		Log& operator=(Log const&);  // Asignacion tambien privada.
-		static Log* m_pInstance;
 };
 
 

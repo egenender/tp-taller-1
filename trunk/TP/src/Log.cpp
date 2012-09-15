@@ -1,19 +1,46 @@
 #include "Log.h"
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include "string.h"
 
 // Puntero estatico para controlar la instanciacion.
-Log* Log::m_pInstance = NULL;
+Log Log::instance;
+
 const string Log::INFORMATIVO="INFO"; // Tipo de severidad
 const string Log::ADVERTENCIA="WARN"; // Tipo de severidad
 const string Log::ERROR="ERROR";      // Tipo de severidad
-const string Log::RUTA="logDK.txt";
+const char* Log::RUTA="logDK.txt";
 
-Log* Log::Instance() {
-   if (!m_pInstance)
-      m_pInstance = new Log;
-   return m_pInstance;
+Log::Log() {}
+
+Log* Log::getInstance() {
+   return &instance;
 }
 
-void writeToLogFile(string severity, string description) {
-	// TODO Usar un prefijo Date y setear un registro en el archivo.
+
+/**
+ * Parametros:
+ * 	Descripcion: Debe tener maximo 247 caracteres.
+ * 	Severity: Usar las constantes definidas en la clase para seleccionar su tipo.
+ */
+void Log::writeToLogFile(string severity, string description) {
+	ofstream handlerWriteFile;
+	time_t rawtime;
+	time ( &rawtime );
+	string tiempo = ctime (&rawtime);
+	string registro = severity + " - " + description + " - " + tiempo;
+	// TODO Corregir doble salto de linea en registro.
+
+	handlerWriteFile.open(Log::RUTA, handlerWriteFile.app);
+
+	if (handlerWriteFile.good()) {
+		// Si esta ok al crear o abrir el archivo de log
+		// escupe por consola y al log.
+		handlerWriteFile << registro << endl;
+		cout << registro << endl;
+	} else {
+		cout << "Error al crear/abrir el archivo de sistema LogDK.txt" << endl;
+	}
 }
 
