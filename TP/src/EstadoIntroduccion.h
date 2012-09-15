@@ -3,6 +3,7 @@
 
 #include "Estado.h"
 #include "Animacion.h"
+#include "Camara2.h"
 
 class EstadoIntroduccion : public Estado {
     private:
@@ -12,6 +13,7 @@ class EstadoIntroduccion : public Estado {
         Animacion* yoshiGigante;
         Superficie* original;
         Superficie* espejada;
+        Camara* camara;
         int x,y,dx,dy;
 
     private:
