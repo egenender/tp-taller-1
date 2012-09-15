@@ -42,8 +42,9 @@ SDL_Surface* Superficie::cargar(const char* archivo) {
 	return supFinal;
 }
 
-/** Dibuja la imagen sobre supDest, en la posicion X, Y **/
-bool Superficie::dibujar(SDL_Surface* supDest, int x, int y) {
+/** Dibuja la imagen sobre supDest, en la posicion (x,y). Si corte es distinto
+ *  de NULL, se dibuja la parte deliminada por corte de la imagen. **/
+bool Superficie::dibujar(SDL_Surface* supDest, int x, int y, SDL_Rect* corte) {
 	if (supDest == NULL || superficie == NULL)
 		return false;
 
@@ -52,31 +53,7 @@ bool Superficie::dibujar(SDL_Surface* supDest, int x, int y) {
 	rectDest.x = x;
 	rectDest.y = y;
 
-	SDL_BlitSurface(superficie, NULL, supDest, &rectDest);
-
-	return true;
-}
-
-/** Dibuja el sector de la imagen (empezando en xOri, yOri, con ancho y alto)
- * sobre supDest, en la posicion xDest, yDest **/
-bool Superficie::dibujar(SDL_Surface* supDest, int xDest, int yDest, int xOri,
-		int yOri, int ancho, int alto) {
-	if (supDest == NULL || superficie == NULL)
-		return false;
-
-	SDL_Rect rectDest;
-
-	rectDest.x = xDest;
-	rectDest.y = yDest;
-
-	SDL_Rect rectOri;
-
-	rectOri.x = xOri;
-	rectOri.y = yOri;
-	rectOri.w = ancho;
-	rectOri.h = alto;
-
-	SDL_BlitSurface(superficie, &rectOri, supDest, &rectDest);
+	SDL_BlitSurface(superficie, corte, supDest, &rectDest);
 
 	return true;
 }
