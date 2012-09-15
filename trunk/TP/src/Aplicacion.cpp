@@ -40,8 +40,14 @@ void Aplicacion::actualizar() {
 
 /** Dibujar **/
 void Aplicacion::dibujar() {
+
+	// Primero limpiamos la pantalla:
+	SDL_FillRect(display, NULL, SDL_MapRGB(display->format, 0, 0, 0));
+
+	// Ahora dibujamos las cosas:
     ManejadorEstados::dibujar(display);
 
+    // Y actualizamos:
     SDL_Flip(display);
 }
 
