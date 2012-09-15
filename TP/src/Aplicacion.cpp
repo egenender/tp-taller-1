@@ -69,7 +69,7 @@ void Aplicacion::limpiar() {
 /** Al salir de la aplicacion **/
 void Aplicacion::salir() {
 	corriendo = false;
-	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Fin de aplicación.");
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Fin de aplicacion.");
 }
 
 /** Gameloop */
