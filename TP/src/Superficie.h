@@ -29,8 +29,7 @@ class Superficie {
 
 
 	public:
-		bool dibujar(SDL_Surface* supDest, int X, int Y);
-		bool dibujar(SDL_Surface* supDest, int xDest, int yDest, int xOri, int yOri, int Ancho, int Altura);
+		bool dibujar(SDL_Surface* supDest, int X, int Y, SDL_Rect* corte = NULL);
 		void transparencia(unsigned int R, unsigned int G, unsigned int B);
 		bool escala(Uint16 width, Uint16 height);
 		bool escala(Uint16 factor);
