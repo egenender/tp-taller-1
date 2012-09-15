@@ -25,7 +25,7 @@ bool Aplicacion::iniciar() {
     if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
         return false;
 
-
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");
     SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 
     // Seteamos el primer estado al entrar al juego:
