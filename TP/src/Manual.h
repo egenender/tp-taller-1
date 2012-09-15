@@ -4,7 +4,7 @@
 #include "Area.h"
 #include "Cuerpo.h"
 
-class Manual:public Cuerpo {
+class Manual:public Cuerpo, public Observable {
 private:
 	int velocidad;
 public:
