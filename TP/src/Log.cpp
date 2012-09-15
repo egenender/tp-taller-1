@@ -30,14 +30,13 @@ void Log::writeToLogFile(string severity, string description) {
 	time ( &rawtime );
 	string tiempo = ctime (&rawtime);
 	string registro = severity + " - " + description + " - " + tiempo;
-	// TODO Corregir doble salto de linea en registro.
 
 	handlerWriteFile.open(Log::RUTA, handlerWriteFile.app);
 
 	if (handlerWriteFile.good()) {
 		// Si esta ok al crear o abrir el archivo de log
 		// escupe por consola y al log.
-		handlerWriteFile << registro << endl;
+		handlerWriteFile << registro;
 		cout << registro << endl;
 	} else {
 		cout << "Error al crear/abrir el archivo de sistema LogDK.txt" << endl;
