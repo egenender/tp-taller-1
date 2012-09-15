@@ -19,12 +19,10 @@ Manual::~Manual() {
 
 void Manual::moverALaDerecha(){
 	trasladar(1);
-	//avisar Cambios al observador
 }
 
 void Manual::moverALaIzquierda(){
 	trasladar(-1);
-	//avisar Cambios al observador
 }
 
 void Manual::trasladar(int factor){
@@ -32,6 +30,7 @@ void Manual::trasladar(int factor){
 	Posicion* posDesplazamiento = new Posicion (DeltaX,0);
 	superficieOcupada->mover(posDesplazamiento);
 	delete posDesplazamiento;
+	Manual::huboCambios(); //el método se hereda de Observable
 }
 
 void Manual::saltar(){} //Por ahora no hace nada
@@ -42,4 +41,5 @@ void Manual::especial(){} //idem
 
 void Manual::actualizar(){
 // que hago aca?
+	Manual::notificarObservadores();
 }
