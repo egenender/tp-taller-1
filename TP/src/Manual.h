@@ -5,9 +5,18 @@
 #include "Cuerpo.h"
 #include "Observable.h"
 
+//Defino constantes para conocer mi estado
+#define QUIETO 0
+#define CAMINANDOIZQ 1
+#define CAMINANDODER 2
+//#define SALTANDOIZQ 3
+//#define SALTANDODER 4
+
+
 class Manual:public Cuerpo, public Observable {
 private:
 	int velocidad;
+	int estado;
 public:
 	Manual(const char*, Area*);
 	Manual(const char*, Area*, int);
@@ -19,6 +28,7 @@ public:
 	void atacar();
 	void especial();
 	void actualizar();
+	int getEstado();
 private:
 	void trasladar(int);
 };
