@@ -2,6 +2,7 @@
 
 Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
+	estado = QUIETO;
 }
 
 Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
@@ -11,6 +12,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 		vel = VELOCIDAD_STANDARD;
 	}
 	velocidad = vel;
+	estado = QUIETO;
 }
 
 Manual::~Manual() {
@@ -19,10 +21,12 @@ Manual::~Manual() {
 
 void Manual::moverALaDerecha(){
 	trasladar(1);
+	estado = CAMINANDODER;
 }
 
 void Manual::moverALaIzquierda(){
 	trasladar(-1);
+	estado = CAMINANDOIZQ;
 }
 
 void Manual::trasladar(int factor){
@@ -40,6 +44,10 @@ void Manual::atacar(){} //idem
 void Manual::especial(){} //idem
 
 void Manual::actualizar(){
-// que hago aca?
 	Manual::notificarObservadores();
+
+	//ahora que ya terminó de actualizarse, me quedo quieto
+	estado = QUIETO;
 }
+
+int Manual::getEstado(){return estado;}
