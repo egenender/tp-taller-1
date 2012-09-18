@@ -1,4 +1,5 @@
 #include "Superficie.h"
+#include "Log.h"
 
 Superficie::Superficie() {
 	alto = 0;
@@ -14,7 +15,7 @@ Superficie::Superficie(SDL_Surface* superficie) {
 }
 
 /** Crea una superficie a partir de una ruta de imagen **/
-Superficie::Superficie(const char* archivo) {
+Superficie::Superficie(string archivo) {
 
 	Superficie();
 	if ((superficie = cargar(archivo)) != NULL) {
@@ -27,12 +28,12 @@ Superficie::~Superficie() {
 	SDL_FreeSurface(superficie);
 }
 
-SDL_Surface* Superficie::cargar(const char* archivo) {
+SDL_Surface* Superficie::cargar(string archivo) {
 	SDL_Surface* supTemporal = NULL;
 	SDL_Surface* supFinal = NULL;
 
-	if ((supTemporal = IMG_Load(archivo)) == NULL) {
-		printf("Error: No se puede cargar el archivo '%s'\n", archivo);
+	if ((supTemporal = IMG_Load(archivo.c_str())) == NULL) {
+		Log::getInstance()->writeToLogFile(Log::ERROR, "No se pudo cargar el archivo [" + archivo + "]\n");
 		return NULL;
 	}
 
@@ -45,8 +46,10 @@ SDL_Surface* Superficie::cargar(const char* archivo) {
 /** Dibuja la imagen sobre supDest, en la posicion (x,y). Si corte es distinto
  *  de NULL, se dibuja la parte deliminada por corte de la imagen. **/
 bool Superficie::dibujar(SDL_Surface* supDest, int x, int y, SDL_Rect* corte) {
-	if (supDest == NULL || superficie == NULL)
+	if (supDest == NULL || superficie == NULL) {
+		printf("Error al dibujar superficie: se recibio NULL\n");
 		return false;
+	}
 
 	SDL_Rect rectDest;
 
@@ -60,8 +63,10 @@ bool Superficie::dibujar(SDL_Surface* supDest, int x, int y, SDL_Rect* corte) {
 
 /** Setea un color RGB como transparente en la imagen **/
 void Superficie::transparencia(unsigned int R, unsigned int G, unsigned int B) {
-	if (superficie == NULL)
+	if (superficie == NULL) {
+		printf("Error al aplicar transparencia: superficie es NULL\n");
 		return;
+	}
 
 	Uint32 colorkey = SDL_MapRGB(superficie->format, R, G, B);
 	SDL_SetColorKey(superficie, SDL_SRCCOLORKEY, colorkey);
@@ -130,16 +135,20 @@ void Superficie::putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 }
 
 bool Superficie::escala(Uint16 ancho, Uint16 alto) {
-	if (!superficie || !ancho || !alto)
+	if (!superficie || !ancho || !alto) {
+		printf("Error al aplicar escala\n");
 		return false;
+	}
 
 	SDL_Surface* _ret = SDL_CreateRGBSurface(superficie->flags, ancho, alto,
 			superficie->format->BitsPerPixel, superficie->format->Rmask,
 			superficie->format->Gmask, superficie->format->Bmask,
 			superficie->format->Amask);
 
-	if (!_ret)
+	if (!_ret) {
+		printf("Error al aplicar escala: no se pudo aplicar\n");
 		return false;
+	}
 
 	double _stretch_factor_x = (static_cast<double>(ancho)
 			/ static_cast<double>(superficie->w)), _stretch_factor_y =

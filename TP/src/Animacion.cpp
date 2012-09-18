@@ -17,8 +17,10 @@ void Animacion::inicializar() {
 }
 
 void Animacion::cargarFrames(HojaSprites* frames) {
-	if (!frames)
+	if (!frames) {
+		printf("Error al cargar Frames: se recibio NULL\n");
 		return;
+	}
 
 	this->frames = frames;
 	framesTotales = frames->obtenerNumeroSprites();
@@ -96,23 +98,29 @@ void Animacion::animar() {
 
 /** Setea la duracion de cada frame individual **/
 void Animacion::setearDelayFrame(int delay) {
-	if (delay <= 0)
+	if (delay <= 0) {
+		printf("Warning: se recibio un delay frame negativo, se dejo el default\n");
 		return;
+	}
 	delayFrame = delay;
 }
 
 /** Setea la duracion total de la animacion **/
 void Animacion::setearDuracion(int duracion) {
-	if (duracion <= 0)
+	if (duracion <= 0) {
+		printf("Warning: se recibio una duracion negativa, se dejo la default\n");
 		return;
+	}
 
 	delayFrame = duracion/framesTotales;
 }
 
 /** Setea como actual a un frame determinado **/
 void Animacion::setearFrameActual(int frame) {
-	if (frame < 0 || frame >= framesTotales)
+	if (frame < 0 || frame >= framesTotales) {
+		printf("Warning: se recibio un frame negativo o mayor al total, se dejo el actual\n");
 		return;
+	}
 
 	frameActual = frame;
 }
@@ -120,6 +128,7 @@ void Animacion::setearFrameActual(int frame) {
 /** Dibuja la animacion actual sobre la superficie "supDest", en la posicion x,y **/
 bool Animacion::dibujar(SDL_Surface* supDest, int x, int y) {
 	if (supDest == NULL || frames == NULL) {
+		printf("Error al dibujar animacion\n");
 		return false;
 	}
 
@@ -138,8 +147,10 @@ void Animacion::detener() {
 
 /** Detiene la animacion en un determinado frame. (Se anima hasta que llega a ese) **/
 void Animacion::detenerEn(int frame) {
-	if (frame < 0 || frame >= framesTotales)
+	if (frame < 0 || frame >= framesTotales) {
+		printf("Warning: se recibio un frame negativo o mayor al total, se dejo el actual\n");
 		return;
+	}
 
 	puntoDetencion = frame;
 }
