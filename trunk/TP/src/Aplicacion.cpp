@@ -1,9 +1,14 @@
 #include "Aplicacion.h"
 #include "ManejadorEstados.h"
 #include "Log.h"
+#include "FPS.h"
+
+#include <sstream>
+using namespace std;
 
 /** Constructor **/
 Aplicacion::Aplicacion() {
+	FPS_ON = true;
 	display = NULL;
 	corriendo = true;
 	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Aplicacion creada correctamente.");
@@ -18,15 +23,16 @@ bool Aplicacion::iniciar() {
     	return false;
     }
 
-
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "SDL iniciada correctamente.");
 
     // Creamos la ventana:
     if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
         return false;
 
-	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");
-    SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
+    Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");
+
+	// Para algo servia:
+	SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
 
     // Seteamos el primer estado al entrar al juego:
     ManejadorEstados::setearEstadoActual(ESTADO_INTRO);
@@ -50,6 +56,13 @@ void Aplicacion::dibujar() {
 
 	// Primero limpiamos la pantalla:
 	SDL_FillRect(display, NULL, SDL_MapRGB(display->format, 0, 0, 0));
+
+    // Mostramos los FPS:
+    if (FPS_ON) {
+    	stringstream out;
+    	out << "FPS: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
+    	SDL_WM_SetCaption(out.str().c_str(), NULL);
+    }
 
 	// Ahora dibujamos las cosas:
     ManejadorEstados::dibujar(display);
@@ -79,20 +92,30 @@ int Aplicacion::ejecutar() {
 
 	SDL_Event evento;
 	while (corriendo) {
+
+		FPS::ControlFPS.actualizar();
+
 		while (SDL_PollEvent(&evento)) {
 			manejarEvento(&evento);
 		}
 		actualizar();
 		dibujar();
-		SDL_Delay(100);
+		SDL_Delay(35);
 	}
 	limpiar();
 	return 0;
 }
 
+/** Setea si se muestran por pantalla los Frames Por Segundo o no **/
+void Aplicacion::mostrarFPS(bool mostrar) {
+	FPS_ON = mostrar;
+}
 
 /** Se ejecuta el programa **/
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
+
+	//aplicacion.mostrarFPS(false);
+
 	return aplicacion.ejecutar();
 }

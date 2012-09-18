@@ -9,8 +9,9 @@
 
 class Aplicacion: public Evento {
 	private:
-		bool corriendo; // si esta corriendo
-		SDL_Surface* display; // Aca se dibuja todo
+		bool FPS_ON; // Si mostramos los FPS o no
+		bool corriendo; // Si esta corriendo
+		SDL_Surface* display; // Aca se dibujan las cosas
 
 	// Constructor:
 	public:
@@ -20,10 +21,12 @@ class Aplicacion: public Evento {
 		int ejecutar();
 		bool iniciar();
 		void manejarEvento(SDL_Event* evento);
-		void salir();
 		void actualizar();
 		void dibujar();
 		void limpiar();
+		void salir();
+
+		void mostrarFPS(bool mostrar);
 };
 
 #endif
