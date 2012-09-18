@@ -6,6 +6,9 @@ EstadoIntroduccion EstadoIntroduccion::instancia;
 
 // Introduccion del juego
 EstadoIntroduccion::EstadoIntroduccion() {
+
+	// constructor... inicializar las cosas a un estado valido inicial
+
 	camara = NULL;
 	fondo = NULL;
 	yoshiNormal = NULL;
@@ -17,6 +20,8 @@ EstadoIntroduccion::EstadoIntroduccion() {
 
 /** Inicializa el estado **/
 void EstadoIntroduccion::iniciar() {
+
+	// Aca se inicializa lo referente al estado, es decir, crear los cuerpos, vistas, etc.
 
 	// iniciamos la camara:
 	camara = new Camara(x,y);
@@ -74,20 +79,13 @@ void EstadoIntroduccion::terminar() {
 /** Actualiza el estado **/
 void EstadoIntroduccion::actualizar() {
 
-	// Actualizamos la posicion de yoshi, tomando desde teclado:
-	// TODO: Esto se haria en una clase externa, un controlador...
-	Uint8 *keystates = SDL_GetKeyState(NULL);
+	// Se actualizan todos los cuerpos
+	// Se actualizan las vistas (o no, depende como sea implementado el patron observador - observable!)
+	// Se verifican colisiones
+	// Se elimina lo que se tenga que eliminar
 
-	if (keystates[SDLK_UP])
-		dy-=1;
-	if (keystates[SDLK_DOWN])
-		dy+=1;
-	if (keystates[SDLK_LEFT])
-		dx-=1;
-	if (keystates[SDLK_RIGHT])
-		dx+=1;
-	if (!keystates[SDLK_UP] && !keystates[SDLK_DOWN] && !keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT])
-		dx = dy = 0;
+
+
 
 	// Actualizamos la posicion de los cuerpos:
 	x += dx;
@@ -133,4 +131,34 @@ void EstadoIntroduccion::dibujar(SDL_Surface* display) {
 /** Devuelve la instancia del estado (Singleton) **/
 EstadoIntroduccion* EstadoIntroduccion::obtenerInstancia() {
 	return &instancia;
+}
+
+
+/** Maneja eventos que vienen del teclado **/
+void EstadoIntroduccion::manejarEvento(SDL_Event* evento) {
+
+	// Aca se verifican las teclas que utilice el usuario, y se hace actuar al cuerpo respecto a ello.
+
+	// Otras acciones tambien se podrían verificar aca, como ser botones o menues o esas mierdas (?)
+
+	// Las de cerrar la aplicacion, maximixar, etc, eso se verifica antes, en la clase Evento! Aca no.
+
+
+
+	// Si, ya se que aca no utilizo evento, pero bueno. Shit happens (?)
+
+	// Actualizamos la posicion de yoshi, tomando desde teclado:
+	Uint8 *keystates = SDL_GetKeyState(NULL);
+
+	// Podria ser mejor :P Movimiento medio choto este:
+	if (keystates[SDLK_UP])
+		dy-=1;
+	if (keystates[SDLK_DOWN])
+		dy+=1;
+	if (keystates[SDLK_LEFT])
+		dx-=1;
+	if (keystates[SDLK_RIGHT])
+		dx+=1;
+	if (!keystates[SDLK_UP] && !keystates[SDLK_DOWN] && !keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT])
+		dx = dy = 0;
 }

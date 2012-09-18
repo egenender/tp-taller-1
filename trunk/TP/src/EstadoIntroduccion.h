@@ -20,6 +20,7 @@ class EstadoIntroduccion : public Estado {
         EstadoIntroduccion();
 
     public:
+        void manejarEvento(SDL_Event* evento);
         void iniciar();
         void terminar();
         void actualizar();
