@@ -11,9 +11,24 @@ HojaSprites::HojaSprites() {
  *  Debe haber una correspondencia entre el ancho y alto de la imagen completa
  *  con cada sprite individual... Ej: archivo de 64x256 pixeles, sprites de
  *  64x64 pixeles -> tenemos 4 sprites en total. **/
-HojaSprites::HojaSprites(const char* archivo, unsigned int ancho, unsigned int alto) : Superficie(archivo) {
+HojaSprites::HojaSprites(string archivo, unsigned int ancho, unsigned int alto) : Superficie(archivo) {
 
 	HojaSprites();
+
+	if (superficie && (ancho > 0 && alto > 0)) {
+		altoSprite = alto;
+		anchoSprite = ancho;
+
+		cantSprites = this->alto / alto;
+	}
+}
+
+
+// TODO:
+HojaSprites::HojaSprites(Superficie* sup, unsigned int ancho, unsigned int alto) {
+	HojaSprites();
+
+//	superficie = sup;
 
 	if (superficie && (ancho > 0 && alto > 0)) {
 		altoSprite = alto;
@@ -31,8 +46,10 @@ unsigned int HojaSprites::obtenerNumeroSprites() {
 /** Dibuja el sprite numero "sprite" en la superficie "supDest", en X,Y
  *  Recordar que el primer sprite es el 0, el segundo el 1, etc... **/
 bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
-	if (supDest == NULL || superficie == NULL || sprite < 0)
+	if (supDest == NULL || superficie == NULL || sprite < 0) {
+		printf("Error al dibujar hoja de sprites\n");
 		return false;
+	}
 
 	SDL_Rect rectDest;
 
@@ -57,14 +74,18 @@ bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
  * Se recomienda utilizar escala(factor). Aun asi, este metodo queda por si
  * llega a ser util en algun momento **/
 bool HojaSprites::escala(Uint16 ancho, Uint16 alto) {
-	if(!superficie)
+	if(!superficie) {
+		printf("Error al aplicar escala: superficie es NULL\n");
 		return false;
+	}
 
 	float factorAncho = (float) ancho/this->ancho;
 	float factorAlto = (float) alto/this->alto;
 
-	if(!Superficie::escala(ancho, alto))
+	if(!Superficie::escala(ancho, alto)) {
+		printf("Error al aplicar escala\n");
 		return false;
+	}
 
 	altoSprite *= factorAlto;
 	anchoSprite *= factorAncho;

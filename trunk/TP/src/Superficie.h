@@ -4,6 +4,9 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 
+#include <string>
+using namespace std;
+
 #define VERTICALMENTE 0x00000001
 #define HORIZONTALMENTE 0x00000010
 
@@ -16,12 +19,12 @@ class Superficie {
 
 	public:
 		Superficie(SDL_Surface* superficie);
-		Superficie(const char* archivo);
+		Superficie(string archivo);
 		~Superficie();
 
 	protected:
 		Superficie();
-		SDL_Surface* cargar(const char* archivo);
+		SDL_Surface* cargar(string archivo);
 
 	private:
 		Uint32 getPixel(SDL_Surface *surface, int x, int y);
