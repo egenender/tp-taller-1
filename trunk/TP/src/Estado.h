@@ -2,6 +2,7 @@
 #define ESTADO_H
 
 #include "Evento.h"
+#include "FPS.h"
 
 class Estado: public Evento {
 	public:

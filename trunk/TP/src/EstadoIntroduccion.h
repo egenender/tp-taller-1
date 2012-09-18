@@ -14,7 +14,8 @@ class EstadoIntroduccion : public Estado {
         Superficie* original;
         Superficie* espejada;
         Camara* camara;
-        int x,y,dx,dy;
+        float x,y, dx,dy;
+        float velocidadX, velocidadY;
 
     private:
         EstadoIntroduccion();
