@@ -251,3 +251,8 @@ Superficie* Superficie::voltear(int flags) {
 
 	return new Superficie(volteada);
 }
+
+/** Devuelve la superficie SDL **/
+SDL_Surface* Superficie::obtenerSurface() {
+	return superficie;
+}

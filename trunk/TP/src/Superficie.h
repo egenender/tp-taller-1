@@ -39,6 +39,7 @@ class Superficie {
 		int obtenerAlto();
 		int obtenerAncho();
 		Superficie* voltear(int flags);
+		SDL_Surface* obtenerSurface();
 };
 
 #endif

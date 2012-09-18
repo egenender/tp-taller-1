@@ -24,11 +24,9 @@ HojaSprites::HojaSprites(string archivo, unsigned int ancho, unsigned int alto) 
 }
 
 
-// TODO:
-HojaSprites::HojaSprites(Superficie* sup, unsigned int ancho, unsigned int alto) {
+/** Crea una hoja de sprites a partir de una superficie SDL **/
+HojaSprites::HojaSprites(SDL_Surface* sup, unsigned int ancho, unsigned int alto) : Superficie(sup) {
 	HojaSprites();
-
-//	superficie = sup;
 
 	if (superficie && (ancho > 0 && alto > 0)) {
 		altoSprite = alto;
