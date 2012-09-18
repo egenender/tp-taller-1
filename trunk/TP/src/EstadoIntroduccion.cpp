@@ -41,17 +41,20 @@ void EstadoIntroduccion::iniciar() {
 	gigante->escala(2);
 	gigante->transparencia(255, 0, 255);
 
-	// TODO: hacer que funcione esta linea:
-//	gigante = gigante->voltear(HORIZONTALMENTE);
-
 	// Yoshi del tamanio del original de la imagen:
 	yoshiNormal = new Animacion(normal);
 
 	// Yoshi del doble del tamanio
 	yoshiGigante = new Animacion(gigante);
 
+	// La rotamos:
+	Animacion* temp = yoshiGigante->voltear(HORIZONTALMENTE);
+	delete(yoshiGigante);
+	yoshiGigante = temp;
+
 	// Simplemente se carga la hoja de sprites:
-	original = new Superficie("src/yoshi.bmp");
+	//original = new Superficie("src/yoshi.bmp");
+	original = new HojaSprites("src/yoshi.bmp", 64, 64);
 	original->transparencia(255, 0, 255);
 
 	// Aca espejamos horizontalmente la anterior hoja:

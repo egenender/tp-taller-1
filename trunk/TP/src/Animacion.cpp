@@ -179,3 +179,14 @@ int Animacion::obtenerFramesTotales() {
 bool Animacion::estaCorriendo() {
 	return corriendo;
 }
+
+
+/** Devuelve una nueva animacion volteada, respecto de la original.
+ * Parametros: El tipo de volteo: HORIZONTALMENTE y VERTICALMENTE
+ * Se puede hacer ambos volteos a la vez, pasar como parametro:
+ * HORIZONTALMENTE | VERTICALMENTE **/
+Animacion* Animacion::voltear(int flags) {
+	HojaSprites* volteada = frames->voltear(flags);
+
+	return new Animacion(volteada, delayFrame);
+}

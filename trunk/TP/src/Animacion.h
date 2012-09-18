@@ -6,6 +6,9 @@
 #include <vector>
 using namespace std;
 
+#define VERTICALMENTE 0x00000001
+#define HORIZONTALMENTE 0x00000010
+
 class Animacion {
 	private:
 		HojaSprites* frames;
@@ -43,6 +46,7 @@ class Animacion {
 		int obtenerFramesTotales();
 		bool estaCorriendo();
 		bool dibujar(SDL_Surface* supDest, int x, int y);
+		Animacion* voltear(int flags);
 };
 
 #endif

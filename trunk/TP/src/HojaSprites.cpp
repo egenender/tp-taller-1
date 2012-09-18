@@ -104,3 +104,10 @@ int HojaSprites::obtenerAltoSprite() {
 int HojaSprites::obtenerAnchoSprite() {
 	return anchoSprite;
 }
+
+/** Devuelve una hoja de sprites volteada **/
+HojaSprites* HojaSprites::voltear(int flags) {
+	SDL_Surface* volteada = this->Superficie::voltear(flags)->obtenerSurface();
+
+	return new HojaSprites(volteada, anchoSprite, altoSprite);
+}
