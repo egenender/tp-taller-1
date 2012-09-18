@@ -15,7 +15,10 @@ EstadoIntroduccion::EstadoIntroduccion() {
 	yoshiGigante = NULL;
 	espejada = NULL;
 	original = NULL;
-	x = y = dx = dy =0;
+	x = 0;
+	y = 400;
+	dx = dy =0;
+	velocidadX = velocidadY = 100; // 100 pixeles por segundo
 }
 
 /** Inicializa el estado **/
@@ -85,11 +88,13 @@ void EstadoIntroduccion::actualizar() {
 	// Se elimina lo que se tenga que eliminar
 
 
-
+	// Esto podria ser mejor pasado por parametro... capaz el delta cambio mientras
+	// estaba actualizando... si se lo pasa por parametro esto se evitaria (creo)
+	float delta = FPS::ControlFPS.obtenerDelta();
 
 	// Actualizamos la posicion de los cuerpos:
-	x += dx;
-	y += dy;
+	x += dx * delta;
+	y += dy * delta;
 
 	// Actualizamos la posicion de la camara:
 	camara->actualizar(x,y,64,64);
@@ -122,8 +127,8 @@ void EstadoIntroduccion::dibujar(SDL_Surface* display) {
 
 	/* Tener en cuenta que su posicion es respecto a la camara!! */
 	yoshiNormal->dibujar(display, 0 - dimensiones->x, 0 - dimensiones->y);
-	yoshiNormal->dibujar(display, 24 - dimensiones->x, 0 - dimensiones->y);
-	yoshiGigante->dibujar(display, x - dimensiones->x, y - dimensiones->y);
+	yoshiNormal->dibujar(display, x - dimensiones->x, y - dimensiones->y);
+	yoshiGigante->dibujar(display, 0 - dimensiones->x, 0 - dimensiones->y);
 	original->dibujar(display, 200 - dimensiones->x, 0 - dimensiones->y);
 	espejada->dibujar(display, 300 - dimensiones->x, 0 - dimensiones->y);
 }
@@ -152,13 +157,15 @@ void EstadoIntroduccion::manejarEvento(SDL_Event* evento) {
 
 	// Podria ser mejor :P Movimiento medio choto este:
 	if (keystates[SDLK_UP])
-		dy-=1;
+		dy = (velocidadY * -1);
 	if (keystates[SDLK_DOWN])
-		dy+=1;
+		dy = velocidadY;
 	if (keystates[SDLK_LEFT])
-		dx-=1;
+		dx = (velocidadX * -1);
 	if (keystates[SDLK_RIGHT])
-		dx+=1;
-	if (!keystates[SDLK_UP] && !keystates[SDLK_DOWN] && !keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT])
-		dx = dy = 0;
+		dx = velocidadY;
+	if (!keystates[SDLK_UP] && !keystates[SDLK_DOWN])
+		dy = 0;
+	if (!keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT])
+		dx = 0;
 }
