@@ -11,7 +11,7 @@ class HojaSprites : public Superficie {
 		HojaSprites();
 	public:
 		HojaSprites(string archivo, unsigned int ancho, unsigned int alto);
-		HojaSprites(Superficie* superficie, unsigned int ancho, unsigned int alto);
+		HojaSprites(SDL_Surface* superficie, unsigned int ancho, unsigned int alto);
 		unsigned int obtenerNumeroSprites();
 		bool dibujar(SDL_Surface* supDest, int x, int y, int sprite);
 		bool escala(Uint16 ancho, Uint16 alto);
