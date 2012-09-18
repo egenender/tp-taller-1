@@ -53,8 +53,7 @@ void EstadoIntroduccion::iniciar() {
 	yoshiGigante = temp;
 
 	// Simplemente se carga la hoja de sprites:
-	//original = new Superficie("src/yoshi.bmp");
-	original = new HojaSprites("src/yoshi.bmp", 64, 64);
+	original = new Superficie("src/yoshi.bmp");
 	original->transparencia(255, 0, 255);
 
 	// Aca espejamos horizontalmente la anterior hoja:
