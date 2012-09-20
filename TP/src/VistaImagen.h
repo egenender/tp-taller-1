@@ -2,6 +2,7 @@
 #define VISTAIMAGEN_H_
 
 #include "VistaCuerpo.h"
+#include "Superficie.h"
 
 #include <string>
 using namespace std;
