@@ -8,7 +8,7 @@ using namespace std;
 
 class Observable {
 	private:
-		vector<Observador*> observadores;
+		vector<Observador*>* observadores;
 		bool cambios;
 	public:
 		Observable();
@@ -17,8 +17,12 @@ class Observable {
 		void eliminarObservador(Observador* observador);
 		void notificarObservadores();
 		virtual int obtenerEstado()=0;
+		bool cambio();
+		int cantidadObservadores();
 	protected:
 		void huboCambios();
+		void limpiarCambio();
+
 };
 
 #endif

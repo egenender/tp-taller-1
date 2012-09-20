@@ -21,7 +21,6 @@ public:
 	int obtenerAncho();
 	int obtenerAlto();
 	void moverA(Posicion*);
-	//void agregarObservador(Observador* observer); Lo dejo comentado para cuando lo hagamos
 	virtual void actualizar()=0; //o que reciba o devuelva algo ?
 	const char* obtenerNombre();
 };
