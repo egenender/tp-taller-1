@@ -12,7 +12,7 @@ class Observable {
 		bool cambios;
 	public:
 		Observable();
-		~Observable();
+		virtual ~Observable();
 		void agregarObservador(Observador* observador);
 		void eliminarObservador(Observador* observador);
 		void notificarObservadores();
