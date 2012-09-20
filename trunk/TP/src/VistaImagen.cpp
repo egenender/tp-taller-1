@@ -6,7 +6,7 @@ VistaImagen::VistaImagen() {
 }
 
 VistaImagen::VistaImagen(string ID) {
-	cambiarImagen(ID);
+//	cambiarImagen(ID);
 }
 
 VistaImagen::~VistaImagen() {
