@@ -69,9 +69,16 @@ void Posicion::moverVerticalmente(int deltaY){
 	y *= deltaY;
 }
 
+/*
 Posicion Posicion::operator+(Posicion sumando){
 	Posicion pos(x,y); //hago una copia
 	pos.moverHorizontalmente(sumando.x);
 	pos.moverVerticalmente(sumando.y);
 	return pos;
+}
+*/
+
+void Posicion::sumarlePosicion(Posicion *pos_sumada){
+	x += pos_sumada->x;
+	y += pos_sumada->y;
 }
