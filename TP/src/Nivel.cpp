@@ -34,7 +34,10 @@ void Nivel::manejarEvento(SDL_Event* evento){
 		principal->moverALaDerecha();
 	}
 
-	//Faltaria ver si hay que poner algo del estilo principal->quieto();
+	//TODO: en este if va a haber que agregar mas condiciones cuando se permita saltar/etc..
+	if (!keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]){
+		principal->detener();
+	}
 
 }
 

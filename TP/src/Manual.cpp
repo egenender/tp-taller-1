@@ -45,9 +45,12 @@ void Manual::especial(){} //idem
 
 void Manual::actualizar(){
 	notificarObservadores();
-
-	//ahora que ya terminó de actualizarse, me quedo quieto
-	estado = QUIETO;
 }
 
 int Manual::obtenerEstado(){return estado;}
+
+void Manual::detener(){
+	if (estado == QUIETO) return;
+	estado = QUIETO;
+	notificarObservadores();
+}
