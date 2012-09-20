@@ -13,7 +13,7 @@
 //#define SALTANDODER 4
 
 
-class Manual:public Cuerpo, public Observable {
+class Manual:public Cuerpo {
 private:
 	int velocidad;
 	int estado;

@@ -16,6 +16,8 @@ class Observable {
 		void agregarObservador(Observador* observador);
 		void eliminarObservador(Observador* observador);
 		void notificarObservadores();
+		virtual int obtenerEstado()=0;
+	protected:
 		void huboCambios();
 };
 

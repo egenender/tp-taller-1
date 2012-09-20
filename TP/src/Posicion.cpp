@@ -80,5 +80,7 @@ Posicion Posicion::operator+(Posicion sumando){
 
 void Posicion::sumarlePosicion(Posicion *pos_sumada){
 	x += pos_sumada->x;
+	if (x < 0) x = 0;
 	y += pos_sumada->y;
+	if (y < 0) y = 0;
 }

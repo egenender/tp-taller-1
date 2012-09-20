@@ -1,0 +1,4 @@
+INFO - Aplicacion creada correctamente. - Wed Sep 19 22:34:17 2012
+INFO - SDL iniciada correctamente. - Wed Sep 19 22:34:18 2012
+INFO - Ventana creada correctamente. - Wed Sep 19 22:34:18 2012
+INFO - Fin de aplicacion. - Wed Sep 19 22:34:25 2012
