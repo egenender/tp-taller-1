@@ -5,10 +5,11 @@
 #include "Area.h"
 #include <stdbool.h>
 #include "lista.h"
+#include "Observable.h"
 
 //habria que ver que otros metodos tiene, alguno que tenga que ser definido mas abajo..
 
-class Cuerpo {
+class Cuerpo: public Observable {
 protected:
 	Area* superficieOcupada;
 	const char* nombre;

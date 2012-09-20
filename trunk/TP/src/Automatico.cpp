@@ -1,7 +1,7 @@
 #include "Automatico.h"
 
 Automatico::Automatico(const char* nombrecito, Area* sup): Cuerpo(nombrecito,sup) {
-
+	estado = QUIETO;
 }
 
 Automatico::~Automatico() {
@@ -23,4 +23,8 @@ void Automatico::actualizar(){
 	 * }
 	 * lista_iter_destruir(iter);
 	 * */
+}
+
+int Automatico::obtenerEstado(){
+	return estado;
 }
