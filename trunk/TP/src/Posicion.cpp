@@ -8,7 +8,9 @@ Posicion::Posicion() {
 }
 
 Posicion::~Posicion() {
-	// TODO Auto-generated destructor stub
+	if (maximo != NULL) {
+	//	delete(maximo); // TODO: EEMMM VAMOS A PERDER MEMORIA D:
+	}
 }
 
 Posicion::Posicion(int a, int b){
@@ -90,8 +92,8 @@ void Posicion::sumarlePosicion(Posicion *pos_sumada){
 	if (y > maximo->y) y = maximo->y;
 }
 
-void Posicion::indicarMaximo(Posicion* posMax){
-	maximo = posMax;
+void Posicion::indicarMaximo(int x, int y){
+	maximo = new Posicion(x,y);
 }
 
 void Posicion::setX(int a){

@@ -36,7 +36,7 @@ public:
 	void sumarlePosicion(Posicion*);
 
 	//Funciones de clase que permiten indicar y obtener el maximo
-	static void indicarMaximo(Posicion*);
+	static void indicarMaximo(int x, int y);
 	static Posicion* obtenerMaximo(){return maximo;}
 };
 
