@@ -34,7 +34,7 @@ void Manual::trasladar(int factor){
 	Posicion* posDesplazamiento = new Posicion (DeltaX,0);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
-	Manual::huboCambios(); //el método se hereda de Observable
+	huboCambios(); //el método se hereda de Observable
 }
 
 void Manual::saltar(){} //Por ahora no hace nada
@@ -52,5 +52,5 @@ int Manual::obtenerEstado(){return estado;}
 void Manual::detener(){
 	if (estado == QUIETO) return;
 	estado = QUIETO;
-	notificarObservadores();
+	huboCambios();
 }
