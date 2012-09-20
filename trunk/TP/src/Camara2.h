@@ -10,6 +10,7 @@ class Camara {
 	private:
 		// Las dimensiones de la camara:
 		SDL_Rect* cam;
+		int margenScroll;
 
 	public:
 		Camara(int x, int y);

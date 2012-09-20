@@ -8,6 +8,7 @@ Camara::Camara(int x, int y) {
 	cam->y = 0;
 	cam->w = ANCHO_VENTANA;
 	cam->h = ALTO_VENTANA;
+	margenScroll = MARGEN_SCROLL;
 
 	if (x > 0 || y > 0) {
 		cam->x = x;
@@ -18,8 +19,16 @@ Camara::Camara(int x, int y) {
 void Camara::actualizar(int x, int y, int ancho, int alto) {
 
 	// Centramos la camara:
-	cam->x = (x + ancho / 2) - ANCHO_VENTANA / 2;
+	if ( (x + ancho / 2) < cam->x + margenScroll) {
+		cam->x = (x + ancho / 2) - margenScroll;
+	}
+
+	if ( (x + ancho / 2) > cam->x + ANCHO_VENTANA - margenScroll) {
+			cam->x = (x + ancho / 2) + margenScroll - ANCHO_VENTANA;
+	}
+
 	cam->y = (y + alto / 2) - ALTO_VENTANA / 2;
+
 
 	// No dejo que se vaya del nivel:
 	if (cam->x < 0) {
