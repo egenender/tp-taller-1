@@ -71,16 +71,16 @@ bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
  * no se asegura que se puedan definir bien las dimensiones de los sprites
  * Se recomienda utilizar escala(factor). Aun asi, este metodo queda por si
  * llega a ser util en algun momento **/
-bool HojaSprites::escala(Uint16 ancho, Uint16 alto) {
+bool HojaSprites::escala(Uint16 nuevoAnchoSprite, Uint16 nuevoAltoSprite) {
 	if(!superficie) {
 		printf("Error al aplicar escala: superficie es NULL\n");
 		return false;
 	}
 
-	float factorAncho = (float) ancho/this->ancho;
-	float factorAlto = (float) alto/this->alto;
+	float factorAncho = (float) nuevoAnchoSprite/this->anchoSprite;
+	float factorAlto = (float) nuevoAltoSprite/this->altoSprite;
 
-	if(!Superficie::escala(ancho, alto)) {
+	if(!Superficie::escala(nuevoAnchoSprite, nuevoAltoSprite*cantSprites)) {
 		printf("Error al aplicar escala\n");
 		return false;
 	}

@@ -47,6 +47,10 @@ class Animacion {
 		bool estaCorriendo();
 		bool dibujar(SDL_Surface* supDest, int x, int y);
 		Animacion* voltear(int flags);
+		bool escala(Uint16 anchoSprite, Uint16 altoSprite);
+		bool escala(Uint16 factor);
+		void transparencia(unsigned int R, unsigned int G, unsigned int B);
+
 };
 
 #endif

@@ -190,3 +190,18 @@ Animacion* Animacion::voltear(int flags) {
 
 	return new Animacion(volteada, delayFrame);
 }
+
+/** Escala los sprites de la animacion **/
+bool Animacion::escala(Uint16 anchoSprite, Uint16 altoSprite) {
+	return frames->escala(anchoSprite, altoSprite);
+}
+
+/** Escala los sprites de la animacion **/
+bool Animacion::escala(Uint16 factor) {
+	return frames->escala(factor);
+}
+
+/** Setea un color RGB como transparente **/
+void Animacion::transparencia(unsigned int R, unsigned int G, unsigned int B) {
+	frames->transparencia(R,G,B);
+}
