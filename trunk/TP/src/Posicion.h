@@ -7,6 +7,7 @@
 class Posicion {
 private:
 	int x,y;
+	static Posicion* maximo;
 public:
 	//Constructores y Destructores
 	Posicion();
@@ -20,6 +21,8 @@ public:
 	Posicion obtenerIzquierda();
 	int getX();
 	int getY();
+	void setX(int);
+	void setY(int)
 
 	//Para verificar si una posicion esta a la X de otra
 	bool estaALaDerechaDe(Posicion);
@@ -31,6 +34,10 @@ public:
 	void moverHorizontalmente(int);
 	void moverVerticalmente(int);
 	void sumarlePosicion(Posicion*);
+
+	//Funciones de clase que permiten indicar y obtener el maximo
+	static void indicarMaximo(Posicion*);
+	static Posicion* obtenerMaximo(){return maximo;}
 };
 
 #endif /* POSICION_H_ */

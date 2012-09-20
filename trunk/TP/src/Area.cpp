@@ -30,6 +30,11 @@ void Area::mover(Posicion* traslado){
 	delete(pos);
 	pos = pos_nueva;*/
 	pos->sumarlePosicion(traslado);
+	Posicion* maximoPosible = Posicion::obtenerMaximo();
+	if (pos->getX() + ancho > maximoPosible->getX())
+		pos->setX( maximoPosible->getX() - ancho);
+	if (pos->getY() + alto > maximoPosible->getY())
+		pos->setY( maximoPosible->getY() - alto );
 }
 
 bool Area::verificarColision(Area otraArea){
