@@ -7,8 +7,8 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 }
 
 Cuerpo::~Cuerpo() {
-	delete superficieOcupada;
-	delete nombre;
+	delete (superficieOcupada);
+	delete (nombre);
 	//Podría pasarse una función que destruya a los observadores...
 }
 
@@ -28,6 +28,6 @@ int Cuerpo::obtenerAlto() {
 	return superficieOcupada->getAlto();
 }
 
-const char* Cuerpo::getNombre(){
+const char* Cuerpo::obtenerNombre(){
 	return nombre;
 }
