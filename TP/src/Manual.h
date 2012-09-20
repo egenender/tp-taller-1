@@ -28,7 +28,7 @@ public:
 	void atacar();
 	void especial();
 	void actualizar();
-	int getEstado();
+	int obtenerEstado();
 private:
 	void trasladar(int);
 };

@@ -25,10 +25,11 @@ void Area::cambiarPosicion(Posicion* pos_nueva){
 }
 
 void Area::mover(Posicion* traslado){
-	Posicion *pos_nueva = NULL;
-	*pos_nueva = *pos + *traslado;
-	delete pos;
-	pos = pos_nueva;
+	//Posicion *pos_nueva = NULL;
+	/**pos_nueva = pos->sumar(*traslado);
+	delete(pos);
+	pos = pos_nueva;*/
+	pos->sumarlePosicion(traslado);
 }
 
 bool Area::verificarColision(Area otraArea){
