@@ -45,7 +45,7 @@ void Nivel::iniciar() {
 
 	// Aca se leeria de algun lado datos para el nivel, crear los cuerpos etc.
 
-	Manual* algo = new Manual("algo", new Area(128,128,new Posicion(0,0)));
+	Manual* algo = new Manual("algo", new Area(65,73,new Posicion(0,0)));
 
 	VistaCuerpo* vistaAlgo = new VistaProtagonista(algo);
 
