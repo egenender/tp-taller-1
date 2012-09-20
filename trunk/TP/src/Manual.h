@@ -23,6 +23,7 @@ public:
 	virtual ~Manual();
 	void moverALaIzquierda();
 	void moverALaDerecha();
+	void detener();
 	//Estos 3 por ahora no van a hacer nada
 	void saltar();
 	void atacar();
