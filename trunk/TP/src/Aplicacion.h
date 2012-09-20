@@ -6,6 +6,7 @@
 
 #define ANCHO_VENTANA 640
 #define ALTO_VENTANA 480
+#define MARGEN_SCROLL 160
 
 class Aplicacion: public Evento {
 	private:
