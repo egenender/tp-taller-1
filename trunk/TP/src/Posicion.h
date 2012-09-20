@@ -22,7 +22,7 @@ public:
 	int getX();
 	int getY();
 	void setX(int);
-	void setY(int)
+	void setY(int);
 
 	//Para verificar si una posicion esta a la X de otra
 	bool estaALaDerechaDe(Posicion);
