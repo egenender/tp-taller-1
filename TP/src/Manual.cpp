@@ -55,6 +55,7 @@ void Manual::detener(){
 	if (estado == CAMINANDODER)
 		estado = QUIETODER;
 	if (estado == CAMINANDOIZQ)
-			estado = QUIETOIZQ;
+		estado = QUIETOIZQ;
+	estado = QUIETO; //quitar esto
 	huboCambios();
 }
