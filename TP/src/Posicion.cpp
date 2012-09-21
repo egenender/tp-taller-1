@@ -21,7 +21,7 @@ Posicion::Posicion(int a, int b){
 	y = b;
 }
 
-Posicion Posicion::obtenerDerecha(){
+/*Posicion Posicion::obtenerDerecha(){
 	Posicion pos(x+1,y);
 	return pos;
 }
@@ -39,7 +39,7 @@ Posicion Posicion::obtenerArriba(){
 	Posicion pos(x,y-1);
 	return pos;
 }
-
+*/
 int Posicion::getX(){
 	return x;
 }
@@ -64,14 +64,14 @@ bool Posicion::estaArribaDe(Posicion pos){
 	return (y < pos.y);
 }
 
-void Posicion::moverHorizontalmente(int deltaX){
+/*void Posicion::moverHorizontalmente(int deltaX){
 	x += deltaX;
 
 }
 
 void Posicion::moverVerticalmente(int deltaY){
 	y *= deltaY;
-}
+}*/
 
 /*
 Posicion Posicion::operator+(Posicion sumando){
@@ -85,11 +85,13 @@ Posicion Posicion::operator+(Posicion sumando){
 void Posicion::sumarlePosicion(Posicion *pos_sumada){
 	x += pos_sumada->x;
 	if (x < 0) x = 0;
-	if (x > maximo->x) x = maximo->x;
+	if (maximo){
+		if (x > maximo->x) x = maximo->x;}
 
 	y += pos_sumada->y;
 	if (y < 0) y = 0;
-	if (y > maximo->y) y = maximo->y;
+	if (maximo){
+		if (y > maximo->y) y = maximo->y;}
 }
 
 void Posicion::indicarMaximo(int x, int y){
@@ -97,11 +99,21 @@ void Posicion::indicarMaximo(int x, int y){
 }
 
 void Posicion::setX(int a){
+	if(!maximo){
+		x = a;
+		return;
+	}
+
 	if (a <= maximo->x)
 		x = a;
 }
 
 void Posicion::setY(int b){
+	if (!maximo){
+		y = b;
+		return;
+	}
+
 	if (b <= maximo->y)
 		y = b;
 }

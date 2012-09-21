@@ -44,3 +44,13 @@ INFO - Ventana creada correctamente. - Thu Sep 20 23:20:29 2012
 INFO - Aplicacion creada correctamente. - Thu Sep 20 23:20:38 2012
 INFO - SDL iniciada correctamente. - Thu Sep 20 23:20:39 2012
 INFO - Ventana creada correctamente. - Thu Sep 20 23:20:39 2012
+INFO - Aplicacion creada correctamente. - Thu Sep 20 23:25:55 2012
+INFO - SDL iniciada correctamente. - Thu Sep 20 23:25:55 2012
+INFO - Ventana creada correctamente. - Thu Sep 20 23:25:55 2012
+INFO - Aplicacion creada correctamente. - Thu Sep 20 23:50:16 2012
+INFO - SDL iniciada correctamente. - Thu Sep 20 23:50:16 2012
+INFO - Ventana creada correctamente. - Thu Sep 20 23:50:16 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 00:03:28 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 00:03:28 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 00:03:28 2012
+INFO - Fin de aplicacion. - Fri Sep 21 00:04:07 2012
