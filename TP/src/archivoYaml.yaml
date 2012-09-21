@@ -1,0 +1,68 @@
+juego:
+  pantalla:
+    ancho: 100
+    alto: 120
+    fondo: TP/src/fondoGrande.png
+  parametros:
+    vel_personaje: 15
+    margen_scroll: 20
+  tiposPersonaje:
+    protagonista:
+      ancho: 30
+      alto: 40
+      animaciones:
+        quieto:
+          sprites: TP/src/yoshi.bmp
+        caminar:
+          sprites: TP/src/yoshi.png
+    mono:
+      ancho: 50
+      alto: 50
+      animaciones:
+        quieto:
+          sprites: TP/src/yoshi.bmp
+        grito:
+          sprites: TP/src/yoshi.png
+          periodo: 10
+    princesa:
+      ancho: 30
+      alto: 40
+      animaciones:
+        quieto:
+          sprites: TP/src/yoshi.bmp
+        ayudenme:
+          sprites: TP/src/yoshi.png
+          periodo: 7
+  texturas:
+    viga: viga.png
+    madera: madera.png
+  nivel:
+    alto: 800
+    ancho: 1000
+    personajes:
+      - tipo: protagonista
+        x: 100
+        y: 200
+      - tipo: mono
+        x: 300
+        y: 400
+      - tipo: princesa
+        x: 200
+        y: 300
+    plataformas:
+      - textura: viga
+        x: 100
+        y: 100
+        ancho: 100
+        alto: 20
+      - textura: viga
+        x: 200
+        y: 200
+        ancho: 200
+        alto: 20
+    escaleras:
+      - textura: madera
+        x: 200
+        y: 300
+        ancho: 20
+        alto: 100

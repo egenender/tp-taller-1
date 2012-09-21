@@ -1,0 +1,96 @@
+INFO - Aplicacion creada correctamente. - Fri Sep 21 17:56:16 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 17:56:16 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 17:56:16 2012
+INFO - Fin de aplicacion. - Fri Sep 21 17:56:29 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:13:01 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:13:02 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:13:02 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:13:39 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:14:14 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:14:14 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:14:14 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:14:40 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:14:56 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:14:56 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:14:56 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:15:04 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:19:52 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:20:53 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:21:55 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:22:31 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:23:46 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:23:47 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:24:00 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:24:00 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:24:22 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:24:22 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:24:35 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:24:35 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:24:48 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:24:48 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:24:58 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:25:37 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:25:37 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:25:37 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:25:44 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:26:10 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:26:10 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:26:10 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:26:15 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:26:36 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:26:36 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:26:36 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:26:38 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:26:53 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:27:09 2012
+ERROR - No se pudo cargar el archivo [TP/src/fondoGrande.png]
+ - Fri Sep 21 19:27:09 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:27:09 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:27:09 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:27:15 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:27:21 2012
+ERROR - No se pudo cargar el archivo [TP/src/fondoGrande.png]
+ - Fri Sep 21 19:27:21 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:27:21 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:27:21 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:27:33 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/fondoGrande.png]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:27:53 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:27:53 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:27:54 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:27:54 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:28:02 2012
+INFO - Aplicacion creada correctamente. - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/fondoGrande.png]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.bmp]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [TP/src/yoshi.png]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [madera.png]
+ - Fri Sep 21 19:28:12 2012
+ERROR - No se pudo cargar el archivo [viga.png]
+ - Fri Sep 21 19:28:12 2012
+INFO - SDL iniciada correctamente. - Fri Sep 21 19:28:12 2012
+INFO - Ventana creada correctamente. - Fri Sep 21 19:28:12 2012
+INFO - Fin de aplicacion. - Fri Sep 21 19:28:18 2012

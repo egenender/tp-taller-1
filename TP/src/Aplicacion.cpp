@@ -1,5 +1,6 @@
 #include "Aplicacion.h"
 #include "ManejadorEstados.h"
+#include "GestorConfiguraciones.h"
 #include "Log.h"
 #include "FPS.h"
 
@@ -16,6 +17,7 @@ Aplicacion::Aplicacion() {
 
 /** Iniciar las cosas: **/
 bool Aplicacion::iniciar() {
+	GestorConfiguraciones* gestor = new  GestorConfiguraciones();
 
 	// Iniciamos SDL:
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -26,7 +28,7 @@ bool Aplicacion::iniciar() {
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "SDL iniciada correctamente.");
 
     // Creamos la ventana:
-    if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
+    if((display = gestor->CrearPantalla()) == NULL)
         return false;
 
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");

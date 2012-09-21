@@ -1,4 +1,4 @@
-#ifndef SURFACE_H
+#ifndef SUPERFICIE_H
 #define SUPERFICIE_H
 
 #include "SDL/SDL.h"
@@ -21,9 +21,8 @@ class Superficie {
 		Superficie(SDL_Surface* superficie);
 		Superficie(string archivo);
 		~Superficie();
-
-	protected:
 		Superficie();
+	protected:
 		SDL_Surface* cargar(string archivo);
 
 	private:
