@@ -15,11 +15,14 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista) {
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
 
 	//Animacion* quieto = new Animacion(new HojaSprites("src/yoshi2.bmp", 64, 64), 150);
-	Animacion* quieto = new Animacion(new HojaSprites("src/charmeleonQuieto.png", 65, 73), 150);
-	quieto->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
-	quieto->transparencia(255,0,255);
+	Animacion* quietoDer = new Animacion(new HojaSprites("src/charmeleonQuieto.png", 65, 73), 150);
+	quietoDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
+	//quietoDer->transparencia(255,0,255);
 
-	animaciones->insert(pair<int, Animacion*>(QUIETO, quieto));
+	Animacion* quietoIzq = quietoDer->voltear(HORIZONTALMENTE);
+
+	animaciones->insert(pair<int, Animacion*>(QUIETODER, quietoDer));
+	animaciones->insert(pair<int, Animacion*>(QUIETOIZQ, quietoIzq));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDODER,caminaDer));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
 	actualizar(protagonista);
