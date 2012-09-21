@@ -2,7 +2,7 @@
 
 Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
-	estado = QUIETO;
+	estado = QUIETODER;
 }
 
 Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
@@ -12,7 +12,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 		vel = VELOCIDAD_STANDARD;
 	}
 	velocidad = vel;
-	estado = QUIETO;
+	estado = QUIETODER;
 }
 
 Manual::~Manual() {
@@ -50,7 +50,11 @@ void Manual::actualizar(){
 int Manual::obtenerEstado(){return estado;}
 
 void Manual::detener(){
-	if (estado == QUIETO) return;
-	estado = QUIETO;
+	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
+
+	if (estado == CAMINANDODER)
+		estado = QUIETODER;
+	if (estado == CAMINANDOIZQ)
+			estado = QUIETOIZQ;
 	huboCambios();
 }
