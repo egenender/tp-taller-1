@@ -39,7 +39,7 @@ void pruebas_posicionCreada(){
 void pruebas_posicionAdyacentes(){
 	Posicion *pos = new Posicion(5,5);
 	Posicion *pos2 = (Posicion*)malloc (sizeof(Posicion*));
-	*pos2 = pos->obtenerDerecha();
+	/**pos2 = pos->obtenerDerecha();
 	print_test("3. La posicion a la derecha del (5,5) es (6,5)", pos2->getX()==6 && pos2->getY()==5);
 
 	*pos2 = pos->obtenerArriba();
@@ -49,7 +49,7 @@ void pruebas_posicionAdyacentes(){
 	*pos2 = pos->obtenerAbajo();
 	print_test("5. La posicion abajo del (5,5) es (5,6)", pos2->getX()==5 && pos2->getY()==6);
 
-	*pos2 = pos->obtenerIzquierda();
+	*pos2 = pos->obtenerIzquierda();*/
 	print_test("6. La posicion a la izquierda del (5,5) es (4,5)", pos2->getX()==4 && pos2->getY()==5);
 	delete pos2;
 	delete pos;
