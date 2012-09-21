@@ -26,16 +26,16 @@ void Nivel::manejarEvento(SDL_Event* evento){
 	if (keystates[SDLK_DOWN]){
 
 	}
-	if (keystates[SDLK_LEFT]){
+	if (keystates[SDLK_LEFT] && ! keystates[SDLK_RIGHT]){
 		principal->moverALaIzquierda();
 	}
 
-	if (keystates[SDLK_RIGHT]){
+	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]){
 		principal->moverALaDerecha();
 	}
 
 	//TODO: en este if va a haber que agregar mas condiciones cuando se permita saltar/etc..
-	if (!keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]){
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])){
 		principal->detener();
 	}
 
