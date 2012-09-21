@@ -3,7 +3,6 @@
 Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
 	estado = QUIETODER;
-	estado = QUIETO; //borrar despues
 }
 
 Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
@@ -14,7 +13,6 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 	}
 	velocidad = vel;
 	estado = QUIETODER;
-	estado = QUIETO; //borrar despues
 }
 
 Manual::~Manual() {
@@ -58,6 +56,5 @@ void Manual::detener(){
 		estado = QUIETODER;
 	if (estado == CAMINANDOIZQ)
 		estado = QUIETOIZQ;
-	estado = QUIETO; //quitar esto
 	huboCambios();
 }
