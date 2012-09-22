@@ -17,32 +17,72 @@ Nivel::~Nivel() {
 	//Nivel::terminar();
 }
 
-void Nivel::manejarEvento(SDL_Event* evento){
+/*void Nivel::manejarEvento(SDL_Event* evento) {
 	if (evento->type == SDL_MOUSEMOTION)
 			return;
 
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
 	// Podria ser mejor :P Movimiento medio choto este:
-	if (keystates[SDLK_UP]){
+	if (keystates[SDLK_UP]) {
 		//principal->saltar(); ?
 	}
-	if (keystates[SDLK_DOWN]){
+	if (keystates[SDLK_DOWN]) {
 
 	}
-	if (keystates[SDLK_LEFT] && ! keystates[SDLK_RIGHT]){
+	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
 		principal->moverALaIzquierda();
 	}
 
-	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]){
+	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
 		principal->moverALaDerecha();
 	}
 
 	//TODO: en este if va a haber que agregar mas condiciones cuando se permita saltar/etc..
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])){
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])) {
 		principal->detener();
 	}
+}*/
 
+void Nivel::teclaApretada(SDLKey sym, SDLMod mod, Uint16 unicode) {
+	switch (sym) {
+		case SDLK_LEFT: {
+			principal->moverALaIzquierda();
+			break;
+		}
+
+		case SDLK_RIGHT: {
+			principal->moverALaDerecha();
+			break;
+		}
+
+		case SDLK_SPACE: {
+			//principal->saltar();
+			break;
+		}
+
+		default: {
+			break;
+		}
+	}
+}
+
+void Nivel::teclaSoltada(SDLKey sym, SDLMod mod, Uint16 unicode) {
+	switch (sym) {
+		case SDLK_LEFT: {
+			principal->detener();
+			break;
+		}
+
+		case SDLK_RIGHT: {
+			principal->detener();
+			break;
+		}
+
+		default: {
+			break;
+		}
+	}
 }
 
 void Nivel::iniciar() {
