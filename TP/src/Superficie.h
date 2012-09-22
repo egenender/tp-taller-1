@@ -20,6 +20,8 @@ class Superficie {
 	public:
 		Superficie(SDL_Surface* superficie);
 		Superficie(string archivo);
+		Superficie(string archivo, SDL_Rect* corte);
+		Superficie(string archivo, int x, int y, int ancho, int alto);
 		~Superficie();
 		Superficie();
 	protected:
