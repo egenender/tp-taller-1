@@ -2,6 +2,7 @@
 #include "VistaProtagonista.h"
 #include "GestorConfiguraciones.h"
 
+
 Nivel Nivel::instancia;
 
 #define ANCHO_NIVEL 640

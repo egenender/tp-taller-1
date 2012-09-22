@@ -1,0 +1,63 @@
+juego:
+  pantalla:
+    ancho: 1200
+    alto: 1200
+    fondo: src/charmeleonMovimiento.png
+  parametros:
+    vel_personaje: 15
+    margen_scroll: 20
+  tiposPersonaje:
+    protagonista:
+      ancho: 65
+      alto: 73
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.png
+        caminar:
+          sprites: src/charmeleonMovimiento.png
+    mono:
+      ancho: 50
+      alto: 50
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.png
+        grito:
+          sprites: src/charmeleonQuieto.png
+          periodo: 10
+    princesa:
+      ancho: 30
+      alto: 40
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.png
+        ayudenme:
+          sprites: src/charmeleonQuieto.png
+          periodo: 7
+  texturas:
+    viga: src/charmeleonQuieto.png
+    madera: src/charmeleonQuieto.png
+  nivel:
+    alto: 1000
+    ancho: 1000
+    personajes:
+      - tipo: protagonista
+        x: 0
+        y: 0
+    plataformas:
+      - textura: viga
+        x: 0
+        y: 0
+        ancho: 100
+        alto: 20
+      - textura: viga
+        x: 200
+        y: 200
+        ancho: 200
+        alto: 20
+    escaleras:
+      - textura: madera
+        x: 200
+        y: 300
+        ancho: 20
+        alto: 100
+

@@ -13,6 +13,7 @@
 #include "TipoPersonaje.h"
 #include "ConfiguracionPantalla.h"
 #include "ConfiguracionNivel.h"
+#include "Log.h"
 #include <map>
 
 #include "yaml-cpp/yaml.h"
@@ -23,7 +24,7 @@ typedef std::map <std::string,TipoPersonaje*> mapa_per;
 
 class GestorConfiguraciones{
 	private:
-		static GestorConfiguraciones instance;
+		static GestorConfiguraciones instancia;
 		GestorConfiguraciones();
 		int vel_personaje;
 		int margen_scroll;
@@ -37,7 +38,8 @@ class GestorConfiguraciones{
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
-		void CargarTiposPersonajes(const YAML::Node&);
+		ConfiguracionPantalla* CargarConfiguracionPantalla(int, int, string);
+		void CargarTiposPersonajes(const YAML::Node&, const YAML::Node&);
 		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&);
 		void CargarTexturas(const YAML::Node& nodo);
 		SDL_Surface* CrearPantalla();

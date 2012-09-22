@@ -17,7 +17,6 @@ Aplicacion::Aplicacion() {
 
 /** Iniciar las cosas: **/
 bool Aplicacion::iniciar() {
-
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
 	// Iniciamos SDL:
