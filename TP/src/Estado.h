@@ -9,7 +9,7 @@ class Estado: public Evento {
 		Estado();
 
 	public:
-//		virtual void manejarEvento(SDL_Event* evento) = 0;
+		virtual void manejarEvento(SDL_Event* evento) = 0;
 		virtual void iniciar() = 0;
 		virtual void terminar() = 0;
 		virtual void actualizar() = 0;
