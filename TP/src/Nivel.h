@@ -16,7 +16,10 @@ private:
 public:
 	Nivel();
 	virtual ~Nivel();
-	void manejarEvento(SDL_Event* evento);
+//	void manejarEvento(SDL_Event* evento);
+	void teclaApretada(SDLKey sym, SDLMod mod, Uint16 unicode);
+	void teclaSoltada(SDLKey sym, SDLMod mod, Uint16 unicode);
+
 	void iniciar();
 	void terminar();
 	void actualizar();
