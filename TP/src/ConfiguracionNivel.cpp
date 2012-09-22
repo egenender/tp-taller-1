@@ -11,11 +11,9 @@
 ConfiguracionNivel::ConfiguracionNivel(){
 
 	ancho=alto=0;
-	automaticos=vector<Automatico*>();
+	cuerpos=vector<Cuerpo*>();
 	manual=0;
-	animacionesAuto=vector<Animacion*>();
-	animacionManual=0;
 	vistaManual=0;
-
+	vistas=vector<VistaCuerpo*>();
 }
 

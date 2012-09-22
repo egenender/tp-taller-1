@@ -9,6 +9,14 @@
 #include <iostream>
 #include <fstream>
 #include "GestorConfiguraciones.h"
+#include "Estatico.h"
+
+// Puntero estatico para controlar la instanciacion.
+GestorConfiguraciones GestorConfiguraciones::instance;
+
+GestorConfiguraciones* GestorConfiguraciones::getInstance() {
+   return &instance;
+}
 
 GestorConfiguraciones::GestorConfiguraciones (){
 	vel_personaje=0;
@@ -16,7 +24,6 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	configPantalla=0;
 	tiposPersonajes=new mapa_per();
 	texturas=new mapa_tex();
-
 
 	std::ifstream fin("src/archivoYaml.yaml");
 	YAML::Parser parser(fin);
@@ -47,33 +54,87 @@ ConfiguracionNivel* GestorConfiguraciones::CargarConfiguracionNivel(const YAML::
 	std::string tipo;
 	int posX,posY;
 	Automatico* automatico;
-	configNivel->automaticos = vector<Automatico*>();
+	Cuerpo* cuerpo;
+	VistaCuerpo* vistaCuerpo;
+	configNivel->cuerpos = vector<Cuerpo*>();
 	for(unsigned i=0;i<personajes.size();i++) {
 			personajes[i]["tipo"] >> tipo;
 			personajes[i]["x"] >> posX;
 			personajes[i]["y"] >> posY;
-
 			if (strcmp(tiposPersonajes->at(tipo)->nombre,"protagonista")==0){
-
 				configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
-
+				cuerpo = configNivel->manual;
 				configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
-
+				vistaCuerpo = configNivel->vistaManual;
+				configNivel->vistas.push_back(configNivel->vistaManual );
 			}else{
 				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
-				configNivel->automaticos.push_back(automatico);
+				cuerpo = automatico;
+				//vista = new VistaAnimada(automatico, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
+				//configNivel->vistas.push_back(vista);
 			}
+			cuerpo->agregarObservador(vistaCuerpo);
+			configNivel->cuerpos.push_back(cuerpo);
 	}
 
+	const YAML::Node& plataformas=nodo["plataformas"];
+	int ancho, alto;
+	std::string nombreTex;
+	Estatico* estatico;
+	VistaImagen* vista;
+	for(unsigned i=0;i<plataformas.size();i++) {
+		plataformas[i]["x"] >> posX;
+		plataformas[i]["y"] >> posY;
+		plataformas[i]["ancho"] >> ancho;
+		plataformas[i]["alto"] >> alto;
+		plataformas[i]["textura"] >> nombreTex;
+		estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
+		configNivel->cuerpos.push_back(cuerpo);
+		vista = new VistaImagen(texturas->at(nombreTex));
+		estatico->agregarObservador(vista);
+		configNivel->vistas.push_back(vista);
+	}
+
+	const YAML::Node& escaleras=nodo["escaleras"];
+		for(unsigned i=0;i<escaleras.size();i++) {
+			escaleras[i]["x"] >> posX;
+			escaleras[i]["y"] >> posY;
+			escaleras[i]["ancho"] >> ancho;
+			escaleras[i]["alto"] >> alto;
+			escaleras[i]["textura"] >> nombreTex;
+			estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
+			configNivel->cuerpos.push_back(cuerpo);
+			//crear una superficie escalera con esa textura
+			vista = new VistaImagen(texturas->at(nombreTex));
+			estatico->agregarObservador(vista);
+			configNivel->vistas.push_back(vista);
+		}
 	return configNivel;
+}
+
+vector<Cuerpo*>* GestorConfiguraciones::ObtenerCuerpos(){
+	return &configNivel->cuerpos;
+}
+
+vector<VistaCuerpo*>* GestorConfiguraciones::ObtenerVistas(){
+	return &configNivel->vistas;
 }
 
 Manual* GestorConfiguraciones::ObtenerManual(){
 	return configNivel->manual;
 }
 
-VistaCuerpo* GestorConfiguraciones::ObtenerVistaManual(){
+VistaProtagonista* GestorConfiguraciones::ObtenerVistaManual(){
 	return configNivel->vistaManual;
+}
+
+int GestorConfiguraciones::ObtenerAltoNivel(){
+	return configNivel->alto;
+}
+
+
+int GestorConfiguraciones::ObtenerAnchoNivel(){
+	return configNivel->ancho;
 }
 
 void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
@@ -89,8 +150,6 @@ void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
 
 
 void GestorConfiguraciones::CargarTiposPersonajes(const YAML::Node& nodo){
-
-
 	for(YAML::Iterator it=nodo.begin();it!=nodo.end();++it) {
 
 		std::string nombre;

@@ -12,6 +12,7 @@
 #include "Automatico.h"
 #include "Manual.h"
 #include "VistaCuerpo.h"
+#include "VistaProtagonista.h"
 #include <vector>
 
 class ConfiguracionNivel{
@@ -19,12 +20,10 @@ class ConfiguracionNivel{
 	public:
 		int alto;
 		int ancho;
-		std::vector<Automatico*> automaticos;
 		Manual* manual;
-		std::vector<Animacion*> animacionesAuto;
-		Animacion* animacionManual;
-
-		VistaCuerpo* vistaManual;
+		VistaProtagonista* vistaManual;
+		std::vector<Cuerpo*> cuerpos;
+		std::vector<VistaCuerpo*> vistas;
 	public:
 		ConfiguracionNivel();
 };

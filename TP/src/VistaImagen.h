@@ -15,6 +15,7 @@ public:
 	VistaImagen();
 	VistaImagen(string ID);
 	~VistaImagen();
+	VistaImagen(Superficie*);
 	void actualizar(Observable* observable);
 	bool dibujar(SDL_Surface* display);
 

@@ -1,7 +1,7 @@
 juego:
   pantalla:
-    ancho: 800
-    alto: 600
+    ancho: 1200
+    alto: 1200
     fondo: src/charmeleonMovimiento.png
   parametros:
     vel_personaje: 15
@@ -37,22 +37,16 @@ juego:
     viga: src/charmeleonQuieto.png
     madera: src/charmeleonQuieto.png
   nivel:
-    alto: 800
+    alto: 1000
     ancho: 1000
     personajes:
       - tipo: protagonista
         x: 0
         y: 0
-      - tipo: mono
-        x: 300
-        y: 400
-      - tipo: princesa
-        x: 200
-        y: 300
     plataformas:
       - textura: viga
-        x: 100
-        y: 100
+        x: 0
+        y: 0
         ancho: 100
         alto: 20
       - textura: viga

@@ -10,8 +10,8 @@
 class Nivel: public Estado {
 private:
     static Nivel instancia;
-	lista_t* lista_cuerpos;
-	lista_t* lista_vistas;
+	vector<Cuerpo*>* cuerpos;
+	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
 public:
 	Nivel();
