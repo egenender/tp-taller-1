@@ -47,14 +47,9 @@ void Nivel::iniciar() {
 	GestorConfiguraciones* gestor = new  GestorConfiguraciones();
 
 	//Manual* algo = new Manual("algo", new Area(65,73,new Posicion(0,0)));
-
-
-	Manual* algo = gestor->ObtenerManual();
-
-
 	//VistaCuerpo* vistaAlgo = new VistaProtagonista(algo);
 
-
+	Manual* algo = gestor->ObtenerManual();
 	VistaCuerpo* vistaAlgo = gestor->ObtenerVistaManual();
 
 	Posicion::indicarMaximo(ANCHO_NIVEL, ALTO_NIVEL);

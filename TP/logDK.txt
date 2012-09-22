@@ -529,3 +529,11 @@ INFO - Aplicacion creada correctamente. - Sat Sep 22 01:17:47 2012
 INFO - SDL iniciada correctamente. - Sat Sep 22 01:17:47 2012
 INFO - Ventana creada correctamente. - Sat Sep 22 01:17:47 2012
 INFO - Fin de aplicacion. - Sat Sep 22 01:19:15 2012
+INFO - Aplicacion creada correctamente. - Sat Sep 22 01:38:21 2012
+INFO - SDL iniciada correctamente. - Sat Sep 22 01:38:22 2012
+INFO - Ventana creada correctamente. - Sat Sep 22 01:38:22 2012
+INFO - Aplicacion creada correctamente. - Sat Sep 22 01:43:49 2012
+INFO - SDL iniciada correctamente. - Sat Sep 22 01:43:49 2012
+INFO - Ventana creada correctamente. - Sat Sep 22 01:43:49 2012
+INFO - Fin de aplicacion. - Sat Sep 22 01:43:57 2012
+INFO - Fin de aplicacion. - Sat Sep 22 01:44:10 2012
