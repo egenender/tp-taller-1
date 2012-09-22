@@ -5,6 +5,10 @@ VistaImagen::VistaImagen() {
 	imagen = NULL;
 }
 
+VistaImagen::VistaImagen(Superficie* imagenNueva) {
+	imagen = imagenNueva;
+}
+
 VistaImagen::VistaImagen(string ID) {
 //	cambiarImagen(ID);
 }
