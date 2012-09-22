@@ -24,7 +24,7 @@ void Nivel::manejarEvento(SDL_Event* evento){
 	if (keystates[SDLK_UP]){
 		//principal->saltar(); ?
 	}
-	if (keystates[SDLK_DOWN]){ALTO_NIVEL;
+	if (keystates[SDLK_DOWN]){
 
 	}
 	if (keystates[SDLK_LEFT] && ! keystates[SDLK_RIGHT]){
