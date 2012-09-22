@@ -9,7 +9,6 @@
 
 
 ConfiguracionNivel::ConfiguracionNivel(){
-
 	ancho=alto=0;
 	cuerpos=vector<Cuerpo*>();
 	manual=0;
