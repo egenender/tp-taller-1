@@ -17,7 +17,8 @@ Aplicacion::Aplicacion() {
 
 /** Iniciar las cosas: **/
 bool Aplicacion::iniciar() {
-	GestorConfiguraciones* gestor = new  GestorConfiguraciones();
+
+	GestorConfiguraciones* gestor=new GestorConfiguraciones();
 
 	// Iniciamos SDL:
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -28,8 +29,10 @@ bool Aplicacion::iniciar() {
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "SDL iniciada correctamente.");
 
     // Creamos la ventana:
-    if((display = gestor->CrearPantalla()) == NULL)
-        return false;
+    //if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
+
+    if((display=gestor->CrearPantalla())==NULL)
+    	return false;
 
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");
 
@@ -44,6 +47,7 @@ bool Aplicacion::iniciar() {
 
 /** Manejar eventos (teclado, mouse, etc) **/
 void Aplicacion::manejarEvento(SDL_Event* evento) {
+
 	Evento::manejarEvento(evento);
 	ManejadorEstados::manejarEvento(evento);
 }
@@ -100,6 +104,7 @@ int Aplicacion::ejecutar() {
 		while (SDL_PollEvent(&evento)) {
 			manejarEvento(&evento);
 		}
+
 		actualizar();
 		dibujar();
 		SDL_Delay(35);

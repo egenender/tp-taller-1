@@ -5,11 +5,10 @@
  *      Author: juaqi
  */
 
-#include "GestorConfiguraciones.h"
-#include "ConfiguracionPantalla.h"
 #include <string.h>
 #include <iostream>
 #include <fstream>
+#include "GestorConfiguraciones.h"
 
 GestorConfiguraciones::GestorConfiguraciones (){
 	vel_personaje=0;
@@ -34,6 +33,47 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	CargarTiposPersonajes(nodoRaiz["tiposPersonaje"]);
 	CargarTexturas(nodoRaiz["texturas"]);
 
+	configNivel=CargarConfiguracionNivel(nodoRaiz["nivel"]);
+
+}
+
+ConfiguracionNivel* GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo){
+	configNivel= new ConfiguracionNivel();
+
+	nodo["alto"] >> configNivel->alto;
+	nodo["ancho"] >> configNivel->ancho;
+
+	const YAML::Node& personajes=nodo["personajes"];
+	std::string tipo;
+	int posX,posY;
+	Automatico* automatico;
+	configNivel->automaticos = vector<Automatico*>();
+	for(unsigned i=0;i<personajes.size();i++) {
+			personajes[i]["tipo"] >> tipo;
+			personajes[i]["x"] >> posX;
+			personajes[i]["y"] >> posY;
+
+			if (strcmp(tiposPersonajes->at(tipo)->nombre,"protagonista")==0){
+
+				configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
+
+				configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
+
+			}else{
+				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
+				configNivel->automaticos.push_back(automatico);
+			}
+	}
+
+	return configNivel;
+}
+
+Manual* GestorConfiguraciones::ObtenerManual(){
+	return configNivel->manual;
+}
+
+VistaCuerpo* GestorConfiguraciones::ObtenerVistaManual(){
+	return configNivel->vistaManual;
 }
 
 void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
@@ -44,9 +84,7 @@ void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
 		    it.first() >> nombre;
 		    it.second() >> ruta;
 		    texturas -> insert(pair<std::string , Superficie*>(nombre,new Superficie(ruta)));
-
 	}
-
 }
 
 
@@ -58,6 +96,7 @@ void GestorConfiguraciones::CargarTiposPersonajes(const YAML::Node& nodo){
 		std::string nombre;
 	    it.first() >> nombre;
 	    TipoPersonaje* tipoper=_CargarTipoPersonaje(nodo[nombre.c_str()]);
+	    tipoper->nombre=nombre.c_str();
 	    tiposPersonajes -> insert(pair<std::string , TipoPersonaje*>(nombre,tipoper));
 
 	}

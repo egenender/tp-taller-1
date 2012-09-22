@@ -6,10 +6,10 @@
 
 class VistaProtagonista : public VistaAnimada {
 public:
-	VistaProtagonista(Manual* protagonista);
+	VistaProtagonista(Manual* protagonista, Animacion*, Animacion*);
 	~VistaProtagonista();
 	void actualizar(Observable* observable);
-
+	VistaProtagonista(Manual* protagonista);
 };
 
 #endif /* VISTAPROTAGONISTA_H_ */

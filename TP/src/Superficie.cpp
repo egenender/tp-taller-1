@@ -16,10 +16,11 @@ Superficie::Superficie(SDL_Surface* superficie) {
 
 /** Crea una superficie a partir de una ruta de imagen **/
 Superficie::Superficie(string archivo) {
-
 	Superficie();
+
 	if ((superficie = cargar(archivo)) != NULL) {
 		alto = superficie->h;
+
 		ancho = superficie->w;
 	}
 }
@@ -37,10 +38,11 @@ SDL_Surface* Superficie::cargar(string archivo) {
 		return NULL;
 	}
 
-	supFinal = SDL_DisplayFormat(supTemporal);
-	SDL_FreeSurface(supTemporal);
 
-	return supFinal;
+	//supFinal = SDL_DisplayFormat(supTemporal);
+	//SDL_FreeSurface(supTemporal);
+
+	return supTemporal;
 }
 
 /** Dibuja la imagen sobre supDest, en la posicion (x,y). Si corte es distinto

@@ -22,6 +22,7 @@ public:
 	void actualizar();
 	void dibujar(SDL_Surface* display);
 
+
 private:
 	//Para agregar elementos al nivel:
 	void agregarCuerpo(Cuerpo*);
