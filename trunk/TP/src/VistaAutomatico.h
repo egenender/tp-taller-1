@@ -9,8 +9,9 @@ class VistaAutomatico:public VistaAnimada {
 private:
 	int actual;
 	bool terminoAhora;
+	int periodo;
 public:
-	VistaAutomatico(Automatico*, Animacion*, Animacion*);
+	VistaAutomatico(Automatico*, Animacion*, Animacion*, int);
 	virtual ~VistaAutomatico();
 	void actualizar(Observable* observable);
 private:

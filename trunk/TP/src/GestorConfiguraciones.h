@@ -10,6 +10,7 @@
 #include "VistaProtagonista.h"
 #include "VistaAnimada.h"
 #include "VistaImagen.h"
+#include "VistaAutomatico.h"
 #include "TipoPersonaje.h"
 #include "ConfiguracionPantalla.h"
 #include "ConfiguracionNivel.h"
@@ -40,7 +41,7 @@ class GestorConfiguraciones{
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
 		ConfiguracionPantalla* CargarConfiguracionPantalla(int, int, string);
 		void CargarTiposPersonajes(const YAML::Node&, const YAML::Node&);
-		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&);
+		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&, const char*);
 		void CargarTexturas(const YAML::Node& nodo);
 		SDL_Surface* CrearPantalla();
 		ConfiguracionNivel* CargarConfiguracionNivel(const YAML::Node&);

@@ -14,6 +14,7 @@ TipoPersonaje::TipoPersonaje (){
 	nombre=0;
 	animacionPasiva=0;
 	animacionActiva=0;
+	periodo=0;
 }
 
 Manual* TipoPersonaje::CrearManual(const char* nombre,int x, int y, int velocidad){
