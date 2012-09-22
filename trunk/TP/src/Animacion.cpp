@@ -14,6 +14,7 @@ void Animacion::inicializar() {
 	corriendo = true;
 	puntoDetencion = -1;
 	delaysFrames = NULL;
+	cantVecesAnimado = 0;
 }
 
 void Animacion::cargarFrames(HojaSprites* frames) {
@@ -93,6 +94,7 @@ void Animacion::animar() {
 
 	if (frameActual >= framesTotales) {
 		frameActual = 0;
+		cantVecesAnimado++;
 	}
 }
 
@@ -168,6 +170,7 @@ void Animacion::resetear() {
 	frameActual = 0;
 	puntoDetencion = -1;
 	corriendo = true;
+	cantVecesAnimado = 0;
 }
 
 /** Devuelve la cantidad de frames de la animacion **/
@@ -207,5 +210,5 @@ void Animacion::transparencia(unsigned int R, unsigned int G, unsigned int B) {
 }
 
 bool Animacion::termino(){
-	return (frameActual == framesTotales);
+	return (cantVecesAnimado > 0);
 }

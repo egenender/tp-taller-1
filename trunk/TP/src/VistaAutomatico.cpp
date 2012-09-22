@@ -50,4 +50,5 @@ void VistaAutomatico::cambiarAnimacion(){
 		actual = PRIMERA;
 
 	animacionActual = animaciones->at(actual);
+	animacionActual->resetear();
 }
