@@ -18,6 +18,9 @@ Nivel::~Nivel() {
 }
 
 void Nivel::manejarEvento(SDL_Event* evento){
+	if (evento->type == SDL_MOUSEMOTION)
+		return;
+
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
 	// Podria ser mejor :P Movimiento medio choto este:
