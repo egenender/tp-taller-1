@@ -205,3 +205,7 @@ bool Animacion::escala(Uint16 factor) {
 void Animacion::transparencia(unsigned int R, unsigned int G, unsigned int B) {
 	frames->transparencia(R,G,B);
 }
+
+bool Animacion::termino(){
+	return (frameActual == framesTotales);
+}
