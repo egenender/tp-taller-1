@@ -34,8 +34,8 @@ juego:
           sprites: src/pikachuQuieto.png
           periodo: 7
   texturas:
-    viga: src/charmeleonQuieto.png
-    madera: src/charmeleonQuieto.png
+    viga: src/viga2.jpg
+    esc: src/film.png
   nivel:
     alto: 1000
     ancho: 1000
@@ -52,18 +52,18 @@ juego:
     plataformas:
       - textura: viga
         x: 0
-        y: 0
-        ancho: 100
-        alto: 20
+        y: 500
+        ancho: 2000
+        alto: 120
       - textura: viga
         x: 200
         y: 200
-        ancho: 200
-        alto: 20
+        ancho: 400
+        alto: 50
     escaleras:
-      - textura: madera
+      - textura: esc
         x: 200
         y: 300
-        ancho: 20
+        ancho: 100
         alto: 100
 

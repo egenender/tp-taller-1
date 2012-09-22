@@ -159,7 +159,9 @@ ConfiguracionNivel* GestorConfiguraciones::CargarConfiguracionNivel(const YAML::
 		plataformas[i]["textura"] >> nombreTex;
 		estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
 		configNivel->cuerpos.push_back(cuerpo);
-		vista = new VistaImagen(texturas->at(nombreTex));
+		Superficie* sup =  new Superficie( texturas->at(nombreTex) , 0 , 0 , ancho, alto);
+		//sup->escala(ancho,alto);
+		vista = new VistaImagen( sup );
 		estatico->agregarObservador(vista);
 		configNivel->vistas.push_back(vista);
 	}
@@ -173,8 +175,9 @@ ConfiguracionNivel* GestorConfiguraciones::CargarConfiguracionNivel(const YAML::
 			escaleras[i]["textura"] >> nombreTex;
 			estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
 			configNivel->cuerpos.push_back(cuerpo);
-			//crear una superficie escalera con esa textura
-			vista = new VistaImagen(texturas->at(nombreTex));
+			Superficie* sup =  new Superficie( texturas->at(nombreTex));
+			sup->escala(ancho,alto);
+			vista = new VistaImagen( sup );
 			estatico->agregarObservador(vista);
 			configNivel->vistas.push_back(vista);
 		}
@@ -213,7 +216,7 @@ void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
 			std::string nombre, ruta;
 		    it.first() >> nombre;
 		    it.second() >> ruta;
-		    texturas -> insert(pair<std::string , Superficie*>(nombre,new Superficie(ruta)));
+		    texturas -> insert(pair<std::string , std::string>(nombre,ruta));
 	}
 }
 
