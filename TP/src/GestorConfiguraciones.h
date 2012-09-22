@@ -20,7 +20,7 @@
 #include "yaml-cpp/yaml.h"
 
 
-typedef std::map <std::string,Superficie*> mapa_tex;
+typedef std::map <std::string,std::string> mapa_tex;
 typedef std::map <std::string,TipoPersonaje*> mapa_per;
 
 class GestorConfiguraciones{
