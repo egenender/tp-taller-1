@@ -1,6 +1,6 @@
 #include "VistaAutomatico.h"
 
-VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* pasiva, Animacion* activa) {
+VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Animacion* pasiva, int period) {
 
 	pasiva->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
 	activa->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
@@ -9,10 +9,13 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* pasiva, Anima
 
 	animaciones->insert(pair<int, Animacion*>(PRIMERA, pasiva));
 	animaciones->insert(pair<int, Animacion*>(SEGUNDA, activa));
-	actualizar(automatic);
+
 	animacionActual = pasiva;
+	actualizar(automatic);
 	terminoAhora = true;
 	actual = PRIMERA;
+
+	periodo = period;
 }
 
 VistaAutomatico::~VistaAutomatico() {

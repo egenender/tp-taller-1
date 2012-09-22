@@ -14,6 +14,7 @@ class TipoPersonaje {
 	public:
 		int ancho;
 		int alto;
+		int periodo;
 		const char* nombre;
 		Animacion* animacionPasiva;
 		Animacion* animacionActiva;

@@ -29,9 +29,9 @@ juego:
       alto: 40
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/pikachuQuieto.png
         ayudenme:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/pikachuQuieto.png
           periodo: 7
   texturas:
     viga: src/charmeleonQuieto.png
@@ -43,6 +43,12 @@ juego:
       - tipo: protagonista
         x: 0
         y: 0
+      - tipo: mono
+        x: 0
+        y: 200
+      - tipo: princesa
+        x: 0
+        y: 400
     plataformas:
       - textura: viga
         x: 0
