@@ -1,5 +1,6 @@
 #include "Nivel.h"
 #include "VistaProtagonista.h"
+#include "GestorConfiguraciones.h"
 
 Nivel Nivel::instancia;
 
@@ -23,7 +24,7 @@ void Nivel::manejarEvento(SDL_Event* evento){
 	if (keystates[SDLK_UP]){
 		//principal->saltar(); ?
 	}
-	if (keystates[SDLK_DOWN]){
+	if (keystates[SDLK_DOWN]){ALTO_NIVEL;
 
 	}
 	if (keystates[SDLK_LEFT] && ! keystates[SDLK_RIGHT]){
@@ -43,11 +44,18 @@ void Nivel::manejarEvento(SDL_Event* evento){
 
 void Nivel::iniciar() {
 
-	// Aca se leeria de algun lado datos para el nivel, crear los cuerpos etc.
+	GestorConfiguraciones* gestor = new  GestorConfiguraciones();
 
-	Manual* algo = new Manual("algo", new Area(65,73,new Posicion(0,0)));
+	//Manual* algo = new Manual("algo", new Area(65,73,new Posicion(0,0)));
 
-	VistaCuerpo* vistaAlgo = new VistaProtagonista(algo);
+
+	Manual* algo = gestor->ObtenerManual();
+
+
+	//VistaCuerpo* vistaAlgo = new VistaProtagonista(algo);
+
+
+	VistaCuerpo* vistaAlgo = gestor->ObtenerVistaManual();
 
 	Posicion::indicarMaximo(ANCHO_NIVEL, ALTO_NIVEL);
 

@@ -5,14 +5,19 @@
  *      Author: juaqi
  */
 
-#include <map>
-#include "yaml-cpp/yaml.h"
-#include "Superficie.h"
+#include "Animacion.h"
+#include "HojaSprites.h"
+#include "VistaProtagonista.h"
 #include "TipoPersonaje.h"
 #include "ConfiguracionPantalla.h"
+#include "ConfiguracionNivel.h"
+#include <map>
 
-typedef std::map <std::string,TipoPersonaje*> mapa_per;
+#include "yaml-cpp/yaml.h"
+
+
 typedef std::map <std::string,Superficie*> mapa_tex;
+typedef std::map <std::string,TipoPersonaje*> mapa_per;
 
 class GestorConfiguraciones{
 
@@ -23,6 +28,7 @@ class GestorConfiguraciones{
 		ConfiguracionPantalla* configPantalla;
 		mapa_per* tiposPersonajes;
 		mapa_tex* texturas;
+		ConfiguracionNivel* configNivel;
 
 	public:
 		GestorConfiguraciones();
@@ -31,6 +37,9 @@ class GestorConfiguraciones{
 		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&);
 		void CargarTexturas(const YAML::Node& nodo);
 		SDL_Surface* CrearPantalla();
+		ConfiguracionNivel* CargarConfiguracionNivel(const YAML::Node&);
+		Manual* ObtenerManual();
+		VistaCuerpo* ObtenerVistaManual();
 
 };
 
