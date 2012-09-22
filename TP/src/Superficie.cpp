@@ -31,7 +31,7 @@ Superficie::~Superficie() {
 
 SDL_Surface* Superficie::cargar(string archivo) {
 	SDL_Surface* supTemporal = NULL;
-	SDL_Surface* supFinal = NULL;
+	//SDL_Surface* supFinal = NULL;
 
 	if ((supTemporal = IMG_Load(archivo.c_str())) == NULL) {
 		Log::getInstance()->writeToLogFile(Log::ERROR, "No se pudo cargar el archivo [" + archivo + "]\n");
