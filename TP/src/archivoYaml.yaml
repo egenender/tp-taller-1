@@ -8,13 +8,13 @@ juego:
     margen_scroll: 80
   tiposPersonaje:
     protagonista:
-      ancho: 65
-      alto: 73
+      ancho: 64
+      alto: 64
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/yoshi2.bmp
         caminar:
-          sprites: src/charmeleonMovimiento.png
+          sprites: src/yoshi1.bmp
     mono:
       ancho: 65
       alto: 73

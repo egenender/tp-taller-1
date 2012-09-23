@@ -7,10 +7,10 @@ void Superficie::inicializarSuperficie() {
 	superficie = NULL;
 }
 
-
 Superficie::Superficie(string archivo, SDL_Rect* corte) {
 	SDL_Surface* temp = cargar(archivo);
-	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, corte->w, corte->h, 32, 0, 0, 0, 0);
+	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, corte->w, corte->h,
+			32, 0, 0, 0, 0);
 	SDL_BlitSurface(temp, corte, final, NULL);
 	superficie = final;
 	alto = final->h;
@@ -19,7 +19,8 @@ Superficie::Superficie(string archivo, SDL_Rect* corte) {
 
 Superficie::Superficie(string archivo, int x, int y, int ancho, int alto) {
 	SDL_Surface* temp = cargar(archivo);
-	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto, 32, 0, 0, 0, 0);
+	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto, 32, 0,
+			0, 0, 0);
 	SDL_Rect corte;
 	corte.x = x;
 	corte.y = y;
@@ -58,10 +59,10 @@ SDL_Surface* Superficie::cargar(string archivo) {
 	//SDL_Surface* supFinal = NULL;
 
 	if ((supTemporal = IMG_Load(archivo.c_str())) == NULL) {
-		Log::getInstance()->writeToLogFile(Log::ERROR, "No se pudo cargar el archivo [" + archivo + "]\n");
+		Log::getInstance()->writeToLogFile(Log::ERROR,
+				"No se pudo cargar el archivo [" + archivo + "]\n");
 		return NULL;
 	}
-
 
 	//supFinal = SDL_DisplayFormat(supTemporal);
 	//SDL_FreeSurface(supTemporal);
@@ -100,7 +101,7 @@ void Superficie::transparencia(unsigned int R, unsigned int G, unsigned int B) {
 
 Uint32 Superficie::getPixel(SDL_Surface *surface, int x, int y) {
 	int bpp = surface->format->BytesPerPixel;
-	/* Here p is the address to the pixel we want to retrieve */
+	// Here p is the address to the pixel we want to retrieve
 	Uint8 *p = (Uint8 *) surface->pixels + y * surface->pitch + x * bpp;
 
 	switch (bpp) {
@@ -124,13 +125,13 @@ Uint32 Superficie::getPixel(SDL_Surface *surface, int x, int y) {
 		break;
 
 	default:
-		return 0; /* shouldn't happen, but avoids warnings */
+		return 0; // shouldn't happen, but avoids warnings
 	}
 }
 
 void Superficie::putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 	int bpp = surface->format->BytesPerPixel;
-	/* Here p is the address to the pixel we want to set */
+	// Here p is the address to the pixel we want to set
 	Uint8 *p = (Uint8 *) surface->pixels + y * surface->pitch + x * bpp;
 
 	switch (bpp) {
@@ -209,19 +210,6 @@ int Superficie::obtenerAncho() {
 	return ancho;
 }
 
-Uint32 get_pixel32(SDL_Surface *surface, int x, int y) {
-	//Convert the pixels to 32 bit
-	Uint32 *pixels = (Uint32 *) surface->pixels;
-	//Get the requested pixel
-	return pixels[(y * surface->w) + x];
-}
-void put_pixel32(SDL_Surface *surface, int x, int y, Uint32 pixel) {
-	//Convert the pixels to 32 bit
-	Uint32 *pixels = (Uint32 *) surface->pixels;
-	//Set the pixel
-	pixels[(y * surface->w) + x] = pixel;
-}
-
 /** Devuelve una nueva superficie volteada, respecto de la original.
  * Parametros: El tipo de volteo: HORIZONTALMENTE y VERTICALMENTE
  * Se puede hacer ambos volteos a la vez, pasar como parametro:
@@ -252,14 +240,14 @@ Superficie* Superficie::voltear(int flags) {
 		// Recorremos las filas
 		for (int y = 0, ry = volteada->h - 1; y < volteada->h; y++, ry--) {
 			// Obtenemos un pixel:
-			Uint32 pixel = get_pixel32(superficie, x, y);
+			Uint32 pixel = getPixel(superficie, x, y);
 			// Copiamos el pixel:
 			if ((flags & VERTICALMENTE) && (flags & HORIZONTALMENTE)) {
-				put_pixel32(volteada, rx, ry, pixel);
+				putPixel(volteada, rx, ry, pixel);
 			} else if (flags & HORIZONTALMENTE) {
-				put_pixel32(volteada, rx, y, pixel);
+				putPixel(volteada, rx, y, pixel);
 			} else if (flags & VERTICALMENTE) {
-				put_pixel32(volteada, x, ry, pixel);
+				putPixel(volteada, x, ry, pixel);
 			}
 		}
 	}
