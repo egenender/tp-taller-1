@@ -33,6 +33,15 @@ juego:
         ayudenme:
           sprites: src/pikachuMovimiento.png
           periodo: 7
+    defe:
+      ancho: 55
+      alto: 47
+      animaciones:
+        quieto:
+          sprites: src/pikachuQuieto.png
+        ayudenme:
+          sprites: src/pikachuMovimiento.png
+          periodo: 7
   texturas:
     viga: src/viga2.jpg
     esc: src/film.png
