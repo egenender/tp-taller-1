@@ -7,14 +7,15 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Anima
 	pasiva->transparencia(255,0,255);
 	activa->transparencia(255,0,255);
 
-	animaciones->insert(pair<int, Animacion*>(PRIMERA, pasiva));
-	animaciones->insert(pair<int, Animacion*>(SEGUNDA, activa));
+	animaciones->insert(pair<int, Animacion*>(INMOVIL, pasiva));
+	animaciones->insert(pair<int, Animacion*>(MOVIENDO, activa));
 
 	animacionActual = pasiva;
-	actual = PRIMERA;
+	actual = INMOVIL;
 	terminoAhora = true;
 	periodo = period;
 	timer = new Timer();
+	timer->comenzar();
 	actualizar(automatic);
 }
 
@@ -22,7 +23,7 @@ VistaAutomatico::~VistaAutomatico() {
 	delete timer;
 }
 
-void VistaAutomatico::actualizar(Observable* observable) {
+/*void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
 
 	posicionDibujar = automatic->obtenerPosicion();
@@ -45,13 +46,36 @@ void VistaAutomatico::actualizar(Observable* observable) {
 		timer->detener();
 	}
 
+}*/
+
+void VistaAutomatico::actualizar(Observable* observable) {
+	Automatico* automatic = (Automatico*) observable;
+	posicionDibujar = automatic->obtenerPosicion();
+
+	//si estoy corriendo, me fijo si termino de correr:
+	if (actual == MOVIENDO && animacionActual->termino()){
+		cambiarAnimacion();
+		timer->comenzar();
+		return;
+	}
+
+	//Si simplemente esta corriendo, y no termino de correr, vuelvo
+	if (actual == MOVIENDO) return;
+
+	//Ya se que no esta corriendo, asi que me fijo si deberia
+
+	if (timer->obtenerTiempo() >= (periodo * 1000)){
+			cambiarAnimacion();
+			timer->detener();
+	}
+
 }
 
 void VistaAutomatico::cambiarAnimacion(){
-	if (actual == PRIMERA)
-		actual = SEGUNDA;
+	if (actual == INMOVIL)
+		actual = MOVIENDO;
 	else
-		actual = PRIMERA;
+		actual = INMOVIL;
 
 	animacionActual = animaciones->at(actual);
 	animacionActual->resetear();
