@@ -40,7 +40,7 @@ void VistaAutomatico::actualizar(Observable* observable) {
 
 	//Si el timer terminó de contar, tengo que cambiar la animacion
 
-	if (timer->obtenerTiempo() > (periodo * 1000)){
+	if (timer->obtenerTiempo() >= (periodo * 1000)){
 		cambiarAnimacion();
 		timer->detener();
 	}

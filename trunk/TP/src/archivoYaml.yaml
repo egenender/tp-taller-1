@@ -16,8 +16,8 @@ juego:
         caminar:
           sprites: src/charmeleonMovimiento.png
     mono:
-      ancho: 50
-      alto: 50
+      ancho: 65
+      alto: 73
       animaciones:
         quieto:
           sprites: src/charmeleonQuieto.png
@@ -25,8 +25,8 @@ juego:
           sprites: src/charmeleonMovimiento.png
           periodo: 10
     princesa:
-      ancho: 30
-      alto: 40
+      ancho: 55
+      alto: 47
       animaciones:
         quieto:
           sprites: src/pikachuQuieto.png
