@@ -1,11 +1,11 @@
 juego:
   pantalla:
-    ancho: 1200
-    alto: 1200
-    fondo: src/charmeleonMovimiento.png
+    ancho: 800
+    alto: 600
+    fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 15
-    margen_scroll: 20
+    margen_scroll: 80
   tiposPersonaje:
     protagonista:
       ancho: 65
@@ -16,26 +16,26 @@ juego:
         caminar:
           sprites: src/charmeleonMovimiento.png
     mono:
-      ancho: 50
-      alto: 50
+      ancho: 65
+      alto: 73
       animaciones:
         quieto:
           sprites: src/charmeleonQuieto.png
         grito:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/charmeleonMovimiento.png
           periodo: 10
     princesa:
-      ancho: 30
-      alto: 40
+      ancho: 55
+      alto: 47
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/pikachuQuieto.png
         ayudenme:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/pikachuMovimiento.png
           periodo: 7
   texturas:
-    viga: src/charmeleonQuieto.png
-    madera: src/charmeleonQuieto.png
+    viga: src/viga2.jpg
+    esc: src/film.png
   nivel:
     alto: 1000
     ancho: 1000
@@ -43,21 +43,27 @@ juego:
       - tipo: protagonista
         x: 0
         y: 0
+      - tipo: mono
+        x: 0
+        y: 200
+      - tipo: princesa
+        x: 0
+        y: 400
     plataformas:
       - textura: viga
         x: 0
-        y: 0
-        ancho: 100
-        alto: 20
+        y: 500
+        ancho: 2000
+        alto: 120
       - textura: viga
         x: 200
         y: 200
-        ancho: 200
-        alto: 20
+        ancho: 400
+        alto: 50
     escaleras:
-      - textura: madera
+      - textura: esc
         x: 200
         y: 300
-        ancho: 20
+        ancho: 100
         alto: 100
 

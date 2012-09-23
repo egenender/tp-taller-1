@@ -1,7 +1,7 @@
 juego:
   pantalla:
-    ancho: 500
-    alto: 500
+    ancho: 900
+    alto: 750
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 15
@@ -52,7 +52,7 @@ juego:
     plataformas:
       - textura: viga
         x: 0
-        y: 500
+        y: 450
         ancho: 2000
         alto: 120
       - textura: viga

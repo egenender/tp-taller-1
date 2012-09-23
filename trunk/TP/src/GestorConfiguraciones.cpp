@@ -50,7 +50,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 
 	try{
-		//const YAML::Node& nodoRaiz = nodo["juego"];
+		const YAML::Node& nodoRaiz = nodo["juego"];
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abrio el Archivo YAML");
 	}catch(YAML::Exception &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo Juego");
@@ -105,7 +105,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de texturas");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo texturas, se carga por defecto");
-		//CargarTiposPersonajes(nodoRaizDef["tiposPersonaje"]);
+		CargarTexturas(nodoRaizDef["texturas"]);
 	}
 
 	configNivel=CargarConfiguracionNivel(nodoRaiz["nivel"]);
