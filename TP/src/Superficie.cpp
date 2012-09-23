@@ -32,6 +32,7 @@ Superficie::Superficie(string archivo, int x, int y, int ancho, int alto) {
 	superficie = final;
 	alto = final->h;
 	ancho = final->w;
+	SDL_FreeSurface(temp);
 }
 
 /** Crea una superficie a partir de una superficie SDL **/
@@ -46,9 +47,10 @@ Superficie::Superficie(SDL_Surface* superficie) {
 Superficie::Superficie(string archivo) {
 	inicializarSuperficie();
 
-	if ((superficie = cargar(archivo)) != NULL) {
-		alto = superficie->h;
+	superficie = cargar(archivo);
 
+	if (superficie != NULL) {
+		alto = superficie->h;
 		ancho = superficie->w;
 	}
 }
