@@ -1,0 +1,369 @@
+juego:
+  pantalla:
+    ancho: 900
+    alto: 750
+    fondo: src/fondoGrande.png
+  parametros:
+    vel_personaje: 15
+    margen_scroll: 80
+  tiposPersonaje:
+    protagonista:
+      ancho: 65
+      alto: 73
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.png
+        caminar:
+          sprites: src/charmeleonMovimiento.png
+    mono:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        grito:
+          sprites: src/primeapeMovimiento.png
+          periodo: 10
+    princesa:
+      ancho: 55
+      alto: 47
+      animaciones:
+        quieto:
+          sprites: src/pikachuQuieto.png
+        ayudenme:
+          sprites: src/pikachuMovimiento.png
+          periodo: 7
+    mono1:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono2:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono3:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono4:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono5:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono6:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono7:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono8:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono9:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono10:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono11:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono12:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono13:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono14:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono15:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono16:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono17:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono18:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono19:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono20:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono21:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono22:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono23:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono24:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+    mono25:
+      ancho: 62
+      alto: 54
+      animaciones:
+        quieto:
+          sprites: src/primeapeQuieto.png
+        loco:
+          sprite: src/primeapeMovimiento.png
+          periodo: 5
+  texturas:
+    viga: src/viga2.jpg
+    esc: src/film.png
+  nivel:
+    alto: 1000
+    ancho: 1000
+    personajes:
+      - tipo: protagonista
+        x: 110
+        y: 110
+      - tipo: mono
+        x: 0
+        y: 200
+      - tipo: princesa
+        x: 0
+        y: 400
+      - tipo: mono1
+        x: 0
+        y: 0
+      - tipo: mono2
+        x: 10
+        y: 0
+      - tipo: mono3
+        x: 20
+        y: 0
+      - tipo: mono4
+        x: 30
+        y: 0
+      - tipo: mono5
+        x: 40
+        y: 50
+      - tipo: mono6
+        x: 60
+        y: 0
+      - tipo: mono7
+        x: 70
+        y: 0
+      - tipo: mono8
+        x: 80
+        y: 0
+      - tipo: mono9
+        x: 90
+        y: 0
+      - tipo: mono10
+        x: 100
+        y: 0
+      - tipo: mono11
+        x: 110
+        y: 0
+      - tipo: mono12
+        x: 120
+        y: 0
+      - tipo: mono13
+        x: 130
+        y: 0
+      - tipo: mono14
+        x: 140
+        y: 0
+      - tipo: mono15
+        x: 150
+        y: 0
+      - tipo: mono16
+        x: 160
+        y: 0
+      - tipo: mono17
+        x: 170
+        y: 0
+      - tipo: mono18
+        x: 180
+        y: 0
+      - tipo: mono19
+        x: 190
+        y: 0
+      - tipo: mono20
+        x: 200
+        y: 0
+      - tipo: mono21
+        x: 210
+        y: 0
+      - tipo: mono22
+        x: 220
+        y: 0
+      - tipo: mono23
+        x: 230
+        y: 0
+      - tipo: mono24
+        x: 240
+        y: 0
+      - tipo: mono25
+        x: 250
+        y: 0
+    plataformas:
+      - textura: viga
+        x: 0
+        y: 450
+        ancho: 2000
+        alto: 120
+      - textura: viga
+        x: 200
+        y: 200
+        ancho: 400
+        alto: 50
+    escaleras:
+      - textura: esc
+        x: 200
+        y: 300
+        ancho: 100
+        alto: 100
+
