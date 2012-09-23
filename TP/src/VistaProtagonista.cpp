@@ -28,20 +28,12 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista) {
 }
 VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, Animacion* quieto) {
 
-	// O algo similar:
-	//animaciones = ResourcesManager::obtenerInstancia()->obtenerAnimaciones(protagonista->obtenerNombre());
-
-	// A lo YaoMing mientras no este el parser:
-//	Animacion* caminaDer = new Animacion(new HojaSprites("src/yoshi1.bmp", 64, 64), 150);
-	//Animacion* caminaDer = new Animacion(new HojaSprites("src/charmeleonMovimiento.png", 65, 73), 150);
 	Animacion* caminaDer=caminar;
 	caminaDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	caminaDer->transparencia(255,0,255);
 
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
 
-	//Animacion* quieto = new Animacion(new HojaSprites("src/yoshi2.bmp", 64, 64), 150);
-	//Animacion* quietoDer = new Animacion(new HojaSprites("src/charmeleonQuieto.png", 65, 73), 150);
 	Animacion* quietoDer=quieto;
 	quietoDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	quietoDer->transparencia(255,0,255);
