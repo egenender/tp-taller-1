@@ -8,6 +8,7 @@ void Superficie::inicializarSuperficie() {
 }
 
 Superficie::Superficie(string archivo, SDL_Rect* corte) {
+	inicializarSuperficie();
 	SDL_Surface* temp = cargar(archivo);
 	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, corte->w, corte->h,
 			32, 0, 0, 0, 0);
@@ -18,6 +19,7 @@ Superficie::Superficie(string archivo, SDL_Rect* corte) {
 }
 
 Superficie::Superficie(string archivo, int x, int y, int ancho, int alto) {
+	inicializarSuperficie();
 	SDL_Surface* temp = cargar(archivo);
 	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto, 32, 0,
 			0, 0, 0);
@@ -34,6 +36,7 @@ Superficie::Superficie(string archivo, int x, int y, int ancho, int alto) {
 
 /** Crea una superficie a partir de una superficie SDL **/
 Superficie::Superficie(SDL_Surface* superficie) {
+	inicializarSuperficie();
 	alto = superficie->h;
 	ancho = superficie->w;
 	this->superficie = superficie;
