@@ -26,6 +26,7 @@
 #define ANCHO_NIVEL 1200
 #define ALTO_NIVEL 1000
 #define POS_DEFECTO 0
+#define TIPO_DEFECTO "defe"
 
 
 // Puntero estatico para controlar la instanciacion.
@@ -121,17 +122,17 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 	configNivel = new ConfiguracionNivel();
 	try{
-		CargarConfiguracionNivel(nodoRaiz["nivel"]);
+		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo nivel, se carga enteramente por defecto");
-		CargarConfiguracionNivel(nodoRaizDef["nivel"]);
+		CargarConfiguracionNivel(nodoRaizDef["nivel"],nodoRaizDef["nivel"]["personajes"]);
 	}
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Cargo Nivel");
 
 }
 
-void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo){
+void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes){
 
 
 	try{
@@ -154,10 +155,13 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo){
 		configNivel->ancho = ALTO_NIVEL;
 	}
 
-
-	const YAML::Node& personajes=nodo["personajes"];
-
-	CargarPersonajesNivel(personajes);
+	try{
+		CargarPersonajesNivel(nodo["personajes"]);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
+		CargarPersonajesNivel(defPersonajes);
+	}
 
 	int posX,posY;
 	const YAML::Node& plataformas=nodo["plataformas"];
@@ -207,43 +211,52 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 	Cuerpo* cuerpo;
 	VistaCuerpo* vistaCuerpo;
 	for(unsigned i=0;i<personajes.size();i++) {
-		personajes[i]["tipo"] >> tipo;
 		try{
-					personajes[i]["x"] >> posX;
-				}catch(YAML::TypedKeyNotFound<std::string> &e){
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
-					posX = POS_DEFECTO;
-				}catch(YAML::InvalidScalar &e){
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
-					posX = POS_DEFECTO;
-				}
-				try{
-					personajes[i]["y"] >> posY;
-				}catch(YAML::TypedKeyNotFound<std::string> &e){
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
-					posY = POS_DEFECTO;
-				}catch(YAML::InvalidScalar &e){
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
-					posY = POS_DEFECTO;
-				}
+			personajes[i]["tipo"] >> tipo;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			tipo = TIPO_DEFECTO;
+		}
+
+		try{
+			personajes[i]["x"] >> posX;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			posX = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+			posX = POS_DEFECTO;
+		}
+
+		try{
+			personajes[i]["y"] >> posY;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			posY = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+			posY = POS_DEFECTO;
+		}
 
 
-				if (strcmp(tiposPersonajes->at(tipo)->nombre,"protagonista")==0){
-					configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
-					cuerpo = configNivel->manual;
-					configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
-					//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
-					vistaCuerpo = configNivel->vistaManual;
-					configNivel->vistas.push_back(configNivel->vistaManual );
-				}else{
-					automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
-					cuerpo = automatico;
-					vistaCuerpo = new VistaAutomatico(automatico, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva, tiposPersonajes->at(tipo)->periodo);
-					configNivel->vistas.push_back(vistaCuerpo);
-				}
-				cuerpo->agregarObservador(vistaCuerpo);
-				configNivel->cuerpos.push_back(cuerpo);
-			}
+		if (strcmp(tiposPersonajes->at(tipo)->nombre,"protagonista")==0){
+			//ya asegure que hay nodo protagonista, entonces esto anda siempre
+			configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
+			cuerpo = configNivel->manual;
+			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
+			//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
+			vistaCuerpo = configNivel->vistaManual;
+			configNivel->vistas.push_back(configNivel->vistaManual );
+		}else{
+			//debo asegurarme de que pasen un tipo de personaje que ya exista
+			automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
+			cuerpo = automatico;
+			vistaCuerpo = new VistaAutomatico(automatico, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva, tiposPersonajes->at(tipo)->periodo);
+			configNivel->vistas.push_back(vistaCuerpo);
+		}
+		cuerpo->agregarObservador(vistaCuerpo);
+		configNivel->cuerpos.push_back(cuerpo);
+		}
 }
 
 

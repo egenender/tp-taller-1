@@ -5,7 +5,7 @@ juego:
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 15
-    margen_scroll: 80
+    margen_scroll: 120
   tiposPersonaje:
     protagonista:
       ancho: 64
@@ -41,8 +41,8 @@ juego:
     ancho: 1000
     personajes:
       - tipo: protagonista
-        x: 0
-        y: 0
+        x: 10
+        y: 10
       - tipo: mono
         x: 0
         y: 200
@@ -52,7 +52,7 @@ juego:
     plataformas:
       - textura: viga
         x: 0
-        y: 450
+        y: 500
         ancho: 2000
         alto: 120
       - textura: viga
