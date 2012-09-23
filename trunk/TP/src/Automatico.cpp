@@ -11,6 +11,7 @@ Automatico::~Automatico() {
 }
 
 void Automatico::actualizar(){
+	huboCambios();
 	Automatico::notificarObservadores();
 
 	//por el momento no hace nada, pero si hiciera:

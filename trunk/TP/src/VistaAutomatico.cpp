@@ -11,15 +11,15 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Anima
 	animaciones->insert(pair<int, Animacion*>(SEGUNDA, activa));
 
 	animacionActual = pasiva;
-	actualizar(automatic);
-	terminoAhora = true;
 	actual = PRIMERA;
-
+	terminoAhora = true;
 	periodo = period;
+	timer = new Timer();
+	actualizar(automatic);
 }
 
 VistaAutomatico::~VistaAutomatico() {
-	// TODO Auto-generated destructor stub
+	delete timer;
 }
 
 void VistaAutomatico::actualizar(Observable* observable) {
@@ -35,14 +35,15 @@ void VistaAutomatico::actualizar(Observable* observable) {
 	if (terminoAhora){
 		terminoAhora = false;
 		animacionActual->detener();
-		//timer->reiniciar();
+		timer->comenzar();
 	}
 
 	//Si el timer terminó de contar, tengo que cambiar la animacion
 
-	//if (timer->termino()){
+	if (timer->obtenerTiempo() > (periodo * 1000)){
 		cambiarAnimacion();
-	//}
+		timer->detener();
+	}
 
 }
 
@@ -55,4 +56,5 @@ void VistaAutomatico::cambiarAnimacion(){
 	animacionActual = animaciones->at(actual);
 	animacionActual->resetear();
 	terminoAhora = true;
+
 }

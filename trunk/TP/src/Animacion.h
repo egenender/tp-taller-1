@@ -20,7 +20,7 @@ class Animacion {
 		unsigned long tiempoViejo;
 		int puntoDetencion;
 		vector<int>* delaysFrames;
-		unsigned int cantVecesAnimado;
+		int cantVecesAnimado;
 
 	private:
 		void inicializarAnimacion();

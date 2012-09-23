@@ -2,6 +2,7 @@
 #define VISTAAUTOMATICO_H_
 #include "VistaAnimada.h"
 #include "Automatico.h"
+#include "Timer.h"
 #define PRIMERA 1
 #define SEGUNDA 2
 
@@ -10,6 +11,7 @@ private:
 	int actual;
 	bool terminoAhora;
 	int periodo;
+	Timer* timer;
 public:
 	VistaAutomatico(Automatico*, Animacion*, Animacion*, int);
 	virtual ~VistaAutomatico();

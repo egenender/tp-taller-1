@@ -22,7 +22,7 @@ juego:
         quieto:
           sprites: src/charmeleonQuieto.png
         grito:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/charmeleonMovimiento.png
           periodo: 10
     princesa:
       ancho: 30
@@ -31,7 +31,7 @@ juego:
         quieto:
           sprites: src/pikachuQuieto.png
         ayudenme:
-          sprites: src/pikachuQuieto.png
+          sprites: src/pikachuMovimiento.png
           periodo: 7
   texturas:
     viga: src/viga2.jpg
