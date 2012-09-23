@@ -14,7 +14,7 @@
 #include <sstream>
 
 #define VEL_PERSONAJE 15
-#define MARGEN_SCROLL 25
+#define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
 #define RUTA_FONDO "src/charmeleonMovimiento.png"
@@ -201,6 +201,20 @@ VistaProtagonista* GestorConfiguraciones::ObtenerVistaManual(){
 	return configNivel->vistaManual;
 }
 
+Superficie* GestorConfiguraciones::ObtenerFondo(){
+	return configPantalla->superficieCargada;
+}
+
+int GestorConfiguraciones::ObtenerAltoPantalla(){
+	return configPantalla->alto;
+}
+
+
+int GestorConfiguraciones::ObtenerAnchoPantalla(){
+	return configPantalla->ancho;
+}
+
+
 int GestorConfiguraciones::ObtenerAltoNivel(){
 	return configNivel->alto;
 }
@@ -208,6 +222,10 @@ int GestorConfiguraciones::ObtenerAltoNivel(){
 
 int GestorConfiguraciones::ObtenerAnchoNivel(){
 	return configNivel->ancho;
+}
+
+int GestorConfiguraciones::ObtenerMargenScroll(){
+	return margen_scroll;
 }
 
 void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){

@@ -1,26 +1,21 @@
 #include "Camara.h"
 #include "Cuerpo.h"
+#include "GestorConfiguraciones.h"
 
 void Camara::iniciarCamara() {
-	// TODO: En realidad deberia cargar la configuracion del juego, pedirsela a alguien:
-	/* camara->w = Configuracion::getInstance()->obtenerAnchoVentana();
-	 * camara->h = Configuracion::getInstance()->obtenerAltoVentana();
-	 *
-	 * anchoNivel = Configuracion::getInstance()->obtenerAnchoNivel();
-	 * altoNivel = Configuracion::getInstance()->obtenerAltoNivel();
-	 * imagen = ResourcesManager::getInstance()->obtenerImagen("fondoNivel");
-	 */
 
-	anchoNivel = ANCHO_NIVEL;
-	altoNivel = ALTO_NIVEL;
-	margenScroll = MARGEN_SCROLL;
-	imagen = new Superficie("src/fondoGrande.png"); // el fondo
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+
+	anchoNivel = gestor->ObtenerAnchoNivel();
+	altoNivel = gestor->ObtenerAltoNivel();
+	margenScroll = gestor->ObtenerMargenScroll();
+	imagen = gestor->ObtenerFondo();
 
 	camara = new SDL_Rect();
 	camara->x = 0;
 	camara->y = 0;
-	camara->w = ANCHO_VENTANA;
-	camara->h = ALTO_VENTANA;
+	camara->w = gestor->ObtenerAnchoPantalla();
+	camara->h = gestor->ObtenerAltoPantalla();
 }
 
 Camara::~Camara() {}
@@ -59,11 +54,11 @@ void Camara::actualizar(Observable* observable) {
 		camara->x = (x + ancho / 2) - margenScroll;
 	}
 
-	if ( (x + ancho / 2) > camara->x + ANCHO_VENTANA - margenScroll) {
-			camara->x = (x + ancho / 2) + margenScroll - ANCHO_VENTANA;
+	if ( (x + ancho / 2) > camara->x + camara->w - margenScroll) {
+			camara->x = (x + ancho / 2) + margenScroll - camara->w;
 	}
 
-	camara->y = (y + alto / 2) - ALTO_VENTANA / 2;
+	camara->y = (y + alto / 2) - camara->h / 2;
 
 
 	// No dejo que se vaya del nivel:

@@ -1,11 +1,11 @@
 juego:
   pantalla:
-    ancho: 1200
-    alto: 1200
-    fondo: src/charmeleonMovimiento.png
+    ancho: 500
+    alto: 500
+    fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 15
-    margen_scroll: 20
+    margen_scroll: 80
   tiposPersonaje:
     protagonista:
       ancho: 65
