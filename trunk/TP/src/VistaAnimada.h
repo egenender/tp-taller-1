@@ -14,7 +14,7 @@ protected:
 public:
 	VistaAnimada();
 	~VistaAnimada();
-	bool dibujar(SDL_Surface* display);
+	bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 };
 
 

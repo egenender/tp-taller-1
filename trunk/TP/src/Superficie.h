@@ -23,11 +23,12 @@ class Superficie {
 		Superficie(string archivo, SDL_Rect* corte);
 		Superficie(string archivo, int x, int y, int ancho, int alto);
 		~Superficie();
-		Superficie();
+		//Superficie();
 	protected:
 		SDL_Surface* cargar(string archivo);
 
 	private:
+		void inicializarSuperficie();
 		Uint32 getPixel(SDL_Surface *surface, int x, int y);
 		void putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
 

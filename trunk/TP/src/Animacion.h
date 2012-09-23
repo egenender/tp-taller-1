@@ -23,7 +23,7 @@ class Animacion {
 		unsigned int cantVecesAnimado;
 
 	private:
-		void inicializar();
+		void inicializarAnimacion();
 		void cargarFrames(HojaSprites* frames);
 
 	// Contructores y Destructor:

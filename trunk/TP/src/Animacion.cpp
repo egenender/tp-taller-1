@@ -4,7 +4,7 @@ Animacion::~Animacion() {
 	delete(frames);
 }
 
-void Animacion::inicializar() {
+void Animacion::inicializarAnimacion() {
 	this->frames = NULL;
 	frameActual = 0;
 	framesTotales = 0;
@@ -29,7 +29,7 @@ void Animacion::cargarFrames(HojaSprites* frames) {
 
 /** Crea una Animacion a partir de una HojaSprites **/
 Animacion::Animacion(HojaSprites* frames) {
-	inicializar();
+	inicializarAnimacion();
 	cargarFrames(frames);
 }
 
@@ -47,7 +47,7 @@ Animacion::Animacion(HojaSprites* frames) {
 /** Crea una Animacion a partir de una HojaSprites, con duracion de frames definido **/
 Animacion::Animacion(HojaSprites* frames, int delayFrame) {
 
-	inicializar();
+	inicializarAnimacion();
 	cargarFrames(frames);
 
 	this->delayFrame = delayFrame;
@@ -57,7 +57,7 @@ Animacion::Animacion(HojaSprites* frames, int delayFrame) {
 /** Crea una Animacion a partir de una HojaSprites, con duracion de frames definidos (pueden variar) **/
 Animacion::Animacion(HojaSprites* frames, vector<int>* frameDelays) {
 
-	inicializar();
+	inicializarAnimacion();
 	cargarFrames(frames);
 
 	if (frameDelays->size() == frames->obtenerNumeroSprites()) {

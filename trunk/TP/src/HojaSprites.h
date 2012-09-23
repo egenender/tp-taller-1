@@ -8,7 +8,7 @@ class HojaSprites : public Superficie {
 		unsigned int anchoSprite, altoSprite, cantSprites;
 
 	private:
-		HojaSprites();
+		void inicializarHojaSprites();
 	public:
 		HojaSprites(string archivo, unsigned int ancho, unsigned int alto);
 		HojaSprites(SDL_Surface* superficie, unsigned int ancho, unsigned int alto);

@@ -6,6 +6,7 @@
 #include "Cuerpo.h"
 #include "VistaCuerpo.h"
 #include "Manual.h"
+#include "Camara.h"
 
 class Nivel: public Estado {
 private:
@@ -13,6 +14,7 @@ private:
 	vector<Cuerpo*>* cuerpos;
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
+	Camara* camara;
 public:
 	Nivel();
 	virtual ~Nivel();
@@ -21,7 +23,6 @@ public:
 	void terminar();
 	void actualizar();
 	void dibujar(SDL_Surface* display);
-
 
 private:
 	//Para agregar elementos al nivel:

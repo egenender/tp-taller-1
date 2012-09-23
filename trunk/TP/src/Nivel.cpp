@@ -5,13 +5,14 @@
 
 Nivel Nivel::instancia;
 
-#define ANCHO_NIVEL 640
-#define ALTO_NIVEL 480
+/*#define ANCHO_NIVEL 640
+#define ALTO_NIVEL 480*/
 
 Nivel::Nivel() {
 	principal = NULL;
 	cuerpos = NULL;
 	vistas = NULL;
+	camara = NULL;
 }
 
 Nivel::~Nivel() {
@@ -63,26 +64,20 @@ void Nivel::iniciar() {
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());
 
-	//algo->moverALaDerecha();
+	camara = new Camara(0,0);
+	algo->agregarObservador(camara);
 
 	indicarManual(algo);
 
 	// Se pregunta a alguien quien es el Protagonista!
 }
 
-void destruirCuerpo(void* cuerpo){
-	Cuerpo* c = (Cuerpo*) cuerpo;
-	delete (c);
-}
-
-void destruirVista(void* vista){
-	VistaCuerpo* v = (VistaCuerpo*) vista;
-	delete (v);
-}
-
 void Nivel::terminar() {
 	//lista_destruir(lista_cuerpos, NULL); //o usar un destructor null?
 	//lista_destruir(lista_vistas, NULL);
+	/*delete(cuerpos);
+	delete(vistas);
+	delete(camara);*/
 }
 
 
@@ -103,12 +98,13 @@ void Nivel::actualizar(){
 
 void Nivel::dibujar(SDL_Surface* display){
 	// Dibujamos el fondo:
+	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
 
 
 	// Dibujamos las vistas:
 	for(unsigned int i=0;i<vistas->size();i++){
 			VistaCuerpo* vista = vistas->at(i);
-			vista->dibujar(display);
+			vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
 	}
 	// Ponele que se reproducen los sonidos (?)
 }
