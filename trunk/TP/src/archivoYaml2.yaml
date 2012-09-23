@@ -40,7 +40,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono2:
       ancho: 62
@@ -49,7 +49,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono3:
       ancho: 62
@@ -58,7 +58,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono4:
       ancho: 62
@@ -67,7 +67,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono5:
       ancho: 62
@@ -76,7 +76,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono6:
       ancho: 62
@@ -85,7 +85,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono7:
       ancho: 62
@@ -94,7 +94,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono8:
       ancho: 62
@@ -103,7 +103,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono9:
       ancho: 62
@@ -112,7 +112,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono10:
       ancho: 62
@@ -121,7 +121,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono11:
       ancho: 62
@@ -130,7 +130,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono12:
       ancho: 62
@@ -139,7 +139,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono13:
       ancho: 62
@@ -148,7 +148,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono14:
       ancho: 62
@@ -157,7 +157,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono15:
       ancho: 62
@@ -166,7 +166,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono16:
       ancho: 62
@@ -175,7 +175,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono17:
       ancho: 62
@@ -184,7 +184,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono18:
       ancho: 62
@@ -193,7 +193,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono19:
       ancho: 62
@@ -202,7 +202,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono20:
       ancho: 62
@@ -211,7 +211,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono21:
       ancho: 62
@@ -220,7 +220,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono22:
       ancho: 62
@@ -229,7 +229,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono23:
       ancho: 62
@@ -238,7 +238,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono24:
       ancho: 62
@@ -247,7 +247,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
     mono25:
       ancho: 62
@@ -256,7 +256,7 @@ juego:
         quieto:
           sprites: src/primeapeQuieto.png
         loco:
-          sprite: src/primeapeMovimiento.png
+          sprites: src/primeapeMovimiento.png
           periodo: 5
   texturas:
     viga: src/viga2.jpg
@@ -288,7 +288,7 @@ juego:
         y: 0
       - tipo: mono5
         x: 40
-        y: 50
+        y: 0
       - tipo: mono6
         x: 60
         y: 0
