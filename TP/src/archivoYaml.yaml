@@ -8,13 +8,13 @@ juego:
     margen_scroll: 80
   tiposPersonaje:
     protagonista:
-      ancho: 55
-      alto: 55
+      ancho: 65
+      alto: 73
       animaciones:
         quieto:
-          sprites: src/gengarQuieto.png
+          sprites: src/charmeleonQuieto.png
         caminar:
-          sprites: src/gengarMovimiento.png
+          sprites: src/charmeleonMovimiento.png
     mono:
       ancho: 65
       alto: 73
