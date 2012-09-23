@@ -13,38 +13,15 @@ Nivel::Nivel() {
 	cuerpos = NULL;
 	vistas = NULL;
 	camara = NULL;
+	controlador = NULL;
 }
 
 Nivel::~Nivel() {
-	//Nivel::terminar();
+
 }
 
 void Nivel::manejarEvento(SDL_Event* evento){
-	if (evento->type == SDL_MOUSEMOTION)
-			return;
-
-	Uint8 *keystates = SDL_GetKeyState(NULL);
-
-	// Podria ser mejor :P Movimiento medio choto este:
-	if (keystates[SDLK_UP]){
-		//principal->saltar(); ?
-	}
-	if (keystates[SDLK_DOWN]){
-
-	}
-	if (keystates[SDLK_LEFT] && ! keystates[SDLK_RIGHT]){
-		principal->moverALaIzquierda();
-	}
-
-	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]){
-		principal->moverALaDerecha();
-	}
-
-	//TODO: en este if va a haber que agregar mas condiciones cuando se permita saltar/etc..
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])){
-		principal->detener();
-	}
-
+	controlador->manejarEvento(evento, principal);
 }
 
 void Nivel::iniciar() {
@@ -68,7 +45,7 @@ void Nivel::iniciar() {
 	algo->agregarObservador(camara);
 
 	indicarManual(algo);
-
+	controlador = new Controlador();
 	// Se pregunta a alguien quien es el Protagonista!
 }
 
@@ -78,6 +55,7 @@ void Nivel::terminar() {
 	/*delete(cuerpos);
 	delete(vistas);
 	delete(camara);*/
+	delete controlador;
 }
 
 

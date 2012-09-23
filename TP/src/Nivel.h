@@ -7,10 +7,12 @@
 #include "VistaCuerpo.h"
 #include "Manual.h"
 #include "Camara.h"
+#include "Controlador.h"
 
 class Nivel: public Estado {
 private:
     static Nivel instancia;
+    Controlador* controlador;
 	vector<Cuerpo*>* cuerpos;
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
