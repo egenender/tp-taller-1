@@ -47,6 +47,10 @@ class GestorConfiguraciones{
 		ConfiguracionNivel* CargarConfiguracionNivel(const YAML::Node&);
 		int ObtenerAltoNivel();
 		int ObtenerAnchoNivel();
+		int ObtenerAltoPantalla();
+		int ObtenerAnchoPantalla();
+		int ObtenerMargenScroll();
+		Superficie* ObtenerFondo();
 
 		Manual* ObtenerManual();
 		VistaProtagonista* ObtenerVistaManual();
