@@ -3,8 +3,8 @@
 #include "VistaAnimada.h"
 #include "Automatico.h"
 #include "Timer.h"
-#define PRIMERA 1
-#define SEGUNDA 2
+#define INMOVIL 1
+#define MOVIENDO 2
 
 class VistaAutomatico:public VistaAnimada {
 private:
