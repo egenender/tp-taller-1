@@ -13,7 +13,7 @@ public:
 	VistaCuerpo();
 	~VistaCuerpo();
 	virtual void actualizar(Observable* observable) = 0;
-	virtual bool dibujar(SDL_Surface* display) = 0;
+	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara) = 0;
 };
 
 

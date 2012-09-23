@@ -17,7 +17,7 @@ public:
 	~VistaImagen();
 	VistaImagen(Superficie*);
 	void actualizar(Observable* observable);
-	bool dibujar(SDL_Surface* display);
+	bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 
 	//void cambiarImagen(string ID);
 	void cambiarImagen(Superficie* imagenNueva);

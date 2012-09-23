@@ -1,7 +1,7 @@
 #include "Superficie.h"
 #include "Log.h"
 
-Superficie::Superficie() {
+void Superficie::inicializarSuperficie() {
 	alto = 0;
 	ancho = 0;
 	superficie = NULL;
@@ -40,7 +40,7 @@ Superficie::Superficie(SDL_Surface* superficie) {
 
 /** Crea una superficie a partir de una ruta de imagen **/
 Superficie::Superficie(string archivo) {
-	Superficie();
+	inicializarSuperficie();
 
 	if ((superficie = cargar(archivo)) != NULL) {
 		alto = superficie->h;

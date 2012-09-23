@@ -18,11 +18,11 @@ VistaAnimada::~VistaAnimada() {
 	}
 }
 
-bool VistaAnimada::dibujar(SDL_Surface *display) {
+bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara ) {
 	if (display == NULL || animacionActual == NULL || posicionDibujar == NULL)
 		return false;
 
 	animacionActual->animar();
 
-	return animacionActual->dibujar(display, posicionDibujar->getX(), posicionDibujar->getY());
+	return animacionActual->dibujar(display, posicionDibujar->getX() - xCamara, posicionDibujar->getY() - yCamara);
 }

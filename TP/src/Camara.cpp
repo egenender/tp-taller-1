@@ -1,7 +1,21 @@
 #include "Camara.h"
 #include "Cuerpo.h"
 
-/*Camara::Camara() {
+void Camara::iniciarCamara() {
+	// TODO: En realidad deberia cargar la configuracion del juego, pedirsela a alguien:
+	/* camara->w = Configuracion::getInstance()->obtenerAnchoVentana();
+	 * camara->h = Configuracion::getInstance()->obtenerAltoVentana();
+	 *
+	 * anchoNivel = Configuracion::getInstance()->obtenerAnchoNivel();
+	 * altoNivel = Configuracion::getInstance()->obtenerAltoNivel();
+	 * imagen = ResourcesManager::getInstance()->obtenerImagen("fondoNivel");
+	 */
+
+	anchoNivel = ANCHO_NIVEL;
+	altoNivel = ALTO_NIVEL;
+	margenScroll = MARGEN_SCROLL;
+	imagen = new Superficie("src/fondoGrande.png"); // el fondo
+
 	camara = new SDL_Rect();
 	camara->x = 0;
 	camara->y = 0;
@@ -12,7 +26,7 @@
 Camara::~Camara() {}
 
 Camara::Camara(int x, int y) {
-	Camara();
+	iniciarCamara();
 
 	if (x > 0 || y > 0) {
 		camara->x = x;
@@ -20,14 +34,37 @@ Camara::Camara(int x, int y) {
 	}
 }
 
+bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
+	// TODO: deberia preguntarle el fondo a nivel? o lo tiene el?
+	// Por ahora lo dejo como que lo tiene el:
+
+	if (display == NULL)
+		return false;
+
+	imagen->dibujar(display, 0, 0, camara); // 0,0 porque lo dibujamos el fondo nomas!
+
+	return true;
+}
+
 void Camara::actualizar(Observable* observable) {
 
 	Cuerpo* observado = (Cuerpo*) observable;
-	Posicion* pos = observado->obtenerPosicion();
+	int x = observado->obtenerPosicion()->getX();
+	int y = observado->obtenerPosicion()->getY();
+	int ancho = observado->obtenerAncho();
+	int alto = observado->obtenerAlto();
 
 	// Centramos la camara:
-	camara->x = (pos->getX() + observado->obtenerAncho() / 2) - ANCHO_VENTANA / 2;
-	camara->y = (pos->getY() + observado->obtenerAlto() / 2) - ALTO_VENTANA / 2;
+	if ( (x + ancho / 2) < camara->x + margenScroll) {
+		camara->x = (x + ancho / 2) - margenScroll;
+	}
+
+	if ( (x + ancho / 2) > camara->x + ANCHO_VENTANA - margenScroll) {
+			camara->x = (x + ancho / 2) + margenScroll - ANCHO_VENTANA;
+	}
+
+	camara->y = (y + alto / 2) - ALTO_VENTANA / 2;
+
 
 	// No dejo que se vaya del nivel:
 	if (camara->x < 0) {
@@ -36,11 +73,11 @@ void Camara::actualizar(Observable* observable) {
 	if (camara->y < 0) {
 		camara->y = 0;
 	}
-	if (camara->x > ANCHO_NIVEL 0- camara->w) {
-		camara->x = ANCHO_NIVEL 0- camara->w;
+	if (camara->x > anchoNivel - camara->w) {
+		camara->x = anchoNivel - camara->w;
 	}
-	if (camara->y > ALTO_NIVEL 0- camara->h) {
-		camara->y = ALTO_NIVEL 0- camara->h;
+	if (camara->y > altoNivel - camara->h) {
+		camara->y = altoNivel - camara->h;
 	}
 }
 
@@ -59,4 +96,4 @@ Posicion* Camara::obtenerPosicion() {
 SDL_Rect* Camara::obtenerDimensiones() {
 	return camara;
 }
-*/
+

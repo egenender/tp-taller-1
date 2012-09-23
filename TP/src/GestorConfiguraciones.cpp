@@ -48,8 +48,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	YAML::Parser parserDef(finDef);
 	parserDef.GetNextDocument(nodoDef);
 
+
 	try{
-		const YAML::Node& nodoRaiz = nodo["juego"];
+		//const YAML::Node& nodoRaiz = nodo["juego"];
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abrio el Archivo YAML");
 	}catch(YAML::Exception &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo Juego");

@@ -1,6 +1,6 @@
 #include "HojaSprites.h"
 
-HojaSprites::HojaSprites() {
+void HojaSprites::inicializarHojaSprites() {
 	altoSprite = 0;
 	anchoSprite = 0;
 	cantSprites = 0;
@@ -13,7 +13,7 @@ HojaSprites::HojaSprites() {
  *  64x64 pixeles -> tenemos 4 sprites en total. **/
 HojaSprites::HojaSprites(string archivo, unsigned int ancho, unsigned int alto) : Superficie(archivo) {
 
-	HojaSprites();
+	inicializarHojaSprites();
 
 	if (superficie && (ancho > 0 && alto > 0)) {
 		altoSprite = alto;
@@ -26,7 +26,7 @@ HojaSprites::HojaSprites(string archivo, unsigned int ancho, unsigned int alto) 
 
 /** Crea una hoja de sprites a partir de una superficie SDL **/
 HojaSprites::HojaSprites(SDL_Surface* sup, unsigned int ancho, unsigned int alto) : Superficie(sup) {
-	HojaSprites();
+	inicializarHojaSprites();
 
 	if (superficie && (ancho > 0 && alto > 0)) {
 		altoSprite = alto;
