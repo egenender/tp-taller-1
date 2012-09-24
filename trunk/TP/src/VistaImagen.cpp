@@ -38,5 +38,5 @@ bool VistaImagen::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 	if (display == NULL || imagen == NULL || posicionDibujar == NULL)
 		return false;
 
-	return imagen->dibujar(display, posicionDibujar->getX() - xCamara, posicionDibujar->getY() - yCamara);
+	return imagen->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
 }

@@ -15,10 +15,10 @@ public:
 	virtual ~Posicion();
 
 	//Otras funciones
-	int getX();
-	int getY();
-	void setX(int);
-	void setY(int);
+	int obtenerX();
+	int obtenerY();
+	void setearX(int);
+	void setearY(int);
 
 	//Para verificar si una posicion esta a la X de otra
 	bool estaALaDerechaDe(Posicion);

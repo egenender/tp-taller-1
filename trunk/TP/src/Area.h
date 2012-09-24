@@ -17,9 +17,9 @@ class Area {
 		void mover(Posicion*);
 		bool verificarColision(Area);
 		virtual ~Area();
-		int getAncho();
-		int getAlto();
-		Posicion* getPosicion();
+		int obtenerAncho();
+		int obtenerAlto();
+		Posicion* obtenerPosicion();
 };
 
 #endif /* AREA_H_ */

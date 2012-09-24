@@ -44,8 +44,8 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 void Camara::actualizar(Observable* observable) {
 
 	Cuerpo* observado = (Cuerpo*) observable;
-	int x = observado->obtenerPosicion()->getX();
-	int y = observado->obtenerPosicion()->getY();
+	int x = observado->obtenerPosicion()->obtenerX();
+	int y = observado->obtenerPosicion()->obtenerY();
 	int ancho = observado->obtenerAncho();
 	int alto = observado->obtenerAlto();
 

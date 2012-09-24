@@ -40,11 +40,11 @@ Posicion Posicion::obtenerArriba(){
 	return pos;
 }
 */
-int Posicion::getX(){
+int Posicion::obtenerX(){
 	return x;
 }
 
-int Posicion::getY(){
+int Posicion::obtenerY(){
 	return y;
 }
 
@@ -98,7 +98,7 @@ void Posicion::indicarMaximo(int x, int y){
 	maximo = new Posicion(x,y);
 }
 
-void Posicion::setX(int a){
+void Posicion::setearX(int a){
 	if(!maximo){
 		x = a;
 		return;
@@ -108,7 +108,7 @@ void Posicion::setX(int a){
 		x = a;
 }
 
-void Posicion::setY(int b){
+void Posicion::setearY(int b){
 	if (!maximo){
 		y = b;
 		return;

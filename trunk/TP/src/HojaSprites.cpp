@@ -72,28 +72,20 @@ bool HojaSprites::dibujar(SDL_Surface* supDest, int x, int y, int sprite) {
  * Se recomienda utilizar escala(factor). Aun asi, este metodo queda por si
  * llega a ser util en algun momento **/
 bool HojaSprites::escala(Uint16 nuevoAnchoSprite, Uint16 nuevoAltoSprite) {
-	if(!superficie) {
-		printf("Error al aplicar escala: superficie es NULL\n");
-		return false;
-	}
-
-	float factorAncho = (float) nuevoAnchoSprite/this->anchoSprite;
-	float factorAlto = (float) nuevoAltoSprite/this->altoSprite;
 
 	if(!Superficie::escala(nuevoAnchoSprite, nuevoAltoSprite*cantSprites)) {
-		printf("Error al aplicar escala\n");
 		return false;
 	}
 
-	altoSprite *= factorAlto;
-	anchoSprite *= factorAncho;
+	anchoSprite = nuevoAnchoSprite;
+	altoSprite = nuevoAltoSprite;
 
 	return true;
 }
 
 /** Redimenciona la hoja de sprites en ancho y alto. **/
 bool HojaSprites::escala(Uint16 factor) {
-	return escala(ancho*factor,alto*factor);
+	return escala(anchoSprite*factor,altoSprite*factor);
 }
 /** Devuelve el alto de un Sprite **/
 int HojaSprites::obtenerAltoSprite() {

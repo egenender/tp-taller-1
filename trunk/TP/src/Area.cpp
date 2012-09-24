@@ -1,17 +1,17 @@
 #include "Area.h"
 #include "Posicion.h"
 
-Area::Area(int height, int weight) {
-	Area(height, weight, new Posicion(0,0));
+Area::Area(int alto, int ancho) {
+	Area(alto, ancho, new Posicion(0,0));
 }
 
-Area::Area(int height, int weight, Posicion *pos_inicial){
-	if (height <= 0 || weight <= 0){
+Area::Area(int alto, int ancho, Posicion *pos_inicial){
+	if (alto <= 0 || ancho <= 0){
 		//Lanzo Excepcion
 	}
 
-	alto = height;
-	ancho = weight;
+	this->alto = alto;
+	this->ancho = ancho;
 	pos = pos_inicial;
 }
 
@@ -31,10 +31,10 @@ void Area::mover(Posicion* traslado){
 	pos = pos_nueva;*/
 	pos->sumarlePosicion(traslado);
 	Posicion* maximoPosible = Posicion::obtenerMaximo();
-	if (pos->getX() + ancho > maximoPosible->getX())
-		pos->setX( maximoPosible->getX() - ancho);
-	if (pos->getY() + alto > maximoPosible->getY())
-		pos->setY( maximoPosible->getY() - alto );
+	if (pos->obtenerX() + ancho > maximoPosible->obtenerX())
+		pos->setearX( maximoPosible->obtenerX() - ancho);
+	if (pos->obtenerY() + alto > maximoPosible->obtenerY())
+		pos->setearY( maximoPosible->obtenerY() - alto );
 }
 
 bool Area::verificarColision(Area otraArea){
@@ -45,14 +45,14 @@ bool Area::verificarColision(Area otraArea){
 	return choque;
 }
 
-int Area::getAlto(){
+int Area::obtenerAlto(){
 	return alto;
 }
 
-int Area::getAncho(){
+int Area::obtenerAncho(){
 	return ancho;
 }
 
-Posicion* Area::getPosicion(){
+Posicion* Area::obtenerPosicion(){
 	return pos;
 }

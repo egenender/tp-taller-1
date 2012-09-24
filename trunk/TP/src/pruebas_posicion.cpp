@@ -28,9 +28,9 @@ void print_test(const char* name, bool result){
 
 void pruebas_posicionCreada(){
 	Posicion *pos = new Posicion();
-	print_test("1. La posicion al iniciar es (0,0)", pos->getX()==0 && pos->getY()==0);
+	print_test("1. La posicion al iniciar es (0,0)", pos->obtenerX()==0 && pos->obtenerY()==0);
 	Posicion *pos2 = new Posicion(3,4);
-	print_test("2. La posicion al iniciar es (3,4)", pos2->getX()==3 && pos2->getY()==4);
+	print_test("2. La posicion al iniciar es (3,4)", pos2->obtenerX()==3 && pos2->obtenerY()==4);
 
 	delete pos;
 	delete pos2;
@@ -50,7 +50,7 @@ void pruebas_posicionAdyacentes(){
 	print_test("5. La posicion abajo del (5,5) es (5,6)", pos2->getX()==5 && pos2->getY()==6);
 
 	*pos2 = pos->obtenerIzquierda();*/
-	print_test("6. La posicion a la izquierda del (5,5) es (4,5)", pos2->getX()==4 && pos2->getY()==5);
+	print_test("6. La posicion a la izquierda del (5,5) es (4,5)", pos2->obtenerX()==4 && pos2->obtenerY()==5);
 	delete pos2;
 	delete pos;
 	free(pos);
