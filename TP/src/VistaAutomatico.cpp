@@ -2,8 +2,8 @@
 
 VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Animacion* pasiva, int period) {
 
-	pasiva->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
-	activa->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
+//	pasiva->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
+//	activa->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
 	pasiva->transparencia(255,0,255);
 	activa->transparencia(255,0,255);
 

@@ -8,13 +8,13 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista) {
 VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, Animacion* quieto) {
 
 	Animacion* caminaDer=caminar;
-	caminaDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
+//	caminaDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	caminaDer->transparencia(255,0,255); // color transparente = magenta
 
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
 
 	Animacion* quietoDer=quieto;
-	quietoDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
+//	quietoDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	quietoDer->transparencia(255,0,255);
 
 	Animacion* quietoIzq = quietoDer->voltear(HORIZONTALMENTE);
@@ -33,4 +33,9 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	animacionActual = animaciones->at(prot->obtenerEstado());
 }
 
-VistaProtagonista::~VistaProtagonista() {}
+VistaProtagonista::~VistaProtagonista() {
+/*	map<int, Animacion*>::iterator iter;
+	for (iter = animaciones->begin(); iter != animaciones->end(); iter++) {
+		delete(iter->second);
+	}*/
+}
