@@ -8,13 +8,12 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista) {
 VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, Animacion* quieto) {
 
 	Animacion* caminaDer=caminar;
-//	caminaDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	caminaDer->transparencia(255,0,255); // color transparente = magenta
+
 
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
 
 	Animacion* quietoDer=quieto;
-//	quietoDer->escala(protagonista->obtenerAncho(), protagonista->obtenerAlto());
 	quietoDer->transparencia(255,0,255);
 
 	Animacion* quietoIzq = quietoDer->voltear(HORIZONTALMENTE);

@@ -167,8 +167,13 @@ void Superficie::putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 }
 
 bool Superficie::escala(Uint16 ancho, Uint16 alto) {
-	if (ancho <= 0 || alto <= 0 || !superficie) {
-		printf("Error al aplicar escala\n");
+	if (ancho <= 0 || alto <= 0) {
+		printf("Error al aplicar escala: ancho o algo <= 0\n");
+		return false;
+	}
+
+	if (!superficie) {
+		printf("Error al aplicar escala: SDL_Surface es NULL\n");
 		return false;
 	}
 
@@ -253,6 +258,10 @@ int Superficie::obtenerAncho() {
  * Se puede hacer ambos volteos a la vez, pasar como parametro:
  * HORIZONTALMENTE | VERTICALMENTE **/
 Superficie* Superficie::voltear(int flags) {
+
+	// Caso que no piden voltear: (medio al pedo, pero puede pasar)
+	if (flags == (HORIZONTALMENTE & VERTICALMENTE))
+		return new Superficie(superficie);
 
 	SDL_Surface* volteada = NULL;
 

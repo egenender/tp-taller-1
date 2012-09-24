@@ -13,7 +13,7 @@ Cuerpo::~Cuerpo() {
 }
 
 Posicion* Cuerpo::obtenerPosicion() {
-	return superficieOcupada->getPosicion();
+	return superficieOcupada->obtenerPosicion();
 }
 
 void Cuerpo::moverA(Posicion* pos){
@@ -21,11 +21,11 @@ void Cuerpo::moverA(Posicion* pos){
 }
 
 int Cuerpo::obtenerAncho() {
-	return superficieOcupada->getAncho();
+	return superficieOcupada->obtenerAncho();
 }
 
 int Cuerpo::obtenerAlto() {
-	return superficieOcupada->getAlto();
+	return superficieOcupada->obtenerAlto();
 }
 
 const char* Cuerpo::obtenerNombre(){

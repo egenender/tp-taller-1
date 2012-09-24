@@ -33,5 +33,5 @@ bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara ) {
 
 	animacionActual->animar();
 
-	return animacionActual->dibujar(display, posicionDibujar->getX() - xCamara, posicionDibujar->getY() - yCamara);
+	return animacionActual->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
 }
