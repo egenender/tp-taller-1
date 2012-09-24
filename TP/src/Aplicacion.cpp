@@ -106,7 +106,7 @@ int Aplicacion::ejecutar() {
 
 		actualizar();
 		dibujar();
-		SDL_Delay(35);
+		SDL_Delay(10);
 	}
 	limpiar();
 	return 0;

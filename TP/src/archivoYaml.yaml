@@ -4,7 +4,7 @@ juego:
     alto: 750
     fondo: src/fondoGrande.png
   parametros:
-    vel_personaje: 15
+    vel_personaje: 10
     margen_scroll: 120
   tiposPersonaje:
     protagonista:
