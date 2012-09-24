@@ -19,11 +19,11 @@ TipoPersonaje::TipoPersonaje (){
 
 Manual* TipoPersonaje::CrearManual(const char* nombre,int x, int y, int velocidad){
 
-	return new Manual(nombre,new Area(ancho,alto,new Posicion(x,y)),velocidad);
+	return new Manual(nombre,new Area(alto,ancho,new Posicion(x,y)),velocidad);
 
 }
 Automatico* TipoPersonaje::CrearAutomatico(const char* nombre,int x, int y){
 
-	return new Automatico(nombre,new Area(ancho,alto,new Posicion(x,y)));
+	return new Automatico(nombre,new Area(alto,ancho,new Posicion(x,y)));
 
 }
