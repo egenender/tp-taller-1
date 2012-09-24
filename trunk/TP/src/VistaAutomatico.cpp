@@ -16,11 +16,11 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Anima
 	periodo = period;
 	timer = new Timer();
 	timer->comenzar();
-	actualizar(automatic);
+//	actualizar(automatic);
 }
 
 VistaAutomatico::~VistaAutomatico() {
-	delete timer;
+	delete(timer);
 }
 
 /*void VistaAutomatico::actualizar(Observable* observable) {
