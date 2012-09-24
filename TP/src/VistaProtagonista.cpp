@@ -23,7 +23,7 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, A
 	animaciones->insert(pair<int, Animacion*>(QUIETOIZQ, quietoIzq));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDODER,caminaDer));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
-	actualizar(protagonista);
+//	actualizar(protagonista);
 }
 
 void VistaProtagonista::actualizar(Observable* observable) {
@@ -33,9 +33,4 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	animacionActual = animaciones->at(prot->obtenerEstado());
 }
 
-VistaProtagonista::~VistaProtagonista() {
-/*	map<int, Animacion*>::iterator iter;
-	for (iter = animaciones->begin(); iter != animaciones->end(); iter++) {
-		delete(iter->second);
-	}*/
-}
+VistaProtagonista::~VistaProtagonista() {}
