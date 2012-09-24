@@ -1,22 +1,26 @@
 #include "Area.h"
 #include "Posicion.h"
 
-Area::Area(int alto, int ancho) {
+/*Area::Area(int alto, int ancho) {
 	Area(alto, ancho, new Posicion(0,0));
-}
+}*/
 
-Area::Area(int alto, int ancho, Posicion *pos_inicial){
+Area::Area(int ancho, int alto, Posicion *pos_inicial = NULL){
 	if (alto <= 0 || ancho <= 0){
 		//Lanzo Excepcion
 	}
 
 	this->alto = alto;
 	this->ancho = ancho;
-	pos = pos_inicial;
+
+	if (!pos_inicial)
+		pos = new Posicion(0,0);
+	else
+		pos = pos_inicial;
 }
 
 Area::~Area() {
-	delete pos;
+	delete(pos);
 }
 
 void Area::cambiarPosicion(Posicion* pos_nueva){
