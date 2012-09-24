@@ -8,7 +8,7 @@ juego:
     margen_scroll: 120
   tiposPersonaje:
     protagonista:
-      ancho: 66
+      ancho: 65
       alto: 73
       animaciones:
         quieto:
