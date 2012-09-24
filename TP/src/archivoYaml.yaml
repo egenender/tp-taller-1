@@ -8,8 +8,8 @@ juego:
     margen_scroll: 120
   tiposPersonaje:
     protagonista:
-      ancho: 64
-      alto: 64
+      ancho: 66
+      alto: 73
       animaciones:
         quieto:
           sprites: src/charmeleonQuieto.bmp
