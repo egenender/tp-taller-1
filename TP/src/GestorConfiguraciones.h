@@ -46,6 +46,8 @@ class GestorConfiguraciones{
 		SDL_Surface* CrearPantalla();
 		void CargarConfiguracionNivel(const YAML::Node&,const YAML::Node&);
 		void CargarPersonajesNivel(const YAML::Node&);
+		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
+		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 		int ObtenerAltoNivel();
 		int ObtenerAnchoNivel();
 		int ObtenerAltoPantalla();
