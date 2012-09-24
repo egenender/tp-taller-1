@@ -45,6 +45,7 @@ juego:
   texturas:
     viga: src/viga2.jpg
     esc: src/film.png
+    defe: src/viga.jpg
   nivel:
     alto: 1000
     ancho: 1000
@@ -61,7 +62,7 @@ juego:
     plataformas:
       - textura: viga
         x: 0
-        y: 500
+        y: 480
         ancho: 2000
         alto: 120
       - textura: viga
@@ -71,7 +72,7 @@ juego:
         alto: 50
     escaleras:
       - textura: esc
-        x: 200
+        x: 700
         y: 300
         ancho: 100
         alto: 100

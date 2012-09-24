@@ -44,8 +44,9 @@ class GestorConfiguraciones{
 		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&, const char*);
 		void CargarTexturas(const YAML::Node& nodo);
 		SDL_Surface* CrearPantalla();
-		void CargarConfiguracionNivel(const YAML::Node&,const YAML::Node&);
+		void CargarConfiguracionNivel(const YAML::Node&,const YAML::Node&,const YAML::Node&,const YAML::Node&);
 		void CargarPersonajesNivel(const YAML::Node&);
+		void CargarEstaticosNivel(const YAML::Node&, bool, bool);
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 		int ObtenerAltoNivel();
