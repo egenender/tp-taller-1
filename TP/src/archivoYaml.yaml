@@ -12,26 +12,26 @@ juego:
       alto: 64
       animaciones:
         quieto:
-          sprites: src/yoshi2.bmp
+          sprites: src/charmeleonQuieto.bmp
         caminar:
-          sprites: src/yoshi1.bmp
+          sprites: src/charmeleonMovimiento.bmp
     mono:
-      ancho: 65
-      alto: 73
+      ancho: 62
+      alto: 54
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/primeapeQuieto.bmp
         grito:
-          sprites: src/charmeleonMovimiento.png
+          sprites: src/primeapeMovimiento.bmp
           periodo: 10
     princesa:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.png
+          sprites: src/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.png
+          sprites: src/pikachuMovimiento.bmp
           periodo: 7
   texturas:
     viga: src/viga2.jpg
@@ -42,13 +42,13 @@ juego:
     personajes:
       - tipo: protagonista
         x: 10
-        y: 10
-      - tipo: mono
-        x: 0
-        y: 200
-      - tipo: princesa
-        x: 0
         y: 400
+      - tipo: mono
+        x: 200
+        y: 140
+      - tipo: princesa
+        x: 900
+        y: 290
     plataformas:
       - textura: viga
         x: 0
