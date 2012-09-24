@@ -11,7 +11,7 @@ class Area {
 		int ancho, alto;
 		Posicion* pos; //esta posicion indica la posicion que tiene el punto superior izquierdo
 	public:
-		Area(int, int);
+		//Area(int, int);
 		Area(int, int, Posicion*); //revisar si no deberia ser Posicion a secas
 		void cambiarPosicion(Posicion*); //idem
 		void mover(Posicion*);

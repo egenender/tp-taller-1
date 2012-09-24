@@ -183,7 +183,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		plataformas[i]["ancho"] >> ancho;
 		plataformas[i]["alto"] >> alto;
 		plataformas[i]["textura"] >> nombreTex;
-		estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
+		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY)));
 		configNivel->cuerpos.push_back(estatico);
 		Superficie* sup =  new Superficie( texturas->at(nombreTex) , 0 , 0 , ancho, alto);
 		//sup->escala(ancho,alto);
@@ -199,7 +199,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 			escaleras[i]["ancho"] >> ancho;
 			escaleras[i]["alto"] >> alto;
 			escaleras[i]["textura"] >> nombreTex;
-			estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
+			estatico = new Estatico(nombreTex.c_str(), new Area(ancho, alto,new Posicion(posX,posY)));
 			configNivel->cuerpos.push_back(estatico);
 			Superficie* sup =  new Superficie( texturas->at(nombreTex));
 			sup->escala(ancho,alto);
@@ -277,7 +277,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
 
 Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int x, int y){
-	return new Automatico(nombre,new Area(ALTO_PERSONAJE,ANCHO_PERSONAJE,new Posicion(x,y)));
+	return new Automatico(nombre,new Area(ANCHO_PERSONAJE,ALTO_PERSONAJE,new Posicion(x,y)));
 }
 
 VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* automatico){
