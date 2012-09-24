@@ -53,6 +53,8 @@ class Animacion {
 		void transparencia(unsigned int R, unsigned int G, unsigned int B);
 		bool termino();
 
+		int obtenerAlto();
+		int obtenerAncho();
 };
 
 #endif
