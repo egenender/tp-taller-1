@@ -167,20 +167,42 @@ void Superficie::putPixel(SDL_Surface *surface, int x, int y, Uint32 pixel) {
 }
 
 bool Superficie::escala(Uint16 ancho, Uint16 alto) {
-	if (!superficie || !ancho || !alto) {
+	if (ancho <= 0 || alto <= 0 || !superficie) {
 		printf("Error al aplicar escala\n");
 		return false;
 	}
 
-	SDL_Surface* _ret = SDL_CreateRGBSurface(superficie->flags, ancho, alto,
-			superficie->format->BitsPerPixel, superficie->format->Rmask,
-			superficie->format->Gmask, superficie->format->Bmask,
-			superficie->format->Amask);
+	/** Caso que no reescalo **/
+	if (ancho == this->ancho && alto == this->alto)
+		return true;
+
+	SDL_Surface* _ret = NULL;
+
+	/*_ret = SDL_CreateRGBSurface(superficie->flags, ancho, alto,
+	 superficie->format->BitsPerPixel, superficie->format->Rmask,
+	 superficie->format->Gmask, superficie->format->Bmask,
+	 superficie->format->Amask);*/
+
+	// Caso que la imagen tiene un color seteado como transparente:
+	if (superficie->flags & SDL_SRCCOLORKEY)
+		_ret = SDL_CreateRGBSurface(SDL_SWSURFACE, superficie->w, superficie->h,
+				superficie->format->BitsPerPixel, superficie->format->Rmask,
+				superficie->format->Gmask, superficie->format->Bmask, 0);
+	// Otro caso:
+	else
+		_ret = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto,
+				superficie->format->BitsPerPixel, superficie->format->Rmask,
+				superficie->format->Gmask, superficie->format->Bmask,
+				superficie->format->Amask);
 
 	if (!_ret) {
 		printf("Error al aplicar escala: no se pudo aplicar\n");
 		return false;
 	}
+
+	// Bloqueamos la superficie original
+	if (SDL_MUSTLOCK(superficie))
+		SDL_LockSurface(superficie);
 
 	double _stretch_factor_x = (static_cast<double>(ancho)
 			/ static_cast<double>(superficie->w)), _stretch_factor_y =
@@ -194,6 +216,17 @@ bool Superficie::escala(Uint16 ancho, Uint16 alto) {
 							static_cast<Sint32>(_stretch_factor_x * x) + o_x,
 							static_cast<Sint32>(_stretch_factor_y * y) + o_y,
 							getPixel(superficie, x, y));
+
+	// Desbloqueamos la superficie original
+	if (SDL_MUSTLOCK(superficie)) {
+		SDL_UnlockSurface(superficie);
+	}
+
+	// Copiamos el color seteado como transparente:
+	if (superficie->flags & SDL_SRCCOLORKEY) {
+		SDL_SetColorKey(_ret, SDL_RLEACCEL | SDL_SRCCOLORKEY,
+				superficie->format->colorkey);
+	}
 
 	SDL_FreeSurface(superficie);
 	superficie = _ret;

@@ -212,3 +212,11 @@ void Animacion::transparencia(unsigned int R, unsigned int G, unsigned int B) {
 bool Animacion::termino(){
 	return (cantVecesAnimado > 0);
 }
+
+int Animacion::obtenerAlto() {
+	return frames->obtenerAltoSprite();
+}
+
+int Animacion::obtenerAncho() {
+	return frames->obtenerAnchoSprite();
+}
