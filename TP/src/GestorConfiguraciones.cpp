@@ -17,7 +17,7 @@
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
-#define RUTA_FONDO "src/charmeleonMovimiento.png"
+#define RUTA_FONDO "src/fondoGrande.png"
 #define ANCHO_PERSONAJE 65
 #define ALTO_PERSONAJE 73
 #define RUTA_ACTIVA "src/charmeleonMovimiento.png"
@@ -27,6 +27,10 @@
 #define ALTO_NIVEL 1000
 #define POS_DEFECTO 0
 #define TIPO_DEFECTO "defe"
+#define ANCHO_OBJETO 40
+#define ALTO_OBJETO 80
+#define POS_DEFECTO_OBJ 60
+#define TEXTURA_DEFECTO "src/viga.jpg"
 
 
 // Puntero estatico para controlar la instanciacion.
@@ -130,37 +134,36 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 	configNivel = new ConfiguracionNivel();
 	try{
-		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"]);
+		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo nivel, se carga enteramente por defecto");
-		CargarConfiguracionNivel(nodoRaizDef["nivel"],nodoRaizDef["nivel"]["personajes"]);
+		CargarConfiguracionNivel(nodoRaizDef["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 	}
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Cargo Nivel");
 
 }
 
-void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes){
-
-
-	try{
-		nodo["alto"] >> configNivel->alto;
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro del nivel, se carga por defecto");
-		configNivel->alto = ANCHO_NIVEL;
-	}catch(YAML::InvalidScalar &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
-		configNivel->alto = ANCHO_NIVEL;
-	}
+void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes, const YAML::Node& defPlataformas, const YAML::Node& defEscaleras){
 
 	try{
 		nodo["ancho"] >> configNivel->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro del nivel, se carga por defecto");
+		configNivel->ancho = ANCHO_NIVEL;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
+		configNivel->ancho = ANCHO_NIVEL;
+	}
+
+	try{
+		nodo["alto"] >> configNivel->alto;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
-		configNivel->ancho = ALTO_NIVEL;
+		configNivel->alto = ALTO_NIVEL;
 	}catch(YAML::InvalidScalar &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
-		configNivel->ancho = ALTO_NIVEL;
+		configNivel->alto = ALTO_NIVEL;
 	}
 
 	try{
@@ -171,45 +174,105 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		CargarPersonajesNivel(defPersonajes);
 	}
 
+	try{
+		CargarEstaticosNivel(nodo["plataformas"], false, true);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las plataformas del nivel");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo plataformas, se cargan por defecto");
+		CargarEstaticosNivel(defPlataformas, true, false);
+	}
+
+	try{
+		CargarEstaticosNivel(nodo["escaleras"], true, false);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las escaleras del nivel");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
+		CargarEstaticosNivel(defEscaleras, true, false);
+	}
+
+}
+
+void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool escalar, bool cortar){
 	int posX,posY;
-	const YAML::Node& plataformas=nodo["plataformas"];
 	int ancho, alto;
 	std::string nombreTex;
 	Estatico* estatico;
 	VistaImagen* vista;
-	for(unsigned i=0;i<plataformas.size();i++) {
-		plataformas[i]["x"] >> posX;
-		plataformas[i]["y"] >> posY;
-		plataformas[i]["ancho"] >> ancho;
-		plataformas[i]["alto"] >> alto;
-		plataformas[i]["textura"] >> nombreTex;
-		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY)));
+	Superficie* sup;
+
+	for(unsigned i=0;i<nodo.size();i++) {
+		try{
+			nodo[i]["ancho"] >> ancho;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro del objeto, se carga por defecto");
+			ancho = ANCHO_OBJETO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
+			ancho = ANCHO_OBJETO;
+		}
+
+		try{
+			nodo[i]["alto"] >> alto;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del objeto, se carga por defecto");
+			alto = ALTO_OBJETO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+			alto = ALTO_OBJETO;
+		}
+
+		try{
+			nodo[i]["x"] >> posX;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo x dentro del objeto, se carga por defecto");
+			posX = POS_DEFECTO_OBJ;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
+			posX = POS_DEFECTO_OBJ;
+		}
+
+		try{
+			nodo[i]["y"] >> posY;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo y dentro del objeto, se carga por defecto");
+			posY = POS_DEFECTO_OBJ;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
+			posY = POS_DEFECTO_OBJ;
+		}
+
+
+		try{
+			nodo[i]["textura"] >> nombreTex;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo textura del objeto, se carga por defecto");
+			nombreTex = TIPO_DEFECTO;
+		}
+
+		estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
 		configNivel->cuerpos.push_back(estatico);
-		Superficie* sup =  new Superficie( texturas->at(nombreTex) , 0 , 0 , ancho, alto);
-		//sup->escala(ancho,alto);
+
+		std::string rutaImagen;
+		try{
+			rutaImagen = texturas->at(nombreTex);
+		}catch(std::out_of_range &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia deficion del tipo de textura, se carga una definicion por defecto");
+			rutaImagen = TEXTURA_DEFECTO;
+		}
+
+		if (cortar)
+			sup =  new Superficie( rutaImagen , 0 , 0 , ancho, alto);
+		else
+			sup =  new Superficie( rutaImagen );
+
+		if (escalar)
+			sup->escala(ancho,alto);
+
 		vista = new VistaImagen( sup );
 		estatico->agregarObservador(vista);
 		configNivel->vistas.push_back(vista);
 	}
-
-	const YAML::Node& escaleras=nodo["escaleras"];
-		for(unsigned i=0;i<escaleras.size();i++) {
-			escaleras[i]["x"] >> posX;
-			escaleras[i]["y"] >> posY;
-			escaleras[i]["ancho"] >> ancho;
-			escaleras[i]["alto"] >> alto;
-			escaleras[i]["textura"] >> nombreTex;
-			estatico = new Estatico(nombreTex.c_str(), new Area(ancho, alto,new Posicion(posX,posY)));
-			configNivel->cuerpos.push_back(estatico);
-			Superficie* sup =  new Superficie( texturas->at(nombreTex));
-			sup->escala(ancho,alto);
-			vista = new VistaImagen( sup );
-			estatico->agregarObservador(vista);
-			configNivel->vistas.push_back(vista);
-		}
-
 }
-
 
 void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
@@ -229,20 +292,20 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		try{
 			personajes[i]["x"] >> posX;
 		}catch(YAML::TypedKeyNotFound<std::string> &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo x dentro del personaje, se carga por defecto");
 			posX = POS_DEFECTO;
 		}catch(YAML::InvalidScalar &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
 			posX = POS_DEFECTO;
 		}
 
 		try{
 			personajes[i]["y"] >> posY;
 		}catch(YAML::TypedKeyNotFound<std::string> &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo y dentro del personaje, se carga por defecto");
 			posY = POS_DEFECTO;
 		}catch(YAML::InvalidScalar &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
 			posY = POS_DEFECTO;
 		}
 
@@ -255,10 +318,11 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			vistaCuerpo = configNivel->vistaManual;
 			configNivel->vistas.push_back(configNivel->vistaManual );
 		}else{
-			//debo asegurarme de que pasen un tipo de personaje que ya exista
+			//debo asegurarme de que pasen un tipo de personaje que ya exista:
 			try{
 				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
 			}catch(std::out_of_range &e){
+				//si no hay, por defecto
 				automatico = CrearAutomaticoDefecto(tipo.c_str(), posX, posY);
 				Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia deficion del tipo de personaje, se carga una definicion por defecto");
 			}
@@ -277,7 +341,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
 
 Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int x, int y){
-	return new Automatico(nombre,new Area(ANCHO_PERSONAJE,ALTO_PERSONAJE,new Posicion(x,y)));
+	return new Automatico(nombre,new Area(ALTO_PERSONAJE,ANCHO_PERSONAJE,new Posicion(x,y)));
 }
 
 VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* automatico){
