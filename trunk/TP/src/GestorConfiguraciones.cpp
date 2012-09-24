@@ -45,10 +45,18 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 	YAML::Node nodo,nodoDef;
 
-	std::ifstream fin("src/archivoYaml.yaml");
-	YAML::Parser parser(fin);
-	parser.GetNextDocument(nodo);
+	try{
+		std::ifstream fin("src/archivoYaml.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: El parser de la libreria YAML corre apropiadamente");
+	} catch(YAML::ParserException &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El archivo YAML no tiene el formato correcto, se parsea archivo default");
+		std::ifstream fin("src/defecto.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
 
+	}
 	std::ifstream finDef("src/defecto.yaml");
 	YAML::Parser parserDef(finDef);
 	parserDef.GetNextDocument(nodoDef);
