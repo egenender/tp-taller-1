@@ -7,7 +7,6 @@
 
 #include "TipoPersonaje.h"
 
-
 TipoPersonaje::TipoPersonaje (){
 	ancho=0;
 	alto=0;

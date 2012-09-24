@@ -222,7 +222,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		try{
 			personajes[i]["tipo"] >> tipo;
 		}catch(YAML::TypedKeyNotFound<std::string> &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tipo del personaje, se carga por defecto");
 			tipo = TIPO_DEFECTO;
 		}
 
@@ -246,8 +246,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			posY = POS_DEFECTO;
 		}
 
-
-		if (strcmp(tiposPersonajes->at(tipo)->nombre,"protagonista")==0){
+		if (strcmp(tipo.c_str(),"protagonista")==0){
 			//ya asegure que hay nodo protagonista, entonces esto anda siempre
 			configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
 			cuerpo = configNivel->manual;
@@ -257,9 +256,18 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			configNivel->vistas.push_back(configNivel->vistaManual );
 		}else{
 			//debo asegurarme de que pasen un tipo de personaje que ya exista
-			automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
+			try{
+				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
+			}catch(std::out_of_range &e){
+				automatico = CrearAutomaticoDefecto(tipo.c_str(), posX, posY);
+				Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia deficion del tipo de personaje, se carga una definicion por defecto");
+			}
 			cuerpo = automatico;
-			vistaCuerpo = new VistaAutomatico(automatico, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva, tiposPersonajes->at(tipo)->periodo);
+			try{
+				vistaCuerpo = new VistaAutomatico(automatico, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva, tiposPersonajes->at(tipo)->periodo);
+			}catch(std::out_of_range &e){
+				vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
+			}
 			configNivel->vistas.push_back(vistaCuerpo);
 		}
 		cuerpo->agregarObservador(vistaCuerpo);
@@ -267,6 +275,14 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		}
 }
 
+
+Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int x, int y){
+	return new Automatico(nombre,new Area(ALTO_PERSONAJE,ANCHO_PERSONAJE,new Posicion(x,y)));
+}
+
+VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* automatico){
+	return new VistaAutomatico(automatico, new Animacion(new HojaSprites(RUTA_ACTIVA,ANCHO_PERSONAJE,ALTO_PERSONAJE)) , new Animacion(new HojaSprites(RUTA_PASIVA,ANCHO_PERSONAJE,ALTO_PERSONAJE)) , PERIODO_PERSONAJE);
+}
 
 vector<Cuerpo*>* GestorConfiguraciones::ObtenerCuerpos(){
 	return &configNivel->cuerpos;
