@@ -136,6 +136,11 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	}
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Cargo Nivel");
 
+
+	if ((configPantalla->alto) > (configNivel->alto)) configPantalla->alto=configNivel->alto;
+	if ((configPantalla->ancho) > (configNivel->ancho)) configPantalla->ancho=configNivel->ancho;
+
+
 	try{
 		nodoRaiz["parametros"]["margen_scroll"] >> margen_scroll;
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga margen_scroll");
@@ -154,6 +159,8 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		margen_scroll=(configNivel->ancho)/2;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll no toma valor valido dentro de las dimensiones del nivel, se carga uno valido");
 	}
+
+
 
 }
 
