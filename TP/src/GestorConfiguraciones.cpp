@@ -18,6 +18,8 @@
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
+#define ANCHO_PANTALLA_MINIMO 200
+#define ALTO_PANTALLA_MINIMO 200
 #define RUTA_FONDO "src/fondoGrande.png"
 #define ANCHO_PERSONAJE 65
 #define ALTO_PERSONAJE 73
@@ -84,9 +86,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	try{
 		nodoRaiz["parametros"]["vel_personaje"] >> vel_personaje;
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga vel_personaje");
-	//}catch(YAML::BadDereference &e){
-		//Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje, se carga por defecto");
-		//vel_personaje = VEL_PERSONAJE;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje, se carga por defecto");
+		vel_personaje = VEL_PERSONAJE;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje, se carga por defecto");
 			vel_personaje = VEL_PERSONAJE;
@@ -95,7 +97,10 @@ GestorConfiguraciones::GestorConfiguraciones (){
 			vel_personaje = VEL_PERSONAJE;
 	}
 
-
+	if (vel_personaje==0){
+		vel_personaje = 1;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje toma valor nulo, se carga velocidad de 1");
+	}
 
 	try{
 		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
@@ -134,9 +139,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	try{
 		nodoRaiz["parametros"]["margen_scroll"] >> margen_scroll;
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga margen_scroll");
-	//}catch(YAML::BadDereference &e){
-		//Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll, se carga por defecto");
-		//margen_scroll = MARGEN_SCROLL;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll, se carga por defecto");
+		margen_scroll = MARGEN_SCROLL;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll, se carga por defecto");
 		margen_scroll = MARGEN_SCROLL;
@@ -145,7 +150,10 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		margen_scroll = MARGEN_SCROLL;
 	}
 
-	if (margen_scroll<=0 || margen_scroll >= configNivel->ancho ) margen_scroll=(configNivel->ancho)/2;
+	if (margen_scroll<=0 || margen_scroll*2 >= configNivel->ancho ){
+		margen_scroll=(configNivel->ancho)/2;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll no toma valor valido dentro de las dimensiones del nivel, se carga uno valido");
+	}
 
 }
 
@@ -161,7 +169,10 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->ancho = ANCHO_NIVEL;
 	}
 
-	if ((configNivel->ancho)<= 0) configNivel->ancho=ANCHO_NIVEL;
+	if ((configNivel->ancho)<= 0){
+		configNivel->ancho=ANCHO_NIVEL;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
+	}
 
 	try{
 		nodo["alto"] >> configNivel->alto;
@@ -173,7 +184,10 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->alto = ALTO_NIVEL;
 	}
 
-	if ((configNivel->alto)<= 0) configNivel->alto=ALTO_NIVEL;
+	if ((configNivel->alto)<= 0){
+		configNivel->alto=ALTO_NIVEL;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+	}
 
 	try{
 		CargarPersonajesNivel(nodo["personajes"]);
@@ -189,7 +203,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las plataformas del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo plataformas, se cargan por defecto");
-		CargarEstaticosNivel(defPlataformas, true, false);
+		CargarEstaticosNivel(defPlataformas, false, true);
 	}
 
 	try{
@@ -237,12 +251,13 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo x dentro del objeto, se carga por defecto");
 			posX = POS_DEFECTO_OBJ;
 		}catch(YAML::InvalidScalar &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del objeto no toma valor valido, se carga por defecto");
 			posX = POS_DEFECTO_OBJ;
 		}
-
-
-		if (posX<=0 || posX>= configNivel->ancho) posX=POS_DEFECTO_OBJ;
+		if (posX<=0 || posX>= configNivel->ancho){
+			posX=POS_DEFECTO_OBJ;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del objeto no toma valor valido, se carga por defecto");
+		}
 
 		try{
 			nodo[i]["y"] >> posY;
@@ -250,13 +265,13 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo y dentro del objeto, se carga por defecto");
 			posY = POS_DEFECTO_OBJ;
 		}catch(YAML::InvalidScalar &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del objeto no toma valor valido, se carga por defecto");
 			posY = POS_DEFECTO_OBJ;
 		}
-
-
-		if (posY<=0 || posY>= configNivel->alto) posY=POS_DEFECTO_OBJ;
-
+		if (posY<=0 || posY>= configNivel->alto){
+			posY=POS_DEFECTO_OBJ;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del objeto no toma valor valido, se carga por defecto");
+		}
 
 		try{
 			nodo[i]["textura"] >> nombreTex;
@@ -266,9 +281,9 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 		}catch(YAML::InvalidScalar &e){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No se especifica textura del objeto, se carga por defecto");
 			nombreTex = TIPO_DEFECTO;
-		//}catch(YAML::BadDereference &e){
-			//Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo textura del objeto, se carga por defecto");
-			//nombreTex = TIPO_DEFECTO;
+		}catch(YAML::BadDereference &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo textura del objeto, se carga por defecto");
+			nombreTex = TIPO_DEFECTO;
 		}
 
 		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
@@ -284,8 +299,12 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 
 		_IO_FILE* archiv=fopen(rutaImagen.c_str(),"r");
 
-		if (!(archiv)) rutaImagen=TEXTURA_DEFECTO;
-		else fclose(archiv);
+		if (!(archiv)){
+			rutaImagen=TEXTURA_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Ruta de imagen de textura invalida, se carga una ruta por defecto");
+		}
+		else
+			fclose(archiv);
 
 		if (cortar)
 			sup =  new Superficie( rutaImagen , 0 , 0 , ancho, alto);
@@ -627,6 +646,10 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
 			config->alto = ALTO_PANTALLA;
 	}
+	if(config->alto < ALTO_PANTALLA_MINIMO){
+		config->alto = ALTO_PANTALLA_MINIMO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor muy chico, se carga minimo");
+	}
 
 	try{
 		nodo["ancho"] >> config->ancho;
@@ -637,6 +660,11 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
 		config->ancho = ANCHO_PANTALLA;
 	}
+	if(config->ancho < ANCHO_PANTALLA_MINIMO){
+		config->ancho = ANCHO_PANTALLA_MINIMO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor muy chico, se carga minimo");
+	}
+
 
 	try{
 		nodo["fondo"] >> ruta;
