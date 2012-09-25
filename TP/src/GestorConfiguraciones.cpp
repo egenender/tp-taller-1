@@ -23,8 +23,8 @@
 #define RUTA_FONDO "src/fondoGrande.png"
 #define ANCHO_PERSONAJE 65
 #define ALTO_PERSONAJE 73
-#define RUTA_ACTIVA "src/charmeleonMovimiento.png"
-#define RUTA_PASIVA "src/charmeleonQuieto.png"
+#define RUTA_ACTIVA "src/charmeleonMovimiento.bmp"
+#define RUTA_PASIVA "src/charmeleonQuieto.bmp"
 #define PERIODO_PERSONAJE 15
 #define ANCHO_NIVEL 1200
 #define ALTO_NIVEL 1000
@@ -137,8 +137,14 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Cargo Nivel");
 
 
-	if ((configPantalla->alto) > (configNivel->alto)) configPantalla->alto=configNivel->alto;
-	if ((configPantalla->ancho) > (configNivel->ancho)) configPantalla->ancho=configNivel->ancho;
+	if ((configPantalla->alto) > (configNivel->alto)){
+		configPantalla->alto=configNivel->alto;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto de la pantalla supera al del nivel, se carga alto maximo valido");
+	}
+	if ((configPantalla->ancho) > (configNivel->ancho)){
+		configPantalla->ancho=configNivel->ancho;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho de la pantalla supera al del nivel, se carga alto maximo valido");
+	}
 
 
 	try{

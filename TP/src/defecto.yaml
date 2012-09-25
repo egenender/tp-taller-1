@@ -12,35 +12,35 @@ juego:
       alto: 73
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/charmeleonQuieto.bmp
         caminar:
-          sprites: src/charmeleonMovimiento.png
+          sprites: src/charmeleonMovimiento.bmp
     mono:
       ancho: 65
       alto: 73
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/charmeleonQuieto.bmp
         grito:
-          sprites: src/charmeleonMovimiento.png
+          sprites: src/charmeleonMovimiento.bmp
           periodo: 10
     princesa:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.png
+          sprites: src/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.png
+          sprites: src/pikachuMovimiento.bmp
           periodo: 7
     defe:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.png
+          sprites: src/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.png
+          sprites: src/pikachuMovimiento.bmp
           periodo: 7
   texturas:
     viga: src/viga2.jpg
