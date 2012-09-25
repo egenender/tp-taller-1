@@ -33,7 +33,7 @@
 #define ANCHO_OBJETO 40
 #define ALTO_OBJETO 80
 #define POS_DEFECTO_OBJ 60
-#define TEXTURA_DEFECTO "src/viga.jpg"
+#define TEXTURA_DEFECTO "src/texturaGrande.jpg"
 
 
 // Puntero estatico para controlar la instanciacion.
@@ -111,19 +111,19 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	}
 
 	try{
-		CargarTiposPersonajes(nodoRaiz["tiposPersonaje"] , nodoRaizDef["tiposPersonaje"]["protagonista"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
-		 (nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
-	}
-
-	try{
 		CargarTexturas(nodoRaiz["texturas"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de texturas");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo texturas, se cargan por defecto");
 		CargarTexturas(nodoRaizDef["texturas"]);
+	}
+
+	try{
+		CargarTiposPersonajes(nodoRaiz["tiposPersonaje"] , nodoRaizDef["tiposPersonaje"]["protagonista"]);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
+		 (nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
 	}
 
 	configNivel = new ConfiguracionNivel();
