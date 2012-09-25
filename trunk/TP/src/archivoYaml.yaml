@@ -50,17 +50,17 @@ juego:
     ancho: 1000
     personajes:
       - tipo: protagonista
-        x: 10
+        x: 40
         y: 400
       - tipo: mono
-        x: 200
-        y: 140
+        x: 250
+        y: 200
       - tipo: princesa
         x: 900
         y: 290
       - tipo: troll
-        x: 0
-        y: 0
+        x: 100
+        y: 200
     plataformas:
       - textura: viga
         x: 0
