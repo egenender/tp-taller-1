@@ -329,7 +329,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 
 		vista = new VistaImagen( sup );
 		estatico->agregarObservador(vista);
-		configNivel->vistas.push_back(vista);
+		configNivel->vistas.insert(configNivel->vistas.begin(),vista);
 	}
 }
 
@@ -379,7 +379,6 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			posY=POS_DEFECTO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del personaje no toma valor valido, se carga por defecto");
 		}
-
 		int x,y;
 		int ancho, alto;
 
@@ -395,7 +394,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
 			//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
 			vistaCuerpo = configNivel->vistaManual;
-			configNivel->vistas.push_back(configNivel->vistaManual );
+			configNivel->vistas.push_back(configNivel->vistaManual);
 		}else{
 			//debo asegurarme de que pasen un tipo de personaje que ya exista:
 			try{
@@ -416,7 +415,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			}catch(std::out_of_range &e){
 				vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
 			}
-			configNivel->vistas.push_back(vistaCuerpo);
+			configNivel->vistas.insert(configNivel->vistas.begin(),vistaCuerpo);
 		}
 		cuerpo->agregarObservador(vistaCuerpo);
 		configNivel->cuerpos.push_back(cuerpo);
