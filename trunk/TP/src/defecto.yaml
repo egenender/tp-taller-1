@@ -1,7 +1,7 @@
 juego:
   pantalla:
     ancho: 800
-    alto: 600
+    alto: 700
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 15
@@ -16,13 +16,13 @@ juego:
         caminar:
           sprites: src/charmeleonMovimiento.bmp
     mono:
-      ancho: 65
-      alto: 73
+      ancho: 62
+      alto: 54
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.bmp
+          sprites: src/primeapeQuieto.bmp
         grito:
-          sprites: src/charmeleonMovimiento.bmp
+          sprites: src/primeapeMovimiento.bmp
           periodo: 10
     princesa:
       ancho: 55
@@ -47,33 +47,33 @@ juego:
     esc: src/film.png
     defe: src/texturaGrande.jpg
   nivel:
-    alto: 1000
-    ancho: 1000
+    alto: 700
+    ancho: 1400
     personajes:
       - tipo: protagonista
-        x: 0
-        y: 0
+        x: 40
+        y: 486
       - tipo: mono
-        x: 0
-        y: 200
+        x: 250
+        y: 156
       - tipo: princesa
-        x: 0
-        y: 400
+        x: 940
+        y: 286
     plataformas:
       - textura: viga
         x: 0
-        y: 480
+        y: 482
         ancho: 2000
         alto: 120
       - textura: viga
         x: 200
-        y: 200
+        y: 152
         ancho: 400
         alto: 50
     escaleras:
       - textura: esc
-        x: 700
-        y: 300
+        x: 900
+        y: 282
         ancho: 100
         alto: 100
 

@@ -5,16 +5,8 @@ juego:
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 10
-    margen_scroll: 120
+    margen_scroll: 200
   tiposPersonaje:
-    protagonista:
-      ancho: 65
-      alto: 73
-      animaciones:
-        quieto:
-          sprites: src/charmeleonQuieto.bmp
-        caminar:
-          sprites: src/charmeleonMovimiento.bmp
     mono:
       ancho: 62
       alto: 54
@@ -23,7 +15,15 @@ juego:
           sprites: src/primeapeQuieto.bmp
         grito:
           sprites: src/primeapeMovimiento.bmp
-          periodo: 10
+          periodo: 10    
+    protagonista:
+      ancho: 65
+      alto: 73
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.bmp
+        caminar:
+          sprites: src/charmeleonMovimiento.bmp
     princesa:
       ancho: 55
       alto: 47

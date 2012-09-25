@@ -20,6 +20,8 @@
 #define ALTO_PANTALLA 600
 #define ANCHO_PANTALLA_MINIMO 200
 #define ALTO_PANTALLA_MINIMO 200
+#define ANCHO_NIVEL_MINIMO 200
+#define ALTO_NIVEL_MINIMO 200
 #define RUTA_FONDO "src/fondoGrande.png"
 #define ANCHO_PERSONAJE 65
 #define ALTO_PERSONAJE 73
@@ -73,11 +75,10 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		const YAML::Node& nodoRaiz = nodo["juego"];
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abrio el Archivo YAML");
 	}catch(YAML::Exception &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo Juego");
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo Juego, se cargan configuraciones por defecto");
 		std::ifstream fin("src/defecto.yaml");
 		YAML::Parser parser(fin);
 		parser.GetNextDocument(nodo);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargan configuraciones por defecto");
 	}
 
 	const YAML::Node& nodoRaiz = nodo["juego"];
@@ -111,19 +112,19 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	}
 
 	try{
+			CargarTiposPersonajes(nodoRaiz["tiposPersonaje"] , nodoRaizDef["tiposPersonaje"]["protagonista"]);
+			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
+			CargarTiposPersonajes(nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
+		}
+
+	try{
 		CargarTexturas(nodoRaiz["texturas"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de texturas");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo texturas, se cargan por defecto");
 		CargarTexturas(nodoRaizDef["texturas"]);
-	}
-
-	try{
-		CargarTiposPersonajes(nodoRaiz["tiposPersonaje"] , nodoRaizDef["tiposPersonaje"]["protagonista"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
-		CargarTiposPersonajes(nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
 	}
 
 	configNivel = new ConfiguracionNivel();
@@ -134,7 +135,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo nivel, se carga enteramente por defecto");
 		CargarConfiguracionNivel(nodoRaizDef["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 	}
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Cargo Nivel");
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones del Nivel");
 
 
 	if ((configPantalla->alto) > (configNivel->alto)){
@@ -182,9 +183,9 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->ancho = ANCHO_NIVEL;
 	}
 
-	if ((configNivel->ancho)<= 0){
-		configNivel->ancho=ANCHO_NIVEL;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
+	if ((configNivel->ancho)< ANCHO_NIVEL_MINIMO){
+		configNivel->ancho=ANCHO_NIVEL_MINIMO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho del nivel toma valor muy chico o negativo, se carga minimo valido");
 	}
 
 	try{
@@ -197,19 +198,10 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->alto = ALTO_NIVEL;
 	}
 
-	if ((configNivel->alto)<= 0){
-		configNivel->alto=ALTO_NIVEL;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
+	if ((configNivel->alto)< ALTO_NIVEL_MINIMO){
+		configNivel->alto=ALTO_NIVEL_MINIMO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
 	}
-
-	try{
-		CargarPersonajesNivel(nodo["personajes"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
-		CargarPersonajesNivel(defPersonajes);
-	}
-
 
 	try{
 		CargarEstaticosNivel(nodo["plataformas"], false, true);
@@ -226,6 +218,14 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
 		CargarEstaticosNivel(defEscaleras, true, false);
 	}
+
+	try{
+			CargarPersonajesNivel(nodo["personajes"]);
+			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
+			CargarPersonajesNivel(defPersonajes);
+		}
 
 }
 
@@ -311,7 +311,6 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 		}
 
 		_IO_FILE* archiv=fopen(rutaImagen.c_str(),"r");
-
 		if (!(archiv)){
 			rutaImagen=TEXTURA_DEFECTO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: Ruta de imagen de textura invalida, se carga una ruta por defecto");
@@ -329,7 +328,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 
 		vista = new VistaImagen( sup );
 		estatico->agregarObservador(vista);
-		configNivel->vistas.insert(configNivel->vistas.begin(),vista);
+		configNivel->vistas.push_back(vista);
 	}
 }
 
@@ -358,7 +357,6 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
 			posX = POS_DEFECTO;
 		}
-
 		if (posX<0 || posX>= configNivel->ancho){
 			posX=POS_DEFECTO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del personaje no toma valor valido, se carga por defecto");
@@ -373,15 +371,13 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
 			posY = POS_DEFECTO;
 		}
-
-
 		if (posY<0 || posY>=configNivel->alto){
 			posY=POS_DEFECTO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del personaje no toma valor valido, se carga por defecto");
 		}
+
 		int x,y;
 		int ancho, alto;
-
 		if (strcmp(tipo.c_str(),"protagonista")==0){
 			//ya asegure que hay nodo protagonista, entonces esto anda siempre
 			ancho = tiposPersonajes->at(tipo)->ancho;
@@ -392,9 +388,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, x, y, vel_personaje);
 			cuerpo = configNivel->manual;
 			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
-			//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
 			vistaCuerpo = configNivel->vistaManual;
-			configNivel->vistas.push_back(configNivel->vistaManual);
 		}else{
 			//debo asegurarme de que pasen un tipo de personaje que ya exista:
 			try{
@@ -415,11 +409,12 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			}catch(std::out_of_range &e){
 				vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
 			}
-			configNivel->vistas.insert(configNivel->vistas.begin(),vistaCuerpo);
+			configNivel->vistas.push_back(vistaCuerpo);
 		}
 		cuerpo->agregarObservador(vistaCuerpo);
 		configNivel->cuerpos.push_back(cuerpo);
 		}
+	configNivel->vistas.push_back(configNivel->vistaManual);
 
 	if (configNivel->manual == NULL){
 		tipo = string("protagonista");
@@ -515,6 +510,7 @@ void GestorConfiguraciones::CargarTiposPersonajes(const YAML::Node& nodo, const 
 		TipoPersonaje* tipoper=_CargarTipoPersonaje(protDef, "protagonista");
 		tipoper->nombre=nombre.c_str();
 		tiposPersonajes -> insert(pair<std::string , TipoPersonaje*>(nombre,tipoper));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay definicion de tipo protagonista, se carga definicion por defecto");
 	}
 
 	for(YAML::Iterator it=nodo.begin();it!=nodo.end();++it) {
@@ -543,9 +539,9 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	}catch(YAML::InvalidScalar &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
 		tipoper->ancho = ANCHO_PERSONAJE;
-	//}catch(YAML::BadDereference &e){
-		//Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho, se carga por defecto");
-		//tipoper->ancho = ANCHO_PERSONAJE;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho, se carga por defecto");
+		tipoper->ancho = ANCHO_PERSONAJE;
 	}
 
 	try{
@@ -556,15 +552,16 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	}catch(YAML::InvalidScalar &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
 		tipoper->alto = ALTO_PERSONAJE;
-	//}catch(YAML::Exception &e){
-		//Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo alto, se carga por defecto");
-		//tipoper->alto = ALTO_PERSONAJE;
+	}catch(YAML::Exception &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo alto, se carga por defecto");
+		tipoper->alto = ALTO_PERSONAJE;
 	}
 
 	try{
 		nodo["animaciones"];
 	}catch( YAML::Exception &e) {
-		rutaPasiva = rutaActiva = RUTA_PASIVA;
+		rutaPasiva = RUTA_PASIVA;
+		rutaActiva = RUTA_ACTIVA;
 		tipoper->periodo = PERIODO_PERSONAJE;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones dentro del personaje, se cargan por defecto");
 		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
@@ -579,13 +576,14 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		rutaPasiva = RUTA_PASIVA;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones quieto dentro del personaje, se cargan por defecto");
-	//}catch( YAML::Exception &e) {
-		//rutaPasiva = RUTA_PASIVA;
-		//Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones quieto dentro del personaje, se cargan por defecto");
+	}catch( YAML::Exception &e) {
+		rutaPasiva = RUTA_PASIVA;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones quieto dentro del personaje, se cargan por defecto");
 	}
 
 	if (animaciones.size() == 0){
-		rutaPasiva = rutaActiva = RUTA_PASIVA;
+		rutaPasiva = RUTA_PASIVA;
+		rutaActiva = RUTA_ACTIVA;
 		tipoper->periodo = PERIODO_PERSONAJE;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay ninguna animacion dentro del personaje, se cargan por defecto");
 		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
@@ -597,7 +595,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 		std::string nombre;
 		animaciones.begin().first() >> nombre;
 		if (strcmp(nombre.c_str(), "quieto")==0){
-			rutaActiva = RUTA_PASIVA;
+			rutaActiva = RUTA_ACTIVA;
 			tipoper->periodo = PERIODO_PERSONAJE;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay animacion activa dentro del personaje, se cargan por defecto");
 		}
@@ -629,10 +627,13 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    				tipoper->periodo = PERIODO_PERSONAJE;
 	    			}
 
-	    			if(tipoper->periodo<0) tipoper->periodo=PERIODO_PERSONAJE;
+	    			if(tipoper->periodo<0){
+	    				tipoper->periodo=PERIODO_PERSONAJE;
+	    				Log::getInstance()->writeToLogFile("ERROR","PARSER: El periodo toma valor negativo, se carga por defecto");
+	    			}
 	    		}
 	    	}catch( YAML::TypedKeyNotFound<std::string> &e){
-	    		rutaActiva = RUTA_PASIVA;
+	    		rutaActiva = RUTA_ACTIVA;
 	    		tipoper->periodo = PERIODO_PERSONAJE;
 	    		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo sprites en animacion activa del personaje, se cargan por defecto");
 	    	}
