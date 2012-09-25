@@ -20,7 +20,17 @@ void Camara::iniciarCamara() {
 	camara->h = gestor->ObtenerAltoPantalla();
 }
 
-Camara::~Camara() {}
+Camara::~Camara() {
+	if (imagen) {
+		delete(imagen);
+		imagen = NULL;
+	}
+
+	if (camara) {
+		delete(camara);
+		camara = NULL;
+	}
+}
 
 Camara::Camara(int x, int y) {
 	iniciarCamara();
@@ -38,9 +48,7 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 	if (display == NULL)
 		return false;
 
-	imagen->dibujar(display, 0, 0, camara); // 0,0 porque lo dibujamos el fondo nomas!
-
-	return true;
+	return imagen->dibujar(display, 0, 0, camara); // 0,0 porque lo dibujamos el fondo nomas!
 }
 
 void Camara::actualizar(Observable* observable) {
@@ -61,7 +69,6 @@ void Camara::actualizar(Observable* observable) {
 	}
 
 	camara->y = (y + alto / 2) - camara->h / 2;
-
 
 	// No dejo que se vaya del nivel:
 	if (camara->x < 0) {
