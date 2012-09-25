@@ -27,12 +27,12 @@
 #define RUTA_PASIVA "src/charmeleonQuieto.bmp"
 #define PERIODO_PERSONAJE 15
 #define ANCHO_NIVEL 1200
-#define ALTO_NIVEL 1000
-#define POS_DEFECTO 0
+#define ALTO_NIVEL 600
+#define POS_DEFECTO 60
 #define TIPO_DEFECTO "defe"
 #define ANCHO_OBJETO 40
 #define ALTO_OBJETO 80
-#define POS_DEFECTO_OBJ 60
+#define POS_DEFECTO_OBJ 80
 #define TEXTURA_DEFECTO "src/texturaGrande.jpg"
 
 
@@ -123,7 +123,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
-		 (nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
+		CargarTiposPersonajes(nodoRaizDef["tiposPersonaje"], nodoRaizDef["tiposPersonaje"]);
 	}
 
 	configNivel = new ConfiguracionNivel();
@@ -359,7 +359,10 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			posX = POS_DEFECTO;
 		}
 
-		if (posX<=0 || posX>= configNivel->ancho) posX=POS_DEFECTO;
+		if (posX<0 || posX>= configNivel->ancho){
+			posX=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del personaje no toma valor valido, se carga por defecto");
+		}
 
 		try{
 			personajes[i]["y"] >> posY;
@@ -372,11 +375,22 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		}
 
 
-		if (posY<=0 || posY>=configNivel->alto) posY=POS_DEFECTO;
+		if (posY<0 || posY>=configNivel->alto){
+			posY=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del personaje no toma valor valido, se carga por defecto");
+		}
+
+		int x,y;
+		int ancho, alto;
 
 		if (strcmp(tipo.c_str(),"protagonista")==0){
 			//ya asegure que hay nodo protagonista, entonces esto anda siempre
-			configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, posX, posY, vel_personaje);
+			ancho = tiposPersonajes->at(tipo)->ancho;
+			alto = tiposPersonajes->at(tipo)->alto;
+			//el posX posY indica el punto inferior central del personaje (consigna)
+			x = posX - ( ancho/2 );
+			y = posY - alto;
+			configNivel->manual = tiposPersonajes->at(tipo)->CrearManual(tiposPersonajes->at(tipo)->nombre, x, y, vel_personaje);
 			cuerpo = configNivel->manual;
 			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposPersonajes->at(tipo)->animacionActiva , tiposPersonajes->at(tipo)->animacionPasiva);
 			//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
@@ -385,7 +399,12 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		}else{
 			//debo asegurarme de que pasen un tipo de personaje que ya exista:
 			try{
-				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, posX, posY);
+				ancho = tiposPersonajes->at(tipo)->ancho;
+				alto = tiposPersonajes->at(tipo)->alto;
+				//el posX posY indica el punto inferior central del personaje (consigna)
+				x = posX - ( ancho/2 );
+				y = posY - alto;
+				automatico = tiposPersonajes->at(tipo)->CrearAutomatico(tiposPersonajes->at(tipo)->nombre, x, y);
 			}catch(std::out_of_range &e){
 				//si no hay, por defecto
 				automatico = CrearAutomaticoDefecto(tipo.c_str(), posX, posY);
@@ -420,7 +439,12 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 }
 
 
-Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int x, int y){
+Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int posX, int posY){
+	int ancho = ANCHO_PERSONAJE;
+	int alto = ALTO_PERSONAJE;
+	//el posX posY indica el punto inferior central del personaje (consigna)
+	int x = posX - ( ancho/2 );
+	int y = posY - alto;
 	return new Automatico(nombre,new Area(ANCHO_PERSONAJE,ALTO_PERSONAJE,new Posicion(x,y)));
 }
 
