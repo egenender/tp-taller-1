@@ -254,7 +254,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del objeto no toma valor valido, se carga por defecto");
 			posX = POS_DEFECTO_OBJ;
 		}
-		if (posX<=0 || posX>= configNivel->ancho){
+		if (posX<0 || posX>= configNivel->ancho){
 			posX=POS_DEFECTO_OBJ;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del objeto no toma valor valido, se carga por defecto");
 		}
@@ -268,7 +268,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del objeto no toma valor valido, se carga por defecto");
 			posY = POS_DEFECTO_OBJ;
 		}
-		if (posY<=0 || posY>= configNivel->alto){
+		if (posY<0 || posY>= configNivel->alto){
 			posY=POS_DEFECTO_OBJ;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del objeto no toma valor valido, se carga por defecto");
 		}
