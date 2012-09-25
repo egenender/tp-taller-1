@@ -6,7 +6,7 @@
 
 #include <string>
 using namespace std;
-
+#define IMAGEN_DEFECTO "src/film.png"
 #define VERTICALMENTE 0x00000001
 #define HORIZONTALMENTE 0x00000010
 
