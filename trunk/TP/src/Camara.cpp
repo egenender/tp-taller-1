@@ -11,6 +11,8 @@ void Camara::iniciarCamara() {
 	margenScroll = gestor->ObtenerMargenScroll();
 	imagen = gestor->ObtenerFondo();
 
+	imagen->escala(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());
+
 	camara = new SDL_Rect();
 	camara->x = 0;
 	camara->y = 0;
