@@ -33,6 +33,15 @@ juego:
         ayudenme:
           sprites: src/pikachuMovimiento.bmp
           periodo: 7
+    troll:
+      ancho: 200
+      alto: 200
+      animaciones:
+        quieto:
+          sprites: src/trollface.bmp
+        troll:
+          sprites: src/trollface.bmp
+          periodo: 10
   texturas:
     viga: src/viga2.jpg
     esc: src/film.png
@@ -49,6 +58,9 @@ juego:
       - tipo: princesa
         x: 900
         y: 290
+      - tipo: troll
+        x: 0
+        y: 0
     plataformas:
       - textura: viga
         x: 0
