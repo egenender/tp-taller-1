@@ -271,7 +271,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			//nombreTex = TIPO_DEFECTO;
 		}
 
-		estatico = new Estatico(nombreTex.c_str(), new Area(alto,ancho,new Posicion(posX,posY) ) );
+		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
 		configNivel->cuerpos.push_back(estatico);
 
 		std::string rutaImagen;
@@ -389,7 +389,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
 
 Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int x, int y){
-	return new Automatico(nombre,new Area(ALTO_PERSONAJE,ANCHO_PERSONAJE,new Posicion(x,y)));
+	return new Automatico(nombre,new Area(ANCHO_PERSONAJE,ALTO_PERSONAJE,new Posicion(x,y)));
 }
 
 VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* automatico){
