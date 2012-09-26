@@ -16,6 +16,15 @@ juego:
         grito:
           sprites: src/primeapeMovimiento.bmp
           periodo: 10    
+    mono2:
+      ancho: 140
+      alto: 126
+      animaciones:
+        quieto:
+          sprites: src/gokumonoGritando.bmp
+        grito:
+          sprites: src/gokumonoQuieto.bmp
+          periodo: 10  
     protagonista:
       ancho: 65
       alto: 73
@@ -55,9 +64,12 @@ juego:
       - tipo: mono
         x: 250
         y: 200
+      - tipo: mono2
+        x: 400
+        y: 400
       - tipo: princesa
-        x: 990
-        y: 697
+        x: 900
+        y: 400
       - tipo: troll
         x: 100
         y: 200
