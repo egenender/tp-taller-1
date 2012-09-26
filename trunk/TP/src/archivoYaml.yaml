@@ -1,10 +1,10 @@
 juego:
   pantalla:
     ancho: 900
-    alto: 750
+    alto: 700
     fondo: src/fondoGrande.png
   parametros:
-    vel_personaje: 150
+    vel_personaje: 300
     margen_scroll: 200
   tiposPersonaje:
     mono:
@@ -51,13 +51,13 @@ juego:
     personajes:
       - tipo: protagonista
         x: 40
-        y: 400
+        y: 100
       - tipo: mono
         x: 250
         y: 200
       - tipo: princesa
-        x: 900
-        y: 290
+        x: 990
+        y: 697
       - tipo: troll
         x: 100
         y: 200
