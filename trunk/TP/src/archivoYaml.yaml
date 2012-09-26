@@ -21,10 +21,10 @@ juego:
       alto: 126
       animaciones:
         quieto:
-          sprites: src/gokumonoGritando.bmp
-        grito:
           sprites: src/gokumonoQuieto.bmp
-          periodo: 10  
+        grito:
+          sprites: src/gokumonoGritando.bmp
+          periodo: 20  
     protagonista:
       ancho: 65
       alto: 73
