@@ -14,12 +14,14 @@
 #include "Log.h"
 #include <sstream>
 
-#define VEL_PERSONAJE 15
+#define VEL_PERSONAJE 300
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
 #define ANCHO_PANTALLA_MINIMO 200
 #define ALTO_PANTALLA_MINIMO 200
+#define ANCHO_PANTALLA_MAXIMO 1300
+#define ALTO_PANTALLA_MAXIMO 700
 #define ANCHO_NIVEL_MINIMO 200
 #define ALTO_NIVEL_MINIMO 200
 #define RUTA_FONDO "src/fondoGrande.png"
@@ -496,6 +498,16 @@ void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
 			std::string nombre, ruta;
 		    it.first() >> nombre;
 		    it.second() >> ruta;
+
+		    FILE* archiv=fopen(ruta.c_str(),"r");
+
+		    if (!(archiv)){
+		    	Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta de la textura no corresponde con un archivo valido, se carga por defecto");
+		    	ruta = TEXTURA_DEFECTO;
+		    }
+		    else
+		    	fclose(archiv);
+
 		    texturas -> insert(pair<std::string , std::string>(nombre,ruta));
 	}
 }
@@ -643,13 +655,21 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 	FILE* archiv=fopen(rutaPasiva.c_str(),"r");
 
-	if (!(archiv)) rutaPasiva=RUTA_PASIVA;
-	else fclose(archiv);
+	if (!(archiv)){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta de la animacion pasiva no corresponde con un archivo valido, se carga por defecto");
+		rutaPasiva=RUTA_PASIVA;
+	}
+	else
+		fclose(archiv);
 
 	FILE* archivo=fopen(rutaActiva.c_str(),"r");
 
-	if (!(archivo)) rutaActiva=RUTA_ACTIVA;
-	else fclose(archivo);
+	if (!(archivo)){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta de la animacion activa no corresponde con un archivo valido, se carga por defecto");
+		rutaActiva=RUTA_ACTIVA;
+	}
+	else
+		fclose(archivo);
 
 	tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	tipoper->animacionActiva=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
@@ -685,8 +705,13 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 	}
 	if(config->alto < ALTO_PANTALLA_MINIMO){
 		config->alto = ALTO_PANTALLA_MINIMO;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor muy chico, se carga minimo");
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto toma valor muy chico, se carga minimo");
 	}
+	if(config->alto > ALTO_PANTALLA_MAXIMO){
+		config->alto = ALTO_PANTALLA_MAXIMO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto toma valor muy grande, se carga maximo");
+	}
+
 
 	try{
 		nodo["ancho"] >> config->ancho;
@@ -699,8 +724,12 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 	}
 	if(config->ancho < ANCHO_PANTALLA_MINIMO){
 		config->ancho = ANCHO_PANTALLA_MINIMO;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor muy chico, se carga minimo");
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho toma valor muy chico, se carga minimo");
 	}
+	if(config->ancho > ANCHO_PANTALLA_MAXIMO){
+			config->ancho = ANCHO_PANTALLA_MAXIMO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho toma valor muy grande, se carga maximo");
+		}
 
 
 	try{
@@ -715,8 +744,12 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 
 	FILE* archiv=fopen(ruta.c_str(),"r");
 
-	if (!(archiv)) ruta=RUTA_FONDO;
-	else fclose(archiv);
+	if (!(archiv)) {
+		ruta=RUTA_FONDO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta del fondo para la pantalla no corresponde con un archivo valido, se carga por defecto");
+	}
+	else
+		fclose(archiv);
 
 	config->superficieCargada= new Superficie(ruta);
 
