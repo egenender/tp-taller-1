@@ -11,28 +11,42 @@ void HojaSprites::inicializarHojaSprites() {
  *  Debe haber una correspondencia entre el ancho y alto de la imagen completa
  *  con cada sprite individual... Ej: archivo de 64x256 pixeles, sprites de
  *  64x64 pixeles -> tenemos 4 sprites en total. **/
-HojaSprites::HojaSprites(string archivo, unsigned int ancho, unsigned int alto) : Superficie(archivo) {
+HojaSprites::HojaSprites(string archivo, int anchoSprite, int altoSprite) : Superficie(archivo) {
 
 	inicializarHojaSprites();
 
-	if (superficie && (ancho > 0 && alto > 0)) {
-		altoSprite = alto;
-		anchoSprite = ancho;
+	if (superficie && (anchoSprite > 0 && altoSprite > 0)) {
+		if (anchoSprite > this->ancho)
+			this->anchoSprite = this->ancho;
+		if (altoSprite > this->alto)
+			this->altoSprite = this->alto;
 
-		cantSprites = this->alto / alto;
+		else {
+			this->altoSprite = altoSprite;
+			this->anchoSprite = anchoSprite;
+		}
+
+		cantSprites = this->alto / this->altoSprite;
 	}
 }
 
 
 /** Crea una hoja de sprites a partir de una superficie SDL **/
-HojaSprites::HojaSprites(SDL_Surface* sup, unsigned int ancho, unsigned int alto) : Superficie(sup) {
+HojaSprites::HojaSprites(SDL_Surface* sup, int anchoSprite, int altoSprite) : Superficie(sup) {
 	inicializarHojaSprites();
 
-	if (superficie && (ancho > 0 && alto > 0)) {
-		altoSprite = alto;
-		anchoSprite = ancho;
+	if (superficie && (anchoSprite > 0 && altoSprite > 0)) {
+		if (anchoSprite > this->ancho)
+			this->anchoSprite = this->ancho;
+		if (altoSprite > this->alto)
+			this->altoSprite = this->alto;
 
-		cantSprites = this->alto / alto;
+		else {
+			this->altoSprite = altoSprite;
+			this->anchoSprite = anchoSprite;
+		}
+
+		cantSprites = this->alto / this->altoSprite;
 	}
 }
 
