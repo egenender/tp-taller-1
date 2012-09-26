@@ -18,6 +18,7 @@
 #define DERECHA 1
 #define IZQUIERDA -1
 
+/*
 // Nuevo:
 class Manual:public Cuerpo {
 private:
@@ -40,10 +41,10 @@ public:
 	int obtenerEstado();
 private:
 	void trasladar();
-};
+};*/
 
 // Viejo:
-/*class Manual:public Cuerpo {
+class Manual:public Cuerpo {
 private:
 	int velocidad;
 	float delta;
@@ -64,6 +65,6 @@ public:
 private:
 	void trasladar(int);
 };
-*/
+
 
 #endif /* MANUAL_H_ */

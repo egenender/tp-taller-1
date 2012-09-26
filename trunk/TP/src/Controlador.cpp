@@ -19,7 +19,7 @@ Controlador::~Controlador() {
 }
 
 // NUEVO MANEJAR EVENTO
-void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
+/*void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
@@ -31,10 +31,10 @@ void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
 	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])) {
 		principal->detener();
 	}
-}
+}*/
 
 // VIEJO MANEJAR EVENTO:
-/*void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
+void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
 	if (evento->type == SDL_MOUSEMOTION || evento->type == SDL_MOUSEBUTTONDOWN
 			|| evento->type == SDL_MOUSEBUTTONUP)
 		return;
@@ -61,4 +61,4 @@ void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
 		principal->detener();
 	}
 
-}*/
+}
