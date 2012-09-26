@@ -31,7 +31,7 @@ void Manual::moverALaIzquierda(){
 
 void Manual::trasladar(int factor){
 	float DeltaX = velocidad * factor * delta;
-	Posicion* posDesplazamiento = new Posicion (DeltaX,0);
+	Posicion* posDesplazamiento = new Posicion ((int) DeltaX,0);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
 	huboCambios(); //el método se hereda de Observable

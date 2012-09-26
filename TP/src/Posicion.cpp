@@ -13,7 +13,7 @@ Posicion::~Posicion() {
 	}
 }
 
-Posicion::Posicion(float a, float b){
+Posicion::Posicion(int a, int b){
 	if (a < 0 || b < 0) {
 		//Lanzo Excepcion
 	}
@@ -40,11 +40,11 @@ Posicion Posicion::obtenerArriba(){
 	return pos;
 }
 */
-float Posicion::obtenerX(){
+int Posicion::obtenerX(){
 	return x;
 }
 
-float Posicion::obtenerY(){
+int Posicion::obtenerY(){
 	return y;
 }
 
@@ -94,11 +94,11 @@ void Posicion::sumarlePosicion(Posicion *pos_sumada){
 		if (y > maximo->y) y = maximo->y;}
 }
 
-void Posicion::indicarMaximo(float x, float y){
+void Posicion::indicarMaximo(int x, int y){
 	maximo = new Posicion(x,y);
 }
 
-void Posicion::setearX(float a){
+void Posicion::setearX(int a){
 	if(!maximo){
 		x = a;
 		return;
@@ -108,7 +108,7 @@ void Posicion::setearX(float a){
 		x = a;
 }
 
-void Posicion::setearY(float b){
+void Posicion::setearY(int b){
 	if (!maximo){
 		y = b;
 		return;
