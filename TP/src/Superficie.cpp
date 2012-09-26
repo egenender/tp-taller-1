@@ -235,6 +235,8 @@ bool Superficie::escala(Uint16 ancho, Uint16 alto) {
 
 	SDL_FreeSurface(superficie);
 	superficie = _ret;
+	this->alto = _ret->h;
+	this->ancho = _ret->w;
 	return true;
 }
 
