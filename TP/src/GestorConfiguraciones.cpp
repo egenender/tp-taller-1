@@ -310,7 +310,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			rutaImagen = TEXTURA_DEFECTO;
 		}
 
-		_IO_FILE* archiv=fopen(rutaImagen.c_str(),"r");
+		FILE* archiv=fopen(rutaImagen.c_str(),"r");
 		if (!(archiv)){
 			rutaImagen=TEXTURA_DEFECTO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: Ruta de imagen de textura invalida, se carga una ruta por defecto");
@@ -641,12 +641,12 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	}
 
 
-	_IO_FILE* archiv=fopen(rutaPasiva.c_str(),"r");
+	FILE* archiv=fopen(rutaPasiva.c_str(),"r");
 
 	if (!(archiv)) rutaPasiva=RUTA_PASIVA;
 	else fclose(archiv);
 
-	_IO_FILE* archivo=fopen(rutaActiva.c_str(),"r");
+	FILE* archivo=fopen(rutaActiva.c_str(),"r");
 
 	if (!(archivo)) rutaActiva=RUTA_ACTIVA;
 	else fclose(archivo);
@@ -713,7 +713,7 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 		ruta=RUTA_FONDO;
 	}
 
-	_IO_FILE* archiv=fopen(ruta.c_str(),"r");
+	FILE* archiv=fopen(ruta.c_str(),"r");
 
 	if (!(archiv)) ruta=RUTA_FONDO;
 	else fclose(archiv);
