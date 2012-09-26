@@ -10,8 +10,8 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Anima
 	animaciones->insert(pair<int, Animacion*>(INMOVIL, pasiva));
 	animaciones->insert(pair<int, Animacion*>(MOVIENDO, activa));
 
-	animacionActual = pasiva;
-	actual = INMOVIL;
+	animacionActual = activa;
+	actual = MOVIENDO;
 	terminoAhora = true;
 	periodo = period;
 	timer = new Timer();
@@ -51,6 +51,8 @@ VistaAutomatico::~VistaAutomatico() {
 void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
 	posicionDibujar = automatic->obtenerPosicion();
+
+	if (periodo == 0) return;
 
 	//si estoy corriendo, me fijo si termino de correr:
 	if (actual == MOVIENDO && animacionActual->termino()){
