@@ -45,7 +45,7 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 	// TODO: deberia preguntarle el fondo a nivel? o lo tiene el?
 	// Por ahora lo dejo como que lo tiene el:
 
-	if (display == NULL)
+	if (display == NULL || imagen == NULL)
 		return false;
 
 	return imagen->dibujar(display, 0, 0, camara); // 0,0 porque lo dibujamos el fondo nomas!

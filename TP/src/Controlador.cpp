@@ -35,9 +35,6 @@ Controlador::~Controlador() {
 
 // VIEJO MANEJAR EVENTO:
 void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
-	if (evento->type == SDL_MOUSEMOTION || evento->type == SDL_MOUSEBUTTONDOWN
-			|| evento->type == SDL_MOUSEBUTTONUP)
-		return;
 
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
