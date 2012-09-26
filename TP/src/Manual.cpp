@@ -1,15 +1,15 @@
 #include "Manual.h"
 
 // Nuevo:
-Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
+/*Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
 	velocidadX = 0;
 	direccion = DERECHA;
 	estado = QUIETODER;
-}
+}*/
 
 // Nuevo:
-Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
+/*Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
 		//Lanzo excepcion?
 		//Por ahora hago esto:
@@ -19,33 +19,33 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 	velocidadX = 0;
 	direccion = DERECHA;
 	estado = QUIETODER;
-}
+}*/
 
 Manual::~Manual() {
 	//Por ahora, todo lo que se tiene se elimina en el destructor del padre.
 }
 
 // Nuevo:
-void Manual::moverALaDerecha(){
+/*void Manual::moverALaDerecha(){
 	direccion = DERECHA;
 	estado = CAMINANDODER;
 	trasladar();
-}
+}*/
 
 // Nuevo:
-void Manual::moverALaIzquierda(){
+/*void Manual::moverALaIzquierda(){
 	direccion = IZQUIERDA;
 	estado = CAMINANDOIZQ;
 	trasladar();
-}
+}*/
 
 // Nuevo:
-void Manual::trasladar(){
+/*void Manual::trasladar(){
 
 	velocidadX = velocidad * direccion;
 
 	huboCambios(); //el método se hereda de Observable
-}
+}*/
 
 void Manual::saltar(){} //Por ahora no hace nada
 
@@ -55,7 +55,7 @@ void Manual::especial(){} //idem
 
 
 // Nuevo:
-void Manual::actualizar(float delta){
+/*void Manual::actualizar(float delta){
 
 	// Como lo unico que hacemos es esto por ahora:
 
@@ -65,12 +65,12 @@ void Manual::actualizar(float delta){
 	delete(posDesplazamiento);
 
 	notificarObservadores();
-}
+}*/
 
 int Manual::obtenerEstado(){return estado;}
 
 // Nuevo:
-void Manual::detener(){
+/*void Manual::detener(){
 	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
 
 	if (estado == CAMINANDODER)
@@ -79,17 +79,17 @@ void Manual::detener(){
 		estado = QUIETOIZQ;
 	velocidadX = 0;
 	huboCambios();
-}
-
-
-// Viejo:
-/*Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
-	velocidad = VELOCIDAD_STANDARD;
-	estado = QUIETODER;
 }*/
 
+
 // Viejo:
-/*Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
+Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
+	velocidad = VELOCIDAD_STANDARD;
+	estado = QUIETODER;
+}
+
+// Viejo:
+Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
 		//Lanzo excepcion?
 		//Por ahora hago esto:
@@ -97,10 +97,10 @@ void Manual::detener(){
 	}
 	velocidad = vel;
 	estado = QUIETODER;
-}*/
+}
 
 // Viejos:
-/*void Manual::moverALaDerecha(){
+void Manual::moverALaDerecha(){
 	trasladar(1);
 	estado = CAMINANDODER;
 }
@@ -116,16 +116,16 @@ void Manual::trasladar(int factor){
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
 	huboCambios(); //el método se hereda de Observable
-}*/
+}
 
 // Viejo:
-/*void Manual::actualizar(float delta){
+void Manual::actualizar(float delta){
 	this->delta = delta;
 	notificarObservadores();
-}*/
+}
 
 // Viejo:
-/*void Manual::detener(){
+void Manual::detener(){
 	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
 
 	if (estado == CAMINANDODER)
@@ -133,4 +133,4 @@ void Manual::trasladar(int factor){
 	if (estado == CAMINANDOIZQ)
 		estado = QUIETOIZQ;
 	huboCambios();
-}*/
+}
