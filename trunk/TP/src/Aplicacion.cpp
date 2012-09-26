@@ -52,8 +52,8 @@ void Aplicacion::manejarEvento(SDL_Event* evento) {
 }
 
 /** Actualizar **/
-void Aplicacion::actualizar() {
-	ManejadorEstados::actualizar();
+void Aplicacion::actualizar(float delta) {
+	ManejadorEstados::actualizar(delta);
 }
 
 /** Dibujar **/
@@ -104,7 +104,7 @@ int Aplicacion::ejecutar() {
 			manejarEvento(&evento);
 		}
 
-		actualizar();
+		actualizar(FPS::ControlFPS.obtenerDelta());
 		dibujar();
 		SDL_Delay(10);
 	}

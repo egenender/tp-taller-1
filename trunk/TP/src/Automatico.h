@@ -12,7 +12,7 @@ public:
 	Automatico(const char*, Area*);
 	virtual ~Automatico();
 
-	void actualizar();
+	void actualizar(float delta);
 	int obtenerEstado();
 };
 

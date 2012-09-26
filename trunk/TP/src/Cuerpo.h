@@ -21,7 +21,7 @@ public:
 	int obtenerAncho();
 	int obtenerAlto();
 	void moverA(Posicion*);
-	virtual void actualizar()=0; //o que reciba o devuelva algo ?
+	virtual void actualizar(float delta)=0; //o que reciba o devuelva algo ?
 	const char* obtenerNombre();
 };
 

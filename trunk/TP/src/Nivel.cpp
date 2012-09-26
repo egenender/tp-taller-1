@@ -59,12 +59,12 @@ void Nivel::terminar() {
 }
 
 
-void Nivel::actualizar(){
+void Nivel::actualizar(float delta){
 
 	// Actualizamos cada cuerpo:
 	for(unsigned int i=0;i<cuerpos->size();i++){
 			Cuerpo* cuerpito = cuerpos->at(i);
-			cuerpito->actualizar();
+			cuerpito->actualizar(delta);
 	}
 
 	// Verificar aca colisiones:

@@ -1,6 +1,6 @@
 #ifndef MANUAL_H_
 #define MANUAL_H_
-#define VELOCIDAD_STANDARD 5
+#define VELOCIDAD_STANDARD 150
 #include "Area.h"
 #include "Cuerpo.h"
 #include "Observable.h"
@@ -18,6 +18,7 @@
 class Manual:public Cuerpo {
 private:
 	int velocidad;
+	float delta;
 	int estado;
 public:
 	Manual(const char*, Area*);
@@ -30,7 +31,7 @@ public:
 	void saltar();
 	void atacar();
 	void especial();
-	void actualizar();
+	void actualizar(float delta);
 	int obtenerEstado();
 private:
 	void trasladar(int);

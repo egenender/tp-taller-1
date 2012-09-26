@@ -12,9 +12,9 @@ void ManejadorEstados::manejarEvento(SDL_Event* evento) {
 }
 
 /** Se encarga de decirle al estado actual que se actualice **/
-void ManejadorEstados::actualizar() {
+void ManejadorEstados::actualizar(float delta) {
 	if (estadoActivo)
-		estadoActivo->actualizar();
+		estadoActivo->actualizar(delta);
 }
 
 /** Se encarga de decirle al estado actual que se dibuje **/

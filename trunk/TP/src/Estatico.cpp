@@ -14,6 +14,6 @@ int Estatico::obtenerEstado(){
 	return 0;
 }
 
-void Estatico::actualizar(){
+void Estatico::actualizar(float delta){
 	//No hace nada
 }
