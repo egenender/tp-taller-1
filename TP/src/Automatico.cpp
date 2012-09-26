@@ -10,7 +10,7 @@ Automatico::~Automatico() {
 	//si despues se hace algo que le agregue inteligencia artificial, se lo avisa
 }
 
-void Automatico::actualizar(){
+void Automatico::actualizar(float delta){
 	huboCambios();
 	Automatico::notificarObservadores();
 

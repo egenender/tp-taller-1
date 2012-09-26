@@ -11,7 +11,7 @@ public:
 
 	//redefino los metodos heredados:
 	int obtenerEstado();	 //de observable
-	void actualizar(); 		//de cuerpo
+	void actualizar(float delta); 		//de cuerpo
 
 
 };

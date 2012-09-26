@@ -22,7 +22,7 @@ class Aplicacion: public Evento {
 		int ejecutar();
 		bool iniciar();
 		void manejarEvento(SDL_Event* evento);
-		void actualizar();
+		void actualizar(float delta);
 		void dibujar();
 		void limpiar();
 		void salir();

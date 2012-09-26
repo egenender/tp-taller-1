@@ -30,7 +30,7 @@ void Manual::moverALaIzquierda(){
 }
 
 void Manual::trasladar(int factor){
-	int DeltaX = velocidad * factor;
+	float DeltaX = velocidad * factor * delta;
 	Posicion* posDesplazamiento = new Posicion (DeltaX,0);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
@@ -43,7 +43,8 @@ void Manual::atacar(){} //idem
 
 void Manual::especial(){} //idem
 
-void Manual::actualizar(){
+void Manual::actualizar(float delta){
+	this->delta = delta;
 	notificarObservadores();
 }
 

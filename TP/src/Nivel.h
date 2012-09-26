@@ -23,7 +23,7 @@ public:
 	void manejarEvento(SDL_Event* evento);
 	void iniciar();
 	void terminar();
-	void actualizar();
+	void actualizar(float delta);
 	void dibujar(SDL_Surface* display);
 
 private:

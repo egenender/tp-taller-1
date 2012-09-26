@@ -15,7 +15,7 @@ class ManejadorEstados {
 
 	public:
 		static void manejarEvento(SDL_Event* evento);
-		static void actualizar();
+		static void actualizar(float delta);
 		static void dibujar(SDL_Surface* display);
 		static void setearEstadoActual(int ID);
 		static Estado* obtenerEstadoActual();
