@@ -6,19 +6,19 @@
 
 class Posicion {
 private:
-	float x,y;
+	int x,y;
 	static Posicion* maximo;
 public:
 	//Constructores y Destructores
 	Posicion();
-	Posicion(float,float);
+	Posicion(int,int);
 	virtual ~Posicion();
 
 	//Otras funciones
-	float obtenerX();
-	float obtenerY();
-	void setearX(float);
-	void setearY(float);
+	int obtenerX();
+	int obtenerY();
+	void setearX(int);
+	void setearY(int);
 
 	//Para verificar si una posicion esta a la X de otra
 	bool estaALaDerechaDe(Posicion);
@@ -31,7 +31,7 @@ public:
 	void sumarlePosicion(Posicion*);
 
 	//Funciones de clase que permiten indicar y obtener el maximo
-	static void indicarMaximo(float x, float y);
+	static void indicarMaximo(int x, int y);
 	static Posicion* obtenerMaximo(){return maximo;}
 
 	/*Posicion obtenerDerecha();
