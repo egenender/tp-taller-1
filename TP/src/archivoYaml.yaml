@@ -1,30 +1,25 @@
 juego:
   pantalla:
-    ancho: 900
-    alto: 700
+    ancho: 800
+    alto: 600
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 300
-    margen_scroll: 200
-  tiposPersonaje:
+    margen_scroll: 10
+  tiposPersonaje:  
     mono:
-      ancho: 62
-      alto: 54
-      animaciones:
-        quieto:
-          sprites: src/primeapeQuieto.bmp
-        grito:
-          sprites: src/primeapeMovimiento.bmp
-          periodo: 10    
-    mono2:
       ancho: 140
       alto: 126
       animaciones:
         quieto:
           sprites: src/gokumonoQuieto.bmp
-        grito:
+          periodo:
+        caminar:
           sprites: src/gokumonoGritando.bmp
-          periodo: 20  
+          periodo: 3
+#        grito2:
+#          sprites: src/gokumonoMovimiento.bmp
+#          periodo: 10
     protagonista:
       ancho: 65
       alto: 73
@@ -39,55 +34,44 @@ juego:
       animaciones:
         quieto:
           sprites: src/pikachuQuieto.bmp
+          periodo: 2
         ayudenme:
           sprites: src/pikachuMovimiento.bmp
           periodo: 7
-    troll:
-      ancho: 200
-      alto: 200
-      animaciones:
-        quieto:
-          sprites: src/trollface.bmp
-        troll:
-          sprites: src/trollface.bmp
-          periodo: 10
   texturas:
     viga: src/viga2.jpg
     esc: src/film.png
   nivel:
-    alto: 700
-    ancho: 1000
+    alto: 600
+    ancho: 1600
     personajes:
       - tipo: protagonista
-        x: 40
-        y: 100
-      - tipo: mono
-        x: 250
-        y: 200
-      - tipo: mono2
         x: 400
-        y: 400
-      - tipo: princesa
-        x: 900
-        y: 400
-      - tipo: troll
+        y: 599
+      - tipo: mono
         x: 100
-        y: 200
+        y: 150
+      - tipo: princesa
+        x: 700
+        y: 150
+      - tipo: princesa
+        x: 700
+        y: 599
     plataformas:
       - textura: viga
-        x: 0
-        y: 500
-        ancho: 2000
-        alto: 120
+        x: 20
+        y: 150
+        ancho: 200
+        alto: 50
       - textura: viga
-        x: 200
-        y: 200
-        ancho: 400
+        x: 550
+        y: 150
+        ancho: 200
         alto: 50
     escaleras:
       - textura: esc
-        x: 200
-        y: 300
-        ancho: 100
-        alto: 100
+        x: 1200
+        y: 200
+        ancho: 80
+        alto: 400
 

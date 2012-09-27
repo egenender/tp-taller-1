@@ -11,9 +11,10 @@ TipoPersonaje::TipoPersonaje (){
 	ancho=0;
 	alto=0;
 	nombre=0;
-	animacionPasiva=0;
-	animacionActiva=0;
-	periodo=0;
+	animacionPasivaProt=0;
+	animacionActivaProt=0;
+	animacionesActiva= vector<Animacion*>();
+	periodos= vector<int>();
 }
 
 Manual* TipoPersonaje::CrearManual(const char* nombre,int x, int y, int velocidad){

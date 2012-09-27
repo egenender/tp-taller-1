@@ -14,10 +14,11 @@ class TipoPersonaje {
 	public:
 		int ancho;
 		int alto;
-		int periodo;
 		const char* nombre;
-		Animacion* animacionPasiva;
-		Animacion* animacionActiva;
+		Animacion* animacionPasivaProt;
+		Animacion* animacionActivaProt;
+		vector<Animacion*> animacionesActiva;
+		vector<int> periodos;
 
 	public:
 		TipoPersonaje();
