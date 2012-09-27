@@ -17,8 +17,32 @@ VistaAutomatico::VistaAutomatico(Automatico* automatic, vector<Animacion*>* anim
 //	actualizar(automatic);
 }
 
+/*VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* quieto, vector<Animacion*>* anim, vector<int>* period) {
+	periodos = period;
+	quieto->transparencia(255,0,255);
+	animacionActual = quieto;
+	animacionQuieto = quieto;
+	quieto = true;
+	actual = 0;
+
+	vector<Animacion*>::iterator iter;
+	for (unsigned int i = 0; i < anim->size(); i++) {
+		anim->at(i)->transparencia(255,0,255);
+		animaciones->insert(pair<int, Animacion*>(i, anim->at(i)));
+	}
+
+	terminoAhora = false;
+	timer = new Timer();
+	timer->comenzar();
+	posicionDibujar = automatic->obtenerPosicion();
+//	actualizar(automatic);
+}*/
+
+
+
 VistaAutomatico::~VistaAutomatico() {
 	delete(timer);
+	delete (periodos);
 }
 
 void VistaAutomatico::actualizar(Observable* observable) {
@@ -45,6 +69,34 @@ void VistaAutomatico::actualizar(Observable* observable) {
 	}
 
 }
+
+/*void VistaAutomatico::actualizar(Observable* observable) {
+	Automatico* automatic = (Automatico*) observable;
+
+	posicionDibujar = automatic->obtenerPosicion();
+
+	//Si la animacion actual todavia no termino, entonces tengo que seguir
+	//con esta. No cambio nada.
+	if (!animacionActual->termino() && !quieto) return;
+
+	//si Recien termino, tengo que reiniciar el timer
+	if (terminoAhora){
+		terminoAhora = false;
+		quieto = true;
+		animacionActual->detener;
+		animacionActual = animacionQuieto;
+		timer->comenzar();
+	}
+
+	//Si el timer terminó de contar, tengo que cambiar la animacion
+
+	if (timer->obtenerTiempo() >= (periodos->at(actual) * 1000)){
+		cambiarAnimacion();
+		timer->detener();
+	}
+
+}*/
+
 
 /*void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
@@ -78,4 +130,5 @@ void VistaAutomatico::cambiarAnimacion(){
 	animacionActual = animaciones->at(actual);
 	animacionActual->resetear();
 	terminoAhora = true;
+	//quieto = false;
 }
