@@ -1,21 +1,19 @@
 #include "VistaAutomatico.h"
 
-VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* activa, Animacion* pasiva, int period) {
+VistaAutomatico::VistaAutomatico(Automatico* automatic, vector<Animacion*>* anim, vector<int>* period) {
+	periodos = period;
+	animacionActual = anim->at(0);
+	actual = 0;
 
-//	pasiva->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
-//	activa->escala(automatic->obtenerAncho(), automatic->obtenerAlto());
-	pasiva->transparencia(255,0,255);
-	activa->transparencia(255,0,255);
+	vector<Animacion*>::iterator iter;
+	for (unsigned int i = 0; i < anim->size(); i++) {
+		anim->at(i)->transparencia(255,0,255);
+		animaciones->insert(pair<int, Animacion*>(i, anim->at(i)));
+	}
 
-	animaciones->insert(pair<int, Animacion*>(INMOVIL, pasiva));
-	animaciones->insert(pair<int, Animacion*>(MOVIENDO, activa));
-
-	animacionActual = activa;
-	actual = MOVIENDO;
 	terminoAhora = true;
-	periodo = period;
 	timer = new Timer();
-	timer->comenzar();
+	posicionDibujar = automatic->obtenerPosicion();
 //	actualizar(automatic);
 }
 
@@ -23,7 +21,7 @@ VistaAutomatico::~VistaAutomatico() {
 	delete(timer);
 }
 
-/*void VistaAutomatico::actualizar(Observable* observable) {
+void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
 
 	posicionDibujar = automatic->obtenerPosicion();
@@ -41,14 +39,14 @@ VistaAutomatico::~VistaAutomatico() {
 
 	//Si el timer terminó de contar, tengo que cambiar la animacion
 
-	if (timer->obtenerTiempo() >= (periodo * 1000)){
+	if (timer->obtenerTiempo() >= (periodos->at(actual) * 1000)){
 		cambiarAnimacion();
 		timer->detener();
 	}
 
-}*/
+}
 
-void VistaAutomatico::actualizar(Observable* observable) {
+/*void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
 	posicionDibujar = automatic->obtenerPosicion();
 
@@ -71,16 +69,13 @@ void VistaAutomatico::actualizar(Observable* observable) {
 			timer->detener();
 	}
 
-}
+}*/
 
 void VistaAutomatico::cambiarAnimacion(){
-	if (actual == INMOVIL)
-		actual = MOVIENDO;
-	else
-		actual = INMOVIL;
+	actual++;
+	if (actual == periodos->size()) actual = 0;
 
 	animacionActual = animaciones->at(actual);
 	animacionActual->resetear();
 	terminoAhora = true;
-
 }

@@ -1,20 +1,12 @@
 juego:
   pantalla:
-    ancho: 800
+    ancho: 900
     alto: 700
     fondo: src/fondoGrande.png
   parametros:
-    vel_personaje: 400
-    margen_scroll: 80
+    vel_personaje: 300
+    margen_scroll: 200
   tiposPersonaje:
-    protagonista:
-      ancho: 65
-      alto: 73
-      animaciones:
-        quieto:
-          sprites: src/charmeleonQuieto.bmp
-        caminar:
-          sprites: src/charmeleonMovimiento.bmp
     mono:
       ancho: 62
       alto: 54
@@ -23,7 +15,24 @@ juego:
           sprites: src/primeapeQuieto.bmp
         grito:
           sprites: src/primeapeMovimiento.bmp
-          periodo: 10
+          periodo: 10    
+    mono2:
+      ancho: 140
+      alto: 126
+      animaciones:
+        quieto:
+          sprites: src/gokumonoQuieto.bmp
+        grito:
+          sprites: src/gokumonoGritando.bmp
+          periodo: 20  
+    protagonista:
+      ancho: 65
+      alto: 73
+      animaciones:
+        quieto:
+          sprites: src/charmeleonQuieto.bmp
+        caminar:
+          sprites: src/charmeleonMovimiento.bmp
     princesa:
       ancho: 55
       alto: 47
@@ -32,48 +41,53 @@ juego:
           sprites: src/pikachuQuieto.bmp
         ayudenme:
           sprites: src/pikachuMovimiento.bmp
-          periodo: 7
-    defe:
-      ancho: 55
-      alto: 47
+          periogddo: 2
+    troll:
+      ancho: 200
+      alto: 200
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.bmp
-        ayudenme:
-          sprites: src/pikachuMovimiento.bmp
-          periodo: 7
+          sprites: src/trollface.bmp
+        troll:
+          sprites: src/trollface.bmp
+          periodo: 10
   texturas:
     viga: src/viga2.jpg
     esc: src/film.png
-    defe: src/texturaGrande.jpg
   nivel:
     alto: 700
-    ancho: 1400
+    ancho: 1000
     personajes:
       - tipo: protagonista
         x: 40
-        y: 486
+        y: 100
       - tipo: mono
         x: 250
-        y: 156
+        y: 200
+      - tipo: mono2
+        x: 400
+        y: 400
       - tipo: princesa
-        x: 940
-        y: 286
+        x: 900
+        y: 400
+      - tipo: troll
+        x: 100
+        y: 200
     plataformas:
       - textura: viga
         x: 0
-        y: 482
+        y: 500
         ancho: 2000
         alto: 120
       - textura: viga
         x: 200
-        y: 152
+        y: 200
         ancho: 400
         alto: 50
     escaleras:
       - textura: esc
-        x: 900
-        y: 282
+        x: 200
+        y: 300
         ancho: 100
         alto: 100
 
