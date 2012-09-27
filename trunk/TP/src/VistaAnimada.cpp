@@ -9,10 +9,10 @@ VistaAnimada::~VistaAnimada() {
 
 	// TODO: tendriamos que eliminar las animaciones del mapa?
 
-	/*	map<int, Animacion*>::iterator iter;
-		for (iter = animaciones->begin(); iter != animaciones->end(); iter++) {
-			delete(iter->second);
-		}*/
+	map<int, Animacion*>::iterator iter;
+	for (iter = animaciones->begin(); iter != animaciones->end(); iter++) {
+		delete(iter->second);
+	}
 
 
 	if (animaciones != NULL) {
