@@ -50,12 +50,19 @@ void Nivel::iniciar() {
 }
 
 void Nivel::terminar() {
-	//lista_destruir(lista_cuerpos, NULL); //o usar un destructor null?
-	//lista_destruir(lista_vistas, NULL);
-	/*delete(cuerpos);
+	for (unsigned int i = 0; i < cuerpos->size(); i++){
+		delete (cuerpos->at(i));
+	}
+
+	for (unsigned int j = 0; j < vistas->size(); j++){
+		delete (vistas->at(j));
+	}
+	delete(cuerpos);
 	delete(vistas);
-	delete(camara);*/
-	delete controlador;
+	delete(camara);
+	delete (controlador);
+	if (principal != NULL)
+		delete (principal);
 }
 
 
