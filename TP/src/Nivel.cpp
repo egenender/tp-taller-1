@@ -50,19 +50,23 @@ void Nivel::iniciar() {
 }
 
 void Nivel::terminar() {
-	for (unsigned int i = 0; i < cuerpos->size(); i++){
-		delete (cuerpos->at(i));
+
+	while (!cuerpos->empty()){
+		Cuerpo* cuerpito = cuerpos->back();
+		cuerpos->pop_back();
+		delete(cuerpito);
 	}
 
-	for (unsigned int j = 0; j < vistas->size(); j++){
-		delete (vistas->at(j));
+	while (!vistas->empty()){
+		VistaCuerpo* vista = vistas->back();
+		vistas->pop_back();
+		delete (vista);
 	}
+
 	delete(cuerpos);
 	delete(vistas);
 	delete(camara);
 	delete (controlador);
-	if (principal != NULL)
-		delete (principal);
 }
 
 
