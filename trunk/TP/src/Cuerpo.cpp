@@ -8,7 +8,7 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 
 Cuerpo::~Cuerpo() {
 	delete (superficieOcupada);
-	delete (nombre);
+	//delete (nombre);
 	//Podría pasarse una función que destruya a los observadores...
 }
 
