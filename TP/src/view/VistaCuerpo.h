@@ -2,8 +2,8 @@
 #define VISTACUERPO_H_
 
 #include "SDL/SDL.h"
-#include "Observador.h"
-#include "Posicion.h"
+#include "../controller/Observador.h"
+#include "../model/Posicion.h"
 
 class VistaCuerpo : public Observador {
 protected:

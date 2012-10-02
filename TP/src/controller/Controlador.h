@@ -1,6 +1,6 @@
 #ifndef CONTROLADOR_H_
 #define CONTROLADOR_H_
-#include "Manual.h"
+#include "../model/Manual.h"
 #include "Evento.h"
 
 //Dejo comentado todo lo relacionado con usar el Patrón Singleton

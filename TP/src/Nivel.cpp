@@ -1,5 +1,5 @@
 #include "Nivel.h"
-#include "VistaProtagonista.h"
+#include "view/VistaProtagonista.h"
 #include "GestorConfiguraciones.h"
 
 

@@ -1,7 +1,7 @@
 juego:
   pantalla:
-    ancho: 800
-    alto: 600
+    ancho: 700
+    alto: 550
     fondo: src/fondoGrande.png
   parametros:
     vel_personaje: 300

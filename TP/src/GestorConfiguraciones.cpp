@@ -11,7 +11,7 @@
 #include <fstream>
 #include "GestorConfiguraciones.h"
 #include "Estatico.h"
-#include "Log.h"
+#include "config/Log.h"
 #include <sstream>
 
 #define VEL_PERSONAJE 300

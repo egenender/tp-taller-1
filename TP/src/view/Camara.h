@@ -3,7 +3,7 @@
 
 #include "VistaCuerpo.h"
 #include "Superficie.h"
-#include "Posicion.h"
+#include "../model/Posicion.h"
 
 
 class Camara : public VistaCuerpo {

@@ -1,5 +1,5 @@
 #include "Superficie.h"
-#include "Log.h"
+#include "../config/Log.h"
 
 void Superficie::inicializarSuperficie() {
 	alto = 0;

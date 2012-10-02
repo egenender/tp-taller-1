@@ -2,8 +2,8 @@
 #define VISTAAUTOMATICO_H_
 #include "VistaAnimada.h"
 #include "Animacion.h"
-#include "Automatico.h"
-#include "Timer.h"
+#include "../model/Automatico.h"
+#include "../model/Timer.h"
 #include <vector>
 #define INMOVIL 1
 #define MOVIENDO 2
