@@ -1,6 +1,6 @@
 #include "Camara.h"
 #include "../model/Cuerpo.h"
-#include "../GestorConfiguraciones.h"
+#include "../config/GestorConfiguraciones.h" //FIXME
 
 void Camara::iniciarCamara() {
 
