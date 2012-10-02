@@ -1,7 +1,7 @@
 #include "ManejadorEstados.h"
 
 // Incluir mas estados aca:
-#include "Nivel.h"
+#include "../Nivel.h"
 
 Estado* ManejadorEstados::estadoActivo = 0;
 

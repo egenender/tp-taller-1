@@ -2,7 +2,7 @@
 #define VISTAPROTAGONISTA_H_
 
 #include "VistaAnimada.h"
-#include "Manual.h"
+#include "../model/Manual.h"
 
 class VistaProtagonista : public VistaAnimada {
 public:

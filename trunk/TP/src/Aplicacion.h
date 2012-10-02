@@ -2,7 +2,7 @@
 #define APLICACION_H
 
 #include "SDL/SDL.h"
-#include "Evento.h"
+#include "controller/Evento.h"
 
 #define ANCHO_VENTANA 640
 #define ALTO_VENTANA 480

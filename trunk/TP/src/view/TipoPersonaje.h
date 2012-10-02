@@ -6,8 +6,8 @@
  */
 
 #include "Animacion.h"
-#include "Manual.h"
-#include "Automatico.h"
+#include "../model/Manual.h"
+#include "../model/Automatico.h"
 
 class TipoPersonaje {
 

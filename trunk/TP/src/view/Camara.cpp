@@ -1,6 +1,6 @@
 #include "Camara.h"
-#include "Cuerpo.h"
-#include "GestorConfiguraciones.h"
+#include "../model/Cuerpo.h"
+#include "../GestorConfiguraciones.h"
 
 void Camara::iniciarCamara() {
 

@@ -1,13 +1,13 @@
 #ifndef NIVEL_H_
 #define NIVEL_H_
-#include "Evento.h"
-#include "Estado.h"
-#include "lista.h"
-#include "Cuerpo.h"
-#include "VistaCuerpo.h"
-#include "Manual.h"
-#include "Camara.h"
-#include "Controlador.h"
+#include "controller/Evento.h"
+#include "controller/Estado.h"
+#include "model/lista.h"
+#include "model/Cuerpo.h"
+#include "view/VistaCuerpo.h"
+#include "model/Manual.h"
+#include "view/Camara.h"
+#include "controller/Controlador.h"
 
 class Nivel: public Estado {
 private:

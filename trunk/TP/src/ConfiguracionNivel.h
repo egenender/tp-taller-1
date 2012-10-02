@@ -8,11 +8,11 @@
 #ifndef CONFIGURACIONNIVEL_H_
 #define CONFIGURACIONNIVEL_H_
 
-#include "Animacion.h"
-#include "Automatico.h"
-#include "Manual.h"
-#include "VistaCuerpo.h"
-#include "VistaProtagonista.h"
+#include "view/Animacion.h"
+#include "model/Automatico.h"
+#include "model/Manual.h"
+#include "view/VistaCuerpo.h"
+#include "view/VistaProtagonista.h"
 #include <vector>
 
 class ConfiguracionNivel{
