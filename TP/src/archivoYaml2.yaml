@@ -2,7 +2,7 @@ juego:
   pantalla:
     ancho: 900
     alto: 750
-    fondo: src/fondoGrande.png
+    fondo: src/resources/fondoGrande.png
   parametros:
     vel_personaje: 15
     margen_scroll: 80
@@ -12,255 +12,255 @@ juego:
       alto: 73
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.png
+          sprites: src/resources/charmeleonQuieto.png
         caminar:
-          sprites: src/charmeleonMovimiento.png
+          sprites: src/resources/charmeleonMovimiento.png
     mono:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         grito:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 10
     princesa:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.png
+          sprites: src/resources/pikachuQuieto.png
         ayudenme:
-          sprites: src/pikachuMovimiento.png
+          sprites: src/resources/pikachuMovimiento.png
           periodo: 7
     mono1:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono2:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono3:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono4:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono5:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono6:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono7:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono8:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono9:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono10:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono11:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono12:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono13:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono14:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono15:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono16:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono17:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono18:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono19:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono20:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono21:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono22:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono23:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono24:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
     mono25:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.png
+          sprites: src/resources/primeapeQuieto.png
         loco:
-          sprites: src/primeapeMovimiento.png
+          sprites: src/resources/primeapeMovimiento.png
           periodo: 5
   texturas:
-    viga: src/viga2.jpg
-    esc: src/film.png
+    viga: src/resources/viga2.jpg
+    esc: src/resources/film.png
   nivel:
     alto: 1000
     ancho: 1000
