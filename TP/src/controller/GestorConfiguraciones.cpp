@@ -57,18 +57,18 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	YAML::Node nodo,nodoDef;
 
 	try{
-		std::ifstream fin("src/config/archivoYaml.yaml");
+		std::ifstream fin("src/principal/archivoYaml.yaml");
 		YAML::Parser parser(fin);
 		parser.GetNextDocument(nodo);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: El parser de la libreria YAML corre apropiadamente");
 	} catch(YAML::ParserException &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El archivo YAML no tiene el formato correcto, se parsea archivo default");
-		std::ifstream fin("src/config/defecto.yaml");
+		std::ifstream fin("src/principal/defecto.yaml");
 		YAML::Parser parser(fin);
 		parser.GetNextDocument(nodo);
 
 	}
-	std::ifstream finDef("src/config/defecto.yaml");
+	std::ifstream finDef("src/principal/defecto.yaml");
 	YAML::Parser parserDef(finDef);
 	parserDef.GetNextDocument(nodoDef);
 
@@ -78,7 +78,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abrio el Archivo YAML");
 	}catch(YAML::Exception &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo Juego, se cargan configuraciones por defecto");
-		std::ifstream fin("src/config/defecto.yaml");
+		std::ifstream fin("src/principal/defecto.yaml");
 		YAML::Parser parser(fin);
 		parser.GetNextDocument(nodo);
 	}

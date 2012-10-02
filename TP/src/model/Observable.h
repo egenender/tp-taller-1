@@ -1,7 +1,7 @@
 #ifndef OBSERVABLE_H_
 #define OBSERVABLE_H_
 
-#include "../controller/Observador.h"
+#include "../common/Observador.h"
 #include <stdbool.h>
 #include <vector>
 using namespace std;

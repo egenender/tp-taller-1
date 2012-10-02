@@ -1,6 +1,6 @@
 #include "Nivel.h"
 #include "../view/VistaProtagonista.h"
-#include "../config/GestorConfiguraciones.h" //FIXME
+#include "../controller/GestorConfiguraciones.h" //FIXME
 
 
 Nivel Nivel::instancia;
