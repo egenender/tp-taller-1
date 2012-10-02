@@ -13,7 +13,7 @@
 #include "view/VistaAutomatico.h"
 #include "view/TipoPersonaje.h"
 #include "view/ConfiguracionPantalla.h"
-#include "ConfiguracionNivel.h"
+#include "view/ConfiguracionNivel.h"
 #include "config/Log.h"
 #include <map>
 
