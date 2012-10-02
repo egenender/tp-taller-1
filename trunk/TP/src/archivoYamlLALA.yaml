@@ -2,7 +2,7 @@ juego:
   pantalla:
     ancho: 900
     alto: 700
-    fondo: src/fondoGrande.png
+    fondo: src/resources/fondoGrande.png
   parametros:
     vel_personaje: 300
     margen_scroll: 200
@@ -12,48 +12,48 @@ juego:
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.bmp
+          sprites: src/resources/primeapeQuieto.bmp
         grito:
-          sprites: src/primeapeMovimiento.bmp
+          sprites: src/resources/primeapeMovimiento.bmp
           periodo: 10    
     mono2:
       ancho: 140
       alto: 126
       animaciones:
         quieto:
-          sprites: src/gokumonoQuieto.bmp
+          sprites: src/resources/gokumonoQuieto.bmp
         grito:
-          sprites: src/gokumonoGritando.bmp
+          sprites: src/resources/gokumonoGritando.bmp
           periodo: 20  
     protagonista:
       ancho: 65
       alto: 73
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.bmp
+          sprites: src/resources/charmeleonQuieto.bmp
         caminar:
-          sprites: src/charmeleonMovimiento.bmp
+          sprites: src/resources/charmeleonMovimiento.bmp
     princesa:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.bmp
+          sprites: src/resources/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.bmp
+          sprites: src/resources/pikachuMovimiento.bmp
           periogddo: 2
     troll:
       ancho: 200
       alto: 200
       animaciones:
         quieto:
-          sprites: src/trollface.bmp
+          sprites: src/resources/trollface.bmp
         troll:
-          sprites: src/trollface.bmp
+          sprites: src/resources/trollface.bmp
           periodo: 10
   texturas:
-    viga: src/viga2.jpg
-    esc: src/film.png
+    viga: src/resources/viga2.jpg
+    esc: src/resources/film.png
   nivel:
     alto: 700
     ancho: 1000

@@ -2,7 +2,7 @@ juego:
   pantalla:
     ancho: 800
     alto: 700
-    fondo: src/fondoGrande.png
+    fondo: src/resources/fondoGrande.png
   parametros:
     vel_personaje: 400
     margen_scroll: 80
@@ -12,40 +12,40 @@ juego:
       alto: 73
       animaciones:
         quieto:
-          sprites: src/charmeleonQuieto.bmp
+          sprites: src/resources/charmeleonQuieto.bmp
         caminar:
-          sprites: src/charmeleonMovimiento.bmp
+          sprites: src/resources/charmeleonMovimiento.bmp
     mono:
       ancho: 62
       alto: 54
       animaciones:
         quieto:
-          sprites: src/primeapeQuieto.bmp
+          sprites: src/resources/primeapeQuieto.bmp
         grito:
-          sprites: src/primeapeMovimiento.bmp
+          sprites: src/resources/primeapeMovimiento.bmp
           periodo: 10
     princesa:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.bmp
+          sprites: src/resources/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.bmp
+          sprites: src/resources/pikachuMovimiento.bmp
           periodo: 7
     defe:
       ancho: 55
       alto: 47
       animaciones:
         quieto:
-          sprites: src/pikachuQuieto.bmp
+          sprites: src/resources/pikachuQuieto.bmp
         ayudenme:
-          sprites: src/pikachuMovimiento.bmp
+          sprites: src/resources/pikachuMovimiento.bmp
           periodo: 7
   texturas:
-    viga: src/viga2.jpg
-    esc: src/film.png
-    defe: src/texturaGrande.jpg
+    viga: src/resources/viga2.jpg
+    esc: src/resources/film.png
+    defe: src/resources/texturaGrande.jpg
   nivel:
     alto: 700
     ancho: 1400
