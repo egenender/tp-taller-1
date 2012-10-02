@@ -14,7 +14,7 @@
 #include "view/TipoPersonaje.h"
 #include "view/ConfiguracionPantalla.h"
 #include "view/ConfiguracionNivel.h"
-#include "config/Log.h"
+#include "log/Log.h"
 #include <map>
 
 #include "yaml-cpp/yaml.h"

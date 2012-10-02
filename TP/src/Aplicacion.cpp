@@ -1,7 +1,7 @@
 #include "Aplicacion.h"
 #include "controller/ManejadorEstados.h"
 #include "GestorConfiguraciones.h"
-#include "config/Log.h"
+#include "log/Log.h"
 #include "view/FPS.h"
 
 #include <sstream>
