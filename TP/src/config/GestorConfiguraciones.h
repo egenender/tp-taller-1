@@ -5,16 +5,16 @@
  *      Author: juaqi
  */
 
-#include "view/Animacion.h"
-#include "view/HojaSprites.h"
-#include "view/VistaProtagonista.h"
-#include "view/VistaAnimada.h"
-#include "view/VistaImagen.h"
-#include "view/VistaAutomatico.h"
-#include "view/TipoPersonaje.h"
-#include "view/ConfiguracionPantalla.h"
-#include "view/ConfiguracionNivel.h"
-#include "log/Log.h"
+#include "../view/Animacion.h"
+#include "../view/HojaSprites.h"
+#include "../view/VistaProtagonista.h"
+#include "../view/VistaAnimada.h"
+#include "../view/VistaImagen.h"
+#include "../view/VistaAutomatico.h"
+#include "../view/TipoPersonaje.h"
+#include "../view/ConfiguracionPantalla.h"
+#include "../view/ConfiguracionNivel.h"
+#include "../log/Log.h"
 #include <map>
 
 #include "yaml-cpp/yaml.h"

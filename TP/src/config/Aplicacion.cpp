@@ -1,8 +1,8 @@
 #include "Aplicacion.h"
-#include "controller/ManejadorEstados.h"
+#include "../controller/ManejadorEstados.h"
 #include "GestorConfiguraciones.h"
-#include "log/Log.h"
-#include "view/FPS.h"
+#include "../log/Log.h"
+#include "../view/FPS.h"
 
 #include <sstream>
 using namespace std;
