@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include "GestorConfiguraciones.h"
-#include "Estatico.h"
+#include "model/Estatico.h"
 #include "config/Log.h"
 #include <sstream>
 

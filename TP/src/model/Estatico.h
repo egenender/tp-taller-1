@@ -1,7 +1,7 @@
 #ifndef ESTATICO_H_
 #define ESTATICO_H_
-#include "model/Cuerpo.h"
-#include "model/Area.h"
+#include "Cuerpo.h"
+#include "Area.h"
 
 class Estatico : public Cuerpo{
 

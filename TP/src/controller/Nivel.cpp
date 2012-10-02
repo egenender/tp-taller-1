@@ -1,6 +1,6 @@
 #include "Nivel.h"
-#include "view/VistaProtagonista.h"
-#include "GestorConfiguraciones.h"
+#include "../view/VistaProtagonista.h"
+#include "../GestorConfiguraciones.h"
 
 
 Nivel Nivel::instancia;
