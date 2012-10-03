@@ -46,8 +46,6 @@ bool Aplicacion::iniciar() {
 
 /** Manejar eventos (teclado, mouse, etc) **/
 void Aplicacion::manejarEvento(SDL_Event* evento) {
-
-//	Evento::manejarEvento(evento);
 	ManejadorEstados::manejarEvento(evento);
 }
 
@@ -95,10 +93,6 @@ int Aplicacion::ejecutar() {
 	if (iniciar() == false)
 		return -1;
 
-/*	SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONDOWN, SDL_IGNORE);
-	SDL_EventState(SDL_MOUSEBUTTONUP, SDL_IGNORE);*/
-
 	SDL_Event evento;
 	while (corriendo) {
 
@@ -113,7 +107,7 @@ int Aplicacion::ejecutar() {
 
 		actualizar(FPS::ControlFPS.obtenerDelta());
 		dibujar();
-		SDL_Delay(10);
+		SDL_Delay(35);
 	}
 	limpiar();
 	return 0;
