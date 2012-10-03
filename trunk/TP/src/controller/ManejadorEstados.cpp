@@ -1,9 +1,7 @@
 #include "ManejadorEstados.h"
 
 // Incluir mas estados aca:
-#include "EstadoIntroduccion4.h"
-#include "EstadoIntroduccion3.h"
-#include "EstadoIntroduccion2.h"
+#include "Nivel.h"
 
 Estado* ManejadorEstados::estadoActivo = 0;
 
@@ -38,15 +36,8 @@ void ManejadorEstados::setearEstadoActual(int ID) {
 			estadoActivo = 0;
 			break;
 		case ESTADO_INTRO:
-			estadoActivo = EstadoIntroduccion2::obtenerInstancia();
+			estadoActivo = Nivel::obtenerInstancia();
 			break;
-		case ESTADO_INTRO2:
-			estadoActivo = EstadoIntroduccion4::obtenerInstancia();
-			break;
-		case ESTADO_JUEGO:
-			estadoActivo = EstadoIntroduccion3::obtenerInstancia();
-			break;
-
 		// Agregar estados aca
 	}
 
