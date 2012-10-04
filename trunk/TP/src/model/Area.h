@@ -20,6 +20,8 @@ class Area {
 		int obtenerAncho();
 		int obtenerAlto();
 		Posicion* obtenerPosicion();
+		void ponerEnPiso();
+		bool pasaPiso();
 };
 
 #endif /* AREA_H_ */

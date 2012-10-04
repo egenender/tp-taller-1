@@ -8,6 +8,7 @@ class Posicion {
 private:
 	int x,y;
 	static Posicion* maximo;
+	static int piso;
 public:
 	//Constructores y Destructores
 	Posicion();
@@ -17,8 +18,8 @@ public:
 	//Otras funciones
 	int obtenerX();
 	int obtenerY();
-	void setearX(int);
 	void setearY(int);
+	void setearX(int);
 
 	//Para verificar si una posicion esta a la X de otra
 	bool estaALaDerechaDe(Posicion);
@@ -33,6 +34,8 @@ public:
 	//Funciones de clase que permiten indicar y obtener el maximo
 	static void indicarMaximo(int x, int y);
 	static Posicion* obtenerMaximo(){return maximo;}
+	static void indicarPiso(int y);
+	static int obtenerPiso();
 
 	/*Posicion obtenerDerecha();
 		Posicion obtenerArriba();

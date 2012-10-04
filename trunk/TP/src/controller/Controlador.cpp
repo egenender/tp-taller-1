@@ -41,6 +41,7 @@ void Controlador::manejarEvento(SDL_Event* evento, Manual* principal) {
 	// Podria ser mejor :P Movimiento medio choto este:
 	if (keystates[SDLK_UP]) {
 		//principal->saltar(); ?
+		principal->saltar();
 	}
 	if (keystates[SDLK_DOWN]) {
 

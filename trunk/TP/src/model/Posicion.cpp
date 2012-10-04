@@ -2,6 +2,7 @@
 #include <stddef.h>
 
 Posicion* Posicion::maximo = NULL;
+int Posicion::piso;
 
 Posicion::Posicion() {
 	x = y = 0;
@@ -96,6 +97,8 @@ void Posicion::sumarlePosicion(Posicion *pos_sumada){
 
 void Posicion::indicarMaximo(int x, int y){
 	maximo = new Posicion(x,y);
+	//FIXME: Sacar esto de aca
+	piso = y;
 }
 
 void Posicion::setearX(int a){
@@ -116,4 +119,13 @@ void Posicion::setearY(int b){
 
 	if (b <= maximo->y)
 		y = b;
+}
+
+void Posicion::indicarPiso(int y){
+	if (y < 0) return;
+	if (y > maximo->y) return;
+	piso = y;
+}
+int Posicion::obtenerPiso(){
+	return piso;
 }
