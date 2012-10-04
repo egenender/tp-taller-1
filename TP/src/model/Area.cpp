@@ -60,3 +60,15 @@ int Area::obtenerAncho(){
 Posicion* Area::obtenerPosicion(){
 	return pos;
 }
+
+void Area::ponerEnPiso(){
+	if (!pasaPiso()) return;
+
+	pos->setearY(Posicion::obtenerPiso()-alto);
+}
+
+bool Area::pasaPiso(){
+	int y = pos->obtenerY();
+	y += alto;
+	return (y >= Posicion::obtenerPiso());
+}

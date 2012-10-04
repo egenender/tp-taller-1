@@ -22,7 +22,7 @@
 }*/
 
 Manual::~Manual() {
-	//Por ahora, todo lo que se tiene se elimina en el destructor del padre.
+	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 }
 
 // Nuevo:
@@ -47,7 +47,19 @@ Manual::~Manual() {
 	huboCambios(); //el método se hereda de Observable
 }*/
 
-void Manual::saltar(){} //Por ahora no hace nada
+void Manual::saltar(){
+	if (estado == QUIETODER || estado == CAMINANDODER){
+		estado = SALTANDODER;
+		velocidadY = velocidadSaltoBase;
+		return;
+	}
+
+	if(estado == QUIETOIZQ || estado == CAMINANDOIZQ){
+		estado = SALTANDOIZQ;
+		velocidadY = velocidadSaltoBase;
+		return;
+	}
+}
 
 void Manual::atacar(){} //idem
 
@@ -85,6 +97,7 @@ int Manual::obtenerEstado(){return estado;}
 // Viejo:
 Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
+	velocidadSaltoBase = VELOCIDAD_STANDARD;
 	estado = QUIETODER;
 }
 
@@ -96,23 +109,35 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 		vel = VELOCIDAD_STANDARD;
 	}
 	velocidad = vel;
+
+	//FIXME: esto tiene que cambiar cuando lo reciba por parametro
+	velocidadSaltoBase = -500;
+
 	estado = QUIETODER;
 }
 
 // Viejos:
 void Manual::moverALaDerecha(){
-	trasladar(1);
-	estado = CAMINANDODER;
+	movimiento(SALTANDODER, CAMINANDODER, DERECHA);
 }
 
 void Manual::moverALaIzquierda(){
-	trasladar(-1);
-	estado = CAMINANDOIZQ;
+	movimiento(SALTANDOIZQ, CAMINANDOIZQ, IZQUIERDA);
 }
 
-void Manual::trasladar(int factor){
-	float DeltaX = velocidad * factor * delta;
-	Posicion* posDesplazamiento = new Posicion ((int) DeltaX,0);
+void Manual::movimiento(int saltando, int caminando, int direccion){
+	if (estoySaltando())
+		estado = saltando;
+	else
+		estado = caminando;
+	trasladar(direccion * velocidad, 0);
+}
+
+
+void Manual::trasladar(int factorX, int factorY){
+	float DeltaX = factorX * delta;
+	float DeltaY = factorY * delta;
+	Posicion* posDesplazamiento = new Posicion ((int) DeltaX,(int)DeltaY);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
 	huboCambios(); //el método se hereda de Observable
@@ -121,11 +146,17 @@ void Manual::trasladar(int factor){
 // Viejo:
 void Manual::actualizar(float delta){
 	this->delta = delta;
+	actualizarSalto();
 	notificarObservadores();
+}
+
+bool Manual::estoySaltando(){
+	return (estado == SALTANDOIZQ || estado == SALTANDODER);
 }
 
 // Viejo:
 void Manual::detener(){
+	if (estoySaltando()) return;
 	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
 
 	if (estado == CAMINANDODER)
@@ -133,4 +164,22 @@ void Manual::detener(){
 	if (estado == CAMINANDOIZQ)
 		estado = QUIETOIZQ;
 	huboCambios();
+}
+
+
+void Manual::actualizarSalto(){
+	if (!estoySaltando()) return;
+
+	trasladar(0,velocidadY);
+	velocidadY += ACELERACION;
+	if (chocaConPiso()){
+		superficieOcupada->ponerEnPiso();
+		velocidadY = 0;
+		if (estado == SALTANDODER) estado = QUIETODER;
+		else estado = QUIETOIZQ;
+	}
+}
+
+bool Manual::chocaConPiso(){
+	return superficieOcupada->pasaPiso();
 }

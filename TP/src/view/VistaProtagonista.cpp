@@ -22,6 +22,11 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, A
 	animaciones->insert(pair<int, Animacion*>(QUIETOIZQ, quietoIzq));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDODER,caminaDer));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
+
+	//FIXME: poner las animaciones que correspondan al salto cuando esten
+	animaciones->insert(pair<int, Animacion*>(SALTANDODER, quietoDer));
+	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, quietoIzq));
+
 //	actualizar(protagonista);
 }
 

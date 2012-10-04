@@ -11,12 +11,13 @@
 #define CAMINANDODER 2
 #define QUIETODER 3
 #define QUIETOIZQ 4
-//#define SALTANDOIZQ 3
-//#define SALTANDODER 4
+#define SALTANDOIZQ 5
+#define SALTANDODER 6
 
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
+#define ACELERACION 50
 
 /*
 // Nuevo:
@@ -49,6 +50,8 @@ private:
 	int velocidad;
 	float delta;
 	int estado;
+	int velocidadY;
+	int velocidadSaltoBase;
 public:
 	Manual(const char*, Area*);
 	Manual(const char*, Area*, int);
@@ -63,7 +66,11 @@ public:
 	void actualizar(float delta);
 	int obtenerEstado();
 private:
-	void trasladar(int);
+	void trasladar(int,int);
+	void actualizarSalto();
+	bool estoySaltando();
+	void movimiento(int,int,int);
+	bool chocaConPiso();
 };
 
 

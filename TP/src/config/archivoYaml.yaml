@@ -47,7 +47,7 @@ juego:
     personajes:
       - tipo: protagonista
         x: 400
-        y: 599
+        y: 300
       - tipo: mono
         x: 100
         y: 150
