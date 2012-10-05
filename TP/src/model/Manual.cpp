@@ -1,51 +1,9 @@
 #include "Manual.h"
 
-// Nuevo:
-/*Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
-	velocidad = VELOCIDAD_STANDARD;
-	velocidadX = 0;
-	direccion = DERECHA;
-	estado = QUIETODER;
-}*/
-
-// Nuevo:
-/*Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
-	if (vel <= 0){
-		//Lanzo excepcion?
-		//Por ahora hago esto:
-		vel = VELOCIDAD_STANDARD;
-	}
-	velocidad = vel;
-	velocidadX = 0;
-	direccion = DERECHA;
-	estado = QUIETODER;
-}*/
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 }
-
-// Nuevo:
-/*void Manual::moverALaDerecha(){
-	direccion = DERECHA;
-	estado = CAMINANDODER;
-	trasladar();
-}*/
-
-// Nuevo:
-/*void Manual::moverALaIzquierda(){
-	direccion = IZQUIERDA;
-	estado = CAMINANDOIZQ;
-	trasladar();
-}*/
-
-// Nuevo:
-/*void Manual::trasladar(){
-
-	velocidadX = velocidad * direccion;
-
-	huboCambios(); //el método se hereda de Observable
-}*/
 
 void Manual::saltar(){
 	if (estado == QUIETODER || estado == CAMINANDODER){
@@ -65,43 +23,16 @@ void Manual::atacar(){} //idem
 
 void Manual::especial(){} //idem
 
+int Manual::obtenerEstado(){
+	return estado;
+}
 
-// Nuevo:
-/*void Manual::actualizar(float delta){
-
-	// Como lo unico que hacemos es esto por ahora:
-
-	float DeltaX = velocidadX * delta;
-	Posicion* posDesplazamiento = new Posicion ((int) DeltaX,0);
-	superficieOcupada->mover(posDesplazamiento);
-	delete(posDesplazamiento);
-
-	notificarObservadores();
-}*/
-
-int Manual::obtenerEstado(){return estado;}
-
-// Nuevo:
-/*void Manual::detener(){
-	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
-
-	if (estado == CAMINANDODER)
-		estado = QUIETODER;
-	if (estado == CAMINANDOIZQ)
-		estado = QUIETOIZQ;
-	velocidadX = 0;
-	huboCambios();
-}*/
-
-
-// Viejo:
 Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	velocidad = VELOCIDAD_STANDARD;
 	velocidadSaltoBase = VELOCIDAD_STANDARD;
 	estado = QUIETODER;
 }
 
-// Viejo:
 Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
 		//Lanzo excepcion?
@@ -116,7 +47,6 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 	estado = QUIETODER;
 }
 
-// Viejos:
 void Manual::moverALaDerecha(){
 	movimiento(SALTANDODER, CAMINANDODER, DERECHA);
 }
