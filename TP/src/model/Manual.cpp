@@ -42,7 +42,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 	velocidad = vel;
 
 	//FIXME: esto tiene que cambiar cuando lo reciba por parametro
-	velocidadSaltoBase = -500;
+	velocidadSaltoBase = -577;
 
 	estado = QUIETODER;
 }

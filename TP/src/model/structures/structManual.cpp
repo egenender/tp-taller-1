@@ -3,7 +3,9 @@
 #include <stdlib.h>
 
 struct structManual{
-	int x, y, estado, velocidadY, identificador;
+	unsigned int identificador, numeroDeCambio;
+	unsigned int x, y, estado, velocidadY;
+
 };
 
 //Precondicion: los valores son correctos. Lo asumo porque lo voy a llamar desde el mismo Manual.
@@ -16,6 +18,7 @@ structManual_t* structManual_crear(int posX, int posY, int estado, int vel /*, f
 	estructura->estado = estado;
 	estructura->identificador = ID;
 	estructura->velocidadY = vel;
+	estructura->numeroDeCambio = 0;
 	return estructura;
 }
 
@@ -32,8 +35,25 @@ int structManual_obtener_estado(structManual_t* estructura){
 	return estructura->estado;
 }
 
-bool structManual_es_mio(structManual_t* estructura, int ID){
+bool structManual_es_mio(structManual_t* estructura, unsigned int ID){
 	return (estructura->identificador == ID);
+}
+
+void structManual_cambiar(structManual_t* estructura, int nuevaX, int nuevaY, bool cambioPos, int nuevoEstado, bool cambioEstado, int nuevaVel, bool cambioVel){
+	if (!(cambioPos || cambioEstado || cambioVel)) return;
+	estructura->numeroDeCambio++;
+	if (cambioPos){
+		estructura->x = nuevaX;
+		estructura->y = nuevaY;
+	}
+
+	if (cambioEstado){
+		estructura->estado = nuevoEstado;
+	}
+
+	if(cambioVel){
+		estructura->velocidadY = nuevaVel;
+	}
 }
 
 void structManual_destruir(structManual_t* estructura){

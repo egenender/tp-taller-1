@@ -15,6 +15,8 @@ int structManual_obtener_velocidadY(structManual_t* estructura);
 
 int structManual_obtener_estado(structManual_t* estructura);
 
+void structManual_cambiar(structManual_t* estructura, int nuevaX, int nuevaY, bool cambioPos, int nuevoEstado, bool cambioEstado, int nuevaVel, bool cambioVel);
+
 void structManual_destruir(structManual_t* estructura);
 
 #endif /* STRUCTMANUAL_H_ */
