@@ -3,6 +3,7 @@
 #include "GestorConfiguraciones.h"
 #include "../log/Log.h"
 #include "../view/FPS.h"
+#include "../common/Fuente.h"
 
 #include <sstream>
 using namespace std;
@@ -37,6 +38,9 @@ bool Aplicacion::iniciar() {
 
 	// Para algo servia:
 	SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
+
+	if (!Fuente::obtenerInstancia()->inicializar())
+		return false;
 
     // Seteamos el primer estado al entrar al juego:
     ManejadorEstados::setearEstadoActual(ESTADO_INTRO);
@@ -77,6 +81,8 @@ void Aplicacion::dibujar() {
 /** Liberar toda la memoria **/
 void Aplicacion::limpiar() {
     ManejadorEstados::setearEstadoActual(ESTADO_NINGUNO);
+
+    Fuente::obtenerInstancia()->terminar();
 
     SDL_FreeSurface(display);
     SDL_Quit();
