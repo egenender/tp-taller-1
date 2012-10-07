@@ -11,13 +11,18 @@
 #define CAMINANDODER 2
 #define QUIETODER 3
 #define QUIETOIZQ 4
-#define SALTANDOIZQ 5
-#define SALTANDODER 6
+#define SALTANDODER 5
+#define SALTANDOIZQ 6
 
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
-#define ACELERACION 50
+
+/* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
+ que la altura maxima sea la misma a la que hay ahora:
+ VbaseNueva = VbaseVieja * sqrt(aceleracionNueva/aceleracionVieja)
+*/
+#define ACELERACION 80
 
 class Manual:public Cuerpo {
 private:
