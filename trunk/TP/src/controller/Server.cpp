@@ -18,7 +18,7 @@ Server::Server(){
 	leidos=fd_set();
 	activado=false;
 	cambios_entrantes= new mapa_cambios();
-	id_sock= new mapa_sockid();
+	cambios_nuevos=false;
 
 }
 
@@ -29,7 +29,7 @@ Server::Server(int port){
 	leidos=fd_set();
 	activado=false;
 	cambios_entrantes= new mapa_cambios();
-	id_sock= new mapa_sockid();
+	cambios_nuevos=false;
 }
 
 int Server::crear_socket (unsigned short int port) {
@@ -81,6 +81,11 @@ bool Server::leer_de_cliente (int filedes, void* buffer,size_t tamanio){
 		return 0;
 
     }
+}
+
+void Server::informar_cambios(){
+
+	cambios_nuevos=true;
 }
 
 void Server::activar(){
@@ -164,16 +169,16 @@ void Server::atender_sockets(){
 
 					cambios_entrantes->insert(pair <int,prueba_t> (struct_entrante.ID,struct_entrante));
 
-					// asociar el ID con el numerito de socket, puse otro mapa (mmm)
+					// if hay cambios nuevos: escribir aca?
 
-					id_sock->insert(pair <int,int> (struct_entrante.ID,i));
-
-					// if hay que escribir al cliente: hacerlo aca?
+					if (cambios_nuevos) escribir_a_cliente(i,cambios_salientes,sizeof(cambios_salientes));
 
 
 				}
 			}
-    }
+    cambios_nuevos=false;
+
+	}
 
 
 }

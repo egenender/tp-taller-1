@@ -40,11 +40,13 @@ class Server{
 		fd_set activos,leidos;
 		int sock;
 		mapa_cambios* cambios_entrantes;
-		mapa_sockid* id_sock;
+		prueba_t* cambios_salientes;
+		bool cambios_nuevos;
 
 	public:
 		Server();
 		Server(int);
+		void informar_cambios();
 		void atender_sockets(void);
 		bool leer_de_cliente (int, void*,size_t);
 		bool escribir_a_cliente(int,void*,size_t);
