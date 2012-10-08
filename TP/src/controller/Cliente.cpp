@@ -49,6 +49,8 @@ bool Cliente::inicializar_address (struct sockaddr_in *direccion_host, const cha
 
 bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 
+	if (!conectado) return false;
+
 	int nbytes;
 
 	nbytes = write (sock,datos, tamanio);
