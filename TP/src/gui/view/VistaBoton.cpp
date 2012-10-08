@@ -6,6 +6,7 @@ VistaBoton::VistaBoton(string rutaInactivo, string rutaActivo) {
 	activo = new Superficie(rutaActivo);
 	inactivo = new Superficie(rutaInactivo);
 	actual = inactivo;
+	botonHabilitado = true;
 }
 
 VistaBoton::~VistaBoton() {
@@ -27,6 +28,8 @@ void VistaBoton::actualizar(Observable* observable) {
 	x = boton->obtenerX();
 	y = boton->obtenerY();
 
+	botonHabilitado = (boton->obtenerEstado() == ACTIVO);
+
 	if (boton->esClickeado())
 		actual = activo;
 	else
@@ -34,5 +37,7 @@ void VistaBoton::actualizar(Observable* observable) {
 }
 
 bool VistaBoton::dibujar(SDL_Surface* display) {
+	/*Si no esta habilitado el boton, dibujo*/
+	if (!botonHabilitado) return true;
 	return actual->dibujar(display, x, y);
 }

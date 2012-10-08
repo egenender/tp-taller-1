@@ -8,6 +8,7 @@ Boton::Boton(int x, int y, int ancho, int alto) : ObjetoGUI::ObjetoGUI(x,y,ancho
 Boton::~Boton() {}
 
 void Boton::manejarEvento(SDL_Event* evento) {
+	if (obtenerEstado() == INACTIVO )return;
 	int x, y;
 	Uint8 estadoMouse = SDL_GetMouseState(&x, &y);
 	estaEncima = mouseEncima(x,y);

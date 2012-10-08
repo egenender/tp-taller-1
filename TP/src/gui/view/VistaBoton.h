@@ -16,6 +16,7 @@ using namespace std;
 class VistaBoton : public Observador {
 private:
 	int x, y;
+	bool botonHabilitado;
 	Superficie *activo, *inactivo, *actual;
 
 public:

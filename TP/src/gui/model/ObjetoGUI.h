@@ -29,9 +29,11 @@ class ObjetoGUI : public Observable {
 		void manejarEvento(SDL_Event* evento);
 		int obtenerEstado();
 		void actualizar();
-		int obtenerX();
 		int obtenerY();
+		int obtenerX();
 		void setearEstado(int estado);
+		void activar();
+		void desactivar();
 };
 
 
