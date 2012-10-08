@@ -37,3 +37,17 @@ void ObjetoGUI::setearEstado(int estado) {
 void ObjetoGUI::manejarEvento(SDL_Event* evento) {
 	return;
 }
+
+void ObjetoGUI::activar(){
+	if (estado != INACTIVO){
+		estado = INACTIVO;
+		huboCambios();
+	}
+}
+
+void ObjetoGUI::desactivar(){
+	if (estado != ACTIVO){
+		estado = ACTIVO;
+		huboCambios();
+	}
+}
