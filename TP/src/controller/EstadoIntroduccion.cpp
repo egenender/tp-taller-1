@@ -1,5 +1,6 @@
 #include "EstadoIntroduccion.h"
 #include "ManejadorEstados.h"
+#include "../gui/model/ManejadorEjemplo.h"
 
 EstadoIntroduccion EstadoIntroduccion::instancia;
 
@@ -14,7 +15,7 @@ EstadoIntroduccion::EstadoIntroduccion() {
 /** Inicializa el estado **/
 void EstadoIntroduccion::iniciar() {
 
-	botonIniciar = new Boton(0, 0, 86, 86);
+	botonIniciar = new Boton(0, 0, 86, 86, new ManejadorEjemplo());
 	vistaBotonIniciar = new VistaBoton("src/botonIniciarNormal.png",
 			"src/botonIniciarClickeado.png");
 

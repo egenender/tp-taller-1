@@ -1,11 +1,19 @@
 #include "Boton.h"
+#include <exception>
 
-Boton::Boton(int x, int y, int ancho, int alto) : ObjetoGUI::ObjetoGUI(x,y,ancho,alto){
+Boton::Boton(int x, int y, int ancho, int alto, ManejadorBoton* m) : ObjetoGUI::ObjetoGUI(x,y,ancho,alto){
 	clickeado = false;
 	estaEncima = false;
+	manejador = m;
 }
 
-Boton::~Boton() {}
+Boton::~Boton() {
+	try{
+		delete(manejador);
+	}catch(exception& e){
+		//Ya lo eliminaron, no hago nada
+	}
+}
 
 void Boton::manejarEvento(SDL_Event* evento) {
 	if (obtenerEstado() == INACTIVO )return;
@@ -15,7 +23,7 @@ void Boton::manejarEvento(SDL_Event* evento) {
 
 	if ((SDL_MOUSEBUTTONDOWN & SDL_BUTTON(estadoMouse)) == SDL_BUTTON_LEFT) {
 		if (estaEncima) {
-			printf("Click\n");
+			manejador->manejarClic();
 			clickeado = true;
 		}
 	}
