@@ -9,6 +9,8 @@ EstadoIntroduccion EstadoIntroduccion::instancia;
 EstadoIntroduccion::EstadoIntroduccion() {
 	botonIniciar = NULL;
 	vistaBotonIniciar = NULL;
+	vistaBotonSacaCuadro = NULL;
+	botonSacaCuadro = NULL;
 	barra = NULL;
 	vistaBarra = NULL;
 	cuadroTexto = NULL;
@@ -35,11 +37,22 @@ void EstadoIntroduccion::iniciar() {
 	int cantMaxCaracteres = 10;
 	cuadroTexto = new CuadroTexto((anchoPantalla - anchoCuadro)/2, altoPantalla/4, anchoCuadro, altoCuadro, cantMaxCaracteres);
 
+	lista_t* listita = lista_crear();
+	lista_insertar_primero(listita, cuadroTexto);
+	ManejadorSolapa* manejador = new ManejadorSolapa(listita,lista_crear());
+	botonSacaCuadro = new Boton(100, 100, anchoBoton, altoBoton, manejador);
+	botonSacaCuadro->setearMensaje("Esconder");
+
 	vistaBotonIniciar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 			"src/gui/resources/botonIniciarClickeado.png");
+
+	vistaBotonSacaCuadro = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
+				"src/gui/resources/botonIniciarClickeado.png");
+
 	vistaBarra = new VistaBarraEstado();
 	vistaCuadroTexto = new VistaCuadroTexto();
 
+	botonSacaCuadro->agregarObservador(vistaBotonSacaCuadro);
 	botonIniciar->agregarObservador(vistaBotonIniciar);
 	barra->agregarObservador(vistaBarra);
 	cuadroTexto->agregarObservador(vistaCuadroTexto);
@@ -71,6 +84,14 @@ void EstadoIntroduccion::terminar() {
 		delete(vistaCuadroTexto);
 		vistaCuadroTexto = NULL;
 	}
+	if (botonSacaCuadro) {
+		delete (botonSacaCuadro);
+		botonSacaCuadro = NULL;
+	}
+	if (vistaBotonSacaCuadro) {
+		delete (vistaBotonSacaCuadro);
+		vistaBotonSacaCuadro = NULL;
+	}
 }
 
 /** Actualiza el estado **/
@@ -78,6 +99,7 @@ void EstadoIntroduccion::actualizar(float delta) {
 	botonIniciar->actualizar();
 	barra->actualizar();
 	cuadroTexto->actualizar();
+	botonSacaCuadro->actualizar();
 
 	if(botonIniciar->mouseEncima()) {
 		barra->setearMensaje("Mouse encima");
@@ -97,6 +119,7 @@ void EstadoIntroduccion::dibujar(SDL_Surface* display) {
 	vistaBotonIniciar->dibujar(display);
 	vistaBarra->dibujar(display);
 	vistaCuadroTexto->dibujar(display);
+	vistaBotonSacaCuadro->dibujar(display);
 }
 
 /** Devuelve la instancia del estado (Singleton) **/
@@ -106,6 +129,7 @@ EstadoIntroduccion* EstadoIntroduccion::obtenerInstancia() {
 
 /** Maneja eventos que vienen del teclado **/
 void EstadoIntroduccion::manejarEvento(SDL_Event* evento) {
+	botonSacaCuadro->manejarEvento(evento);
 	botonIniciar->manejarEvento(evento);
 	cuadroTexto->manejarEvento(evento);
 }

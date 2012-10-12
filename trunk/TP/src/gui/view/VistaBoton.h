@@ -20,6 +20,7 @@ private:
 	Superficie *activo, *inactivo, *actual;
 	SDL_Surface* mensajeAMostrar;
 	string mensajeActual, mensajeAnterior;
+	bool visible;
 
 public:
 	VistaBoton(string, string);

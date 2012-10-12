@@ -7,6 +7,7 @@ void VistaBarraEstado::inicializar() {
 	mensajeAnterior = mensajeActual = "";
 	mensajeAMostrar = NULL;
 	barraEstado = NULL;
+	visible = true;
 }
 
 VistaBarraEstado::VistaBarraEstado() {
@@ -30,6 +31,8 @@ VistaBarraEstado::~VistaBarraEstado() {
 void VistaBarraEstado::actualizar(Observable* observable) {
 	BarraEstado* barra = (BarraEstado*) observable;
 
+	visible = barra->esVisible();
+
 	x = barra->obtenerX();
 	y = barra->obtenerY();
 	alto = barra->obtenerAlto();
@@ -48,6 +51,7 @@ void VistaBarraEstado::actualizar(Observable* observable) {
 }
 
 bool VistaBarraEstado::dibujar(SDL_Surface* display) {
+	if (!visible) return true;
 	// Dibujo la barra:
 	bool dibujeBarra = barraEstado->dibujar(display, x, y);
 

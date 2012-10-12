@@ -21,6 +21,7 @@ private:
 	string mensajeActual, mensajeAnterior;
 	SDL_Surface* mensajeAMostrar;
 	Superficie* barraEstado;
+	bool visible;
 
 private:
 	void inicializar();

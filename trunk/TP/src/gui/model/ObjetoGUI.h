@@ -19,6 +19,7 @@ class ObjetoGUI : public Observable {
 	protected:
 		SDL_Rect dimensiones;
 		int estado;
+		bool visible;
 
 	public:
 		ObjetoGUI(int x, int y, int ancho, int alto);
@@ -33,9 +34,10 @@ class ObjetoGUI : public Observable {
 		int obtenerAlto();
 		int obtenerAncho();
 		void setearEstado(int estado);
-		void activar();
-		void desactivar();
+		void visibilizar();
+		void invisibilizar();
 		Posicion* obtenerPosicion();
+		bool esVisible();
 };
 
 
