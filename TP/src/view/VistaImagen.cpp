@@ -30,8 +30,7 @@ void VistaImagen::cambiarImagen(Superficie* imagenNueva) {
 }
 
 void VistaImagen::actualizar(Observable* observable) {
-	Manual* cuerpo = (Manual*) observable;
-	posicionDibujar = cuerpo->obtenerPosicion();
+	posicionDibujar = observable->obtenerPosicion();
 }
 
 bool VistaImagen::dibujar(SDL_Surface* display, int xCamara, int yCamara) {

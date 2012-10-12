@@ -2,7 +2,7 @@
 #define VISTAAUTOMATICO_H_
 #include "VistaAnimada.h"
 #include "Animacion.h"
-#include "../model/Automatico.h"
+#include "../model/Observable.h"
 #include "../model/Timer.h"
 #include <vector>
 #define INMOVIL 1
@@ -19,7 +19,7 @@ private:
 	Animacion* animacionQuieto;
 	bool quieto;
 public:
-	VistaAutomatico(Automatico*, vector<Animacion*>*d, vector<int>*);
+	VistaAutomatico(Observable*, vector<Animacion*>*d, vector<int>*);
 	//VistaAutomatico::VistaAutomatico(Automatico*, Animacion*, vector<Animacion*>*, vector<int>*);
 	virtual ~VistaAutomatico();
 	void actualizar(Observable* observable);

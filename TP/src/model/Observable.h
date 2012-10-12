@@ -4,7 +4,17 @@
 #include "../common/Observador.h"
 #include <stdbool.h>
 #include <vector>
+#include "Posicion.h"
 using namespace std;
+
+//Defino constantes para conocer mi estado
+#define QUIETO 0
+#define CAMINANDOIZQ 1
+#define CAMINANDODER 2
+#define QUIETODER 3
+#define QUIETOIZQ 4
+#define SALTANDODER 5
+#define SALTANDOIZQ 6
 
 class Observable {
 	private:
@@ -19,6 +29,7 @@ class Observable {
 		virtual int obtenerEstado()=0;
 		bool cambio();
 		int cantidadObservadores();
+		virtual Posicion* obtenerPosicion()=0;
 	protected:
 		void huboCambios();
 		void limpiarCambio();

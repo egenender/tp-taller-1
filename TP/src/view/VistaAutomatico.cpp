@@ -1,6 +1,6 @@
 #include "VistaAutomatico.h"
 
-VistaAutomatico::VistaAutomatico(Automatico* automatic, vector<Animacion*>* anim, vector<int>* period) {
+VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
 	animacionActual = anim->at(0);
 	actual = 0;
@@ -46,9 +46,7 @@ VistaAutomatico::~VistaAutomatico() {
 }
 
 void VistaAutomatico::actualizar(Observable* observable) {
-	Automatico* automatic = (Automatico*) observable;
-
-	posicionDibujar = automatic->obtenerPosicion();
+	posicionDibujar = observable->obtenerPosicion();
 
 	//Si la animacion actual todavia no termino, entonces tengo que seguir
 	//con esta. No cambio nada.

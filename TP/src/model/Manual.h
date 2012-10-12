@@ -5,15 +5,6 @@
 #include "Cuerpo.h"
 #include "Observable.h"
 
-//Defino constantes para conocer mi estado
-#define QUIETO 0
-#define CAMINANDOIZQ 1
-#define CAMINANDODER 2
-#define QUIETODER 3
-#define QUIETOIZQ 4
-#define SALTANDODER 5
-#define SALTANDOIZQ 6
-
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
