@@ -10,11 +10,17 @@
 
 #include "ObjetoGUI.h"
 #include "ManejadorBoton.h"
+#include <string>
+using namespace std;
 
 class Boton : public ObjetoGUI {
 private:
 	bool estaEncima, clickeado, sostenido;
 	ManejadorBoton* manejador;
+	string mensaje;
+
+private:
+	void inicializar();
 
 public:
 	Boton(int x, int y, int ancho, int alto,ManejadorBoton* m);
@@ -22,6 +28,8 @@ public:
 	void manejarEvento(SDL_Event* evento);
 	bool mouseEncima();
 	bool esClickeado();
+	string obtenerMensaje();
+	void setearMensaje(string texto);
 
 private:
 	bool mouseEncima(int x, int y);

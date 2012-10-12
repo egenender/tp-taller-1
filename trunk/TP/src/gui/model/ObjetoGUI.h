@@ -31,6 +31,8 @@ class ObjetoGUI : public Observable {
 		void actualizar();
 		int obtenerY();
 		int obtenerX();
+		int obtenerAlto();
+		int obtenerAncho();
 		void setearEstado(int estado);
 		void activar();
 		void desactivar();

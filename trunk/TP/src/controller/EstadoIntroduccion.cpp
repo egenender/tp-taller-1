@@ -1,6 +1,7 @@
 #include "EstadoIntroduccion.h"
 #include "ManejadorEstados.h"
 #include "../gui/model/ManejadorEjemplo.h"
+#include "../controller/GestorConfiguraciones.h"
 
 EstadoIntroduccion EstadoIntroduccion::instancia;
 
@@ -15,17 +16,23 @@ EstadoIntroduccion::EstadoIntroduccion() {
 /** Inicializa el estado **/
 void EstadoIntroduccion::iniciar() {
 
-	botonIniciar = new Boton(0, 0, 86, 86, new ManejadorEjemplo());
-	vistaBotonIniciar = new VistaBoton("src/botonIniciarNormal.png",
-			"src/botonIniciarClickeado.png");
+	int anchoPantalla = GestorConfiguraciones::getInstance()->ObtenerAnchoPantalla();
+	int altoPantalla = GestorConfiguraciones::getInstance()->ObtenerAltoPantalla();
 
-	botonIniciar->agregarObservador(vistaBotonIniciar);
+	int altoBoton = 86;
+	int anchoBoton = 86;
+	botonIniciar = new Boton((anchoPantalla - anchoBoton)/2, (altoPantalla - altoBoton)/2, anchoBoton, altoBoton, new ManejadorEjemplo());
+	botonIniciar->setearMensaje("Iniciar");
 
-	barra = new BarraEstado(0,200, 200,25);
-	vistaBarra = new VistaBarraEstado();
-
+	int altoBarra = 25;
+	barra = new BarraEstado(0,altoPantalla - altoBarra,anchoPantalla,altoBarra);
 	barra->setearMensaje("Iddle");
 
+	vistaBotonIniciar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
+			"src/gui/resources/botonIniciarClickeado.png");
+	vistaBarra = new VistaBarraEstado();
+
+	botonIniciar->agregarObservador(vistaBotonIniciar);
 	barra->agregarObservador(vistaBarra);
 }
 

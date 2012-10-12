@@ -1,11 +1,11 @@
 juego:
   pantalla:
-    ancho: 700
+    ancho: 800
     alto: 550
     fondo: src/resources/fondoGrande.png
   parametros:
     vel_personaje: 300
-    margen_scroll: 10
+    margen_scroll: 150
   tiposPersonaje:  
     mono:
       ancho: 140

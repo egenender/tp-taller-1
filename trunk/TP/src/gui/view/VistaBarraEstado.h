@@ -9,7 +9,7 @@
 #define VISTABARRAESTADO_H_
 
 
-#include "SDL/SDL.h"
+#include "../../view/Superficie.h"
 #include "SDL/SDL_ttf.h"
 #include "../../common/Observador.h"
 #include <string>
@@ -17,9 +17,13 @@ using namespace std;
 
 class VistaBarraEstado : public Observador {
 private:
-	int x, y;
+	int x, y, ancho, alto;
 	string mensajeActual, mensajeAnterior;
 	SDL_Surface* mensajeAMostrar;
+	Superficie* barraEstado;
+
+private:
+	void inicializar();
 
 public:
 	VistaBarraEstado();

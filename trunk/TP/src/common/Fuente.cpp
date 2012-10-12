@@ -4,20 +4,24 @@ Fuente Fuente::instancia;
 
 Fuente::Fuente() {
 	font = NULL;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
+	size = 0;
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
 }
 
 bool Fuente::inicializar() {
 	 if(TTF_Init() == -1)
 		 return false;
 
-	 font = TTF_OpenFont("src/common/lazy.ttf", 28);
+	 size = 18;
+
+	 font = TTF_OpenFont("src/gui/resources/arial.ttf", size);
 	 if (font == NULL) {
 		 printf("%s\n", TTF_GetError());
 		 return false;
 	 }
+
 	 return true;
 }
 
@@ -36,6 +40,9 @@ SDL_Color Fuente::obtenerColor() {
 	return color;
 }
 
+int Fuente::obtenerTamanio() {
+	return size;
+}
 
 Fuente* Fuente::obtenerInstancia() {
 	return &instancia;

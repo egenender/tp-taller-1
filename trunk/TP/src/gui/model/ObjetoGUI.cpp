@@ -26,6 +26,14 @@ int ObjetoGUI::obtenerY() {
 	return dimensiones.y;
 }
 
+int ObjetoGUI::obtenerAncho() {
+	return dimensiones.w;
+}
+
+int ObjetoGUI::obtenerAlto() {
+	return dimensiones.h;
+}
+
 int ObjetoGUI::obtenerEstado() {
 	return estado;
 }

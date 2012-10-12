@@ -1,9 +1,15 @@
 #include "Boton.h"
 #include <exception>
 
-Boton::Boton(int x, int y, int ancho, int alto, ManejadorBoton* m) : ObjetoGUI::ObjetoGUI(x,y,ancho,alto){
+void Boton::inicializar() {
 	clickeado = false;
 	estaEncima = false;
+	manejador = NULL;
+	mensaje = "";
+}
+
+Boton::Boton(int x, int y, int ancho, int alto, ManejadorBoton* m) : ObjetoGUI::ObjetoGUI(x,y,ancho,alto){
+	inicializar();
 	manejador = m;
 }
 
@@ -45,4 +51,12 @@ bool Boton::mouseEncima() {
 
 bool Boton::esClickeado() {
 	return clickeado;
+}
+
+string Boton::obtenerMensaje() {
+	return mensaje;
+}
+
+void Boton::setearMensaje(string texto) {
+	mensaje = texto;
 }
