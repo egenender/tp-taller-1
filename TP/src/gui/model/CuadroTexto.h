@@ -26,6 +26,8 @@ public:
 	~CuadroTexto();
 	string obtenerMensaje();
 	void manejarEvento(SDL_Event* evento);
+private:
+	bool caracterValido(SDL_Event* evento);
 };
 
 

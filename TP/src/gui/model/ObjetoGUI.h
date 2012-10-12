@@ -12,10 +12,8 @@
 #include "../../model/Observable.h"
 #include "../../model/Posicion.h"
 
-enum {
-	ACTIVO = 0,
-	INACTIVO
-};
+#define	ACTIVO 0
+#define INACTIVO 1
 
 class ObjetoGUI : public Observable {
 	protected:
