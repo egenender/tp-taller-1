@@ -16,6 +16,7 @@ class CuadroTexto : public ObjetoGUI {
 private:
 	string mensajeEscrito;
 	unsigned int maximosCaracteres;
+	bool permitido;
 
 private:
 	void inicializar();

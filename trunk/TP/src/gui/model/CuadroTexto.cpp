@@ -10,15 +10,19 @@
 void CuadroTexto::inicializar() {
 	mensajeEscrito = "";
 	maximosCaracteres = 0;
+	//estado = INACTIVO;
 }
 
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
 		unsigned int cantCaracteres) :
 		ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
 		maximosCaracteres = cantCaracteres;
+		estado = INACTIVO;
+		permitido = true;
 }
 
 CuadroTexto::~CuadroTexto() {
+
 }
 
 void CuadroTexto::manejarEvento(SDL_Event* evento) {
@@ -26,8 +30,11 @@ void CuadroTexto::manejarEvento(SDL_Event* evento) {
 	Uint8 estadoMouse = SDL_GetMouseState(&x, &y);
 	bool estaEncima = mouseEncima(x,y);
 	if ((SDL_MOUSEBUTTONDOWN & SDL_BUTTON(estadoMouse)) == SDL_BUTTON_LEFT) {
-		if (estaEncima) {
+		if (estaEncima)
 			setearEstado(ACTIVO);
+		else{
+			setearEstado(INACTIVO);
+			permitido = true;
 		}
 	}
 
@@ -36,17 +43,20 @@ void CuadroTexto::manejarEvento(SDL_Event* evento) {
 
 	string temp = mensajeEscrito;
 
+	if (evento->type == SDL_KEYUP){
+		permitido = true;
+	}
+
 	if (evento->type == SDL_KEYDOWN) {
-		if (mensajeEscrito.length() < maximosCaracteres) {
-			if (caracterValido(evento)){
-				mensajeEscrito += (char) evento->key.keysym.unicode;
-			}
+		if (mensajeEscrito.length() < maximosCaracteres && caracterValido(evento) && permitido) {
+			mensajeEscrito += (char) evento->key.keysym.unicode;
 		}
 
 		if ((evento->key.keysym.sym == SDLK_BACKSPACE)
 				&& (mensajeEscrito.length() != 0)) {
 			mensajeEscrito.erase(mensajeEscrito.length() - 1);
 		}
+		permitido = false;
 	}
 
 	 if(mensajeEscrito != temp) {
