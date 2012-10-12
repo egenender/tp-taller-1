@@ -19,8 +19,9 @@ private:
 	int x, y, ancho, alto;
 	string mensajeActual;
 	SDL_Surface* mensajeAMostrar;
-	Superficie* cuadroTexto;
-
+	Superficie* cuadroSinFoco;
+	Superficie* cuadroConFoco;
+	Superficie* imagenActual;
 private:
 	void inicializar();
 

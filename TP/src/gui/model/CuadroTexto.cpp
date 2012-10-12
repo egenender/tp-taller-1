@@ -30,11 +30,17 @@ void CuadroTexto::manejarEvento(SDL_Event* evento) {
 	Uint8 estadoMouse = SDL_GetMouseState(&x, &y);
 	bool estaEncima = mouseEncima(x,y);
 	if ((SDL_MOUSEBUTTONDOWN & SDL_BUTTON(estadoMouse)) == SDL_BUTTON_LEFT) {
-		if (estaEncima)
-			setearEstado(ACTIVO);
-		else{
-			setearEstado(INACTIVO);
-			permitido = true;
+		if (estaEncima){
+			if (estado != ACTIVO){
+				estado = ACTIVO;
+				huboCambios();
+			}
+		}else{
+			if (estado != INACTIVO){
+				estado = INACTIVO;
+				permitido = true;
+				huboCambios();
+			}
 		}
 	}
 

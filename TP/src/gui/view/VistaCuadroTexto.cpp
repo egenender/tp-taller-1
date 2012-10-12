@@ -13,22 +13,28 @@ void VistaCuadroTexto::inicializar() {
 	x = y = ancho = alto = 0;
 	mensajeActual = "";
 	mensajeAMostrar = NULL;
-	cuadroTexto = NULL;
+	cuadroSinFoco = NULL;
 }
 
 VistaCuadroTexto::VistaCuadroTexto() {
 	inicializar();
-	cuadroTexto = new Superficie("src/gui/resources/cuadradoBlanco.jpg");
+	cuadroSinFoco = new Superficie("src/gui/resources/cuadradoBlanco.jpg");
+	cuadroConFoco = new Superficie("src/gui/resources/cuadradoBlancoFoco.jpg");
+	imagenActual = cuadroSinFoco;
 }
 
 VistaCuadroTexto::~VistaCuadroTexto() {
-	if (cuadroTexto) {
-		delete(cuadroTexto);
-		cuadroTexto = NULL;
+	if (cuadroSinFoco) {
+		delete(cuadroSinFoco);
+		cuadroSinFoco = NULL;
 	}
 	if (mensajeAMostrar) {
 		delete(mensajeAMostrar);
 		mensajeAMostrar = NULL;
+	}
+	if (cuadroConFoco){
+		delete(cuadroConFoco);
+		cuadroConFoco = NULL;
 	}
 }
 
@@ -48,12 +54,18 @@ void VistaCuadroTexto::actualizar(Observable* observable) {
 	}
 
 	// Por si hay que redimencionarla:
-	cuadroTexto->escala(ancho, alto);
+	cuadroSinFoco->escala(ancho, alto);
+	cuadroConFoco->escala(ancho,alto);
+
+	if (cuadro->obtenerEstado() == ACTIVO)
+		imagenActual = cuadroConFoco;
+	else
+		imagenActual = cuadroSinFoco;
 }
 
 bool VistaCuadroTexto::dibujar(SDL_Surface* display) {
 	// Dibujo la barra:
-	bool dibujeCuadro = cuadroTexto->dibujar(display, x, y);
+	bool dibujeCuadro = imagenActual->dibujar(display, x, y);
 
 	if (mensajeAMostrar == NULL)
 		return false;
