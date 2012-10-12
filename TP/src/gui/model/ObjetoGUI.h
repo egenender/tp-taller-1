@@ -10,6 +10,7 @@
 
 #include "SDL/SDL.h"
 #include "../../model/Observable.h"
+#include "../../model/Posicion.h"
 
 enum {
 	ACTIVO = 0,
@@ -36,6 +37,7 @@ class ObjetoGUI : public Observable {
 		void setearEstado(int estado);
 		void activar();
 		void desactivar();
+		Posicion* obtenerPosicion();
 };
 
 

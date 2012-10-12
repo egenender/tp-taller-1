@@ -59,3 +59,7 @@ void ObjetoGUI::desactivar(){
 		huboCambios();
 	}
 }
+
+Posicion* ObjetoGUI::obtenerPosicion(){
+	return (new Posicion(dimensiones.x,dimensiones.y));
+}
