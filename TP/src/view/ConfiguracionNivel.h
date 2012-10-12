@@ -13,6 +13,7 @@
 #include "../model/Manual.h"
 #include "VistaCuerpo.h"
 #include "VistaProtagonista.h"
+#include "../model/Actualizable.h"
 #include <vector>
 
 class ConfiguracionNivel{
@@ -22,7 +23,7 @@ class ConfiguracionNivel{
 		int ancho;
 		Manual* manual;
 		VistaProtagonista* vistaManual;
-		std::vector<Cuerpo*> cuerpos;
+		std::vector<Actualizable*> actualizables;
 		std::vector<VistaCuerpo*> vistas;
 	public:
 		ConfiguracionNivel();

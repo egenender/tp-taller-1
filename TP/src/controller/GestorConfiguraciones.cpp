@@ -302,7 +302,7 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 		}
 
 		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
-		configNivel->cuerpos.push_back(estatico);
+		configNivel->actualizables.push_back(estatico);
 
 		std::string rutaImagen;
 		try{
@@ -461,7 +461,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			configNivel->vistas.push_back(vistaCuerpo);
 		}
 		cuerpo->agregarObservador(vistaCuerpo);
-		configNivel->cuerpos.push_back(cuerpo);
+		configNivel->actualizables.push_back(cuerpo);
 		}
 	configNivel->vistas.push_back(configNivel->vistaManual);
 
@@ -474,7 +474,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		vistaCuerpo = configNivel->vistaManual;
 		configNivel->vistas.push_back(configNivel->vistaManual );
 		cuerpo->agregarObservador(vistaCuerpo);
-		configNivel->cuerpos.push_back(cuerpo);
+		configNivel->actualizables.push_back(cuerpo);
 
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia personaje principal en el nivel, se carga por defecto");
 	}
@@ -521,8 +521,8 @@ VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* 
 	return new VistaAutomatico(automatico, & animaciones , & periodos);
 }
 
-vector<Cuerpo*>* GestorConfiguraciones::ObtenerCuerpos(){
-	return &configNivel->cuerpos;
+vector<Actualizable*>* GestorConfiguraciones::ObtenerActualizables(){
+	return &configNivel->actualizables;
 }
 
 vector<VistaCuerpo*>* GestorConfiguraciones::ObtenerVistas(){

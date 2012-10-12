@@ -60,7 +60,7 @@ class GestorConfiguraciones{
 		Manual* ObtenerManual();
 		VistaProtagonista* ObtenerVistaManual();
 
-		vector<Cuerpo*>* ObtenerCuerpos();
+		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
 
 };
