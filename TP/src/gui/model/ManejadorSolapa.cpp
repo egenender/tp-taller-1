@@ -12,8 +12,10 @@ void destructor(void* objeto){
 }
 
 ManejadorSolapa::~ManejadorSolapa() {
-	lista_destruir(solapa1,destructor);
-	lista_destruir(solapa2,destructor);
+	//lista_destruir(solapa1,destructor);
+	//lista_destruir(solapa2,destructor);
+	lista_destruir(solapa1,NULL);
+	lista_destruir(solapa2,NULL);
 }
 
 void ManejadorSolapa::manejarClic(){
@@ -49,10 +51,13 @@ void ManejadorSolapa::habilitacion(lista_t* solapa, bool habilitar){
 	lista_iter_t* iter = lista_iter_crear(solapa);
 	while (!lista_iter_al_final(iter)){
 		ObjetoGUI* ui = (ObjetoGUI*)lista_iter_ver_actual(iter);
-		if (habilitar)
-			ui->activar();
-		else
-			ui->desactivar();
+		if (habilitar){
+			ui->visibilizar();
+			ui->setearEstado(ACTIVO);
+		}else{
+			ui->invisibilizar();
+			ui->setearEstado(INACTIVO);
+		}
 		lista_iter_avanzar(iter);
 	}
 	lista_iter_destruir(iter);

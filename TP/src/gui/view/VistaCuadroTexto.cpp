@@ -45,6 +45,7 @@ void VistaCuadroTexto::actualizar(Observable* observable) {
 	y = cuadro->obtenerY();
 	alto = cuadro->obtenerAlto();
 	ancho = cuadro->obtenerAncho();
+	visible = cuadro->esVisible();
 
 	if (mensajeActual.compare(cuadro->obtenerMensaje()) != 0) {
 		mensajeActual = cuadro->obtenerMensaje();
@@ -64,6 +65,7 @@ void VistaCuadroTexto::actualizar(Observable* observable) {
 }
 
 bool VistaCuadroTexto::dibujar(SDL_Surface* display) {
+	if (!visible) return true;
 	// Dibujo la barra:
 	bool dibujeCuadro = imagenActual->dibujar(display, x, y);
 

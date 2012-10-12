@@ -22,6 +22,7 @@ private:
 	Superficie* cuadroSinFoco;
 	Superficie* cuadroConFoco;
 	Superficie* imagenActual;
+	bool visible;
 private:
 	void inicializar();
 

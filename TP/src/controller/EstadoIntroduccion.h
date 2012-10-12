@@ -9,6 +9,9 @@
 #include "../gui/model/BarraEstado.h"
 #include "../gui/view/VistaCuadroTexto.h"
 #include "../gui/model/CuadroTexto.h"
+#include "../gui/model/ManejadorEjemplo.h"
+#include "../gui/model/ManejadorSolapa.h"
+#include "../model/lista.h"
 
 class EstadoIntroduccion : public Estado {
     private:
@@ -16,6 +19,9 @@ class EstadoIntroduccion : public Estado {
 
         Boton* botonIniciar;
     	VistaBoton* vistaBotonIniciar;
+
+    	Boton* botonSacaCuadro;
+    	VistaBoton* vistaBotonSacaCuadro;
 
     	BarraEstado* barra;
     	VistaBarraEstado* vistaBarra;

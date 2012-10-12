@@ -2,7 +2,7 @@
 
 ObjetoGUI::ObjetoGUI(int x, int y, int ancho, int alto) {
 	estado = ACTIVO;
-
+	visible = true;
 	dimensiones.x = x;
 	dimensiones.y = y;
 
@@ -46,20 +46,23 @@ void ObjetoGUI::manejarEvento(SDL_Event* evento) {
 	return;
 }
 
-void ObjetoGUI::activar(){
-	if (estado != INACTIVO){
-		estado = INACTIVO;
+void ObjetoGUI::invisibilizar(){
+	if (visible){
+		visible = false;
 		huboCambios();
 	}
 }
 
-void ObjetoGUI::desactivar(){
-	if (estado != ACTIVO){
-		estado = ACTIVO;
+void ObjetoGUI::visibilizar(){
+	if (!visible){
+		visible = true;
 		huboCambios();
 	}
 }
 
 Posicion* ObjetoGUI::obtenerPosicion(){
 	return (new Posicion(dimensiones.x,dimensiones.y));
+}
+bool ObjetoGUI::esVisible(){
+	return visible;
 }
