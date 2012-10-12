@@ -18,6 +18,8 @@ private:
 	int x, y;
 	bool botonHabilitado;
 	Superficie *activo, *inactivo, *actual;
+	SDL_Surface* mensajeAMostrar;
+	string mensajeActual, mensajeAnterior;
 
 public:
 	VistaBoton(string, string);

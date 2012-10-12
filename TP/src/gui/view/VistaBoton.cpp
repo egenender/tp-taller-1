@@ -1,4 +1,5 @@
 #include "VistaBoton.h"
+#include "../../common/Fuente.h"
 #include "../../gui/model/Boton.h"
 
 VistaBoton::VistaBoton(string rutaInactivo, string rutaActivo) {
@@ -7,6 +8,8 @@ VistaBoton::VistaBoton(string rutaInactivo, string rutaActivo) {
 	inactivo = new Superficie(rutaInactivo);
 	actual = inactivo;
 	botonHabilitado = true;
+	mensajeAnterior = mensajeActual = "";
+	mensajeAMostrar = NULL;
 }
 
 VistaBoton::~VistaBoton() {
@@ -34,10 +37,32 @@ void VistaBoton::actualizar(Observable* observable) {
 		actual = activo;
 	else
 		actual = inactivo;
+
+	mensajeActual = boton->obtenerMensaje();
+	if (mensajeActual.compare(mensajeAnterior) != 0) {
+		mensajeAnterior = mensajeActual;
+		SDL_FreeSurface(mensajeAMostrar);
+		mensajeAMostrar = TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), mensajeActual.c_str(), Fuente::obtenerInstancia()->obtenerColor());
+	}
 }
 
 bool VistaBoton::dibujar(SDL_Surface* display) {
 	/*Si no esta habilitado el boton, dibujo*/
 	if (!botonHabilitado) return true;
-	return actual->dibujar(display, x, y);
+
+	// Dibujo el boton:
+	bool dibujeBoton = actual->dibujar(display, x, y);
+
+	/* Centro el texto en el boton */
+	SDL_Rect destino;
+	int desplazamientoX = (actual->obtenerAncho() - mensajeAMostrar->w) / 2;
+	int desplazamientoY = (actual->obtenerAlto() - mensajeAMostrar->h) / 2;
+
+	destino.x = x+desplazamientoX;
+	destino.y = y+desplazamientoY;
+
+	// Dibujo el texto:
+	SDL_BlitSurface(mensajeAMostrar, NULL, display, &destino);
+
+	return dibujeBoton;
 }

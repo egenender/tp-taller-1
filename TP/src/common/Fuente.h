@@ -15,6 +15,7 @@ class Fuente {
 private:
 	TTF_Font* font;
 	SDL_Color color;
+	int size;
 	static Fuente instancia;
 	Fuente();
 
@@ -26,6 +27,7 @@ public:
 	void terminar();
 	TTF_Font* obtenerFuente();
 	SDL_Color obtenerColor();
+	int obtenerTamanio();
 };
 
 #endif /* FUENTE_H_ */
