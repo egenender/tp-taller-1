@@ -2,7 +2,6 @@
 #define AUTOMATICO_H_
 #include "Area.h"
 #include "Cuerpo.h"
-#define QUIETO 0
 
 class Automatico: public Cuerpo{
 private:

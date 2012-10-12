@@ -1,15 +1,10 @@
 #include "HojaSprites.h"
 #include "VistaProtagonista.h"
 
-VistaProtagonista::VistaProtagonista(Manual* protagonista) {
-	// Nothing to do here (?)
-}
+VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* caminar, Animacion* quieto) {
 
-VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, Animacion* quieto) {
-
-	Animacion* caminaDer=caminar;
+	Animacion* caminaDer = caminar;
 	caminaDer->transparencia(255,0,255); // color transparente = magenta
-
 
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
 
@@ -29,14 +24,13 @@ VistaProtagonista::VistaProtagonista(Manual* protagonista, Animacion* caminar, A
 	animaciones->insert(pair<int, Animacion*>(SALTANDODER, saltandoDer));
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));
 
+	posicionDibujar = protagonista->obtenerPosicion();
 //	actualizar(protagonista);
 }
 
 void VistaProtagonista::actualizar(Observable* observable) {
-	Manual* prot = (Manual*) observable;
-
-	posicionDibujar = prot->obtenerPosicion();
-	animacionActual = animaciones->at(prot->obtenerEstado());
+	posicionDibujar = observable->obtenerPosicion();
+	animacionActual = animaciones->at(observable->obtenerEstado());
 }
 
 VistaProtagonista::~VistaProtagonista() {}

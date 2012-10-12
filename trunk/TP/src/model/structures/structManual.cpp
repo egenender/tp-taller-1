@@ -59,3 +59,7 @@ void structManual_cambiar(structManual_t* estructura, int nuevaX, int nuevaY, bo
 void structManual_destruir(structManual_t* estructura){
 	free(estructura);
 }
+
+unsigned int structManual_obtenerID(structManual_t* estructura){
+	return estructura->identificador;
+}
