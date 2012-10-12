@@ -3,17 +3,17 @@
 #include "Evento.h"
 #include "Estado.h"
 #include "../model/lista.h"
-#include "../model/Cuerpo.h"
 #include "../view/VistaCuerpo.h"
 #include "../model/Manual.h"
 #include "../view/Camara.h"
 #include "Controlador.h"
+#include "../model/Actualizable.h"
 
 class Nivel: public Estado {
 private:
     static Nivel instancia;
     Controlador* controlador;
-	vector<Cuerpo*>* cuerpos;
+	vector<Actualizable*>* actualizables;
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
 	Camara* camara;

@@ -5,12 +5,9 @@
 
 Nivel Nivel::instancia;
 
-/*#define ANCHO_NIVEL 640
-#define ALTO_NIVEL 480*/
-
 Nivel::Nivel() {
 	principal = NULL;
-	cuerpos = NULL;
+	actualizables = NULL;
 	vistas = NULL;
 	camara = NULL;
 	controlador = NULL;
@@ -36,7 +33,9 @@ void Nivel::iniciar() {
 
 	// Se inicializan los cuerpos y se agregan a las listas
 	// Idem con las vistas
-	cuerpos = gestor->ObtenerCuerpos();
+
+	actualizables = gestor->ObtenerActualizables();
+
 	vistas = gestor->ObtenerVistas();
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());
@@ -51,9 +50,9 @@ void Nivel::iniciar() {
 
 void Nivel::terminar() {
 
-	while (!cuerpos->empty()){
-		Cuerpo* cuerpito = cuerpos->back();
-		cuerpos->pop_back();
+	while (!actualizables->empty()){
+		Actualizable* cuerpito = actualizables->back();
+		actualizables->pop_back();
 		delete(cuerpito);
 	}
 
@@ -63,7 +62,7 @@ void Nivel::terminar() {
 		delete (vista);
 	}
 
-	delete(cuerpos);
+	delete(actualizables);
 	delete(vistas);
 	delete(camara);
 	delete (controlador);
@@ -73,8 +72,8 @@ void Nivel::terminar() {
 void Nivel::actualizar(float delta){
 
 	// Actualizamos cada cuerpo:
-	for(unsigned int i=0;i<cuerpos->size();i++){
-			Cuerpo* cuerpito = cuerpos->at(i);
+	for(unsigned int i=0;i<actualizables->size();i++){
+			Actualizable* cuerpito = actualizables->at(i);
 			cuerpito->actualizar(delta);
 	}
 
@@ -99,7 +98,7 @@ void Nivel::dibujar(SDL_Surface* display){
 }
 
 void Nivel::agregarCuerpo(Cuerpo* c){
-	cuerpos->push_back(c);
+	actualizables->push_back(c);
 }
 
 void Nivel::agregarVista(VistaCuerpo* v){
