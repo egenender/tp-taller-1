@@ -22,12 +22,16 @@ bool Fuente::inicializar() {
 		 return false;
 	 }
 
+	 SDL_EnableUNICODE(SDL_ENABLE);
+
 	 return true;
 }
 
 void Fuente::terminar() {
 	if (font)
 		TTF_CloseFont(font);
+
+	SDL_EnableUNICODE(SDL_DISABLE);
 
 	TTF_Quit();
 }
