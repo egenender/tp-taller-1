@@ -15,7 +15,7 @@ void CuadroTexto::inicializar() {
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
 		unsigned int cantCaracteres) :
 		ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
-	maximosCaracteres = cantCaracteres;
+		maximosCaracteres = cantCaracteres;
 }
 
 CuadroTexto::~CuadroTexto() {
@@ -38,17 +38,7 @@ void CuadroTexto::manejarEvento(SDL_Event* evento) {
 
 	if (evento->type == SDL_KEYDOWN) {
 		if (mensajeEscrito.length() < maximosCaracteres) {
-			if (evento->key.keysym.unicode == (Uint16) ' ') {
-				mensajeEscrito += (char) evento->key.keysym.unicode;
-			}
-			else if ((evento->key.keysym.unicode >= (Uint16) '0')
-					&& (evento->key.keysym.unicode <= (Uint16) '9')) {
-				mensajeEscrito += (char) evento->key.keysym.unicode;
-			} else if ((evento->key.keysym.unicode >= (Uint16) 'A')
-					&& (evento->key.keysym.unicode <= (Uint16) 'Z')) {
-				mensajeEscrito += (char) evento->key.keysym.unicode;
-			} else if ((evento->key.keysym.unicode >= (Uint16) 'a')
-					&& (evento->key.keysym.unicode <= (Uint16) 'z')) {
+			if (caracterValido(evento)){
 				mensajeEscrito += (char) evento->key.keysym.unicode;
 			}
 		}
@@ -62,6 +52,22 @@ void CuadroTexto::manejarEvento(SDL_Event* evento) {
 	 if(mensajeEscrito != temp) {
 		 huboCambios();
 	 }
+}
+
+bool CuadroTexto::caracterValido(SDL_Event* evento){
+	bool esNumerico =(evento->key.keysym.unicode >= (Uint16) '0')
+							&& (evento->key.keysym.unicode <= (Uint16) '9');
+	bool esEspacio = (evento->key.keysym.unicode == (Uint16) ' ');
+	bool esMayuscula = (evento->key.keysym.unicode >= (Uint16) 'A')
+							&& (evento->key.keysym.unicode <= (Uint16) 'Z');
+	bool esMinuscula = (evento->key.keysym.unicode >= (Uint16) 'a')
+							&& (evento->key.keysym.unicode <= (Uint16) 'z');
+	bool esPunto = (evento->key.keysym.unicode == (Uint16) '.');
+
+	if (esNumerico || esEspacio || esMayuscula || esMinuscula || esPunto)
+		return true;
+	else
+		return false;
 }
 
 string CuadroTexto::obtenerMensaje() {
