@@ -11,6 +11,8 @@ EstadoIntroduccion::EstadoIntroduccion() {
 	vistaBotonIniciar = NULL;
 	barra = NULL;
 	vistaBarra = NULL;
+	cuadroTexto = NULL;
+	vistaCuadroTexto = NULL;
 }
 
 /** Inicializa el estado **/
@@ -28,12 +30,19 @@ void EstadoIntroduccion::iniciar() {
 	barra = new BarraEstado(0,altoPantalla - altoBarra,anchoPantalla,altoBarra);
 	barra->setearMensaje("Iddle");
 
+	int altoCuadro = 25;
+	int anchoCuadro = 150;
+	int cantMaxCaracteres = 10;
+	cuadroTexto = new CuadroTexto((anchoPantalla - anchoCuadro)/2, altoPantalla/4, anchoCuadro, altoCuadro, cantMaxCaracteres);
+
 	vistaBotonIniciar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 			"src/gui/resources/botonIniciarClickeado.png");
 	vistaBarra = new VistaBarraEstado();
+	vistaCuadroTexto = new VistaCuadroTexto();
 
 	botonIniciar->agregarObservador(vistaBotonIniciar);
 	barra->agregarObservador(vistaBarra);
+	cuadroTexto->agregarObservador(vistaCuadroTexto);
 }
 
 /** Termina el estado **/
@@ -46,7 +55,6 @@ void EstadoIntroduccion::terminar() {
 		delete (vistaBotonIniciar);
 		vistaBotonIniciar = NULL;
 	}
-
 	if (barra) {
 		delete (barra);
 		barra = NULL;
@@ -55,12 +63,21 @@ void EstadoIntroduccion::terminar() {
 		delete (vistaBarra);
 		vistaBarra = NULL;
 	}
+	if (cuadroTexto) {
+		delete(cuadroTexto);
+		cuadroTexto = NULL;
+	}
+	if (vistaCuadroTexto) {
+		delete(vistaCuadroTexto);
+		vistaCuadroTexto = NULL;
+	}
 }
 
 /** Actualiza el estado **/
 void EstadoIntroduccion::actualizar(float delta) {
 	botonIniciar->actualizar();
 	barra->actualizar();
+	cuadroTexto->actualizar();
 
 	if(botonIniciar->mouseEncima()) {
 		barra->setearMensaje("Mouse encima");
@@ -79,9 +96,7 @@ void EstadoIntroduccion::actualizar(float delta) {
 void EstadoIntroduccion::dibujar(SDL_Surface* display) {
 	vistaBotonIniciar->dibujar(display);
 	vistaBarra->dibujar(display);
-
-	if (botonIniciar->esClickeado())
-		printf("CLICK!\n");
+	vistaCuadroTexto->dibujar(display);
 }
 
 /** Devuelve la instancia del estado (Singleton) **/
@@ -92,4 +107,5 @@ EstadoIntroduccion* EstadoIntroduccion::obtenerInstancia() {
 /** Maneja eventos que vienen del teclado **/
 void EstadoIntroduccion::manejarEvento(SDL_Event* evento) {
 	botonIniciar->manejarEvento(evento);
+	cuadroTexto->manejarEvento(evento);
 }

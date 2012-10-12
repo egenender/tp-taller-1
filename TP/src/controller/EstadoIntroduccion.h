@@ -7,6 +7,8 @@
 #include "../gui/model/Boton.h"
 #include "../gui/view/VistaBarraEstado.h"
 #include "../gui/model/BarraEstado.h"
+#include "../gui/view/VistaCuadroTexto.h"
+#include "../gui/model/CuadroTexto.h"
 
 class EstadoIntroduccion : public Estado {
     private:
@@ -17,6 +19,9 @@ class EstadoIntroduccion : public Estado {
 
     	BarraEstado* barra;
     	VistaBarraEstado* vistaBarra;
+
+    	CuadroTexto* cuadroTexto;
+    	VistaCuadroTexto* vistaCuadroTexto;
 
     private:
         EstadoIntroduccion();
