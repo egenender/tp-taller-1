@@ -25,7 +25,7 @@ Boton::~Boton() {
 void Boton::manejarEvento(SDL_Event* evento) {
 	if (obtenerEstado() == INACTIVO)
 		return;
-
+	if (!visible) return;
 	//TODO: Esto aca o en donde lo deje comentado?
 	clickeado = false;
 
