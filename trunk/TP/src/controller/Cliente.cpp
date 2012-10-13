@@ -79,30 +79,30 @@ void Cliente::detener(){
 
 }
 
-bool Cliente::iniciar (){
-
-	int fdes;
-	struct sockaddr_in direccion_server;
-
-	/* Crear el socket.   */
-	fdes = socket (PF_INET, SOCK_STREAM, 0);
-	if (fdes < 0){
-
-		//perror ("socket (client)"); osea mensaje de log
-		return false;
-
-	}
-
-	/* Connectarse al server.   */
-	inicializar_address (&direccion_server, SERVERHOST, PORT);
-	if (connect (fdes,(struct sockaddr *) &direccion_server, sizeof (direccion_server))<0) {
-
-		//perror ("connect (client)"); osea mensaje de log
-		return false;
-
-	}
-	Log::getInstance()->writeToLogFile("INFO","Se conecto el cliente al server");
-	sock=fdes;
-	marcar_conectado();
-	return true;
-}
+//bool Cliente::iniciar (){
+//
+//	int fdes;
+//	struct sockaddr_in direccion_server;
+//
+//	/* Crear el socket.   */
+//	fdes = socket (PF_INET, SOCK_STREAM, 0);
+//	if (fdes < 0){
+//
+//		//perror ("socket (client)"); osea mensaje de log
+//		return false;
+//
+//	}
+//
+//	/* Connectarse al server.   */
+//	inicializar_address (&direccion_server, serverhost, puerto);
+//	if (connect (fdes,(struct sockaddr *) &direccion_server, sizeof (direccion_server))<0) {
+//
+//		//perror ("connect (client)"); osea mensaje de log
+//		return false;
+//
+//	}
+//	Log::getInstance()->writeToLogFile("INFO","Se conecto el cliente al server");
+//	sock=fdes;
+//	marcar_conectado();
+//	return true;
+//}
