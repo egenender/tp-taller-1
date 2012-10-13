@@ -16,19 +16,36 @@
 #include <netdb.h>
 #include "../log/Log.h"
 #include <queue>
-
+#include <pthread.h>
 using namespace std;
 
 #define PORT		5555
 #define SERVERHOST 	"127.0.0.1"
+#define MAX_INTENTOS 8
 
 typedef queue <void*> Cola ;
 
+
+typedef struct parametrosCliente{
+
+	Cola* entrantes;
+	Cola* salientes;
+	size_t tamanio;
+	int sock;
+
+} parametrosCliente_t;
+
 class Cliente {
 
-	// CUESTION: thread para mandar tambien?
+	// CUESTION: thread para mandar tambien? respuesta: si
+	// CUESTION: tema del head, que es lo que manda al principio para especificar el tamanio.
+	// eso habria que manejarlo desde el modelo?
 
 	private:
+
+		// Atributos viejos
+		//Thread thread_envio;
+
 
 		// Esta conectado o no
 		bool conectado;
@@ -48,8 +65,11 @@ class Cliente {
 		// Cola de cambios salientes
 		Cola cola_salientes;
 
-	public:
+		pthread_t thread_escuchar;
+		pthread_t thread_escritura;
 
+
+	public:
 		// Metodos viejos
 		//bool iniciar ();
 
@@ -63,16 +83,40 @@ class Cliente {
 		// Destructor: warap chabon
 		~Cliente();
 
+		// Crea un socket a partir de los datos ya inicializados
+		bool crear_socket();
+
+
+		// Se conecta al server
+		bool conectar();
+		// Esto deberia crear un thread que empiece a escuchar a su socket por si viene algo,
+		// aceptar lo que le viene y encolar sus cambios entrantes
+		void escuchar(size_t);
+
+		void escritura(size_t);
+
+		parametrosCliente_t* inicializar_parametros(size_t tamanio);
 		// Burocracias para incializar un struct de atributos que se le pasan al connect
 		bool inicializar_address (struct sockaddr_in *, const char *, unsigned short int);
 
 		// Escribir al server que ya tendriamos inicializado todo liso
+		// si no conecta al server, deberia intentar conectar hasta hacer un timeout
 		bool escribir_al_server (void*,size_t);
 
-		// Marca al cliente como conectado a un server
+		void* desencolar_cambio();
+
+		void encolar_cambio(void*);
+
+		bool hay_cambios();
+
+		// Marca al cliente como conectado a un server (no se para que todavia pero suena bien)
 		void marcar_conectado();
 
 		// Detiene el thread que esta escuchando al server
+		void detener_escuchar();
+
+		void detener_escribir();
+
 		void detener();
 
 };

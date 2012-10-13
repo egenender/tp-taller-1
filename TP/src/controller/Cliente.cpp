@@ -15,6 +15,12 @@ Cliente::Cliente(){
 	sock=0;
 	serverhost=SERVERHOST;
 	puerto=PORT;
+	thread_escuchar=0;
+	cola_entrantes = Cola();
+	cola_salientes = Cola();
+
+	crear_socket();
+	conectar();
 
 }
 
@@ -24,6 +30,12 @@ Cliente::Cliente(const char * dir_host,unsigned short int port){
 	sock=0;
 	serverhost=dir_host;
 	puerto=port;
+	thread_escuchar=0;
+	cola_entrantes = Cola();
+	cola_salientes = Cola();
+
+	crear_socket();
+	conectar();
 
 }
 
@@ -53,7 +65,7 @@ bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 
 	int nbytes;
 
-	nbytes = write (sock,datos, tamanio);
+	nbytes = write (sock ,datos, tamanio);
 	if (nbytes < 0){
 
 		//perror ("write"); osea mensaje de log
@@ -79,30 +91,158 @@ void Cliente::detener(){
 
 }
 
-//bool Cliente::iniciar (){
-//
-//	int fdes;
-//	struct sockaddr_in direccion_server;
-//
-//	/* Crear el socket.   */
-//	fdes = socket (PF_INET, SOCK_STREAM, 0);
-//	if (fdes < 0){
-//
-//		//perror ("socket (client)"); osea mensaje de log
-//		return false;
-//
-//	}
-//
-//	/* Connectarse al server.   */
-//	inicializar_address (&direccion_server, serverhost, puerto);
-//	if (connect (fdes,(struct sockaddr *) &direccion_server, sizeof (direccion_server))<0) {
-//
-//		//perror ("connect (client)"); osea mensaje de log
-//		return false;
-//
-//	}
-//	Log::getInstance()->writeToLogFile("INFO","Se conecto el cliente al server");
-//	sock=fdes;
-//	marcar_conectado();
-//	return true;
-//}
+bool Cliente::crear_socket(){
+
+	/* Crear el socket.   */
+	sock = socket (PF_INET, SOCK_STREAM, 0);
+	if (sock < 0){
+
+		//perror ("socket (client)"); osea mensaje de log
+		return false;
+
+	}
+
+	return true;
+}
+
+bool Cliente::conectar(){
+
+	struct sockaddr_in direccion_server;
+
+	inicializar_address (&direccion_server, serverhost, puerto);
+
+
+	bool conecta=false;
+	int maxIntentos=MAX_INTENTOS;
+	int intento=1;
+	while (intento!=maxIntentos && !conecta){
+
+		if (connect (sock,(struct sockaddr *) &direccion_server, sizeof (direccion_server))>=0) conecta=true;
+
+		intento++;
+	}
+
+	if (!conecta) {
+		//perror ("connect (client)"); osea mensaje de log
+		return false;
+	}
+
+	Log::getInstance()->writeToLogFile("INFO","Se conecto el cliente al server");
+
+	marcar_conectado();
+
+	return true;
+
+}
+void* privEscuchar(void* param){
+
+	parametrosCliente_t* parametros= (parametrosCliente_t*) param;
+	Cola* cola_entrantes= parametros->entrantes;
+	int tamanio=parametros->tamanio;
+	int sock=parametros->sock;
+
+	while (true){
+		void* dato = malloc (tamanio);
+		int bytes;
+
+		if ((bytes=read(sock,dato, tamanio))<tamanio){
+			free(dato);
+			continue;
+		}
+
+		if (bytes==tamanio) cola_entrantes->push(dato);
+
+	}
+	return NULL;
+}
+
+void* privEscribir(void* param){
+
+	parametrosCliente_t* parametros= (parametrosCliente_t*) param;
+	Cola* cola_salientes= parametros->salientes;
+	int tamanio=parametros->tamanio;
+	int sock=parametros->sock;
+
+	while (true){
+		if (!cola_salientes->empty()){
+
+			void* saliente = cola_salientes->front();
+			cola_salientes->pop();
+			int bytes;
+			if ((bytes=write(sock,saliente, tamanio))<tamanio){
+
+				//Manejo  lo que sea
+				continue;
+			}
+		}
+
+	}
+	return NULL;
+}
+
+parametrosCliente_t* Cliente::inicializar_parametros(size_t tamanio){
+
+	parametrosCliente_t *parametros = (parametrosCliente_t*) malloc (sizeof(parametrosCliente_t));
+
+	parametros->entrantes=&cola_entrantes;
+	parametros->salientes=&cola_salientes;
+	parametros->tamanio=tamanio;
+	parametros->sock=sock;
+
+	return parametros;
+}
+
+void Cliente::escuchar(size_t tamanio){
+
+	parametrosCliente_t *param= inicializar_parametros(tamanio);
+	pthread_t thread;
+	thread_escuchar=thread;
+
+	if (pthread_create(&thread,NULL,&privEscuchar,(void*)param)!=0) return;
+
+}
+
+void Cliente::encolar_cambio(void* cambio){
+	cola_salientes.push(cambio);
+}
+
+void Cliente::escritura(size_t tamanio){
+
+	parametrosCliente_t *param= inicializar_parametros(tamanio);
+	pthread_t thread;
+	thread_escritura=thread;
+
+	if (pthread_create(&thread,NULL,&privEscribir,(void*)param)!=0) return;
+
+
+
+}
+
+void* Cliente::desencolar_cambio(){
+
+	void* cambio=cola_entrantes.front();
+
+	cola_entrantes.pop();
+
+	return cambio;
+}
+
+bool Cliente::hay_cambios(){
+
+	return !cola_entrantes.empty();
+
+}
+
+void Cliente::detener_escuchar(){
+
+	pthread_cancel(thread_escuchar);
+
+
+}
+
+void Cliente::detener_escribir(){
+
+	pthread_cancel(thread_escritura);
+
+
+}

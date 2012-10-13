@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,6 +17,7 @@
 #include <netdb.h>
 #include <map>
 #include <queue>
+#include <pthread.h>
 using namespace std;
 
 #define PORT	5555
@@ -33,9 +35,22 @@ typedef struct prueba{
 
 typedef queue <void*> Cola ;
 
+typedef struct parametrosServer{
+
+	Cola* entrantes;
+	Cola* salientes;
+	size_t tamanio;
+	fd_set* act;
+	fd_set* rd;
+	int sock;
+	int puerto;
+
+} parametrosServer_t;
+
 class Server{
 
-	// CUESTION: thread para mandar tambien?
+	// CUESTION: thread para mandar tambien? respuesta: si
+	// CUESTION: tema del head, que es lo que manda al principio para especificar el tamanio
 
 	private:
 
@@ -44,10 +59,7 @@ class Server{
 		//prueba_t* cambios_salientes;
 		//bool cambios_nuevos;
 
-		// No estoy seguro de la necesidad de que esten LAS DOS colas, pero prefiero mas que menos
-
 		// Esta es la cola de la que se iran desencolando los cambios que ingresen de los clientes
-		// (por ahora tipo de dato void* hasta decision)
 		Cola cola_entrantes;
 		// Mismo, pero los cambios que deben salir a los clientes
 		Cola cola_salientes;
@@ -56,13 +68,16 @@ class Server{
 		int crear_socket (unsigned short int);
 
 		// Atributo puerto del servidor
-		int puerto;
+		unsigned short int puerto;
 		// Esta activado o no
 		bool activado;
 		// Conjuntos de sockets (veremos esto)
 		fd_set activos,leidos;
 		// El file descriptor del socket del servidor
 		int sock;
+
+		pthread_t thread_escuchar;
+		pthread_t thread_escritura;
 
 	public:
 
@@ -81,9 +96,13 @@ class Server{
 		// Crea un server especificando un Port
 		Server(int);
 
+		parametrosServer_t* inicializar_parametros(size_t);
+
 		// Esto deberia crear un thread que empiece a escuchar a los clientes que le piden conexion,
 		// aceptarlos y encolar sus cambios entrantes
-		int escuchar();
+		void escuchar(size_t);
+
+		void escribir(size_t);
 
 		// Esto deberia desencolar de las cosas que le mandan para escribir y mandarlo a todos los clientes
 		int escribir_cambio();
@@ -91,11 +110,15 @@ class Server{
 		// Encola un cambio para recibir (servidor: recibir cambio)
 		int recibir_cambio(void*);
 
-		// Encola un cambio para mandar (enviar cambio a servidor)
+		// desencola un cambio para mandar (enviar cambio a servidor)
 		int enviar_cambio(void*);
 
 		// Devuelve el cambio mas actual (de la cola) para aplicar en el modelo
 		void* devolver_cambio();
+
+		bool hay_cambios();
+
+		void* desencolar_cambio();
 
 		// Detener al server
 		int detener ();
