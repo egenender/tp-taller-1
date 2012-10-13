@@ -33,7 +33,7 @@ void VistaBoton::actualizar(Observable* observable) {
 	visible = boton->esVisible();
 	botonHabilitado = (boton->obtenerEstado() == ACTIVO);
 
-	if (boton->esClickeado())
+	if (boton->esPresionado())
 		actual = activo;
 	else
 		actual = inactivo;

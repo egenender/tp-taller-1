@@ -5,6 +5,7 @@ ObjetoGUI::ObjetoGUI(int x, int y, int ancho, int alto) {
 	visible = true;
 	dimensiones.x = x;
 	dimensiones.y = y;
+	nombre = "";
 
 	if (ancho > 0)
 		dimensiones.w = ancho;
@@ -34,6 +35,10 @@ int ObjetoGUI::obtenerAlto() {
 	return dimensiones.h;
 }
 
+string ObjetoGUI::obtenerNombre() {
+	return nombre;
+}
+
 int ObjetoGUI::obtenerEstado() {
 	return estado;
 }
@@ -42,18 +47,30 @@ void ObjetoGUI::setearEstado(int estado) {
 	this->estado = estado;
 }
 
+void ObjetoGUI::setearX(int x) {
+	dimensiones.x = x;
+}
+
+void ObjetoGUI::setearY(int y) {
+	dimensiones.y = y;
+}
+
+void ObjetoGUI::setearNombre(string nombre) {
+	this->nombre = nombre;
+}
+
 void ObjetoGUI::manejarEvento(SDL_Event* evento) {
 	return;
 }
 
-void ObjetoGUI::invisibilizar(){
+void ObjetoGUI::hacerInvisible(){
 	if (visible){
 		visible = false;
 		huboCambios();
 	}
 }
 
-void ObjetoGUI::visibilizar(){
+void ObjetoGUI::hacerVisible(){
 	if (!visible){
 		visible = true;
 		huboCambios();
@@ -63,6 +80,12 @@ void ObjetoGUI::visibilizar(){
 Posicion* ObjetoGUI::obtenerPosicion(){
 	return (new Posicion(dimensiones.x,dimensiones.y));
 }
+
 bool ObjetoGUI::esVisible(){
 	return visible;
+}
+
+bool ObjetoGUI::mouseEncima(int mouseX, int mouseY) {
+	return ((mouseX > obtenerX()) && (mouseX < obtenerX() + obtenerAncho())
+			&& (mouseY > obtenerY()) && (mouseY < obtenerY() + obtenerAlto()));
 }

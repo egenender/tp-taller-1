@@ -11,33 +11,46 @@
 #include "SDL/SDL.h"
 #include "../../model/Observable.h"
 #include "../../model/Posicion.h"
+#include <string>
+using namespace std;
 
-#define	ACTIVO 0
-#define INACTIVO 1
+enum {
+	ACTIVO,
+	INACTIVO
+};
 
 class ObjetoGUI : public Observable {
 	protected:
 		SDL_Rect dimensiones;
 		int estado;
 		bool visible;
+		string nombre; // Para identificarlo
 
 	public:
 		ObjetoGUI(int x, int y, int ancho, int alto);
 		~ObjetoGUI();
 
 	public:
-		void manejarEvento(SDL_Event* evento);
-		int obtenerEstado();
-		void actualizar();
-		int obtenerY();
 		int obtenerX();
+		int obtenerY();
+		Posicion* obtenerPosicion();
 		int obtenerAlto();
 		int obtenerAncho();
+		string obtenerNombre();
+		int obtenerEstado();
+
+		void setearX(int x);
+		void setearY(int y);
+		void setearNombre(string nombre);
 		void setearEstado(int estado);
-		void visibilizar();
-		void invisibilizar();
-		Posicion* obtenerPosicion();
+
+		void manejarEvento(SDL_Event* evento);
+		void actualizar();
+		void hacerVisible();
+		void hacerInvisible();
+
 		bool esVisible();
+		bool mouseEncima(int mouseX, int mouseY);
 };
 
 
