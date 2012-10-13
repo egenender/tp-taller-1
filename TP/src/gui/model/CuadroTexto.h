@@ -20,7 +20,6 @@ private:
 
 private:
 	void inicializar();
-	bool mouseEncima(int x, int y);
 
 public:
 	CuadroTexto(int x, int y, int ancho, int alto, unsigned int cantCaracteres);

@@ -15,7 +15,7 @@ using namespace std;
 
 class Boton : public ObjetoGUI {
 private:
-	bool estaEncima, clickeado, sostenido;
+	bool estaEncima, clickeado, presionado;
 	ManejadorBoton* manejador;
 	string mensaje;
 
@@ -25,14 +25,16 @@ private:
 public:
 	Boton(int x, int y, int ancho, int alto,ManejadorBoton* m);
 	~Boton();
-	void manejarEvento(SDL_Event* evento);
-	bool mouseEncima();
-	bool esClickeado();
-	string obtenerMensaje();
-	void setearMensaje(string texto);
 
-private:
-	bool mouseEncima(int x, int y);
+	void setearPresionado(bool flag);
+	void setearMensaje(string texto);
+	string obtenerMensaje();
+
+	bool esPresionado();
+	bool esClickeado();
+	bool mouseEstaEncima(); // TODO: haria falta esto?
+
+	void manejarEvento(SDL_Event* evento);
 };
 
 

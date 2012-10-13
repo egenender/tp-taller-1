@@ -3,6 +3,7 @@
 
 void Boton::inicializar() {
 	clickeado = false;
+	presionado = false;
 	estaEncima = false;
 	manejador = NULL;
 	mensaje = "";
@@ -22,35 +23,44 @@ Boton::~Boton() {
 }
 
 void Boton::manejarEvento(SDL_Event* evento) {
-	if (obtenerEstado() == INACTIVO )return;
-	int x, y;
-	Uint8 estadoMouse = SDL_GetMouseState(&x, &y);
-	estaEncima = mouseEncima(x,y);
+	if (obtenerEstado() == INACTIVO)
+		return;
 
-	if ((SDL_MOUSEBUTTONDOWN & SDL_BUTTON(estadoMouse)) == SDL_BUTTON_LEFT) {
-		if (estaEncima) {
-			manejador->manejarClic();
-			clickeado = true;
+	//TODO: Esto aca o en donde lo deje comentado?
+	clickeado = false;
+
+	if (evento->type == SDL_MOUSEMOTION) {
+		estaEncima = mouseEncima(evento->motion.x, evento->motion.y);
+	}
+
+	if (evento->type == SDL_MOUSEBUTTONDOWN && estaEncima) {
+		if (evento->button.button == SDL_BUTTON_LEFT) {
+			setearPresionado(true);
+			// clickeado = false;
 		}
 	}
 
-	else
-		clickeado = false;
+	if (evento->type == SDL_MOUSEBUTTONUP) {
+		if (evento->button.button == SDL_BUTTON_LEFT && esPresionado()) {
+			setearPresionado(false);
+			clickeado = true;
+			manejador->manejarClic();
+		}
+	}
 
 	huboCambios();
 }
 
-bool Boton::mouseEncima(int x, int y) {
-	return ((x > dimensiones.x) && (x < dimensiones.x + dimensiones.w)
-			&& (y > dimensiones.y) && (y < dimensiones.y + dimensiones.h));
-}
-
-bool Boton::mouseEncima() {
+bool Boton::mouseEstaEncima() {
 	return estaEncima;
 }
 
 bool Boton::esClickeado() {
 	return clickeado;
+}
+
+bool Boton::esPresionado() {
+	return presionado;
 }
 
 string Boton::obtenerMensaje() {
@@ -59,4 +69,8 @@ string Boton::obtenerMensaje() {
 
 void Boton::setearMensaje(string texto) {
 	mensaje = texto;
+}
+
+void Boton::setearPresionado(bool flag) {
+	presionado = flag;
 }

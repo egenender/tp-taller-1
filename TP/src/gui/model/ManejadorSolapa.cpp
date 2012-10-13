@@ -52,10 +52,10 @@ void ManejadorSolapa::habilitacion(lista_t* solapa, bool habilitar){
 	while (!lista_iter_al_final(iter)){
 		ObjetoGUI* ui = (ObjetoGUI*)lista_iter_ver_actual(iter);
 		if (habilitar){
-			ui->visibilizar();
+			ui->hacerVisible();
 			ui->setearEstado(ACTIVO);
 		}else{
-			ui->invisibilizar();
+			ui->hacerInvisible();
 			ui->setearEstado(INACTIVO);
 		}
 		lista_iter_avanzar(iter);

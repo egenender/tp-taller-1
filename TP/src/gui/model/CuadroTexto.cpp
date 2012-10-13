@@ -89,9 +89,3 @@ bool CuadroTexto::caracterValido(SDL_Event* evento){
 string CuadroTexto::obtenerMensaje() {
 	return mensajeEscrito;
 }
-
-
-bool CuadroTexto::mouseEncima(int x, int y) {
-	return ((x > dimensiones.x) && (x < dimensiones.x + dimensiones.w)
-			&& (y > dimensiones.y) && (y < dimensiones.y + dimensiones.h));
-}

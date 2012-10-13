@@ -101,7 +101,9 @@ void EstadoIntroduccion::actualizar(float delta) {
 	cuadroTexto->actualizar();
 	botonSacaCuadro->actualizar();
 
-	if(botonIniciar->mouseEncima()) {
+
+	// TODO: ESTO NO SE SI SE DEBERIA HACER ACA!
+	if(botonIniciar->mouseEstaEncima()) {
 		barra->setearMensaje("Mouse encima");
 	}
 
@@ -109,6 +111,7 @@ void EstadoIntroduccion::actualizar(float delta) {
 		barra->setearMensaje("Iddle");
 	}
 
+	// TODO: esto idem, se tendria que hacer de otra forma
 	if(botonIniciar->esClickeado()) {
 		ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
 	}
