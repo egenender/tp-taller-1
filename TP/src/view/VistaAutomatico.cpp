@@ -17,11 +17,11 @@
 //	actualizar(automatic);
 }*/
 
-VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* quieto, vector<Animacion*>* anim, vector<int>* period) {
+VistaAutomatico::VistaAutomatico(Observable* automatic, Animacion* inmovil, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
-	quieto->transparencia(255,0,255);
-	animacionActual = quieto;
-	animacionQuieto = quieto;
+	inmovil->transparencia(255,0,255);
+	animacionActual = inmovil;
+	animacionQuieto = inmovil;
 	quieto = true;
 	actual = 0;
 
@@ -70,9 +70,7 @@ VistaAutomatico::~VistaAutomatico() {
 }*/
 
 void VistaAutomatico::actualizar(Observable* observable) {
-	Automatico* automatic = (Automatico*) observable;
-
-	posicionDibujar = automatic->obtenerPosicion();
+	posicionDibujar = observable->obtenerPosicion();
 
 	//Si la animacion actual todavia no termino, entonces tengo que seguir
 	//con esta. No cambio nada.
@@ -82,7 +80,7 @@ void VistaAutomatico::actualizar(Observable* observable) {
 	if (terminoAhora){
 		terminoAhora = false;
 		quieto = true;
-		animacionActual->detener;
+		animacionActual->detener();
 		animacionActual = animacionQuieto;
 		timer->comenzar();
 	}
