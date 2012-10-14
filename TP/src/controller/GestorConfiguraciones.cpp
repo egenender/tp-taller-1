@@ -454,7 +454,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			}
 			cuerpo = automatico;
 			try{
-				vistaCuerpo = new VistaAutomatico(automatico, & tiposPersonajes->at(tipo)->animacionesActiva , & tiposPersonajes->at(tipo)->periodos);
+				vistaCuerpo = new VistaAutomatico(automatico, tiposPersonajes->at(tipo)->animacionPasiva, & tiposPersonajes->at(tipo)->animacionesActiva , & tiposPersonajes->at(tipo)->periodos);
 			}catch(std::out_of_range &e){
 				vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
 			}
@@ -516,9 +516,10 @@ Automatico* GestorConfiguraciones::CrearAutomaticoDefecto(const char* nombre,int
 VistaAutomatico* GestorConfiguraciones::CrearVistaAutomaticaDefecto(Automatico* automatico){
 	vector<Animacion*> animaciones;
 	vector<int> periodos;
+	Animacion* pasiva =  new Animacion(new HojaSprites(RUTA_PASIVA,ANCHO_PERSONAJE,ALTO_PERSONAJE));
 	animaciones.push_back(new Animacion(new HojaSprites(RUTA_ACTIVA,ANCHO_PERSONAJE,ALTO_PERSONAJE)));
 	periodos.push_back(PERIODO_PERSONAJE);
-	return new VistaAutomatico(automatico, & animaciones , & periodos);
+	return new VistaAutomatico(automatico, pasiva, & animaciones , & periodos);
 }
 
 vector<Actualizable*>* GestorConfiguraciones::ObtenerActualizables(){
@@ -651,6 +652,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		tipoper->animacionActivaProt=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
 
+		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto))  );
 		tipoper->periodos.push_back(PERIODO_PERSONAJE);
 		return tipoper;
@@ -662,21 +664,26 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 		animaciones["quieto"];
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		rutaPasiva = RUTA_PASIVA;
+		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones quieto dentro del personaje, se cargan por defecto");
 	}catch( YAML::Exception &e) {
 		rutaPasiva = RUTA_PASIVA;
+		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones quieto dentro del personaje, se cargan por defecto");
 	}
-	/*
+
 	if (animaciones.size() == 0){
 		rutaPasiva = RUTA_PASIVA;
 		rutaActiva = RUTA_ACTIVA;
-		tipoper->periodo = PERIODO_PERSONAJE;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay ninguna animacion dentro del personaje, se cargan por defecto");
+		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
+		tipoper->animacionActivaProt=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
+
 		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
-		tipoper->animacionActiva=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
+		tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto))  );
+		tipoper->periodos.push_back(PERIODO_PERSONAJE);
 		return tipoper;
 	}
 
@@ -685,21 +692,22 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 		animaciones.begin().first() >> nombre;
 		if (strcmp(nombre.c_str(), "quieto")==0){
 			rutaActiva = RUTA_ACTIVA;
-			tipoper->periodo = PERIODO_PERSONAJE;
+			tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
+			tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto))  );
+			tipoper->periodos.push_back(PERIODO_PERSONAJE);
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay animacion activa dentro del personaje, se cargan por defecto");
 		}
 	}
-	*/
+
 	int unPeriodo;
 	std::string unaRuta;
 	vector<std::string> rutas;
 	for(YAML::Iterator it=animaciones.begin();it!=animaciones.end();++it) {
 		std::string nombre;
 	    it.first() >> nombre;
-	    if ( (strcmp(nombre.c_str(),"quieto")==0) &&  (strcmp(nombrecito,"protagonista")==0) ) {
+	    if ( (strcmp(nombre.c_str(),"quieto")==0) ) {
 	    	try{
 	    		animaciones["quieto"]["sprites"] >> rutaPasiva;
-
 
 	    		FILE* archiv=fopen(rutaPasiva.c_str(),"r");
 
@@ -710,10 +718,11 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			else
 	    				fclose(archiv);
 
-
+	    		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	    		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	    	}catch( YAML::TypedKeyNotFound<std::string> &e){
 	    		rutaPasiva = RUTA_PASIVA;
+	    		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	    		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	    		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo sprites en quieto del personaje, se cargan por defecto");
 	    	}
@@ -759,7 +768,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			else
 	    				fclose(archivo);
 
-	    			tipoper->animacionesActiva .push_back(  new Animacion(new HojaSprites(unaRuta,tipoper->ancho,tipoper->alto))  );
+	    			tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(unaRuta,tipoper->ancho,tipoper->alto))  );
 	    			tipoper->periodos.push_back (unPeriodo);
 
 	    		}
