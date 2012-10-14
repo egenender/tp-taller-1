@@ -15,6 +15,7 @@ class TipoPersonaje {
 		int ancho;
 		int alto;
 		const char* nombre;
+		Animacion* animacionPasiva;
 		Animacion* animacionPasivaProt;
 		Animacion* animacionActivaProt;
 		vector<Animacion*> animacionesActiva;
