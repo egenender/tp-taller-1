@@ -1,6 +1,6 @@
 #include "VistaAutomatico.h"
 
-VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim, vector<int>* period) {
+/*VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
 	animacionActual = anim->at(0);
 	actual = 0;
@@ -15,9 +15,9 @@ VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim
 	timer = new Timer();
 	posicionDibujar = automatic->obtenerPosicion();
 //	actualizar(automatic);
-}
+}*/
 
-/*VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* quieto, vector<Animacion*>* anim, vector<int>* period) {
+VistaAutomatico::VistaAutomatico(Automatico* automatic, Animacion* quieto, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
 	quieto->transparencia(255,0,255);
 	animacionActual = quieto;
@@ -36,16 +36,17 @@ VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim
 	timer->comenzar();
 	posicionDibujar = automatic->obtenerPosicion();
 //	actualizar(automatic);
-}*/
+}
 
 
 
 VistaAutomatico::~VistaAutomatico() {
 	delete(timer);
 	delete (periodos);
+	delete (animacionQuieto);
 }
 
-void VistaAutomatico::actualizar(Observable* observable) {
+/*void VistaAutomatico::actualizar(Observable* observable) {
 	posicionDibujar = observable->obtenerPosicion();
 
 	//Si la animacion actual todavia no termino, entonces tengo que seguir
@@ -66,9 +67,9 @@ void VistaAutomatico::actualizar(Observable* observable) {
 		timer->detener();
 	}
 
-}
+}*/
 
-/*void VistaAutomatico::actualizar(Observable* observable) {
+void VistaAutomatico::actualizar(Observable* observable) {
 	Automatico* automatic = (Automatico*) observable;
 
 	posicionDibujar = automatic->obtenerPosicion();
@@ -93,33 +94,7 @@ void VistaAutomatico::actualizar(Observable* observable) {
 		timer->detener();
 	}
 
-}*/
-
-
-/*void VistaAutomatico::actualizar(Observable* observable) {
-	Automatico* automatic = (Automatico*) observable;
-	posicionDibujar = automatic->obtenerPosicion();
-
-	if (periodo == 0) return;
-
-	//si estoy corriendo, me fijo si termino de correr:
-	if (actual == MOVIENDO && animacionActual->termino()){
-		cambiarAnimacion();
-		timer->comenzar();
-		return;
-	}
-
-	//Si simplemente esta corriendo, y no termino de correr, vuelvo
-	if (actual == MOVIENDO) return;
-
-	//Ya se que no esta corriendo, asi que me fijo si deberia
-
-	if (timer->obtenerTiempo() >= (periodo * 1000)){
-			cambiarAnimacion();
-			timer->detener();
-	}
-
-}*/
+}
 
 void VistaAutomatico::cambiarAnimacion(){
 	actual++;
@@ -128,5 +103,5 @@ void VistaAutomatico::cambiarAnimacion(){
 	animacionActual = animaciones->at(actual);
 	animacionActual->resetear();
 	terminoAhora = true;
-	//quieto = false;
+	quieto = false;
 }
