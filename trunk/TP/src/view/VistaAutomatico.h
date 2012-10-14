@@ -20,7 +20,7 @@ private:
 	bool quieto;
 public:
 	//VistaAutomatico(Observable*, vector<Animacion*>*d, vector<int>*);
-	VistaAutomatico::VistaAutomatico(Automatico*, Animacion*, vector<Animacion*>*, vector<int>*);
+	VistaAutomatico(Observable*, Animacion*, vector<Animacion*>*, vector<int>*);
 	virtual ~VistaAutomatico();
 	void actualizar(Observable* observable);
 private:
