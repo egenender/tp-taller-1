@@ -19,7 +19,7 @@
 #include <pthread.h>
 using namespace std;
 
-#define PORT		5555
+#define PORT		5556
 #define SERVERHOST 	"127.0.0.1"
 #define MAX_INTENTOS 8
 

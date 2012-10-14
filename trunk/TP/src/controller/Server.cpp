@@ -21,20 +21,20 @@ Server::Server(){
 	//cambios_nuevos=false;
 
 	/* Create the socket and set it up to accept connections.  */
-		sock = crear_socket (puerto);
-		printf ("%i \n", sock);
+	sock = crear_socket (puerto);
 
-		if (listen (sock, 1) < 0){
-			perror ("listen");
-			exit (EXIT_FAILURE);
-	    }
-		printf ("%i \n", sock);
+	if (listen (sock, 1) < 0){
+		perror ("listen");
+		exit (EXIT_FAILURE);
+	}
 
-		/* Initialize the set of active sockets.  */
-		FD_ZERO (&activos);
-		printf ("%p \n", activos);
-		FD_SET (sock, &activos);
-		printf ("%p \n", activos);
+	/* Initialize the set of active sockets.  */
+	FD_ZERO (&activos);
+	FD_SET (sock, &activos);
+
+
+	printf("rd en inic: %p \n",&leidos);
+	printf("act en inic: %p \n",&activos);
 }
 
 Server::Server(int port){
@@ -64,6 +64,12 @@ Server::Server(int port){
 bool Server::hay_cambios(){
 
 	return !cola_entrantes.empty();
+
+}
+
+void Server::encolar_cambio(void* cambio){
+
+	cola_salientes.push(cambio);
 
 }
 
@@ -131,7 +137,7 @@ void escribir_a_cliente(int i, void* punt,size_t tam){
 		/* Data read.  */
 
 		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
-		fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",((prueba_t*)punt)->entero);
+		fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
 
     }
 
@@ -179,12 +185,19 @@ void* _escuchar(void* parametros){
 
 	struct sockaddr_in nombre_cliente;
 	size_t size;
+//
+//	printf("cola en _escuchar: %p \n",cola_entrantes);
+//	printf("tamanio en _escuchar: %i \n",tamanio);
+//	printf("rd en _escuchar: %p \n",rd);
+//	printf("act en _escuchar: %p \n",act);
 
 	while (true){
 		/* Block until input arrives on one or more active sockets.  */
-		*rd = *act;
+		*rd=*act;
 		printf("antes select \n");
-		printf ("%p \n", act);
+//		printf ("%p \n", act);
+//		printf ("%p \n", rd);
+
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			perror ("select");
 			exit (EXIT_FAILURE);
@@ -192,7 +205,6 @@ void* _escuchar(void* parametros){
 
 		/* Service all the sockets with input pending.  */
 		for (i = 0; i < FD_SETSIZE; ++i){
-			printf("deslock \n");
 			if (FD_ISSET (i, rd)){
 
 				if (i == sock) {
@@ -237,19 +249,26 @@ void Server::escuchar(size_t tamanio){
 void* _escribir(void* parametros){
 	parametrosServer_t* param=(parametrosServer_t*) parametros;
 
+	int sock=param->sock;
 	Cola* cola_salientes=param->salientes;
 	size_t tamanio=param->tamanio;
-	fd_set* rd=param->rd;
+	fd_set* act=param->act;
 	int i;
+
 	while (true){
 		if (!cola_salientes->empty()){
+
 			void *cambio = cola_salientes->front();
 			cola_salientes->pop();
 			for (i = 0; i < FD_SETSIZE; ++i){
-				if (FD_ISSET (i, rd)){
 
-					escribir_a_cliente(i,cambio,tamanio);
+				if (FD_ISSET (i, act)){
 
+					printf("%d",i);
+
+					if (i!=sock){
+						escribir_a_cliente(i,cambio,tamanio);
+					}
 				}
 			}
 		}
