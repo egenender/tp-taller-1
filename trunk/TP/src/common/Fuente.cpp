@@ -6,7 +6,7 @@ Fuente::Fuente() {
 	font = NULL;
 	size = 0;
 	color.r = 255;
-	color.g = 255;
+	color.g = 0;
 	color.b = 255;
 }
 
