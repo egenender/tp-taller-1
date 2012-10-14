@@ -22,16 +22,19 @@ Server::Server(){
 
 	/* Create the socket and set it up to accept connections.  */
 		sock = crear_socket (puerto);
+		printf ("%i \n", sock);
 
-		if (listen (sock, 10) < 0){
+		if (listen (sock, 1) < 0){
 			perror ("listen");
 			exit (EXIT_FAILURE);
 	    }
+		printf ("%i \n", sock);
 
 		/* Initialize the set of active sockets.  */
 		FD_ZERO (&activos);
 		printf ("%p \n", activos);
 		FD_SET (sock, &activos);
+		printf ("%p \n", activos);
 }
 
 Server::Server(int port){
@@ -181,7 +184,7 @@ void* _escuchar(void* parametros){
 		/* Block until input arrives on one or more active sockets.  */
 		*rd = *act;
 		printf("antes select \n");
-		printf ("%p \n", rd);
+		printf ("%p \n", act);
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			perror ("select");
 			exit (EXIT_FAILURE);
