@@ -20,7 +20,7 @@
 #include <pthread.h>
 using namespace std;
 
-#define PORT	5555
+#define PORT	5556
 typedef struct prueba{
 
 
@@ -111,7 +111,7 @@ class Server{
 		int recibir_cambio(void*);
 
 		// desencola un cambio para mandar (enviar cambio a servidor)
-		int enviar_cambio(void*);
+		void encolar_cambio(void*);
 
 		// Devuelve el cambio mas actual (de la cola) para aplicar en el modelo
 		void* devolver_cambio();
