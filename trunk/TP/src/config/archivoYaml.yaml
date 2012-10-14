@@ -17,9 +17,9 @@ juego:
         caminar:
           sprites: src/resources/gokumonoGritando.bmp
           periodo: 3
-#        grito2:
-#          sprites: src/resources/gokumonoMovimiento.bmp
-#          periodo: 10
+        grito2:
+          sprites: src/resources/gokumonoMovimiento.bmp
+          periodo: 2
     protagonista:
       ancho: 65
       alto: 73
