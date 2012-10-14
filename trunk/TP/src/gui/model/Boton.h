@@ -32,10 +32,9 @@ public:
 
 	bool esPresionado();
 	bool esClickeado();
-	bool mouseEstaEncima(); // TODO: haria falta esto?
+	bool mouseEstaEncima(); // FIXME: haria falta esto?
 
 	void manejarEvento(SDL_Event* evento);
 };
-
 
 #endif /* BOTON_H_ */

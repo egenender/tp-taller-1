@@ -39,7 +39,7 @@ void EstadoIntroduccion::iniciar() {
 
 	lista_t* listita = lista_crear();
 	lista_insertar_primero(listita, cuadroTexto);
-	ManejadorSolapa* manejador = new ManejadorSolapa(listita,lista_crear());
+	ManejadorSolapa* manejador = new ManejadorSolapa(lista_crear(),listita);
 	botonSacaCuadro = new Boton(100, 100, anchoBoton, altoBoton, manejador);
 	botonSacaCuadro->setearMensaje("Esconder");
 

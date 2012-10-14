@@ -43,7 +43,7 @@ bool Aplicacion::iniciar() {
 		return false;
 
     // Seteamos el primer estado al entrar al juego:
-    ManejadorEstados::setearEstadoActual(ESTADO_INTRO);
+    ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 
     return true;
 }
