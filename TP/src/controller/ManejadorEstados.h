@@ -7,7 +7,8 @@
 enum {
 	ESTADO_NINGUNO = 0,
 	ESTADO_INTRO,
-	ESTADO_JUEGO
+	ESTADO_JUEGO,
+	ESTADO_GUI
 };
 
 class ManejadorEstados {

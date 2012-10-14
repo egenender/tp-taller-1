@@ -15,11 +15,7 @@ Boton::Boton(int x, int y, int ancho, int alto, ManejadorBoton* m) : ObjetoGUI::
 }
 
 Boton::~Boton() {
-	try{
-		delete(manejador);
-	}catch(exception& e){
-		//Ya lo eliminaron, no hago nada
-	}
+	delete(manejador);
 }
 
 void Boton::manejarEvento(SDL_Event* evento) {

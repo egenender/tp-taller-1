@@ -4,15 +4,10 @@
 #include "../../model/lista.h"
 #include "ObjetoGUI.h"
 
-#define NINGUNO 0
-#define SOLAPA1 1
-#define SOLAPA2 2
-
 class ManejadorSolapa:public ManejadorBoton {
 private:
-	lista_t *solapa1;
-	lista_t *solapa2;
-	int estado;
+	lista_t *lista_aparecer;
+	lista_t *lista_desaparecer;
 public:
 	ManejadorSolapa(lista_t*, lista_t*);
 	virtual ~ManejadorSolapa();

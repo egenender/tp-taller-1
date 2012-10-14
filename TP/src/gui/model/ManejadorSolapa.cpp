@@ -1,9 +1,8 @@
 #include "ManejadorSolapa.h"
 
 ManejadorSolapa::ManejadorSolapa(lista_t* s1, lista_t* s2) {
-	solapa1 = s1;
-	solapa2 = s2;
-	estado = NINGUNO;
+	lista_aparecer = s1;
+	lista_desaparecer = s2;
 }
 
 void destructor(void* objeto){
@@ -14,29 +13,13 @@ void destructor(void* objeto){
 ManejadorSolapa::~ManejadorSolapa() {
 	//lista_destruir(solapa1,destructor);
 	//lista_destruir(solapa2,destructor);
-	lista_destruir(solapa1,NULL);
-	lista_destruir(solapa2,NULL);
+	//lista_destruir(lista_aparecer,NULL);
+	//lista_destruir(lista_desaparecer,NULL);
 }
 
 void ManejadorSolapa::manejarClic(){
-	lista_t* habilitada;
-	lista_t* deshabilitada;
-	int valor;
-
-	if (estado == SOLAPA2 || estado == NINGUNO){
-		habilitada = solapa1;
-		deshabilitada = solapa2;
-		valor = SOLAPA1;
-	}else{
-		habilitada = solapa2;
-		deshabilitada = solapa1;
-		valor = SOLAPA2;
-	}
-
-	habilitar(habilitada);
-	deshabilitar(deshabilitada);
-	estado = valor;
-
+	deshabilitar(lista_desaparecer);
+	habilitar(lista_aparecer);
 }
 
 void ManejadorSolapa::habilitar(lista_t* solapa){

@@ -19,6 +19,17 @@ CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
 		maximosCaracteres = cantCaracteres;
 		estado = INACTIVO;
 		permitido = true;
+		validar = TODO;
+}
+
+
+CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
+		unsigned int cantCaracteres, int posibles) :
+		ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+		maximosCaracteres = cantCaracteres;
+		estado = INACTIVO;
+		permitido = true;
+		validar = posibles;
 }
 
 CuadroTexto::~CuadroTexto() {
@@ -81,10 +92,17 @@ bool CuadroTexto::caracterValido(SDL_Event* evento){
 							&& (evento->key.keysym.unicode <= (Uint16) 'z');
 	bool esPunto = (evento->key.keysym.unicode == (Uint16) '.');
 
-	if (esNumerico || esEspacio || esMayuscula || esMinuscula || esPunto)
-		return true;
-	else
-		return false;
+	if (validar == NUMEROS)
+		return esNumerico;
+
+	if (validar == LETRAS)
+		return (esMayuscula || esMinuscula || esEspacio || esPunto);
+
+	if (validar == NUMEROSYPUNTO)
+		return (esNumerico || esPunto);
+
+	return (esNumerico || esEspacio || esMayuscula || esMinuscula || esPunto);
+
 }
 
 string CuadroTexto::obtenerMensaje() {

@@ -3,6 +3,7 @@
 // Incluir mas estados aca:
 #include "EstadoIntroduccion.h"
 #include "Nivel.h"
+#include "EstadoGUI.h"
 
 Estado* ManejadorEstados::estadoActivo = 0;
 
@@ -41,6 +42,9 @@ void ManejadorEstados::setearEstadoActual(int ID) {
 			break;
 		case ESTADO_JUEGO:
 			estadoActivo = Nivel::obtenerInstancia();
+			break;
+		case ESTADO_GUI:
+			estadoActivo = EstadoGUI::obtenerInstancia();
 			break;
 	}
 
