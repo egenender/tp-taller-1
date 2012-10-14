@@ -10,7 +10,7 @@ EstadoGUI::EstadoGUI() {
 	btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
 	txtPuertoServidor = txtPuertoCliente = txtIP;
 	barra = NULL;
-
+	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
 }
 
 EstadoGUI::~EstadoGUI() {
@@ -28,6 +28,7 @@ void EstadoGUI::iniciar() {
 	crearBtns();
 	crearTxts();
 	crearBarra();
+	crearLabels();
 	crearSolapaServidor();
 	crearSolapaCliente();
 	crearVistas();
@@ -35,13 +36,13 @@ void EstadoGUI::iniciar() {
 
 void EstadoGUI::crearBtns(){
 
-	btnsolapacliente1 = new Boton(100, 100, 50, 50, new ManejadorSolapa(solapaServidor, solapaCliente1));
-	btnsolapaservidor = new Boton(200, 100, 50, 50, new ManejadorSolapa(solapaCliente1, solapaServidor));
+	btnsolapacliente1 = new Boton(100, 100, 80, 50, new ManejadorSolapa(solapaServidor, solapaCliente1));
+	btnsolapaservidor = new Boton(200, 100, 80, 50, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
-	btnsolapacliente2 = new Boton(100,100,50,50, new ManejadorSolapa(solapaServidor, solapaCliente2) );
-	btnconectar = new Boton(400,400,50,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
-	btncrear = new Boton(400, 400, 50, 50, new ManejadorEjemplo());
-	btnjugar = new Boton(400, 400, 50, 50 , new ManejadorEjemplo());
+	btnsolapacliente2 = new Boton(100,100,80,50, new ManejadorSolapa(solapaServidor, solapaCliente2) );
+	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
+	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
+	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -53,9 +54,9 @@ void EstadoGUI::crearBtns(){
 }
 
 void EstadoGUI::crearTxts(){
-	txtPuertoServidor = new CuadroTexto(50,300,100,30,4,NUMEROS);
-	txtPuertoCliente = new CuadroTexto(50,300,100,30,4,NUMEROS);
-	txtIP = new CuadroTexto(50, 250, 300, 30, 15,NUMEROSYPUNTO);
+	txtPuertoServidor = new CuadroTexto(100,300,100,30,4,NUMEROS);
+	txtPuertoCliente = new CuadroTexto(100,300,100,30,4,NUMEROS);
+	txtIP = new CuadroTexto(100, 250, 300, 30, 15,NUMEROSYPUNTO);
 }
 
 void EstadoGUI::crearBarra(){
@@ -63,10 +64,28 @@ void EstadoGUI::crearBarra(){
 	barra->setearMensaje("Iddle");
 }
 
+void EstadoGUI::crearLabels(){
+	//Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto;
+	lblPuertoServidor = new Label(20,300,80, 30);
+	lblPuertoServidor->setearMensaje("Puerto:");
+	lblIP = new Label(20,250, 80,30);
+	lblIP->setearMensaje("IP:");
+	lblPuertoCliente = new Label(20,300,80,30);
+	lblPuertoCliente->setearMensaje("Puerto:");
+
+	lblnombrePersonaje = new Label(80, 380, 200, 30);
+	lblnombrePersonaje->setearMensaje("Aca deberia ir el nombre");
+	lblvelocidad= new Label(80, 420, 200, 30);
+	lblvelocidad->setearMensaje("Aca deberia ir la velocidad");
+	lblsalto = new Label(80, 460, 200, 30);
+	lblsalto->setearMensaje("Aca deberia ir el salto");
+}
+
 void EstadoGUI::crearSolapaServidor(){
 	lista_insertar_ultimo(solapaServidor, txtPuertoServidor);
 	lista_insertar_ultimo(solapaServidor, btncrear);
 	lista_insertar_ultimo(solapaServidor, btnsolapaservidor);
+	lista_insertar_ultimo(solapaServidor, lblPuertoServidor);
 }
 
 void EstadoGUI::crearSolapaCliente(){
@@ -74,14 +93,24 @@ void EstadoGUI::crearSolapaCliente(){
 	lista_insertar_ultimo(solapaCliente1, txtPuertoCliente);
 	lista_insertar_ultimo(solapaCliente1, btnconectar);
 	lista_insertar_ultimo(solapaCliente1, btnsolapacliente1);
+	lista_insertar_ultimo(solapaCliente1, lblPuertoCliente);
+	lista_insertar_ultimo(solapaCliente1, lblIP);
 	lista_insertar_ultimo(solapaCliente2, btnjugar);
 	lista_insertar_ultimo(solapaCliente2, btnsolapacliente2);
+	lista_insertar_ultimo(solapaCliente2, lblnombrePersonaje);
+	lista_insertar_ultimo(solapaCliente2, lblvelocidad);
+	lista_insertar_ultimo(solapaCliente2, lblsalto);
 	txtIP->hacerInvisible();
 	txtPuertoCliente->hacerInvisible();
 	btnconectar->hacerInvisible();
 	btnsolapacliente1->hacerInvisible();
 	btnjugar->hacerInvisible();
 	btnsolapacliente2->hacerInvisible();
+	lblIP->hacerInvisible();
+	lblPuertoCliente->hacerInvisible();
+	lblvelocidad->hacerInvisible();
+	lblsalto->hacerInvisible();
+	lblnombrePersonaje->hacerInvisible();
 }
 
 void EstadoGUI::crearVistas(){
@@ -107,6 +136,12 @@ void EstadoGUI::crearVistas(){
 	vistaTxtPuertoServidor = new VistaCuadroTexto();
 	vistaTxtPuertoCliente = new VistaCuadroTexto();
 	vistaTxtIP = new VistaCuadroTexto();
+	vistalblpuertoservidor = new VistaLabel();
+	vistalblpuertocliente = new VistaLabel();
+	vistalblIP = new VistaLabel();
+	vistalblnombre = new VistaLabel();
+	vistalblvelocidad = new VistaLabel();
+	vistalblsalto = new VistaLabel();
 
 	btnsolapacliente1->agregarObservador(vistaBtnsolapacliente1);
 	btnsolapacliente2->agregarObservador(vistaBtnsolapacliente2);
@@ -119,6 +154,13 @@ void EstadoGUI::crearVistas(){
 	txtPuertoServidor->agregarObservador(vistaTxtPuertoServidor);
 	txtPuertoCliente->agregarObservador(vistaTxtPuertoCliente);
 	txtIP->agregarObservador(vistaTxtIP);
+
+	lblPuertoServidor->agregarObservador(vistalblpuertoservidor);
+	lblPuertoCliente->agregarObservador(vistalblpuertocliente);
+	lblIP->agregarObservador(vistalblIP);
+	lblnombrePersonaje->agregarObservador(vistalblnombre);
+	lblvelocidad->agregarObservador(vistalblvelocidad);
+	lblsalto->agregarObservador(vistalblsalto);
 }
 
 
@@ -134,6 +176,12 @@ void EstadoGUI::actualizar(float delta){
 	txtPuertoServidor->actualizar();
 	txtPuertoCliente->actualizar();
 	txtIP->actualizar();
+	lblPuertoCliente->actualizar();
+	lblPuertoServidor->actualizar();
+	lblIP->actualizar();
+	lblnombrePersonaje->actualizar();
+	lblvelocidad->actualizar();
+	lblsalto->actualizar();
 
 	// FIXME: ESTO NO SE SI SE DEBERIA HACER ACA!
 	if(btnconectar->esClickeado()) {
@@ -158,6 +206,12 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistaTxtPuertoServidor->dibujar(display);
 	vistaTxtPuertoCliente->dibujar(display);
 	vistaTxtIP->dibujar(display);
+	vistalblnombre->dibujar(display);
+	vistalblvelocidad->dibujar(display);
+	vistalblsalto->dibujar(display);
+	vistalblIP->dibujar(display);
+	vistalblpuertoservidor->dibujar(display);
+	vistalblpuertocliente->dibujar(display);
 }
 
 void EstadoGUI::manejarEvento(SDL_Event* evento) {
@@ -266,6 +320,54 @@ void EstadoGUI::terminar() {
 	if (solapaCliente2){
 		lista_destruir(solapaCliente2,NULL);
 		solapaCliente2 = NULL;
+	}
+	if (lblPuertoCliente){
+		delete (lblPuertoCliente);
+		lblPuertoCliente = NULL;
+	}
+	if (lblPuertoServidor){
+		delete (lblPuertoServidor);
+		lblPuertoServidor = NULL;
+	}
+	if (lblIP){
+		delete (lblIP);
+		lblIP = NULL;
+	}
+	if (lblnombrePersonaje){
+		delete (lblnombrePersonaje);
+		lblnombrePersonaje = NULL;
+	}
+	if (lblvelocidad){
+		delete (lblvelocidad);
+		lblvelocidad = NULL;
+	}
+	if (lblsalto){
+		delete (lblsalto);
+		lblsalto = NULL;
+	}
+	if (vistalblpuertocliente){
+			delete (vistalblpuertocliente);
+			vistalblpuertocliente = NULL;
+	}
+	if (vistalblpuertoservidor){
+		delete (vistalblpuertoservidor);
+		vistalblpuertoservidor = NULL;
+	}
+	if (vistalblIP){
+		delete (vistalblIP);
+		vistalblIP = NULL;
+	}
+	if (vistalblnombre){
+		delete (vistalblnombre);
+		vistalblnombre = NULL;
+	}
+	if (vistalblvelocidad){
+		delete (vistalblvelocidad);
+		vistalblvelocidad = NULL;
+	}
+	if (vistalblsalto){
+		delete (vistalblsalto);
+		vistalblsalto = NULL;
 	}
 }
 
