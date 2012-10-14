@@ -5,6 +5,8 @@
 #include "../gui/view/VistaBoton.h"
 #include "../gui/model/Boton.h"
 #include "../gui/view/VistaBarraEstado.h"
+#include "../gui/view/VistaLabel.h"
+#include "../gui/model/Label.h"
 #include "../gui/model/BarraEstado.h"
 #include "../gui/view/VistaCuadroTexto.h"
 #include "../gui/model/CuadroTexto.h"
@@ -23,11 +25,13 @@ private:
 	Boton *btncrear,*btnsolapacliente1, *btnsolapacliente2,*btnsolapaservidor,*btnconectar,*btnjugar;
 	CuadroTexto *txtPuertoServidor, *txtPuertoCliente, *txtIP;
 	BarraEstado* barra;
-	//TODO: faltan los labels, las imagenes y las listas
+	//TODO: faltan las imagenes y las listas
+	Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto;
 
 	VistaBoton *vistaBtncrear, *vistaBtnsolapacliente1, *vistaBtnsolapacliente2, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnjugar;
 	VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;
 	VistaBarraEstado *vistaBarra;
+	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
 private:
         EstadoGUI();
         void crearBtns();
@@ -36,7 +40,7 @@ private:
         void crearSolapaServidor();
         void crearSolapaCliente();
         void crearVistas();
-
+        void crearLabels();
 public:
         virtual ~EstadoGUI();
         void manejarEvento(SDL_Event* evento);

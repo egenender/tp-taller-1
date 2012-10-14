@@ -1,30 +1,29 @@
-#ifndef VISTABARRAESTADO_H_
-#define VISTABARRAESTADO_H_
-
+#ifndef VISTALABEL_H_
+#define VISTALABEL_H_
 
 #include "../../view/Superficie.h"
 #include "SDL/SDL_ttf.h"
 #include "../../common/Observador.h"
+#include "../model/Label.h"
 #include <string>
 using namespace std;
 
-class VistaBarraEstado : public Observador {
+
+class VistaLabel: public Observador {
 private:
 	int x, y, ancho, alto;
 	string mensajeActual, mensajeAnterior;
 	SDL_Surface* mensajeAMostrar;
-	Superficie* barraEstado;
 	bool visible;
 
 private:
 	void inicializar();
 
 public:
-	VistaBarraEstado();
-	~VistaBarraEstado();
+	VistaLabel();
+	virtual ~VistaLabel();
 	virtual void actualizar(Observable* observable);
 	virtual bool dibujar(SDL_Surface* display);
 };
 
-
-#endif /* VISTABOTON_H_ */
+#endif /* VISTALABEL_H_ */

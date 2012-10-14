@@ -10,6 +10,8 @@ VistaBoton::VistaBoton(string rutaInactivo, string rutaActivo) {
 	botonHabilitado = true;
 	mensajeAnterior = mensajeActual = "";
 	mensajeAMostrar = NULL;
+	ancho = alto = 0;
+
 }
 
 VistaBoton::~VistaBoton() {
@@ -44,6 +46,11 @@ void VistaBoton::actualizar(Observable* observable) {
 		SDL_FreeSurface(mensajeAMostrar);
 		mensajeAMostrar = TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), mensajeActual.c_str(), Fuente::obtenerInstancia()->obtenerColor());
 	}
+
+	ancho = boton->obtenerAncho();
+	alto = boton->obtenerAlto();
+	activo->escala(ancho,alto);
+	inactivo->escala(ancho,alto);
 }
 
 bool VistaBoton::dibujar(SDL_Surface* display) {
