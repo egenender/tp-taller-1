@@ -5,10 +5,10 @@
 VistaLista::VistaLista(unsigned int m) {
 	mostrables = m;
 	x = y = alto = ancho = 0;
-	cuadro = new Superficie("src/gui/resources/cuadradoBlanco.jpg");
+	cuadro = new Superficie("src/gui/resources/lista.bmp");
 	mensajeAMostrar = new vector<SDL_Surface*>();
 
-	seleccionado = new Superficie("src/gui/resources/cuadradoBlancoFoco.jpg");
+	seleccionado = new Superficie("src/gui/resources/listaSelec.bmp");
 	seleccionadoActual = 0;
 	visible = false;
 	primeraVez = true;

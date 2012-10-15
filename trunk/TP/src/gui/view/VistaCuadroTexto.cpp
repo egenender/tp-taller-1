@@ -19,7 +19,7 @@ void VistaCuadroTexto::inicializar() {
 VistaCuadroTexto::VistaCuadroTexto() {
 	inicializar();
 	cuadroSinFoco = new Superficie("src/gui/resources/cuadradoBlanco.jpg");
-	cuadroConFoco = new Superficie("src/gui/resources/cuadradoBlancoFoco.jpg");
+	cuadroConFoco = new Superficie("src/gui/resources/cuadradoBlancoFoco.bmp");
 	imagenActual = cuadroSinFoco;
 }
 

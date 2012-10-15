@@ -37,7 +37,7 @@ void EstadoGUI::iniciar() {
 }
 
 void EstadoGUI::crearScroll(){
-	scroll = new ListaScrolleable(350,100, 200, 150);
+	scroll = new ListaScrolleable(100,200, 200, 150);
 	scroll->agregarElemento("Charmeleon");
 	scroll->agregarElemento("Pikachu");
 	scroll->agregarElemento("Mono Goku");
@@ -47,15 +47,15 @@ void EstadoGUI::crearScroll(){
 
 void EstadoGUI::crearBtns(){
 
-	btnsolapacliente1 = new Boton(100, 100, 80, 50, new ManejadorSolapa(solapaServidor, solapaCliente1));
-	btnsolapaservidor = new Boton(200, 100, 80, 50, new ManejadorSolapa(solapaCliente1, solapaServidor));
+	btnsolapacliente1 = new Boton(100, 100, 85, 30, new ManejadorSolapa(solapaServidor, solapaCliente1));
+	btnsolapaservidor = new Boton(200, 100, 85, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
-	btnsolapacliente2 = new Boton(100,100,80,50, new ManejadorSolapa(solapaServidor, solapaCliente2) );
+	btnsolapacliente2 = new Boton(100,100,85,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
 	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
-	btnscrollarriba = new Boton(550, 100, 30,30, new ManejadorScroll(scroll,ARRIBA));
-	btnscrollabajo = new Boton(550, 300, 30,30, new ManejadorScroll(scroll,ABAJO));
+	btnscrollarriba = new Boton(300, 200, 30,30, new ManejadorScroll(scroll,ARRIBA));
+	btnscrollabajo = new Boton(300, 320, 30,30, new ManejadorScroll(scroll,ABAJO));
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -141,21 +141,21 @@ void EstadoGUI::crearVistas(){
 
 	vistaBtncrear = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 			"src/gui/resources/botonIniciarClickeado.png");
-	vistaBtnsolapacliente1 = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
-			"src/gui/resources/botonIniciarClickeado.png");
-	vistaBtnsolapacliente2 = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
-				"src/gui/resources/botonIniciarClickeado.png");
-	vistaBtnsolapaservidor = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
-			"src/gui/resources/botonIniciarClickeado.png");
+	vistaBtnsolapacliente1 = new VistaBoton("src/gui/resources/pestania.bmp",
+			"src/gui/resources/pestania.bmp");
+	vistaBtnsolapacliente2 = new VistaBoton("src/gui/resources/pestania.bmp",
+				"src/gui/resources/pestania.bmp");
+	vistaBtnsolapaservidor = new VistaBoton("src/gui/resources/pestania.bmp",
+			"src/gui/resources/pestania.bmp");
 	vistaBtnconectar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 				"src/gui/resources/botonIniciarClickeado.png");
 	vistaBtnjugar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 				"src/gui/resources/botonIniciarClickeado.png");
 
-	vistaarriba = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
-			"src/gui/resources/botonIniciarClickeado.png");
-	vistaabajo = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
-				"src/gui/resources/botonIniciarClickeado.png");
+	vistaarriba = new VistaBoton("src/gui/resources/flechaArriba.jpg",
+			"src/gui/resources/flechaArriba.jpg");
+	vistaabajo = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
+				"src/gui/resources/flechaAbajo.jpg");
 
 	vistaBarra = new VistaBarraEstado();
 	vistaTxtPuertoServidor = new VistaCuadroTexto();
