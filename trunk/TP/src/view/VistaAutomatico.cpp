@@ -1,4 +1,6 @@
 #include "VistaAutomatico.h"
+#include <iostream>
+using namespace std;
 
 /*VistaAutomatico::VistaAutomatico(Observable* automatic, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
@@ -20,9 +22,9 @@
 VistaAutomatico::VistaAutomatico(Observable* automatic, Animacion* inmovil, vector<Animacion*>* anim, vector<int>* period) {
 	periodos = period;
 	inmovil->transparencia(255,0,255);
-	animacionActual = inmovil;
+	animacionActual = anim->at(0);
 	animacionQuieto = inmovil;
-	quieto = true;
+	quieto = false;
 	actual = 0;
 
 	vector<Animacion*>::iterator iter;
@@ -33,9 +35,9 @@ VistaAutomatico::VistaAutomatico(Observable* automatic, Animacion* inmovil, vect
 
 	terminoAhora = false;
 	timer = new Timer();
-	timer->comenzar();
+
 	posicionDibujar = automatic->obtenerPosicion();
-//	actualizar(automatic);
+	//	actualizar(automatic);
 }
 
 
@@ -72,30 +74,27 @@ VistaAutomatico::~VistaAutomatico() {
 void VistaAutomatico::actualizar(Observable* observable) {
 	posicionDibujar = observable->obtenerPosicion();
 
-	//Si la animacion actual todavia no termino, entonces tengo que seguir
-	//con esta. No cambio nada.
-	if (!animacionActual->termino() && !quieto) return;
-
-	//si Recien termino, tengo que reiniciar el timer
-	if (terminoAhora){
-		terminoAhora = false;
-		quieto = true;
-		animacionActual->detener();
-		animacionActual = animacionQuieto;
-		timer->comenzar();
+	if (quieto){
+		if (timer->obtenerTiempo() >= (periodos->at(actual) * 1000)){
+			printf("%d",actual);
+			cambiarAnimacion();
+			timer->detener();
+			printf(" %d",actual);
+		}
+	}else{
+		if (!animacionActual->termino()) return;
+		else{
+			quieto = true;
+			animacionActual->detener();
+			animacionActual = animacionQuieto;
+			timer->comenzar();
+		}
 	}
-
-	//Si el timer terminó de contar, tengo que cambiar la animacion
-
-	if (timer->obtenerTiempo() >= (periodos->at(actual) * 1000)){
-		cambiarAnimacion();
-		timer->detener();
-	}
-
 }
 
 void VistaAutomatico::cambiarAnimacion(){
 	actual++;
+
 	if (actual == periodos->size()) actual = 0;
 
 	animacionActual = animaciones->at(actual);
