@@ -85,7 +85,14 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 	}
 
 	if ((seleccionadoActual < topeInferior) && (seleccionadoActual >= topeSuperior)) return;
-	mensajeAMostrar->clear();
+
+	unsigned int largo = mensajeAMostrar->size();
+	for (unsigned int i = 0; i < largo; i++){
+			SDL_Surface* tex = mensajeAMostrar->at(mensajeAMostrar->size()-1);
+			mensajeAMostrar->pop_back();
+			delete (tex);
+	}
+
 	if (lista->cantidad() == 0){
 		topeSuperior = topeInferior = 0;
 		return;
