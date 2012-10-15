@@ -18,10 +18,11 @@ ConfiguracionPantalla::ConfiguracionPantalla(){
 
 }
 
-SDL_Surface* ConfiguracionPantalla::CrearPantalla(){
+Ventana* ConfiguracionPantalla::CrearPantalla(){
 
+	Ventana* ventana = new Ventana(ancho,alto);
 
-	return SDL_SetVideoMode(ancho,alto, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	return ventana;
 
 }
 
