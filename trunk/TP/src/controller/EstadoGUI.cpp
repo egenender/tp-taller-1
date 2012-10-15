@@ -52,10 +52,10 @@ void EstadoGUI::crearScroll(){
 
 void EstadoGUI::crearBtns(){
 
-	btnsolapacliente1 = new Boton(100, 100, 85, 30, new ManejadorSolapa(solapaServidor, solapaCliente1));
-	btnsolapaservidor = new Boton(200, 100, 85, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
+	btnsolapacliente1 = new Boton(25, 30, 206, 30, new ManejadorSolapa(solapaServidor, solapaCliente1));
+	btnsolapaservidor = new Boton(235, 30, 206, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
-	btnsolapacliente2 = new Boton(100,100,85,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
+	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
 	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
@@ -80,7 +80,7 @@ void EstadoGUI::crearTxts(){
 }
 
 void EstadoGUI::crearBarra(){
-	barra = new BarraEstado(0,500,800,50);
+	barra = new BarraEstado(15,490,611,30);
 	barra->setearMensaje("Iddle");
 }
 
@@ -93,12 +93,15 @@ void EstadoGUI::crearLabels(){
 	lblPuertoCliente = new Label(20,300,80,30);
 	lblPuertoCliente->setearMensaje("Puerto:");
 
-	lblnombrePersonaje = new Label(80, 380, 200, 30);
+	lblnombrePersonaje = new Label(80, 370, 200, 30);
 	lblnombrePersonaje->setearMensaje("Aca deberia ir el nombre");
-	lblvelocidad= new Label(80, 420, 200, 30);
+	lblvelocidad= new Label(80, 410, 200, 30);
 	lblvelocidad->setearMensaje("Aca deberia ir la velocidad");
-	lblsalto = new Label(80, 460, 200, 30);
+	lblsalto = new Label(80, 450, 200, 30);
 	lblsalto->setearMensaje("Aca deberia ir el salto");
+
+	imgCliente = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Cliente", 230, 40, 206, 50);
+	imgServidor = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Servidor", 25,40, 206, 50);
 }
 
 void EstadoGUI::crearSolapaServidor(){
@@ -106,6 +109,7 @@ void EstadoGUI::crearSolapaServidor(){
 	lista_insertar_ultimo(solapaServidor, btncrear);
 	lista_insertar_ultimo(solapaServidor, btnsolapaservidor);
 	lista_insertar_ultimo(solapaServidor, lblPuertoServidor);
+	lista_insertar_ultimo(solapaServidor, imgServidor);
 }
 
 void EstadoGUI::crearSolapaCliente(){
@@ -115,6 +119,7 @@ void EstadoGUI::crearSolapaCliente(){
 	lista_insertar_ultimo(solapaCliente1, btnsolapacliente1);
 	lista_insertar_ultimo(solapaCliente1, lblPuertoCliente);
 	lista_insertar_ultimo(solapaCliente1, lblIP);
+	lista_insertar_ultimo(solapaCliente1, imgCliente);
 	lista_insertar_ultimo(solapaCliente2, btnjugar);
 	lista_insertar_ultimo(solapaCliente2, btnsolapacliente2);
 	lista_insertar_ultimo(solapaCliente2, lblnombrePersonaje);
@@ -123,6 +128,7 @@ void EstadoGUI::crearSolapaCliente(){
 	lista_insertar_ultimo(solapaCliente2, scroll);
 	lista_insertar_ultimo(solapaCliente2, btnscrollarriba);
 	lista_insertar_ultimo(solapaCliente2, btnscrollabajo);
+	lista_insertar_ultimo(solapaCliente2, imgCliente);
 	txtIP->hacerInvisible();
 	txtPuertoCliente->hacerInvisible();
 	btnconectar->hacerInvisible();
@@ -137,6 +143,7 @@ void EstadoGUI::crearSolapaCliente(){
 	scroll->hacerInvisible();
 	btnscrollarriba->hacerInvisible();
 	btnscrollabajo->hacerInvisible();
+	imgCliente->hacerInvisible();
 }
 
 void EstadoGUI::crearVistas(){
@@ -158,9 +165,9 @@ void EstadoGUI::crearVistas(){
 				"src/gui/resources/botonIniciarClickeado.png");
 
 	vistaarriba = new VistaBoton("src/gui/resources/flechaArriba.jpg",
-			"src/gui/resources/flechaArriba.jpg");
+			"src/gui/resources/flechaArribaClic.jpg");
 	vistaabajo = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
-				"src/gui/resources/flechaAbajo.jpg");
+				"src/gui/resources/flechaAbajoClic.jpg");
 
 	vistaBarra = new VistaBarraEstado();
 	vistaTxtPuertoServidor = new VistaCuadroTexto();
@@ -196,6 +203,9 @@ void EstadoGUI::crearVistas(){
 	lblnombrePersonaje->agregarObservador(vistalblnombre);
 	lblvelocidad->agregarObservador(vistalblvelocidad);
 	lblsalto->agregarObservador(vistalblsalto);
+
+	fondoPestania = new Superficie("src/gui/resources/fondoPestanias.bmp");
+	fondoPestania->transparencia(255,0,255);
 }
 
 
@@ -217,7 +227,7 @@ void EstadoGUI::actualizar(float delta){
 	lblPuertoCliente->actualizar();
 	lblPuertoServidor->actualizar();
 	lblIP->actualizar();
-	lblnombrePersonaje->setearMensaje(scroll->obtenerSeleccionado());
+	lblnombrePersonaje->setearMensaje("Nombre: "+scroll->obtenerSeleccionado());
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
@@ -236,6 +246,9 @@ void EstadoGUI::actualizar(float delta){
 }
 
 void EstadoGUI::dibujar(SDL_Surface* display) {
+	fondoPestania->dibujar(display,10,40);
+	imgCliente->dibujar(display);
+	imgServidor->dibujar(display);
 	vistaBtncrear->dibujar(display);
 	vistaBtnsolapacliente1->dibujar(display);
 	vistaBtnsolapacliente2->dibujar(display);
@@ -255,6 +268,8 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistaScroll->dibujar(display);
 	vistaarriba->dibujar(display);
 	vistaabajo->dibujar(display);
+
+
 }
 
 void EstadoGUI::manejarEvento(SDL_Event* evento) {
@@ -438,5 +453,13 @@ void EstadoGUI::terminar() {
 		delete (vistaabajo);
 		vistaabajo = NULL;
 	}
+	if (imgServidor){
+		delete (imgServidor);
+		imgServidor = NULL;
+	}
+	if (imgCliente){
+			delete (imgCliente);
+			imgCliente = NULL;
+		}
 }
 
