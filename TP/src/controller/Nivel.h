@@ -2,6 +2,7 @@
 #define NIVEL_H_
 #include "Evento.h"
 #include "Estado.h"
+#include "ManejadorEstados.h"
 #include "../model/lista.h"
 #include "../view/VistaCuerpo.h"
 #include "../model/Manual.h"
