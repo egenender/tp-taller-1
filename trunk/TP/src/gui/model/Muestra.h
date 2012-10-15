@@ -3,7 +3,7 @@
 #include "ObjetoGUI.h"
 #include "../../view/VistaProtagonista.h"
 
-class Muestra : ObjetoGUI{
+class Muestra :public ObjetoGUI{
 private:
 	vector<VistaProtagonista*>* vectorcito;
 	unsigned int seleccion;
