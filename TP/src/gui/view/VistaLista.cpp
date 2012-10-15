@@ -74,7 +74,7 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 	primeraVez = false;
 	if (mensajeAMostrar->size() == 0){
 		for (unsigned int i = 0; i < mostrables && i < lista->cantidad(); i++){
-			 mensajeAMostrar->push_back(TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), lista->obtenerElemento(i).c_str(), Fuente::obtenerInstancia()->obtenerColor()));
+			mensajeAMostrar->push_back(TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), lista->obtenerElemento(i).c_str(), Fuente::obtenerInstancia()->obtenerColor()));
 		}
 		topeSuperior = 0;
 		if (mostrables <= lista->cantidad())
@@ -85,6 +85,11 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 	}
 
 	if ((seleccionadoActual < topeInferior) && (seleccionadoActual >= topeSuperior)) return;
+	mensajeAMostrar->clear();
+	if (lista->cantidad() == 0){
+		topeSuperior = topeInferior = 0;
+		return;
+	}
 
 	if (seleccionadoActual >= topeInferior){
 		//topeSuperior = topeSuperior + seleccionadoActual - topeInferior + 1;
@@ -97,7 +102,7 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 		topeSuperior = topeSuperior - 1;
 		topeInferior = topeInferior - 1;
 	}
-	mensajeAMostrar->clear();
+
 	for (unsigned int i = topeSuperior; i<topeInferior; i++){
 		mensajeAMostrar->push_back( TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), lista->obtenerElemento(i).c_str(), Fuente::obtenerInstancia()->obtenerColor()));
 	}

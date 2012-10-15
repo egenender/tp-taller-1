@@ -24,7 +24,7 @@ void ListaScrolleable::moverHaciaArriba(){
 
 }
 void ListaScrolleable::moverHaciaAbajo(){
-	if (seleccionado < vectorcito->size()-1){
+	if (seleccionado +1 < vectorcito->size()){
 		seleccionado++;
 		huboCambios();
 	}
@@ -51,7 +51,10 @@ void ListaScrolleable::eliminarElemento(unsigned int eliminar){
 }
 
 string ListaScrolleable::obtenerSeleccionado(){
-	return vectorcito->at(seleccionado);
+	if (vectorcito->size() > 0)
+		return vectorcito->at(seleccionado);
+	else
+		return " ";
 }
 unsigned int ListaScrolleable::indiceSeleccionado(){
 	return seleccionado;
