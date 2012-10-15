@@ -58,12 +58,12 @@ Ventana::Ventana(int ancho, int alto) {
 	inicializar();
 	if (ancho > 0 && alto > 0) {
 		screen = SDL_SetVideoMode(ancho, alto, 32,
-				SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+				SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_DOUBLEBUF);
 		this->ancho = anchoOriginal = ancho;
 		this->alto = altoOriginal = alto;
 	} else {
 		screen = SDL_SetVideoMode(ANCHO_ESTANDARD, ALTO_ESTANDARD, 32,
-				SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+				SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_DOUBLEBUF);
 		this->ancho = anchoOriginal = ANCHO_ESTANDARD;
 		this->alto = altoOriginal = ALTO_ESTANDARD;
 	}
@@ -103,7 +103,7 @@ void Ventana::redimencionar(int ancho, int alto) {
 
 	if (modoVentana && ventanaOK) {
 		if (ancho > 0 && alto > 0) {
-			screen = SDL_SetVideoMode(ancho, alto, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+			screen = SDL_SetVideoMode(ancho, alto, 32, SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_DOUBLEBUF);
 
 			if (screen == NULL) {
 				ventanaOK = false;
@@ -121,7 +121,7 @@ void Ventana::pantallaCompleta() {
 	if (modoVentana) {
 		//Set the screen to fullscreen
 		screen = SDL_SetVideoMode(ancho, alto, 32,
-				SDL_HWSURFACE | SDL_RESIZABLE | SDL_FULLSCREEN | SDL_DOUBLEBUF);
+				SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_FULLSCREEN | SDL_DOUBLEBUF);
 		//If there's an error
 		if (screen == NULL) {
 			ventanaOK = false;
@@ -134,7 +134,7 @@ void Ventana::pantallaCompleta() {
 	else if (!modoVentana) {
 		//Window the screen
 		screen = SDL_SetVideoMode(ancho, alto, 32,
-				SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+				SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_DOUBLEBUF);
 		//If there's an error
 		if (screen == NULL) {
 			ventanaOK = false;
@@ -150,7 +150,7 @@ void Ventana::manejarEvento(SDL_Event* evento) {
 	if (!ventanaOK)
 		return;
 	//If the window resized
-	if (evento->type == SDL_VIDEORESIZE) {
+/*	if (evento->type == SDL_VIDEORESIZE) {
 		//Resize the screen
 		screen = SDL_SetVideoMode(evento->resize.w, evento->resize.h, 32,	SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
 		//If there's an error
@@ -172,7 +172,7 @@ void Ventana::manejarEvento(SDL_Event* evento) {
 	}
 
 	//If the window focus changed
-/*	else if( evento->type == SDL_ACTIVEEVENT ) {
+	else if( evento->type == SDL_ACTIVEEVENT ) {
 		//If the window was iconified or restored
 		if( evento->active.state & SDL_APPACTIVE ) {
 			//If the application is no longer active
