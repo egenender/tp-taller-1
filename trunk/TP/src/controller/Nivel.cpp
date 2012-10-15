@@ -17,13 +17,18 @@ Nivel::~Nivel() {
 
 }
 
-void Nivel::manejarEvento(SDL_Event* evento){
+void Nivel::manejarEvento(SDL_Event* evento) {
+	if ((evento->type == SDL_KEYDOWN)
+			&& (evento->key.keysym.sym == SDLK_ESCAPE)) {
+		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+	}
+
 	controlador->manejarEvento(evento, principal);
 }
 
 void Nivel::iniciar() {
 
-	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
 	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
 	// Ventana::obtenerInstancia()->redimencionar(gestor->obtenerAnchoPantalla(), gestor->obtenerAltoPantalla());
@@ -34,9 +39,10 @@ void Nivel::iniciar() {
 
 	vistas = gestor->ObtenerVistas();
 
-	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());
+	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),
+			gestor->ObtenerAltoNivel());
 
-	camara = new Camara(0,0);
+	camara = new Camara(0, 0);
 	algo->agregarObservador(camara);
 
 	indicarManual(algo);
@@ -57,19 +63,18 @@ void Nivel::terminar() {
 		delete (vista);
 	}
 
-	delete(actualizables);
-	delete(vistas);
-	delete(camara);
+	delete (actualizables);
+	delete (vistas);
+	delete (camara);
 	delete (controlador);
 }
 
-
-void Nivel::actualizar(float delta){
+void Nivel::actualizar(float delta) {
 
 	// Actualizamos cada cuerpo:
-	for(unsigned int i=0;i<actualizables->size();i++){
-			Actualizable* cuerpito = actualizables->at(i);
-			cuerpito->actualizar(delta);
+	for (unsigned int i = 0; i < actualizables->size(); i++) {
+		Actualizable* cuerpito = actualizables->at(i);
+		cuerpito->actualizar(delta);
 	}
 
 	// Verificar aca colisiones:
@@ -79,28 +84,27 @@ void Nivel::actualizar(float delta){
 	// Aca eliminamos los cuerpos y vistas que tegan que ser eliminados:
 }
 
-void Nivel::dibujar(SDL_Surface* display){
+void Nivel::dibujar(SDL_Surface* display) {
 	// Dibujamos el fondo:
 	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
 
-
 	// Dibujamos las vistas:
-	for(unsigned int i=0;i<vistas->size();i++){
-			VistaCuerpo* vista = vistas->at(i);
-			vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
+	for (unsigned int i = 0; i < vistas->size(); i++) {
+		VistaCuerpo* vista = vistas->at(i);
+		vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
 	}
 	// Ponele que se reproducen los sonidos (?)
 }
 
-void Nivel::agregarCuerpo(Cuerpo* c){
+void Nivel::agregarCuerpo(Cuerpo* c) {
 	actualizables->push_back(c);
 }
 
-void Nivel::agregarVista(VistaCuerpo* v){
- 	 vistas->push_back(v);
+void Nivel::agregarVista(VistaCuerpo* v) {
+	vistas->push_back(v);
 }
 
-void Nivel::indicarManual(Manual* m){
+void Nivel::indicarManual(Manual* m) {
 	principal = m;
 	//Nivel::agregarCuerpo(m);
 }
