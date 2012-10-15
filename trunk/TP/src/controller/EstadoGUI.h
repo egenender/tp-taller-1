@@ -12,7 +12,10 @@
 #include "../gui/model/CuadroTexto.h"
 #include "../gui/model/ManejadorEjemplo.h"
 #include "../gui/model/ManejadorSolapa.h"
+#include "../gui/model/ManejadorScroll.h"
 #include "../model/lista.h"
+#include "../gui/model/ListaScrolleable.h"
+#include "../gui/view/VistaLista.h"
 #include "Evento.h"
 
 class EstadoGUI : public Estado{
@@ -28,10 +31,16 @@ private:
 	//TODO: faltan las imagenes y las listas
 	Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto;
 
+	ListaScrolleable* scroll;
+	Boton *btnscrollarriba, *btnscrollabajo;
+	VistaBoton *vistaarriba, *vistaabajo;
+	VistaLista *vistaScroll;
+
 	VistaBoton *vistaBtncrear, *vistaBtnsolapacliente1, *vistaBtnsolapacliente2, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnjugar;
 	VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;
 	VistaBarraEstado *vistaBarra;
 	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
+
 private:
         EstadoGUI();
         void crearBtns();
@@ -41,6 +50,7 @@ private:
         void crearSolapaCliente();
         void crearVistas();
         void crearLabels();
+        void crearScroll();
 public:
         virtual ~EstadoGUI();
         void manejarEvento(SDL_Event* evento);

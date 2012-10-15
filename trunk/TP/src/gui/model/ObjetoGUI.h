@@ -14,10 +14,8 @@
 #include <string>
 using namespace std;
 
-enum {
-	ACTIVO = 0,
-	INACTIVO
-};
+#define ACTIVO 0
+#define INACTIVO 1
 
 class ObjetoGUI : public Observable {
 	protected:
