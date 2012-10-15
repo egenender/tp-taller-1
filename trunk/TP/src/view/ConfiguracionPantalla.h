@@ -6,9 +6,7 @@
  */
 #ifndef CONFIGPANTALLA_H
 #define CONFIGPANTALLA_H
-#include "Superficie.h"
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include "../gui/model/Ventana.h"
 
 class ConfiguracionPantalla{
 
@@ -19,7 +17,7 @@ class ConfiguracionPantalla{
 
 	public:
 		ConfiguracionPantalla();
-		SDL_Surface* CrearPantalla();
+		Ventana* CrearPantalla();
 
 };
 

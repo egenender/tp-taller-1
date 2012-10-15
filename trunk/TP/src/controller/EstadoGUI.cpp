@@ -23,6 +23,11 @@ EstadoGUI* EstadoGUI::obtenerInstancia() {
 }
 
 void EstadoGUI::iniciar() {
+
+	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
+	// Ventana::obtenerInstancia()->volverALasDimensionesDeCreacion();
+
+
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();

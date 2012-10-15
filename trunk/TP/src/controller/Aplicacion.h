@@ -1,18 +1,14 @@
 #ifndef APLICACION_H
 #define APLICACION_H
 
-#include "SDL/SDL.h"
+#include "../gui/model/Ventana.h"
 #include "../controller/Evento.h"
-
-#define ANCHO_VENTANA 640
-#define ALTO_VENTANA 480
-#define MARGEN_SCROLL 160
 
 class Aplicacion: public Evento {
 	private:
 		bool FPS_ON; // Si mostramos los FPS o no
 		bool corriendo; // Si esta corriendo
-		SDL_Surface* display; // Aca se dibujan las cosas
+		Ventana* ventana;
 
 	// Constructor:
 	public:

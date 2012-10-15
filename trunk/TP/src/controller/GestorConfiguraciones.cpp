@@ -875,7 +875,7 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 	return config;
 }
 
-SDL_Surface* GestorConfiguraciones::CrearPantalla(){
+Ventana* GestorConfiguraciones::CrearPantalla(){
 
 
 	return configPantalla->CrearPantalla();

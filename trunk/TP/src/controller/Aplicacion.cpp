@@ -11,7 +11,7 @@ using namespace std;
 /** Constructor **/
 Aplicacion::Aplicacion() {
 	FPS_ON = true;
-	display = NULL;
+	ventana = NULL;
 	corriendo = true;
 	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Aplicacion creada correctamente.");
 }
@@ -31,8 +31,11 @@ bool Aplicacion::iniciar() {
     // Creamos la ventana:
     //if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
 
-    if((display=gestor->CrearPantalla())==NULL)
+    if((ventana=gestor->CrearPantalla())==NULL)
     	return false;
+
+    /*if ((ventana = new Ventana()) == NULL)
+    	return false;*/
 
     Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Ventana creada correctamente.");
 
@@ -50,6 +53,7 @@ bool Aplicacion::iniciar() {
 
 /** Manejar eventos (teclado, mouse, etc) **/
 void Aplicacion::manejarEvento(SDL_Event* evento) {
+	ventana->manejarEvento(evento);
 	ManejadorEstados::manejarEvento(evento);
 }
 
@@ -62,20 +66,20 @@ void Aplicacion::actualizar(float delta) {
 void Aplicacion::dibujar() {
 
 	// Primero limpiamos la pantalla:
-	SDL_FillRect(display, NULL, SDL_MapRGB(display->format, 0, 0, 0));
+	ventana->limpiarPantalla();
 
     // Mostramos los FPS:
     if (FPS_ON) {
     	stringstream out;
     	out << "FPS: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
-    	SDL_WM_SetCaption(out.str().c_str(), NULL);
+    	ventana->setearTitulo(out.str());
     }
 
 	// Ahora dibujamos las cosas:
-    ManejadorEstados::dibujar(display);
+    ManejadorEstados::dibujar(ventana->obtenerSuperficieDibujable()->obtenerSurface());
 
     // Y actualizamos:
-    SDL_Flip(display);
+    ventana->dibujar();
 }
 
 /** Liberar toda la memoria **/
@@ -84,7 +88,11 @@ void Aplicacion::limpiar() {
 
     Fuente::obtenerInstancia()->terminar();
 
-    SDL_FreeSurface(display);
+    if(ventana) {
+    	delete(ventana);
+    	ventana = NULL;
+    }
+
     SDL_Quit();
 }
 

@@ -25,14 +25,10 @@ void Nivel::iniciar() {
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
-	//Manual* algo = new Manual("algo", new Area(65,73,new Posicion(0,0)));
-	//VistaCuerpo* vistaAlgo = new VistaProtagonista(algo);
+	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
+	// Ventana::obtenerInstancia()->redimencionar(gestor->obtenerAnchoPantalla(), gestor->obtenerAltoPantalla());
 
 	Manual* algo = gestor->ObtenerManual();
-//	VistaCuerpo* vistaAlgo = gestor->ObtenerVistaManual();
-
-	// Se inicializan los cuerpos y se agregan a las listas
-	// Idem con las vistas
 
 	actualizables = gestor->ObtenerActualizables();
 
@@ -45,7 +41,6 @@ void Nivel::iniciar() {
 
 	indicarManual(algo);
 	controlador = new Controlador();
-	// Se pregunta a alguien quien es el Protagonista!
 }
 
 void Nivel::terminar() {
