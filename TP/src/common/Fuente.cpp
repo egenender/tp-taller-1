@@ -5,9 +5,9 @@ Fuente Fuente::instancia;
 Fuente::Fuente() {
 	font = NULL;
 	size = 0;
-	color.r = 255;
+	color.r = 0;
 	color.g = 0;
-	color.b = 255;
+	color.b = 0;
 }
 
 bool Fuente::inicializar() {

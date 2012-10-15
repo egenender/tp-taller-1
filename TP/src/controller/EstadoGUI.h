@@ -16,6 +16,8 @@
 #include "../model/lista.h"
 #include "../gui/model/ListaScrolleable.h"
 #include "../gui/view/VistaLista.h"
+#include "../view/Superficie.h"
+#include "../gui/model/ImagenGUI.h"
 #include "Evento.h"
 
 class EstadoGUI : public Estado{
@@ -36,11 +38,14 @@ private:
 	VistaBoton *vistaarriba, *vistaabajo;
 	VistaLista *vistaScroll;
 
+	ImagenGUI* imgCliente, *imgServidor;
+
 	VistaBoton *vistaBtncrear, *vistaBtnsolapacliente1, *vistaBtnsolapacliente2, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnjugar;
 	VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;
 	VistaBarraEstado *vistaBarra;
 	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
 
+	Superficie* fondoPestania;
 private:
         EstadoGUI();
         void crearBtns();
