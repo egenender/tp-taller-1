@@ -12,6 +12,7 @@ EstadoGUI::EstadoGUI() {
 	barra = NULL;
 	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
 	scroll = NULL;
+	animaciones = NULL;
 }
 
 EstadoGUI::~EstadoGUI() {
@@ -48,6 +49,9 @@ void EstadoGUI::crearScroll(){
 	scroll->agregarElemento("Mono Goku");
 	scroll->agregarElemento("Gengar");
 	scroll->agregarElemento("Primeape");
+
+	animaciones = new Muestra(400, 300, 50,50);
+	animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
 void EstadoGUI::crearBtns(){
@@ -59,8 +63,8 @@ void EstadoGUI::crearBtns(){
 	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
-	btnscrollarriba = new Boton(300, 200, 30,30, new ManejadorScroll(scroll,ARRIBA));
-	btnscrollabajo = new Boton(300, 320, 30,30, new ManejadorScroll(scroll,ABAJO));
+	btnscrollarriba = new Boton(300, 200, 30,30, new ManejadorScroll(scroll,ARRIBA,animaciones));
+	btnscrollabajo = new Boton(300, 320, 30,30, new ManejadorScroll(scroll,ABAJO,animaciones));
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -129,6 +133,7 @@ void EstadoGUI::crearSolapaCliente(){
 	lista_insertar_ultimo(solapaCliente2, btnscrollarriba);
 	lista_insertar_ultimo(solapaCliente2, btnscrollabajo);
 	lista_insertar_ultimo(solapaCliente2, imgCliente);
+	lista_insertar_ultimo(solapaCliente2, animaciones);
 	txtIP->hacerInvisible();
 	txtPuertoCliente->hacerInvisible();
 	btnconectar->hacerInvisible();
@@ -144,6 +149,7 @@ void EstadoGUI::crearSolapaCliente(){
 	btnscrollarriba->hacerInvisible();
 	btnscrollabajo->hacerInvisible();
 	imgCliente->hacerInvisible();
+	animaciones->hacerInvisible();
 }
 
 void EstadoGUI::crearVistas(){
@@ -206,6 +212,9 @@ void EstadoGUI::crearVistas(){
 
 	fondoPestania = new Superficie("src/gui/resources/fondoPestanias.bmp");
 	fondoPestania->transparencia(255,0,255);
+
+	vistaAnimaciones = new VistaMuestra();
+	animaciones->agregarObservador(vistaAnimaciones);
 }
 
 
@@ -231,7 +240,7 @@ void EstadoGUI::actualizar(float delta){
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
-
+	animaciones->actualizar();
 
 	// FIXME: ESTO NO SE SI SE DEBERIA HACER ACA!
 	if(btnconectar->esClickeado()) {
@@ -268,7 +277,7 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistaScroll->dibujar(display);
 	vistaarriba->dibujar(display);
 	vistaabajo->dibujar(display);
-
+	vistaAnimaciones->dibujar(display);
 
 }
 
@@ -461,5 +470,13 @@ void EstadoGUI::terminar() {
 			delete (imgCliente);
 			imgCliente = NULL;
 		}
+	if (animaciones){
+		delete (animaciones);
+		animaciones = NULL;
+	}
+	if (vistaAnimaciones){
+		delete (vistaAnimaciones);
+		vistaAnimaciones = NULL;
+	}
 }
 
