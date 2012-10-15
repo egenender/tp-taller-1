@@ -53,7 +53,10 @@ bool VistaLista::dibujar(SDL_Surface* display){
 
 	SDL_Rect destino;
 	for (unsigned int i = 0; i < mensajeAMostrar->size(); i++){
-		int desplazamientoY = (alto/mensajeAMostrar->size() - mensajeAMostrar->at(i)->h) / 2;
+		unsigned int divisor;
+		if (mostrables > mensajeAMostrar->size()) divisor = mostrables;
+		else 	divisor = mensajeAMostrar->size();
+		int desplazamientoY = (alto/divisor - mensajeAMostrar->at(i)->h) / 2;
 		int desplazamientoX = (ancho - mensajeAMostrar->at(i)->w) / 2;
 		destino.x = x+desplazamientoX;
 		destino.y = y + desplazamientoY+ i * (alto/mostrables);
