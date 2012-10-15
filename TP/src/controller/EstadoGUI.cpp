@@ -203,6 +203,7 @@ void EstadoGUI::actualizar(float delta){
 	btnjugar->actualizar();
 	btnscrollarriba->actualizar();
 	btnscrollabajo->actualizar();
+	scroll->actualizar();
 
 	barra->actualizar();
 	txtPuertoServidor->actualizar();
@@ -211,10 +212,11 @@ void EstadoGUI::actualizar(float delta){
 	lblPuertoCliente->actualizar();
 	lblPuertoServidor->actualizar();
 	lblIP->actualizar();
+	lblnombrePersonaje->setearMensaje(scroll->obtenerSeleccionado());
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
-	scroll->actualizar();
+
 
 	// FIXME: ESTO NO SE SI SE DEBERIA HACER ACA!
 	if(btnconectar->esClickeado()) {
