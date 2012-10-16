@@ -50,21 +50,29 @@ void Nivel::iniciar() {
 }
 
 void Nivel::terminar() {
-
 	while (!actualizables->empty()){
 		Actualizable* cuerpito = actualizables->back();
 		actualizables->pop_back();
-		delete(cuerpito);
+		if (cuerpito != NULL) {
+			delete(cuerpito);
+			cuerpito = NULL;
+		}
 	}
 
-	while (!vistas->empty()){
+	actualizables->clear();
+	actualizables = NULL;
+
+	/*while (!vistas->empty()){
 		VistaCuerpo* vista = vistas->back();
 		vistas->pop_back();
-		delete (vista);
-	}
+		if (vista != NULL) {
+			delete (vista);
+			vista = NULL;
+		}
+	}*/
+	vistas->clear();
+	vistas = NULL;
 
-	delete (actualizables);
-	delete (vistas);
 	delete (camara);
 	delete (controlador);
 }
