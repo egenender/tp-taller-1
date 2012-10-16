@@ -4,6 +4,14 @@
 #include "../log/Log.h"
 #include "../view/FPS.h"
 #include "../common/Fuente.h"
+#include "Cliente.h"
+#include "Server.h"
+#include "LectorArchivo.h"
+#include "EscrituraArchivo.h"
+
+#include "../model/Manual.h"
+#include "../view/Superficie.h"
+#include "../view/VistaProtagonista.h"
 
 #include <sstream>
 using namespace std;
@@ -136,7 +144,129 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
 
+//	Server servidor;
+//
+//	servidor.escribir(sizeof(int));
+//	servidor.escuchar(sizeof(int));
+//
+//	SDL_Delay(1000);
+//
+//	Cliente client;
+//
+//	client.escuchar(sizeof(int));
+
+/*	//Superficie* prueba = new Superficie ( "resources/cruzCuadroError4.png" );
+	SDL_Surface* sdlPrueba = NULL;
+	sdlPrueba = IMG_Load( "src/resources/cruzCuadroError4.png" );
+
+	size_t lala = sizeof(*sdlPrueba);
+
+	SDL_Surface* lolo = (SDL_Surface*) malloc (lala);
+	*lolo = *sdlPrueba;
+
+	cout << sdlPrueba << endl;*/
+
+
+//	char* ruta = (char*) malloc (90*sizeof(char));
+//	sprintf(ruta,"%s %s","mkdir","src/resources/Temp");
+//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+//	system(ruta);
+//	free(ruta);
+
+
+	Server servidor;
+
+	servidor.escuchar(sizeof(int));
+
+	Cliente client;
+
+	int* elLargo = (int*) client.escuchar_al_server(sizeof(int));
+
+	int j = 0;
+	char *nombre = (char*) malloc((*elLargo)*sizeof(char));
+	while(j < *elLargo){
+		void* algo = client.escuchar_al_server(sizeof(int));
+		if (algo != NULL){
+			nombre[j] = * (char*) algo;
+			j++;
+		}
+	}
+
+	cout << "lala:  " << nombre << endl;
+	cout << "lolo:  " << *elLargo << endl;
+
+	free(elLargo);
+	EscrituraArchivo* e = new EscrituraArchivo(nombre);
+	SDL_Delay(1000);
+
+	elLargo = (int*) client.escuchar_al_server(sizeof(int));
+
+	j = 0;
+	void* algo;
+	while(j<*elLargo){
+		algo = client.escuchar_al_server(sizeof(int));
+		if (algo != NULL){
+			e->EscribirUno(  *(int*) algo , *elLargo);
+			j++;
+			cout << j << endl;
+		}
+	}
+	//e->EscribirArchivo(  (int*) algo , *elLargo);
+
+	e->CerrarArchivo();
+
+
+	//	VistaProtagonista* lili =
+//	new VistaProtagonista(new Manual("r" , new Area (50,50,new Posicion(50,50))),
+//			new Animacion(new HojaSprites(sdlPrueba,50,50)) ,
+//								new Animacion(new HojaSprites(sdlPrueba,50,50)) );
+//
+//	lili->Observador();
+//
+//	int ent=9;
+//	int* entero = (int*) malloc (sizeof (int));
+//	*entero=ent;
+//
+//	servidor.encolar_cambio(entero);
+//	servidor.encolar_cambio(entero);
+//	servidor.encolar_cambio(entero);
+//	servidor.encolar_cambio(entero);
+//	servidor.encolar_cambio(entero);
+//	servidor.encolar_cambio(entero);
+//
+//	int i = 0;
+//	while (true){
+//		if (client.hay_cambios()){
+//			void* cambio=client.desencolar_cambio();
+//			cout<< "cambio:" << *(int *) cambio << endl;
+//			i++;
+//		}
+//		if (i== 6)
+//			break;
+//	}
+
+
+//	client.escuchar(sizeof(int));
+//
+//	while (true){
+//		if (  (client.hay_cambios() ) ){
+//			void* cambio=client.desencolar_cambio();
+//			cout << *(int*)cambio<< endl;
+//		}
+//	}
+//	client.detener_escribir();
+
+//	while(true){
+//		//	while(true){
+//
+//		if(servidor.hay_cambios()){
+//			void* cambio=servidor.desencolar_cambio();
+//			cout<<"cambio:"<<*(int *) cambio << endl;
+//		}
+//	}
+
 	//aplicacion.mostrarFPS(false);
+
 
 	return aplicacion.ejecutar();
 }
