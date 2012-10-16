@@ -104,6 +104,8 @@ class Server{
 
 		void escribir(size_t);
 
+		void escribir_a_cliente(int, void*, size_t);
+
 		// Esto deberia desencolar de las cosas que le mandan para escribir y mandarlo a todos los clientes
 		int escribir_cambio();
 

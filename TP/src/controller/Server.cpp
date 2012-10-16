@@ -7,6 +7,8 @@
 
 
 #include "Server.h"
+#include "LectorArchivo.h"
+#include "SDL/SDL.h"
 
 
 Server::Server(){
@@ -120,15 +122,40 @@ int Server::crear_socket (unsigned short int port) {
 	return sock;
 }
 
+void Server::escribir_a_cliente(int i, void* punt,size_t tam){
+
+	int nbytes;
+
+	nbytes = write (i, punt, tam);
+
+	if (nbytes < 0){
+
+		/* Read error.  */
+		perror ("read");
+		exit (EXIT_FAILURE);
+
+	} else if (nbytes == 0){
+		/* End-of-file.  */
+	}else {
+		/* Data read.  */
+
+		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
+		fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
+
+    }
+
+}
+
 void escribir_a_cliente(int i, void* punt,size_t tam){
 
 	int nbytes;
 
 	nbytes = write (i, punt, tam);
+
 	if (nbytes < 0){
 
 		/* Read error.  */
-		perror ("read");
+		perror ("write");
 		exit (EXIT_FAILURE);
 
 	} else if (nbytes == 0){
@@ -217,6 +244,42 @@ void* _escuchar(void* parametros){
 					fprintf (stderr, "Server: connect from host %s, port %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
 					FD_SET(status, act);
 
+					//char* ruta = (char*) malloc (90*sizeof(char));
+					string rutaA ="Temp/";
+					string rutaB ="src/resources/lala";
+					string ruta2 = rutaA + rutaB;
+					ruta2.size();
+
+					LectorArchivo* l = new LectorArchivo("src/resources/lala");
+					int cant;
+					int* todo = l->LeerArchivo(&cant);
+
+					//mando tamano de la ruta
+					int* entero = (int*) malloc (sizeof (int));
+					*entero= ruta2.size();
+					escribir_a_cliente(status, entero, ( sizeof(int) ) );
+
+					//mando toda la ruta
+					unsigned int j = 0;
+					int i = 0;
+					int* carac = (int*) malloc (sizeof (int));
+					for(j=0;j<  (ruta2.size())  ;j++){
+						*carac = ruta2[j];
+						escribir_a_cliente(status, carac, ( 1*sizeof(int) ) );
+					}
+
+					//mando tamano de archivo
+					*entero=cant;
+					escribir_a_cliente(status, entero, ( sizeof(int) ) );
+
+					//mando todo el archivo
+					for(i=0;i<cant;i++){
+						*entero = todo[i];
+						escribir_a_cliente(status, entero, ( 1*sizeof(int) ) );
+					}
+
+					l->CerrarArchivo();
+					free(entero);
 				} else {
 					/* Data arriving on an already-connected socket.  */
 					void* cambio = leer_de_cliente (i,tamanio);
@@ -263,9 +326,6 @@ void* _escribir(void* parametros){
 			for (i = 0; i < FD_SETSIZE; ++i){
 
 				if (FD_ISSET (i, act)){
-
-					printf("%d",i);
-
 					if (i!=sock){
 						escribir_a_cliente(i,cambio,tamanio);
 					}
