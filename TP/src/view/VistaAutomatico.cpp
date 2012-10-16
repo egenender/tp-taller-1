@@ -10,7 +10,7 @@ VistaAutomatico::VistaAutomatico(Observable* automatic, Animacion* inmovil, vect
 	quieto = false;
 	actual = 0;
 
-	vector<Animacion*>::iterator iter;
+	map<int, Animacion*>::iterator iter;
 	for (unsigned int i = 0; i < anim->size(); i++) {
 		anim->at(i)->transparencia(255,0,255);
 		animaciones->insert(pair<int, Animacion*>(i, anim->at(i)));
