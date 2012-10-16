@@ -56,7 +56,10 @@ Superficie::Superficie(string archivo) {
 }
 
 Superficie::~Superficie() {
-	SDL_FreeSurface(superficie);
+	if (superficie != NULL) {
+		SDL_FreeSurface(superficie);
+		superficie = NULL;
+	}
 }
 
 SDL_Surface* Superficie::cargar(string archivo) {

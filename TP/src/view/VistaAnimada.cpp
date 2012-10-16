@@ -10,7 +10,10 @@ VistaAnimada::~VistaAnimada() {
 		map<int, Animacion*>::iterator iter;
 		for (iter = animaciones->begin(); iter != animaciones->end(); ++iter) {
 			Animacion* anim = (*iter).second;
-			delete(anim);
+			if (anim != NULL) {
+				delete(anim);
+				anim = NULL;
+			}
 		}
 		animaciones->clear();
 		delete(animaciones);
