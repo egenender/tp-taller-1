@@ -1,29 +1,37 @@
 #include "ManejadorCrear.h"
 
-ManejadorCrear::ManejadorCrear(/*CuadroTexto* cuadro, VentanaTexto* ventana,*/BarraEstado* barraNueva) {
-	/*txtPuerto = cuadro;
-	txtPersonaje = ventana;
-	*/
+ManejadorCrear::ManejadorCrear(CuadroTexto* cuadro, ListaScrolleable* ventana,BarraEstado* barraNueva) {
+	txtPuerto = cuadro;
+	scrollNivel = ventana;
 	barra = barraNueva;
 }
 
 ManejadorCrear::~ManejadorCrear() {
-	//No debe destruir las cosas.
-	//De eso se encargan al destruir las solapas ya
+
 }
 
 void ManejadorCrear::manejarClic(){
-	/*TODO:
-	string puerto = txtPuerto->obtenerTexto();
-	bool ok = Server::ValidarPuerto(puerto);
-	if (!ok){
-		barra->setearMensaje("Numero de Puerto indebido");
-		return;
-	}
+	string puerto = txtPuerto->obtenerMensaje();
+	string nivel = scrollNivel->obtenerSeleccionado();
 
-	string NombrePersonaje = txtPersonaje->obtenerActual();
-	barra->setearMensaje("Cargando");
-	//TODO: y ahora tendria que darle el nombre al gestor de configuraciones
-	//Deshabilitar todas las cosas?
+	/*TODO:
+	 bool ok = Server::Crear(nivel, puerto);
+	 if (!ok){
+	 	 barra->setearMensaje("No se pudo crear el servidor");
+	 	 return;
+	 }
+	 string puntos = "";
+	 while (Server::estaCargando()){
+	 	 barra->seterMensaje("Cargando"+puntos);
+	 	 puntos += ".";
+	 	 if (strcmp(puntos.c_str, "....")
+	 	 	 puntos = "";
+	 }
+	 Paso al EstadoJuego??
 	 */
+
+	//Por ahora Dejo hecho esto:
+
+	barra->setearMensaje("Todavia No puedo conectar");
+	//scrollNivel->agregarElemento(puerto);
 }

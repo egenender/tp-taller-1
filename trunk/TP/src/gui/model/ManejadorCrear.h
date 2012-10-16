@@ -4,20 +4,20 @@
 #include "ManejadorBoton.h"
 #include "BarraEstado.h"
 #include <string>
-//TODO
-//#include "CuadroTexto.h"
-//#include "VentanaTexto.h"
+#include "CuadroTexto.h"
+#include "ListaScrolleable.h"
+
+//TODO:
+#include "../../controller/Server.h"
 
 class ManejadorCrear : public ManejadorBoton{
 private:
-	//TODO:
-	/*
-	 CuadroTexto* txtPuerto;
-	 VentanaTexto txtPersonaje;
-	 */
+	CuadroTexto* txtPuerto;
+	ListaScrolleable *scrollNivel;
+
 	BarraEstado* barra;
 public:
-	ManejadorCrear(/*CuadroTexto*, VentanaTexto*,*/ BarraEstado*);
+	ManejadorCrear(CuadroTexto*, ListaScrolleable*, BarraEstado*);
 	virtual ~ManejadorCrear();
 	void manejarClic();
 };

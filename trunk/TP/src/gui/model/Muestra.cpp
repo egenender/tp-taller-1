@@ -28,17 +28,17 @@ void Muestra::eliminarVista (unsigned int elim){
 }
 
 void Muestra::siguiente(){
-	//if (seleccion + 1  < vectorcito->size()){
+	if (seleccion + 1  < vectorcito->size()){
 		seleccion++;
 		huboCambios();
-	//}
+	}
 }
 
 void Muestra::anterior(){
-	//if (seleccion > 0){
+	if (seleccion > 0){
 		seleccion--;
 		huboCambios();
-	//}
+	}
 }
 
 VistaProtagonista* Muestra::obtenerActual(){
