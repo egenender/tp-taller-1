@@ -232,6 +232,7 @@ void EstadoGUI::crearVistas(){
 
 	fondoPestania = new Superficie("src/gui/resources/fondoPestanias.bmp");
 	fondoPestania->transparencia(255,0,255);
+	fondo = new Superficie("src/gui/resources/fondo.bmp");
 
 	vistaAnimaciones = new VistaMuestra();
 	animaciones->agregarObservador(vistaAnimaciones);
@@ -278,6 +279,7 @@ void EstadoGUI::actualizar(float delta){
 }
 
 void EstadoGUI::dibujar(SDL_Surface* display) {
+	fondo->dibujar(display,0,0);
 	fondoPestania->dibujar(display,10,40);
 	imgCliente->dibujar(display);
 	imgServidor->dibujar(display);
@@ -443,8 +445,8 @@ void EstadoGUI::terminar() {
 		lblsalto = NULL;
 	}
 	if (vistalblpuertocliente){
-			delete (vistalblpuertocliente);
-			vistalblpuertocliente = NULL;
+		delete (vistalblpuertocliente);
+		vistalblpuertocliente = NULL;
 	}
 	if (vistalblpuertoservidor){
 		delete (vistalblpuertoservidor);
@@ -530,7 +532,10 @@ void EstadoGUI::terminar() {
 		delete (vistaAnimaciones);
 		vistaAnimaciones = NULL;
 	}
-
+	if (fondo){
+		delete (fondo);
+		fondo = NULL;
+	}
 }
 
 
