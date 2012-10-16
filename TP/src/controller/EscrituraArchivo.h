@@ -20,6 +20,7 @@ public:
 	EscrituraArchivo(char* );
 	void AsignarArchivo(const char*);
 	void EscribirArchivo(int*, int);
+	void EscribirUno(int, int);
 	void CerrarArchivo();
 	virtual ~EscrituraArchivo();
 };

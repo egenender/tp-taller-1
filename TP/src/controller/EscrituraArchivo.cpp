@@ -36,6 +36,10 @@ void EscrituraArchivo::EscribirArchivo(int* dato, int cant){
 	}
 }
 
+void EscrituraArchivo::EscribirUno(int dato, int cant){
+	fprintf(archivo, "%c", dato );
+}
+
 void EscrituraArchivo::CerrarArchivo() {
 	if (archivo){
 		fclose(archivo);

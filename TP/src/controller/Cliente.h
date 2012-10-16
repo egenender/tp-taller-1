@@ -103,6 +103,8 @@ class Cliente {
 		// si no conecta al server, deberia intentar conectar hasta hacer un timeout
 		bool escribir_al_server (void*,size_t);
 
+		void* escuchar_al_server (size_t);
+
 		void* desencolar_cambio();
 
 		void encolar_cambio(void*);
