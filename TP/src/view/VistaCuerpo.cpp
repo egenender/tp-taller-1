@@ -8,8 +8,8 @@ VistaCuerpo::~VistaCuerpo() {
 
 	// TODO: HMMM... no la borraria cuerpo?
 
-	if (posicionDibujar != NULL) {
+	/*if (posicionDibujar != NULL) {
 		delete(posicionDibujar);
 		posicionDibujar = NULL;
-	}
+	}*/
 }

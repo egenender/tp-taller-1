@@ -26,9 +26,15 @@ VistaAutomatico::VistaAutomatico(Observable* automatic, Animacion* inmovil, vect
 
 
 VistaAutomatico::~VistaAutomatico() {
-	delete(timer);
-	delete (periodos);
-	delete (animacionQuieto);
+	if (timer) {
+		delete(timer);
+		timer = NULL;
+	}
+	//delete (periodos);
+/*	if (animacionQuieto) {
+		delete (animacionQuieto);
+		animacionQuieto = NULL;
+	}*/
 }
 
 
