@@ -246,11 +246,11 @@ void* _escuchar(void* parametros){
 
 					//char* ruta = (char*) malloc (90*sizeof(char));
 					string rutaA ="Temp/";
-					string rutaB ="src/resources/lala";
+					string rutaB ="src/resources/gengarQuieto.bmp";
 					string ruta2 = rutaA + rutaB;
 					ruta2.size();
 
-					LectorArchivo* l = new LectorArchivo("src/resources/lala");
+					LectorArchivo* l = new LectorArchivo("src/resources/gengarQuieto.bmp");
 					int cant;
 					int* todo = l->LeerArchivo(&cant);
 
@@ -279,7 +279,11 @@ void* _escuchar(void* parametros){
 					}
 
 					l->CerrarArchivo();
+					*entero = -1;
+					escribir_a_cliente(status, entero, ( sizeof(int) ) );
 					free(entero);
+
+
 				} else {
 					/* Data arriving on an already-connected socket.  */
 					void* cambio = leer_de_cliente (i,tamanio);

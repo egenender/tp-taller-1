@@ -74,6 +74,46 @@ bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 	return true;
 }
 
+int Cliente::escuchar_un_entero () {
+	int* dato = (int*) malloc (sizeof(int));
+	int bytes;
+	bool escuchado = false;
+	while (!escuchado){
+		if (( ( bytes=read(sock,dato, sizeof(int))) ) ==sizeof(int) ){
+			escuchado = true;
+		}
+	}
+
+	int valor = *dato;
+	free(dato);
+
+	return valor;
+}
+
+int* Cliente::escuchar_N_enteros (int n) {
+	int* dato = (int*) malloc (n*sizeof(int));
+	int j = 0;
+
+	while (j < n){
+		dato[j] = escuchar_un_entero();
+		j++;
+	}
+
+	return dato;
+}
+
+char* Cliente::escuchar_N_char (int n) {
+	char* dato = (char*) malloc (n*sizeof(char));
+	int j = 0;
+
+	while (j < n){
+		dato[j] = (char) escuchar_un_entero();
+		j++;
+	}
+
+	return dato;
+}
+
 void* Cliente::escuchar_al_server (size_t tamanio) {
 	void* dato = malloc (tamanio);
 	int bytes;

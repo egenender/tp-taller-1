@@ -168,7 +168,13 @@ int main(int argc, char* argv[]) {
 
 
 //	char* ruta = (char*) malloc (90*sizeof(char));
-//	sprintf(ruta,"%s %s","mkdir","src/resources/Temp");
+//	sprintf(ruta,"%s %s","mkdir","Temp");
+//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+//	system(ruta);
+//	sprintf(ruta,"%s %s","mkdir","Temp/src");
+//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+//	system(ruta);
+//	sprintf(ruta,"%s %s","mkdir","Temp/src/resources");
 //	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
 //	system(ruta);
 //	free(ruta);
@@ -179,41 +185,42 @@ int main(int argc, char* argv[]) {
 	servidor.escuchar(sizeof(int));
 
 	Cliente client;
-
-	int* elLargo = (int*) client.escuchar_al_server(sizeof(int));
-
-	int j = 0;
-	char *nombre = (char*) malloc((*elLargo)*sizeof(char));
-	while(j < *elLargo){
-		void* algo = client.escuchar_al_server(sizeof(int));
-		if (algo != NULL){
-			nombre[j] = * (char*) algo;
-			j++;
+	int largo;
+	//leo largo de ruta
+	largo = client.escuchar_un_entero();
+	while (largo>0) {
+		//leo ruta
+		int* intNombre = client.escuchar_N_enteros(largo);
+		char *nombre = (char*) malloc((largo)*sizeof(char));
+		int i=0;
+		while(i < largo){
+			nombre[i] = (char) intNombre[i];
+			i++;
 		}
-	}
+		free(intNombre);
 
-	cout << "lala:  " << nombre << endl;
-	cout << "lolo:  " << *elLargo << endl;
+		EscrituraArchivo* e = new EscrituraArchivo(nombre);
+		free(nombre);
 
-	free(elLargo);
-	EscrituraArchivo* e = new EscrituraArchivo(nombre);
-	SDL_Delay(1000);
+		//leo largo de todo
+		largo = client.escuchar_un_entero();
+		int j = 0;
+		void* algo;
 
-	elLargo = (int*) client.escuchar_al_server(sizeof(int));
-
-	j = 0;
-	void* algo;
-	while(j<*elLargo){
-		algo = client.escuchar_al_server(sizeof(int));
-		if (algo != NULL){
-			e->EscribirUno(  *(int*) algo , *elLargo);
-			j++;
-			cout << j << endl;
+		//de a uno leo todo y lo escribo
+		while(j<largo){
+			algo = client.escuchar_al_server(sizeof(int));
+			if (algo != NULL){
+				e->EscribirUno(  *(int*) algo , largo);
+				j++;
+			}
 		}
-	}
-	//e->EscribirArchivo(  (int*) algo , *elLargo);
 
-	e->CerrarArchivo();
+		e->CerrarArchivo();
+
+		//leo largo de ruta
+		largo = client.escuchar_un_entero();
+	}
 
 
 	//	VistaProtagonista* lili =
@@ -266,7 +273,6 @@ int main(int argc, char* argv[]) {
 //	}
 
 	//aplicacion.mostrarFPS(false);
-
 
 	return aplicacion.ejecutar();
 }

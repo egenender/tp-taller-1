@@ -105,6 +105,10 @@ class Cliente {
 
 		void* escuchar_al_server (size_t);
 
+		int escuchar_un_entero ();
+		int* escuchar_N_enteros (int );
+		char* escuchar_N_char (int );
+
 		void* desencolar_cambio();
 
 		void encolar_cambio(void*);
