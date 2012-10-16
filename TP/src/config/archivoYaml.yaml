@@ -54,9 +54,9 @@ juego:
       - tipo: princesa
         x: 700
         y: 150
-      - tipo: princesa
-        x: 700
-        y: 599
+#      - tipo: princesa
+#        x: 700
+#        y: 599
     plataformas:
       - textura: viga
         x: 20
