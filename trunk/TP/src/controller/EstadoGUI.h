@@ -50,7 +50,7 @@ private:
 	VistaBarraEstado *vistaBarra;
 	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
 
-	Superficie* fondoPestania;
+	Superficie* fondoPestania, *fondo;
 private:
         EstadoGUI();
         void crearBtns();
