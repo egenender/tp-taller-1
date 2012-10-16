@@ -6,23 +6,21 @@ VistaAnimada::VistaAnimada() {
 }
 
 VistaAnimada::~VistaAnimada() {
-
-	// TODO: tendriamos que eliminar las animaciones del mapa?
-
 	if (animaciones != NULL) {
 		map<int, Animacion*>::iterator iter;
-		for (iter = animaciones->begin(); iter != animaciones->end(); iter++) {
-			delete(iter->second);
+		for (iter = animaciones->begin(); iter != animaciones->end(); ++iter) {
+			Animacion* anim = (*iter).second;
+			delete(anim);
 		}
+		animaciones->clear();
 		delete(animaciones);
-		animacionActual = NULL;
 		animaciones = NULL;
 	}
 
-	if (animacionActual != NULL) {
+/*	if (animacionActual != NULL) {
 		delete(animacionActual);
 		animacionActual = NULL;
-	}
+	}*/
 }
 
 bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara ) {

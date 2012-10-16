@@ -27,8 +27,9 @@ void VistaMuestra::actualizar(Observable* observable){
 	tonto->setXY(muestra->obtenerX(), muestra->obtenerY());
 	tonto->setEstado(QUIETODER);
 	vistaActual = muestra->obtenerActual();
-	if (vistaActual)
-		vistaActual->actualizar(tonto);
+	// FIXME: aca se caga al volver:
+/*	if (vistaActual)
+		vistaActual->actualizar(tonto);*/
 }
 
 bool VistaMuestra::dibujar(SDL_Surface* display){

@@ -62,14 +62,14 @@ void Nivel::terminar() {
 	actualizables->clear();
 	actualizables = NULL;
 
-	/*while (!vistas->empty()){
+	while (!vistas->empty()){
 		VistaCuerpo* vista = vistas->back();
 		vistas->pop_back();
 		if (vista != NULL) {
 			delete (vista);
 			vista = NULL;
 		}
-	}*/
+	}
 	vistas->clear();
 	vistas = NULL;
 

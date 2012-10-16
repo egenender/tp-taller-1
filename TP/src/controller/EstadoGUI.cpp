@@ -392,19 +392,19 @@ void EstadoGUI::terminar() {
 		delete (vistaBtnjugar);
 		vistaBtnjugar = NULL;
 	}
-	if (!vistaBarra){
+	if (vistaBarra){
 		delete (vistaBarra);
 		vistaBarra = NULL;
 	}
-	if (!vistaTxtPuertoServidor){
+	if (vistaTxtPuertoServidor){
 		delete (vistaTxtPuertoServidor);
 		vistaTxtPuertoServidor = NULL;
 	}
-	if (!vistaTxtPuertoCliente){
+	if (vistaTxtPuertoCliente){
 		delete (vistaTxtPuertoCliente);
 		vistaTxtPuertoCliente = NULL;
 	}
-	if (!vistaTxtIP){
+	if (vistaTxtIP){
 		delete (vistaTxtIP);
 		vistaTxtIP = NULL;
 	}
