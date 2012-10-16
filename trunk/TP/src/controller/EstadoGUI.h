@@ -36,10 +36,10 @@ private:
 	//TODO: faltan las imagenes y las listas
 	Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto;
 
-	ListaScrolleable* scroll;
-	Boton *btnscrollarriba, *btnscrollabajo;
-	VistaBoton *vistaarriba, *vistaabajo;
-	VistaLista *vistaScroll;
+	ListaScrolleable* scrollPersonajes, *scrollNiveles ;
+	Boton *btnscrollarribaPersonajes, *btnscrollabajoPersonajes, *btnscrollarribaNiveles, *btnscrollabajoNiveles;
+	VistaBoton *vistaArribaPersonajes, *vistaAbajoPersonajes,*vistaArribaNiveles, *vistaAbajoNiveles;
+	VistaLista *vistaScrollPersonajes, *vistaScrollNiveles;
 
 	ImagenGUI* imgCliente, *imgServidor;
 	Muestra* animaciones;

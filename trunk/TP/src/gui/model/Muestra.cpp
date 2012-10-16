@@ -28,20 +28,21 @@ void Muestra::eliminarVista (unsigned int elim){
 }
 
 void Muestra::siguiente(){
-	if (seleccion + 1  < vectorcito->size()){
+	//if (seleccion + 1  < vectorcito->size()){
 		seleccion++;
 		huboCambios();
-	}
+	//}
 }
 
 void Muestra::anterior(){
-	if (seleccion > 0){
+	//if (seleccion > 0){
 		seleccion--;
 		huboCambios();
-	}
+	//}
 }
 
 VistaProtagonista* Muestra::obtenerActual(){
 	if (vectorcito->size() == 0) return NULL;
+	if (seleccion >= vectorcito->size()) return NULL;
 	else return (vectorcito->at(seleccion));
 }

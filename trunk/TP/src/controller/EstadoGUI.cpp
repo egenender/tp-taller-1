@@ -7,11 +7,11 @@ EstadoGUI::EstadoGUI() {
 	solapaServidor = NULL;
 	solapaCliente1 = NULL;
 	solapaCliente2 = NULL;
-	btnscrollarriba = btnscrollabajo = btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
+	btnscrollarribaNiveles = btnscrollabajoNiveles =	btnscrollarribaPersonajes = btnscrollabajoPersonajes = btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
 	txtPuertoServidor = txtPuertoCliente = txtIP;
 	barra = NULL;
 	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
-	scroll = NULL;
+	scrollPersonajes = scrollNiveles = NULL;
 	animaciones = NULL;
 }
 
@@ -43,14 +43,19 @@ void EstadoGUI::iniciar() {
 }
 
 void EstadoGUI::crearScroll(){
-	scroll = new ListaScrolleable(100,200, 200, 150);
-	scroll->agregarElemento("Charmeleon");
-	scroll->agregarElemento("Pikachu");
-	scroll->agregarElemento("Mono Goku");
-	scroll->agregarElemento("Gengar");
-	scroll->agregarElemento("Primeape");
+	scrollPersonajes = new ListaScrolleable(100,200, 200, 150);
+	scrollPersonajes->agregarElemento("Charmeleon");
+	scrollPersonajes->agregarElemento("Pikachu");
+	scrollPersonajes->agregarElemento("Mono Goku");
+	scrollPersonajes->agregarElemento("Gengar");
+	scrollPersonajes->agregarElemento("Primeape");
 
-	animaciones = new Muestra(400, 300, 50,50);
+	scrollNiveles = new ListaScrolleable(100,150,200,120);
+	scrollNiveles->agregarElemento("Moo Moo Farm");
+	scrollNiveles->agregarElemento("Delfino Square");
+	scrollNiveles->agregarElemento("Bowser Castle");
+
+	animaciones = new Muestra(370, 230, 50,50);
 	animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
@@ -63,8 +68,10 @@ void EstadoGUI::crearBtns(){
 	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
-	btnscrollarriba = new Boton(300, 200, 30,30, new ManejadorScroll(scroll,ARRIBA,animaciones));
-	btnscrollabajo = new Boton(300, 320, 30,30, new ManejadorScroll(scroll,ABAJO,animaciones));
+	btnscrollarribaPersonajes = new Boton(300, 200, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
+	btnscrollabajoPersonajes = new Boton(300, 320, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
+	btnscrollarribaNiveles = new Boton(300, 150, 30,30, new ManejadorScroll(scrollNiveles,ARRIBA));
+	btnscrollabajoNiveles = new Boton(300, 240, 30,30, new ManejadorScroll(scrollNiveles,ABAJO));
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -72,8 +79,10 @@ void EstadoGUI::crearBtns(){
 	btnconectar->setearMensaje("Conectar");
 	btncrear->setearMensaje("Crear");
 	btnjugar->setearMensaje("Jugar");
-	btnscrollarriba->setearMensaje(" ");
-	btnscrollabajo->setearMensaje(" ");
+	btnscrollarribaPersonajes->setearMensaje(" ");
+	btnscrollabajoPersonajes->setearMensaje(" ");
+	btnscrollarribaNiveles->setearMensaje(" ");
+	btnscrollabajoNiveles->setearMensaje(" ");
 
 }
 
@@ -114,6 +123,9 @@ void EstadoGUI::crearSolapaServidor(){
 	lista_insertar_ultimo(solapaServidor, btnsolapaservidor);
 	lista_insertar_ultimo(solapaServidor, lblPuertoServidor);
 	lista_insertar_ultimo(solapaServidor, imgServidor);
+	lista_insertar_ultimo(solapaServidor, scrollNiveles);
+	lista_insertar_ultimo(solapaServidor, btnscrollarribaNiveles);
+	lista_insertar_ultimo(solapaServidor, btnscrollabajoNiveles);
 }
 
 void EstadoGUI::crearSolapaCliente(){
@@ -129,9 +141,9 @@ void EstadoGUI::crearSolapaCliente(){
 	lista_insertar_ultimo(solapaCliente2, lblnombrePersonaje);
 	lista_insertar_ultimo(solapaCliente2, lblvelocidad);
 	lista_insertar_ultimo(solapaCliente2, lblsalto);
-	lista_insertar_ultimo(solapaCliente2, scroll);
-	lista_insertar_ultimo(solapaCliente2, btnscrollarriba);
-	lista_insertar_ultimo(solapaCliente2, btnscrollabajo);
+	lista_insertar_ultimo(solapaCliente2, scrollPersonajes);
+	lista_insertar_ultimo(solapaCliente2, btnscrollarribaPersonajes);
+	lista_insertar_ultimo(solapaCliente2, btnscrollabajoPersonajes);
 	lista_insertar_ultimo(solapaCliente2, imgCliente);
 	lista_insertar_ultimo(solapaCliente2, animaciones);
 	txtIP->hacerInvisible();
@@ -145,9 +157,9 @@ void EstadoGUI::crearSolapaCliente(){
 	lblvelocidad->hacerInvisible();
 	lblsalto->hacerInvisible();
 	lblnombrePersonaje->hacerInvisible();
-	scroll->hacerInvisible();
-	btnscrollarriba->hacerInvisible();
-	btnscrollabajo->hacerInvisible();
+	scrollPersonajes->hacerInvisible();
+	btnscrollarribaPersonajes->hacerInvisible();
+	btnscrollabajoPersonajes->hacerInvisible();
 	imgCliente->hacerInvisible();
 	animaciones->hacerInvisible();
 }
@@ -170,10 +182,14 @@ void EstadoGUI::crearVistas(){
 	vistaBtnjugar = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 				"src/gui/resources/botonIniciarClickeado.png");
 
-	vistaarriba = new VistaBoton("src/gui/resources/flechaArriba.jpg",
+	vistaArribaPersonajes = new VistaBoton("src/gui/resources/flechaArriba.jpg",
 			"src/gui/resources/flechaArribaClic.jpg");
-	vistaabajo = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
+	vistaAbajoPersonajes = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
 				"src/gui/resources/flechaAbajoClic.jpg");
+	vistaArribaNiveles = new VistaBoton("src/gui/resources/flechaArriba.jpg",
+				"src/gui/resources/flechaArribaClic.jpg");
+	vistaAbajoNiveles = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
+					"src/gui/resources/flechaAbajoClic.jpg");
 
 	vistaBarra = new VistaBarraEstado();
 	vistaTxtPuertoServidor = new VistaCuadroTexto();
@@ -186,8 +202,10 @@ void EstadoGUI::crearVistas(){
 	vistalblvelocidad = new VistaLabel();
 	vistalblsalto = new VistaLabel();
 
-	vistaScroll = new VistaLista(3);
-	scroll->agregarObservador(vistaScroll);
+	vistaScrollPersonajes = new VistaLista(3);
+	scrollPersonajes->agregarObservador(vistaScrollPersonajes);
+	vistaScrollNiveles = new VistaLista(5);
+	scrollNiveles->agregarObservador(vistaScrollNiveles);
 
 	btnsolapacliente1->agregarObservador(vistaBtnsolapacliente1);
 	btnsolapacliente2->agregarObservador(vistaBtnsolapacliente2);
@@ -195,8 +213,10 @@ void EstadoGUI::crearVistas(){
 	btnsolapaservidor->agregarObservador(vistaBtnsolapaservidor);
 	btnconectar->agregarObservador(vistaBtnconectar);
 	btnjugar->agregarObservador(vistaBtnjugar);
-	btnscrollarriba->agregarObservador(vistaarriba);
-	btnscrollabajo->agregarObservador(vistaabajo);
+	btnscrollarribaPersonajes->agregarObservador(vistaArribaPersonajes);
+	btnscrollabajoPersonajes->agregarObservador(vistaAbajoPersonajes);
+	btnscrollarribaNiveles->agregarObservador(vistaArribaNiveles);
+	btnscrollabajoNiveles->agregarObservador(vistaAbajoNiveles);
 
 	barra->agregarObservador(vistaBarra);
 	txtPuertoServidor->agregarObservador(vistaTxtPuertoServidor);
@@ -225,9 +245,12 @@ void EstadoGUI::actualizar(float delta){
 	btnsolapaservidor->actualizar();
 	btnconectar->actualizar();
 	btnjugar->actualizar();
-	btnscrollarriba->actualizar();
-	btnscrollabajo->actualizar();
-	scroll->actualizar();
+	btnscrollarribaPersonajes->actualizar();
+	btnscrollabajoPersonajes->actualizar();
+	btnscrollarribaNiveles->actualizar();
+	btnscrollabajoNiveles->actualizar();
+	scrollNiveles->actualizar();
+	scrollPersonajes->actualizar();
 
 	barra->actualizar();
 	txtPuertoServidor->actualizar();
@@ -236,7 +259,7 @@ void EstadoGUI::actualizar(float delta){
 	lblPuertoCliente->actualizar();
 	lblPuertoServidor->actualizar();
 	lblIP->actualizar();
-	lblnombrePersonaje->setearMensaje("Nombre: "+scroll->obtenerSeleccionado());
+	lblnombrePersonaje->setearMensaje("Nombre: "+scrollPersonajes->obtenerSeleccionado());
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
@@ -274,9 +297,12 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistalblIP->dibujar(display);
 	vistalblpuertoservidor->dibujar(display);
 	vistalblpuertocliente->dibujar(display);
-	vistaScroll->dibujar(display);
-	vistaarriba->dibujar(display);
-	vistaabajo->dibujar(display);
+	vistaScrollPersonajes->dibujar(display);
+	vistaScrollNiveles->dibujar(display);
+	vistaArribaPersonajes->dibujar(display);
+	vistaAbajoPersonajes->dibujar(display);
+	vistaArribaNiveles->dibujar(display);
+	vistaAbajoNiveles->dibujar(display);
 	vistaAnimaciones->dibujar(display);
 
 }
@@ -288,8 +314,10 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	btnsolapaservidor->manejarEvento(evento);
 	btnconectar->manejarEvento(evento);
 	btnjugar->manejarEvento(evento);
-	btnscrollarriba->manejarEvento(evento);
-	btnscrollabajo->manejarEvento(evento);
+	btnscrollarribaPersonajes->manejarEvento(evento);
+	btnscrollabajoPersonajes->manejarEvento(evento);
+	btnscrollarribaNiveles->manejarEvento(evento);
+	btnscrollabajoNiveles->manejarEvento(evento);
 
 	txtPuertoServidor->manejarEvento(evento);
 	txtPuertoCliente->manejarEvento(evento);
@@ -438,38 +466,62 @@ void EstadoGUI::terminar() {
 		delete (vistalblsalto);
 		vistalblsalto = NULL;
 	}
-	if(scroll){
-		delete (scroll);
-		scroll = NULL;
+	if(scrollPersonajes){
+		delete (scrollPersonajes);
+		scrollPersonajes = NULL;
 	}
-	if (vistaScroll){
-		delete (vistaScroll);
-		vistaScroll = NULL;
+	if (vistaScrollPersonajes){
+		delete (vistaScrollPersonajes);
+		vistaScrollPersonajes = NULL;
 	}
-	if (btnscrollarriba){
-		delete (btnscrollarriba);
-		btnscrollarriba = NULL;
+	if (scrollNiveles){
+		delete(scrollNiveles);
+		scrollNiveles= NULL;
 	}
-	if (vistaarriba){
-		delete (vistaarriba);
-		vistaarriba = NULL;
+	if (vistaScrollNiveles){
+		delete(vistaScrollNiveles);
+		vistaScrollNiveles= NULL;
 	}
-	if (btnscrollabajo){
-		delete (btnscrollabajo);
-		btnscrollabajo = NULL;
+	if (btnscrollarribaPersonajes){
+		delete (btnscrollarribaPersonajes);
+		btnscrollarribaPersonajes = NULL;
 	}
-	if (vistaabajo){
-		delete (vistaabajo);
-		vistaabajo = NULL;
+	if (vistaArribaPersonajes){
+		delete (vistaArribaPersonajes);
+		vistaArribaPersonajes = NULL;
+	}
+	if (btnscrollabajoPersonajes){
+		delete (btnscrollabajoPersonajes);
+		btnscrollabajoPersonajes = NULL;
+	}
+	if (vistaAbajoPersonajes){
+		delete (vistaAbajoPersonajes);
+		vistaAbajoPersonajes = NULL;
+	}
+	if (btnscrollarribaNiveles){
+		delete (btnscrollarribaNiveles);
+		btnscrollarribaNiveles = NULL;
+	}
+	if (vistaArribaNiveles){
+		delete (vistaArribaNiveles);
+		vistaArribaNiveles = NULL;
+	}
+	if (btnscrollabajoNiveles){
+		delete (btnscrollabajoNiveles);
+		btnscrollabajoNiveles = NULL;
+	}
+	if (vistaAbajoNiveles){
+		delete (vistaAbajoNiveles);
+		vistaAbajoNiveles = NULL;
 	}
 	if (imgServidor){
 		delete (imgServidor);
 		imgServidor = NULL;
 	}
 	if (imgCliente){
-			delete (imgCliente);
-			imgCliente = NULL;
-		}
+		delete (imgCliente);
+		imgCliente = NULL;
+	}
 	if (animaciones){
 		delete (animaciones);
 		animaciones = NULL;
@@ -478,5 +530,7 @@ void EstadoGUI::terminar() {
 		delete (vistaAnimaciones);
 		vistaAnimaciones = NULL;
 	}
+
 }
+
 
