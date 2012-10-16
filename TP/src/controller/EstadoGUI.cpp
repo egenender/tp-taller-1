@@ -33,9 +33,9 @@ void EstadoGUI::iniciar() {
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();
 	crearScroll();
-	crearBtns();
-	crearTxts();
 	crearBarra();
+	crearTxts();
+	crearBtns();
 	crearLabels();
 	crearSolapaServidor();
 	crearSolapaCliente();
@@ -66,7 +66,7 @@ void EstadoGUI::crearBtns(){
 
 	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
 	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
-	btncrear = new Boton(400, 400, 100, 50, new ManejadorEjemplo());
+	btncrear = new Boton(400, 400, 100, 50, new ManejadorCrear(txtPuertoServidor, scrollNiveles, barra));
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
 	btnscrollarribaPersonajes = new Boton(300, 200, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
 	btnscrollabajoPersonajes = new Boton(300, 320, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
@@ -267,11 +267,6 @@ void EstadoGUI::actualizar(float delta){
 	animaciones->actualizar();
 
 	// FIXME: ESTO NO SE SI SE DEBERIA HACER ACA!
-	if(btnconectar->esClickeado()) {
-		barra->setearMensaje("Todavia No Puedo Conectar");
-	}else {
-		barra->setearMensaje("Iddle");
-	}
 
 	if(btnjugar->esClickeado()) {
 		ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
