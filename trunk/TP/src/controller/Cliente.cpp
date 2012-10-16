@@ -22,6 +22,7 @@ Cliente::Cliente(){
 	crear_socket();
 	conectar();
 
+
 }
 
 Cliente::Cliente(const char * dir_host,unsigned short int port){
@@ -67,20 +68,27 @@ bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 
 	nbytes = write (sock ,datos, tamanio);
 	if (nbytes < 0){
-
 		//perror ("write"); osea mensaje de log
 		return false;
+	}
+	return true;
+}
 
+void* Cliente::escuchar_al_server (size_t tamanio) {
+	void* dato = malloc (tamanio);
+	int bytes;
+	if ((bytes=read(sock,dato, tamanio))<tamanio){
+		free(dato);
+		return NULL;
 	}
 
-	return true;
-
+	return dato;
 }
+
 
 void Cliente::marcar_conectado(){
 
 	conectado=true;
-
 
 }
 
