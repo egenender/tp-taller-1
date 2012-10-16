@@ -24,11 +24,11 @@
 #define ALTO_PANTALLA_MAXIMO 700
 #define ANCHO_NIVEL_MINIMO 200
 #define ALTO_NIVEL_MINIMO 200
-#define RUTA_FONDO "resources/fondoGrande.png"
+#define RUTA_FONDO "src/resources/fondoGrande.png"
 #define ANCHO_PERSONAJE 65
 #define ALTO_PERSONAJE 73
-#define RUTA_ACTIVA "resources/cruzCuadroError4.png"
-#define RUTA_PASIVA "resources/cruzCuadroError4.png"
+#define RUTA_ACTIVA "src/resources/cruzCuadroError4.png"
+#define RUTA_PASIVA "src/resources/cruzCuadroError4.png"
 #define PERIODO_PERSONAJE 15
 #define ANCHO_NIVEL 1200
 #define ALTO_NIVEL 600
@@ -37,7 +37,7 @@
 #define ANCHO_OBJETO 40
 #define ALTO_OBJETO 80
 #define POS_DEFECTO_OBJ 80
-#define TEXTURA_DEFECTO "resources/texturagrande.jpg"
+#define TEXTURA_DEFECTO "src/resources/texturagrande.jpg"
 
 
 // Puntero estatico para controlar la instanciacion.
