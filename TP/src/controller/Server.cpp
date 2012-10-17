@@ -142,7 +142,8 @@ void Server::escribir_a_cliente(int i, void* punt,size_t tam){
 		/* Data read.  */
 
 		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
-		fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
+
+		//fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
 
     }
 
@@ -166,7 +167,8 @@ void escribir_a_cliente(int i, void* punt,size_t tam){
 		/* Data read.  */
 
 		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
-		fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
+
+		//fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
 
     }
 
@@ -211,25 +213,33 @@ void* _enviar_inicializacion(void* parametros){
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
 	std::vector<string>* rutas= gestor->devolverVectorRutas();
+//	std::vector<string>* rutas = new vector<string>;
+//	string rut = "src/config/defecto.yaml";
+//	rutas->push_back(rut);
+//	rut = "src/config/archivoYaml.yaml";
+//	rutas->push_back(rut);
 
 	string headerTemp ="Temp/";
 	int* entero = (int*) malloc (sizeof (int));
-	for (unsigned int i=0; i<rutas->size();i++){
+	for (unsigned int i=0; i< rutas->size() ;i++){
 
 		string rutaServer=(rutas->at(i));
 		string rutaCompleta = headerTemp + rutaServer;
 
+		cout<<rutaCompleta<< endl;
+
 		*entero= rutaCompleta.size();
+
+		cout<<*entero<< endl;
 		escribir_a_cliente(cliente, entero, (sizeof(int)));
 
 		unsigned int j = 0;
 		int i = 0;
 		int* carac = (int*) malloc (sizeof (int));
-		for(j=0;j<  (rutaCompleta.size())  ;j++){
-			*carac = rutaCompleta[j];
+		for(j=0; j<  (rutaCompleta.size())  ;j++){
+			*carac =  rutaCompleta[j];
 			escribir_a_cliente(cliente, carac, ( 1*sizeof(int) ) );
 		}
-
 
 		LectorArchivo* l = new LectorArchivo(rutaServer.c_str());
 		int cant;
@@ -307,9 +317,6 @@ void* _escuchar(void* parametros){
 					param->act=act;
 					param->sock=status;
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
-
-
-
 
 				} else {
 					/* Data arriving on an already-connected socket.  */
