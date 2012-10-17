@@ -19,6 +19,7 @@ class HojaSprites : public Superficie {
 		int obtenerAltoSprite();
 		int obtenerAnchoSprite();
 		HojaSprites* voltear(int flags);
+		HojaSprites* obtenerCopia();
 };
 
 #endif

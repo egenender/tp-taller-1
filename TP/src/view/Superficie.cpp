@@ -322,3 +322,23 @@ Superficie* Superficie::voltear(int flags) {
 SDL_Surface* Superficie::obtenerSurface() {
 	return superficie;
 }
+
+
+Superficie* Superficie::obtenerCopia() {
+	if (this->superficie == NULL)
+		return NULL;
+
+	SDL_Surface* copia = NULL;
+	copia = SDL_ConvertSurface(this->superficie, this->superficie->format, this->superficie->flags);
+	if (copia == NULL)
+		return NULL;
+
+	return new Superficie(copia);
+}
+
+SDL_Surface* Superficie::obtenerCopia(SDL_Surface* otra) {
+	if (otra == NULL)
+		return NULL;
+
+	return SDL_ConvertSurface(otra, otra->format, otra->flags);
+}
