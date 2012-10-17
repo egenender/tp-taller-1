@@ -41,7 +41,7 @@ class GestorConfiguraciones{
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
-		ConfiguracionPantalla* CargarConfiguracionPantalla(int, int, string);
+		ConfiguracionPantalla* CargarConfiguracionPantalla(int, int);
 		void CargarTiposPersonajes(const YAML::Node&, const YAML::Node&);
 		TipoPersonaje* _CargarTipoPersonaje(const YAML::Node&, const char*);
 		void CargarTexturas(const YAML::Node& nodo);

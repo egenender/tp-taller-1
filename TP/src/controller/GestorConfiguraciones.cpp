@@ -127,7 +127,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo pantalla, se carga por defecto");
-		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA,RUTA_FONDO);
+		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
 	}
 
 	try{
@@ -149,12 +149,11 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	configNivel = new ConfiguracionNivel();
 	try{
 		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Nivel");
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones del Nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo nivel, se carga enteramente por defecto");
 		CargarConfiguracionNivel(nodoRaizDef["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 	}
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones del Nivel");
 
 
 	if ((configPantalla->alto) > (configNivel->alto)){
@@ -221,6 +220,29 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->alto=ALTO_NIVEL_MINIMO;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
 	}
+	string ruta;
+	try{
+		nodo["fondo"] >> ruta;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo fondo dentro de pantalla, se carga por defecto");
+		ruta = RUTA_FONDO;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se especifica fondo para la pantalla, se carga por defecto");
+		ruta=RUTA_FONDO;
+	}
+
+	FILE* archiv=fopen(ruta.c_str(),"r");
+
+	if (!(archiv)) {
+		ruta=RUTA_FONDO;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta del fondo para la pantalla no corresponde con un archivo valido, se carga por defecto");
+	}
+	else
+		fclose(archiv);
+
+	AgregarAVector(ruta);
+	configNivel->superficieCargada= new Superficie(ruta);
+
 
 	try{
 		CargarEstaticosNivel(nodo["plataformas"], false, true);
@@ -558,7 +580,7 @@ VistaProtagonista* GestorConfiguraciones::ObtenerVistaManual(){
 }
 
 Superficie* GestorConfiguraciones::ObtenerFondo(){
-	return configPantalla->superficieCargada;
+	return configNivel->superficieCargada;
 }
 
 int GestorConfiguraciones::ObtenerAltoPantalla(){
@@ -817,14 +839,11 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 }
 
-ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(int alto, int ancho, string ruta){
+ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(int alto, int ancho){
 
 	ConfiguracionPantalla* config= new ConfiguracionPantalla();
 	config->alto = alto;
 	config->ancho = ancho;
-
-	AgregarAVector(ruta);
-	config->superficieCargada= new Superficie(ruta);
 
 	return config;
 }
@@ -833,7 +852,6 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 
 	ConfiguracionPantalla* config= new ConfiguracionPantalla();
 
-	std::string ruta;
 	try{
 		nodo["alto"] >> config->alto;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -870,28 +888,6 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 			config->ancho = ANCHO_PANTALLA_MAXIMO;
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho toma valor muy grande, se carga maximo");
 		}
-
-
-	try{
-		nodo["fondo"] >> ruta;
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo fondo dentro de pantalla, se carga por defecto");
-		ruta = RUTA_FONDO;
-	}catch(YAML::InvalidScalar &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se especifica fondo para la pantalla, se carga por defecto");
-		ruta=RUTA_FONDO;
-	}
-
-	FILE* archiv=fopen(ruta.c_str(),"r");
-
-	if (!(archiv)) {
-		ruta=RUTA_FONDO;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: La ruta del fondo para la pantalla no corresponde con un archivo valido, se carga por defecto");
-	}
-	else
-		fclose(archiv);
-
-	config->superficieCargada= new Superficie(ruta);
 
 	return config;
 }
