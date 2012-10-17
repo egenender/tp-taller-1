@@ -23,6 +23,8 @@ class ConfiguracionNivel{
 		int ancho;
 		Superficie* superficieCargada;
 
+		int nivelElegido;
+
 		Manual* manual;
 		VistaProtagonista* vistaManual;
 		std::vector<Actualizable*> actualizables;

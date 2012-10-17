@@ -14,5 +14,7 @@ ConfiguracionNivel::ConfiguracionNivel(){
 	manual=0;
 	vistaManual=0;
 	vistas=vector<VistaCuerpo*>();
+
+	nivelElegido = 0;
 }
 
