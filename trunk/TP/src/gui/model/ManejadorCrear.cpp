@@ -32,6 +32,6 @@ void ManejadorCrear::manejarClic(){
 
 	//Por ahora Dejo hecho esto:
 
-	barra->setearMensaje("Todavia No puedo conectar");
+	barra->setearMensaje("Todavia No puedo crear el servidor");
 	//scrollNivel->agregarElemento(puerto);
 }
