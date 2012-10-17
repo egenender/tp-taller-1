@@ -188,16 +188,21 @@ int main(int argc, char* argv[]) {
 	int largo;
 	//leo largo de ruta
 	largo = client.escuchar_un_entero();
+
 	while (largo>0) {
 		//leo ruta
 		int* intNombre = client.escuchar_N_enteros(largo);
 		char *nombre = (char*) malloc((largo)*sizeof(char));
 		int i=0;
 		while(i < largo){
-			nombre[i] = (char) intNombre[i];
+			nombre[i] = intNombre[i];
 			i++;
 		}
 		free(intNombre);
+		nombre[i] = '\0';
+
+
+		cout<<largo<< endl;
 
 		EscrituraArchivo* e = new EscrituraArchivo(nombre);
 		free(nombre);

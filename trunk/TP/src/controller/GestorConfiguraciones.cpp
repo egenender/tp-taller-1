@@ -809,7 +809,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 	    		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo sprites en animacion activa del personaje, se cargan por defecto");
 	    	}
-	    	AgregarAVector(rutaActiva);
+	    	//AgregarAVector(rutaActiva);
 	    }
 	}
 
