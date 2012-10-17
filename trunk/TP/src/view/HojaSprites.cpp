@@ -117,3 +117,14 @@ HojaSprites* HojaSprites::voltear(int flags) {
 
 	return new HojaSprites(volteada, anchoSprite, altoSprite);
 }
+
+HojaSprites* HojaSprites::obtenerCopia() {
+	if (this->superficie == NULL)
+		return NULL;
+
+	SDL_Surface* copia = this->Superficie::obtenerCopia(this->superficie);
+	if (copia == NULL)
+		return NULL;
+
+	return new HojaSprites(copia, this->anchoSprite, this->altoSprite);
+}
