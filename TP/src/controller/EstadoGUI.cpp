@@ -28,7 +28,6 @@ void EstadoGUI::iniciar() {
 	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
 	// Ventana::obtenerInstancia()->volverALasDimensionesDeCreacion();
 
-
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();
@@ -43,7 +42,7 @@ void EstadoGUI::iniciar() {
 }
 
 void EstadoGUI::crearScroll(){
-	scrollPersonajes = new ListaScrolleable(100,200, 200, 150);
+	scrollPersonajes = new ListaScrolleable(100,150, 200, 150);
 	scrollPersonajes->agregarElemento("Charmeleon");
 	scrollPersonajes->agregarElemento("Pikachu");
 	scrollPersonajes->agregarElemento("Mono Goku");
@@ -54,8 +53,7 @@ void EstadoGUI::crearScroll(){
 	scrollNiveles->agregarElemento("Moo Moo Farm");
 	scrollNiveles->agregarElemento("Delfino Square");
 	scrollNiveles->agregarElemento("Bowser Castle");
-
-	animaciones = new Muestra(370, 230, 50,50);
+	animaciones = new Muestra(370, 180, 50,50);
 	animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
@@ -65,11 +63,11 @@ void EstadoGUI::crearBtns(){
 	btnsolapaservidor = new Boton(235, 30, 206, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
 	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
-	btnconectar = new Boton(400,400,100,50, new ManejadorSolapa(solapaCliente2, solapaCliente1) );
+	btnconectar = new Boton(400,400,100,50, new ManejadorConectar(txtIP, txtPuertoCliente, barra, solapaCliente2, solapaCliente1) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorCrear(txtPuertoServidor, scrollNiveles, barra));
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
-	btnscrollarribaPersonajes = new Boton(300, 200, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
-	btnscrollabajoPersonajes = new Boton(300, 320, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
+	btnscrollarribaPersonajes = new Boton(300, 150, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
+	btnscrollabajoPersonajes = new Boton(300, 270, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
 	btnscrollarribaNiveles = new Boton(300, 150, 30,30, new ManejadorScroll(scrollNiveles,ARRIBA));
 	btnscrollabajoNiveles = new Boton(300, 240, 30,30, new ManejadorScroll(scrollNiveles,ABAJO));
 
@@ -106,11 +104,11 @@ void EstadoGUI::crearLabels(){
 	lblPuertoCliente = new Label(20,300,80,30);
 	lblPuertoCliente->setearMensaje("Puerto:");
 
-	lblnombrePersonaje = new Label(80, 370, 200, 30);
+	lblnombrePersonaje = new Label(100, 320, 200, 30);
 	lblnombrePersonaje->setearMensaje("Aca deberia ir el nombre");
-	lblvelocidad= new Label(80, 410, 200, 30);
+	lblvelocidad= new Label(100, 360, 200, 30);
 	lblvelocidad->setearMensaje("Aca deberia ir la velocidad");
-	lblsalto = new Label(80, 450, 200, 30);
+	lblsalto = new Label(100, 400, 200, 30);
 	lblsalto->setearMensaje("Aca deberia ir el salto");
 
 	imgCliente = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Cliente", 230, 40, 206, 50);

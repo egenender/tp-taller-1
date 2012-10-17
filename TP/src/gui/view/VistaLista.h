@@ -8,7 +8,7 @@
 #include "SDL/SDL_ttf.h"
 #include "../../common/Observador.h"
 using namespace std;
-
+#define ANCHOLETRA 10
 
 class VistaLista : public Observador{
 	unsigned int mostrables, seleccionadoAnterior, seleccionadoActual, topeSuperior, topeInferior;
@@ -17,7 +17,7 @@ class VistaLista : public Observador{
 
 	Superficie* cuadro;
 	Superficie* seleccionado;
-	bool visible, primeraVez;
+	bool visible, primeraVez, sinCarga;
 public:
 	VistaLista(unsigned int);
 
@@ -26,6 +26,7 @@ public:
 	bool dibujar(SDL_Surface* display);
 private:
 	void llenarVector(ListaScrolleable*);
+	string acortarMensaje(string);
 };
 
 #endif /* VISTALISTA_H_ */

@@ -23,6 +23,7 @@ VistaLista::~VistaLista() {
 		delete (tex);
 	}
 	delete (mensajeAMostrar);
+	sinCarga = true;
 }
 
 void VistaLista::actualizar(Observable* observable){
@@ -32,10 +33,15 @@ void VistaLista::actualizar(Observable* observable){
 	ancho = lista->obtenerAncho();
 	alto = lista->obtenerAlto();
 
-	llenarVector(lista);
 	cuadro->escala(ancho,alto);
 	seleccionado->escala(ancho, alto/mostrables);
 	visible = lista->esVisible();
+	if (lista->cantidad() == 0){
+		sinCarga = true;
+		return;
+	}
+	sinCarga = false;
+	llenarVector(lista);
 }
 
 bool VistaLista::dibujar(SDL_Surface* display){
@@ -46,7 +52,9 @@ bool VistaLista::dibujar(SDL_Surface* display){
 	dsf = seleccionadoActual - topeSuperior;
 	dibujeCuadro&= seleccionado->dibujar(display,x,(y + dsf * alto / mostrables));
 
-
+	if (sinCarga){
+		return false;
+	}
 	if (mensajeAMostrar->size() == 0){
 		return false;
 	}
@@ -74,7 +82,8 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 	primeraVez = false;
 	if (mensajeAMostrar->size() == 0){
 		for (unsigned int i = 0; i < mostrables && i < lista->cantidad(); i++){
-			mensajeAMostrar->push_back(TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), lista->obtenerElemento(i).c_str(), Fuente::obtenerInstancia()->obtenerColor()));
+			string mensaje = acortarMensaje(lista->obtenerElemento(i));
+			mensajeAMostrar->push_back(TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), mensaje.c_str(), Fuente::obtenerInstancia()->obtenerColor()));
 		}
 		topeSuperior = 0;
 		if (mostrables <= lista->cantidad())
@@ -111,6 +120,18 @@ void VistaLista::llenarVector(ListaScrolleable* lista){
 	}
 
 	for (unsigned int i = topeSuperior; i<topeInferior; i++){
-		mensajeAMostrar->push_back( TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), lista->obtenerElemento(i).c_str(), Fuente::obtenerInstancia()->obtenerColor()));
+		string mensaje = acortarMensaje(lista->obtenerElemento(i));
+		mensajeAMostrar->push_back( TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), mensaje.c_str(), Fuente::obtenerInstancia()->obtenerColor()));
 	}
+}
+
+string VistaLista::acortarMensaje(string mensaje){
+	string acortado="";
+	unsigned int i = 0;
+	unsigned int anchito = ancho;
+	while ((acortado.size() * ANCHOLETRA <= anchito) && (i < mensaje.size())){
+		acortado+=mensaje.at(i);
+		i++;
+	}
+	return acortado;
 }

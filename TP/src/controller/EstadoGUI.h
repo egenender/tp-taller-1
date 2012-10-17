@@ -14,6 +14,7 @@
 #include "../gui/model/ManejadorSolapa.h"
 #include "../gui/model/ManejadorScroll.h"
 #include "../gui/model/ManejadorCrear.h"
+#include "../gui/model/ManejadorConectar.h"
 #include "../model/lista.h"
 #include "../gui/model/ListaScrolleable.h"
 #include "../gui/view/VistaLista.h"
