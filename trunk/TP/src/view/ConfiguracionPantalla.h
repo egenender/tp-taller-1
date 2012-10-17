@@ -13,7 +13,6 @@ class ConfiguracionPantalla{
 	public:
 		int ancho;
 		int alto;
-		Superficie* superficieCargada;
 
 	public:
 		ConfiguracionPantalla();

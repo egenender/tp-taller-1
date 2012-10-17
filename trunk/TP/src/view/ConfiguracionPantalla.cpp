@@ -13,8 +13,6 @@
 ConfiguracionPantalla::ConfiguracionPantalla(){
 
 	ancho=alto=0;
-	superficieCargada=0;
-	//superficieCargada= new Superficie();
 
 }
 
