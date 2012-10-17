@@ -47,6 +47,13 @@ typedef struct parametrosServer{
 
 } parametrosServer_t;
 
+typedef struct parametrosInicializacion{
+
+	fd_set* act;
+	int sock;
+
+} parametrosInit_t;
+
 class Server{
 
 	// CUESTION: thread para mandar tambien? respuesta: si

@@ -47,14 +47,30 @@ GestorConfiguraciones* GestorConfiguraciones::getInstance() {
    return &instancia;
 }
 
+void GestorConfiguraciones::AgregarAVector(string ruta){
+
+
+	for (unsigned int i = 0; i < vectorRutas->size(); i++) {
+		char* rutaVector = (vectorRutas->at(i).c_str());
+		if (strcmp(rutaVector,ruta.c_str())==0) return;
+	}
+
+	vectorRutas->push_back(ruta);
+
+
+}
+
 GestorConfiguraciones::GestorConfiguraciones (){
 	vel_personaje=0;
 	margen_scroll=0;
 	configPantalla=0;
 	tiposPersonajes=new mapa_per();
 	texturas=new mapa_tex();
+	vectorRutas=new std::vector<string>();
 
 	YAML::Node nodo,nodoDef;
+
+	AgregarAVector("src/config/archivoYaml.yaml");
 
 	try{
 		std::ifstream fin("src/config/archivoYaml.yaml");
@@ -69,6 +85,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 	}
 	std::ifstream finDef("src/config/defecto.yaml");
+	AgregarAVector("src/config/defecto.yaml");
 	YAML::Parser parserDef(finDef);
 	parserDef.GetNextDocument(nodoDef);
 
@@ -319,6 +336,8 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 		}
 		else
 			fclose(archiv);
+
+		AgregarAVector(rutaImagen);
 
 		if (cortar)
 			sup =  new Superficie( rutaImagen , 0 , 0 , ancho, alto);
@@ -740,7 +759,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			}
 	    			else
 	    				fclose(archivo);
-
+	    			AgregarAVector(rutaActiva);
 	    			tipoper->animacionActivaProt=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
 	    		}
 	    		else{
@@ -770,7 +789,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 	    			tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(unaRuta,tipoper->ancho,tipoper->alto))  );
 	    			tipoper->periodos.push_back (unPeriodo);
-
+	    			AgregarAVector(unaRuta);
 	    		}
 	    	}catch( YAML::TypedKeyNotFound<std::string> &e){
 	    		rutaActiva = RUTA_ACTIVA;
@@ -790,6 +809,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 	    		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo sprites en animacion activa del personaje, se cargan por defecto");
 	    	}
+	    	AgregarAVector(rutaActiva);
 	    }
 	}
 
@@ -803,6 +823,7 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(int al
 	config->alto = alto;
 	config->ancho = ancho;
 
+	AgregarAVector(ruta);
 	config->superficieCargada= new Superficie(ruta);
 
 	return config;
@@ -879,5 +900,13 @@ Ventana* GestorConfiguraciones::CrearPantalla(){
 
 
 	return configPantalla->CrearPantalla();
+
+}
+
+std::vector<string>* GestorConfiguraciones::devolverVectorRutas(){
+
+
+
+	return vectorRutas;
 
 }
