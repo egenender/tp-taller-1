@@ -41,37 +41,38 @@ juego:
     viga: src/resources/viga2.jpg
     esc: src/resources/film.png
   nivel:
-    alto: 600
-    ancho: 1600
-    fondo: src/resources/fondoGrande.png
-    personajes:
-      - tipo: protagonista
-        x: 400
-        y: 300
-      - tipo: mono
-        x: 100
-        y: 150
-      - tipo: princesa
-        x: 700
-        y: 150
-      - tipo: princesa
-        x: 700
-        y: 599
-    plataformas:
-      - textura: viga
-        x: 20
-        y: 150
-        ancho: 200
-        alto: 50
-      - textura: viga
-        x: 550
-        y: 150
-        ancho: 200
-        alto: 50
-    escaleras:
-      - textura: esc
-        x: 1200
-        y: 200
-        ancho: 80
-        alto: 400
+    - nivel: MooMooMilk
+      alto: 600
+      ancho: 1600
+      fondo: src/resources/fondoGrande.png
+      personajes:
+        - tipo: protagonista
+          x: 400
+          y: 300
+        - tipo: mono
+          x: 100
+          y: 150
+        - tipo: princesa
+          x: 700
+          y: 150
+        - tipo: princesa
+          x: 700
+          y: 599
+      plataformas:
+        - textura: viga
+          x: 20
+          y: 150
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 550
+          y: 150
+          ancho: 200
+          alto: 50
+      escaleras:
+        - textura: esc
+          x: 1200
+          y: 200
+          ancho: 80
+          alto: 400
 
