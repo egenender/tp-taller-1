@@ -189,6 +189,11 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 }
 
+std::map<string,string>* ObtenerPosiblesNiveles(){
+	//std::map<string,string>* niveles = new std::map<string,string>;
+	return NULL;
+}
+
 void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes, const YAML::Node& defPlataformas, const YAML::Node& defEscaleras){
 
 	try{
