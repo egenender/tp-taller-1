@@ -49,10 +49,8 @@ GestorConfiguraciones* GestorConfiguraciones::getInstance() {
 
 void GestorConfiguraciones::AgregarAVector(string ruta){
 
-
 	for (unsigned int i = 0; i < vectorRutas->size(); i++) {
-		char* rutaVector = (vectorRutas->at(i).c_str());
-		if (strcmp(rutaVector,ruta.c_str())==0) return;
+		if (ruta.compare(vectorRutas->at(i))) return;
 	}
 
 	vectorRutas->push_back(ruta);
