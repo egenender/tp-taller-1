@@ -9,6 +9,7 @@
 #include "Server.h"
 #include "LectorArchivo.h"
 #include "SDL/SDL.h"
+#include "GestorConfiguraciones.h"
 
 
 Server::Server(){
@@ -199,9 +200,57 @@ void* leer_de_cliente (int filedes,size_t tam){
     }
 }
 
-void* _enviar_inicializacion(void* sock){
+void* _enviar_inicializacion(void* parametros){
 
 	//Mandar todos los archivos para inicializar
+
+	int cliente=((parametrosInit_t*)parametros)->sock;
+	fd_set* conjuntoClientes=((parametrosInit_t*)parametros)->act;
+
+
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+
+	std::vector<string>* rutas= gestor->devolverVectorRutas();
+
+	string headerTemp ="Temp/";
+	int* entero = (int*) malloc (sizeof (int));
+	for (unsigned int i=0; i<rutas->size();i++){
+
+		string rutaServer=(rutas->at(i));
+		string rutaCompleta = headerTemp + rutaServer;
+
+		*entero= rutaCompleta.size();
+		escribir_a_cliente(cliente, entero, (sizeof(int)));
+
+		unsigned int j = 0;
+		int i = 0;
+		int* carac = (int*) malloc (sizeof (int));
+		for(j=0;j<  (rutaCompleta.size())  ;j++){
+			*carac = rutaCompleta[j];
+			escribir_a_cliente(cliente, carac, ( 1*sizeof(int) ) );
+		}
+
+
+		LectorArchivo* l = new LectorArchivo(rutaServer.c_str());
+		int cant;
+		int* todo = l->LeerArchivo(&cant);
+
+		*entero=cant;
+		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+
+		for(i=0;i<cant;i++){
+			*entero = todo[i];
+			escribir_a_cliente(cliente, entero, ( 1*sizeof(int) ) );
+		}
+		l->CerrarArchivo();
+
+	}
+
+	*entero = -1;
+	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+	free(entero);
+
+	FD_SET(cliente, conjuntoClientes);
 
 	return NULL;
 }
@@ -258,46 +307,8 @@ void* _escuchar(void* parametros){
 					param->act=act;
 					param->sock=status;
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
-					FD_SET(status, act);
 
-					//char* ruta = (char*) malloc (90*sizeof(char));
-					string rutaA ="Temp/";
-					string rutaB ="src/resources/gengarQuieto.bmp";
-					string ruta2 = rutaA + rutaB;
-					ruta2.size();
 
-					LectorArchivo* l = new LectorArchivo("src/resources/gengarQuieto.bmp");
-					int cant;
-					int* todo = l->LeerArchivo(&cant);
-
-					//mando tamano de la ruta
-					int* entero = (int*) malloc (sizeof (int));
-					*entero= ruta2.size();
-					escribir_a_cliente(status, entero, ( sizeof(int) ) );
-
-					//mando toda la ruta
-					unsigned int j = 0;
-					int i = 0;
-					int* carac = (int*) malloc (sizeof (int));
-					for(j=0;j<  (ruta2.size())  ;j++){
-						*carac = ruta2[j];
-						escribir_a_cliente(status, carac, ( 1*sizeof(int) ) );
-					}
-
-					//mando tamano de archivo
-					*entero=cant;
-					escribir_a_cliente(status, entero, ( sizeof(int) ) );
-
-					//mando todo el archivo
-					for(i=0;i<cant;i++){
-						*entero = todo[i];
-						escribir_a_cliente(status, entero, ( 1*sizeof(int) ) );
-					}
-
-					l->CerrarArchivo();
-					*entero = -1;
-					escribir_a_cliente(status, entero, ( sizeof(int) ) );
-					free(entero);
 
 
 				} else {
