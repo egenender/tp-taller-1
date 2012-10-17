@@ -35,9 +35,6 @@ Server::Server(){
 	FD_ZERO (&activos);
 	FD_SET (sock, &activos);
 
-
-	printf("rd en inic: %p \n",&leidos);
-	printf("act en inic: %p \n",&activos);
 }
 
 Server::Server(int port){
@@ -279,7 +276,7 @@ void* _escuchar(void* parametros){
 
 	struct sockaddr_in nombre_cliente;
 	size_t size;
-//
+
 //	printf("cola en _escuchar: %p \n",cola_entrantes);
 //	printf("tamanio en _escuchar: %i \n",tamanio);
 //	printf("rd en _escuchar: %p \n",rd);
@@ -288,9 +285,6 @@ void* _escuchar(void* parametros){
 	while (true){
 		/* Block until input arrives on one or more active sockets.  */
 		*rd=*act;
-		printf("antes select \n");
-//		printf ("%p \n", act);
-//		printf ("%p \n", rd);
 
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			perror ("select");
