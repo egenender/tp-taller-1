@@ -99,6 +99,7 @@ parametrosServer_t* Server::inicializar_parametros(size_t tamanio){
 	return parametros;
 }
 
+
 int Server::crear_socket (unsigned short int port) {
 	int sock;
 	struct sockaddr_in name;
@@ -198,6 +199,13 @@ void* leer_de_cliente (int filedes,size_t tam){
     }
 }
 
+void* _enviar_inicializacion(void* sock){
+
+	//Mandar todos los archivos para inicializar
+
+	return NULL;
+}
+
 void* _escuchar(void* parametros){
 
 	parametrosServer_t* param=(parametrosServer_t*) parametros;
@@ -242,6 +250,14 @@ void* _escuchar(void* parametros){
 						exit (EXIT_FAILURE);
 					}
 					fprintf (stderr, "Server: connect from host %s, port %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
+					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
+
+					pthread_t threadInicializacion;
+
+					parametrosInit_t* param=(parametrosInit_t*)malloc(sizeof(parametrosInit_t));
+					param->act=act;
+					param->sock=status;
+					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
 					FD_SET(status, act);
 
 					//char* ruta = (char*) malloc (90*sizeof(char));

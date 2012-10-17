@@ -34,6 +34,7 @@ class GestorConfiguraciones{
 		mapa_per* tiposPersonajes;
 		mapa_tex* texturas;
 		ConfiguracionNivel* configNivel;
+		std::vector<string>* vectorRutas;
 
 	public:
 		static GestorConfiguraciones* getInstance();
@@ -57,6 +58,9 @@ class GestorConfiguraciones{
 		int ObtenerAnchoPantalla();
 		int ObtenerMargenScroll();
 		Superficie* ObtenerFondo();
+		void AgregarAVector(string ruta);
+
+		std::vector<string>* devolverVectorRutas();
 
 		Manual* ObtenerManual();
 		VistaProtagonista* ObtenerVistaManual();
