@@ -29,8 +29,15 @@ VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* camina
 }
 
 void VistaProtagonista::actualizar(Observable* observable) {
+	if (pararDeDibujar) return;
+	int estado = observable->obtenerEstado();
+	if (estado == MUERTO){
+		pararDeDibujar = true;
+		return;
+	}
+
 	posicionDibujar = observable->obtenerPosicion();
-	animacionActual = animaciones->at(observable->obtenerEstado());
+	animacionActual = animaciones->at(estado);
 }
 
 VistaProtagonista::~VistaProtagonista() {}

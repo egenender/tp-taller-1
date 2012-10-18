@@ -3,6 +3,7 @@
 VistaAnimada::VistaAnimada() {
 	animacionActual = NULL;
 	animaciones = new map<int,Animacion*>();
+	pararDeDibujar = false;
 }
 
 VistaAnimada::~VistaAnimada() {
@@ -27,6 +28,7 @@ VistaAnimada::~VistaAnimada() {
 }
 
 bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara ) {
+	if (pararDeDibujar) return true;
 	if (display == NULL || animacionActual == NULL || posicionDibujar == NULL)
 		return false;
 
