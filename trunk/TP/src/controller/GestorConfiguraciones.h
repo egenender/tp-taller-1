@@ -26,6 +26,8 @@ typedef std::map <std::string,std::string> mapa_tex;
 typedef std::map <std::string,TipoProtagonista*> mapa_prot;
 typedef std::map <std::string,TipoPersonaje*> mapa_auto;
 
+typedef std::map <std::string,string> mapa_niveles;
+
 class GestorConfiguraciones{
 	private:
 		static GestorConfiguraciones instancia;
@@ -37,6 +39,8 @@ class GestorConfiguraciones{
 		mapa_tex* texturas;
 		ConfiguracionNivel* configNivel;
 		std::vector<string>* vectorRutas;
+
+		mapa_niveles* posiblesNiveles;
 
 		int nivelElegido;
 	public:
@@ -70,7 +74,8 @@ class GestorConfiguraciones{
 		void inicioCarga();
 		void CargaRestante();
 
-		std::vector<string>* ObtenerPosiblesNiveles();
+		void setPosiblesNiveles();
+		std::map<string,string>* ObtenerPosiblesNiveles();
 
 		std::vector<string>* devolverVectorRutas();
 

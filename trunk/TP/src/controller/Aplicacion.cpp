@@ -150,6 +150,9 @@ int main(int argc, char* argv[]) {
 	servidor.escuchar(sizeof(int));
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	gestor->setPosiblesNiveles();
+	std::map<string,string>* posibles = gestor->ObtenerPosiblesNiveles();
+
 	gestor->inicioCarga();
 	gestor->setNivelElegido(0);
 	gestor->CargaRestante();
@@ -159,6 +162,8 @@ int main(int argc, char* argv[]) {
 	ManejadorCliente* manejadorCliente= new ManejadorCliente(&client);
 
 	manejadorCliente->recibirRecursos();
+
+
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);
