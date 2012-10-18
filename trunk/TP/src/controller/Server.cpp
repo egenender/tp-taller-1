@@ -257,7 +257,6 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//mando nivel a jugar
-	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 	*entero = gestor->ObtenerNivelElegido();
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
