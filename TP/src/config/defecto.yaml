@@ -4,12 +4,13 @@ juego:
     alto: 700
     fondo: src/resources/fondoGrande.png
   parametros:
-    vel_personaje: 400
     margen_scroll: 80
   tiposProtagonista:
     protagonista:
       ancho: 65
       alto: 73
+      vel_personaje: 400
+      salto: 400
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
@@ -20,6 +21,8 @@ juego:
     defe:
       ancho: 55
       alto: 47
+      vel_personaje: 400
+      salto: 400
       animaciones:
         quieto:
           sprites: src/resources/pikachuQuieto.bmp

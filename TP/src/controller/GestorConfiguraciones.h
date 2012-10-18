@@ -30,7 +30,6 @@ class GestorConfiguraciones{
 	private:
 		static GestorConfiguraciones instancia;
 		GestorConfiguraciones();
-		int vel_personaje;
 		int margen_scroll;
 		ConfiguracionPantalla* configPantalla;
 		mapa_prot* tiposProtagonista;

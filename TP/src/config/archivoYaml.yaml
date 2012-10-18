@@ -3,12 +3,13 @@ juego:
     ancho: 800
     alto: 550
   parametros:
-    vel_personaje: 300
     margen_scroll: 150
   tiposProtagonista:
     Charmeleon:
       ancho: 65
       alto: 73
+      vel_personaje: 300
+      salto: 100
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
