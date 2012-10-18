@@ -19,19 +19,19 @@ void ContenedorDummy::agregarDummy(Dummy* tonto){
 
 void ContenedorDummy::actualizar(float delta){
 	while (!cola_esta_vacia(cola_entrada)){
-		structManual_t* mod = (structManual_t*)cola_desencolar(cola_entrada);
+		structServidor_t* mod = (structServidor_t*)cola_desencolar(cola_entrada);
 		interpretarStruct(mod);
 	}
 }
 
-void ContenedorDummy::interpretarStruct(structManual_t* mod){
-	unsigned int id = structManual_obtenerID(mod);
+void ContenedorDummy::interpretarStruct(structServidor_t* mod){
+	unsigned int id = structServidor_obtener_id(mod);
 	Dummy* tonto = buscarID(id);
 	if (!tonto) return;
 	int x, y;
-	structManual_obtener_posicion(mod, &x,&y);
+	structServidor_obtener_posicion(mod, &x,&y);
 	tonto->setXY(x,y);
-	tonto->setEstado(structManual_obtener_estado(mod));
+	tonto->setEstado(structServidor_obtener_estado(mod));
 	tonto->notificar();
 }
 

@@ -113,3 +113,10 @@ void Manual::actualizarSalto(){
 bool Manual::chocaConPiso(){
 	return superficieOcupada->pasaPiso();
 }
+
+void Manual::morir(){
+	estado = MUERTO;
+}
+bool Manual::estaMuerto(){
+	return (estado == MUERTO);
+}

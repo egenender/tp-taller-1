@@ -4,7 +4,7 @@
 #include "lista.h" //ver si lo hacemos con vector
 #include "Dummy.h"
 #include "Actualizable.h"
-#include "structures/structManual.h"
+#include "structures/structServidor.h"
 
 class ContenedorDummy : public Actualizable{
 private:
@@ -17,7 +17,7 @@ public:
 	void agregarDummy(Dummy*);
 	void actualizar(float delta);
 private:
-	void interpretarStruct(structManual_t*);
+	void interpretarStruct(structServidor_t*);
 	Dummy* buscarID(unsigned int id);
 };
 

@@ -35,6 +35,8 @@ public:
 	void especial();
 	void actualizar(float delta);
 	int obtenerEstado();
+	void morir();
+	bool estaMuerto();
 private:
 	void trasladar(int,int);
 	void actualizarSalto();

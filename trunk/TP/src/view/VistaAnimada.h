@@ -10,7 +10,7 @@ class VistaAnimada : public VistaCuerpo {
 protected:
 	map<int,Animacion*>* animaciones;
 	Animacion* animacionActual;
-
+	bool pararDeDibujar;
 public:
 	VistaAnimada();
 	~VistaAnimada();
