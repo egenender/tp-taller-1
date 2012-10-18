@@ -37,7 +37,7 @@
 #define ANCHO_OBJETO 40
 #define ALTO_OBJETO 80
 #define POS_DEFECTO_OBJ 80
-#define TEXTURA_DEFECTO "src/resources/texturagrande.jpg"
+#define TEXTURA_DEFECTO "src/resources/viga2.jpg"
 
 
 // Puntero estatico para controlar la instanciacion.
@@ -70,6 +70,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	YAML::Node nodo,nodoDef;
 
 	AgregarAVector("src/config/archivoYaml.yaml");
+	AgregarAVector("src/resources/fondoGrande.png");
+	AgregarAVector("src/resources/cruzCuadroError4.png");
+	AgregarAVector("src/resources/viga2.jpg");
 
 	try{
 		std::ifstream fin("src/config/archivoYaml.yaml");
@@ -790,6 +793,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			}
 	    			else
 	    				fclose(archiv);
+	    		AgregarAVector(rutaPasiva);
 
 	    		tipoper->animacionPasiva=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
 	    		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(rutaPasiva,tipoper->ancho,tipoper->alto));
@@ -813,6 +817,7 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			}
 	    			else
 	    				fclose(archivo);
+
 	    			AgregarAVector(rutaActiva);
 	    			tipoper->animacionActivaProt=new Animacion(new HojaSprites(rutaActiva,tipoper->ancho,tipoper->alto));
 	    		}
@@ -841,10 +846,12 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 	    			else
 	    				fclose(archivo);
 
+	    			AgregarAVector(unaRuta);
+
 	    			tipoper->animacionesActiva.push_back(  new Animacion(new HojaSprites(unaRuta,tipoper->ancho,tipoper->alto))  );
 	    			tipoper->periodos.push_back (unPeriodo);
-	    			AgregarAVector(unaRuta);
 	    		}
+
 	    	}catch( YAML::TypedKeyNotFound<std::string> &e){
 	    		rutaActiva = RUTA_ACTIVA;
 
@@ -863,7 +870,6 @@ TipoPersonaje* GestorConfiguraciones::_CargarTipoPersonaje(const YAML::Node& nod
 
 	    		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo sprites en animacion activa del personaje, se cargan por defecto");
 	    	}
-	    	//AgregarAVector(rutaActiva);
 	    }
 	}
 

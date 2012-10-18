@@ -45,7 +45,7 @@ juego:
   texturas:
     viga: src/resources/viga2.jpg
     esc: src/resources/film.png
-    defe: src/resources/texturaGrande.jpg
+    defe: src/resources/viga2.jpg
   nivel:
     alto: 700
     ancho: 1400
