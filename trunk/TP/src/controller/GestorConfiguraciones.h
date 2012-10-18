@@ -67,6 +67,7 @@ class GestorConfiguraciones{
 
 		void setNivelElegido(int);
 		int ObtenerNivelElegido();
+		void inicioCarga();
 		void CargaRestante();
 
 		std::vector<string>* ObtenerPosiblesNiveles();

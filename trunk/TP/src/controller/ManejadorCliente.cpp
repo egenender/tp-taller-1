@@ -56,9 +56,12 @@ void ManejadorCliente::recibirRecursos(){
 		//leo largo de ruta
 		largo = cliente->escuchar_un_entero();
 	}
-}
-char* ManejadorCliente::recibirRuta(int largo){
 
+	elNivel = cliente->escuchar_un_entero();
+
+}
+
+char* ManejadorCliente::recibirRuta(int largo){
 
 	int* intNombre = cliente->escuchar_N_enteros(largo);
 	char *nombre = (char*) malloc((largo)*sizeof(char));
@@ -71,7 +74,6 @@ char* ManejadorCliente::recibirRuta(int largo){
 	nombre[i] = '\0';
 
 	return nombre;
-
 
 }
 

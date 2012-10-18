@@ -70,6 +70,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	texturas=new mapa_tex();
 	vectorRutas=new std::vector<string>();
 
+}
+
+void GestorConfiguraciones::inicioCarga(){
 	YAML::Node nodo,nodoDef;
 
 	AgregarAVector("src/config/archivoYaml.yaml");
@@ -139,7 +142,6 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo texturas, se cargan por defecto");
 		CargarTexturas(nodoRaizDef["texturas"]);
 	}
-
 }
 
 void GestorConfiguraciones::CargaRestante(){
