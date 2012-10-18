@@ -6,7 +6,7 @@ juego:
   parametros:
     vel_personaje: 400
     margen_scroll: 80
-  tiposPersonaje:
+  tiposProtagonista:
     protagonista:
       ancho: 65
       alto: 73
@@ -15,6 +15,17 @@ juego:
           sprites: src/resources/charmeleonQuieto.bmp
         caminar:
           sprites: src/resources/charmeleonMovimiento.bmp
+        saltar:
+          sprites: src/resources/charmeleonQuieto.bmp
+    defe:
+      ancho: 55
+      alto: 47
+      animaciones:
+        quieto:
+          sprites: src/resources/pikachuQuieto.bmp
+        caminar:
+          sprites: src/resources/pikachuMovimiento.bmp
+  tiposAutomatico:
     mono:
       ancho: 62
       alto: 54

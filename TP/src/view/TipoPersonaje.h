@@ -6,7 +6,6 @@
  */
 
 #include "Animacion.h"
-#include "../model/Manual.h"
 #include "../model/Automatico.h"
 
 class TipoPersonaje {
@@ -16,14 +15,11 @@ class TipoPersonaje {
 		int alto;
 		const char* nombre;
 		Animacion* animacionPasiva;
-		Animacion* animacionPasivaProt;
-		Animacion* animacionActivaProt;
 		vector<Animacion*> animacionesActiva;
 		vector<int> periodos;
 
 	public:
 		TipoPersonaje();
-		Manual* CrearManual(const char*,int, int,int);
 		Automatico* CrearAutomatico(const char*,int, int);
 
 };
