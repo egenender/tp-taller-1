@@ -213,9 +213,26 @@ void GestorConfiguraciones::CargaRestante(){
 
 }
 
-std::map<string,string>* ObtenerPosiblesNiveles(){
-	//std::vector<string>* niveles = new std::vector<string>;
-	return NULL;
+void GestorConfiguraciones::setPosiblesNiveles(){
+	posiblesNiveles = new mapa_niveles;
+	YAML::Node nodo;
+	std::string nombre, ruta;
+	std::ifstream fin("src/config/archivoYaml.yaml");
+	YAML::Parser parser(fin);
+	parser.GetNextDocument(nodo);
+
+	const YAML::Node& nodoNivel = nodo["juego"]["nivel"];
+
+	for(unsigned i=0;i<nodoNivel.size();i++) {
+		nodoNivel[i]["nivel"] >> nombre;
+		nodoNivel[i]["fondo"] >> ruta;
+		posiblesNiveles->insert(pair<std::string , std::string>(nombre,ruta));
+	}
+
+}
+
+std::map<string,string>* GestorConfiguraciones::ObtenerPosiblesNiveles(){
+	return posiblesNiveles;
 }
 
 void GestorConfiguraciones::setNivelElegido(int nivel){
