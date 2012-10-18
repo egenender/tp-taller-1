@@ -5,7 +5,18 @@ juego:
   parametros:
     vel_personaje: 300
     margen_scroll: 150
-  tiposPersonaje:  
+  tiposProtagonista:
+    Charmeleon:
+      ancho: 65
+      alto: 73
+      animaciones:
+        quieto:
+          sprites: src/resources/charmeleonQuieto.bmp
+        caminar:
+          sprites: src/resources/charmeleonMovimiento.bmp
+        saltar:
+          sprites: src/resources/charmeleonQuieto.bmp
+  tiposAutomatico:  
     mono:
       ancho: 140
       alto: 126
@@ -19,14 +30,6 @@ juego:
         grito2:
           sprites: src/resources/gokumonoMovimiento.bmp
           periodo: 2
-    protagonista:
-      ancho: 65
-      alto: 73
-      animaciones:
-        quieto:
-          sprites: src/resources/charmeleonQuieto.bmp
-        caminar:
-          sprites: src/resources/charmeleonMovimiento.bmp
     princesa:
       ancho: 55
       alto: 47
