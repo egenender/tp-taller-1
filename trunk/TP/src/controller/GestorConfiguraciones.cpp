@@ -15,6 +15,7 @@
 #include <sstream>
 
 #define VEL_PERSONAJE 300
+#define SALTO_PERSONAJE 100
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
@@ -61,7 +62,6 @@ void GestorConfiguraciones::AgregarAVector(string ruta){
 }
 
 GestorConfiguraciones::GestorConfiguraciones (){
-	vel_personaje=0;
 	margen_scroll=0;
 	configPantalla=0;
 	tiposProtagonista=new mapa_prot();
@@ -108,25 +108,6 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	const YAML::Node& nodoRaizDef = nodoDef["juego"];
 
 	try{
-		nodoRaiz["parametros"]["vel_personaje"] >> vel_personaje;
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga vel_personaje");
-	}catch(YAML::BadDereference &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje, se carga por defecto");
-		vel_personaje = VEL_PERSONAJE;
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje, se carga por defecto");
-			vel_personaje = VEL_PERSONAJE;
-	}catch(YAML::InvalidScalar &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje no toma valor valido, se carga por defecto");
-			vel_personaje = VEL_PERSONAJE;
-	}
-
-	if (vel_personaje<20){
-		vel_personaje = 1;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje toma valor nulo, se carga velocidad de 1");
-	}
-
-	try{
 		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -141,6 +122,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tiposPersonaje, se cargan por defecto");
 		CargarTiposProtagonista(nodoRaizDef["tiposProtagonista"], nodoRaizDef["tiposProtagonista"]);
 	}
+
 	try{
 		CargarTiposAutomaticos(nodoRaiz["tiposAutomatico"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de tiposPersonaje");
@@ -498,7 +480,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 				Log::getInstance()->writeToLogFile("ERROR","PARSER: El protagonista fue re-ubicado para entrar en el nivel");
 			}
 
-			configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, x, y, vel_personaje);
+			configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, x, y, tiposProtagonista->at(tipo)->velocidad);
 			cuerpo = configNivel->manual;
 			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt);
 			vistaCuerpo = configNivel->vistaManual;
@@ -905,6 +887,44 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo alto, se carga por defecto");
 		tipoper->alto = ALTO_PERSONAJE;
 	}
+
+	try{
+		nodo["vel_personaje"] >> tipoper->velocidad;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje en personaje, se carga por defecto");
+		tipoper->velocidad = VEL_PERSONAJE;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo vel_personaje en personaje, se carga por defecto");
+		tipoper->velocidad = VEL_PERSONAJE;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje en personaje no toma valor valido, se carga por defecto");
+		tipoper->velocidad = VEL_PERSONAJE;
+	}
+
+	if (tipoper->velocidad<25){
+		tipoper->velocidad = 25;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje en personaje toma valor bajo, se carga velocidad de 25");
+	}
+
+
+	try{
+		nodo["salto"] >> tipoper->salto;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo salto en personaje, se carga por defecto");
+		tipoper->salto = SALTO_PERSONAJE;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo salto en personaje, se carga por defecto");
+		tipoper->salto = SALTO_PERSONAJE;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El salto en personaje no toma valor valido, se carga por defecto");
+		tipoper->salto = SALTO_PERSONAJE;
+	}
+
+	if (tipoper->salto<25){
+		tipoper->salto = 25;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El salto en personaje toma valor bajo, se carga salto de 25");
+	}
+
 
 	try{
 		nodo["animaciones"];

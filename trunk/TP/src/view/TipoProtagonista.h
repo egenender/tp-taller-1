@@ -18,6 +18,8 @@ public:
 public:
 	int ancho;
 	int alto;
+	int velocidad;
+	int salto;
 	const char* nombre;
 	Animacion* animacionPasivaProt;
 	Animacion* animacionActivaProt;

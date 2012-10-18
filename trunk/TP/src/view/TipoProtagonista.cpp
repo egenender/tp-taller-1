@@ -12,6 +12,7 @@ TipoProtagonista::TipoProtagonista (){
 	ancho=0;
 	alto=0;
 	nombre=0;
+	velocidad = 0;
 	animacionPasivaProt=0;
 	animacionActivaProt=0;
 	animacionSaltaProt=0;
