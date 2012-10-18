@@ -14,6 +14,7 @@ class ManejadorCliente{
 	private:
 
 		Cliente* cliente;
+		int elNivel;
 
 	public:
 

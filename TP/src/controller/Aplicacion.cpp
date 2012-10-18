@@ -150,7 +150,8 @@ int main(int argc, char* argv[]) {
 	servidor.escuchar(sizeof(int));
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-	gestor->setNivelElegido(1);
+	gestor->inicioCarga();
+	gestor->setNivelElegido(0);
 	gestor->CargaRestante();
 
 	Cliente client;
