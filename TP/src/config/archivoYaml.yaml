@@ -75,4 +75,12 @@ juego:
           y: 200
           ancho: 80
           alto: 400
+    - nivel: MooMoo
+      alto: 600
+      ancho: 1600
+      fondo: src/resources/fondoGrande.png
+      personajes:
+        - tipo: protagonista
+          x: 400
+          y: 300
 
