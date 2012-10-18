@@ -181,6 +181,9 @@ int main(int argc, char* argv[]) {
 //	free(ruta);
 
 
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	gestor->CargaRestante(0);
+
 	Server servidor;
 
 	servidor.escuchar(sizeof(int));

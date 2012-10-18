@@ -145,7 +145,37 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		CargarTexturas(nodoRaizDef["texturas"]);
 	}
 
-	configNivel = new ConfiguracionNivel();
+}
+
+void GestorConfiguraciones::CargaRestante(int nivel){
+	YAML::Node nodo,nodoDef;
+	try{
+		std::ifstream fin("src/config/archivoYaml.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+	} catch(YAML::ParserException &e){
+		std::ifstream fin("src/config/defecto.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+	}
+	std::ifstream finDef("src/config/defecto.yaml");
+	AgregarAVector("src/config/defecto.yaml");
+	YAML::Parser parserDef(finDef);
+	parserDef.GetNextDocument(nodoDef);
+
+	try{
+		const YAML::Node& nodoRaiz = nodo["juego"];
+	}catch(YAML::Exception &e){
+		std::ifstream fin("src/config/defecto.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+	}
+
+	const YAML::Node& nodoRaiz = nodo["juego"];
+	const YAML::Node& nodoRaizDef = nodoDef["juego"];
+
+
+	configNivel = new ConfiguracionNivel(nivel);
 	try{
 		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones del Nivel");
@@ -183,8 +213,6 @@ GestorConfiguraciones::GestorConfiguraciones (){
 		margen_scroll=(configNivel->ancho)/2;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll no toma valor valido dentro de las dimensiones del nivel, se carga uno valido");
 	}
-
-
 
 }
 
