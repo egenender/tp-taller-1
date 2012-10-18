@@ -15,6 +15,20 @@ ManejadorCliente::ManejadorCliente(Cliente* clienteNuevo){
 }
 
 void ManejadorCliente::recibirRecursos(){
+	char* ruta = (char*) malloc (90*sizeof(char));
+	sprintf(ruta,"%s %s","mkdir","Temp");
+	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src");
+	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources");
+	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/config");
+	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
+	system(ruta);
+	free(ruta);
 
 
 	int largo;

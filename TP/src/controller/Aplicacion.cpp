@@ -145,109 +145,18 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
 
-//	Server servidor;
-//
-//	servidor.escribir(sizeof(int));
-//	servidor.escuchar(sizeof(int));
-//
-//	SDL_Delay(1000);
-//
-//	Cliente client;
-//
-//	client.escuchar(sizeof(int));
-
-/*	//Superficie* prueba = new Superficie ( "resources/cruzCuadroError4.png" );
-	SDL_Surface* sdlPrueba = NULL;
-	sdlPrueba = IMG_Load( "src/resources/cruzCuadroError4.png" );
-
-	size_t lala = sizeof(*sdlPrueba);
-
-	SDL_Surface* lolo = (SDL_Surface*) malloc (lala);
-	*lolo = *sdlPrueba;
-
-	cout << sdlPrueba << endl;*/
-
-
-//	char* ruta = (char*) malloc (90*sizeof(char));
-//	sprintf(ruta,"%s %s","mkdir","Temp");
-//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
-//	system(ruta);
-//	sprintf(ruta,"%s %s","mkdir","Temp/src");
-//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
-//	system(ruta);
-//	sprintf(ruta,"%s %s","mkdir","Temp/src/resources");
-//	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
-//	system(ruta);
-//	free(ruta);
-
-
-	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-	gestor->CargaRestante(0);
-
 	Server servidor;
 
 	servidor.escuchar(sizeof(int));
+
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	gestor->CargaRestante(0);
 
 	Cliente client;
 
 	ManejadorCliente* manejadorCliente= new ManejadorCliente(&client);
 
 	manejadorCliente->recibirRecursos();
-
-//	int largo;
-//	//leo largo de ruta
-//	largo = client.escuchar_un_entero();
-//
-//	while (largo>0) {
-//		//leo ruta
-//		int* intNombre = client.escuchar_N_enteros(largo);
-//		char *nombre = (char*) malloc((largo)*sizeof(char));
-//		int i=0;
-//		while(i < largo){
-//			nombre[i] = intNombre[i];
-//			i++;
-//		}
-//		free(intNombre);
-//		nombre[i] = '\0';
-//
-//
-//		cout<<largo<< endl;
-//
-//		EscrituraArchivo* e = new EscrituraArchivo(nombre);
-//		free(nombre);
-//
-//		//leo largo de todo
-//		largo = client.escuchar_un_entero();
-//		int j = 0;
-//		void* algo;
-//
-//		//de a uno leo todo y lo escribo
-//		while(j<largo){
-//			algo = client.escuchar_al_server(sizeof(int));
-//			if (algo != NULL){
-//				e->EscribirUno(  *(int*) algo , largo);
-//				j++;
-//			}
-//		}
-//
-//		e->CerrarArchivo();
-//
-//		//leo largo de ruta
-//		largo = client.escuchar_un_entero();
-//	}
-
-
-	//	VistaProtagonista* lili =
-//	new VistaProtagonista(new Manual("r" , new Area (50,50,new Posicion(50,50))),
-//			new Animacion(new HojaSprites(sdlPrueba,50,50)) ,
-//								new Animacion(new HojaSprites(sdlPrueba,50,50)) );
-//
-//	lili->Observador();
-//
-//	int ent=9;
-//	int* entero = (int*) malloc (sizeof (int));
-//	*entero=ent;
-//
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);
