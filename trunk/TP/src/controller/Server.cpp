@@ -255,6 +255,8 @@ void* _enviar_inicializacion(void* parametros){
 
 	*entero = -1;
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+
+
 	free(entero);
 
 	FD_SET(cliente, conjuntoClientes);
