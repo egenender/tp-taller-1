@@ -57,7 +57,6 @@ void GestorConfiguraciones::AgregarAVector(string ruta){
 
 	vectorRutas->push_back(ruta);
 
-
 }
 
 GestorConfiguraciones::GestorConfiguraciones (){
@@ -190,7 +189,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 }
 
 std::map<string,string>* ObtenerPosiblesNiveles(){
-	//std::map<string,string>* niveles = new std::map<string,string>;
+	//std::vector<string>* niveles = new std::vector<string>;
 	return NULL;
 }
 

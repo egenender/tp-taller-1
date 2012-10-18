@@ -60,7 +60,7 @@ class GestorConfiguraciones{
 		Superficie* ObtenerFondo();
 		void AgregarAVector(string ruta);
 
-		std::map<string,string>* ObtenerPosiblesNiveles();
+		std::vector<string>* ObtenerPosiblesNiveles();
 
 		std::vector<string>* devolverVectorRutas();
 

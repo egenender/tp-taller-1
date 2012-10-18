@@ -8,6 +8,7 @@
 #include "Server.h"
 #include "LectorArchivo.h"
 #include "EscrituraArchivo.h"
+#include "ManejadorCliente.h"
 
 #include "../model/Manual.h"
 #include "../view/Superficie.h"
@@ -185,47 +186,52 @@ int main(int argc, char* argv[]) {
 	servidor.escuchar(sizeof(int));
 
 	Cliente client;
-	int largo;
-	//leo largo de ruta
-	largo = client.escuchar_un_entero();
 
-	while (largo>0) {
-		//leo ruta
-		int* intNombre = client.escuchar_N_enteros(largo);
-		char *nombre = (char*) malloc((largo)*sizeof(char));
-		int i=0;
-		while(i < largo){
-			nombre[i] = intNombre[i];
-			i++;
-		}
-		free(intNombre);
-		nombre[i] = '\0';
+	ManejadorCliente* manejadorCliente= new ManejadorCliente(&client);
 
+	manejadorCliente->recibirRecursos();
 
-		cout<<largo<< endl;
-
-		EscrituraArchivo* e = new EscrituraArchivo(nombre);
-		free(nombre);
-
-		//leo largo de todo
-		largo = client.escuchar_un_entero();
-		int j = 0;
-		void* algo;
-
-		//de a uno leo todo y lo escribo
-		while(j<largo){
-			algo = client.escuchar_al_server(sizeof(int));
-			if (algo != NULL){
-				e->EscribirUno(  *(int*) algo , largo);
-				j++;
-			}
-		}
-
-		e->CerrarArchivo();
-
-		//leo largo de ruta
-		largo = client.escuchar_un_entero();
-	}
+//	int largo;
+//	//leo largo de ruta
+//	largo = client.escuchar_un_entero();
+//
+//	while (largo>0) {
+//		//leo ruta
+//		int* intNombre = client.escuchar_N_enteros(largo);
+//		char *nombre = (char*) malloc((largo)*sizeof(char));
+//		int i=0;
+//		while(i < largo){
+//			nombre[i] = intNombre[i];
+//			i++;
+//		}
+//		free(intNombre);
+//		nombre[i] = '\0';
+//
+//
+//		cout<<largo<< endl;
+//
+//		EscrituraArchivo* e = new EscrituraArchivo(nombre);
+//		free(nombre);
+//
+//		//leo largo de todo
+//		largo = client.escuchar_un_entero();
+//		int j = 0;
+//		void* algo;
+//
+//		//de a uno leo todo y lo escribo
+//		while(j<largo){
+//			algo = client.escuchar_al_server(sizeof(int));
+//			if (algo != NULL){
+//				e->EscribirUno(  *(int*) algo , largo);
+//				j++;
+//			}
+//		}
+//
+//		e->CerrarArchivo();
+//
+//		//leo largo de ruta
+//		largo = client.escuchar_un_entero();
+//	}
 
 
 	//	VistaProtagonista* lili =
