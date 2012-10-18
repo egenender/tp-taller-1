@@ -8,13 +8,13 @@
 #include "ConfiguracionNivel.h"
 
 
-ConfiguracionNivel::ConfiguracionNivel(){
+ConfiguracionNivel::ConfiguracionNivel(int nivel){
 	ancho=alto=0;
 	actualizables=vector<Actualizable*>();
 	manual=0;
 	vistaManual=0;
 	vistas=vector<VistaCuerpo*>();
 
-	nivelElegido = 0;
+	nivelElegido = nivel;
 }
 

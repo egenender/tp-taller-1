@@ -30,7 +30,7 @@ class ConfiguracionNivel{
 		std::vector<Actualizable*> actualizables;
 		std::vector<VistaCuerpo*> vistas;
 	public:
-		ConfiguracionNivel();
+		ConfiguracionNivel(int );
 };
 
 
