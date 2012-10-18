@@ -64,6 +64,7 @@ void GestorConfiguraciones::AgregarAVector(string ruta){
 GestorConfiguraciones::GestorConfiguraciones (){
 	margen_scroll=0;
 	configPantalla=0;
+	nivelElegido = 0;
 	tiposProtagonista=new mapa_prot();
 	tiposAutomatico=new mapa_auto();
 	texturas=new mapa_tex();
@@ -141,7 +142,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 }
 
-void GestorConfiguraciones::CargaRestante(int nivel){
+void GestorConfiguraciones::CargaRestante(){
 	YAML::Node nodo,nodoDef;
 	try{
 		std::ifstream fin("src/config/archivoYaml.yaml");
@@ -169,7 +170,7 @@ void GestorConfiguraciones::CargaRestante(int nivel){
 	const YAML::Node& nodoRaizDef = nodoDef["juego"];
 
 
-	configNivel = new ConfiguracionNivel(nivel);
+	configNivel = new ConfiguracionNivel();
 	try{
 		CargarConfiguracionNivel(nodoRaiz["nivel"],nodoRaizDef["nivel"]["personajes"],nodoRaizDef["nivel"]["plataformas"],nodoRaizDef["nivel"]["escaleras"]);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones del Nivel");
@@ -215,10 +216,18 @@ std::map<string,string>* ObtenerPosiblesNiveles(){
 	return NULL;
 }
 
+void GestorConfiguraciones::setNivelElegido(int nivel){
+	nivelElegido = nivel;
+}
+
+int GestorConfiguraciones::ObtenerNivelElegido(){
+	return nivelElegido;
+}
+
 void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes, const YAML::Node& defPlataformas, const YAML::Node& defEscaleras){
 
 	try{
-		nodo[configNivel->nivelElegido]["ancho"] >> configNivel->ancho;
+		nodo[nivelElegido]["ancho"] >> configNivel->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro del nivel, se carga por defecto");
 		configNivel->ancho = ANCHO_NIVEL;
@@ -233,7 +242,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}
 
 	try{
-		nodo[configNivel->nivelElegido]["alto"] >> configNivel->alto;
+		nodo[nivelElegido]["alto"] >> configNivel->alto;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro del nivel, se carga por defecto");
 		configNivel->alto = ALTO_NIVEL;
@@ -248,7 +257,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}
 	string ruta;
 	try{
-		nodo[configNivel->nivelElegido]["fondo"] >> ruta;
+		nodo[nivelElegido]["fondo"] >> ruta;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo fondo dentro de pantalla, se carga por defecto");
 		ruta = RUTA_FONDO;
@@ -271,7 +280,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 
 	try{
-		CargarEstaticosNivel(nodo[configNivel->nivelElegido]["plataformas"], false, true);
+		CargarEstaticosNivel(nodo[nivelElegido]["plataformas"], false, true);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las plataformas del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo plataformas, se cargan por defecto");
@@ -279,7 +288,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}
 
 	try{
-		CargarEstaticosNivel(nodo[configNivel->nivelElegido]["escaleras"], true, false);
+		CargarEstaticosNivel(nodo[nivelElegido]["escaleras"], true, false);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las escaleras del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
@@ -287,7 +296,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}
 
 	try{
-			CargarPersonajesNivel(nodo[configNivel->nivelElegido]["personajes"]);
+			CargarPersonajesNivel(nodo[nivelElegido]["personajes"]);
 			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
 		}catch(YAML::TypedKeyNotFound<std::string> &e){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
