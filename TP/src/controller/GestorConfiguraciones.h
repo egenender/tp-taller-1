@@ -38,6 +38,7 @@ class GestorConfiguraciones{
 		ConfiguracionNivel* configNivel;
 		std::vector<string>* vectorRutas;
 
+		int nivelElegido;
 	public:
 		static GestorConfiguraciones* getInstance();
 
@@ -64,7 +65,9 @@ class GestorConfiguraciones{
 		Superficie* ObtenerFondo();
 		void AgregarAVector(string ruta);
 
-		void CargaRestante(int );
+		void setNivelElegido(int);
+		int ObtenerNivelElegido();
+		void CargaRestante();
 
 		std::vector<string>* ObtenerPosiblesNiveles();
 
