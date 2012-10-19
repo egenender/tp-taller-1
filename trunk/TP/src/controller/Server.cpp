@@ -202,7 +202,10 @@ void* _enviar_inicializacion(void* parametros){
 //	rutas->push_back(rut);
 
 	string headerTemp ="Temp/";
-	int* entero = (int*) malloc (sizeof (int));
+//	int* entero = (int*) malloc (sizeof (int));
+
+	int enteroS;
+	int* entero=&enteroS;
 	for (unsigned int i=0; i< rutas->size() ;i++){
 
 		string rutaServer=(rutas->at(i));
@@ -245,7 +248,7 @@ void* _enviar_inicializacion(void* parametros){
 	*entero = gestor->ObtenerNivelElegido();
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
-	free(entero);
+//	free(entero);
 
 	FD_SET(cliente, conjuntoClientes);
 
@@ -310,7 +313,9 @@ void* _escuchar(void* parametros){
 						//close (i);
 						//FD_CLR (i, act);
 					}else
+
 						cola_entrantes->push(cambio);
+
 				}
 			}
 		}
