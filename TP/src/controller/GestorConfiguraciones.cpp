@@ -214,7 +214,7 @@ void GestorConfiguraciones::CargaRestante(){
 }
 
 void GestorConfiguraciones::setPosiblesNiveles(){
-	posiblesNiveles = new mapa_niveles;
+	posiblesNiveles = new std::vector<string>();
 	YAML::Node nodo;
 	std::string nombre, ruta;
 	std::ifstream fin("src/config/archivoYaml.yaml");
@@ -226,12 +226,12 @@ void GestorConfiguraciones::setPosiblesNiveles(){
 	for(unsigned i=0;i<nodoNivel.size();i++) {
 		nodoNivel[i]["nivel"] >> nombre;
 		nodoNivel[i]["fondo"] >> ruta;
-		posiblesNiveles->insert(pair<std::string , std::string>(nombre,ruta));
+		posiblesNiveles->push_back(nombre);
 	}
 
 }
 
-std::map<string,string>* GestorConfiguraciones::ObtenerPosiblesNiveles(){
+std::vector<string>* GestorConfiguraciones::ObtenerPosiblesNiveles(){
 	return posiblesNiveles;
 }
 

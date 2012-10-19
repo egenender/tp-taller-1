@@ -40,7 +40,7 @@ class GestorConfiguraciones{
 		ConfiguracionNivel* configNivel;
 		std::vector<string>* vectorRutas;
 
-		mapa_niveles* posiblesNiveles;
+		std::vector<string>* posiblesNiveles;
 
 		int nivelElegido;
 	public:
@@ -75,7 +75,7 @@ class GestorConfiguraciones{
 		void CargaRestante();
 
 		void setPosiblesNiveles();
-		std::map<string,string>* ObtenerPosiblesNiveles();
+		std::vector<string>* ObtenerPosiblesNiveles();
 
 		std::vector<string>* devolverVectorRutas();
 

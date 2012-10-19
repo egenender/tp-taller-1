@@ -1,4 +1,6 @@
 #include "ManejadorConectar.h"
+#include "../../controller/Cliente.h"
+#include "../../controller/ManejadorCliente.h"
 
 ManejadorConectar::ManejadorConectar(CuadroTexto* cuadroIP, CuadroTexto* cuadroPuerto, BarraEstado* labarra, lista_t* aparecer, lista_t* desaparecer) {
 	txtIP = cuadroIP;
@@ -14,6 +16,15 @@ ManejadorConectar::~ManejadorConectar() {
 void ManejadorConectar::manejarClic(){
 	string puerto = txtPuerto->obtenerMensaje();
 	string ip = txtIP->obtenerMensaje();
+
+
+	ip = "127.0.0.1";
+	unsigned short int numPuerto =  atoi(puerto.c_str());
+	numPuerto = 5557;
+	Cliente client =  Cliente(ip.c_str(),numPuerto);
+	ManejadorCliente* manejadorCliente= new ManejadorCliente(&client);
+	manejadorCliente->recibirRecursos();
+	manejadorCliente->iniciarCarga();
 
 	/*TODO:
 	 bool ok = Cliente::conectar(ip, puerto);

@@ -1,4 +1,6 @@
 #include "ManejadorCrear.h"
+#include "../../controller/Server.h"
+#include "../../controller/GestorConfiguraciones.h"
 
 ManejadorCrear::ManejadorCrear(CuadroTexto* cuadro, ListaScrolleable* ventana,BarraEstado* barraNueva) {
 	txtPuerto = cuadro;
@@ -11,27 +13,31 @@ ManejadorCrear::~ManejadorCrear() {
 }
 
 void ManejadorCrear::manejarClic(){
-	string puerto = txtPuerto->obtenerMensaje();
-	string nivel = scrollNivel->obtenerSeleccionado();
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
-	/*TODO:
-	 bool ok = Server::Crear(nivel, puerto);
-	 if (!ok){
-	 	 barra->setearMensaje("No se pudo crear el servidor");
-	 	 return;
-	 }
-	 string puntos = "";
-	 while (Server::estaCargando()){
-	 	 barra->seterMensaje("Cargando"+puntos);
-	 	 puntos += ".";
-	 	 if (strcmp(puntos.c_str, "....")
-	 	 	 puntos = "";
-	 }
-	 Paso al EstadoJuego??
-	 */
+	gestor->inicioCarga();
+
+	string puerto = txtPuerto->obtenerMensaje();
+
+	int nivel = scrollNivel->indiceSeleccionado();
+
+	int numPuerto = atoi(puerto.c_str());
+	numPuerto = 5557;
+	Server* elServer = Server::obtenerInstancia(numPuerto);
+
+	if (! elServer->estaActivo()){
+		barra->setearMensaje("No se pudo crear el servidor");
+		return;
+	}
+
+	elServer->escuchar(sizeof(int));
 
 	//Por ahora Dejo hecho esto:
 
-	barra->setearMensaje("Todavia No puedo crear el servidor");
+	gestor->setNivelElegido(nivel);
+	gestor->CargaRestante();
+
+	barra->setearMensaje("Realiza Conexion");
 	//scrollNivel->agregarElemento(puerto);
+
 }

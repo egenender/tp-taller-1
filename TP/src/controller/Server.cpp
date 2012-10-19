@@ -11,13 +11,14 @@
 #include "SDL/SDL.h"
 #include "GestorConfiguraciones.h"
 
+Server* Server::instancia= NULL;
 
 Server::Server(){
 
 	puerto=PORT;
 	activos=fd_set();
 	leidos=fd_set();
-	activado=false;
+	activado=true;
 	cola_entrantes=Cola();
 	cola_salientes=Cola();
 	//cambios_entrantes= new mapa_cambios();
@@ -28,7 +29,6 @@ Server::Server(){
 
 	if (listen (sock, 1) < 0){
 		perror ("listen");
-		exit (EXIT_FAILURE);
 	}
 
 	/* Initialize the set of active sockets.  */
@@ -37,12 +37,19 @@ Server::Server(){
 
 }
 
+Server* Server::obtenerInstancia(int puerto) {
+   if( instancia == NULL || !instancia->activado){
+	   instancia = new Server(puerto);
+   }
+   return instancia;
+}
+
 Server::Server(int port){
 
 	puerto=port;
 	activos=fd_set();
 	leidos=fd_set();
-	activado=false;
+	activado=true;
 	cola_entrantes=Cola();
 	cola_salientes=Cola();
 	//cambios_entrantes= new mapa_cambios();
@@ -52,13 +59,13 @@ Server::Server(int port){
 	sock = crear_socket (puerto);
 
 	if (listen (sock, 10) < 0){
-		perror ("listen");
-		exit (EXIT_FAILURE);
+		activado = false;
     }
 
 	/* Initialize the set of active sockets.  */
 	FD_ZERO (&activos);
 	FD_SET ( sock , &activos);
+
 }
 
 bool Server::hay_cambios(){
@@ -80,6 +87,10 @@ void* Server::desencolar_cambio(){
 
 	return cambio;
 
+}
+
+bool Server::estaActivo(){
+	return activado;
 }
 
 parametrosServer_t* Server::inicializar_parametros(size_t tamanio){
@@ -105,8 +116,7 @@ int Server::crear_socket (unsigned short int port) {
 	/* Create the socket.  */
 	sock = socket (PF_INET, SOCK_STREAM, 0);
 	if (sock < 0){
-		perror ("socket");
-		exit (EXIT_FAILURE);
+		activado = false;
 	}
 
 	/* Give the socket a name.  */
@@ -114,8 +124,9 @@ int Server::crear_socket (unsigned short int port) {
 	name.sin_port = htons (port);
 	name.sin_addr.s_addr = htonl (INADDR_ANY); // INADDR_ANY ES LA DIRECCION IP DE LA PROPIA MAQUINA
 	if (bind (sock, (struct sockaddr *) &name, sizeof (name)) < 0){
-		//perror ("bind");
-		//exit (EXIT_FAILURE);
+		activado = false;
+		Log::getInstance()->writeToLogFile("ERROR","La direccion del server ya esta en uso");
+		return 0;
 	}
 
 	return sock;
