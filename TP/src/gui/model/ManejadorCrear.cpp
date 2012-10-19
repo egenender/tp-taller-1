@@ -18,11 +18,12 @@ void ManejadorCrear::manejarClic(){
 	gestor->inicioCarga();
 
 	string puerto = txtPuerto->obtenerMensaje();
+	int numPuerto = atoi(puerto.c_str());
 
 	int nivel = scrollNivel->indiceSeleccionado();
 
-	int numPuerto = atoi(puerto.c_str());
-	numPuerto = 5557;
+	numPuerto = 5557; //harcode
+
 	Server* elServer = Server::obtenerInstancia(numPuerto);
 
 	if (! elServer->estaActivo()){
