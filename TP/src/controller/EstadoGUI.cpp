@@ -71,7 +71,7 @@ void EstadoGUI::crearBtns(){
 	btnsolapaservidor = new Boton(235, 30, 206, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
 	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
-	btnconectar = new Boton(400,400,100,50, new ManejadorConectar(txtIP, txtPuertoCliente, barra, solapaCliente2, solapaCliente1) );
+	btnconectar = new Boton(400,400,100,50, new ManejadorConectar(txtIP, txtPuertoCliente, barra, solapaCliente2, solapaCliente1, scrollPersonajes, animaciones) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorCrear(txtPuertoServidor, scrollNiveles, barra));
 	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
 	btnscrollarribaPersonajes = new Boton(300, 150, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
@@ -240,8 +240,6 @@ void EstadoGUI::crearVistas(){
 	fondoPestania->transparencia(255,0,255);
 	fondo = new Superficie("src/gui/resources/fondo.bmp");
 
-	vistaAnimaciones = new VistaMuestra();
-	animaciones->agregarObservador(vistaAnimaciones);
 }
 
 
@@ -306,7 +304,7 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistaAbajoPersonajes->dibujar(display);
 	vistaArribaNiveles->dibujar(display);
 	vistaAbajoNiveles->dibujar(display);
-	vistaAnimaciones->dibujar(display);
+	animaciones->dibujar(display);
 
 }
 
@@ -528,10 +526,6 @@ void EstadoGUI::terminar() {
 	if (animaciones){
 		delete (animaciones);
 		animaciones = NULL;
-	}
-	if (vistaAnimaciones){
-		delete (vistaAnimaciones);
-		vistaAnimaciones = NULL;
 	}
 	if (fondo){
 		delete (fondo);

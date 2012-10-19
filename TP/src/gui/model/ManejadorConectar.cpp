@@ -2,11 +2,13 @@
 #include "../../controller/Cliente.h"
 #include "../../controller/ManejadorCliente.h"
 
-ManejadorConectar::ManejadorConectar(CuadroTexto* cuadroIP, CuadroTexto* cuadroPuerto, BarraEstado* labarra, lista_t* aparecer, lista_t* desaparecer) {
+ManejadorConectar::ManejadorConectar(CuadroTexto* cuadroIP, CuadroTexto* cuadroPuerto, BarraEstado* labarra, lista_t* aparecer, lista_t* desaparecer, ListaScrolleable* lista, Muestra* animaciones) {
 	txtIP = cuadroIP;
 	txtPuerto = cuadroPuerto;
 	barra = labarra;
 	manejador = new ManejadorSolapa(aparecer, desaparecer);
+	scroll = lista;
+	muestra = animaciones;
 }
 
 ManejadorConectar::~ManejadorConectar() {
@@ -32,7 +34,8 @@ void ManejadorConectar::manejarClic(){
 	 	 return;
 	 }
 
-	 ¿¿Agregarle las cosas al scroll de Personajes??
+	 Agregarle los nombres de los personajes al Scroll.
+	 Agregarle las animaciones a la muestra.
 
 	 * */
 

@@ -21,7 +21,7 @@
 #include "../view/Superficie.h"
 #include "../gui/model/ImagenGUI.h"
 #include "../gui/model/Muestra.h"
-#include "../gui/view/VistaMuestra.h"
+
 #include "Evento.h"
 #include "GestorConfiguraciones.h"
 
@@ -45,7 +45,6 @@ private:
 
 	ImagenGUI* imgCliente, *imgServidor;
 	Muestra* animaciones;
-	VistaMuestra* vistaAnimaciones;
 
 	VistaBoton *vistaBtncrear, *vistaBtnsolapacliente1, *vistaBtnsolapacliente2, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnjugar;
 	VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;

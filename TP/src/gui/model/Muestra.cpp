@@ -1,34 +1,34 @@
 #include "Muestra.h"
 
 Muestra::Muestra(int x, int y, int ancho, int alto): ObjetoGUI(x,y,ancho,alto) {
-	vectorcito = new vector<VistaProtagonista*>();
+	animaciones = new vector<Animacion*>();
 	seleccion = 0;
 }
 
 Muestra::~Muestra() {
-	delete (vectorcito);
+	delete (animaciones);
 	//no lo que esta adentro
 }
-void Muestra::agregarVista (VistaProtagonista* newElem){
-	vectorcito->push_back(newElem);
+void Muestra::agregarVista (Animacion* newElem){
+	animaciones->push_back(newElem);
 	huboCambios();
 }
 void Muestra::eliminarVista (unsigned int elim){
-	if (elim >= vectorcito->size())return;
+	if (elim >= animaciones->size())return;
 
-	unsigned int final = vectorcito->size();
+	unsigned int final = animaciones->size();
 	unsigned int i;
 	for (i = 0;i < final; i++){
-		VistaProtagonista* elem = vectorcito->at(0);
-		vectorcito->pop_back();
+		Animacion* elem = animaciones->at(0);
+		animaciones->pop_back();
 		if (i!=elim)
-			vectorcito->push_back(elem);
+			animaciones->push_back(elem);
 		huboCambios();
 	}
 }
 
 void Muestra::siguiente(){
-	if (seleccion + 1  < vectorcito->size()){
+	if (seleccion + 1  < animaciones->size()){
 		seleccion++;
 		huboCambios();
 	}
@@ -41,8 +41,14 @@ void Muestra::anterior(){
 	}
 }
 
-VistaProtagonista* Muestra::obtenerActual(){
-	if (vectorcito->size() == 0) return NULL;
-	if (seleccion >= vectorcito->size()) return NULL;
-	else return (vectorcito->at(seleccion));
+Animacion* Muestra::obtenerActual(){
+	if (animaciones->size() == 0) return NULL;
+	if (seleccion >= animaciones->size()) return NULL;
+	else return (animaciones->at(seleccion));
+}
+bool Muestra::dibujar(SDL_Surface* display){
+	if (animaciones->size() == 0) return true;
+
+	animaciones->at(seleccion)->animar();
+	return animaciones->at(seleccion)->dibujar(display,obtenerX(),obtenerY());
 }
