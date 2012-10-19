@@ -29,6 +29,7 @@ void LectorArchivo::AsignarArchivo(const char *ruta) {
 	}
 }
 
+
 int* LectorArchivo::LeerArchivo(int* cant) {
 	if (!(archivo)){
 		archivo=fopen(RUTA_DEF,"r");
@@ -56,6 +57,7 @@ int* LectorArchivo::LeerArchivo(int* cant) {
 	}
 
 	*cant = i;
+	buffer=(int*) realloc(buffer,*cant*sizeof(int));
 	return buffer;
 }
 
