@@ -1,10 +1,9 @@
 #include "ControladorCliente.h"
 #include "../model/structures/structCliente.h"
+#include "Cliente.h"
 
-ControladorCliente::ControladorCliente(cola_t* cola, unsigned int id) {
-	cola_salida = cola;
+ControladorCliente::ControladorCliente(unsigned int id) {
 	ID = id;
-
 	ultimoEstado = QUIETO;
 }
 
@@ -42,7 +41,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 }
 
 void ControladorCliente::enviarStruct(int nuevoEstado){
-	structCliente_t* estructura = structCliente_crear(ID, nuevoEstado);
-	//cliente.encolarStruct(estructura); o cola_encolar(estructura);
-	structCliente_destruir(estructura);
+	//structCliente_t* estructura = structCliente_crear(ID, nuevoEstado);
+	/*Cliente *cliente = Cliente::obtenerInstancia();
+	cliente->encolar_cambio(estructura);*/
 }
