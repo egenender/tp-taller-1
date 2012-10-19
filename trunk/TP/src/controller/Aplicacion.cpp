@@ -27,8 +27,6 @@ Aplicacion::Aplicacion() {
 
 /** Iniciar las cosas: **/
 bool Aplicacion::iniciar() {
-	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-
 	// Iniciamos SDL:
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
     	Log::getInstance()->writeToLogFile(Log::ERROR, "Imposible iniciar SDL.");
@@ -40,7 +38,7 @@ bool Aplicacion::iniciar() {
     // Creamos la ventana:
     //if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
 
-    if((ventana=gestor->CrearPantalla())==NULL)
+    if((ventana=new Ventana(800,600))==NULL)
     	return false;
 
     /*if ((ventana = new Ventana()) == NULL)
@@ -144,25 +142,6 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 /** Se ejecuta el programa **/
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
-
-	Server servidor;
-
-	servidor.escuchar(sizeof(int));
-
-	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-	gestor->setPosiblesNiveles();
-	std::map<string,string>* posibles = gestor->ObtenerPosiblesNiveles();
-
-	gestor->inicioCarga();
-	gestor->setNivelElegido(0);
-	gestor->CargaRestante();
-
-	Cliente client;
-
-	ManejadorCliente* manejadorCliente= new ManejadorCliente(&client);
-
-	manejadorCliente->recibirRecursos();
-
 
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);

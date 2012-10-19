@@ -22,9 +22,7 @@ class ManejadorCliente{
 		char* recibirRuta(int);
 		void recibirArchivo(EscrituraArchivo*,int);
 		ManejadorCliente(Cliente*);
-
-
-
+		void iniciarCarga();
 
 
 

@@ -6,11 +6,11 @@
  */
 
 #include "ManejadorCliente.h"
+#include "GestorConfiguraciones.h"
 
 ManejadorCliente::ManejadorCliente(Cliente* clienteNuevo){
 
 	cliente=clienteNuevo;
-
 
 }
 
@@ -60,6 +60,14 @@ void ManejadorCliente::recibirRecursos(){
 	elNivel = cliente->escuchar_un_entero();
 
 }
+
+void ManejadorCliente::iniciarCarga(){
+	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+	gestor->inicioCarga();
+	gestor->setNivelElegido(elNivel);
+	gestor->CargaRestante();
+}
+
 
 char* ManejadorCliente::recibirRuta(int largo){
 

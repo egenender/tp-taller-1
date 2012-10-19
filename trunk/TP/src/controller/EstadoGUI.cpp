@@ -49,12 +49,20 @@ void EstadoGUI::crearScroll(){
 	scrollPersonajes->agregarElemento("Gengar");
 	scrollPersonajes->agregarElemento("Primeape");
 
+	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+	gestor->setPosiblesNiveles();
+	std::vector<string>* nombresNiveles= gestor->ObtenerPosiblesNiveles();
+
 	scrollNiveles = new ListaScrolleable(100,150,200,120);
-	scrollNiveles->agregarElemento("Moo Moo Farm");
-	scrollNiveles->agregarElemento("Delfino Square");
-	scrollNiveles->agregarElemento("Bowser Castle");
+
+	for (unsigned int i = 0 ; i< nombresNiveles->size(); i++) {
+
+		scrollNiveles->agregarElemento( nombresNiveles->at(i) );
+	}
+
+
 	animaciones = new Muestra(370, 180, 50,50);
-	animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
+	//animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
 void EstadoGUI::crearBtns(){

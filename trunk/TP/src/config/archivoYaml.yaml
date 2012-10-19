@@ -79,7 +79,15 @@ juego:
           y: 200
           ancho: 80
           alto: 400
-    - nivel: MooMoo
+    - nivel: Moo la Moo
+      alto: 600
+      ancho: 1600
+      fondo: src/resources/viga2.jpg
+      personajes:
+        - tipo: protagonista
+          x: 400
+          y: 300
+    - nivel: CUCU
       alto: 600
       ancho: 1600
       fondo: src/resources/fondoGrande.png

@@ -1,3 +1,6 @@
+#ifndef SERVER_H
+#define SERVER_H
+
 /*
  * Server.h
  *
@@ -61,6 +64,8 @@ class Server{
 
 	private:
 
+		static Server* instancia;
+
 		// Atributos viejos
 		//mapa_cambios* cambios_entrantes;
 		//prueba_t* cambios_salientes;
@@ -88,6 +93,8 @@ class Server{
 
 	public:
 
+	static Server* obtenerInstancia(int);
+
 		// Metodos viejos
 		//void atender_sockets(void);
 		//void informar_cambios();
@@ -104,6 +111,8 @@ class Server{
 		Server(int);
 
 		parametrosServer_t* inicializar_parametros(size_t);
+
+		bool estaActivo();
 
 		// Esto deberia crear un thread que empiece a escuchar a los clientes que le piden conexion,
 		// aceptarlos y encolar sus cambios entrantes
@@ -137,3 +146,5 @@ class Server{
 
 
 };
+
+#endif
