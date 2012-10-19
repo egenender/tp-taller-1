@@ -216,7 +216,7 @@ void* _enviar_inicializacion(void* parametros){
 		escribir_a_cliente(cliente, entero, (sizeof(int)));
 
 		unsigned int j = 0;
-		int i = 0;
+		int k = 0;
 		int* carac = (int*) malloc (sizeof (int));
 		for(j=0; j<  (rutaCompleta.size())  ;j++){
 			*carac =  rutaCompleta[j];
@@ -230,8 +230,8 @@ void* _enviar_inicializacion(void* parametros){
 		*entero=cant;
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
-		for(i=0;i<cant;i++){
-			*entero = todo[i];
+		for(k=0;k<cant;k++){
+			*entero = todo[k];
 			escribir_a_cliente(cliente, entero, ( 1*sizeof(int) ) );
 		}
 		l->CerrarArchivo();

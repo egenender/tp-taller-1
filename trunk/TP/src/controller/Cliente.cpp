@@ -116,7 +116,7 @@ char* Cliente::escuchar_N_char (int n) {
 
 void* Cliente::escuchar_al_server (size_t tamanio) {
 	void* dato = malloc (tamanio);
-	int bytes;
+	unsigned int bytes;
 	if ((bytes=read(sock,dato, tamanio))<tamanio){
 		free(dato);
 		return NULL;
