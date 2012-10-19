@@ -13,6 +13,7 @@ ManejadorCrear::~ManejadorCrear() {
 }
 
 void ManejadorCrear::manejarClic(){
+	barra->setearMensaje("Iniciando Conexion");
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
 	gestor->inicioCarga();
@@ -38,7 +39,7 @@ void ManejadorCrear::manejarClic(){
 	gestor->setNivelElegido(nivel);
 	gestor->CargaRestante();
 
-	barra->setearMensaje("Realiza Conexion");
+	barra->setearMensaje("Conexion Concretada");
 	//scrollNivel->agregarElemento(puerto);
 
 }

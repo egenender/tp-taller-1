@@ -16,6 +16,8 @@ ManejadorConectar::~ManejadorConectar() {
 }
 
 void ManejadorConectar::manejarClic(){
+	barra->setearMensaje("Iniciando Conexion...");
+
 	string puerto = txtPuerto->obtenerMensaje();
 	string ip = txtIP->obtenerMensaje();
 

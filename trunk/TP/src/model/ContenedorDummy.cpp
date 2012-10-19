@@ -15,6 +15,7 @@ ContenedorDummy::~ContenedorDummy() {
 
 void ContenedorDummy::agregarDummy(Dummy* tonto){
 	lista_insertar_ultimo(lista_dummies, tonto);
+	//barra->setearMensaje("Se ha conectado el cliente "+(lista_cantidad(lista)-1));
 }
 
 void ContenedorDummy::actualizar(float delta){
@@ -34,8 +35,15 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	tonto->setEstado(structServidor_obtener_estado(mod));
 	tonto->notificar();
 
+
 	//TODO: si es que estaba muerto, hay que ver si queremos sacarlo del listado...
 	//igual da lo mismo porque no va a volver a cambiar
+
+	/*
+	 if (structServidor_obtener_estado(mod) == MUERTO){
+	 	 barra->setearMensaje("Se ha desconectado el Cliente "+id);
+	 }
+	 */
 }
 
 Dummy* ContenedorDummy::buscarID(unsigned int id){
