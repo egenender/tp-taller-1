@@ -3,8 +3,11 @@
 
 #include "VistaAnimada.h"
 #include "../model/Observable.h"
+//#include "../gui/model/BarraEstado.h"
 
 class VistaProtagonista : public VistaAnimada {
+	//Barra* barra;
+	//bool primeraVez;
 public:
 	VistaProtagonista(Observable* protagonista, Animacion*, Animacion*);
 	~VistaProtagonista();

@@ -12,12 +12,13 @@ private:
 	vector<Manual*>* vectorManuales;
 	vector<bool>* vectorHuboCambios;
 public:
-	ContenedorManuales(vector<int>*);
+	ContenedorManuales();
 	virtual ~ContenedorManuales();
 	void actualizar(float);
 	void agregarManual(Manual*);
 private:
 	void actualizarManual(Manual*, int,unsigned int);
+	void actualizarEstados(unsigned int,int);
 };
 
 #endif /* CONTENEDORMANUALES_H_ */

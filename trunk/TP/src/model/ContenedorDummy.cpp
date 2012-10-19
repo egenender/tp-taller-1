@@ -33,6 +33,9 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	tonto->setXY(x,y);
 	tonto->setEstado(structServidor_obtener_estado(mod));
 	tonto->notificar();
+
+	//TODO: si es que estaba muerto, hay que ver si queremos sacarlo del listado...
+	//igual da lo mismo porque no va a volver a cambiar
 }
 
 Dummy* ContenedorDummy::buscarID(unsigned int id){

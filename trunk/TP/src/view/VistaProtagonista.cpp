@@ -1,7 +1,9 @@
 #include "HojaSprites.h"
 #include "VistaProtagonista.h"
 
-VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* caminar, Animacion* quieto) {
+VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* caminar, Animacion* quieto/*, BarraEstado* labarra*/) {
+	//barra = labarra;
+	//primeraVez = true;
 
 	Animacion* caminaDer = caminar;
 	caminaDer->transparencia(255,0,255); // color transparente = magenta
@@ -30,8 +32,14 @@ VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* camina
 
 void VistaProtagonista::actualizar(Observable* observable) {
 	if (pararDeDibujar) return;
+	/*if (primeraVez) {
+	 primeraVez = false;
+	 barra->setearMensaje("Se ha conectado un cliente");
+	 }*/
+
 	int estado = observable->obtenerEstado();
 	if (estado == MUERTO){
+		//barra->setearMensaje("Se ha desconectado un cliente");
 		pararDeDibujar = true;
 		return;
 	}
