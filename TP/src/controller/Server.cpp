@@ -24,14 +24,14 @@ Server::Server(){
 	//cambios_entrantes= new mapa_cambios();
 	//cambios_nuevos=false;
 
-	/* Create the socket and set it up to accept connections.  */
+	//Crear el socket e inicializar para que comience a escuchar conexiones
 	sock = crear_socket (puerto);
 
 	if (listen (sock, 1) < 0){
 		perror ("listen");
 	}
 
-	/* Initialize the set of active sockets.  */
+	// Inicialza el set de sockets activos
 	FD_ZERO (&activos);
 	FD_SET (sock, &activos);
 
@@ -55,14 +55,12 @@ Server::Server(int port){
 	//cambios_entrantes= new mapa_cambios();
 	//cambios_nuevos=false;
 
-	/* Create the socket and set it up to accept connections.  */
 	sock = crear_socket (puerto);
 
 	if (listen (sock, 10) < 0){
 		activado = false;
     }
 
-	/* Initialize the set of active sockets.  */
 	FD_ZERO (&activos);
 	FD_SET ( sock , &activos);
 
@@ -113,13 +111,13 @@ int Server::crear_socket (unsigned short int port) {
 	int sock;
 	struct sockaddr_in name;
 
-	/* Create the socket.  */
+	// Se crea el socket
 	sock = socket (PF_INET, SOCK_STREAM, 0);
 	if (sock < 0){
 		activado = false;
 	}
 
-	/* Give the socket a name.  */
+	// Se le pasan los parametros para asociar el socket a una direccion
 	name.sin_family = AF_INET;
 	name.sin_port = htons (port);
 	name.sin_addr.s_addr = htonl (INADDR_ANY); // INADDR_ANY ES LA DIRECCION IP DE LA PROPIA MAQUINA
@@ -138,23 +136,11 @@ void Server::escribir_a_cliente(int i, void* punt,size_t tam){
 
 	nbytes = write (i, punt, tam);
 
-	if (nbytes < 0){
+	if (nbytes <=0){
+		// Manejar error de lectura
 
-		/* Read error.  */
-		perror ("read");
-		exit (EXIT_FAILURE);
 
-	} else if (nbytes == 0){
-		/* End-of-file.  */
-	}else {
-		/* Data read.  */
-
-		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
-
-		//fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
-
-    }
-
+	}
 }
 
 void escribir_a_cliente(int i, void* punt,size_t tam){
@@ -165,18 +151,7 @@ void escribir_a_cliente(int i, void* punt,size_t tam){
 
 	if (nbytes < 0){
 
-		/* Read error.  */
-		perror ("write");
-		exit (EXIT_FAILURE);
-
-	} else if (nbytes == 0){
-		/* End-of-file.  */
-	}else {
-		/* Data read.  */
-
-		//if (nbytes!=sizeof(prueba_t)) printf("Armamos Bardo\n");
-
-		//fprintf (stderr, "Server: envio el struct digamos, y mando el entero:%d \n",*(int*)punt);
+		// Manejar error de escritura
 
     }
 
@@ -192,17 +167,16 @@ void* leer_de_cliente (int filedes,size_t tam){
 
 	nbytes = read (filedes, buffer, tam);
 	if (nbytes < 0){
-		/* Read error.  */
 		free(buffer);
-		perror ("read");
-		exit (EXIT_FAILURE);
+		// Manejar error de lectura
+		return NULL;
+
 	} else if (nbytes == 0){
-		/* End-of-file.  */
 		printf("Armamos Bardo\n");
 		free(buffer);
 		return NULL;
 	}else {
-		/* Data read.  */
+
 		if (nbytes!=tam)
 			printf("Armamos Bardo\n");
 
@@ -299,28 +273,27 @@ void* _escuchar(void* parametros){
 //	printf("act en _escuchar: %p \n",act);
 
 	while (true){
-		/* Block until input arrives on one or more active sockets.  */
-		*rd=*act;
 
+		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
+		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
-			perror ("select");
-			exit (EXIT_FAILURE);
+			// Manejar error select
 		}
 
-		/* Service all the sockets with input pending.  */
+		// Ahora estan los sockets pidiendo permiso, atenderlos:
 		for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, rd)){
 
 				if (i == sock) {
-					/* Connection request on original socket.  */
+					// Si el socket es sock (el que acepta conexiones) quiere decir que le estan pidiendo conectarse
 					size = sizeof (nombre_cliente);
 					if ((status=accept (sock,(struct sockaddr *) &nombre_cliente, (unsigned int *)&size)) < 0){
-						perror ("accept");
-						exit (EXIT_FAILURE);
-					}
-					fprintf (stderr, "Server: connect from host %s, port %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
-					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
+						// Manejar error accept
 
+					}
+					fprintf (stderr, "Server: conexion del host %s, en puerto %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
+
+					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
 					pthread_t threadInicializacion;
 
 					parametrosInit_t* param=(parametrosInit_t*)malloc(sizeof(parametrosInit_t));
@@ -329,7 +302,7 @@ void* _escuchar(void* parametros){
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
 
 				} else {
-					/* Data arriving on an already-connected socket.  */
+					// Aca llegan datos de un socket ya conectado
 					void* cambio = leer_de_cliente (i,tamanio);
 
 					if ( cambio == NULL){
