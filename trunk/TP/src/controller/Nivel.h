@@ -7,17 +7,21 @@
 #include "../view/VistaCuerpo.h"
 #include "../model/Manual.h"
 #include "../view/Camara.h"
-#include "Controlador.h"
+#include "ControladorCliente.h"
 #include "../model/Actualizable.h"
+
+#define CLIENTE 0
+#define SERVIDOR 1
 
 class Nivel: public Estado {
 private:
     static Nivel instancia;
-    Controlador* controlador;
+    ControladorCliente* controlador;
 	vector<Actualizable*>* actualizables;
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
 	Camara* camara;
+	int estado;
 public:
 	Nivel();
 	virtual ~Nivel();
@@ -26,6 +30,7 @@ public:
 	void terminar();
 	void actualizar(float delta);
 	void dibujar(SDL_Surface* display);
+	void setEstado(int);
 
 private:
 	//Para agregar elementos al nivel:

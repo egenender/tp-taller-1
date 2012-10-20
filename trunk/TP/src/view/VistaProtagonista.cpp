@@ -1,7 +1,7 @@
 #include "HojaSprites.h"
 #include "VistaProtagonista.h"
 
-VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* caminar, Animacion* quieto/*, BarraEstado* labarra*/) {
+VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* caminar, Animacion* quieto, Animacion* saltar/*, BarraEstado* labarra*/) {
 	//barra = labarra;
 	//primeraVez = true;
 
@@ -21,12 +21,12 @@ VistaProtagonista::VistaProtagonista(Observable* protagonista, Animacion* camina
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
 
 	//FIXME: poner las animaciones que correspondan al salto cuando esten
-	Animacion* saltandoDer = quietoIzq->voltear(HORIZONTALMENTE);
+	Animacion* saltandoDer = saltar;
 	Animacion* saltandoIzq = saltandoDer->voltear(HORIZONTALMENTE);
 	animaciones->insert(pair<int, Animacion*>(SALTANDODER, saltandoDer));
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));
 
-	posicionDibujar = protagonista->obtenerPosicion();
+	//posicionDibujar = protagonista->obtenerPosicion();
 //	actualizar(protagonista);
 }
 

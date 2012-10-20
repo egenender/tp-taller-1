@@ -1,34 +1,37 @@
 #include "Muestra.h"
 
-Muestra::Muestra(int x, int y, int ancho, int alto): ObjetoGUI(x,y,ancho,alto) {
-	animaciones = new vector<Animacion*>();
+Muestra::Muestra(Label* lbln, Label* lblv, Label* lbls, int x, int y, int ancho, int alto): ObjetoGUI(x,y,ancho,alto) {
+	personajes = new vector<TipoProtagonista*>();
 	seleccion = 0;
+	nombre = lbln;
+	velocidad = lblv;
+	salto = lbls;
 }
 
 Muestra::~Muestra() {
-	delete (animaciones);
+	delete (personajes);
 	//no lo que esta adentro
 }
-void Muestra::agregarVista (Animacion* newElem){
-	animaciones->push_back(newElem);
+void Muestra::agregarVista (TipoProtagonista* newElem){
+	personajes->push_back(newElem);
 	huboCambios();
 }
 void Muestra::eliminarVista (unsigned int elim){
-	if (elim >= animaciones->size())return;
+	if (elim >= personajes->size())return;
 
-	unsigned int final = animaciones->size();
+	unsigned int final = personajes->size();
 	unsigned int i;
 	for (i = 0;i < final; i++){
-		Animacion* elem = animaciones->at(0);
-		animaciones->pop_back();
+		TipoProtagonista* elem = personajes->at(0);
+		personajes->pop_back();
 		if (i!=elim)
-			animaciones->push_back(elem);
+			personajes->push_back(elem);
 		huboCambios();
 	}
 }
 
 void Muestra::siguiente(){
-	if (seleccion + 1  < animaciones->size()){
+	if (seleccion + 1  < personajes->size()){
 		seleccion++;
 		huboCambios();
 	}
@@ -41,14 +44,16 @@ void Muestra::anterior(){
 	}
 }
 
-Animacion* Muestra::obtenerActual(){
-	if (animaciones->size() == 0) return NULL;
-	if (seleccion >= animaciones->size()) return NULL;
-	else return (animaciones->at(seleccion));
-}
-bool Muestra::dibujar(SDL_Surface* display){
-	if (animaciones->size() == 0) return true;
 
-	animaciones->at(seleccion)->animar();
-	return animaciones->at(seleccion)->dibujar(display,obtenerX(),obtenerY());
+bool Muestra::dibujar(SDL_Surface* display){
+	if (personajes->size() == 0) return true;
+
+	nombre->setearMensaje(personajes->at(seleccion)->nombre);
+
+//	string vel = " "+(personajes->at(seleccion)->velocidad);
+//	velocidad->setearMensaje(vel);
+//	//salto->setearMensaje(""+personajes->at(seleccion)->salto);
+
+	personajes->at(seleccion)->animacionPasivaProt->animar();
+	return personajes->at(seleccion)->animacionPasivaProt->dibujar(display,obtenerX(),obtenerY());
 }

@@ -1,5 +1,8 @@
 
 #include "ManejadorJugar.h"
+#include "../../controller/ManejadorCliente.h"
+#include "../../controller/ManejadorEstados.h"
+#include "../../controller/GestorConfiguraciones.h"
 
 ManejadorJugar::ManejadorJugar(ListaScrolleable* lista, BarraEstado* laBarra) {
 	scroll = lista;
@@ -11,7 +14,23 @@ ManejadorJugar::~ManejadorJugar() {
 }
 
 void ManejadorJugar::manejarClic(){
-	unsigned int elegido = scroll->indiceSeleccionado();
+	string elegido = scroll->obtenerSeleccionado();
+	ManejadorCliente *mCliente = ManejadorCliente::obtenerInstancia(NULL);
+
+	mCliente->seleccionarProt(elegido);
+
+	if (! mCliente->personajeAceptado() ){
+		barra->setearMensaje("No se pudo elegir al personaje, ya fue elegido por otro cliente");
+		//scroll->eliminarElemento(elegido); ->vemos si hay que hacer esto o no.
+		return ;
+	}
+
+	GestorConfiguraciones *gestor = GestorConfiguraciones::getInstance();
+	gestor->setProtagonista(elegido);
+
+	ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
+
+
 	/*Cliente* cliente = Cliente::ObtenerInstancia();
 
 	cliente->indicarPersonaje(elegido);

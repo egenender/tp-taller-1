@@ -15,6 +15,8 @@
 #include "../view/TipoProtagonista.h"
 #include "../view/ConfiguracionPantalla.h"
 #include "../view/ConfiguracionNivel.h"
+#include "../model/ContenedorDummy.h"
+#include "../model/Dummy.h"
 #include "../log/Log.h"
 #include "../gui/model/Ventana.h"
 #include <map>
@@ -45,6 +47,9 @@ class GestorConfiguraciones{
 		std::vector<TipoProtagonista*>* posiblesTiposProt;
 
 		int nivelElegido;
+		ContenedorDummy* contenedor;
+		Dummy* dummy;
+
 	public:
 		static GestorConfiguraciones* getInstance();
 
@@ -86,9 +91,10 @@ class GestorConfiguraciones{
 		Manual* ObtenerManual();
 		VistaProtagonista* ObtenerVistaManual();
 
+		void setProtagonista(string nombre);
+
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
-
+		Dummy* obtenerDummyMio();
 };
-
 

@@ -11,19 +11,25 @@ Nivel::Nivel() {
 	vistas = NULL;
 	camara = NULL;
 	controlador = NULL;
+	estado = SERVIDOR;
 }
 
 Nivel::~Nivel() {
 
 }
 
+void Nivel::setEstado(int state){
+	estado = state;
+}
+
 void Nivel::manejarEvento(SDL_Event* evento) {
+	if (estado == SERVIDOR) return;
 	if ((evento->type == SDL_KEYDOWN)
 			&& (evento->key.keysym.sym == SDLK_ESCAPE)) {
 		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 	}
 
-	controlador->manejarEvento(evento, principal);
+	controlador->manejarEvento(evento);
 }
 
 void Nivel::iniciar() {
@@ -32,21 +38,19 @@ void Nivel::iniciar() {
 
 	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
 	// Ventana::obtenerInstancia()->redimencionar(gestor->obtenerAnchoPantalla(), gestor->obtenerAltoPantalla());
-
-	Manual* algo = gestor->ObtenerManual();
+	Dummy* algo = gestor->obtenerDummyMio();
 
 	actualizables = gestor->ObtenerActualizables();
 
 	vistas = gestor->ObtenerVistas();
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),
-			gestor->ObtenerAltoNivel());
+	gestor->ObtenerAltoNivel());
 
 	camara = new Camara(0, 0);
 	algo->agregarObservador(camara);
 
-	indicarManual(algo);
-	controlador = new Controlador();
+	controlador = new ControladorCliente(algo->obtenerID());
 }
 
 void Nivel::terminar() {
@@ -93,10 +97,12 @@ void Nivel::actualizar(float delta) {
 }
 
 void Nivel::dibujar(SDL_Surface* display) {
+	if (estado == SERVIDOR) return;
 	// Dibujamos el fondo:
 	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
 
 	// Dibujamos las vistas:
+
 	for (unsigned int i = 0; i < vistas->size(); i++) {
 		VistaCuerpo* vista = vistas->at(i);
 		vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
