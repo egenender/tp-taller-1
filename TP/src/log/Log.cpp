@@ -1,8 +1,10 @@
 #include "Log.h"
 #include <iostream>
+#include <stdio.h>
 #include <fstream>
 #include <ctime>
 #include "string.h"
+#include <pthread.h>
 
 // Puntero estatico para controlar la instanciacion.
 Log Log::instance;
@@ -31,15 +33,23 @@ void Log::writeToLogFile(string severity, string description) {
 	string tiempo = ctime (&rawtime);
 	string registro = severity + " - " + description + " - " + tiempo;
 
+	pthread_mutex_t mutex;
+
+	pthread_mutex_init (&mutex , NULL);
+
+	pthread_mutex_lock(&mutex);
 	handlerWriteFile.open(Log::RUTA, handlerWriteFile.app);
 
 	if (handlerWriteFile.good()) {
 		// Si esta ok al crear o abrir el archivo de log
 		// escupe por consola y al log.
 		handlerWriteFile << registro;
-		cout << registro << endl;
+		printf ("%s\n",registro.c_str());
 	} else {
 		cout << "Error al crear/abrir el archivo de sistema LogDK.txt" << endl;
 	}
+
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 }
 
