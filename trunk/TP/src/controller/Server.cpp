@@ -67,21 +67,33 @@ Server::Server(int port){
 }
 
 bool Server::hay_cambios(){
-
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	return !cola_entrantes.empty();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 }
 
 void Server::encolar_cambio(void* cambio){
-
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	cola_salientes.push(cambio);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 }
 
 void* Server::desencolar_cambio(){
-
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	void* cambio= cola_entrantes.front();
 	cola_entrantes.pop();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 	return cambio;
 
@@ -199,17 +211,12 @@ void* _enviar_inicializacion(void* parametros){
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
-
-
 	std::vector<string>* rutas= gestor->devolverVectorRutas();
-//	std::vector<string>* rutas = new vector<string>;
-//	string rut = "src/config/defecto.yaml";
-//	rutas->push_back(rut);
-//	rut = "src/config/archivoYaml.yaml";
-//	rutas->push_back(rut);
+
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 	string headerTemp ="Temp/";
-//	int* entero = (int*) malloc (sizeof (int));
 
 	int enteroS;
 	int* entero=&enteroS;
@@ -252,7 +259,13 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//mando nivel a jugar
+
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	*entero = gestor->ObtenerNivelElegido();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
+
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//mando disponibilidad de protagonista
