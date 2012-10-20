@@ -1,6 +1,8 @@
 #include "ManejadorConectar.h"
 #include "../../controller/Cliente.h"
 #include "../../controller/ManejadorCliente.h"
+#include "../../controller/GestorConfiguraciones.h";
+#include "../../view/TipoProtagonista.h";
 
 ManejadorConectar::ManejadorConectar(CuadroTexto* cuadroIP, CuadroTexto* cuadroPuerto, BarraEstado* labarra, lista_t* aparecer, lista_t* desaparecer, ListaScrolleable* lista, Muestra* animaciones) {
 	txtIP = cuadroIP;
@@ -27,22 +29,32 @@ void ManejadorConectar::manejarClic(){
 
 	Cliente* client= Cliente::obtenerInstancia(ip.c_str(),numPuerto);
 
-	ManejadorCliente* manejadorCliente= new ManejadorCliente(client);
+	ManejadorCliente* manejadorCliente= ManejadorCliente::obtenerInstancia(client);
 	manejadorCliente->recibirRecursos();
 	manejadorCliente->iniciarCarga();
 
-	/*TODO:
-	 bool ok = Cliente::conectar(ip, puerto);
-	 if (!ok){
-	 	 labarra->setearMensaje("No se ha podido realizar la conexion");
-	 	 return;
-	 }
+	GestorConfiguraciones* gestor =GestorConfiguraciones::getInstance();
+	gestor->CargaRestante();
 
-	 Agregarle los nombres de los personajes al Scroll.
-	 Agregarle las animaciones a la muestra.
+//	bool ok = Cliente::conectar(ip, puerto);
+//	if (!ok){
+//	 	 labarra->setearMensaje("No se ha podido realizar la conexion");
+//	 	 return;
+//	 }
+//
+//	 Agregarle los nombres de los personajes al Scroll.
+//	 Agregarle las animaciones a la muestra.
 
-	 * */
+
+	vector<TipoProtagonista*>* personajes=gestor->ObtenerPosiblesTiposProtagonistas();
+	for (unsigned int i = 0; i < personajes->size(); i++){
+		if (personajes->at(i)->disponible){
+			string texto = personajes->at(i)->nombre;
+			scroll->agregarElemento(texto);
+			muestra->agregarVista(personajes->at(i));
+		}
+	}
 
 	manejador->manejarClic();
-	barra->setearMensaje("Aun no puedo realizar la conexion");
+	barra->setearMensaje("Conectado al Servidor");
 }

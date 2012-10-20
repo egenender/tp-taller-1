@@ -17,16 +17,16 @@ juego:
           sprites: src/resources/charmeleonMovimiento.bmp
         saltar:
           sprites: src/resources/charmeleonQuieto.bmp
-    Primeape:
-      ancho: 65
-      alto: 73
+    mono:
+      ancho: 140
+      alto: 126
       vel_personaje: 300
       salto: 100
       animaciones:
         quieto:
-          sprites: src/resources/charmeleonQuieto.bmp
+          sprites: src/resources/gokumonoQuieto.bmp
         caminar:
-          sprites: src/resources/charmeleonMovimiento.bmp
+          sprites: src/resources/gokumonoGritando.bmp
         saltar:
           sprites: src/resources/charmeleonQuieto.bmp
     Goku:

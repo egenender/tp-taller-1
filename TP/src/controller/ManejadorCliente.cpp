@@ -8,9 +8,22 @@
 #include "ManejadorCliente.h"
 #include "GestorConfiguraciones.h"
 
+
+ManejadorCliente* ManejadorCliente::instancia=NULL;
+
+ManejadorCliente* ManejadorCliente::obtenerInstancia(Cliente *client) {
+   if( instancia == NULL){
+	   instancia = new ManejadorCliente(client);
+   }
+   return instancia;
+}
+
 ManejadorCliente::ManejadorCliente(Cliente* clienteNuevo){
 
 	cliente=clienteNuevo;
+	elNivel = -1;
+	tiposProt = NULL;
+	IDprot = -1;
 
 }
 
@@ -63,10 +76,10 @@ void ManejadorCliente::recibirRecursos(){
 
 }
 
-void ManejadorCliente::seleccionarProt(int ID){
-	int* entero;
-	*entero = ID;
-	cliente->escribir_al_server(entero,sizeof(int));
+void ManejadorCliente::seleccionarProt(string nombre){
+	int ID = darID(nombre);
+	cliente->escribir_al_server(&ID,sizeof(int));
+
 	int dato = cliente->escuchar_un_entero();
 
 	if (dato == 1)
@@ -78,12 +91,31 @@ void ManejadorCliente::seleccionarProt(int ID){
 
 }
 
+
+bool ManejadorCliente::personajeAceptado(){
+	return (IDprot != -1);
+}
+
+
+int ManejadorCliente::darID(string nombre){
+	bool encontrado = false;
+	unsigned int i = 0;
+	while ( !encontrado && i< tiposProt->size() ){
+		encontrado = ( strcmp ( tiposProt->at(i)->nombre , nombre.c_str() ) == 0 );
+		i++;
+	}
+	i--;
+	if (! encontrado)
+		return -1;
+	return i;
+}
+
 void ManejadorCliente::recibirDisponibles(){
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 	gestor->setPosiblesTiposProtagonistas();
 	tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
 	int dato = cliente->escuchar_un_entero();
-	int i = 0;
+	unsigned int i = 0;
 	while(dato != -1){
 		if (dato == 0)
 			tiposProt->at(i)->disponible = false;
@@ -91,19 +123,12 @@ void ManejadorCliente::recibirDisponibles(){
 		dato = cliente->escuchar_un_entero();
 	}
 
-	for (i=0;i<tiposProt->size();i++){
-		cout << tiposProt->at(i)->nombre << endl;
-		cout << tiposProt->at(i)->disponible << endl;
-	}
-
-	seleccionarProt(0);
 }
 
 void ManejadorCliente::iniciarCarga(){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	gestor->inicioCarga();
 	gestor->setNivelElegido(elNivel);
-	gestor->CargaRestante();
 }
 
 

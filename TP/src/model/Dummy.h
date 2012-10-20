@@ -20,6 +20,7 @@ public:
 	Posicion* obtenerPosicion();
 	bool esMio(unsigned int);
 	void notificar();
+	unsigned int obtenerID();
 };
 
 #endif /* DUMMY_H_ */

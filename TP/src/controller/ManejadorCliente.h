@@ -13,6 +13,7 @@ using namespace std;
 class ManejadorCliente{
 
 	private:
+		static ManejadorCliente* instancia;
 
 		Cliente* cliente;
 		int elNivel;
@@ -20,6 +21,7 @@ class ManejadorCliente{
 		int IDprot;
 
 	public:
+		static ManejadorCliente* obtenerInstancia(Cliente*);
 
 		void recibirRecursos();
 		char* recibirRuta(int);
@@ -27,7 +29,10 @@ class ManejadorCliente{
 		ManejadorCliente(Cliente*);
 		void iniciarCarga();
 		void recibirDisponibles();
-		void seleccionarProt(int);
+		void seleccionarProt(string);
+		int darID(string);
+
+		bool personajeAceptado();
 
 };
 

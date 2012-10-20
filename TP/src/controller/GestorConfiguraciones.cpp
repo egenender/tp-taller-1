@@ -249,8 +249,8 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 		tiposProtagonista -> insert(pair<std::string , TipoProtagonista*>(nombre,tipoper));
 		posiblesTiposProt->push_back(tipoper);
 	}
-
 }
+
 
 std::vector<string>* GestorConfiguraciones::ObtenerPosiblesNiveles(){
 	return posiblesNiveles;
@@ -535,7 +535,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
 			configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, x, y, tiposProtagonista->at(tipo)->velocidad);
 			cuerpo = configNivel->manual;
-			configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt);
+			configNivel->vistaManual = new VistaProtagonista(tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt,tiposProtagonista->at(tipo)->animacionSaltaProt);
 			vistaCuerpo = configNivel->vistaManual;
 		}else{
 			//debo asegurarme de que pasen un tipo de personaje que ya exista:
@@ -589,7 +589,7 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 		tipo = string("protagonista");
 		configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, POS_DEFECTO, POS_DEFECTO, VEL_PERSONAJE);
 		cuerpo = configNivel->manual;
-		configNivel->vistaManual = new VistaProtagonista(configNivel->manual, tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt);
+		configNivel->vistaManual = new VistaProtagonista(tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt , tiposProtagonista->at(tipo)->animacionSaltaProt);
 		//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
 		vistaCuerpo = configNivel->vistaManual;
 		configNivel->vistas.push_back(configNivel->vistaManual );
@@ -648,6 +648,30 @@ vector<Actualizable*>* GestorConfiguraciones::ObtenerActualizables(){
 
 vector<VistaCuerpo*>* GestorConfiguraciones::ObtenerVistas(){
 	return &configNivel->vistas;
+}
+
+
+
+void GestorConfiguraciones::setProtagonista(string nombre){
+	bool encontrado = false;
+	unsigned int i = 0;
+	while ( !encontrado && i< posiblesTiposProt->size() ){
+		encontrado = ( strcmp ( posiblesTiposProt->at(i)->nombre , nombre.c_str() ) == 0 );
+		i++;
+	}
+	i--;
+	if (!encontrado)
+		return ;
+
+	VistaProtagonista* vista = new VistaProtagonista(posiblesTiposProt->at(i)->animacionActivaProt, posiblesTiposProt->at(i)->animacionPasivaProt, posiblesTiposProt->at(i)->animacionSaltaProt);
+	configNivel->vistas.push_back(vista);
+	dummy = new Dummy(i, new Posicion(50,50));
+	dummy->agregarObservador(vista);
+	contenedor = new ContenedorDummy();
+	contenedor->agregarDummy(dummy);
+	configNivel->actualizables.push_back(contenedor);
+	dummy->notificar();
+
 }
 
 Manual* GestorConfiguraciones::ObtenerManual(){
@@ -1103,4 +1127,8 @@ std::vector<string>* GestorConfiguraciones::devolverVectorRutas(){
 
 	return vectorRutas;
 
+}
+
+Dummy* GestorConfiguraciones::obtenerDummyMio(){
+	return dummy;
 }

@@ -9,7 +9,7 @@ class VistaProtagonista : public VistaAnimada {
 	//Barra* barra;
 	//bool primeraVez;
 public:
-	VistaProtagonista(Observable* protagonista, Animacion*, Animacion*);
+	VistaProtagonista(/*Observable* protagonista, */Animacion*, Animacion*, Animacion*);
 	~VistaProtagonista();
 	void actualizar(Observable* observable);
 

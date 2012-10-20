@@ -10,11 +10,13 @@
 Dummy::Dummy(unsigned int elID) {
 	ID = elID;
 	pos = NULL;
+	estado = QUIETODER;
 }
 
 Dummy::Dummy(unsigned int elID, Posicion* posicion){
 	ID = elID;
 	pos = posicion;
+	estado = QUIETODER;
 }
 
 Dummy::~Dummy() {
@@ -41,6 +43,10 @@ bool Dummy::esMio(unsigned int comparacion){
 
 int Dummy::obtenerEstado(){
 	return estado;
+}
+
+unsigned int Dummy::obtenerID(){
+	return ID;
 }
 
 Posicion* Dummy::obtenerPosicion(){

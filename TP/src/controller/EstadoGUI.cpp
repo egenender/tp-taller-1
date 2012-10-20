@@ -31,11 +31,11 @@ void EstadoGUI::iniciar() {
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();
+	crearLabels();
 	crearScroll();
 	crearBarra();
 	crearTxts();
 	crearBtns();
-	crearLabels();
 	crearSolapaServidor();
 	crearSolapaCliente();
 	crearVistas();
@@ -43,11 +43,11 @@ void EstadoGUI::iniciar() {
 
 void EstadoGUI::crearScroll(){
 	scrollPersonajes = new ListaScrolleable(100,150, 200, 150);
-	scrollPersonajes->agregarElemento("Charmeleon");
-	scrollPersonajes->agregarElemento("Pikachu");
-	scrollPersonajes->agregarElemento("Mono Goku");
-	scrollPersonajes->agregarElemento("Gengar");
-	scrollPersonajes->agregarElemento("Primeape");
+//	scrollPersonajes->agregarElemento("Charmeleon");
+//	scrollPersonajes->agregarElemento("Pikachu");
+//	scrollPersonajes->agregarElemento("Mono Goku");
+//	scrollPersonajes->agregarElemento("Gengar");
+//	scrollPersonajes->agregarElemento("Primeape");
 
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	gestor->setPosiblesNiveles();
@@ -61,7 +61,7 @@ void EstadoGUI::crearScroll(){
 	}
 
 
-	animaciones = new Muestra(370, 180, 50,50);
+	animaciones = new Muestra(lblnombrePersonaje, lblvelocidad, lblsalto, 370, 180, 50,50);
 	//animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
@@ -73,11 +73,12 @@ void EstadoGUI::crearBtns(){
 	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
 	btnconectar = new Boton(400,400,100,50, new ManejadorConectar(txtIP, txtPuertoCliente, barra, solapaCliente2, solapaCliente1, scrollPersonajes, animaciones) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorCrear(txtPuertoServidor, scrollNiveles, barra));
-	btnjugar = new Boton(400, 400, 100, 50 , new ManejadorEjemplo());
 	btnscrollarribaPersonajes = new Boton(300, 150, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
 	btnscrollabajoPersonajes = new Boton(300, 270, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
 	btnscrollarribaNiveles = new Boton(300, 150, 30,30, new ManejadorScroll(scrollNiveles,ARRIBA));
 	btnscrollabajoNiveles = new Boton(300, 240, 30,30, new ManejadorScroll(scrollNiveles,ABAJO));
+
+	btnjugar = new Boton(400, 400, 100, 50,  new ManejadorJugar(scrollPersonajes, barra));
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -264,17 +265,10 @@ void EstadoGUI::actualizar(float delta){
 	lblPuertoCliente->actualizar();
 	lblPuertoServidor->actualizar();
 	lblIP->actualizar();
-	lblnombrePersonaje->setearMensaje("Nombre: "+scrollPersonajes->obtenerSeleccionado());
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
 	animaciones->actualizar();
-
-	// FIXME: ESTO NO SE SI SE DEBERIA HACER ACA!
-
-	if(btnjugar->esClickeado()) {
-		ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
-	}
 }
 
 void EstadoGUI::dibujar(SDL_Surface* display) {
@@ -314,7 +308,6 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	btncrear->manejarEvento(evento);
 	btnsolapaservidor->manejarEvento(evento);
 	btnconectar->manejarEvento(evento);
-	btnjugar->manejarEvento(evento);
 	btnscrollarribaPersonajes->manejarEvento(evento);
 	btnscrollabajoPersonajes->manejarEvento(evento);
 	btnscrollarribaNiveles->manejarEvento(evento);
@@ -323,6 +316,8 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	txtPuertoServidor->manejarEvento(evento);
 	txtPuertoCliente->manejarEvento(evento);
 	txtIP->manejarEvento(evento);
+
+	btnjugar->manejarEvento(evento);
 }
 
 void EstadoGUI::terminar() {
