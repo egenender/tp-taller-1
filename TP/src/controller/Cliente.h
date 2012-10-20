@@ -49,6 +49,7 @@ class Cliente {
 		// Atributos viejos
 		//Thread thread_envio;
 
+		static Cliente* instancia;
 
 		// Esta conectado o no
 		bool conectado;
@@ -75,7 +76,7 @@ class Cliente {
 	public:
 		// Metodos viejos
 		//bool iniciar ();
-
+		static Cliente* obtenerInstancia(const char *,unsigned short int);
 
 		// Crea un Cliente asi noma (todo local)
 		Cliente();
