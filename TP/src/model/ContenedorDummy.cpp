@@ -1,8 +1,8 @@
 #include "ContenedorDummy.h"
 
-ContenedorDummy::ContenedorDummy(cola_t* cola) {
+ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
-	cola_entrada = cola;
+	cliente = Cliente::obtenerInstancia("",0);
 }
 
 ContenedorDummy::~ContenedorDummy() {
@@ -19,8 +19,8 @@ void ContenedorDummy::agregarDummy(Dummy* tonto){
 }
 
 void ContenedorDummy::actualizar(float delta){
-	while (!cola_esta_vacia(cola_entrada)){
-		structServidor_t* mod = (structServidor_t*)cola_desencolar(cola_entrada);
+	while (cliente->hay_cambios()){
+		structServidor_t* mod = (structServidor_t*)cliente->desencolar_cambio();
 		interpretarStruct(mod);
 	}
 }
