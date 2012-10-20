@@ -9,6 +9,8 @@
 #include "Cliente.h"
 
 
+Cliente* Cliente::instancia=NULL;
+
 Cliente::Cliente(){
 
 	conectado=false;
@@ -38,6 +40,13 @@ Cliente::Cliente(const char * dir_host,unsigned short int port){
 	crear_socket();
 	conectar();
 
+}
+
+Cliente* Cliente::obtenerInstancia(const char * dir_host,unsigned short int port) {
+   if( instancia == NULL){
+	   instancia = new Cliente(dir_host,port);
+   }
+   return instancia;
 }
 
 Cliente::~Cliente(){}
