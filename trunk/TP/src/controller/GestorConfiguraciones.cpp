@@ -1078,17 +1078,18 @@ Dummy* GestorConfiguraciones::obtenerDummyMio(){
 	return dummy;
 }
 
-void GestorConfiguraciones::crearManual(unsigned int id, TipoProtagonista* tipo){
+void GestorConfiguraciones::crearManual(unsigned int id){
 	if (!manuales){
 		manuales = new ContenedorManuales();
 		configNivel->actualizables.push_back(manuales);
 	}
+	TipoProtagonista* tipo = posiblesTiposProt->at(id);
 
 	int x = id * 5 + tipo->ancho;
 
 	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
 
 	Area* sup = new Area (	tipo->ancho, tipo->alto, pos );
-	Manual* nuevoManual = new Manual("", sup);
+	Manual* nuevoManual = new Manual(tipo->nombre, sup);
 	manuales->agregarManual(nuevoManual, id);
 }

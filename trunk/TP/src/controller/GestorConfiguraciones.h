@@ -96,7 +96,7 @@ class GestorConfiguraciones{
 
 		void setProtagonista(string nombre);
 		Dummy* obtenerDummyMio();
-		void crearManual(unsigned int, TipoProtagonista*);
+		void crearManual(unsigned int);
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
