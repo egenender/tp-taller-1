@@ -14,6 +14,7 @@
 class TipoProtagonista {
 public:
 	TipoProtagonista();
+	bool disponible;
 
 public:
 	int ancho;

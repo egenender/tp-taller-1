@@ -16,6 +16,8 @@ TipoProtagonista::TipoProtagonista (){
 	animacionPasivaProt=0;
 	animacionActivaProt=0;
 	animacionSaltaProt=0;
+
+	disponible = true;
 }
 
 Manual* TipoProtagonista::CrearManual(const char* nombre,int x, int y, int velocidad){

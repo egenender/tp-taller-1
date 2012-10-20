@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.exe.debug.900529905">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.exe.debug.900529905" moduleId="org.eclipse.cdt.core.settings" name="Debug">
@@ -49,6 +51,8 @@
 								</option>
 								<option id="gnu.cpp.link.option.paths.1466229657" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="/usr/include/yaml-cpp"/>
+									<listOptionValue builtIn="false" value="/usr/include/arpa"/>
+									<listOptionValue builtIn="false" value="/usr/include/x86_64-linux-gnu/sys/socket.h"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.862525328" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

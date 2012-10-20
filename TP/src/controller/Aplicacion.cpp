@@ -143,11 +143,6 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
 
-//	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-//
-//	gestor->setPosiblesTiposProtagonistas();
-//	gestor->ObtenerPosiblesTiposProtagonistas();
-
 
 //	servidor.encolar_cambio(entero);
 //	servidor.encolar_cambio(entero);

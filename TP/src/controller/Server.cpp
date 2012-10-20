@@ -255,6 +255,28 @@ void* _enviar_inicializacion(void* parametros){
 	*entero = gestor->ObtenerNivelElegido();
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
+	//mando disponibilidad de protagonista
+	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
+	for (unsigned int i; i< tiposProt->size(); i++){
+		*entero = 0;
+		if (tiposProt->at(i)->disponible)
+			*entero = 1;
+		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+	}
+	*entero = -1;
+	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+
+	void* elegido = leer_de_cliente(cliente,sizeof(int));
+	while (elegido == NULL)
+		void* elegido = leer_de_cliente(cliente,sizeof(int));
+
+	*entero = 1;
+	if ((tiposProt->at( *(int*)elegido)->disponible) == 0){
+		*entero = 0;
+	}
+	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+	cout << "mando  " << *entero << endl;
+
 //	free(entero);
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
