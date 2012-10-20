@@ -86,6 +86,11 @@ void Nivel::actualizar(float delta) {
 		cuerpito->actualizar(delta);
 	}
 
+	if (estado == SERVIDOR){
+		ContenedorManuales* cont = GestorConfiguraciones::getInstance()->obtenerContenedorManuales();
+		if (cont)
+			cont->encolarCambios();
+	}
 	// Verificar aca colisiones:
 
 	// Aca vemos si tenemos que eliminar algun cuerpo:

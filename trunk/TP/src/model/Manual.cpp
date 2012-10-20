@@ -1,4 +1,5 @@
 #include "Manual.h"
+#include <stdio.h>
 
 
 Manual::~Manual() {
@@ -48,10 +49,12 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, su
 }
 
 void Manual::moverALaDerecha(){
+	printf("estoy derecha\n");
 	movimiento(SALTANDODER, CAMINANDODER, DERECHA);
 }
 
 void Manual::moverALaIzquierda(){
+	printf("estoy izq\n");
 	movimiento(SALTANDOIZQ, CAMINANDOIZQ, IZQUIERDA);
 }
 
