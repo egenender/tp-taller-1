@@ -32,7 +32,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && ultimoEstado != QUIETO) {
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !keystates[SDLK_UP] && ultimoEstado != QUIETO) {
 		enviarStruct(QUIETO);
 		ultimoEstado = QUIETO;
 		return;
