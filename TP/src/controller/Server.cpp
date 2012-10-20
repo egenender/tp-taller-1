@@ -250,8 +250,15 @@ void* _enviar_inicializacion(void* parametros){
 
 //	free(entero);
 
+	pthread_mutex_t mutex;
+
+	pthread_mutex_init (&mutex , NULL);
+
+	pthread_mutex_lock(&mutex);
+
 	FD_SET(cliente, conjuntoClientes);
 
+	pthread_mutex_unlock(&mutex);
 	return NULL;
 }
 
