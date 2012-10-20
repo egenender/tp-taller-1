@@ -1,6 +1,7 @@
 #include "Nivel.h"
 #include "../view/VistaProtagonista.h"
 #include "../controller/GestorConfiguraciones.h" //FIXME
+#include "Server.h"
 
 
 Nivel Nivel::instancia;
@@ -41,8 +42,15 @@ void Nivel::iniciar() {
 
 	vistas = gestor->ObtenerVistas();
 
+	if(estado==SERVIDOR){
+
+		Server::obtenerInstancia(0)->escribir(structServidor_obtener_tamanio());
+
+	}
+
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),gestor->ObtenerAltoNivel());
 	if (estado == CLIENTE){
+		//Cliente::obtenerInstancia("",0) -> escuchar( structServidor_obtener_tamanio());
 		camara = new Camara(0, 0);
 		Dummy* algo = gestor->obtenerDummyMio();
 		algo->agregarObservador(camara);
