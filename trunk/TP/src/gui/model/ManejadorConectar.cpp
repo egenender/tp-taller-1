@@ -1,8 +1,8 @@
 #include "ManejadorConectar.h"
 #include "../../controller/Cliente.h"
 #include "../../controller/ManejadorCliente.h"
-#include "../../controller/GestorConfiguraciones.h";
-#include "../../view/TipoProtagonista.h";
+#include "../../controller/GestorConfiguraciones.h"
+#include "../../view/TipoProtagonista.h"
 #include "../../controller/Nivel.h"
 
 ManejadorConectar::ManejadorConectar(CuadroTexto* cuadroIP, CuadroTexto* cuadroPuerto, BarraEstado* labarra, lista_t* aparecer, lista_t* desaparecer, ListaScrolleable* lista, Muestra* animaciones) {

@@ -2,7 +2,7 @@
 #define MUESTRA_H_
 #include "ObjetoGUI.h"
 #include "../../view/Animacion.h"
-#include "Label.h";
+#include "Label.h"
 #include "../../view/TipoProtagonista.h"
 
 class Muestra :public ObjetoGUI{
