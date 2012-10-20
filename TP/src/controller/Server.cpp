@@ -266,18 +266,18 @@ void* _enviar_inicializacion(void* parametros){
 	*entero = -1;
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
-//	//recibo eleccion de cliente
-//	void* elegido = leer_de_cliente(cliente,sizeof(int));
-//	while (elegido == NULL)
-//		void* elegido = leer_de_cliente(cliente,sizeof(int));
-//
-//	//le respondo si puede o no usarlo
-//	*entero = 1;
-//	if ((tiposProt->at( *(int*)elegido)->disponible) == 0){
-//		*entero = 0;
-//	}
-//	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
-//	cout << "mando  " << *entero << endl;
+	//recibo eleccion de cliente
+	void* elegido = leer_de_cliente(cliente,sizeof(int));
+	while (elegido == NULL)
+		void* elegido = leer_de_cliente(cliente,sizeof(int));
+
+	//le respondo si puede o no usarlo
+	*entero = 1;
+	if ((tiposProt->at( *(int*)elegido)->disponible) == 0){
+		*entero = 0;
+	}
+	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+	cout << "mando  " << *entero << endl;
 
 //	free(entero);
 	pthread_mutex_unlock(&mutex);

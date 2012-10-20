@@ -1,5 +1,6 @@
 #include "ManejadorEjemplo.h"
 #include <iostream>
+#include <stdio.h>
 
 ManejadorEjemplo::ManejadorEjemplo() {
 	// TODO Auto-generated constructor stub
@@ -12,5 +13,5 @@ ManejadorEjemplo::~ManejadorEjemplo() {
 
 void ManejadorEjemplo::manejarClic(){
 
-	std::cout << "CLICK\n";
+	printf( "CLICK\n" );
 }

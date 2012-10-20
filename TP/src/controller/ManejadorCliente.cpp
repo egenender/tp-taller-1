@@ -74,7 +74,7 @@ void ManejadorCliente::seleccionarProt(int ID){
 	else
 		IDprot = -1;
 
-	cout << IDprot << endl;
+	printf("id def: %i\n",IDprot);
 
 }
 
@@ -96,7 +96,7 @@ void ManejadorCliente::recibirDisponibles(){
 		cout << tiposProt->at(i)->disponible << endl;
 	}
 
-	//seleccionarProt(0);
+	seleccionarProt(0);
 }
 
 void ManejadorCliente::iniciarCarga(){
