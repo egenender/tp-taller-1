@@ -32,11 +32,11 @@ void ManejadorCrear::manejarClic(){
 		return;
 	}
 
+	gestor->setNivelElegido(nivel);
 	elServer->escuchar(sizeof(int));
 
 	//Por ahora Dejo hecho esto:
 
-	gestor->setNivelElegido(nivel);
 	gestor->CargaRestante();
 
 	barra->setearMensaje("Conexion Concretada");
