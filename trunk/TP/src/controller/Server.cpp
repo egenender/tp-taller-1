@@ -295,11 +295,21 @@ void* _escuchar(void* parametros){
 
 	while (true){
 
+		pthread_mutex_t mutex;
+
+		pthread_mutex_init (&mutex , NULL);
+
+		pthread_mutex_lock(&mutex);
+
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
 		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			// Manejar error select
 		}
+
+		pthread_mutex_unlock(&mutex);
+
+		pthread_mutex_destroy(&mutex);
 
 		// Ahora estan los sockets pidiendo permiso, atenderlos:
 		for (i = 0; i < FD_SETSIZE; ++i){
