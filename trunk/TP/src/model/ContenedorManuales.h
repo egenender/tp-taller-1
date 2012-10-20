@@ -1,20 +1,23 @@
 #ifndef CONTENEDORMANUALES_H_
 #define CONTENEDORMANUALES_H_
 #include "Manual.h"
-#include <vector>
 #include "Observable.h"
 #include "structures/structServidor.h"
 
+#include <vector>
+#include <map>
+
 class ContenedorManuales : public Actualizable {
 private:
-	vector<int>* estados;
-	vector<Manual*>* manuales;
-	vector<bool>* huboCambios;
+	map<unsigned int, int>* estados;
+	map<unsigned int, bool>* huboCambios;
+	map<unsigned int, Manual*>* manuales;
+	vector<unsigned int>* IDs;
 public:
 	ContenedorManuales();
 	virtual ~ContenedorManuales();
 	void actualizar(float);
-	void agregarManual(Manual*);
+	void agregarManual(Manual*, unsigned int);
 	void encolarCambios();
 private:
 	void actualizarManual(Manual*, int,unsigned int);

@@ -1,18 +1,18 @@
 #ifndef CONTENEDORDUMMY_H_
 #define CONTENEDORDUMMY_H_
-#include "cola.h"
+
 #include "lista.h" //ver si lo hacemos con vector
 #include "Dummy.h"
 #include "Actualizable.h"
 #include "structures/structServidor.h"
+#include "../controller/Cliente.h"
 
 class ContenedorDummy : public Actualizable{
 private:
-	cola_t* cola_entrada;
 	lista_t* lista_dummies;
-
+	Cliente* cliente;
 public:
-	ContenedorDummy(cola_t*);
+	ContenedorDummy();
 	virtual ~ContenedorDummy();
 	void agregarDummy(Dummy*);
 	void actualizar(float delta);

@@ -14,7 +14,6 @@ ControladorCliente::~ControladorCliente() {
 void ControladorCliente::manejarEvento(SDL_Event* evento){
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
-	// Podria ser mejor :P Movimiento medio choto este:
 	if (keystates[SDLK_UP] && ultimoEstado != SALTAR) {
 		enviarStruct(SALTAR);
 		ultimoEstado = SALTAR;
@@ -41,7 +40,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 }
 
 void ControladorCliente::enviarStruct(int nuevoEstado){
-	//structCliente_t* estructura = structCliente_crear(ID, nuevoEstado);
-	/*Cliente *cliente = Cliente::obtenerInstancia();
-	cliente->encolar_cambio(estructura);*/
+	structCliente_t* estructura = structCliente_crear(ID, nuevoEstado);
+	Cliente *cliente = Cliente::obtenerInstancia("", 0);
+	cliente->encolar_cambio(estructura);
 }
