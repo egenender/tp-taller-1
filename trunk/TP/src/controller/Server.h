@@ -47,6 +47,7 @@ typedef struct parametrosServer{
 	fd_set* rd;
 	int sock;
 	int puerto;
+	std::map <int,bool> *sockets;
 
 } parametrosServer_t;
 
@@ -54,6 +55,7 @@ typedef struct parametrosInicializacion{
 
 	fd_set* act;
 	int sock;
+	std::map <int,bool> *sockets;
 
 } parametrosInit_t;
 
@@ -87,6 +89,8 @@ class Server{
 		fd_set activos,leidos;
 		// El file descriptor del socket del servidor
 		int sock;
+
+		std::map <int,bool> *sockets;
 
 		pthread_t thread_escuchar;
 		pthread_t thread_escritura;
