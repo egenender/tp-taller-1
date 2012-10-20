@@ -49,7 +49,9 @@ void Muestra::anterior(){
 bool Muestra::dibujar(SDL_Surface* display){
 	if (personajes->size() == 0) return true;
 
-	nombre->setearMensaje("Nombre :"+personajes->at(seleccion)->nombre);
+	string aux = "Nombre: ";
+	string textoNombre =  aux + personajes->at(seleccion)->nombre;
+	nombre->setearMensaje(textoNombre);
 
 	string valor = "Velocidad: " + intToString(personajes->at(seleccion)->velocidad);
 	velocidad->setearMensaje(valor);

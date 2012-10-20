@@ -17,6 +17,8 @@
 #include "../view/ConfiguracionNivel.h"
 #include "../model/ContenedorDummy.h"
 #include "../model/Dummy.h"
+#include "../model/ContenedorManuales.h"
+#include "../model/Manual.h"
 #include "../log/Log.h"
 #include "../gui/model/Ventana.h"
 #include <map>
@@ -49,6 +51,7 @@ class GestorConfiguraciones{
 		int nivelElegido;
 		ContenedorDummy* contenedor;
 		Dummy* dummy;
+		ContenedorManuales* manuales;
 
 	public:
 		static GestorConfiguraciones* getInstance();
@@ -92,9 +95,11 @@ class GestorConfiguraciones{
 		VistaProtagonista* ObtenerVistaManual();
 
 		void setProtagonista(string nombre);
+		Dummy* obtenerDummyMio();
+		void crearManual(unsigned int, TipoProtagonista*);
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
-		Dummy* obtenerDummyMio();
+
 };
 
