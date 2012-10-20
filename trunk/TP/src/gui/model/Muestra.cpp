@@ -13,6 +13,7 @@ Muestra::~Muestra() {
 	//no lo que esta adentro
 }
 void Muestra::agregarVista (TipoProtagonista* newElem){
+	newElem->animacionPasivaProt->transparencia(255,0,255);
 	personajes->push_back(newElem);
 	huboCambios();
 }
