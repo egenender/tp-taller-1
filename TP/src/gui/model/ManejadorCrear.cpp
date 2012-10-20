@@ -2,6 +2,7 @@
 #include "../../controller/Server.h"
 #include "../../controller/GestorConfiguraciones.h"
 #include "../../controller/Nivel.h"
+#include "../../model/structures/structCliente.h"
 
 ManejadorCrear::ManejadorCrear(CuadroTexto* cuadro, ListaScrolleable* ventana,BarraEstado* barraNueva) {
 	txtPuerto = cuadro;
@@ -35,7 +36,7 @@ void ManejadorCrear::manejarClic(){
 
 	gestor->setNivelElegido(nivel);
 	gestor->setPosiblesTiposProtagonistas();
-	elServer->escuchar(sizeof(int));
+	elServer->escuchar( structCliente_obtener_tamanio() );
 
 	//Por ahora Dejo hecho esto:
 

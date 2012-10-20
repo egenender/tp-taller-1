@@ -35,6 +35,8 @@ Server::Server(){
 	FD_ZERO (&activos);
 	FD_SET (sock, &activos);
 
+	sockets = new std::map <int,bool>();
+
 }
 
 Server* Server::obtenerInstancia(int puerto) {
@@ -63,6 +65,8 @@ Server::Server(int port){
 
 	FD_ZERO (&activos);
 	FD_SET ( sock , &activos);
+
+	sockets = new std::map <int,bool>();
 
 }
 
@@ -114,6 +118,7 @@ parametrosServer_t* Server::inicializar_parametros(size_t tamanio){
 	parametros->rd=&leidos;
 	parametros->sock=sock;
 	parametros->puerto=puerto;
+	parametros->sockets=sockets;
 
 	return parametros;
 }
@@ -202,6 +207,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	int cliente=((parametrosInit_t*)parametros)->sock;
 	fd_set* conjuntoClientes=((parametrosInit_t*)parametros)->act;
+	std::map <int,bool> *sockets = ((parametrosInit_t*)parametros)->sockets;
 
 	pthread_mutex_t mutex;
 
@@ -276,13 +282,20 @@ void* _enviar_inicializacion(void* parametros){
 			*entero = 1;
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 	}
+
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	*entero = -1;
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
+	//TODO: no asumir que la eleccion es buena
+
 	//recibo eleccion de cliente
-	void* elegido = leer_de_cliente(cliente,sizeof(int));
-	while (elegido == NULL)
-		void* elegido = leer_de_cliente(cliente,sizeof(int));
+	void* elegido = leer_de_cliente(cliente,sizeof(int)); //una sola lectura???
+	//while (elegido == NULL)
+//		elegido = leer_de_cliente(cliente,sizeof(int));
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 	//le respondo si puede o no usarlo
 	*entero = 0;
@@ -291,22 +304,15 @@ void* _enviar_inicializacion(void* parametros){
 		tiposProt->at( *(int*)elegido)->disponible = false;
 	}
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
-	cout << "mando  " << *entero << endl;
 
-//	free(entero);
-	pthread_mutex_unlock(&mutex);
-	pthread_mutex_destroy(&mutex);
+	gestor->crearManual(*(int*)elegido);
 
 	pthread_mutex_t mutexSet;
-
 	pthread_mutex_init (&mutexSet , NULL);
-
 	pthread_mutex_lock(&mutexSet);
-
-	FD_SET(cliente, conjuntoClientes);
-
+	sockets->at(cliente) = true;
+	//FD_SET(cliente, conjuntoClientes);
 	pthread_mutex_unlock(&mutexSet);
-
 	pthread_mutex_destroy(&mutexSet);
 	return NULL;
 }
@@ -320,6 +326,7 @@ void* _escuchar(void* parametros){
 	size_t tamanio=param->tamanio;
 	fd_set* act=param->act;
 	fd_set* rd=param->rd;
+	std::map <int,bool> *sockets = param->sockets;
 	int status;
 	int i;
 
@@ -363,12 +370,15 @@ void* _escuchar(void* parametros){
 					}
 					fprintf (stderr, "Server: conexion del host %s, en puerto %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
 
+					sockets->insert(pair<int,bool>(status,false));
+
 					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
 					pthread_t threadInicializacion;
 
 					parametrosInit_t* param=(parametrosInit_t*)malloc(sizeof(parametrosInit_t));
 					param->act=act;
 					param->sock=status;
+					param->sockets=sockets;
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
 
 					FD_SET(status,act);
@@ -381,19 +391,25 @@ void* _escuchar(void* parametros){
 						//lo que se hace si llega un dato erroneo
 						//close (i);
 						//FD_CLR (i, act);
-					}else
-						printf("recibe cosas\n");
-						pthread_mutex_t mutex;
-						pthread_mutex_init (&mutex , NULL);
-						pthread_mutex_lock(&mutex);
-						cola_entrantes->push(cambio);
-						pthread_mutex_unlock(&mutex);
-						pthread_mutex_destroy(&mutex);
+					}else{
+						// preguntamos si esta habilitado
+						if (sockets->at(i)){
+							printf("recibe cosas\n");
+							pthread_mutex_t mutex;
+							pthread_mutex_init (&mutex , NULL);
+							pthread_mutex_lock(&mutex);
+							cola_entrantes->push(cambio);
+							pthread_mutex_unlock(&mutex);
+							pthread_mutex_destroy(&mutex);
 
+						}else{
+							printf("llego antes un paquete\n");
+						}
+					}
 				}
 			}
 		}
-    }
+	}
 
 
 	return NULL;
@@ -416,6 +432,7 @@ void* _escribir(void* parametros){
 	Cola* cola_salientes=param->salientes;
 	size_t tamanio=param->tamanio;
 	fd_set* act=param->act;
+	std::map <int,bool> *sockets = param->sockets;
 	int i;
 
 	while (true){
@@ -427,7 +444,9 @@ void* _escribir(void* parametros){
 
 				if (FD_ISSET (i, act)){
 					if (i!=sock){
-						escribir_a_cliente(i,cambio,tamanio);
+						if(sockets->at(i)){
+							escribir_a_cliente(i,cambio,tamanio);
+						}
 					}
 				}
 			}
