@@ -272,9 +272,10 @@ void* _enviar_inicializacion(void* parametros){
 		void* elegido = leer_de_cliente(cliente,sizeof(int));
 
 	//le respondo si puede o no usarlo
-	*entero = 1;
-	if ((tiposProt->at( *(int*)elegido)->disponible) == 0){
-		*entero = 0;
+	*entero = 0;
+	if ((tiposProt->at( *(int*)elegido)->disponible) == true){
+		*entero = 1;
+		tiposProt->at( *(int*)elegido)->disponible = false;
 	}
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 	cout << "mando  " << *entero << endl;

@@ -86,7 +86,7 @@ void ManejadorCliente::recibirDisponibles(){
 	int i = 0;
 	while(dato != -1){
 		if (dato == 0)
-				tiposProt->at(i)->disponible = false;
+			tiposProt->at(i)->disponible = false;
 		i++;
 		dato = cliente->escuchar_un_entero();
 	}
