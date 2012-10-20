@@ -74,6 +74,8 @@ void ManejadorCliente::seleccionarProt(int ID){
 	else
 		IDprot = -1;
 
+	cout << IDprot << endl;
+
 }
 
 void ManejadorCliente::recibirDisponibles(){
@@ -84,7 +86,7 @@ void ManejadorCliente::recibirDisponibles(){
 	int i = 0;
 	while(dato != -1){
 		if (dato == 0)
-				tiposProt->at(i)->disponible;
+				tiposProt->at(i)->disponible = false;
 		i++;
 		dato = cliente->escuchar_un_entero();
 	}
@@ -94,7 +96,7 @@ void ManejadorCliente::recibirDisponibles(){
 		cout << tiposProt->at(i)->disponible << endl;
 	}
 
-	seleccionarProt(0);
+	//seleccionarProt(0);
 }
 
 void ManejadorCliente::iniciarCarga(){
