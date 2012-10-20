@@ -7,6 +7,8 @@
 
 
 #include "Cliente.h"
+#include <pthread.h>
+
 
 
 Cliente* Cliente::instancia=NULL;
@@ -74,7 +76,7 @@ bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 	if (!conectado) return false;
 
 	int nbytes;
-
+	
 	nbytes = write (sock ,datos, tamanio);
 	if (nbytes < 0){
 		//perror ("write"); osea mensaje de log
