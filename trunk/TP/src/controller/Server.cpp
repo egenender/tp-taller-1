@@ -191,8 +191,15 @@ void* _enviar_inicializacion(void* parametros){
 	int cliente=((parametrosInit_t*)parametros)->sock;
 	fd_set* conjuntoClientes=((parametrosInit_t*)parametros)->act;
 
+	pthread_mutex_t mutex;
+
+	pthread_mutex_init (&mutex , NULL);
+
+	pthread_mutex_lock(&mutex);
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+
+
 
 	std::vector<string>* rutas= gestor->devolverVectorRutas();
 //	std::vector<string>* rutas = new vector<string>;
@@ -249,16 +256,20 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 //	free(entero);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
-	pthread_mutex_t mutex;
+	pthread_mutex_t mutexSet;
 
-	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_init (&mutexSet , NULL);
 
-	pthread_mutex_lock(&mutex);
+	pthread_mutex_lock(&mutexSet);
 
 	FD_SET(cliente, conjuntoClientes);
 
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_unlock(&mutexSet);
+
+	pthread_mutex_destroy(&mutexSet);
 	return NULL;
 }
 
