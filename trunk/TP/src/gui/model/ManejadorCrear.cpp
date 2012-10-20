@@ -33,6 +33,7 @@ void ManejadorCrear::manejarClic(){
 	}
 
 	gestor->setNivelElegido(nivel);
+	gestor->setPosiblesTiposProtagonistas();
 	elServer->escuchar(sizeof(int));
 
 	//Por ahora Dejo hecho esto:

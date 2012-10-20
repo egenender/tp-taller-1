@@ -7,6 +7,7 @@
 
 #include "Cliente.h"
 #include "EscrituraArchivo.h"
+#include "../view/TipoProtagonista.h"
 using namespace std;
 
 class ManejadorCliente{
@@ -15,6 +16,8 @@ class ManejadorCliente{
 
 		Cliente* cliente;
 		int elNivel;
+		std::vector<TipoProtagonista*>* tiposProt;
+		int IDprot;
 
 	public:
 
@@ -23,8 +26,8 @@ class ManejadorCliente{
 		void recibirArchivo(EscrituraArchivo*,int);
 		ManejadorCliente(Cliente*);
 		void iniciarCarga();
-
-
+		void recibirDisponibles();
+		void seleccionarProt(int);
 
 };
 

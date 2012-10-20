@@ -59,6 +59,42 @@ void ManejadorCliente::recibirRecursos(){
 
 	elNivel = cliente->escuchar_un_entero();
 
+	recibirDisponibles();
+
+}
+
+void ManejadorCliente::seleccionarProt(int ID){
+	int* entero;
+	*entero = ID;
+	cliente->escribir_al_server(entero,sizeof(int));
+	int dato = cliente->escuchar_un_entero();
+
+	if (dato == 1)
+		IDprot = ID;
+	else
+		IDprot = -1;
+
+}
+
+void ManejadorCliente::recibirDisponibles(){
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	gestor->setPosiblesTiposProtagonistas();
+	tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
+	int dato = cliente->escuchar_un_entero();
+	int i = 0;
+	while(dato != -1){
+		if (dato == 0)
+				tiposProt->at(i)->disponible;
+		i++;
+		dato = cliente->escuchar_un_entero();
+	}
+
+	for (i=0;i<tiposProt->size();i++){
+		cout << tiposProt->at(i)->nombre << endl;
+		cout << tiposProt->at(i)->disponible << endl;
+	}
+
+	seleccionarProt(0);
 }
 
 void ManejadorCliente::iniciarCarga(){
