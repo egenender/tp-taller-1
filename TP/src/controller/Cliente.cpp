@@ -234,7 +234,7 @@ void* privEscribir(void* param){
 		pthread_mutex_init (&mutex , NULL);
 		pthread_mutex_lock(&mutex);
 		if (!cola_salientes->empty()){
-
+			printf("estoy enviando\n");
 			void* saliente = cola_salientes->front();
 			cola_salientes->pop();
 			int bytes;

@@ -27,3 +27,6 @@ int structCliente_obtener_estado(structCliente_t* estructura){
 void structCliente_destruir(structCliente_t* estructura){
 	free(estructura);
 }
+size_t structCliente_obtener_tamanio(){
+	return sizeof(structCliente_t);
+}

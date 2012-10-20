@@ -1,6 +1,7 @@
 #include "ManejadorCrear.h"
 #include "../../controller/Server.h"
 #include "../../controller/GestorConfiguraciones.h"
+#include "../../controller/Nivel.h"
 
 ManejadorCrear::ManejadorCrear(CuadroTexto* cuadro, ListaScrolleable* ventana,BarraEstado* barraNueva) {
 	txtPuerto = cuadro;
@@ -41,6 +42,8 @@ void ManejadorCrear::manejarClic(){
 	gestor->CargaRestante();
 
 	barra->setearMensaje("Conexion Concretada");
-	//scrollNivel->agregarElemento(puerto);
+
+	Nivel::obtenerInstancia()->setEstado(SERVIDOR);
+	ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
 
 }

@@ -618,7 +618,6 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 	contenedor = new ContenedorDummy();
 	contenedor->agregarDummy(dummy);
 	configNivel->actualizables.push_back(contenedor);
-	dummy->notificar();
 
 }
 

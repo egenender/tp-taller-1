@@ -3,6 +3,8 @@
 #include "../../controller/ManejadorCliente.h"
 #include "../../controller/ManejadorEstados.h"
 #include "../../controller/GestorConfiguraciones.h"
+#include "../../model/structures/structCliente.h"
+#include "../../model/structures/structServidor.h"
 
 ManejadorJugar::ManejadorJugar(ListaScrolleable* lista, BarraEstado* laBarra) {
 	scroll = lista;
@@ -28,6 +30,9 @@ void ManejadorJugar::manejarClic(){
 	GestorConfiguraciones *gestor = GestorConfiguraciones::getInstance();
 	gestor->setProtagonista(elegido);
 
+	Cliente* cliente = Cliente::obtenerInstancia("Hola Diego",0);
+	cliente->escritura(structCliente_obtener_tamanio());
+	cliente->escuchar(structServidor_obtener_tamanio());
 	ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
 
 
