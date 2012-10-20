@@ -14,6 +14,7 @@ public:
 	void manejarEvento(SDL_Event*);
 private:
 	void enviarStruct(int);
+	void revisarCambio(int);
 };
 
 #endif /* CONTROLADORCLIENTE_H_ */
