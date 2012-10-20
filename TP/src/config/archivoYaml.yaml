@@ -74,9 +74,6 @@ juego:
       ancho: 1600
       fondo: src/resources/fondoGrande.png
       personajes:
-        - tipo: protagonista
-          x: 400
-          y: 300
         - tipo: mono
           x: 100
           y: 150
