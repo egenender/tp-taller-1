@@ -35,6 +35,7 @@ void ContenedorManuales::actualizar(float delta){
 	structCliente_t* cambio;
 	while (servidor->hay_cambios()){
 		cambio = (structCliente_t*)servidor->desencolar_cambio();
+		printf("estoy actualizando %d %d \n",structCliente_obtener_id(cambio), structCliente_obtener_estado(cambio));
 		actualizarEstados(structCliente_obtener_id(cambio), structCliente_obtener_estado(cambio));
 	}
 
@@ -50,24 +51,29 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 		case QUIETO:
 			if (estadoActual == CAMINANDODER || estadoActual == CAMINANDOIZQ){
 				manual->detener();
+				huboCambios->erase(indice);
 				huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			}
 			break;
 		case SALTAR:
 			manual->saltar(); //si no debe hacerlo ya lo maneja el mismo Manual
+			huboCambios->erase(indice);
 			huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			break;
 		case CAMINANDOIZQ:
 			manual->moverALaIzquierda();
+			huboCambios->erase(indice);
 			huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			break;
 		case CAMINANDODER:
 			manual->moverALaDerecha();
+			huboCambios->erase(indice);
 			huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			break;
 		case MUERTO:
 			if (!manual->estaMuerto()){
 				manual->morir();
+				huboCambios->erase(indice);
 				huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			}
 			break;
@@ -76,7 +82,11 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 
 void ContenedorManuales::actualizarEstados(unsigned int id, int estado){
 	//si el vector es correlativo al estado
+
+	estados->erase(id);
 	estados->insert(pair<unsigned int, int>(id, estado));
+
+	printf("el estado actual es %d\n", estados->at(id));
 }
 
 void ContenedorManuales::encolarCambios(){

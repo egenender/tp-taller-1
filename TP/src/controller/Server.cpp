@@ -305,7 +305,11 @@ void* _enviar_inicializacion(void* parametros){
 	}
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	gestor->crearManual(*(int*)elegido);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 	pthread_mutex_t mutexSet;
 	pthread_mutex_init (&mutexSet , NULL);

@@ -1093,3 +1093,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	Manual* nuevoManual = new Manual(tipo->nombre, sup);
 	manuales->agregarManual(nuevoManual, id);
 }
+
+ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
+	return manuales;
+}
