@@ -36,3 +36,7 @@ void structServidor_obtener_posicion(structServidor_t* estructura, int* x, int *
 void structServidor_destruir(structServidor_t* estructura){
 	free(estructura);
 }
+
+size_t structServidor_obtener_tamanio(){
+	return sizeof(structServidor_t);
+}

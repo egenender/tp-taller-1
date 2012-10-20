@@ -11,7 +11,6 @@ Nivel::Nivel() {
 	vistas = NULL;
 	camara = NULL;
 	controlador = NULL;
-	estado = SERVIDOR;
 }
 
 Nivel::~Nivel() {
@@ -38,19 +37,17 @@ void Nivel::iniciar() {
 
 	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
 	// Ventana::obtenerInstancia()->redimencionar(gestor->obtenerAnchoPantalla(), gestor->obtenerAltoPantalla());
-	Dummy* algo = gestor->obtenerDummyMio();
-
 	actualizables = gestor->ObtenerActualizables();
 
 	vistas = gestor->ObtenerVistas();
 
-	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),
-	gestor->ObtenerAltoNivel());
-
-	camara = new Camara(0, 0);
-	algo->agregarObservador(camara);
-
-	controlador = new ControladorCliente(algo->obtenerID());
+	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),gestor->ObtenerAltoNivel());
+	if (estado == CLIENTE){
+		camara = new Camara(0, 0);
+		Dummy* algo = gestor->obtenerDummyMio();
+		algo->agregarObservador(camara);
+		controlador = new ControladorCliente(algo->obtenerID());
+	}
 }
 
 void Nivel::terminar() {

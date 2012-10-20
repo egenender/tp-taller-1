@@ -305,7 +305,6 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	btnsolapacliente1->manejarEvento(evento);
 	btnsolapacliente2->manejarEvento(evento);
-	btncrear->manejarEvento(evento);
 	btnsolapaservidor->manejarEvento(evento);
 	btnconectar->manejarEvento(evento);
 	btnscrollarribaPersonajes->manejarEvento(evento);
@@ -317,7 +316,12 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	txtPuertoCliente->manejarEvento(evento);
 	txtIP->manejarEvento(evento);
 
+
 	btnjugar->manejarEvento(evento);
+
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia()){
+		btncrear->manejarEvento(evento);
+	}
 }
 
 void EstadoGUI::terminar() {
