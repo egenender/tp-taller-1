@@ -500,104 +500,52 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 
 		int x,y;
 		int ancho, alto;
-		if (strcmp(tipo.c_str(),"protagonista")==0){
-			//ya asegure que hay nodo protagonista, entonces esto anda siempre
-			ancho = tiposProtagonista->at(tipo)->ancho;
-			alto = tiposProtagonista->at(tipo)->alto;
+
+		//debo asegurarme de que pasen un tipo de personaje que ya exista:
+		try{
+			ancho = tiposAutomatico->at(tipo)->ancho;
+			alto = tiposAutomatico->at(tipo)->alto;
 			//el posX posY indica el punto inferior central del personaje (consigna)
 			x = posX - ( ancho/2 );
 			y = posY - alto;
-
-			//veo si entra en el nivel
+				//veo si entra en el nivel
 			if (!Entra(x,y,ancho,alto)){
 				if (!Entra(0,0,ancho,alto)){
 					ancho = ANCHO_PERSONAJE;
 					alto = ALTO_PERSONAJE;
-					tiposProtagonista->at(tipo)->ancho = ANCHO_PERSONAJE;
-					tiposProtagonista->at(tipo)->alto = ALTO_PERSONAJE;
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: El protagonista fue re-dimensionado para entrar en el nivel");
+					tiposAutomatico->at(tipo)->ancho = ANCHO_PERSONAJE;
+					tiposAutomatico->at(tipo)->alto = ALTO_PERSONAJE;
+					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-dimensionado para entrar en el nivel");
 				}else{
 					x = 0;
 					y = 0;
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: El protagonista fue re-ubicado para entrar en el nivel");
+					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
 				}
 			}
-
-			//recalculo el posX posY, indica el punto inferior central del personaje (consigna)
-			x = posX - ( ancho/2 );
-			y = posY - alto;
-
 			if (!Entra(x,y,ancho,alto)){
 				x=0;
 				y=0;
-				Log::getInstance()->writeToLogFile("ERROR","PARSER: El protagonista fue re-ubicado para entrar en el nivel");
+				Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
 			}
 
-			configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, x, y, tiposProtagonista->at(tipo)->velocidad);
-			cuerpo = configNivel->manual;
-			configNivel->vistaManual = new VistaProtagonista(tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt,tiposProtagonista->at(tipo)->animacionSaltaProt);
-			vistaCuerpo = configNivel->vistaManual;
-		}else{
-			//debo asegurarme de que pasen un tipo de personaje que ya exista:
-			try{
-				ancho = tiposAutomatico->at(tipo)->ancho;
-				alto = tiposAutomatico->at(tipo)->alto;
-				//el posX posY indica el punto inferior central del personaje (consigna)
-				x = posX - ( ancho/2 );
-				y = posY - alto;
-
-				//veo si entra en el nivel
-				if (!Entra(x,y,ancho,alto)){
-					if (!Entra(0,0,ancho,alto)){
-						ancho = ANCHO_PERSONAJE;
-						alto = ALTO_PERSONAJE;
-						tiposAutomatico->at(tipo)->ancho = ANCHO_PERSONAJE;
-						tiposAutomatico->at(tipo)->alto = ALTO_PERSONAJE;
-						Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-dimensionado para entrar en el nivel");
-					}else{
-						x = 0;
-						y = 0;
-						Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
-					}
-				}
-				if (!Entra(x,y,ancho,alto)){
-					x=0;
-					y=0;
-					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
-				}
-
-				automatico = tiposAutomatico->at(tipo)->CrearAutomatico(tiposAutomatico->at(tipo)->nombre, x, y);
-			}catch(std::out_of_range &e){
-				//si no hay, por defecto
-				automatico = CrearAutomaticoDefecto(tipo.c_str(), posX, posY);
-				Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia deficion del tipo de personaje, se carga una definicion por defecto");
-			}
-			cuerpo = automatico;
-			try{
-				vistaCuerpo = new VistaAutomatico(automatico, tiposAutomatico->at(tipo)->animacionPasiva, & tiposAutomatico->at(tipo)->animacionesActiva , & tiposAutomatico->at(tipo)->periodos);
-			}catch(std::out_of_range &e){
-				vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
-			}
-			configNivel->vistas.push_back(vistaCuerpo);
+			automatico = tiposAutomatico->at(tipo)->CrearAutomatico(tiposAutomatico->at(tipo)->nombre, x, y);
+		}catch(std::out_of_range &e){
+			//si no hay, por defecto
+			automatico = CrearAutomaticoDefecto(tipo.c_str(), posX, posY);
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia deficion del tipo de personaje, se carga una definicion por defecto");
 		}
-		cuerpo->agregarObservador(vistaCuerpo);
-		configNivel->actualizables.push_back(cuerpo);
+		cuerpo = automatico;
+		try{
+			vistaCuerpo = new VistaAutomatico(automatico, tiposAutomatico->at(tipo)->animacionPasiva, & tiposAutomatico->at(tipo)->animacionesActiva , & tiposAutomatico->at(tipo)->periodos);
+		}catch(std::out_of_range &e){
+			vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
 		}
-	configNivel->vistas.push_back(configNivel->vistaManual);
-
-	if (configNivel->manual == NULL){
-		tipo = string("protagonista");
-		configNivel->manual = tiposProtagonista->at(tipo)->CrearManual(tiposProtagonista->at(tipo)->nombre, POS_DEFECTO, POS_DEFECTO, VEL_PERSONAJE);
-		cuerpo = configNivel->manual;
-		configNivel->vistaManual = new VistaProtagonista(tiposProtagonista->at(tipo)->animacionActivaProt , tiposProtagonista->at(tipo)->animacionPasivaProt , tiposProtagonista->at(tipo)->animacionSaltaProt);
-		//configNivel->vistaManual = new VistaProtagonista(configNivel->manual);
-		vistaCuerpo = configNivel->vistaManual;
-		configNivel->vistas.push_back(configNivel->vistaManual );
-		cuerpo->agregarObservador(vistaCuerpo);
-		configNivel->actualizables.push_back(cuerpo);
-
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No habia personaje principal en el nivel, se carga por defecto");
+		configNivel->vistas.push_back(vistaCuerpo);
 	}
+	cuerpo->agregarObservador(vistaCuerpo);
+	configNivel->actualizables.push_back(cuerpo);
+
+	configNivel->vistas.push_back(configNivel->vistaManual);
 
 }
 
