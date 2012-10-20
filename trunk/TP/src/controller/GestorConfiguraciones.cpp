@@ -69,7 +69,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	tiposAutomatico=new mapa_auto();
 	texturas=new mapa_tex();
 	vectorRutas=new std::vector<string>();
-
+	manuales = NULL;
 }
 
 void GestorConfiguraciones::inicioCarga(){
@@ -1076,4 +1076,19 @@ std::vector<string>* GestorConfiguraciones::devolverVectorRutas(){
 
 Dummy* GestorConfiguraciones::obtenerDummyMio(){
 	return dummy;
+}
+
+void GestorConfiguraciones::crearManual(unsigned int id, TipoProtagonista* tipo){
+	if (!manuales){
+		manuales = new ContenedorManuales();
+		configNivel->actualizables.push_back(manuales);
+	}
+
+	int x = id * 5 + tipo->ancho;
+
+	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
+
+	Area* sup = new Area (	tipo->ancho, tipo->alto, pos );
+	Manual* nuevoManual = new Manual("", sup);
+	manuales->agregarManual(nuevoManual, id);
 }
