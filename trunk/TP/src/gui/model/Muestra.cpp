@@ -49,12 +49,26 @@ void Muestra::anterior(){
 bool Muestra::dibujar(SDL_Surface* display){
 	if (personajes->size() == 0) return true;
 
-	nombre->setearMensaje(personajes->at(seleccion)->nombre);
+	nombre->setearMensaje("Nombre :"+personajes->at(seleccion)->nombre);
 
-//	string vel = " "+(personajes->at(seleccion)->velocidad);
-//	velocidad->setearMensaje(vel);
-//	//salto->setearMensaje(""+personajes->at(seleccion)->salto);
+	string valor = "Velocidad: " + intToString(personajes->at(seleccion)->velocidad);
+	velocidad->setearMensaje(valor);
+
+	valor = "Fuerza de Salto: " + intToString(personajes->at(seleccion)->salto);
+	salto->setearMensaje(valor);
 
 	personajes->at(seleccion)->animacionPasivaProt->animar();
 	return personajes->at(seleccion)->animacionPasivaProt->dibujar(display,obtenerX(),obtenerY());
+}
+
+string Muestra::intToString(int numero){
+	string resul = "";
+	string temp = "";
+	while (numero > 0){
+		temp += numero % 10 + 48;
+        numero /= 10;
+	}
+	for (int i=0;i<temp.length();i++)
+		resul+=temp[temp.length()-i-1];
+	return resul;
 }

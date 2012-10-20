@@ -19,6 +19,8 @@ public:
 	void anterior();
 	//Animacion* obtenerActual();
 	bool dibujar(SDL_Surface*);
+private:
+	string intToString(int);
 };
 
 #endif /* MUESTRA_H_ */
