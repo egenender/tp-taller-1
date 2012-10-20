@@ -209,7 +209,14 @@ void* privEscuchar(void* param){
 			continue;
 		}
 
-		if (bytes==tamanio) cola_entrantes->push(dato);
+		if (bytes==tamanio){
+			pthread_mutex_t mutex;
+			pthread_mutex_init (&mutex , NULL);
+			pthread_mutex_lock(&mutex);
+			cola_entrantes->push(dato);
+			pthread_mutex_unlock(&mutex);
+			pthread_mutex_destroy(&mutex);
+		}
 
 	}
 	return NULL;
@@ -223,6 +230,9 @@ void* privEscribir(void* param){
 	int sock=parametros->sock;
 
 	while (true){
+		pthread_mutex_t mutex;
+		pthread_mutex_init (&mutex , NULL);
+		pthread_mutex_lock(&mutex);
 		if (!cola_salientes->empty()){
 
 			void* saliente = cola_salientes->front();
@@ -234,6 +244,8 @@ void* privEscribir(void* param){
 				continue;
 			}
 		}
+		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&mutex);
 
 	}
 	return NULL;
@@ -262,7 +274,12 @@ void Cliente::escuchar(size_t tamanio){
 }
 
 void Cliente::encolar_cambio(void* cambio){
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	cola_salientes.push(cambio);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 }
 
 void Cliente::escritura(size_t tamanio){
@@ -273,23 +290,30 @@ void Cliente::escritura(size_t tamanio){
 
 	if (pthread_create(&thread,NULL,&privEscribir,(void*)param)!=0) return;
 
-
-
 }
 
 void* Cliente::desencolar_cambio(){
 
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	void* cambio=cola_entrantes.front();
 
 	cola_entrantes.pop();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 
 	return cambio;
 }
 
 bool Cliente::hay_cambios(){
 
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	return !cola_entrantes.empty();
-
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 }
 
 void Cliente::detener_escuchar(){
