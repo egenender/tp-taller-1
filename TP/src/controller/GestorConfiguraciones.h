@@ -42,6 +42,8 @@ class GestorConfiguraciones{
 
 		std::vector<string>* posiblesNiveles;
 
+		std::vector<TipoProtagonista*>* posiblesTiposProt;
+
 		int nivelElegido;
 	public:
 		static GestorConfiguraciones* getInstance();
@@ -76,6 +78,8 @@ class GestorConfiguraciones{
 
 		void setPosiblesNiveles();
 		std::vector<string>* ObtenerPosiblesNiveles();
+		void setPosiblesTiposProtagonistas();
+		std::vector<TipoProtagonista*>* ObtenerPosiblesTiposProtagonistas();
 
 		std::vector<string>* devolverVectorRutas();
 
