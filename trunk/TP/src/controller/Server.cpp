@@ -340,6 +340,7 @@ void* _escuchar(void* parametros){
 		pthread_mutex_lock(&mutex);
 
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
+		printf("antes select\n");
 		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			// Manejar error select
@@ -370,6 +371,8 @@ void* _escuchar(void* parametros){
 					param->sock=status;
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
 
+					FD_SET(status,act);
+
 				} else {
 					// Aca llegan datos de un socket ya conectado
 					void* cambio = leer_de_cliente (i,tamanio);
@@ -379,8 +382,13 @@ void* _escuchar(void* parametros){
 						//close (i);
 						//FD_CLR (i, act);
 					}else
-
+						printf("recibe cosas\n");
+						pthread_mutex_t mutex;
+						pthread_mutex_init (&mutex , NULL);
+						pthread_mutex_lock(&mutex);
 						cola_entrantes->push(cambio);
+						pthread_mutex_unlock(&mutex);
+						pthread_mutex_destroy(&mutex);
 
 				}
 			}
