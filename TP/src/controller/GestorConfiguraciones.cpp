@@ -545,8 +545,6 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 	cuerpo->agregarObservador(vistaCuerpo);
 	configNivel->actualizables.push_back(cuerpo);
 
-	configNivel->vistas.push_back(configNivel->vistaManual);
-
 }
 
 bool GestorConfiguraciones::Entra(int x, int y, int ancho, int alto){
