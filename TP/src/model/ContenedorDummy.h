@@ -19,6 +19,7 @@ public:
 private:
 	void interpretarStruct(structServidor_t*);
 	Dummy* buscarID(unsigned int id);
+	Dummy* crearDummyNuevo(unsigned int);
 };
 
 #endif /* CONTENEDORDUMMY_H_ */
