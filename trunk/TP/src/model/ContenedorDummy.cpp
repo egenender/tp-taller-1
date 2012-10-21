@@ -28,7 +28,9 @@ void ContenedorDummy::actualizar(float delta){
 void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	unsigned int id = structServidor_obtener_id(mod);
 	Dummy* tonto = buscarID(id);
-	if (!tonto) return;
+	if (!tonto) {
+		tonto = crearDummyNuevo(id);
+	}
 	int x, y;
 	structServidor_obtener_posicion(mod, &x,&y);
 	tonto->setXY(x,y);
@@ -55,5 +57,24 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 		encontrado = (tonto->esMio(id));
 		lista_iter_avanzar(iter);
 	}
+	if (!encontrado) return NULL;
 	return tonto;
+}
+
+Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
+	//Obtengo de los tiposProtagonistas el que corresponde al ID a crear
+	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+	vector<TipoProtagonista*>* tipos = gestor->ObtenerPosiblesTiposProtagonistas();
+	TipoProtagonista* tipo = tipos->at(idNuevo);
+	//Creo el nuevo Dummy, en una posicion Arbitraria
+	//FIXME: ver que onda esa posicion rara jaja
+	Dummy* nuevo = new Dummy(idNuevo, new Posicion(50,50), tipo->ancho, tipo->alto);
+
+	//Le asigno una vista para poder dibujarlo
+	VistaProtagonista* vistaNueva = new VistaProtagonista (tipo->animacionActivaProt, tipo->animacionPasivaProt, tipo->animacionSaltaProt);
+	nuevo->agregarObservador(vistaNueva);
+
+	//agrego la vista al vector de vistas del Nivel para que se dibuje:
+	gestor->ObtenerVistas()->push_back(vistaNueva);
+	return nuevo;
 }
