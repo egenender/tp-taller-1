@@ -34,16 +34,28 @@ Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
 	estado = QUIETODER;
 }
 
+Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(nombrecito, sup){
+	if (vel <= 0){
+		vel = VELOCIDAD_STANDARD;
+	}
+	if (fuerza <= 0){
+		fuerza = VELOCIDAD_STANDARD;
+	}
+
+	velocidad = vel;
+	//FIXME: esto tiene que cambiar cuando lo reciba por parametro
+	velocidadSaltoBase = -fuerza;
+
+	estado = QUIETODER;
+}
+
 Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
-		//Lanzo excepcion?
-		//Por ahora hago esto:
 		vel = VELOCIDAD_STANDARD;
 	}
 	velocidad = vel;
-
 	//FIXME: esto tiene que cambiar cuando lo reciba por parametro
-	velocidadSaltoBase = -577;
+	velocidadSaltoBase = -vel;
 
 	estado = QUIETODER;
 }

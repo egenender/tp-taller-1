@@ -25,6 +25,7 @@ private:
 public:
 	Manual(const char*, Area*);
 	Manual(const char*, Area*, int);
+	Manual(const char*, Area*, int, int);
 	virtual ~Manual();
 	void moverALaIzquierda();
 	void moverALaDerecha();

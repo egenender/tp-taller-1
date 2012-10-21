@@ -43,11 +43,6 @@ void EstadoGUI::iniciar() {
 
 void EstadoGUI::crearScroll(){
 	scrollPersonajes = new ListaScrolleable(100,150, 200, 150);
-//	scrollPersonajes->agregarElemento("Charmeleon");
-//	scrollPersonajes->agregarElemento("Pikachu");
-//	scrollPersonajes->agregarElemento("Mono Goku");
-//	scrollPersonajes->agregarElemento("Gengar");
-//	scrollPersonajes->agregarElemento("Primeape");
 
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	gestor->setPosiblesNiveles();
@@ -56,7 +51,6 @@ void EstadoGUI::crearScroll(){
 	scrollNiveles = new ListaScrolleable(100,150,200,120);
 
 	for (unsigned int i = 0 ; i< nombresNiveles->size(); i++) {
-
 		scrollNiveles->agregarElemento( nombresNiveles->at(i) );
 	}
 

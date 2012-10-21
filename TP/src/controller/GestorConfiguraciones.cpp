@@ -1090,7 +1090,8 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
 
 	Area* sup = new Area (	tipo->ancho, tipo->alto, pos );
-	Manual* nuevoManual = new Manual(tipo->nombre, sup);
+
+	Manual* nuevoManual = new Manual(tipo->nombre, sup,tipo->velocidad, tipo->salto);
 	manuales->agregarManual(nuevoManual, id);
 	configNivel->actualizables.push_back(nuevoManual);
 }
