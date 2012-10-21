@@ -1,4 +1,6 @@
 #include "ContenedorDummy.h"
+#include "../view/VistaProtagonista.h"
+#include "../controller/GestorConfiguraciones.h"
 
 ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
