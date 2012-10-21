@@ -20,9 +20,7 @@ string ContenedorDummy::intToString(unsigned int numero){
 ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
 	cliente = Cliente::obtenerInstancia("",0);
-
-	barra = new BarraEstado(0, 550, 800, 50);
-	barra->setearMensaje("");
+	barra = new BarraEstado(0, 400, 600	, 50);
 	VistaBarraEstado* vista = new VistaBarraEstado();
 	barra->agregarObservador(vista);
 	GestorConfiguraciones::getInstance()->ObtenerVistas()->push_back(vista);
