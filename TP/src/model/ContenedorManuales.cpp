@@ -23,6 +23,9 @@ ContenedorManuales::~ContenedorManuales() {
 }
 
 void ContenedorManuales::agregarManual(Manual* principal, unsigned int id){
+	huboCambios->erase(id);
+	estados->erase(id);
+	manuales->erase(id);
 
 	huboCambios->insert(pair<unsigned int, bool>(id, true));
 	estados->insert(pair<unsigned int, int>(id, principal->obtenerEstado()));
