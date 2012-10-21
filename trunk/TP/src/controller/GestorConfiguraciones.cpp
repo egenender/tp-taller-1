@@ -714,16 +714,6 @@ void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
 
 void GestorConfiguraciones::CargarTiposProtagonista(const YAML::Node& nodo, const YAML::Node& protDef){
 
-	try{
-		nodo["protagonista"];
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay definicion de tipo protagonista, se carga definicion por defecto");
-		std::string nombre("protagonista");
-		TipoProtagonista* tipoper=_CargarTipoProtagonista(protDef, "protagonista");
-		tipoper->nombre=nombre.c_str();
-		tiposProtagonista -> insert(pair<std::string , TipoProtagonista*>(nombre,tipoper));
-	}
-
 	for(YAML::Iterator it=nodo.begin();it!=nodo.end();++it) {
 		std::string nombre;
 	    it.first() >> nombre;
