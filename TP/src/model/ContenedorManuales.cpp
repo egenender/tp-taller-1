@@ -112,10 +112,19 @@ void ContenedorManuales::encolarCambios(){
 
 }
 
-structServidor_t* crearEnvio(Manual* manual, unsigned int id){
+structServidor_t* ContenedorManuales::crearEnvio(Manual* manual, unsigned int id){
 	structServidor_t* estructura;
 	int estado = manual->obtenerEstado();
 	Posicion* pos = manual->obtenerPosicion();
 	estructura = structServidor_crear(id, pos->obtenerX(), pos->obtenerY(), estado);
 	return estructura;
+}
+
+void ContenedorManuales::encolarTodos(){
+	for (unsigned int i = 0; i < IDs->size(); i++){
+		unsigned int idActual = IDs->at(i);
+		huboCambios->erase(idActual);
+		huboCambios->insert(pair<unsigned int, bool> (idActual, true));
+	}
+	encolarCambios();
 }
