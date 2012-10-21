@@ -49,7 +49,7 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 	int estadoActual = manual->obtenerEstado();
 	switch (estado){
 		case QUIETO:
-			if (estadoActual == CAMINANDODER || estadoActual == CAMINANDOIZQ){
+			if (estadoActual != QUIETODER && estadoActual != QUIETOIZQ){
 				manual->detener();
 				huboCambios->erase(indice);
 				huboCambios->insert(pair<unsigned int, bool>(indice,true));
