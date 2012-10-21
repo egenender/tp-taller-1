@@ -105,6 +105,7 @@ void ContenedorManuales::encolarCambios(){
 		/*Pongo que ya no hay cambios, ya que ya estoy mandando los cambios actuales
 		ademas sirve en caso que en el vector de IDs haya alguno repetido: NO quiero
 		MANDAR dos veces el MISMO cambio*/
+		huboCambios->erase(idActual);
 		huboCambios->insert(pair<unsigned int, bool>(idActual, false));
 	}
 
