@@ -187,13 +187,11 @@ void* leer_de_cliente (int filedes,size_t tam){
 		return NULL;
 
 	} else if (nbytes == 0){
-		printf("Armamos Bardo\n");
 		free(buffer);
 		return NULL;
 	}else {
 
 		if (nbytes!=tam)
-			printf("Armamos Bardo\n");
 
 		return buffer;
     }
@@ -391,8 +389,8 @@ void* _escuchar(void* parametros){
 
 					if ( cambio == NULL){
 						//lo que se hace si llega un dato erroneo
-						//close (i);
-						//FD_CLR (i, act);
+						close (i);
+						FD_CLR (i, act);
 					}else{
 						// preguntamos si esta habilitado
 						if (sockets->at(i)){
