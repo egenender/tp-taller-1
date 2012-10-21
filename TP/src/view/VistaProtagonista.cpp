@@ -22,6 +22,7 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 
 	//FIXME: poner las animaciones que correspondan al salto cuando esten
 	Animacion* saltandoDer = saltar;
+	saltandoDer->transparencia(255,0,255);
 	Animacion* saltandoIzq = saltandoDer->voltear(HORIZONTALMENTE);
 	animaciones->insert(pair<int, Animacion*>(SALTANDODER, saltandoDer));
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));

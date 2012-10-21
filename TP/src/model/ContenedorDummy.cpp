@@ -1,10 +1,16 @@
 #include "ContenedorDummy.h"
 #include "../view/VistaProtagonista.h"
+#include "../gui/view/VistaBarraEstado.h"
 #include "../controller/GestorConfiguraciones.h"
 
 ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
 	cliente = Cliente::obtenerInstancia("",0);
+
+	barra = new BarraEstado(0, 550, 800, 50);
+	VistaBarraEstado* vista = new VistaBarraEstado();
+	barra->agregarObservador(vista);
+	GestorConfiguraciones::getInstance()->ObtenerVistas()->push_back(vista);
 }
 
 ContenedorDummy::~ContenedorDummy() {
@@ -17,7 +23,7 @@ ContenedorDummy::~ContenedorDummy() {
 
 void ContenedorDummy::agregarDummy(Dummy* tonto){
 	lista_insertar_ultimo(lista_dummies, tonto);
-	//barra->setearMensaje("Se ha conectado el cliente "+(lista_cantidad(lista)-1));
+	barra->setearMensaje("Se ha conectado el cliente "+tonto->obtenerID());
 }
 
 void ContenedorDummy::actualizar(float delta){
@@ -43,11 +49,10 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	//TODO: si es que estaba muerto, hay que ver si queremos sacarlo del listado...
 	//igual da lo mismo porque no va a volver a cambiar
 
-	/*
-	 if (structServidor_obtener_estado(mod) == MUERTO){
+	if (structServidor_obtener_estado(mod) == MUERTO){
 	 	 barra->setearMensaje("Se ha desconectado el Cliente "+id);
-	 }
-	 */
+	}
+
 }
 
 Dummy* ContenedorDummy::buscarID(unsigned int id){

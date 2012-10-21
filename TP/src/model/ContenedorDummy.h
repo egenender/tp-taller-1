@@ -6,11 +6,13 @@
 #include "Actualizable.h"
 #include "structures/structServidor.h"
 #include "../controller/Cliente.h"
+#include "../gui/model/BarraEstado.h"
 
 class ContenedorDummy : public Actualizable{
 private:
 	lista_t* lista_dummies;
 	Cliente* cliente;
+	BarraEstado* barra;
 public:
 	ContenedorDummy();
 	virtual ~ContenedorDummy();
