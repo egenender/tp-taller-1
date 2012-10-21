@@ -68,9 +68,10 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 
 
 void Manual::trasladar(int factorX, int factorY){
-	float DeltaX = factorX * delta;
-	float DeltaY = factorY * delta;
-	Posicion* posDesplazamiento = new Posicion ((int) DeltaX,(int)DeltaY);
+	//float DeltaX = factorX * delta;
+	//float DeltaY = factorY * delta;
+
+	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
 	huboCambios(); //el método se hereda de Observable
