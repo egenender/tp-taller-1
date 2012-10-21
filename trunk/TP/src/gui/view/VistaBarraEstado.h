@@ -4,11 +4,11 @@
 
 #include "../../view/Superficie.h"
 #include "SDL/SDL_ttf.h"
-#include "../../common/Observador.h"
+#include "../../view/VistaCuerpo.h"
 #include <string>
 using namespace std;
 
-class VistaBarraEstado : public Observador {
+class VistaBarraEstado : public VistaCuerpo {
 private:
 	int x, y, ancho, alto;
 	string mensajeActual, mensajeAnterior;
@@ -24,6 +24,7 @@ public:
 	~VistaBarraEstado();
 	virtual void actualizar(Observable* observable);
 	virtual bool dibujar(SDL_Surface* display);
+	bool dibujar(SDL_Surface*, int, int);
 };
 
 
