@@ -22,6 +22,7 @@ ContenedorDummy::ContenedorDummy() {
 	cliente = Cliente::obtenerInstancia("",0);
 
 	barra = new BarraEstado(0, 550, 800, 50);
+	barra->setearMensaje("");
 	VistaBarraEstado* vista = new VistaBarraEstado();
 	barra->agregarObservador(vista);
 	GestorConfiguraciones::getInstance()->ObtenerVistas()->push_back(vista);
@@ -49,6 +50,7 @@ void ContenedorDummy::actualizar(float delta){
 		structServidor_t* mod = (structServidor_t*)cliente->desencolar_cambio();
 		interpretarStruct(mod);
 	}
+	barra->actualizar();
 }
 
 void ContenedorDummy::interpretarStruct(structServidor_t* mod){
