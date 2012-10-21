@@ -2,6 +2,20 @@
 #include "../view/VistaProtagonista.h"
 #include "../gui/view/VistaBarraEstado.h"
 #include "../controller/GestorConfiguraciones.h"
+#include <string>
+
+string intToString(unsigned numero){
+	string resul = "";
+	string temp = "";
+	while (numero > 0){
+		temp += numero % 10 + 48;
+        numero /= 10;
+	}
+	for (unsigned int i=0;i<temp.length();i++)
+		resul+=temp[temp.length()-i-1];
+	return resul;
+}
+
 
 ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
@@ -23,7 +37,11 @@ ContenedorDummy::~ContenedorDummy() {
 
 void ContenedorDummy::agregarDummy(Dummy* tonto){
 	lista_insertar_ultimo(lista_dummies, tonto);
-	barra->setearMensaje("Se ha conectado el cliente "+tonto->obtenerID());
+
+	string aux1 = "Se ha conectado el cliente ";
+	string aux2 = intToString(tonto->obtenerID());
+	string aux3 = aux1 + aux2;
+	barra->setearMensaje(aux3);
 }
 
 void ContenedorDummy::actualizar(float delta){
@@ -50,7 +68,10 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	//igual da lo mismo porque no va a volver a cambiar
 
 	if (structServidor_obtener_estado(mod) == MUERTO){
-	 	 barra->setearMensaje("Se ha desconectado el Cliente "+id);
+		string aux1 = "Se ha desconectado el cliente ";
+		string aux2 = intToString(id);
+		string aux3 = aux1 + aux2;
+		barra->setearMensaje(aux3);
 	}
 
 }
@@ -88,3 +109,4 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
 	agregarDummy(nuevo);
 	return nuevo;
 }
+
