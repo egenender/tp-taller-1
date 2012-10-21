@@ -70,6 +70,8 @@ class GestorConfiguraciones{
 		void CargarEstaticosNivel(const YAML::Node&, bool, bool);
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
+
+		void CargarPantalla();
 		bool Entra(int , int , int , int );
 		int ObtenerAltoNivel();
 		int ObtenerAnchoNivel();

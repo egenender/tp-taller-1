@@ -19,8 +19,8 @@
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
-#define ANCHO_PANTALLA_MINIMO 200
-#define ALTO_PANTALLA_MINIMO 200
+#define ANCHO_PANTALLA_MINIMO 633
+#define ALTO_PANTALLA_MINIMO 530
 #define ANCHO_PANTALLA_MAXIMO 1300
 #define ALTO_PANTALLA_MAXIMO 700
 #define ANCHO_NIVEL_MINIMO 200
@@ -72,6 +72,44 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	manuales = NULL;
 }
 
+void GestorConfiguraciones::CargarPantalla(){
+	YAML::Node nodo,nodoDef;
+
+	try{
+		std::ifstream fin("src/config/archivoYaml.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+	} catch(YAML::ParserException &e){
+		std::ifstream fin("src/config/defecto.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+
+	}
+	std::ifstream finDef("src/config/defecto.yaml");
+	AgregarAVector("src/config/defecto.yaml");
+	YAML::Parser parserDef(finDef);
+	parserDef.GetNextDocument(nodoDef);
+
+
+	try{
+		const YAML::Node& nodoRaiz = nodo["juego"];
+	}catch(YAML::Exception &e){
+		std::ifstream fin("src/config/defecto.yaml");
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodo);
+	}
+
+	const YAML::Node& nodoRaiz = nodo["juego"];
+	const YAML::Node& nodoRaizDef = nodoDef["juego"];
+
+	try{
+		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo pantalla, se carga por defecto");
+		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
+	}
+}
 void GestorConfiguraciones::inicioCarga(){
 	YAML::Node nodo,nodoDef;
 
@@ -113,9 +151,7 @@ void GestorConfiguraciones::inicioCarga(){
 
 	try{
 		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo pantalla, se carga por defecto");
 		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
 	}
 
