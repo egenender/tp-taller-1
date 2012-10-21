@@ -38,7 +38,10 @@ bool Aplicacion::iniciar() {
     // Creamos la ventana:
     //if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
 
-    if((ventana=new Ventana(800,600))==NULL)
+    GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+    gestor->CargarPantalla();
+
+    if((ventana=new Ventana(gestor->ObtenerAnchoPantalla(),gestor->ObtenerAltoPantalla()))==NULL)
     	return false;
 
     /*if ((ventana = new Ventana()) == NULL)
