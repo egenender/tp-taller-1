@@ -19,6 +19,7 @@ public:
 	void actualizar(float);
 	void agregarManual(Manual*, unsigned int);
 	void encolarCambios();
+	void encolarTodos();
 private:
 	void actualizarManual(Manual*, int,unsigned int);
 	void actualizarEstados(unsigned int,int);
