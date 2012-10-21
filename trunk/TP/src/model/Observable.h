@@ -29,6 +29,8 @@ class Observable {
 		void eliminarObservador(Observador* observador);
 		void notificarObservadores();
 		virtual int obtenerEstado()=0;
+		virtual int obtenerAncho()=0;
+		virtual int obtenerAlto() = 0;
 		bool cambio();
 		int cantidadObservadores();
 		virtual Posicion* obtenerPosicion()=0;

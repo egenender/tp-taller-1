@@ -647,7 +647,7 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 
 	VistaProtagonista* vista = new VistaProtagonista(posiblesTiposProt->at(i)->animacionActivaProt, posiblesTiposProt->at(i)->animacionPasivaProt, posiblesTiposProt->at(i)->animacionSaltaProt);
 	configNivel->vistas.push_back(vista);
-	dummy = new Dummy(i, new Posicion(50,50));
+	dummy = new Dummy(i, new Posicion(50,50), posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto);
 	dummy->agregarObservador(vista);
 	contenedor = new ContenedorDummy();
 	contenedor->agregarDummy(dummy);

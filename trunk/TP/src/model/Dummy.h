@@ -10,9 +10,10 @@ private:
 	int estado;
 	unsigned int ID;
 	Posicion* pos;
+	int ancho, alto;
 public:
-	Dummy(unsigned int);
-	Dummy(unsigned int,Posicion*);
+	Dummy(unsigned int,Posicion*, int ancho, int alto);
+
 	virtual ~Dummy();
 	void setXY(int,int);
 	void setEstado(int);
@@ -21,6 +22,8 @@ public:
 	bool esMio(unsigned int);
 	void notificar();
 	unsigned int obtenerID();
+	int obtenerAncho();
+	int obtenerAlto();
 };
 
 #endif /* DUMMY_H_ */

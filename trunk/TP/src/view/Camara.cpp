@@ -53,11 +53,10 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 
 void Camara::actualizar(Observable* observable) {
 
-	Cuerpo* observado = (Cuerpo*) observable;
-	int x = observado->obtenerPosicion()->obtenerX();
-	int y = observado->obtenerPosicion()->obtenerY();
-	int ancho = observado->obtenerAncho();
-	int alto = observado->obtenerAlto();
+	int x = observable->obtenerPosicion()->obtenerX();
+	int y = observable->obtenerPosicion()->obtenerY();
+	int ancho = observable->obtenerAncho();
+	int alto = observable->obtenerAlto();
 
 	// Centramos la camara:
 	if ( (x ) < camara->x + margenScroll) {
