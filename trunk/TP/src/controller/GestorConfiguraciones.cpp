@@ -1092,6 +1092,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	Area* sup = new Area (	tipo->ancho, tipo->alto, pos );
 	Manual* nuevoManual = new Manual(tipo->nombre, sup);
 	manuales->agregarManual(nuevoManual, id);
+	configNivel->actualizables.push_back(nuevoManual);
 }
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
