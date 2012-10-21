@@ -4,7 +4,7 @@
 #include "../controller/GestorConfiguraciones.h"
 #include <string>
 
-string intToString(unsigned numero){
+string ContenedorDummy::intToString(unsigned int numero){
 	string resul = "";
 	string temp = "";
 	while (numero > 0){
