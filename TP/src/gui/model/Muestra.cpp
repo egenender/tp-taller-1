@@ -70,7 +70,7 @@ string Muestra::intToString(int numero){
 		temp += numero % 10 + 48;
         numero /= 10;
 	}
-	for (int i=0;i<temp.length();i++)
+	for (unsigned int i=0;i<temp.length();i++)
 		resul+=temp[temp.length()-i-1];
 	return resul;
 }
