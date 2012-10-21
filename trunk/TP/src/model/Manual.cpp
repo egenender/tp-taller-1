@@ -132,6 +132,7 @@ bool Manual::chocaConPiso(){
 
 void Manual::morir(){
 	estado = MUERTO;
+	huboCambios();
 }
 bool Manual::estaMuerto(){
 	return (estado == MUERTO);
