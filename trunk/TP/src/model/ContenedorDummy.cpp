@@ -78,5 +78,8 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
 
 	//agrego la vista al vector de vistas del Nivel para que se dibuje:
 	gestor->ObtenerVistas()->push_back(vistaNueva);
+
+	//lo agrego al contenedor:
+	agregarDummy(nuevo);
 	return nuevo;
 }
