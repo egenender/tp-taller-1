@@ -191,8 +191,6 @@ void* leer_de_cliente (int filedes,size_t tam){
 		return NULL;
 	}else {
 
-		if (nbytes!=tam)
-
 		return buffer;
     }
 }
