@@ -41,7 +41,7 @@ void ContenedorManuales::actualizar(float delta){
 
 	for (unsigned int i = 0; i < IDs->size(); i++){
 		unsigned int idActual = IDs->at(i);
-		actualizarManual(manuales->at(idActual), estados->at(idActual), i);
+		actualizarManual(manuales->at(idActual), estados->at(idActual), idActual);
 	}
 
 }
