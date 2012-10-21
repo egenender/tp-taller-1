@@ -1,15 +1,15 @@
 juego:
   pantalla:
-    ancho: 800
+    ancho: 1000
     alto: 550
   parametros:
-    margen_scroll: 150
+    margen_scroll: 40
   tiposProtagonista:
     Charmeleon:
       ancho: 65
       alto: 73
-      vel_personaje: 300
-      salto: 100
+      vel_personaje: 20
+      salto: 10
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
@@ -20,8 +20,8 @@ juego:
     mono:
       ancho: 140
       alto: 126
-      vel_personaje: 300
-      salto: 100
+      vel_personaje: 30
+      salto: 10
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
@@ -32,8 +32,8 @@ juego:
     Goku:
       ancho: 65
       alto: 73
-      vel_personaje: 300
-      salto: 100
+      vel_personaje: 27
+      salto: 30
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
