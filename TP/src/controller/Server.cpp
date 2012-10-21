@@ -178,8 +178,6 @@ void* leer_de_cliente (int filedes,size_t tam){
 
 	void* buffer=malloc(tam);
 
-	printf("ESTA LEYENDO\n");
-
 	size_t nbytes;
 
 	nbytes = read (filedes, buffer, tam);
@@ -398,7 +396,6 @@ void* _escuchar(void* parametros){
 					}else{
 						// preguntamos si esta habilitado
 						if (sockets->at(i)){
-							printf("recibe cosas\n");
 							pthread_mutex_t mutex;
 							pthread_mutex_init (&mutex , NULL);
 							pthread_mutex_lock(&mutex);
