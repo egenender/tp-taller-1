@@ -48,6 +48,7 @@ typedef struct parametrosServer{
 	int sock;
 	int puerto;
 	std::map <int,bool> *sockets;
+	std::map <int,int> *IDsockets;
 
 } parametrosServer_t;
 
@@ -56,6 +57,7 @@ typedef struct parametrosInicializacion{
 	fd_set* act;
 	int sock;
 	std::map <int,bool> *sockets;
+	std::map <int,int> *IDsockets;
 
 } parametrosInit_t;
 
@@ -90,7 +92,10 @@ class Server{
 		// El file descriptor del socket del servidor
 		int sock;
 
+		//dice si ese socket esta apto estado estacionario
 		std::map <int,bool> *sockets;
+		//me dice, para cada socket, el id
+		std::map <int,int> *IDsockets;
 
 		pthread_t thread_escuchar;
 		pthread_t thread_escritura;
@@ -98,6 +103,7 @@ class Server{
 	public:
 
 	static Server* obtenerInstancia(int);
+	static Server* reiniciarInstancia(int);
 
 		// Metodos viejos
 		//void atender_sockets(void);
@@ -135,6 +141,8 @@ class Server{
 		// desencola un cambio para mandar (enviar cambio a servidor)
 		void encolar_cambio(void*);
 
+		void Autoencolar_cambio(void* cambio);
+
 		// Devuelve el cambio mas actual (de la cola) para aplicar en el modelo
 		void* devolver_cambio();
 
@@ -144,6 +152,8 @@ class Server{
 
 		// Detener al server
 		int detener ();
+
+		void detenerServer();
 
 
 

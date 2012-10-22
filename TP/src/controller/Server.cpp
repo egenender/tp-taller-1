@@ -10,6 +10,9 @@
 #include "LectorArchivo.h"
 #include "SDL/SDL.h"
 #include "GestorConfiguraciones.h"
+#include "../model/structures/structCliente.h"
+#include "../model/structures/structServidor.h"
+#include "../model/ContenedorManuales.h"
 
 Server* Server::instancia= NULL;
 
@@ -36,7 +39,13 @@ Server::Server(){
 	FD_SET (sock, &activos);
 
 	sockets = new std::map <int,bool>();
+	IDsockets = new std::map <int,int>();
 
+}
+Server* Server::reiniciarInstancia(int port) {
+    instancia = new Server(port);
+
+   return instancia;
 }
 
 Server* Server::obtenerInstancia(int puerto) {
@@ -67,6 +76,18 @@ Server::Server(int port){
 	FD_SET ( sock , &activos);
 
 	sockets = new std::map <int,bool>();
+	IDsockets = new std::map <int,int>();
+
+}
+
+void Server::detenerServer(){
+
+	structServidor_t* mori =  structServidor_crear( -1 , 0,0, MUERTO );
+	encolar_cambio(mori);
+	pthread_cancel(thread_escuchar);
+	pthread_cancel(thread_escritura);
+	close(sock);
+
 
 }
 
@@ -85,6 +106,16 @@ void Server::encolar_cambio(void* cambio){
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
 	cola_salientes.push(cambio);
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
+
+}
+
+void Server::Autoencolar_cambio(void* cambio){
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
+	cola_entrantes.push(cambio);
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
 
@@ -119,6 +150,7 @@ parametrosServer_t* Server::inicializar_parametros(size_t tamanio){
 	parametros->sock=sock;
 	parametros->puerto=puerto;
 	parametros->sockets=sockets;
+	parametros->IDsockets=IDsockets;
 
 	return parametros;
 }
@@ -202,6 +234,7 @@ void* _enviar_inicializacion(void* parametros){
 	int cliente=((parametrosInit_t*)parametros)->sock;
 	fd_set* conjuntoClientes=((parametrosInit_t*)parametros)->act;
 	std::map <int,bool> *sockets = ((parametrosInit_t*)parametros)->sockets;
+	std::map <int,int> *IDsockets = ((parametrosInit_t*)parametros)->IDsockets;
 
 	pthread_mutex_t mutex;
 
@@ -291,17 +324,21 @@ void* _enviar_inicializacion(void* parametros){
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
 
+	int idElegida = *(int*)elegido;
+
 	//le respondo si puede o no usarlo
 	*entero = 0;
-	if ((tiposProt->at( *(int*)elegido)->disponible) == true){
+	if ((tiposProt->at( idElegida )->disponible) == true){
 		*entero = 1;
-		tiposProt->at( *(int*)elegido)->disponible = false;
+		tiposProt->at( idElegida )->disponible = false;
 	}
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
-	gestor->crearManual(*(int*)elegido);
+	gestor->crearManual( idElegida );
+
+	IDsockets->insert(pair<int,int>(cliente, idElegida ));
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
 
@@ -309,6 +346,8 @@ void* _enviar_inicializacion(void* parametros){
 	pthread_mutex_init (&mutexSet , NULL);
 	pthread_mutex_lock(&mutexSet);
 	sockets->at(cliente) = true;
+	ContenedorManuales* manualesYaConectados = gestor->obtenerContenedorManuales();
+	manualesYaConectados->encolarTodos();
 	//FD_SET(cliente, conjuntoClientes);
 	pthread_mutex_unlock(&mutexSet);
 	pthread_mutex_destroy(&mutexSet);
@@ -325,6 +364,7 @@ void* _escuchar(void* parametros){
 	fd_set* act=param->act;
 	fd_set* rd=param->rd;
 	std::map <int,bool> *sockets = param->sockets;
+	std::map <int,int> *IDsockets = param->IDsockets;
 	int status;
 	int i;
 
@@ -377,6 +417,7 @@ void* _escuchar(void* parametros){
 					param->act=act;
 					param->sock=status;
 					param->sockets=sockets;
+					param->IDsockets=IDsockets;
 					pthread_create(&threadInicializacion,NULL,&_enviar_inicializacion,param);
 
 					FD_SET(status,act);
@@ -387,6 +428,18 @@ void* _escuchar(void* parametros){
 
 					if ( cambio == NULL){
 						//lo que se hace si llega un dato erroneo
+						printf("se cerro el cliente\n");
+						int IDabandona = IDsockets->at(i);
+						IDsockets->erase(i);
+
+						structCliente_t* haMuerto =  structCliente_crear( IDabandona , MUERTO );
+						Server::obtenerInstancia(0)->Autoencolar_cambio(haMuerto);
+
+						GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+						std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
+						tiposProt->at(IDabandona)->disponible = true;
+
+
 						close (i);
 						FD_CLR (i, act);
 					}else{
@@ -418,7 +471,7 @@ void Server::escuchar(size_t tamanio){
 	pthread_t thread;
 	thread_escuchar=thread;
 
-	if (pthread_create(&thread,NULL,&_escuchar,(void*)param)!=0) return;
+	if (pthread_create(&thread_escuchar,NULL,&_escuchar,(void*)param)!=0) return;
 
 }
 
@@ -458,7 +511,7 @@ void Server::escribir(size_t tamanio){
 	pthread_t thread;
 	thread_escritura=thread;
 
-	if (pthread_create(&thread,NULL,&_escribir,(void*)param)!=0) return;
+	if (pthread_create(&thread_escritura,NULL,&_escribir,(void*)param)!=0) return;
 }
 
 //bool Server::leer_de_cliente (int filedes, void* buffer,size_t tamanio){

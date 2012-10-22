@@ -77,6 +77,7 @@ class Cliente {
 		// Metodos viejos
 		//bool iniciar ();
 		static Cliente* obtenerInstancia(const char *,unsigned short int);
+		static Cliente* reiniciarInstancia(const char * dir_host,unsigned short int port);
 
 		// Crea un Cliente asi noma (todo local)
 		Cliente();
