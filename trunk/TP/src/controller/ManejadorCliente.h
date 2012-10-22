@@ -32,6 +32,8 @@ class ManejadorCliente{
 		void seleccionarProt(string);
 		int darID(string);
 
+		void detener();
+
 		bool personajeAceptado();
 
 };

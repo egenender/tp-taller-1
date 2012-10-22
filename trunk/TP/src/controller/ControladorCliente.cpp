@@ -1,6 +1,7 @@
 #include "ControladorCliente.h"
 #include "../model/structures/structCliente.h"
 #include "Cliente.h"
+#include "ManejadorCliente.h"
 
 ControladorCliente::ControladorCliente(unsigned int id) {
 	ID = id;
@@ -13,6 +14,14 @@ ControladorCliente::~ControladorCliente() {
 
 void ControladorCliente::manejarEvento(SDL_Event* evento){
 	Uint8 *keystates = SDL_GetKeyState(NULL);
+
+	if (keystates[SDLK_ESCAPE]) {
+		ManejadorCliente::obtenerInstancia(NULL)->detener();
+		Cliente::obtenerInstancia("",0)->detener_escuchar();
+		Cliente::obtenerInstancia("",0)->detener_escribir();
+		Cliente::obtenerInstancia("",0)->detener();
+		return;
+	}
 
 	if (keystates[SDLK_UP]) {
 		revisarCambio(SALTAR);

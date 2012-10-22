@@ -34,7 +34,7 @@ typedef std::map <std::string,string> mapa_niveles;
 
 class GestorConfiguraciones{
 	private:
-		static GestorConfiguraciones instancia;
+		static GestorConfiguraciones* instancia;
 		GestorConfiguraciones();
 		int margen_scroll;
 		ConfiguracionPantalla* configPantalla;
@@ -55,6 +55,7 @@ class GestorConfiguraciones{
 
 	public:
 		static GestorConfiguraciones* getInstance();
+		void acabarGestor();
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);

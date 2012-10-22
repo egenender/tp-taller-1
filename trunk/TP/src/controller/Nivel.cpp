@@ -26,14 +26,13 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 	if ((evento->type == SDL_KEYDOWN)
 			&& (evento->key.keysym.sym == SDLK_ESCAPE)) {
 		if(estado==CLIENTE){
-			Cliente::obtenerInstancia("",0)->detener_escuchar();
-			Cliente::obtenerInstancia("",0)->detener_escribir();
-			Cliente::obtenerInstancia("",0)->detener();
+
 		}
 		if(estado==SERVIDOR){
 			Server::obtenerInstancia(0)->detenerServer();
+			ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 		}
-		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+
 	}
 	if(estado==SERVIDOR)
 		return;

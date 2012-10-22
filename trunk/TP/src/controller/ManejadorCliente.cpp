@@ -7,6 +7,7 @@
 
 #include "ManejadorCliente.h"
 #include "GestorConfiguraciones.h"
+#include "../model/structures/structCliente.h"
 
 
 ManejadorCliente* ManejadorCliente::instancia=NULL;
@@ -165,5 +166,8 @@ void ManejadorCliente::recibirArchivo(EscrituraArchivo* escritor,int largo){
 }
 
 
-
-
+void ManejadorCliente::detener(){
+//	structCliente* mori = structCliente_crear(IDprot,8);
+//	cliente->encolar_cambio(mori);
+//	cliente->detener();
+}

@@ -331,8 +331,10 @@ void Cliente::detener_escuchar(){
 }
 
 void Cliente::detener_escribir(){
-
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	pthread_cancel(thread_escritura);
-
-
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy (&mutex);
 }
