@@ -13,6 +13,7 @@
 #include "../model/structures/structCliente.h"
 #include "../model/structures/structServidor.h"
 #include "../model/ContenedorManuales.h"
+#include "Nivel.h"
 
 Server* Server::instancia= NULL;
 
@@ -81,14 +82,23 @@ Server::Server(int port){
 }
 
 void Server::detenerServer(){
-
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
 	structServidor_t* mori =  structServidor_crear( -1 , 0,0, MUERTO );
 	encolar_cambio(mori);
+	unsigned int i;
+	for (i = 0; i < FD_SETSIZE; ++i){
+			if (FD_ISSET (i, &activos)){
+				close(i);
+			}
+	}
+	GestorConfiguraciones::getInstance()->acabarGestor();
 	pthread_cancel(thread_escuchar);
 	pthread_cancel(thread_escritura);
 	close(sock);
-
-
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
 }
 
 bool Server::hay_cambios(){
@@ -386,6 +396,7 @@ void* _escuchar(void* parametros){
 
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
 		printf("antes select\n");
+		printf("conect: %d\n",sock);
 		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			// Manejar error select
@@ -398,8 +409,8 @@ void* _escuchar(void* parametros){
 		// Ahora estan los sockets pidiendo permiso, atenderlos:
 		for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, rd)){
-
 				if (i == sock) {
+					printf("init desde: %d\n",sock);
 					// Si el socket es sock (el que acepta conexiones) quiere decir que le estan pidiendo conectarse
 					size = sizeof (nombre_cliente);
 					if ((status=accept (sock,(struct sockaddr *) &nombre_cliente, (unsigned int *)&size)) < 0){
@@ -444,6 +455,7 @@ void* _escuchar(void* parametros){
 						FD_CLR (i, act);
 					}else{
 						// preguntamos si esta habilitado
+						printf("escuch: %d\n",i);
 						if (sockets->at(i)){
 							pthread_mutex_t mutex;
 							pthread_mutex_init (&mutex , NULL);

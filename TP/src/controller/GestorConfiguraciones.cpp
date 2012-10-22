@@ -43,10 +43,17 @@
 
 
 // Puntero estatico para controlar la instanciacion.
-GestorConfiguraciones GestorConfiguraciones::instancia;
+GestorConfiguraciones* GestorConfiguraciones::instancia;
 
 GestorConfiguraciones* GestorConfiguraciones::getInstance() {
-   return &instancia;
+   if(instancia!=NULL)
+	   return instancia;
+   instancia = new GestorConfiguraciones();
+   return instancia;
+}
+
+void GestorConfiguraciones::acabarGestor() {
+   instancia = NULL;
 }
 
 void GestorConfiguraciones::AgregarAVector(string ruta){
