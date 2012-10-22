@@ -146,46 +146,5 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
 
-
-//	servidor.encolar_cambio(entero);
-//	servidor.encolar_cambio(entero);
-//	servidor.encolar_cambio(entero);
-//	servidor.encolar_cambio(entero);
-//	servidor.encolar_cambio(entero);
-//	servidor.encolar_cambio(entero);
-//
-//	int i = 0;
-//	while (true){
-//		if (client.hay_cambios()){
-//			void* cambio=client.desencolar_cambio();
-//			cout<< "cambio:" << *(int *) cambio << endl;
-//			i++;
-//		}
-//		if (i== 6)
-//			break;
-//	}
-
-
-//	client.escuchar(sizeof(int));
-//
-//	while (true){
-//		if (  (client.hay_cambios() ) ){
-//			void* cambio=client.desencolar_cambio();
-//			cout << *(int*)cambio<< endl;
-//		}
-//	}
-//	client.detener_escribir();
-
-//	while(true){
-//		//	while(true){
-//
-//		if(servidor.hay_cambios()){
-//			void* cambio=servidor.desencolar_cambio();
-//			cout<<"cambio:"<<*(int *) cambio << endl;
-//		}
-//	}
-
-	//aplicacion.mostrarFPS(false);
-
 	return aplicacion.ejecutar();
 }
