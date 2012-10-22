@@ -44,6 +44,12 @@ Cliente::Cliente(const char * dir_host,unsigned short int port){
 
 }
 
+Cliente* Cliente::reiniciarInstancia(const char * dir_host,unsigned short int port) {
+    instancia = new Cliente(dir_host,port);
+
+   return instancia;
+}
+
 Cliente* Cliente::obtenerInstancia(const char * dir_host,unsigned short int port) {
    if( instancia == NULL){
 	   instancia = new Cliente(dir_host,port);
@@ -147,6 +153,7 @@ void Cliente::marcar_conectado(){
 void Cliente::detener(){
 
 	close (sock);
+	instancia = NULL;
 
 }
 
@@ -206,7 +213,8 @@ void* privEscuchar(void* param){
 
 		if ((bytes=read(sock,dato, tamanio))<tamanio){
 			free(dato);
-			continue;
+			close(sock);
+			pthread_exit(NULL);
 		}
 
 		if (bytes==tamanio){
