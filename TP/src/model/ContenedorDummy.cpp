@@ -2,6 +2,7 @@
 #include "../view/VistaProtagonista.h"
 #include "../gui/view/VistaBarraEstado.h"
 #include "../controller/GestorConfiguraciones.h"
+#include "../controller/ManejadorEstados.h"
 #include <string>
 
 string ContenedorDummy::intToString(unsigned int numero){
@@ -53,6 +54,18 @@ void ContenedorDummy::actualizar(float delta){
 
 void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	unsigned int id = structServidor_obtener_id(mod);
+	if (id==-1){
+//		Cliente::obtenerInstancia("",0)->detener_escuchar();
+//		Cliente::obtenerInstancia("",0)->detener_escribir();
+//		Cliente::obtenerInstancia("",0)->detener();
+		pthread_mutex_t mutex;
+		pthread_mutex_init (&mutex , NULL);
+		pthread_mutex_lock(&mutex);
+		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&mutex);
+		return;
+	}
 	Dummy* tonto = buscarID(id);
 	if (!tonto) {
 		tonto = crearDummyNuevo(id);
