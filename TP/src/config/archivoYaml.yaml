@@ -9,7 +9,7 @@ juego:
       ancho: 65
       alto: 73
       vel_personaje: 20
-      salto: 10
+      salto: 40
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
