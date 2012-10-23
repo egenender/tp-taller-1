@@ -16,8 +16,8 @@ void Camara::iniciarCamara() {
 	camara = new SDL_Rect();
 	camara->x = 0;
 	camara->y = 0;
-	camara->w = gestor->ObtenerAnchoPantalla();
-	camara->h = gestor->ObtenerAltoPantalla();
+	camara->w = 800;
+	camara->h = 600;
 }
 
 Camara::~Camara() {
