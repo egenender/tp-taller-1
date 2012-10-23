@@ -41,7 +41,7 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 }
 
 void Nivel::iniciar() {
-
+	parar = false;
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
 	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
@@ -95,7 +95,14 @@ void Nivel::terminar() {
 }
 
 void Nivel::actualizar(float delta) {
-
+//	if (parar && estado==CLIENTE){
+//		Cliente::obtenerInstancia("",0)->detener_escuchar();
+//		Cliente::obtenerInstancia("",0)->detener_escribir();
+//		Cliente::obtenerInstancia("",0)->detener();
+//		GestorConfiguraciones::getInstance()->acabarGestor();
+//		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+//		return;
+//	}
 	// Actualizamos cada cuerpo:
 	for (unsigned int i = 0; i < actualizables->size(); i++) {
 		Actualizable* cuerpito = actualizables->at(i);
@@ -144,4 +151,8 @@ void Nivel::indicarManual(Manual* m) {
 /** Devuelve la instancia del estado (Singleton) **/
 Nivel* Nivel::obtenerInstancia() {
 	return &instancia;
+}
+
+void Nivel::morir(){
+	parar = true;
 }

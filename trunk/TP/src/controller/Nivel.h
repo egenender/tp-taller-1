@@ -22,6 +22,7 @@ private:
 	Manual* principal;
 	Camara* camara;
 	int estado;
+	bool parar;
 public:
 	Nivel();
 	virtual ~Nivel();
@@ -31,6 +32,7 @@ public:
 	void actualizar(float delta);
 	void dibujar(SDL_Surface* display);
 	void setEstado(int);
+	void morir();
 
 private:
 	//Para agregar elementos al nivel:
