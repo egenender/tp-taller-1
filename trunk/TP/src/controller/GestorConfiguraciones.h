@@ -72,7 +72,7 @@ class GestorConfiguraciones{
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 
-		void CargarPantalla();
+		//void CargarPantalla();
 		bool Entra(int , int , int , int );
 		int ObtenerAltoNivel();
 		int ObtenerAnchoNivel();
