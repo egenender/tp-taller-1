@@ -30,19 +30,17 @@ void ManejadorConectar::manejarClic(){
 
 	Cliente* client= Cliente::reiniciarInstancia(ip.c_str(),numPuerto);
 
+	if (!client->ok){
+		barra->setearMensaje("No se ha podido realizar la conexion");
+		return;
+	}
+
 	ManejadorCliente* manejadorCliente= ManejadorCliente::obtenerInstancia(client);
 	manejadorCliente->recibirRecursos();
 	manejadorCliente->iniciarCarga();
 
 	GestorConfiguraciones* gestor =GestorConfiguraciones::getInstance();
 	gestor->CargaRestante();
-
-//	bool ok = Cliente::conectar(ip, puerto);
-//	if (!ok){
-//	 	 labarra->setearMensaje("No se ha podido realizar la conexion");
-//	 	 return;
-//	 }
-//
 
 	vector<TipoProtagonista*>* personajes=gestor->ObtenerPosiblesTiposProtagonistas();
 	for (unsigned int i = 0; i < personajes->size(); i++){
