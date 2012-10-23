@@ -8,6 +8,7 @@
 #include "ManejadorCliente.h"
 #include "GestorConfiguraciones.h"
 #include "../model/structures/structCliente.h"
+//#include "ManejadorEstados.h"
 
 
 ManejadorCliente* ManejadorCliente::instancia=NULL;
@@ -27,6 +28,19 @@ ManejadorCliente::ManejadorCliente(Cliente* clienteNuevo){
 	IDprot = -1;
 
 }
+
+//void ManejadorCliente::destruirCliente(){
+//	pthread_mutex_t mutex;
+//	pthread_mutex_init (&mutex , NULL);
+//	pthread_mutex_lock(&mutex);
+//	cliente->detener_escuchar();
+//	cliente->detener_escribir();
+//	cliente->detener();
+//	GestorConfiguraciones::getInstance()->acabarGestor();
+//	ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+//	pthread_mutex_unlock(&mutex);
+//	pthread_mutex_destroy(&mutex);
+//}
 
 void ManejadorCliente::recibirRecursos(){
 	char* ruta = (char*) malloc (90*sizeof(char));
@@ -167,7 +181,7 @@ void ManejadorCliente::recibirArchivo(EscrituraArchivo* escritor,int largo){
 
 
 void ManejadorCliente::detener(){
-//	structCliente* mori = structCliente_crear(IDprot,8);
-//	cliente->encolar_cambio(mori);
-//	cliente->detener();
+	structCliente* mori = structCliente_crear(IDprot,8);
+	cliente->encolar_cambio(mori);
+	//	cliente->detener();
 }
