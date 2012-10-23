@@ -26,9 +26,9 @@ juego:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
         caminar:
-          sprites: src/resources/gokumonoGritando.bmp
+          sprites: src/resources/gokumonoMovimiento.bmp
         saltar:
-          sprites: src/resources/charmeleonQuieto.bmp
+          sprites: src/resources/gokumonoSalto.bmp
     Goku:
       ancho: 65
       alto: 73
@@ -72,6 +72,7 @@ juego:
     - nivel: MooMooMilk
       alto: 600
       ancho: 1600
+      piso: 500
       fondo: src/resources/fondoGrande.png
       personajes:
         - tipo: mono
@@ -101,19 +102,19 @@ juego:
           ancho: 80
           alto: 400
     - nivel: Moo la Moo
-      alto: 600
-      ancho: 1600
+      alto: 1200
+      ancho: 1200
       fondo: src/resources/viga2.jpg
       personajes:
-        - tipo: protagonista
+        - tipo: princesa
           x: 400
           y: 300
     - nivel: CUCU
       alto: 600
-      ancho: 1600
+      ancho: 800
       fondo: src/resources/fondoGrande.png
       personajes:
-        - tipo: protagonista
+        - tipo: mono
           x: 400
           y: 300
 

@@ -34,6 +34,7 @@
 #define PERIODO_PERSONAJE 15
 #define ANCHO_NIVEL 1200
 #define ALTO_NIVEL 600
+#define PISO_NIVEL 600
 #define POS_DEFECTO 60
 #define TIPO_DEFECTO "defe"
 #define ANCHO_OBJETO 40
@@ -343,6 +344,29 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->alto=ALTO_NIVEL_MINIMO;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
 	}
+
+	try{
+		nodo[nivelElegido]["piso"] >> configNivel->piso;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo piso dentro del nivel, se carga por defecto");
+		configNivel->piso = PISO_NIVEL;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El piso no toma valor valido, se carga por defecto");
+		configNivel->piso = PISO_NIVEL;
+	}
+
+	if ((configNivel->alto)< 200){
+			configNivel->alto=PISO_NIVEL;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
+		}
+
+
+	if ((configNivel->piso)> configNivel->alto){
+		configNivel->piso=configNivel->alto;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El piso del nivel toma valor muy alto, se carga maximo valido");
+	}
+
+
 	string ruta;
 	try{
 		nodo[nivelElegido]["fondo"] >> ruta;
@@ -686,14 +710,16 @@ int GestorConfiguraciones::ObtenerAnchoPantalla(){
 	//return configPantalla->ancho;
 }
 
+int GestorConfiguraciones::ObtenerAnchoNivel(){
+	return configNivel->ancho;
+}
 
 int GestorConfiguraciones::ObtenerAltoNivel(){
 	return configNivel->alto;
 }
 
-
-int GestorConfiguraciones::ObtenerAnchoNivel(){
-	return configNivel->ancho;
+int GestorConfiguraciones::ObtenerPisoNivel(){
+	return configNivel->piso;
 }
 
 int GestorConfiguraciones::ObtenerMargenScroll(){
