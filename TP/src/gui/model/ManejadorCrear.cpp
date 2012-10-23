@@ -27,7 +27,7 @@ void ManejadorCrear::manejarClic(){
 
 	numPuerto = 5557; //harcode
 
-	Server* elServer = Server::obtenerInstancia(numPuerto);
+	Server* elServer = Server::reiniciarInstancia(numPuerto);
 
 	if (! elServer->estaActivo()){
 		barra->setearMensaje("No se pudo crear el servidor");
