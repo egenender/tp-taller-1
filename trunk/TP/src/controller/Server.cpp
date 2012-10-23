@@ -375,15 +375,16 @@ void _TerminarCliente(int cliente){
 	Server* server = Server::obtenerInstancia(0);
 	//lo que se hace si llega un dato erroneo
 	printf("se cerro el cliente\n");
-
+	
 	int IDabandona = server->IDsockets->at(cliente);
 	server->IDsockets->erase(cliente);
+	server->sockets->at(cliente) = false;
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
 	tiposProt->at(IDabandona)->disponible = true;
 
-	close (cliente);
+//	close (cliente);
 	FD_CLR (cliente, &server->activos);
 }
 
@@ -465,6 +466,7 @@ void* _escuchar(void* parametros){
 						printf("se cerro el cliente\n");
 						int IDabandona = IDsockets->at(i);
 						IDsockets->erase(i);
+						sockets->at(i) = false;
 
 						structCliente_t* haMuerto =  structCliente_crear( IDabandona , MUERTO );
 						Server::obtenerInstancia(0)->Autoencolar_cambio(haMuerto);
@@ -484,9 +486,9 @@ void* _escuchar(void* parametros){
 							pthread_mutex_init (&mutex , NULL);
 							pthread_mutex_lock(&mutex);
 							cola_entrantes->push(cambio);
-							//int estado = structCliente_obtener_estado( (structCliente_t*) cambio);
-							//if(estado == MUERTO)
-								//_TerminarCliente(i);
+							int estado = structCliente_obtener_estado( (structCliente_t*) cambio);
+							if(estado == MUERTO)
+								_TerminarCliente(i);
 							pthread_mutex_unlock(&mutex);
 							pthread_mutex_destroy(&mutex);
 
