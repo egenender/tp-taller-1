@@ -26,7 +26,7 @@ void ManejadorConectar::manejarClic(){
 
 	unsigned short int numPuerto =  atoi(puerto.c_str());
 	numPuerto = 5557; //harcode
-	//ip = "127.0.0.1"; //harcode
+	ip = "127.0.0.1"; //harcode
 
 	Cliente* client= Cliente::obtenerInstancia(ip.c_str(),numPuerto);
 
@@ -43,9 +43,6 @@ void ManejadorConectar::manejarClic(){
 //	 	 return;
 //	 }
 //
-//	 Agregarle los nombres de los personajes al Scroll.
-//	 Agregarle las animaciones a la muestra.
-
 
 	vector<TipoProtagonista*>* personajes=gestor->ObtenerPosiblesTiposProtagonistas();
 	for (unsigned int i = 0; i < personajes->size(); i++){
