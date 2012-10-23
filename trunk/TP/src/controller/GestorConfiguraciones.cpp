@@ -79,44 +79,45 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	manuales = NULL;
 }
 
-void GestorConfiguraciones::CargarPantalla(){
-	YAML::Node nodo,nodoDef;
+//void GestorConfiguraciones::CargarPantalla(){
+//	YAML::Node nodo,nodoDef;
+//
+//	try{
+//		std::ifstream fin("src/config/archivoYaml.yaml");
+//		YAML::Parser parser(fin);
+//		parser.GetNextDocument(nodo);
+//	} catch(YAML::ParserException &e){
+//		std::ifstream fin("src/config/defecto.yaml");
+//		YAML::Parser parser(fin);
+//		parser.GetNextDocument(nodo);
+//
+//	}
+//	std::ifstream finDef("src/config/defecto.yaml");
+//	AgregarAVector("src/config/defecto.yaml");
+//	YAML::Parser parserDef(finDef);
+//	parserDef.GetNextDocument(nodoDef);
+//
+//
+//	try{
+//		const YAML::Node& nodoRaiz = nodo["juego"];
+//	}catch(YAML::Exception &e){
+//		std::ifstream fin("src/config/defecto.yaml");
+//		YAML::Parser parser(fin);
+//		parser.GetNextDocument(nodo);
+//	}
+//
+//	const YAML::Node& nodoRaiz = nodo["juego"];
+//	const YAML::Node& nodoRaizDef = nodoDef["juego"];
+//
+//	try{
+//		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
+//		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
+//	}catch(YAML::TypedKeyNotFound<std::string> &e){
+//		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo pantalla, se carga por defecto");
+//		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
+//	}
+//}
 
-	try{
-		std::ifstream fin("src/config/archivoYaml.yaml");
-		YAML::Parser parser(fin);
-		parser.GetNextDocument(nodo);
-	} catch(YAML::ParserException &e){
-		std::ifstream fin("src/config/defecto.yaml");
-		YAML::Parser parser(fin);
-		parser.GetNextDocument(nodo);
-
-	}
-	std::ifstream finDef("src/config/defecto.yaml");
-	AgregarAVector("src/config/defecto.yaml");
-	YAML::Parser parserDef(finDef);
-	parserDef.GetNextDocument(nodoDef);
-
-
-	try{
-		const YAML::Node& nodoRaiz = nodo["juego"];
-	}catch(YAML::Exception &e){
-		std::ifstream fin("src/config/defecto.yaml");
-		YAML::Parser parser(fin);
-		parser.GetNextDocument(nodo);
-	}
-
-	const YAML::Node& nodoRaiz = nodo["juego"];
-	const YAML::Node& nodoRaizDef = nodoDef["juego"];
-
-	try{
-		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de Pantalla");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo pantalla, se carga por defecto");
-		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
-	}
-}
 void GestorConfiguraciones::inicioCarga(){
 	YAML::Node nodo,nodoDef;
 
@@ -156,11 +157,11 @@ void GestorConfiguraciones::inicioCarga(){
 	const YAML::Node& nodoRaiz = nodo["juego"];
 	const YAML::Node& nodoRaizDef = nodoDef["juego"];
 
-	try{
-		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
-	}
+//	try{
+//		configPantalla=CargarConfiguracionPantalla(nodoRaiz["pantalla"]);
+//	}catch(YAML::TypedKeyNotFound<std::string> &e){
+//		configPantalla=CargarConfiguracionPantalla(ANCHO_PANTALLA,ALTO_PANTALLA);
+//	}
 
 	try{
 		CargarTiposProtagonista(nodoRaiz["tiposProtagonista"] , nodoRaizDef["tiposProtagonista"]["protagonista"]);
@@ -225,14 +226,14 @@ void GestorConfiguraciones::CargaRestante(){
 	}
 
 
-	if ((configPantalla->alto) > (configNivel->alto)){
-		configPantalla->alto=configNivel->alto;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto de la pantalla supera al del nivel, se carga alto maximo valido");
-	}
-	if ((configPantalla->ancho) > (configNivel->ancho)){
-		configPantalla->ancho=configNivel->ancho;
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho de la pantalla supera al del nivel, se carga alto maximo valido");
-	}
+//	if ((configPantalla->alto) > (configNivel->alto)){
+//		configPantalla->alto=configNivel->alto;
+//		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto de la pantalla supera al del nivel, se carga alto maximo valido");
+//	}
+//	if ((configPantalla->ancho) > (configNivel->ancho)){
+//		configPantalla->ancho=configNivel->ancho;
+//		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho de la pantalla supera al del nivel, se carga alto maximo valido");
+//	}
 
 
 	try{
@@ -675,12 +676,14 @@ Superficie* GestorConfiguraciones::ObtenerFondo(){
 }
 
 int GestorConfiguraciones::ObtenerAltoPantalla(){
-	return configPantalla->alto;
+	return 600;
+	//return configPantalla->alto;
 }
 
 
 int GestorConfiguraciones::ObtenerAnchoPantalla(){
-	return configPantalla->ancho;
+	return 800;
+	//return configPantalla->ancho;
 }
 
 
