@@ -38,7 +38,6 @@ void ContenedorManuales::actualizar(float delta){
 	structCliente_t* cambio;
 	while (servidor->hay_cambios()){
 		cambio = (structCliente_t*)servidor->desencolar_cambio();
-		printf("estoy actualizando %d %d \n",structCliente_obtener_id(cambio), structCliente_obtener_estado(cambio));
 		actualizarEstados(structCliente_obtener_id(cambio), structCliente_obtener_estado(cambio));
 	}
 
@@ -89,7 +88,6 @@ void ContenedorManuales::actualizarEstados(unsigned int id, int estado){
 	estados->erase(id);
 	estados->insert(pair<unsigned int, int>(id, estado));
 
-	printf("el estado actual es %d\n", estados->at(id));
 }
 
 void ContenedorManuales::encolarCambios(){
