@@ -17,8 +17,8 @@ ConfiguracionPantalla::ConfiguracionPantalla(){
 }
 
 Ventana* ConfiguracionPantalla::CrearPantalla(){
-
-	Ventana* ventana = new Ventana(ancho,alto);
+	Ventana* ventana = new Ventana(800,600);
+	//Ventana* ventana = new Ventana(ancho,alto);
 
 	return ventana;
 
