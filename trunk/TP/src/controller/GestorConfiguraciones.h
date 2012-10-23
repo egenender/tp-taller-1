@@ -48,6 +48,8 @@ class GestorConfiguraciones{
 
 		std::vector<TipoProtagonista*>* posiblesTiposProt;
 
+		bool esCliente;
+
 		int nivelElegido;
 		ContenedorDummy* contenedor;
 		Dummy* dummy;
@@ -82,6 +84,7 @@ class GestorConfiguraciones{
 		int ObtenerMargenScroll();
 		Superficie* ObtenerFondo();
 		void AgregarAVector(string ruta);
+		void setEsCliente ();
 
 		void setNivelElegido(int);
 		int ObtenerNivelElegido();

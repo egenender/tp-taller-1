@@ -78,6 +78,12 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	texturas=new mapa_tex();
 	vectorRutas=new std::vector<string>();
 	manuales = NULL;
+	esCliente = false;
+	string headerTemp = "Temp/";
+}
+
+void GestorConfiguraciones::setEsCliente (){
+	esCliente = true;
 }
 
 //void GestorConfiguraciones::CargarPantalla(){

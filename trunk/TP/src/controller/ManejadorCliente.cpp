@@ -150,6 +150,7 @@ void ManejadorCliente::recibirDisponibles(){
 
 void ManejadorCliente::iniciarCarga(){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+	gestor->setEsCliente();
 	gestor->inicioCarga();
 	gestor->setNivelElegido(elNivel);
 }
