@@ -28,7 +28,7 @@ void ManejadorConectar::manejarClic(){
 	//numPuerto = 5557; //harcode
 	ip = "127.0.0.1"; //harcode
 
-	Cliente* client= Cliente::obtenerInstancia(ip.c_str(),numPuerto);
+	Cliente* client= Cliente::reiniciarInstancia(ip.c_str(),numPuerto);
 
 	ManejadorCliente* manejadorCliente= ManejadorCliente::obtenerInstancia(client);
 	manejadorCliente->recibirRecursos();
