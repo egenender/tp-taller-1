@@ -8,6 +8,9 @@
 
 #include "Cliente.h"
 #include <pthread.h>
+#include "GestorConfiguraciones.h"
+#include "ManejadorEstados.h"
+#include "Nivel.h"
 
 
 
@@ -213,9 +216,21 @@ void* privEscuchar(void* param){
 
 		if ((bytes=read(sock,dato, tamanio))<tamanio){
 			free(dato);
-			close(sock);
-			pthread_exit(NULL);
+			//ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
+			//Nivel::obtenerInstancia()->morir();
+			
+			//close(sock);
+			//pthread_exit(NULL);
 		}
+
+//		if (dato == NULL){
+//			Cliente::obtenerInstancia("",0)->detener_escuchar();
+//			Cliente::obtenerInstancia("",0)->detener_escribir();
+//			Cliente::obtenerInstancia("",0)->detener();
+//			GestorConfiguraciones::getInstance()->acabarGestor();
+//			ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+//			return NULL;
+//		}
 
 		if (bytes==tamanio){
 			pthread_mutex_t mutex;
