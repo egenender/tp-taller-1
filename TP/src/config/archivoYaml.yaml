@@ -1,7 +1,7 @@
 juego:
-  pantalla:
-    ancho: 1000
-    alto: 550
+#  pantalla:
+#    ancho: 1000
+#    alto: 550
   parametros:
     margen_scroll: 40
   tiposProtagonista:
@@ -9,7 +9,7 @@ juego:
       ancho: 65
       alto: 73
       vel_personaje: 20
-      salto: 40
+      salto: 80
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
