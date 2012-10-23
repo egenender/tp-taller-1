@@ -102,6 +102,7 @@ void ManejadorCliente::recibirRecursos(){
 void ManejadorCliente::seleccionarProt(string nombre){
 	int ID = darID(nombre);
 	cliente->escribir_al_server(&ID,sizeof(int));
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se envia protagonista a usar.");
 
 	int dato = cliente->escuchar_un_entero();
 
@@ -110,8 +111,7 @@ void ManejadorCliente::seleccionarProt(string nombre){
 	else
 		IDprot = -1;
 
-	printf("id def: %i\n",IDprot);
-
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se recibe la respuesta del server.");
 }
 
 
