@@ -95,14 +95,14 @@ void Nivel::terminar() {
 }
 
 void Nivel::actualizar(float delta) {
-//	if (parar && estado==CLIENTE){
-//		Cliente::obtenerInstancia("",0)->detener_escuchar();
-//		Cliente::obtenerInstancia("",0)->detener_escribir();
-//		Cliente::obtenerInstancia("",0)->detener();
-//		GestorConfiguraciones::getInstance()->acabarGestor();
-//		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
-//		return;
-//	}
+	if (parar && estado==CLIENTE){
+		Cliente::obtenerInstancia("",0)->detener_escuchar();
+		Cliente::obtenerInstancia("",0)->detener_escribir();
+		Cliente::obtenerInstancia("",0)->detener();
+		GestorConfiguraciones::getInstance()->acabarGestor();
+		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+		return;
+	}
 	// Actualizamos cada cuerpo:
 	for (unsigned int i = 0; i < actualizables->size(); i++) {
 		Actualizable* cuerpito = actualizables->at(i);
