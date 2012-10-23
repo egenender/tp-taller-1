@@ -74,8 +74,9 @@ class GestorConfiguraciones{
 
 		//void CargarPantalla();
 		bool Entra(int , int , int , int );
-		int ObtenerAltoNivel();
 		int ObtenerAnchoNivel();
+		int ObtenerAltoNivel();
+		int ObtenerPisoNivel();
 		int ObtenerAltoPantalla();
 		int ObtenerAnchoPantalla();
 		int ObtenerMargenScroll();

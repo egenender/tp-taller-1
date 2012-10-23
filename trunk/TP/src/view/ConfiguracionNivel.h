@@ -22,6 +22,7 @@ class ConfiguracionNivel{
 		int alto;
 		int ancho;
 		Superficie* superficieCargada;
+		int piso;
 
 		Manual* manual;
 		VistaProtagonista* vistaManual;

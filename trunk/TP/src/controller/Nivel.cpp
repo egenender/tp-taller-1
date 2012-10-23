@@ -57,6 +57,7 @@ void Nivel::iniciar() {
 	}
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),gestor->ObtenerAltoNivel());
+	Posicion::indicarPiso(gestor->ObtenerPisoNivel());
 	if (estado == CLIENTE){
 		//Cliente::obtenerInstancia("",0) -> escuchar( structServidor_obtener_tamanio());
 		camara = new Camara(0, 0);
