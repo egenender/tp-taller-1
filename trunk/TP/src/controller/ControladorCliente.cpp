@@ -18,6 +18,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
 	if (keystates[SDLK_ESCAPE]) {
+		Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se volvera al Estado de seleccion.");
 		ManejadorCliente::obtenerInstancia(NULL)->detener();
 		SDL_Delay(300);
 		Cliente::obtenerInstancia("",0)->detener_escuchar();
