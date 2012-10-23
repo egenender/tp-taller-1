@@ -12,6 +12,7 @@
 #include "ManejadorEstados.h"
 #include "Nivel.h"
 #include "ManejadorCliente.h"
+#include "../log/Log.h"
 
 
 
@@ -28,7 +29,7 @@ Cliente::Cliente(){
 	cola_salientes = Cola();
 
 	crear_socket();
-	conectar();
+	ok = conectar();
 
 
 }
@@ -44,7 +45,7 @@ Cliente::Cliente(const char * dir_host,unsigned short int port){
 	cola_salientes = Cola();
 
 	crear_socket();
-	conectar();
+	ok = conectar();
 
 }
 
@@ -72,11 +73,12 @@ bool Cliente::inicializar_address (struct sockaddr_in *direccion_host, const cha
 	info_host = gethostbyname (nombre_host);
 	if (info_host == NULL)
 	{
-		//fprintf (stderr, "Unknown host %s.\n", nombre_host); osea mensaje de log
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se pudo establecer cliente");
 		return false;
 
 	}
 	direccion_host->sin_addr = *(struct in_addr *) info_host->h_addr;
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicializo direccion de cliente");
 	return true;
 
 }
@@ -155,7 +157,7 @@ void Cliente::marcar_conectado(){
 
 
 void Cliente::detener(){
-
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se detuo el socket de conexion del cliente");
 	close (sock);
 	instancia = NULL;
 
@@ -166,11 +168,10 @@ bool Cliente::crear_socket(){
 	/* Crear el socket.   */
 	sock = socket (PF_INET, SOCK_STREAM, 0);
 	if (sock < 0){
-
-		//perror ("socket (client)"); osea mensaje de log
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se pudo crear socket cliente");
 		return false;
-
 	}
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se creo socket cliente");
 
 	return true;
 }
@@ -193,7 +194,7 @@ bool Cliente::conectar(){
 	}
 
 	if (!conecta) {
-		//perror ("connect (client)"); osea mensaje de log
+		Log::getInstance()->writeToLogFile("ERROR","No se consiguio conexion con el servidor");
 		return false;
 	}
 
@@ -210,6 +211,7 @@ void* privEscuchar(void* param){
 	Cola* cola_entrantes= parametros->entrantes;
 	int tamanio=parametros->tamanio;
 	int sock=parametros->sock;
+	Log::getInstance()->writeToLogFile("INFO","El cliente inicia escucha");
 
 	while (true){
 		void* dato = malloc (tamanio);
@@ -217,14 +219,10 @@ void* privEscuchar(void* param){
 
 		if ((bytes=read(sock,dato, tamanio))<tamanio){
 			free(dato);
+			Log::getInstance()->writeToLogFile("INFO","Se perdio conexion con el seridor");
 			ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
 			Nivel::obtenerInstancia()->morir();
 
-//			Cliente::obtenerInstancia("",0)->detener_escuchar();
-//			Cliente::obtenerInstancia("",0)->detener_escribir();
-//			Cliente::obtenerInstancia("",0)->detener();
-//			GestorConfiguraciones::getInstance()->acabarGestor();
-//			ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 			pthread_exit(NULL);
 		}
 
@@ -256,6 +254,7 @@ void* privEscribir(void* param){
 	Cola* cola_salientes= parametros->salientes;
 	int tamanio=parametros->tamanio;
 	int sock=parametros->sock;
+	Log::getInstance()->writeToLogFile("INFO","El cliente inicia escritura");
 
 	while (true){
 		pthread_mutex_t mutex;

@@ -74,6 +74,8 @@ class Cliente {
 
 
 	public:
+		bool ok;
+
 		// Metodos viejos
 		//bool iniciar ();
 		static Cliente* obtenerInstancia(const char *,unsigned short int);
