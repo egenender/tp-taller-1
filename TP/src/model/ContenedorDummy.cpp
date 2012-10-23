@@ -21,7 +21,7 @@ string ContenedorDummy::intToString(unsigned int numero){
 ContenedorDummy::ContenedorDummy() {
 	lista_dummies = lista_crear();
 	cliente = Cliente::obtenerInstancia("",0);
-	barra = new BarraEstado(0, 400, 600	, 50);
+	barra = new BarraEstado(100, 0, 600, 37);
 	VistaBarraEstado* vista = new VistaBarraEstado();
 	barra->agregarObservador(vista);
 	GestorConfiguraciones::getInstance()->ObtenerVistas()->push_back(vista);
@@ -54,18 +54,6 @@ void ContenedorDummy::actualizar(float delta){
 
 void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	unsigned int id = structServidor_obtener_id(mod);
-	if (id==-1){
-//		Cliente::obtenerInstancia("",0)->detener_escuchar();
-//		Cliente::obtenerInstancia("",0)->detener_escribir();
-//		Cliente::obtenerInstancia("",0)->detener();
-		pthread_mutex_t mutex;
-		pthread_mutex_init (&mutex , NULL);
-		pthread_mutex_lock(&mutex);
-		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
-		pthread_mutex_unlock(&mutex);
-		pthread_mutex_destroy(&mutex);
-		return;
-	}
 	Dummy* tonto = buscarID(id);
 	if (!tonto) {
 		tonto = crearDummyNuevo(id);
@@ -89,6 +77,20 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 
 }
 
+void ContenedorDummy::borrarID(unsigned int id){
+	lista_iter_t* iter = lista_iter_crear(lista_dummies);
+	bool encontrado = false;
+	Dummy* tonto = NULL;
+	while (!lista_iter_al_final(iter) && !encontrado){
+		tonto = (Dummy*)lista_iter_ver_actual(iter);
+		encontrado = (tonto->esMio(id));
+		if (!encontrado)
+			lista_iter_avanzar(iter);
+	}
+	if (!encontrado) return ;
+	//lista_borrar(lista_dummies, iter);
+}
+
 Dummy* ContenedorDummy::buscarID(unsigned int id){
 	lista_iter_t* iter = lista_iter_crear(lista_dummies);
 	bool encontrado = false;
@@ -96,9 +98,22 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 	while (!lista_iter_al_final(iter) && !encontrado){
 		tonto = (Dummy*)lista_iter_ver_actual(iter);
 		encontrado = (tonto->esMio(id));
-		lista_iter_avanzar(iter);
+		if (!encontrado)
+			lista_iter_avanzar(iter);
 	}
-	if (!encontrado) return NULL;
+	lista_iter_destruir(iter);
+	if (!encontrado){
+		return NULL;
+	}
+
+//	if (tonto->obtenerEstado()==MUERTO){
+//		tonto = (Dummy*)lista_borrar(lista_dummies, iter);
+//
+//		lista_iter_destruir(iter);
+//		delete(tonto);
+//		return NULL;
+//	}
+
 	return tonto;
 }
 
@@ -109,7 +124,7 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
 	TipoProtagonista* tipo = tipos->at(idNuevo);
 	//Creo el nuevo Dummy, en una posicion Arbitraria
 	//FIXME: ver que onda esa posicion rara jaja
-	Dummy* nuevo = new Dummy(idNuevo, new Posicion(50,50), tipo->ancho, tipo->alto);
+	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), tipo->ancho, tipo->alto);
 
 	//Le asigno una vista para poder dibujarlo
 	VistaProtagonista* vistaNueva = new VistaProtagonista (tipo->animacionActivaProt, tipo->animacionPasivaProt, tipo->animacionSaltaProt);
