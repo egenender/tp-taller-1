@@ -326,23 +326,30 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//TODO: no asumir que la eleccion es buena
+	
+	void* elegido;
+	int idElegida;
+	while(*entero!=1){//cambio
+		//recibo eleccion de cliente
+		elegido = leer_de_cliente(cliente,sizeof(int)); //una sola lectura???
+		//while (elegido == NULL)
+		//		elegido = leer_de_cliente(cliente,sizeof(int));
+		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&mutex);
 
-	//recibo eleccion de cliente
-	void* elegido = leer_de_cliente(cliente,sizeof(int)); //una sola lectura???
-	//while (elegido == NULL)
-//		elegido = leer_de_cliente(cliente,sizeof(int));
-	pthread_mutex_unlock(&mutex);
-	pthread_mutex_destroy(&mutex);
+		idElegida = *(int*)elegido;
 
-	int idElegida = *(int*)elegido;
-
-	//le respondo si puede o no usarlo
-	*entero = 0;
-	if ((tiposProt->at( idElegida )->disponible) == true){
-		*entero = 1;
-		tiposProt->at( idElegida )->disponible = false;
+		//le respondo si puede o no usarlo
+		*entero = 0;
+		if ((tiposProt->at( idElegida )->disponible) == true){
+			*entero = 1;
+			tiposProt->at( idElegida )->disponible = false;
+		}
+		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 	}
-	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+	if (*entero == 0){
+		return NULL;
+	}
 
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
@@ -362,6 +369,22 @@ void* _enviar_inicializacion(void* parametros){
 	pthread_mutex_unlock(&mutexSet);
 	pthread_mutex_destroy(&mutexSet);
 	return NULL;
+}
+
+void _TerminarCliente(int cliente){
+	Server* server = Server::obtenerInstancia(0);
+	//lo que se hace si llega un dato erroneo
+	printf("se cerro el cliente\n");
+
+	int IDabandona = server->IDsockets->at(cliente);
+	server->IDsockets->erase(cliente);
+
+	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
+	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
+	tiposProt->at(IDabandona)->disponible = true;
+
+	close (cliente);
+	FD_CLR (cliente, &server->activos);
 }
 
 void* _escuchar(void* parametros){
@@ -461,6 +484,9 @@ void* _escuchar(void* parametros){
 							pthread_mutex_init (&mutex , NULL);
 							pthread_mutex_lock(&mutex);
 							cola_entrantes->push(cambio);
+							//int estado = structCliente_obtener_estado( (structCliente_t*) cambio);
+							//if(estado == MUERTO)
+								//_TerminarCliente(i);
 							pthread_mutex_unlock(&mutex);
 							pthread_mutex_destroy(&mutex);
 
