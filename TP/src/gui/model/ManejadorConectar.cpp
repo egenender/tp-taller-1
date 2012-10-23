@@ -25,7 +25,7 @@ void ManejadorConectar::manejarClic(){
 	string ip = txtIP->obtenerMensaje();
 
 	unsigned short int numPuerto =  atoi(puerto.c_str());
-	numPuerto = 5557; //harcode
+	//numPuerto = 5557; //harcode
 	ip = "127.0.0.1"; //harcode
 
 	Cliente* client= Cliente::obtenerInstancia(ip.c_str(),numPuerto);
