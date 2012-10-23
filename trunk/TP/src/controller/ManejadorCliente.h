@@ -22,6 +22,7 @@ class ManejadorCliente{
 
 	public:
 		static ManejadorCliente* obtenerInstancia(Cliente*);
+		static ManejadorCliente* reiniciarInstancia(Cliente *client);
 
 		void recibirRecursos();
 		char* recibirRuta(int);
@@ -32,7 +33,7 @@ class ManejadorCliente{
 		void seleccionarProt(string);
 		int darID(string);
 
-		//void destruirCliente();
+		void destruirCliente();
 		void detener();
 
 		bool personajeAceptado();

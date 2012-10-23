@@ -8,10 +8,18 @@
 #include "ManejadorCliente.h"
 #include "GestorConfiguraciones.h"
 #include "../model/structures/structCliente.h"
-//#include "ManejadorEstados.h"
+#include "ManejadorEstados.h"
+#include "Nivel.h"
 
 
 ManejadorCliente* ManejadorCliente::instancia=NULL;
+
+ManejadorCliente* ManejadorCliente::reiniciarInstancia(Cliente *client) {
+   instancia = new ManejadorCliente(client);
+
+   return instancia;
+}
+
 
 ManejadorCliente* ManejadorCliente::obtenerInstancia(Cliente *client) {
    if( instancia == NULL){
@@ -29,18 +37,18 @@ ManejadorCliente::ManejadorCliente(Cliente* clienteNuevo){
 
 }
 
-//void ManejadorCliente::destruirCliente(){
-//	pthread_mutex_t mutex;
-//	pthread_mutex_init (&mutex , NULL);
-//	pthread_mutex_lock(&mutex);
-//	cliente->detener_escuchar();
-//	cliente->detener_escribir();
-//	cliente->detener();
-//	GestorConfiguraciones::getInstance()->acabarGestor();
-//	ManejadorEstados::setearEstadoActual(ESTADO_GUI);
-//	pthread_mutex_unlock(&mutex);
-//	pthread_mutex_destroy(&mutex);
-//}
+void ManejadorCliente::destruirCliente(){
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
+	cliente->detener_escuchar();
+	cliente->detener_escribir();
+	GestorConfiguraciones::getInstance()->acabarGestor();
+	//ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+	Nivel::obtenerInstancia()->morir();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
+}
 
 void ManejadorCliente::recibirRecursos(){
 	char* ruta = (char*) malloc (90*sizeof(char));
