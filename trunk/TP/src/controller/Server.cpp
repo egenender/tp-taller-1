@@ -405,11 +405,6 @@ void* _escuchar(void* parametros){
 	struct sockaddr_in nombre_cliente;
 	size_t size;
 
-//	printf("cola en _escuchar: %p \n",cola_entrantes);
-//	printf("tamanio en _escuchar: %i \n",tamanio);
-//	printf("rd en _escuchar: %p \n",rd);
-//	printf("act en _escuchar: %p \n",act);
-
 	while (true){
 
 		pthread_mutex_t mutex;
@@ -419,7 +414,6 @@ void* _escuchar(void* parametros){
 		pthread_mutex_lock(&mutex);
 
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
-		printf("antes select\n");
 		printf("conect: %d\n",sock);
 		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
