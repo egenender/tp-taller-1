@@ -11,6 +11,7 @@
 #include "GestorConfiguraciones.h"
 #include "ManejadorEstados.h"
 #include "Nivel.h"
+#include "ManejadorCliente.h"
 
 
 
@@ -216,11 +217,15 @@ void* privEscuchar(void* param){
 
 		if ((bytes=read(sock,dato, tamanio))<tamanio){
 			free(dato);
-			//ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
-			//Nivel::obtenerInstancia()->morir();
-			
-			//close(sock);
-			//pthread_exit(NULL);
+			ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
+			Nivel::obtenerInstancia()->morir();
+
+//			Cliente::obtenerInstancia("",0)->detener_escuchar();
+//			Cliente::obtenerInstancia("",0)->detener_escribir();
+//			Cliente::obtenerInstancia("",0)->detener();
+//			GestorConfiguraciones::getInstance()->acabarGestor();
+//			ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+			pthread_exit(NULL);
 		}
 
 //		if (dato == NULL){
