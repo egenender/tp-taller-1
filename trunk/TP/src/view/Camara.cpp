@@ -82,7 +82,6 @@ void Camara::actualizar(Observable* observable) {
 	if (camara->y > altoNivel - camara->h) {
 		camara->y = altoNivel - camara->h;
 	}
-	printf("camx %d,camy %d\n",x,y);
 }
 
 int Camara::obtenerX() {
