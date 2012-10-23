@@ -25,7 +25,7 @@ void ManejadorCrear::manejarClic(){
 
 	int nivel = scrollNivel->indiceSeleccionado();
 
-	numPuerto = 5557; //harcode
+	//numPuerto = 5557; //harcode
 
 	Server* elServer = Server::reiniciarInstancia(numPuerto);
 
