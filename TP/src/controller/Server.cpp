@@ -511,7 +511,7 @@ void* _escuchar(void* parametros){
 void Server::escuchar(size_t tamanio){
 
 	parametrosServer_t *param= inicializar_parametros(tamanio);
-	pthread_t thread;
+	pthread_t thread = 0;
 	thread_escuchar=thread;
 
 	if (pthread_create(&thread_escuchar,NULL,&_escuchar,(void*)param)!=0) return;
@@ -552,7 +552,7 @@ void* _escribir(void* parametros){
 void Server::escribir(size_t tamanio){
 
 	parametrosServer_t *param= inicializar_parametros(tamanio);
-	pthread_t thread;
+	pthread_t thread = 0;
 	thread_escritura=thread;
 
 	if (pthread_create(&thread_escritura,NULL,&_escribir,(void*)param)!=0) return;
