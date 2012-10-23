@@ -14,6 +14,7 @@
 #include "../model/structures/structServidor.h"
 #include "../model/ContenedorManuales.h"
 #include "Nivel.h"
+#include "../log/Log.h"
 
 Server* Server::instancia= NULL;
 
@@ -30,6 +31,7 @@ Server::Server(){
 
 	//Crear el socket e inicializar para que comience a escuchar conexiones
 	sock = crear_socket (puerto);
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
 
 	if (listen (sock, 1) < 0){
 		perror ("listen");
@@ -68,6 +70,7 @@ Server::Server(int port){
 	//cambios_nuevos=false;
 
 	sock = crear_socket (puerto);
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
 
 	if (listen (sock, 10) < 0){
 		activado = false;
@@ -85,17 +88,19 @@ void Server::detenerServer(){
 	pthread_mutex_t mutex;
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
-	structServidor_t* mori =  structServidor_crear( -1 , 0,0, MUERTO );
-	encolar_cambio(mori);
 	unsigned int i;
 	for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, &activos)){
 				close(i);
 			}
 	}
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cerraron todos los sockets");
 	GestorConfiguraciones::getInstance()->acabarGestor();
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra el Parser");
 	pthread_cancel(thread_escuchar);
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra thread escritura");
 	pthread_cancel(thread_escritura);
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra thread lectura");
 	close(sock);
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
@@ -252,6 +257,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	pthread_mutex_lock(&mutex);
 
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se empiezan a establecer recursos del cliente");
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
 	std::vector<string>* rutas= gestor->devolverVectorRutas();
@@ -268,11 +274,11 @@ void* _enviar_inicializacion(void* parametros){
 		string rutaServer=(rutas->at(i));
 		string rutaCompleta = headerTemp + rutaServer;
 
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia archivo al cliente");
 		cout<<rutaCompleta<< endl;
 
 		*entero= rutaCompleta.size();
 
-		cout<<*entero<< endl;
 		escribir_a_cliente(cliente, entero, (sizeof(int)));
 
 		unsigned int j = 0;
@@ -305,6 +311,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia nivel a jugar");
 	*entero = gestor->ObtenerNivelElegido();
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
@@ -312,6 +319,7 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//mando disponibilidad de protagonista
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia disponibilidad de protagonistas");
 	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
 	for (unsigned int i; i< tiposProt->size(); i++){
 		*entero = 0;
@@ -344,6 +352,7 @@ void* _enviar_inicializacion(void* parametros){
 		if ((tiposProt->at( idElegida )->disponible) == true){
 			*entero = 1;
 			tiposProt->at( idElegida )->disponible = false;
+			Log::getInstance()->writeToLogFile("INFO","PARSER: La eleccion de protagonista es correcta");
 		}
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 	}
@@ -374,7 +383,7 @@ void* _enviar_inicializacion(void* parametros){
 void _TerminarCliente(int cliente){
 	Server* server = Server::obtenerInstancia(0);
 	//lo que se hace si llega un dato erroneo
-	printf("se cerro el cliente\n");
+	Log::getInstance()->writeToLogFile("INFO","PARSER: El cliente se ha desconectado");
 	
 	int IDabandona = server->IDsockets->at(cliente);
 	server->IDsockets->erase(cliente);
@@ -414,7 +423,6 @@ void* _escuchar(void* parametros){
 		pthread_mutex_lock(&mutex);
 
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
-		printf("conect: %d\n",sock);
 		*rd=*act;
 		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
 			// Manejar error select
@@ -428,14 +436,15 @@ void* _escuchar(void* parametros){
 		for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, rd)){
 				if (i == sock) {
-					printf("init desde: %d\n",sock);
+					Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicia la escucha del server");
 					// Si el socket es sock (el que acepta conexiones) quiere decir que le estan pidiendo conectarse
 					size = sizeof (nombre_cliente);
 					if ((status=accept (sock,(struct sockaddr *) &nombre_cliente, (unsigned int *)&size)) < 0){
 						// Manejar error accept
 
 					}
-					fprintf (stderr, "Server: conexion del host %s, en puerto %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
+					Log::getInstance()->writeToLogFile("INFO","PARSER: Se realizo la conexion");
+					fprintf (stderr, "Server: conecto con cliente: %s, en puerto: %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
 
 					sockets->insert(pair<int,bool>(status,false));
 
@@ -457,7 +466,7 @@ void* _escuchar(void* parametros){
 
 					if ( cambio == NULL){
 						//lo que se hace si llega un dato erroneo
-						printf("se cerro el cliente\n");
+						Log::getInstance()->writeToLogFile("INFO","PARSER: Un cliente abandono la partida");
 						int IDabandona = IDsockets->at(i);
 						IDsockets->erase(i);
 						sockets->at(i) = false;
@@ -474,7 +483,7 @@ void* _escuchar(void* parametros){
 						FD_CLR (i, act);
 					}else{
 						// preguntamos si esta habilitado
-						printf("escuch: %d\n",i);
+						Log::getInstance()->writeToLogFile("INFO","PARSER: A server llega struct");
 						if (sockets->at(i)){
 							pthread_mutex_t mutex;
 							pthread_mutex_init (&mutex , NULL);
@@ -518,6 +527,7 @@ void* _escribir(void* parametros){
 	fd_set* act=param->act;
 	std::map <int,bool> *sockets = param->sockets;
 	int i;
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicia la escritura del server");
 
 	while (true){
 		if (!cola_salientes->empty()){
