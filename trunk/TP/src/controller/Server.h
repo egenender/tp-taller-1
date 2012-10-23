@@ -66,6 +66,13 @@ class Server{
 	// CUESTION: thread para mandar tambien? respuesta: si
 	// CUESTION: tema del head, que es lo que manda al principio para especificar el tamanio
 
+	public:
+		//dice si ese socket esta apto estado estacionario
+		std::map <int,bool> *sockets;
+		//me dice, para cada socket, el id
+		std::map <int,int> *IDsockets;
+
+		fd_set activos;
 	private:
 
 		static Server* instancia;
@@ -88,14 +95,9 @@ class Server{
 		// Esta activado o no
 		bool activado;
 		// Conjuntos de sockets (veremos esto)
-		fd_set activos,leidos;
+		fd_set leidos;
 		// El file descriptor del socket del servidor
 		int sock;
-
-		//dice si ese socket esta apto estado estacionario
-		std::map <int,bool> *sockets;
-		//me dice, para cada socket, el id
-		std::map <int,int> *IDsockets;
 
 		pthread_t thread_escuchar;
 		pthread_t thread_escritura;
@@ -154,10 +156,6 @@ class Server{
 		int detener ();
 
 		void detenerServer();
-
-
-
-
 
 };
 
