@@ -55,6 +55,10 @@ class GestorConfiguraciones{
 		Dummy* dummy;
 		ContenedorManuales* manuales;
 
+		string headerTemp;
+		string rutaYaml;
+		string rutaYamlDefecto;
+
 	public:
 		static GestorConfiguraciones* getInstance();
 		void acabarGestor();

@@ -64,7 +64,7 @@ void EstadoGUI::crearBtns(){
 	btnsolapacliente1 = new Boton(25, 30, 206, 30, new ManejadorSolapa(solapaServidor, solapaCliente1));
 	btnsolapaservidor = new Boton(235, 30, 206, 30, new ManejadorSolapa(solapaCliente1, solapaServidor));
 
-	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorSolapa(solapaServidor, solapaCliente2) );
+	btnsolapacliente2 = new Boton(25,30,206,30, new ManejadorDesconectar() );
 	btnconectar = new Boton(400,400,100,50, new ManejadorConectar(txtIP, txtPuertoCliente, barra, solapaCliente2, solapaCliente1, scrollPersonajes, animaciones) );
 	btncrear = new Boton(400, 400, 100, 50, new ManejadorCrear(txtPuertoServidor, scrollNiveles, barra));
 	btnscrollarribaPersonajes = new Boton(300, 150, 30,30, new ManejadorScroll(scrollPersonajes,ARRIBA,animaciones));
@@ -108,11 +108,11 @@ void EstadoGUI::crearLabels(){
 	lblPuertoCliente->setearMensaje("Puerto:");
 
 	lblnombrePersonaje = new Label(100, 320, 200, 30);
-	lblnombrePersonaje->setearMensaje("Aca deberia ir el nombre");
+	lblnombrePersonaje->setearMensaje("Nombre");
 	lblvelocidad= new Label(100, 360, 200, 30);
-	lblvelocidad->setearMensaje("Aca deberia ir la velocidad");
+	lblvelocidad->setearMensaje("Velocidad");
 	lblsalto = new Label(100, 400, 200, 30);
-	lblsalto->setearMensaje("Aca deberia ir el salto");
+	lblsalto->setearMensaje("Salto");
 
 	imgCliente = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Cliente", 230, 40, 206, 50);
 	imgServidor = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Servidor", 25,40, 206, 50);
