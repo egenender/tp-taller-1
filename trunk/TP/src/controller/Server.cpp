@@ -70,7 +70,8 @@ Server::Server(int port){
 	//cambios_nuevos=false;
 
 	sock = crear_socket (puerto);
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
+	if (sock > 0)
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
 
 	if (listen (sock, 10) < 0){
 		activado = false;
@@ -337,7 +338,7 @@ void* _enviar_inicializacion(void* parametros){
 	
 	void* elegido;
 	int idElegida;
-	while(*entero!=1){//cambio
+	while(*entero!=1){
 		//recibo eleccion de cliente
 		elegido = leer_de_cliente(cliente,sizeof(int)); //una sola lectura???
 		//while (elegido == NULL)
@@ -345,7 +346,14 @@ void* _enviar_inicializacion(void* parametros){
 		pthread_mutex_unlock(&mutex);
 		pthread_mutex_destroy(&mutex);
 
+		if (elegido == NULL){
+			idElegida = -1;
+			break;
+		}
 		idElegida = *(int*)elegido;
+
+		if (idElegida == -1)
+			break;
 
 		//le respondo si puede o no usarlo
 		*entero = 0;
@@ -355,8 +363,21 @@ void* _enviar_inicializacion(void* parametros){
 			Log::getInstance()->writeToLogFile("INFO","PARSER: La eleccion de protagonista es correcta");
 		}
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+
 	}
-	if (*entero == 0){
+
+	IDsockets->insert(pair<int,int>(cliente, idElegida ));
+	if (idElegida == -1){
+		Log::getInstance()->writeToLogFile("INFO","PARSER: El cliente se ha desconectado, no elegio personaje");
+		Server* server = Server::obtenerInstancia(0);
+		pthread_mutex_t mutex;
+		SDL_Delay(200);
+		pthread_mutex_init (&mutex , NULL);
+		pthread_mutex_lock(&mutex);
+		FD_CLR (cliente, &server->activos);
+		close (cliente);
+		pthread_mutex_unlock(&mutex);
+		pthread_mutex_destroy(&mutex);
 		return NULL;
 	}
 
@@ -364,7 +385,7 @@ void* _enviar_inicializacion(void* parametros){
 	pthread_mutex_lock(&mutex);
 	gestor->crearManual( idElegida );
 
-	IDsockets->insert(pair<int,int>(cliente, idElegida ));
+	//IDsockets->insert(pair<int,int>(cliente, idElegida ));
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
 
@@ -388,6 +409,7 @@ void _TerminarCliente(int cliente){
 	int IDabandona = server->IDsockets->at(cliente);
 	server->IDsockets->erase(cliente);
 	server->sockets->at(cliente) = false;
+	//close(cliente); esto hacia que rompa
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
@@ -476,8 +498,11 @@ void* _escuchar(void* parametros){
 
 						GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 						std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
-						tiposProt->at(IDabandona)->disponible = true;
-
+						try{
+							tiposProt->at(IDabandona)->disponible = true;
+						}catch(std::out_of_range &e){
+							//nada, es que el cliente no se termino de conectar
+						}
 
 						close (i);
 						FD_CLR (i, act);
