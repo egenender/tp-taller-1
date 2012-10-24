@@ -8,8 +8,8 @@ juego:
     Charmeleon:
       ancho: 65
       alto: 73
-      vel_personaje: 20
-      salto: 80
+      vel_personaje: 15
+      salto: 40
       animaciones:
         quieto:
           sprites: src/resources/charmeleonQuieto.bmp
@@ -20,8 +20,8 @@ juego:
     mono:
       ancho: 140
       alto: 126
-      vel_personaje: 30
-      salto: 10
+      vel_personaje: 10
+      salto: 60
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
@@ -29,18 +29,7 @@ juego:
           sprites: src/resources/gokumonoMovimiento.bmp
         saltar:
           sprites: src/resources/gokumonoSalto.bmp
-    Goku:
-      ancho: 65
-      alto: 73
-      vel_personaje: 27
-      salto: 30
-      animaciones:
-        quieto:
-          sprites: src/resources/charmeleonQuieto.bmp
-        caminar:
-          sprites: src/resources/charmeleonMovimiento.bmp
-        saltar:
-          sprites: src/resources/charmeleonQuieto.bmp
+
   tiposAutomatico:  
     mono:
       ancho: 140
@@ -72,7 +61,7 @@ juego:
     - nivel: MooMooMilk
       alto: 600
       ancho: 1600
-      piso: 500
+      piso: 530
       fondo: src/resources/fondoGrande.png
       personajes:
         - tipo: mono
