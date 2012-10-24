@@ -16,6 +16,7 @@
 #include "../gui/model/ManejadorCrear.h"
 #include "../gui/model/ManejadorConectar.h"
 #include "../gui/model/ManejadorJugar.h"
+#include "../gui/model/ManejadorDesconectar.h"
 #include "../model/lista.h"
 #include "../gui/model/ListaScrolleable.h"
 #include "../gui/view/VistaLista.h"

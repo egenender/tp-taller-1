@@ -43,6 +43,7 @@ void ManejadorCliente::destruirCliente(){
 	pthread_mutex_lock(&mutex);
 	cliente->detener_escuchar();
 	cliente->detener_escribir();
+	cliente->detener();
 	GestorConfiguraciones::getInstance()->acabarGestor();
 	//ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 	Nivel::obtenerInstancia()->morir();

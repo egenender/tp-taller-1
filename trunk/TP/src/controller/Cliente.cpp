@@ -157,7 +157,7 @@ void Cliente::marcar_conectado(){
 
 
 void Cliente::detener(){
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se detuo el socket de conexion del cliente");
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se detuvo el socket de conexion del cliente");
 	close (sock);
 	instancia = NULL;
 
