@@ -7,7 +7,8 @@
 
 ControladorCliente::ControladorCliente(unsigned int id) {
 	ID = id;
-	ultimoEstado = QUIETO;
+	//ultimoEstado = QUIETO;
+	quieto = derecha = izquierda = saltando = false;
 }
 
 ControladorCliente::~ControladorCliente() {
@@ -29,25 +30,60 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
-	if (keystates[SDLK_UP]) {
-		revisarCambio(SALTAR);
-		//return;
-	}
+//	if (keystates[SDLK_UP]) {
+//		revisarCambio(SALTAR);
+//		//return;
+//	}
+//
+//	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
+//		revisarCambio(CAMINANDOIZQ);
+//		return;
+//	}
+//
+//	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
+//		revisarCambio(CAMINANDODER);
+//		return;
+//	}
+//
+//	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !keystates[SDLK_UP]) {
+//		revisarCambio(QUIETO);
+//		return;
+//	}
+
+	if (keystates[SDLK_UP]){
+		if (!saltando){
+			saltando = true;
+			quieto = false;
+			//lo pongo en falso para que si se estaba ya movimiendo hacia algun lado,
+			//tambien se mande esa actualizacion
+			derecha = izquierda = false;
+			enviarStruct(SALTAR);
+		}
+	}else saltando = false;
 
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
-		revisarCambio(CAMINANDOIZQ);
-		return;
-	}
+		if (!izquierda){
+			quieto = false;
+			derecha = false;
+			izquierda = true;
+			enviarStruct(CAMINANDOIZQ);
+		}
+	}else izquierda = false;
 
 	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
-		revisarCambio(CAMINANDODER);
-		return;
+		if (!derecha){
+			quieto = false;
+			izquierda = false;
+			derecha = true;
+			enviarStruct(CAMINANDODER);
+		}
+	}else derecha = false;
+
+	if (!derecha && !izquierda && !saltando && !quieto){
+		quieto = true;
+		enviarStruct(QUIETO);
 	}
 
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !keystates[SDLK_UP]) {
-		revisarCambio(QUIETO);
-		return;
-	}
 }
 
 void ControladorCliente::enviarStruct(int nuevoEstado){
@@ -56,9 +92,9 @@ void ControladorCliente::enviarStruct(int nuevoEstado){
 	cliente->encolar_cambio(estructura);
 }
 
-void ControladorCliente::revisarCambio(int cambio){
-	if (ultimoEstado != cambio){
-		enviarStruct(cambio);
-		ultimoEstado = cambio;
-	}
-}
+//void ControladorCliente::revisarCambio(int cambio){
+//	if (ultimoEstado != cambio){
+//		enviarStruct(cambio);
+//		ultimoEstado = cambio;
+//	}
+//}
