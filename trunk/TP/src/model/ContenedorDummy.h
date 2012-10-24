@@ -7,6 +7,7 @@
 #include "structures/structServidor.h"
 #include "../controller/Cliente.h"
 #include "../gui/model/BarraEstado.h"
+#define MAX_ACTUALIZACION 5
 
 class ContenedorDummy : public Actualizable{
 private:

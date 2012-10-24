@@ -17,13 +17,17 @@ ManejadorJugar::~ManejadorJugar() {
 
 void ManejadorJugar::manejarClic(){
 	string elegido = scroll->obtenerSeleccionado();
+	if (strcmp(elegido.c_str()," ")==0 ){
+		barra->setearMensaje("No hay personajes para elegir, elija otro servidor");
+		return;
+	}
 	ManejadorCliente *mCliente = ManejadorCliente::obtenerInstancia(NULL);
 
 	mCliente->seleccionarProt(elegido);
 
 	if (! mCliente->personajeAceptado() ){
 		barra->setearMensaje("No se pudo elegir al personaje, ya fue elegido por otro cliente");
-		//scroll->eliminarElemento(elegido); ->vemos si hay que hacer esto o no.
+		//scroll->eliminarElemento(scroll->indiceSeleccionado());
 		return ;
 	}
 

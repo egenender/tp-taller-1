@@ -44,8 +44,10 @@ void ManejadorConectar::manejarClic(){
 
 	vector<TipoProtagonista*>* personajes=gestor->ObtenerPosiblesTiposProtagonistas();
 	for (unsigned int i = 0; i < personajes->size(); i++){
+		printf("hey hey : %s\n", personajes->at(i)->nombre);
 		if (personajes->at(i)->disponible){
 			string texto = personajes->at(i)->nombre;
+			printf("hey: %s\n", texto.c_str());
 			scroll->agregarElemento(texto);
 			muestra->agregarVista(personajes->at(i));
 		}

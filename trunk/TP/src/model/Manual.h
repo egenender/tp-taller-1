@@ -13,7 +13,7 @@
  que la altura maxima sea la misma a la que hay ahora:
  VbaseNueva = VbaseVieja * sqrt(aceleracionNueva/aceleracionVieja)
 */
-#define ACELERACION 10
+#define ACELERACION 8
 
 class Manual:public Cuerpo {
 private:
