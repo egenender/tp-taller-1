@@ -5,10 +5,11 @@
 #include "GestorConfiguraciones.h"
 #include "ManejadorEstados.h"
 
-ControladorCliente::ControladorCliente(unsigned int id) {
+ControladorCliente::ControladorCliente(unsigned int id, Dummy* tonto) {
 	ID = id;
 	//ultimoEstado = QUIETO;
 	quieto = derecha = izquierda = saltando = false;
+	controlable = tonto;
 }
 
 ControladorCliente::~ControladorCliente() {
@@ -51,7 +52,8 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 //	}
 
 	if (keystates[SDLK_UP]){
-		if (!saltando){
+		//if (!saltando){
+		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ){
 			saltando = true;
 			quieto = false;
 			//lo pongo en falso para que si se estaba ya movimiendo hacia algun lado,

@@ -63,7 +63,7 @@ void Nivel::iniciar() {
 		camara = new Camara(0, 0);
 		Dummy* algo = gestor->obtenerDummyMio();
 		algo->agregarObservador(camara);
-		controlador = new ControladorCliente(algo->obtenerID());
+		controlador = new ControladorCliente(algo->obtenerID(), algo);
 	}
 }
 
