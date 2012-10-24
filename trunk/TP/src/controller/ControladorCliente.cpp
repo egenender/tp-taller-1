@@ -52,8 +52,8 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 //	}
 
 	if (keystates[SDLK_UP]){
-		//if (!saltando){
-		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ){
+
+		if (!saltando){
 			saltando = true;
 			quieto = false;
 			//lo pongo en falso para que si se estaba ya movimiendo hacia algun lado,
@@ -61,6 +61,10 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 			derecha = izquierda = false;
 			enviarStruct(SALTAR);
 		}
+		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ){
+			saltando = false;
+		}
+
 	}else saltando = false;
 
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
