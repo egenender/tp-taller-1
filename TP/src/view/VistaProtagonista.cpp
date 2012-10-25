@@ -43,4 +43,8 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	animacionActual = animaciones->at(estado);
 }
 
+void VistaProtagonista::reiniciar(){
+
+}
+
 VistaProtagonista::~VistaProtagonista() {}

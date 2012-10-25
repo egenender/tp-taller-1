@@ -12,7 +12,7 @@ public:
 	VistaProtagonista(/*Observable* protagonista, */Animacion*, Animacion*, Animacion*);
 	~VistaProtagonista();
 	void actualizar(Observable* observable);
-
+	void reiniciar();
 };
 
 #endif /* VISTAPROTAGONISTA_H_ */
