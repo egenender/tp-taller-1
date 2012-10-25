@@ -17,6 +17,7 @@ using namespace std;
 #define SALTANDOIZQ 6
 #define SALTAR 7
 #define MUERTO 8
+#define VIVO 9
 
 class Observable {
 	private:

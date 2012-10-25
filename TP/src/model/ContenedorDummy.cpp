@@ -45,9 +45,11 @@ void ContenedorDummy::agregarDummy(Dummy* tonto){
 }
 
 void ContenedorDummy::actualizar(float delta){
-	while (cliente->hay_cambios()){
+	int interpretado = 0;
+	while (cliente->hay_cambios() && interpretado < MAX_ACTUALIZACION){
 		structServidor_t* mod = (structServidor_t*)cliente->desencolar_cambio();
 		interpretarStruct(mod);
+		interpretado++;
 	}
 	barra->actualizar();
 }
