@@ -32,6 +32,7 @@ private:
 public:
 	CuadroTexto(int x, int y, int ancho, int alto, unsigned int cantCaracteres);
 	CuadroTexto(int x, int y, int ancho, int alto, unsigned int cantCaracteres, int posibles);
+	CuadroTexto(int x, int y, int ancho, int alto, unsigned int cantCaracteres, int posibles, string inicial);
 	~CuadroTexto();
 	string obtenerMensaje();
 	void manejarEvento(SDL_Event* evento);

@@ -14,22 +14,28 @@ void CuadroTexto::inicializar() {
 }
 
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
-		unsigned int cantCaracteres) :
-		ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
-		maximosCaracteres = cantCaracteres;
-		estado = INACTIVO;
-		permitido = true;
-		validar = TODO;
+	unsigned int cantCaracteres) :
+	ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	maximosCaracteres = cantCaracteres;
+	estado = INACTIVO;
+	permitido = true;
+	validar = TODO;
 }
 
 
-CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
-		unsigned int cantCaracteres, int posibles) :
-		ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
-		maximosCaracteres = cantCaracteres;
-		estado = INACTIVO;
-		permitido = true;
-		validar = posibles;
+CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,	unsigned int cantCaracteres, int posibles) :ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	maximosCaracteres = cantCaracteres;
+	estado = INACTIVO;
+	permitido = true;
+	validar = posibles;
+}
+
+CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,	unsigned int cantCaracteres, int posibles, string inicial) :ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	maximosCaracteres = cantCaracteres;
+	permitido = true;
+	validar = posibles;
+	estado = INACTIVO;
+	mensajeEscrito = inicial;
 }
 
 CuadroTexto::~CuadroTexto() {
