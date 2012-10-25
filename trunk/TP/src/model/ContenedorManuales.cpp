@@ -39,6 +39,7 @@ void ContenedorManuales::actualizar(float delta){
 	while (servidor->hay_cambios()){
 		cambio = (structCliente_t*)servidor->desencolar_cambio();
 		actualizarEstados(structCliente_obtener_id(cambio), structCliente_obtener_estado(cambio));
+		structCliente_destruir(cambio);
 	}
 
 	for (unsigned int i = 0; i < IDs->size(); i++){
@@ -83,10 +84,15 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 }
 
 void ContenedorManuales::actualizarEstados(unsigned int id, int estado){
-	//si el vector es correlativo al estado
-
+	if(estado == VIVO){
+		return;
+	}
 	estados->erase(id);
 	estados->insert(pair<unsigned int, int>(id, estado));
+	if (estado == SALTAR){
+		manuales->at(id)->saltar();
+	}
+
 
 }
 
