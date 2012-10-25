@@ -15,6 +15,7 @@ public:
 	VistaAnimada();
 	~VistaAnimada();
 	bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
+	virtual void reiniciar()=0;
 };
 
 

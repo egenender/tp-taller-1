@@ -23,6 +23,7 @@ public:
 	VistaAutomatico(Observable*, Animacion*, vector<Animacion*>*, vector<int>*);
 	virtual ~VistaAutomatico();
 	void actualizar(Observable* observable);
+	void reiniciar();
 private:
 	void cambiarAnimacion();
 };

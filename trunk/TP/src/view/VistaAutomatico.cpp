@@ -30,7 +30,7 @@ VistaAutomatico::~VistaAutomatico() {
 		delete(timer);
 		timer = NULL;
 	}
-	//delete (periodos);
+	delete (periodos);
 /*	if (animacionQuieto) {
 		delete (animacionQuieto);
 		animacionQuieto = NULL;
@@ -65,4 +65,17 @@ void VistaAutomatico::cambiarAnimacion(){
 	animacionActual->resetear();
 	terminoAhora = true;
 	quieto = false;
+}
+
+void VistaAutomatico::reiniciar(){
+	actual = 0;
+	quieto = false;
+	terminoAhora = false;
+	delete (timer);
+	timer = new Timer();
+	animacionActual->detener();
+	animacionActual->resetear();
+	animacionActual->detener();
+	animacionActual = animaciones->at(0);
+	animacionActual->resetear();
 }
