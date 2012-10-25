@@ -16,7 +16,8 @@
 
 #define VEL_PERSONAJE_MINIMA 2
 #define VEL_PERSONAJE 10
-#define SALTO_PERSONAJE 100
+#define SALTO_PERSONAJE 20
+#define SALTO_PERSONAJE_MINIMO 10
 #define MARGEN_SCROLL 80
 #define ANCHO_PANTALLA 800
 #define ALTO_PANTALLA 600
@@ -151,7 +152,6 @@ void GestorConfiguraciones::inicioCarga(){
 		parser.GetNextDocument(nodo);
 	}
 
-	printf("hey: %s\n", rutaYamlDefecto.c_str());
 	std::ifstream finDef(rutaYamlDefecto.c_str());
 	YAML::Parser parserDef(finDef);
 	parserDef.GetNextDocument(nodoDef);
@@ -306,7 +306,6 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 		it.first() >> nombre;
 		TipoProtagonista* tipoper = _CargarTipoProtagonista(nodoProt[nombre.c_str()], nombre.c_str());
 		tipoper->nombre=nombre.c_str();
-		printf("hey hey hey: %s\n", tipoper->nombre);
 		tiposProtagonista -> insert(pair<std::string , TipoProtagonista*>(nombre,tipoper));
 		posiblesTiposProt->push_back(tipoper);
 	}
@@ -371,10 +370,10 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->piso = PISO_NIVEL;
 	}
 
-	if ((configNivel->alto)< 200){
-			configNivel->alto=PISO_NIVEL;
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
-		}
+	if ((configNivel->piso)< 300){
+		configNivel->piso=PISO_NIVEL;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
+	}
 
 
 	if ((configNivel->piso)> configNivel->alto){
@@ -634,10 +633,9 @@ void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
 			vistaCuerpo = CrearVistaAutomaticaDefecto(automatico);
 		}
 		configNivel->vistas.push_back(vistaCuerpo);
+		cuerpo->agregarObservador(vistaCuerpo);
+		configNivel->actualizables.push_back(cuerpo);
 	}
-	cuerpo->agregarObservador(vistaCuerpo);
-	configNivel->actualizables.push_back(cuerpo);
-
 }
 
 bool GestorConfiguraciones::Entra(int x, int y, int ancho, int alto){
@@ -1067,8 +1065,8 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		tipoper->salto = SALTO_PERSONAJE;
 	}
 
-	if (tipoper->salto<25){
-		tipoper->salto = 25;
+	if (tipoper->salto<SALTO_PERSONAJE_MINIMO){
+		tipoper->salto = SALTO_PERSONAJE_MINIMO;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El salto en personaje toma valor bajo, se carga salto de 25");
 	}
 
@@ -1240,7 +1238,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	}
 	TipoProtagonista* tipo = posiblesTiposProt->at(id);
 
-	int x = id * 5 + tipo->ancho;
+	int x = id * 80 + tipo->ancho;
 
 	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
 
