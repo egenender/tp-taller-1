@@ -23,6 +23,7 @@ private:
 	Camara* camara;
 	int estado;
 	bool parar;
+	Superficie* fondoServidor;
 public:
 	Nivel();
 	virtual ~Nivel();
