@@ -17,11 +17,11 @@ juego:
           sprites: src/resources/charmeleonMovimiento.bmp
         saltar:
           sprites: src/resources/charmeleonQuieto.bmp
-    mono:
+    Mono:
       ancho: 140
       alto: 126
       vel_personaje: 10
-      salto: 60
+      salto: 50
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
@@ -29,7 +29,18 @@ juego:
           sprites: src/resources/gokumonoMovimiento.bmp
         saltar:
           sprites: src/resources/gokumonoSalto.bmp
-
+    Gengar:
+      ancho: 55
+      alto: 55
+      vel_personaje: 18
+      salto: 30
+      animaciones:
+        quieto:
+          sprites: src/resources/gengarQuieto.bmp
+        caminar:
+          sprites: src/resources/gengarMovimiento.bmp
+        saltar:
+          sprites: src/resources/gengarSalto.bmp
   tiposAutomatico:  
     mono:
       ancho: 140
@@ -61,7 +72,7 @@ juego:
     - nivel: MooMooMilk
       alto: 600
       ancho: 1600
-      piso: 530
+      piso: 540
       fondo: src/resources/fondoGrande.png
       personajes:
         - tipo: mono
@@ -106,4 +117,3 @@ juego:
         - tipo: mono
           x: 400
           y: 300
-
