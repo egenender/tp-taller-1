@@ -88,9 +88,9 @@ void EstadoGUI::crearBtns(){
 }
 
 void EstadoGUI::crearTxts(){
-	txtPuertoServidor = new CuadroTexto(100,300,100,30,4,NUMEROS);
-	txtPuertoCliente = new CuadroTexto(100,300,100,30,4,NUMEROS);
-	txtIP = new CuadroTexto(100, 250, 300, 30, 15,NUMEROSYPUNTO);
+	txtPuertoServidor = new CuadroTexto(100,300,100,30,4,NUMEROS, "5555");
+	txtPuertoCliente = new CuadroTexto(100,300,100,30,4,NUMEROS, "5555");
+	txtIP = new CuadroTexto(100, 250, 300, 30, 15,NUMEROSYPUNTO, "127.0.0.1");
 }
 
 void EstadoGUI::crearBarra(){
