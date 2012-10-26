@@ -294,7 +294,7 @@ void GestorConfiguraciones::setPosiblesNiveles(){
 void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 	posiblesTiposProt = new std::vector<TipoProtagonista*>();
 	YAML::Node nodo;
-	std::string nombre, ruta;
+	std::string ruta;
 	std::ifstream fin(rutaYaml.c_str());
 	YAML::Parser parser(fin);
 	parser.GetNextDocument(nodo);
@@ -304,6 +304,7 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 	for(YAML::Iterator it=nodoProt.begin();it!=nodoProt.end();++it) {
 		std::string nombre;
 		it.first() >> nombre;
+
 		TipoProtagonista* tipoper = _CargarTipoProtagonista(nodoProt[nombre.c_str()], nombre.c_str());
 		tipoper->nombre=nombre.c_str();
 		tiposProtagonista -> insert(pair<std::string , TipoProtagonista*>(nombre,tipoper));
