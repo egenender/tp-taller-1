@@ -8,7 +8,8 @@ enum {
 	ESTADO_NINGUNO = 0,
 	ESTADO_INTRO,
 	ESTADO_JUEGO,
-	ESTADO_GUI
+	ESTADO_GUI,
+	ESTADO_MENU
 };
 
 class ManejadorEstados {

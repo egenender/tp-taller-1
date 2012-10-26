@@ -10,13 +10,6 @@
 #include "../gui/model/BarraEstado.h"
 #include "../gui/view/VistaCuadroTexto.h"
 #include "../gui/model/CuadroTexto.h"
-#include "../gui/model/ManejadorEjemplo.h"
-#include "../gui/model/ManejadorSolapa.h"
-#include "../gui/model/ManejadorScroll.h"
-#include "../gui/model/ManejadorCrear.h"
-#include "../gui/model/ManejadorConectar.h"
-#include "../gui/model/ManejadorJugar.h"
-#include "../gui/model/ManejadorDesconectar.h"
 #include "../model/lista.h"
 #include "../gui/model/ListaScrolleable.h"
 #include "../gui/view/VistaLista.h"
@@ -35,6 +28,7 @@ private:
 	lista_t* solapaCliente1;
 	lista_t* solapaCliente2;
 	Boton *btncrear,*btnsolapacliente1, *btnsolapacliente2,*btnsolapaservidor,*btnconectar,*btnjugar;
+	Boton *btnMenu;
 	CuadroTexto *txtPuertoServidor, *txtPuertoCliente, *txtIP;
 	BarraEstado* barra;
 	//TODO: faltan las imagenes y las listas
@@ -43,6 +37,7 @@ private:
 	ListaScrolleable* scrollPersonajes, *scrollNiveles ;
 	Boton *btnscrollarribaPersonajes, *btnscrollabajoPersonajes, *btnscrollarribaNiveles, *btnscrollabajoNiveles;
 	VistaBoton *vistaArribaPersonajes, *vistaAbajoPersonajes,*vistaArribaNiveles, *vistaAbajoNiveles;
+	VistaBoton *vistaMenu;
 	VistaLista *vistaScrollPersonajes, *vistaScrollNiveles;
 
 	ImagenGUI* imgCliente, *imgServidor;
