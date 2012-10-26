@@ -14,7 +14,6 @@ private:
 	Boton *btnMultiPlayer, *btnSinglePlayer;
 	Animacion *animacion;
 	VistaBoton *vistaBtnMulti, *vistaBtnSingle;
-	int estado;
 private:
 	EstadoMenuPrincipal();
 	void crearBtns();

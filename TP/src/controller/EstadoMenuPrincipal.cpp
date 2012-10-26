@@ -23,13 +23,12 @@ EstadoMenuPrincipal* EstadoMenuPrincipal::obtenerInstancia() {
 void EstadoMenuPrincipal::iniciar(){
 	crearBtns();
 	crearVistas();
-	estado = ESTADO_MENU;
 }
 
 void EstadoMenuPrincipal::crearBtns(){
 	btnMultiPlayer = new Boton(100,400,200,40, new ManejadorCambiaEstado(ESTADO_GUI));
 	btnMultiPlayer->setearMensaje("Multijugador en red");
-	btnSinglePlayer = new Boton(400,400,200,40, new ManejadorEjemplo());
+	btnSinglePlayer = new Boton(400,400,200,40, new ManejadorCambiaEstado(ESTADO_SINGLE));
 	btnSinglePlayer->setearMensaje("Juego en Solitario");
 }
 
@@ -75,9 +74,8 @@ void EstadoMenuPrincipal::terminar(){
 
 void EstadoMenuPrincipal::manejarEvento(SDL_Event* evento){
 	btnSinglePlayer->manejarEvento(evento);
-	btnMultiPlayer->manejarEvento(evento);
-	if (estado != ESTADO_MENU)
-		ManejadorEstados::setearEstadoActual(estado);
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+		btnMultiPlayer->manejarEvento(evento);
 }
 
 void EstadoMenuPrincipal::actualizar(float delta){

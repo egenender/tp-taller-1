@@ -174,10 +174,6 @@ void EstadoGUI::crearSolapaCliente(){
 }
 
 void EstadoGUI::crearVistas(){
-	//VistaBoton *vistaBtncrear, *vistaBtnsolapacliente, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnJugar;
-	//VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;
-	//VistaBarraEstado *vistaBarra;
-
 	vistaBtncrear = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
 			"src/gui/resources/botonIniciarClickeado.png");
 	vistaBtnsolapacliente1 = new VistaBoton("src/gui/resources/pestania.bmp",

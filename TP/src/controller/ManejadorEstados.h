@@ -9,7 +9,8 @@ enum {
 	ESTADO_INTRO,
 	ESTADO_JUEGO,
 	ESTADO_GUI,
-	ESTADO_MENU
+	ESTADO_MENU,
+	ESTADO_SINGLE
 };
 
 class ManejadorEstados {
