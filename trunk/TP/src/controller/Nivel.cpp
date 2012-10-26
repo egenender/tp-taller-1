@@ -12,6 +12,7 @@ Nivel::Nivel() {
 	vistas = NULL;
 	camara = NULL;
 	controlador = NULL;
+	fondoServidor = NULL;
 }
 
 Nivel::~Nivel() {
@@ -53,7 +54,7 @@ void Nivel::iniciar() {
 	if(estado==SERVIDOR){
 
 		Server::obtenerInstancia(0)->escribir(structServidor_obtener_tamanio());
-
+		fondoServidor = new Superficie("src/gui/resources/fondo.bmp");
 	}
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),gestor->ObtenerAltoNivel());
@@ -93,6 +94,10 @@ void Nivel::terminar() {
 
 	delete (camara);
 	delete (controlador);
+	if (fondoServidor){
+		delete(fondoServidor);
+		fondoServidor = NULL;
+	}
 }
 
 void Nivel::actualizar(float delta) {
@@ -123,7 +128,10 @@ void Nivel::actualizar(float delta) {
 }
 
 void Nivel::dibujar(SDL_Surface* display) {
-	if (estado == SERVIDOR) return;
+	if (estado == SERVIDOR){
+		fondoServidor->dibujar(display,0,0);
+		return;
+	}
 	// Dibujamos el fondo:
 	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
 

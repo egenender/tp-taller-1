@@ -4,6 +4,7 @@
 #include "EstadoIntroduccion.h"
 #include "Nivel.h"
 #include "EstadoGUI.h"
+#include "EstadoMenuPrincipal.h"
 
 Estado* ManejadorEstados::estadoActivo = 0;
 
@@ -45,6 +46,9 @@ void ManejadorEstados::setearEstadoActual(int ID) {
 			break;
 		case ESTADO_GUI:
 			estadoActivo = EstadoGUI::obtenerInstancia();
+			break;
+		case ESTADO_MENU:
+			estadoActivo = EstadoMenuPrincipal::obtenerInstancia();
 			break;
 	}
 

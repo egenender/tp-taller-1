@@ -53,7 +53,7 @@ bool Aplicacion::iniciar() {
 		return false;
 
     // Seteamos el primer estado al entrar al juego:
-    ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+    ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 
     return true;
 }
@@ -128,7 +128,7 @@ int Aplicacion::ejecutar() {
 
 		actualizar(FPS::ControlFPS.obtenerDelta());
 		dibujar();
-		SDL_Delay(35);
+		SDL_Delay(30);
 	}
 	limpiar();
 	return 0;

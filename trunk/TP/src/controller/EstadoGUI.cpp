@@ -1,5 +1,12 @@
 #include "EstadoGUI.h"
-
+#include "../gui/model/ManejadorEjemplo.h"
+#include "../gui/model/ManejadorSolapa.h"
+#include "../gui/model/ManejadorScroll.h"
+#include "../gui/model/ManejadorCrear.h"
+#include "../gui/model/ManejadorConectar.h"
+#include "../gui/model/ManejadorJugar.h"
+#include "../gui/model/ManejadorDesconectar.h"
+#include "../gui/model/ManejadorCambiaEstado.h"
 
 EstadoGUI EstadoGUI::instancia;
 
@@ -7,7 +14,7 @@ EstadoGUI::EstadoGUI() {
 	solapaServidor = NULL;
 	solapaCliente1 = NULL;
 	solapaCliente2 = NULL;
-	btnscrollarribaNiveles = btnscrollabajoNiveles =	btnscrollarribaPersonajes = btnscrollabajoPersonajes = btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
+	btnMenu = btnscrollarribaNiveles = btnscrollabajoNiveles =	btnscrollarribaPersonajes = btnscrollabajoPersonajes = btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
 	txtPuertoServidor = txtPuertoCliente = txtIP;
 	barra = NULL;
 	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
@@ -71,8 +78,8 @@ void EstadoGUI::crearBtns(){
 	btnscrollabajoPersonajes = new Boton(300, 270, 30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
 	btnscrollarribaNiveles = new Boton(300, 150, 30,30, new ManejadorScroll(scrollNiveles,ARRIBA));
 	btnscrollabajoNiveles = new Boton(300, 240, 30,30, new ManejadorScroll(scrollNiveles,ABAJO));
-
 	btnjugar = new Boton(400, 400, 100, 50,  new ManejadorJugar(scrollPersonajes, barra));
+	btnMenu = new Boton(450,80,150,50, new ManejadorCambiaEstado(ESTADO_MENU));
 
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
@@ -84,6 +91,7 @@ void EstadoGUI::crearBtns(){
 	btnscrollabajoPersonajes->setearMensaje(" ");
 	btnscrollarribaNiveles->setearMensaje(" ");
 	btnscrollabajoNiveles->setearMensaje(" ");
+	btnMenu->setearMensaje("Volver al Menu");
 
 }
 
@@ -191,6 +199,8 @@ void EstadoGUI::crearVistas(){
 				"src/gui/resources/flechaArribaClic.jpg");
 	vistaAbajoNiveles = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
 					"src/gui/resources/flechaAbajoClic.jpg");
+	vistaMenu = new VistaBoton("src/gui/resources/botonIniciarNormal.png",
+			"src/gui/resources/botonIniciarClickeado.png");
 
 	vistaBarra = new VistaBarraEstado();
 	vistaTxtPuertoServidor = new VistaCuadroTexto();
@@ -218,6 +228,7 @@ void EstadoGUI::crearVistas(){
 	btnscrollabajoPersonajes->agregarObservador(vistaAbajoPersonajes);
 	btnscrollarribaNiveles->agregarObservador(vistaArribaNiveles);
 	btnscrollabajoNiveles->agregarObservador(vistaAbajoNiveles);
+	btnMenu->agregarObservador(vistaMenu);
 
 	barra->agregarObservador(vistaBarra);
 	txtPuertoServidor->agregarObservador(vistaTxtPuertoServidor);
@@ -249,6 +260,7 @@ void EstadoGUI::actualizar(float delta){
 	btnscrollabajoPersonajes->actualizar();
 	btnscrollarribaNiveles->actualizar();
 	btnscrollabajoNiveles->actualizar();
+	btnMenu->actualizar();
 	scrollNiveles->actualizar();
 	scrollPersonajes->actualizar();
 
@@ -276,6 +288,7 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistaBtnsolapaservidor->dibujar(display);
 	vistaBtnconectar->dibujar(display);
 	vistaBtnjugar->dibujar(display);
+	vistaMenu->dibujar(display);
 	vistaBarra->dibujar(display);
 	vistaTxtPuertoServidor->dibujar(display);
 	vistaTxtPuertoCliente->dibujar(display);
@@ -313,9 +326,10 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 
 	btnjugar->manejarEvento(evento);
 
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia()){
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btncrear->manejarEvento(evento);
-	}
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+		btnMenu->manejarEvento(evento);
 }
 
 void EstadoGUI::terminar() {
@@ -523,6 +537,14 @@ void EstadoGUI::terminar() {
 	if (fondo){
 		delete (fondo);
 		fondo = NULL;
+	}
+	if (btnMenu){
+		delete (btnMenu);
+		btnMenu = NULL;
+	}
+	if (vistaMenu){
+		delete (vistaMenu);
+		vistaMenu = NULL;
 	}
 }
 
