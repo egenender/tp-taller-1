@@ -37,6 +37,7 @@ class ManejadorCliente{
 		void detener();
 
 		bool personajeAceptado();
+		bool serverCaido();
 
 };
 
