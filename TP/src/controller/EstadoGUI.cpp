@@ -62,7 +62,7 @@ void EstadoGUI::crearScroll(){
 	}
 
 
-	animaciones = new Muestra(lblnombrePersonaje, lblvelocidad, lblsalto, 370, 180, 50,50);
+	animaciones = new Muestra(lblnombrePersonaje, lblvelocidad, lblsalto, 400, 200, 50,50);
 	//animaciones->agregarVista(GestorConfiguraciones::getInstance()->ObtenerVistaManual());
 }
 
