@@ -35,7 +35,7 @@ void ManejadorConectar::manejarClic(){
 		return;
 	}
 
-	ManejadorCliente* manejadorCliente= ManejadorCliente::obtenerInstancia(client);
+	ManejadorCliente* manejadorCliente= ManejadorCliente::reiniciarInstancia(client);
 	manejadorCliente->recibirRecursos();
 	manejadorCliente->iniciarCarga();
 
