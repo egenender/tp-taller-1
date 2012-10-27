@@ -30,6 +30,11 @@ void ManejadorJugar::manejarClic(){
 		//scroll->eliminarElemento(scroll->indiceSeleccionado());
 		return ;
 	}
+	if (mCliente->serverCaido() ){
+		barra->setearMensaje("No se pudo elegir al personaje, el server se ha desconectado");
+		//scroll->eliminarElemento(scroll->indiceSeleccionado());
+		return ;
+	}
 
 	GestorConfiguraciones *gestor = GestorConfiguraciones::getInstance();
 	gestor->setProtagonista(elegido);
