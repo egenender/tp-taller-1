@@ -11,6 +11,7 @@
 #include <fstream>
 #include "GestorConfiguraciones.h"
 #include "../model/Estatico.h"
+#include "../model/Area.h"
 #include "../log/Log.h"
 #include <sstream>
 
@@ -709,11 +710,20 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 
 	VistaProtagonista* vista = new VistaProtagonista(posiblesTiposProt->at(i)->animacionActivaProt, posiblesTiposProt->at(i)->animacionPasivaProt, posiblesTiposProt->at(i)->animacionSaltaProt);
 	configNivel->vistas.push_back(vista);
-	dummy = new Dummy(i, new Posicion(50,50), posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto);
-	dummy->agregarObservador(vista);
-	contenedor = new ContenedorDummy();
-	contenedor->agregarDummy(dummy);
-	configNivel->actualizables.push_back(contenedor);
+	if (esCliente){
+		dummy = new Dummy(i, new Posicion(50,50), posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto);
+		dummy->agregarObservador(vista);
+		contenedor = new ContenedorDummy();
+		contenedor->agregarDummy(dummy);
+		configNivel->actualizables.push_back(contenedor);
+	}else{
+		Posicion* pos = new Posicion(10, Posicion::obtenerPiso()-posiblesTiposProt->at(i)->alto);
+		printf("Piso :%d\n",Posicion::obtenerPiso());
+		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
+		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
+		configNivel->manual->agregarObservador(vista);
+		configNivel->actualizables.push_back(configNivel->manual);
+	}
 
 }
 

@@ -8,15 +8,18 @@
 #include "../model/Manual.h"
 #include "../view/Camara.h"
 #include "ControladorCliente.h"
+#include "Controlador.h"
+#include "ControladorSinglePlayer.h"
 #include "../model/Actualizable.h"
 
 #define CLIENTE 0
 #define SERVIDOR 1
+#define SINGLE 2
 
 class Nivel: public Estado {
 private:
     static Nivel instancia;
-    ControladorCliente* controlador;
+    Controlador* controlador;
 	vector<Actualizable*>* actualizables;
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;

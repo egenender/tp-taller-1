@@ -59,12 +59,19 @@ void Nivel::iniciar() {
 
 	Posicion::indicarMaximo(gestor->ObtenerAnchoNivel(),gestor->ObtenerAltoNivel());
 	Posicion::indicarPiso(gestor->ObtenerPisoNivel());
-	if (estado == CLIENTE){
+	if (estado == CLIENTE || estado == SINGLE){
 		//Cliente::obtenerInstancia("",0) -> escuchar( structServidor_obtener_tamanio());
 		camara = new Camara(0, 0);
-		Dummy* algo = gestor->obtenerDummyMio();
-		algo->agregarObservador(camara);
-		controlador = new ControladorCliente(algo->obtenerID(), algo);
+		if (estado == CLIENTE){
+			Dummy* algo = gestor->obtenerDummyMio();
+			algo->agregarObservador(camara);
+			controlador = new ControladorCliente(algo->obtenerID(), algo);
+		}else{
+			Manual* prin = gestor->ObtenerManual();
+			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
+			prin->agregarObservador(camara);
+			controlador = new ControladorSinglePlayer(prin);
+		}
 	}
 }
 
@@ -120,6 +127,7 @@ void Nivel::actualizar(float delta) {
 		if (cont)
 			cont->encolarCambios();
 	}
+
 	// Verificar aca colisiones:
 
 	// Aca vemos si tenemos que eliminar algun cuerpo:

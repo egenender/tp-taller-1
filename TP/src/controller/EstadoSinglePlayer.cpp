@@ -4,6 +4,7 @@
 #include "../gui/model/ManejadorCambiaEstado.h"
 #include "../gui/model/ManejadorScroll.h"
 #include "../gui/model/ManejadorEjemplo.h"
+#include "../gui/model/ManejadorSinglePlayer.h"
 #include "../view/TipoProtagonista.h"
 
 EstadoSinglePlayer EstadoSinglePlayer::instancia;
@@ -27,6 +28,7 @@ EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
 void EstadoSinglePlayer::iniciar(){
 	crearLbls();
 	crearScroll();
+	SDL_Delay(100); //sino se caga, por alguna razon
 	crearBtns();
 	crearVistas();
 }
@@ -46,9 +48,9 @@ void EstadoSinglePlayer::crearScroll(){
 	gestor->inicioCarga();
 	gestor->setPosiblesTiposProtagonistas();
 	vector<TipoProtagonista*>* personajes = gestor->ObtenerPosiblesTiposProtagonistas();
-	//vector<string>* nombres = gestor->obtenerNombresProtagonistas();
+	vector<string>* nombres = gestor->obtenerNombresProtagonistas();
 	for (unsigned int i = 0; i < personajes->size(); i++){
-		string texto = personajes->at(i)->nombre;
+		string texto = nombres->at(i);
 		scrollPersonajes->agregarElemento(texto);
 		animaciones->agregarVista(personajes->at(i));
 	}
@@ -73,7 +75,7 @@ void EstadoSinglePlayer::crearBtns(){
 	btnScrollNivelesAbajo = new Boton(300,290,30,30, new ManejadorScroll(scrollNiveles,ABAJO));
 	btnScrollPersonajesArriba = new Boton(600,200,30,30, new ManejadorScroll(scrollPersonajes,ARRIBA, animaciones));
 	btnScrollPersonajesAbajo = new Boton(600,290,30,30, new ManejadorScroll(scrollPersonajes,ABAJO,animaciones));
-	btnJugar = new Boton(145,400,100,50, new ManejadorEjemplo());
+	btnJugar = new Boton(145,400,100,50, new ManejadorSinglePlayer(scrollNiveles,scrollPersonajes));
 
 	btnMenu->setearMensaje("Volver al Menu");
 	btnJugar->setearMensaje("Jugar");
@@ -252,7 +254,6 @@ void EstadoSinglePlayer::manejarEvento(SDL_Event* evento){
 	btnMenu->manejarEvento(evento);
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnJugar->manejarEvento(evento);
-
 }
 
 void EstadoSinglePlayer::actualizar(float delta){
