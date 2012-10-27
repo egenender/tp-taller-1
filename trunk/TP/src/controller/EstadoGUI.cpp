@@ -332,12 +332,13 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	txtIP->manejarEvento(evento);
 
 
-	btnjugar->manejarEvento(evento);
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+		btnjugar->manejarEvento(evento);
 
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia()) {
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btncrear->manejarEvento(evento);
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnMenu->manejarEvento(evento);
-	}
 }
 
 void EstadoGUI::terminar() {
