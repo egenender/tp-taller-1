@@ -105,14 +105,16 @@ void ManejadorCliente::seleccionarProt(string nombre){
 	cliente->escribir_al_server(&ID,sizeof(int));
 	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se envia protagonista a usar.");
 
-	int dato = cliente->escuchar_un_entero();
+	int dato = cliente->escuchar_un_entero_out(1000);
 
 	if (dato == 1)
 		IDprot = ID;
-	else
-		IDprot = -1;
+	if (dato == -1)
+			IDprot = -1;
+	if (dato == -2)
+			IDprot = -2;
 
-	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se recibe la respuesta del server.");
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Esta dada la respuesta.");
 }
 
 
@@ -120,6 +122,9 @@ bool ManejadorCliente::personajeAceptado(){
 	return (IDprot != -1);
 }
 
+bool ManejadorCliente::serverCaido(){
+	return (IDprot == -2);
+}
 
 int ManejadorCliente::darID(string nombre){
 	bool encontrado = false;
@@ -191,7 +196,6 @@ void ManejadorCliente::recibirArchivo(EscrituraArchivo* escritor,int largo){
 
 
 void ManejadorCliente::detener(){
-	structCliente* mori = structCliente_crear(IDprot,8);
+	structCliente* mori = structCliente_crear(IDprot,MUERTO);
 	cliente->encolar_cambio(mori);
-	//	cliente->detener();
 }
