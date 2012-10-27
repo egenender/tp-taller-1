@@ -1,19 +1,13 @@
 #ifndef CONTROLADOR_H_
 #define CONTROLADOR_H_
-#include "../model/Manual.h"
 #include "Evento.h"
-
-//Dejo comentado todo lo relacionado con usar el Patrón Singleton
+#include "../model/Observable.h"
 
 class Controlador {
-private:
-	/*static Controlador* instancia;*/
 public:
-	virtual ~Controlador();
-	void manejarEvento(SDL_Event*, Manual*);
-	/*Controlador* getInstance();*/
-/*private:*/
 	Controlador();
+	virtual ~Controlador();
+	virtual void manejarEvento(SDL_Event*)=0;
 };
 
 #endif /* CONTROLADOR_H_ */

@@ -18,6 +18,7 @@ Posicion* Cuerpo::obtenerPosicion() {
 
 void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
+	huboCambios();
 }
 
 int Cuerpo::obtenerAncho() {
