@@ -12,7 +12,10 @@ EstadoSinglePlayer EstadoSinglePlayer::instancia;
 EstadoSinglePlayer::EstadoSinglePlayer() {
 	btnMenu = btnScrollNivelesArriba = btnScrollNivelesAbajo = btnScrollPersonajesArriba = btnScrollPersonajesAbajo = btnJugar = NULL;
 	scrollNiveles = scrollPersonajes = NULL;
-	lblNivel = lblPersonaje = NULL;
+	lblNivel = lblPersonaje = lblNombre = lblSalto = lblVelocidad = NULL;
+	vistaBtnJugar = vistaBtnMenu = vistaBtnScrollNivelesAbajo = vistaBtnScrollNivelesArriba = vistaBtnScrollPersonajesAbajo = vistaBtnScrollPersonajesArriba =NULL;
+	vistaLblNivel = vistaLblNombre = vistaLblPersonaje = vistaLblSalto = vistaLblVelocidad = NULL;
+	vistaScrollNiveles = vistaScrollPersonajes = NULL;
 	fondo = fondo2 = NULL;
 	animaciones = NULL;
 }
@@ -94,7 +97,7 @@ void EstadoSinglePlayer::crearVistas(){
 			"src/gui/resources/flechaArribaClic.jpg");
 	vistaBtnScrollNivelesAbajo = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
 			"src/gui/resources/flechaAbajoClic.jpg");
-	vistaBtnScrollPeronajesArriba = new VistaBoton("src/gui/resources/flechaArriba.jpg",
+	vistaBtnScrollPersonajesArriba = new VistaBoton("src/gui/resources/flechaArriba.jpg",
 			"src/gui/resources/flechaArribaClic.jpg");
 	vistaBtnScrollPersonajesAbajo = new VistaBoton("src/gui/resources/flechaAbajo.jpg",
 			"src/gui/resources/flechaAbajoClic.jpg");
@@ -116,7 +119,7 @@ void EstadoSinglePlayer::crearVistas(){
 	btnJugar->agregarObservador(vistaBtnJugar);
 	btnScrollNivelesArriba->agregarObservador(vistaBtnScrollNivelesArriba);
 	btnScrollNivelesAbajo->agregarObservador(vistaBtnScrollNivelesAbajo);
-	btnScrollPersonajesArriba->agregarObservador(vistaBtnScrollPeronajesArriba);
+	btnScrollPersonajesArriba->agregarObservador(vistaBtnScrollPersonajesArriba);
 	btnScrollPersonajesAbajo->agregarObservador(vistaBtnScrollPersonajesAbajo);
 
 	lblNivel->agregarObservador(vistaLblNivel);
@@ -167,9 +170,9 @@ void EstadoSinglePlayer::terminar(){
 		delete (vistaBtnScrollNivelesAbajo);
 		vistaBtnScrollNivelesAbajo = NULL;
 	}
-	if (vistaBtnScrollPeronajesArriba){
-		delete (vistaBtnScrollPeronajesArriba);
-		vistaBtnScrollPeronajesArriba = NULL;
+	if (vistaBtnScrollPersonajesArriba){
+		delete (vistaBtnScrollPersonajesArriba);
+		vistaBtnScrollPersonajesArriba = NULL;
 	}
 	if (vistaBtnScrollPersonajesAbajo){
 		delete (vistaBtnScrollPersonajesAbajo);
@@ -282,7 +285,7 @@ void EstadoSinglePlayer::dibujar(SDL_Surface* display){
 	vistaBtnMenu->dibujar(display);
 	vistaBtnScrollNivelesArriba->dibujar(display);
 	vistaBtnScrollNivelesAbajo->dibujar(display);
-	vistaBtnScrollPeronajesArriba->dibujar(display);
+	vistaBtnScrollPersonajesArriba->dibujar(display);
 	vistaBtnScrollPersonajesAbajo->dibujar(display);
 	vistaBtnJugar->dibujar(display);
 

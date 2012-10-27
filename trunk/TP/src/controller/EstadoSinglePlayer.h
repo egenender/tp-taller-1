@@ -14,7 +14,7 @@ private:
 	static EstadoSinglePlayer instancia;
 
 	Boton *btnMenu, *btnScrollNivelesArriba, *btnScrollNivelesAbajo, *btnScrollPersonajesArriba, *btnScrollPersonajesAbajo, *btnJugar;
-	VistaBoton *vistaBtnMenu, *vistaBtnScrollNivelesArriba, *vistaBtnScrollNivelesAbajo, *vistaBtnScrollPeronajesArriba, *vistaBtnScrollPersonajesAbajo, *vistaBtnJugar;
+	VistaBoton *vistaBtnMenu, *vistaBtnScrollNivelesArriba, *vistaBtnScrollNivelesAbajo, *vistaBtnScrollPersonajesArriba, *vistaBtnScrollPersonajesAbajo, *vistaBtnJugar;
 
 	ListaScrolleable *scrollNiveles, *scrollPersonajes;
 	VistaLista *vistaScrollNiveles, *vistaScrollPersonajes;
