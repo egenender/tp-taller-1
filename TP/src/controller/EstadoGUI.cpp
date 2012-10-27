@@ -11,6 +11,18 @@
 EstadoGUI EstadoGUI::instancia;
 
 EstadoGUI::EstadoGUI() {
+	fondo = NULL;
+	fondoPestania = NULL;
+	imgCliente = imgServidor = NULL;
+	vistaAbajoNiveles = vistaAbajoPersonajes = vistaArribaPersonajes = vistaArribaNiveles = NULL;
+	vistaBarra = NULL;
+	vistaBtncrear = vistaBtnconectar = vistaBtnjugar = vistaBtnsolapacliente1 = vistaBtnsolapacliente2 = vistaBtnsolapaservidor = NULL;
+	vistalblIP = vistalblnombre = vistalblpuertocliente = vistalblpuertoservidor = NULL;
+	vistalblsalto = vistalblvelocidad = NULL;
+	txtIP = NULL;
+	vistaMenu = NULL;
+	vistaScrollNiveles = vistaScrollPersonajes = NULL;
+	vistaTxtIP = vistaTxtPuertoCliente = vistaTxtPuertoServidor = NULL;
 	solapaServidor = NULL;
 	solapaCliente1 = NULL;
 	solapaCliente2 = NULL;
@@ -322,10 +334,10 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 
 	btnjugar->manejarEvento(evento);
 
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia()) {
 		btncrear->manejarEvento(evento);
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnMenu->manejarEvento(evento);
+	}
 }
 
 void EstadoGUI::terminar() {
