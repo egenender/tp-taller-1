@@ -42,15 +42,15 @@ void EstadoSinglePlayer::crearScroll(){
 	}
 
 	scrollPersonajes = new ListaScrolleable(400,200, 200, 120);
-	animaciones = new Muestra(lblNombre, lblVelocidad, lblSalto, 500, 350, 50,50);
+	animaciones = new Muestra(lblNombre, lblVelocidad, lblSalto, 600, 400, 50,50);
 	gestor->inicioCarga();
 	gestor->setPosiblesTiposProtagonistas();
 	vector<TipoProtagonista*>* personajes = gestor->ObtenerPosiblesTiposProtagonistas();
-
+	//vector<string>* nombres = gestor->obtenerNombresProtagonistas();
 	for (unsigned int i = 0; i < personajes->size(); i++){
-			//std::string texto = personajes->at(i)->nombre;
-//			scrollPersonajes->agregarElemento(texto);
-			animaciones->agregarVista(personajes->at(i));
+		string texto = personajes->at(i)->nombre;
+		scrollPersonajes->agregarElemento(texto);
+		animaciones->agregarVista(personajes->at(i));
 	}
 }
 
