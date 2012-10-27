@@ -7,13 +7,15 @@
 
 ControladorCliente::ControladorCliente(unsigned int id, Dummy* tonto) {
 	ID = id;
-	//ultimoEstado = QUIETO;
+	ultimoEstado = QUIETO;
 	quieto = derecha = izquierda = saltando = false;
 	controlable = tonto;
+	mantieneVivo = new Timer();
+	mantieneVivo->comenzar();
 }
 
 ControladorCliente::~ControladorCliente() {
-
+	delete (mantieneVivo);
 }
 
 void ControladorCliente::manejarEvento(SDL_Event* evento){
@@ -31,72 +33,79 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
-//	if (keystates[SDLK_UP]) {
-//		revisarCambio(SALTAR);
-//		//return;
-//	}
-//
-//	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
-//		revisarCambio(CAMINANDOIZQ);
-//		return;
-//	}
-//
-//	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
-//		revisarCambio(CAMINANDODER);
-//		return;
-//	}
-//
-//	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !keystates[SDLK_UP]) {
-//		revisarCambio(QUIETO);
-//		return;
-//	}
-
-	if (keystates[SDLK_UP]){
-		//if (!saltando){
-		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ){
-			saltando = true;
-			quieto = false;
-			//lo pongo en falso para que si se estaba ya movimiendo hacia algun lado,
-			//tambien se mande esa actualizacion
-			derecha = izquierda = false;
-			enviarStruct(SALTAR);
-		}
-	}else saltando = false;
-
-	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
-		if (!izquierda){
-			quieto = false;
-			derecha = false;
-			izquierda = true;
-			enviarStruct(CAMINANDOIZQ);
-		}
-	}else izquierda = false;
-
-	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
-		if (!derecha){
-			quieto = false;
-			izquierda = false;
-			derecha = true;
-			enviarStruct(CAMINANDODER);
-		}
-	}else derecha = false;
-
-	if (!derecha && !izquierda && !saltando && !quieto){
-		quieto = true;
-		enviarStruct(QUIETO);
+	if (keystates[SDLK_UP]) {
+		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
+			revisarCambio(SALTAR);
+		//return;
 	}
 
+	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
+		revisarCambio(CAMINANDOIZQ);
+		return;
+	}
+
+	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
+		revisarCambio(CAMINANDODER);
+		return;
+	}
+
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) /*&& !keystates[SDLK_UP]*/) {
+			if(controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
+				revisarCambio(QUIETO);
+			//return;
+	}
+
+//	if (keystates[SDLK_UP]){
+//		//if (!saltando){
+//		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ){
+//			saltando = true;
+//			quieto = false;
+//			//lo pongo en falso para que si se estaba ya movimiendo hacia algun lado,
+//			//tambien se mande esa actualizacion
+//			derecha = izquierda = false;
+//			enviarStruct(SALTAR);
+//		}
+//	}else saltando = false;
+//
+//	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
+//		if (!izquierda){
+//			quieto = false;
+//			derecha = false;
+//			izquierda = true;
+//			enviarStruct(CAMINANDOIZQ);
+//		}
+//	}else izquierda = false;
+//
+//	if (keystates[SDLK_RIGHT] && !keystates[SDLK_LEFT]) {
+//		if (!derecha){
+//			quieto = false;
+//			izquierda = false;
+//			derecha = true;
+//			enviarStruct(CAMINANDODER);
+//		}
+//	}else derecha = false;
+//
+//	if (!derecha && !izquierda && !saltando && !quieto){
+//		quieto = true;
+//		enviarStruct(QUIETO);
+//	}
+
+	if (mantieneVivo->obtenerTiempo() >= (TIEMPO_ESPERA * 1000)){
+		enviarStruct(VIVO);
+	}
 }
 
 void ControladorCliente::enviarStruct(int nuevoEstado){
 	structCliente_t* estructura = structCliente_crear(ID, nuevoEstado);
 	Cliente *cliente = Cliente::obtenerInstancia("", 0);
 	cliente->encolar_cambio(estructura);
+	mantieneVivo->detener();
+	mantieneVivo->comenzar();
 }
 
-//void ControladorCliente::revisarCambio(int cambio){
-//	if (ultimoEstado != cambio){
-//		enviarStruct(cambio);
-//		ultimoEstado = cambio;
-//	}
-//}
+void ControladorCliente::revisarCambio(int cambio){
+	if (ultimoEstado != cambio){
+		enviarStruct(cambio);
+		ultimoEstado = cambio;
+	}
+}
