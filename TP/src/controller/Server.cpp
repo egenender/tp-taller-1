@@ -31,7 +31,7 @@ Server::Server(){
 
 	//Crear el socket e inicializar para que comience a escuchar conexiones
 	sock = crear_socket (puerto);
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se abre un socket server");
 
 	if (listen (sock, 1) < 0){
 		perror ("listen");
@@ -44,6 +44,9 @@ Server::Server(){
 	sockets = new std::map <int,bool>();
 	IDsockets = new std::map <int,int>();
 
+	desco = false;
+	envio = new Timer();
+	timerSockets = new std::map <int,Timer*>();
 }
 Server* Server::reiniciarInstancia(int port) {
     instancia = new Server(port);
@@ -71,7 +74,7 @@ Server::Server(int port){
 
 	sock = crear_socket (puerto);
 	if (sock > 0)
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se abre un socket server");
+		Log::getInstance()->writeToLogFile("INFO","SOCK: Se abre un socket server");
 
 	if (listen (sock, 10) < 0){
 		activado = false;
@@ -83,7 +86,37 @@ Server::Server(int port){
 	sockets = new std::map <int,bool>();
 	IDsockets = new std::map <int,int>();
 
+	desco = false;
+	envio = new Timer();
+	timerSockets = new std::map <int,Timer*>();
+
 }
+
+void detenerServer(){
+	Server* server = Server::obtenerInstancia(0);
+	pthread_mutex_t mutex;
+	pthread_mutex_init (&mutex , NULL);
+	pthread_mutex_lock(&mutex);
+	unsigned int i;
+	for (i = 0; i < FD_SETSIZE; ++i){
+			if (FD_ISSET (i, &server->activos)){
+				server->sockets->erase(i);
+				close(i);
+			}
+	}
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cerraron todos los sockets");
+	GestorConfiguraciones::getInstance()->acabarGestor();
+	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra el Parser");
+	server->detener_escuchar();
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cierra thread escucha");
+	server->detener_escribir();
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cierra thread escritura");
+	server->detener();
+	pthread_mutex_unlock(&mutex);
+	pthread_mutex_destroy(&mutex);
+
+}
+
 
 void Server::detenerServer(){
 	pthread_mutex_t mutex;
@@ -95,13 +128,13 @@ void Server::detenerServer(){
 				close(i);
 			}
 	}
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cerraron todos los sockets");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cerraron todos los sockets");
 	GestorConfiguraciones::getInstance()->acabarGestor();
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra el Parser");
 	pthread_cancel(thread_escuchar);
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra thread escritura");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cierra thread escucha");
 	pthread_cancel(thread_escritura);
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se cierra thread lectura");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se cierra thread escritura");
 	close(sock);
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
@@ -258,7 +291,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	pthread_mutex_lock(&mutex);
 
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se empiezan a establecer recursos del cliente");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se empiezan a establecer recursos del cliente");
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 
 	std::vector<string>* rutas= gestor->devolverVectorRutas();
@@ -275,7 +308,7 @@ void* _enviar_inicializacion(void* parametros){
 		string rutaServer=(rutas->at(i));
 		string rutaCompleta = headerTemp + rutaServer;
 
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia archivo al cliente");
+		Log::getInstance()->writeToLogFile("INFO","SOCK: Se envia archivo al cliente");
 		cout<<rutaCompleta<< endl;
 
 		*entero= rutaCompleta.size();
@@ -312,7 +345,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia nivel a jugar");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se envia nivel a jugar");
 	*entero = gestor->ObtenerNivelElegido();
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy(&mutex);
@@ -320,7 +353,7 @@ void* _enviar_inicializacion(void* parametros){
 	escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
 	//mando disponibilidad de protagonista
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se envia disponibilidad de protagonistas");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se envia disponibilidad de protagonistas");
 	std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
 	for (unsigned int i; i< tiposProt->size(); i++){
 		*entero = 0;
@@ -360,7 +393,7 @@ void* _enviar_inicializacion(void* parametros){
 		if ((tiposProt->at( idElegida )->disponible) == true){
 			*entero = 1;
 			tiposProt->at( idElegida )->disponible = false;
-			Log::getInstance()->writeToLogFile("INFO","PARSER: La eleccion de protagonista es correcta");
+			Log::getInstance()->writeToLogFile("INFO","SOCK: La eleccion de protagonista es correcta");
 		}
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
 
@@ -368,7 +401,7 @@ void* _enviar_inicializacion(void* parametros){
 
 	IDsockets->insert(pair<int,int>(cliente, idElegida ));
 	if (idElegida == -1){
-		Log::getInstance()->writeToLogFile("INFO","PARSER: El cliente se ha desconectado, no elegio personaje");
+		Log::getInstance()->writeToLogFile("INFO","SOCK: El cliente se ha desconectado, no elegio personaje");
 		Server* server = Server::obtenerInstancia(0);
 		pthread_mutex_t mutex;
 		SDL_Delay(200);
@@ -392,10 +425,21 @@ void* _enviar_inicializacion(void* parametros){
 	pthread_mutex_t mutexSet;
 	pthread_mutex_init (&mutexSet , NULL);
 	pthread_mutex_lock(&mutexSet);
-	sockets->at(cliente) = true;
+
+	sockets->erase(cliente);
+	sockets->insert(pair<int,int>(cliente, true ));
+
+	Server* server = Server::obtenerInstancia(0);
+
+	server->timerSockets->erase(cliente);
+	server->timerSockets->insert(pair<int,Timer*>(cliente, new Timer() ));
+	server->timerSockets->at(cliente)->comenzar();
+
 	ContenedorManuales* manualesYaConectados = gestor->obtenerContenedorManuales();
 	manualesYaConectados->encolarTodos();
 	//FD_SET(cliente, conjuntoClientes);
+
+	server->envio->comenzar();
 	pthread_mutex_unlock(&mutexSet);
 	pthread_mutex_destroy(&mutexSet);
 	return NULL;
@@ -404,11 +448,13 @@ void* _enviar_inicializacion(void* parametros){
 void _TerminarCliente(int cliente){
 	Server* server = Server::obtenerInstancia(0);
 	//lo que se hace si llega un dato erroneo
-	Log::getInstance()->writeToLogFile("INFO","PARSER: El cliente se ha desconectado");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: El cliente se ha desconectado");
 	
 	int IDabandona = server->IDsockets->at(cliente);
 	server->IDsockets->erase(cliente);
-	server->sockets->at(cliente) = false;
+	server->sockets->erase(cliente);
+	server->sockets->insert(pair<int,int>(cliente, false ));
+	server->timerSockets->erase(cliente);
 	//close(cliente); esto hacia que rompa
 
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
@@ -436,6 +482,8 @@ void* _escuchar(void* parametros){
 	struct sockaddr_in nombre_cliente;
 	size_t size;
 
+	struct timeval intervaloTiempo;
+
 	while (true){
 
 		pthread_mutex_t mutex;
@@ -444,12 +492,31 @@ void* _escuchar(void* parametros){
 
 		pthread_mutex_lock(&mutex);
 
+		intervaloTiempo.tv_sec=TIME_OUT_SERVER;
+		intervaloTiempo.tv_usec=0;
+
+		Server *server = Server::obtenerInstancia(0);
 		// Parar la ejecucion hasta que llegue algo en alguno de los sockets del conjunto
 		*rd=*act;
-		if (select (FD_SETSIZE, rd, NULL, NULL, NULL) < 0){
-			// Manejar error select
+		if(select(FD_SETSIZE,rd,NULL,NULL,&intervaloTiempo)==0){
+			if (server->IDsockets->size() > 0){
+				server->desco = true;
+				server->IDsockets = new std::map <int,int> ();
+				Log::getInstance()->writeToLogFile("INFO","SOCK: Se han desconectado todos los clientes por Time Out");
+			}
 		}
 
+		for (unsigned int j = 0; j < FD_SETSIZE; ++j){
+			try{
+				if (server->timerSockets->at(j)->obtenerTiempo() >= 1000*CLIENTE_TIME_OUT){
+					structCliente_t* haMuerto =  structCliente_crear( IDsockets->at(j) , MUERTO );
+					server->Autoencolar_cambio(haMuerto);
+					_TerminarCliente(j);
+				}
+			}catch (std::out_of_range &e){
+
+			}
+		}
 		pthread_mutex_unlock(&mutex);
 
 		pthread_mutex_destroy(&mutex);
@@ -458,16 +525,17 @@ void* _escuchar(void* parametros){
 		for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, rd)){
 				if (i == sock) {
-					Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicia la escucha del server");
+					Log::getInstance()->writeToLogFile("INFO","SOCK: Se inicia la escucha del server");
 					// Si el socket es sock (el que acepta conexiones) quiere decir que le estan pidiendo conectarse
 					size = sizeof (nombre_cliente);
 					if ((status=accept (sock,(struct sockaddr *) &nombre_cliente, (unsigned int *)&size)) < 0){
 						// Manejar error accept
 
 					}
-					Log::getInstance()->writeToLogFile("INFO","PARSER: Se realizo la conexion");
+					Log::getInstance()->writeToLogFile("INFO","SOCK: Se realizo la conexion");
 					fprintf (stderr, "Server: conecto con cliente: %s, en puerto: %d\n",inet_ntoa (nombre_cliente.sin_addr),ntohs (nombre_cliente.sin_port));
 
+					sockets->erase(status);
 					sockets->insert(pair<int,bool>(status,false));
 
 					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
@@ -488,13 +556,16 @@ void* _escuchar(void* parametros){
 
 					if ( cambio == NULL){
 						//lo que se hace si llega un dato erroneo
-						Log::getInstance()->writeToLogFile("INFO","PARSER: Un cliente abandono la partida");
+						Log::getInstance()->writeToLogFile("INFO","SOCK: Un cliente abandono la partida");
 						int IDabandona = IDsockets->at(i);
 						IDsockets->erase(i);
-						sockets->at(i) = false;
+						sockets->erase(i);
+						sockets->insert(pair<int,bool>(i,false));
+
+						server->timerSockets->erase(i);
 
 						structCliente_t* haMuerto =  structCliente_crear( IDabandona , MUERTO );
-						Server::obtenerInstancia(0)->Autoencolar_cambio(haMuerto);
+						server->Autoencolar_cambio(haMuerto);
 
 						GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
 						std::vector<TipoProtagonista*>* tiposProt = gestor->ObtenerPosiblesTiposProtagonistas();
@@ -506,17 +577,27 @@ void* _escuchar(void* parametros){
 
 						close (i);
 						FD_CLR (i, act);
+
+						server->desco = true;
 					}else{
 						// preguntamos si esta habilitado
-						Log::getInstance()->writeToLogFile("INFO","PARSER: A server llega struct");
+						Log::getInstance()->writeToLogFile("INFO","SOCK: A server llega struct");
 						if (sockets->at(i)){
 							pthread_mutex_t mutex;
 							pthread_mutex_init (&mutex , NULL);
 							pthread_mutex_lock(&mutex);
+
+							Server* server = Server::obtenerInstancia(0);
+							server->timerSockets->at(i)->detener();
+							server->timerSockets->at(i)->comenzar();
+
 							cola_entrantes->push(cambio);
 							int estado = structCliente_obtener_estado( (structCliente_t*) cambio);
-							if(estado == MUERTO)
+							if(estado == MUERTO){
 								_TerminarCliente(i);
+								Server *server = Server::obtenerInstancia(0);
+								server->desco = true;
+							}
 							pthread_mutex_unlock(&mutex);
 							pthread_mutex_destroy(&mutex);
 
@@ -581,6 +662,25 @@ void Server::escribir(size_t tamanio){
 	thread_escritura=thread;
 
 	if (pthread_create(&thread_escritura,NULL,&_escribir,(void*)param)!=0) return;
+}
+
+void Server::detener(){
+
+	close(sock);
+
+}
+
+
+void Server::detener_escribir(){
+
+	pthread_cancel(thread_escritura);
+
+}
+
+void Server::detener_escuchar(){
+
+	pthread_cancel(thread_escuchar);
+
 }
 
 //bool Server::leer_de_cliente (int filedes, void* buffer,size_t tamanio){
