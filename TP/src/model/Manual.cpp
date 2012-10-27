@@ -90,6 +90,12 @@ void Manual::trasladar(int factorX, int factorY){
 // Viejo:
 void Manual::actualizar(float delta){
 	this->delta = delta;
+	if (!superficieOcupada->estaSobreElPiso()){
+		if (estado == CAMINANDODER || estado == QUIETODER)
+			estado = SALTANDODER;
+		else if (estado == CAMINANDOIZQ || estado == QUIETOIZQ)
+			estado = SALTANDOIZQ;
+	}
 	actualizarSalto();
 	notificarObservadores();
 }
