@@ -11,7 +11,7 @@ VistaBoton::VistaBoton(string rutaInactivo, string rutaActivo) {
 	mensajeAnterior = mensajeActual = "";
 	mensajeAMostrar = NULL;
 	ancho = alto = 0;
-
+	visible = false;
 }
 
 VistaBoton::~VistaBoton() {

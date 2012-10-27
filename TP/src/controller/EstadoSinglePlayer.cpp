@@ -254,7 +254,8 @@ void EstadoSinglePlayer::manejarEvento(SDL_Event* evento){
 	btnScrollNivelesAbajo->manejarEvento(evento);
 	btnScrollPersonajesArriba->manejarEvento(evento);
 	btnScrollPersonajesAbajo->manejarEvento(evento);
-	btnMenu->manejarEvento(evento);
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+		btnMenu->manejarEvento(evento);
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnJugar->manejarEvento(evento);
 }
