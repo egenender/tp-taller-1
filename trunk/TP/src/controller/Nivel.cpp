@@ -30,13 +30,23 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 
 		}
 		if(estado==SERVIDOR){
+			Log::getInstance()->writeToLogFile("INFO","SOCK: Se han desconectado todos los clientes");
 			Server::obtenerInstancia(0)->detenerServer();
 			ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 		}
 
 	}
-	if(estado==SERVIDOR)
+	if(estado==SERVIDOR){
+		Server* server = Server::obtenerInstancia(0);
+		if (server->desco){
+			if ( server->IDsockets->size() == 0){
+				server->desco = false;
+				server->detenerServer();
+				ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+			}
+		}
 		return;
+	}
 
 	controlador->manejarEvento(evento);
 }
@@ -124,8 +134,16 @@ void Nivel::actualizar(float delta) {
 
 	if (estado == SERVIDOR){
 		ContenedorManuales* cont = GestorConfiguraciones::getInstance()->obtenerContenedorManuales();
-		if (cont)
+		if (cont){
+			Server* server = Server::obtenerInstancia(0);
+			if (server->envio->obtenerTiempo() >= 1000*TIEMPO_ENVIO){
+				server->envio->detener();
+				server->envio->comenzar();
+				cont->encolarTodos();
+				return ;
+			}
 			cont->encolarCambios();
+		}
 	}
 
 	// Verificar aca colisiones:
