@@ -13,6 +13,18 @@
 #include "Nivel.h"
 #include "ManejadorCliente.h"
 #include "../log/Log.h"
+#include "../model/structures/structCliente.h"
+
+#include <linux/ethtool.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <linux/sockios.h>
+#include <linux/if.h>
+#include <linux/ethtool.h>
+#include <string.h>
+#include <stdlib.h>
 
 
 
@@ -73,12 +85,12 @@ bool Cliente::inicializar_address (struct sockaddr_in *direccion_host, const cha
 	info_host = gethostbyname (nombre_host);
 	if (info_host == NULL)
 	{
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se pudo establecer cliente");
+		Log::getInstance()->writeToLogFile("ERROR","SOCK: No se pudo establecer cliente");
 		return false;
 
 	}
 	direccion_host->sin_addr = *(struct in_addr *) info_host->h_addr;
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicializo direccion de cliente");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se inicializo direccion de cliente");
 	return true;
 
 }
@@ -95,6 +107,28 @@ bool Cliente::escribir_al_server (void* datos,size_t tamanio) {
 		return false;
 	}
 	return true;
+}
+
+int Cliente::escuchar_un_entero_out (int t) {
+	int* dato = (int*) malloc (sizeof(int));
+	int bytes;
+	bool escuchado = false;
+	int i = 0;
+	while (!escuchado && i<t){
+		if (( ( bytes=read(sock,dato, sizeof(int))) ) ==sizeof(int) ){
+			escuchado = true;
+		}
+		i++;
+		Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "El server se ha desconectado.");
+	}
+	if(!escuchado){
+		return -2;
+	}
+
+	int valor = *dato;
+	free(dato);
+
+	return valor;
 }
 
 int Cliente::escuchar_un_entero () {
@@ -157,7 +191,7 @@ void Cliente::marcar_conectado(){
 
 
 void Cliente::detener(){
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se detuvo el socket de conexion del cliente");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se detuvo el socket de conexion del cliente");
 	close (sock);
 	instancia = NULL;
 
@@ -168,10 +202,10 @@ bool Cliente::crear_socket(){
 	/* Crear el socket.   */
 	sock = socket (PF_INET, SOCK_STREAM, 0);
 	if (sock < 0){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No se pudo crear socket cliente");
+		Log::getInstance()->writeToLogFile("ERROR","SOCK: No se pudo crear socket cliente");
 		return false;
 	}
-	Log::getInstance()->writeToLogFile("INFO","PARSER: Se creo socket cliente");
+	Log::getInstance()->writeToLogFile("INFO","SOCK: Se creo socket cliente");
 
 	return true;
 }
@@ -213,13 +247,31 @@ void* privEscuchar(void* param){
 	int sock=parametros->sock;
 	Log::getInstance()->writeToLogFile("INFO","El cliente inicia escucha");
 
+	struct timeval intervaloTiempo;
+
 	while (true){
+
 		void* dato = malloc (tamanio);
 		int bytes;
+		intervaloTiempo.tv_sec=10;
+		intervaloTiempo.tv_usec=0;
+
+		fd_set set= fd_set();
+
+		FD_SET(sock,&set);
+
+
+		if(select(FD_SETSIZE,&set,NULL,NULL,&intervaloTiempo)==0){
+			Log::getInstance()->writeToLogFile("INFO","Time Out conexion con el servidor");
+			//ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
+			Nivel::obtenerInstancia()->morir();
+
+			pthread_exit(NULL);
+		}
 
 		if ((bytes=read(sock,dato, tamanio))<tamanio){
 			free(dato);
-			Log::getInstance()->writeToLogFile("INFO","Se perdio conexion con el seridor");
+			Log::getInstance()->writeToLogFile("INFO","Se perdio conexion con el servidor");
 			ManejadorCliente::obtenerInstancia(NULL)->destruirCliente();
 			Nivel::obtenerInstancia()->morir();
 
@@ -247,6 +299,7 @@ void* privEscuchar(void* param){
 	}
 	return NULL;
 }
+
 
 void* privEscribir(void* param){
 
@@ -353,6 +406,13 @@ void Cliente::detener_escribir(){
 	pthread_mutex_t mutex;
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
+//	while (!cola_salientes.empty()){
+//		void* saliente = cola_salientes.front();
+//		cola_salientes.pop();
+//		int tamanio = structCliente_obtener_tamanio();
+//		write(sock,saliente, tamanio);
+//		printf("estado enviado: %d\n", structCliente_obtener_estado((structCliente_t*)saliente));
+//	}
 	pthread_cancel(thread_escritura);
 	pthread_mutex_unlock(&mutex);
 	pthread_mutex_destroy (&mutex);
