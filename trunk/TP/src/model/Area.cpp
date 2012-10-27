@@ -72,3 +72,9 @@ bool Area::pasaPiso(){
 	y += alto;
 	return (y >= Posicion::obtenerPiso());
 }
+
+bool Area::estaSobreElPiso(){
+	//FIXME: cuando se agreguen colisiones con las plataformas esto tiene que cambiar
+	return ((pos->obtenerY() - alto) == Posicion::obtenerPiso());
+
+}

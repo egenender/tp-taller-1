@@ -22,6 +22,7 @@ class Area {
 		Posicion* obtenerPosicion();
 		void ponerEnPiso();
 		bool pasaPiso();
+		bool estaSobreElPiso();
 };
 
 #endif /* AREA_H_ */
