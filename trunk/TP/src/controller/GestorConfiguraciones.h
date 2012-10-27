@@ -47,6 +47,7 @@ class GestorConfiguraciones{
 		std::vector<string>* posiblesNiveles;
 
 		std::vector<TipoProtagonista*>* posiblesTiposProt;
+		std::vector<string>* nombresProt;
 
 		bool esCliente;
 
@@ -99,6 +100,7 @@ class GestorConfiguraciones{
 		std::vector<string>* ObtenerPosiblesNiveles();
 		void setPosiblesTiposProtagonistas();
 		std::vector<TipoProtagonista*>* ObtenerPosiblesTiposProtagonistas();
+		std::vector<string>* obtenerNombresProtagonistas();
 
 		std::vector<string>* devolverVectorRutas();
 

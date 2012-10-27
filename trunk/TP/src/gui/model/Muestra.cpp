@@ -60,7 +60,7 @@ bool Muestra::dibujar(SDL_Surface* display){
 	salto->setearMensaje(valor);
 
 	personajes->at(seleccion)->animacionPasivaProt->animar();
-	return personajes->at(seleccion)->animacionPasivaProt->dibujar(display,obtenerX(),obtenerY());
+	return personajes->at(seleccion)->animacionPasivaProt->dibujar(display,obtenerX() - (personajes->at(seleccion)->ancho / 2),obtenerY() - (personajes->at(seleccion)->alto / 2));
 }
 
 string Muestra::intToString(int numero){

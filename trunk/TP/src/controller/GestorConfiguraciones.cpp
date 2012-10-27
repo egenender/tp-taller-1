@@ -293,6 +293,7 @@ void GestorConfiguraciones::setPosiblesNiveles(){
 
 void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 	posiblesTiposProt = new std::vector<TipoProtagonista*>();
+	nombresProt = new vector<string>();
 	YAML::Node nodo;
 	std::string ruta;
 	std::ifstream fin(rutaYaml.c_str());
@@ -304,11 +305,11 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 	for(YAML::Iterator it=nodoProt.begin();it!=nodoProt.end();++it) {
 		std::string nombre;
 		it.first() >> nombre;
-
 		TipoProtagonista* tipoper = _CargarTipoProtagonista(nodoProt[nombre.c_str()], nombre.c_str());
 		tipoper->nombre=nombre.c_str();
 		tiposProtagonista -> insert(pair<std::string , TipoProtagonista*>(nombre,tipoper));
 		posiblesTiposProt->push_back(tipoper);
+		nombresProt->push_back(nombre);
 	}
 }
 
@@ -319,6 +320,9 @@ std::vector<string>* GestorConfiguraciones::ObtenerPosiblesNiveles(){
 
 std::vector<TipoProtagonista*>* GestorConfiguraciones::ObtenerPosiblesTiposProtagonistas(){
 	return posiblesTiposProt;
+}
+std::vector<string>* GestorConfiguraciones::obtenerNombresProtagonistas(){
+	return nombresProt;
 }
 
 void GestorConfiguraciones::setNivelElegido(int nivel){
