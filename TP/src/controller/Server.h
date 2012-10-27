@@ -21,9 +21,15 @@
 #include <map>
 #include <queue>
 #include <pthread.h>
+#include "../model/Timer.h"
+
 using namespace std;
 
 #define PORT	5556
+#define TIEMPO_ENVIO 7
+#define TIME_OUT_SERVER  100
+#define CLIENTE_TIME_OUT 50
+
 typedef struct prueba{
 
 
@@ -72,7 +78,12 @@ class Server{
 		//me dice, para cada socket, el id
 		std::map <int,int> *IDsockets;
 
+		std::map <int,Timer*> *timerSockets;
+
 		fd_set activos;
+		bool desco;
+
+		Timer* envio;
 	private:
 
 		static Server* instancia;
@@ -153,9 +164,12 @@ class Server{
 		void* desencolar_cambio();
 
 		// Detener al server
-		int detener ();
+		void detener ();
 
 		void detenerServer();
+
+		void detener_escribir();
+		void detener_escuchar();
 
 };
 
