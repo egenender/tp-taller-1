@@ -30,9 +30,7 @@
 							<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2041985087" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug">
 								<option id="gnu.cpp.compiler.exe.debug.option.optimization.level.1199639272" name="Optimization Level" superClass="gnu.cpp.compiler.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.exe.debug.option.debugging.level.1790918532" name="Debug Level" superClass="gnu.cpp.compiler.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-								<option id="gnu.cpp.compiler.option.include.paths.1802680755" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/usr/include/yaml-cpp"/>
-								</option>
+								<option id="gnu.cpp.compiler.option.include.paths.1802680755" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.843085172" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.412696500" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug">
@@ -47,11 +45,12 @@
 									<listOptionValue builtIn="false" value="SDL"/>
 									<listOptionValue builtIn="false" value="SDL_image"/>
 									<listOptionValue builtIn="false" value="SDL_ttf"/>
+									<listOptionValue builtIn="false" value="SDL_mixer"/>
 									<listOptionValue builtIn="false" value="yaml-cpp"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1466229657" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="/usr/include/yaml-cpp"/>
 									<listOptionValue builtIn="false" value="/usr/include/arpa"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/sys/socket.h"/>
 									<listOptionValue builtIn="false" value="/usr/include/x86_64-linux-gnu/sys/socket.h"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.862525328" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -107,6 +106,14 @@
 								<option id="gnu.cpp.link.option.libs.907992732" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="SDL"/>
 									<listOptionValue builtIn="false" value="SDL_image"/>
+									<listOptionValue builtIn="false" value="SDL_ttf"/>
+									<listOptionValue builtIn="false" value="SDL_mixer"/>
+									<listOptionValue builtIn="false" value="yaml-cpp"/>
+								</option>
+								<option id="gnu.cpp.link.option.paths.601523823" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="/usr/include/arpa"/>
+									<listOptionValue builtIn="false" value="/usr/include/i386-linux-gnu/sys/socket.h"/>
+									<listOptionValue builtIn="false" value="/usr/include/x86_64-linux-gnu/sys/socket.h"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.697156587" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -145,7 +152,13 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/Taller"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/Taller"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/Taller"/>
+		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 </cproject>
