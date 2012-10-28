@@ -7,6 +7,8 @@
 Nivel Nivel::instancia;
 
 Nivel::Nivel() {
+	estado = -1;
+	parar = false;
 	principal = NULL;
 	actualizables = NULL;
 	vistas = NULL;

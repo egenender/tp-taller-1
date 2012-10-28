@@ -11,6 +11,7 @@ VistaImagen::VistaImagen(Superficie* imagenNueva) {
 
 VistaImagen::VistaImagen(string ID) {
 //	cambiarImagen(ID);
+	imagen = NULL;
 }
 
 VistaImagen::~VistaImagen() {

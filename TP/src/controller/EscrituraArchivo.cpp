@@ -10,7 +10,7 @@
 
 EscrituraArchivo::EscrituraArchivo() {
 	// TODO Auto-generated constructor stub
-
+	archivo = NULL;
 }
 
 EscrituraArchivo::EscrituraArchivo(char *ruta) {

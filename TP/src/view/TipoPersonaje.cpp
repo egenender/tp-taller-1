@@ -13,6 +13,7 @@ TipoPersonaje::TipoPersonaje (){
 	nombre=0;
 	animacionesActiva= vector<Animacion*>();
 	periodos= vector<int>();
+	animacionPasiva = NULL;
 }
 
 

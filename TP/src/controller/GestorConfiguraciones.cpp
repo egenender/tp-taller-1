@@ -85,6 +85,12 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	headerTemp = "Temp/";
 	rutaYaml = "src/config/archivoYaml.yaml";
 	rutaYamlDefecto = "src/config/defecto.yaml";
+	dummy = NULL;
+	configNivel = NULL;
+	contenedor = NULL;
+	nombresProt = NULL;
+	posiblesNiveles = NULL;
+	posiblesTiposProt = NULL;
 }
 
 void GestorConfiguraciones::setEsCliente (){
