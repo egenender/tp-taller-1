@@ -12,6 +12,11 @@ VistaLista::VistaLista(unsigned int m) {
 	seleccionadoActual = 0;
 	visible = false;
 	primeraVez = true;
+
+	seleccionadoAnterior = 0;
+	sinCarga = true;
+	topeInferior = 0;
+	topeSuperior = 0;
 }
 
 VistaLista::~VistaLista() {

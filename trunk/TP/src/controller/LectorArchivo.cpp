@@ -10,7 +10,7 @@
 
 LectorArchivo::LectorArchivo() {
 	// TODO Auto-generated constructor stub
-
+	archivo = NULL;
 }
 
 LectorArchivo::LectorArchivo(const char *ruta) {

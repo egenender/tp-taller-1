@@ -15,5 +15,6 @@ ConfiguracionNivel::ConfiguracionNivel(){
 	vistaManual=0;
 	vistas=vector<VistaCuerpo*>();
 	piso = 0;
+	superficieCargada = NULL;
 }
 
