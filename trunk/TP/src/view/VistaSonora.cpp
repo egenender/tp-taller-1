@@ -1,7 +1,7 @@
 #include "VistaSonora.h"
-#include "Log.h"
+#include "../log/Log.h"
 
-void VistaSonora::VistaSonora() {
+VistaSonora::VistaSonora() {
 	sonidoActual = NULL;
 	sonidos = new map<int,Mix_Chunk*>();
 	pararDeReproducir = false;

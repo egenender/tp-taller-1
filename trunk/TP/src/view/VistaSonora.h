@@ -11,6 +11,7 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "../model/Observable.h"
+#include <string>
 #include <map>
 using namespace std;
 
@@ -20,8 +21,8 @@ protected:
 	Mix_Chunk* sonidoActual;
 	bool pararDeReproducir, debeReproducir;
 private:
-	void inicializar();
 	Mix_Chunk* cargarSonido(string ruta);
+
 public:
 	VistaSonora();
 	~VistaSonora();
