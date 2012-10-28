@@ -4,14 +4,13 @@
 #include "Estado.h"
 
 // Lista de estados validos:
-enum {
-	ESTADO_NINGUNO = 0,
-	ESTADO_INTRO,
-	ESTADO_JUEGO,
-	ESTADO_GUI,
-	ESTADO_MENU,
-	ESTADO_SINGLE
-};
+
+#define	ESTADO_NINGUNO 0
+#define	ESTADO_INTRO 1
+#define	ESTADO_MENU 2
+#define	ESTADO_GUI 3
+#define	ESTADO_SINGLE 4
+#define	ESTADO_JUEGO 5
 
 class ManejadorEstados {
 	private:
