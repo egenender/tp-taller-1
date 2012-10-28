@@ -9,6 +9,8 @@
 #include "LectorArchivo.h"
 #include "EscrituraArchivo.h"
 #include "ManejadorCliente.h"
+#include "SDL/SDL.h"
+#include "SDL/SLD_mixer.h"
 
 #include "../model/Manual.h"
 #include "../view/Superficie.h"
@@ -51,6 +53,10 @@ bool Aplicacion::iniciar() {
 
 	if (!Fuente::obtenerInstancia()->inicializar())
 		return false;
+
+	 if( Mix_OpenAudio( 22050, MIX_INIT_MP3, 2, 4096 ) == -1 ) {
+		 Log::getInstance()->writeToLogFile(Log::ERROR, "No se pudo incializar el Mixer, no se reproducirá ningun sonido");
+	 }
 
     // Seteamos el primer estado al entrar al juego:
     ManejadorEstados::setearEstadoActual(ESTADO_MENU);
@@ -100,6 +106,7 @@ void Aplicacion::limpiar() {
     	ventana = NULL;
     }
 
+    Mix_CloseAudio();
     SDL_Quit();
 }
 
