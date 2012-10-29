@@ -1,5 +1,7 @@
 #include "VistaSonora.h"
 #include "../log/Log.h"
+#include <exception>
+using namespace std;
 
 VistaSonora::VistaSonora() {
 	sonidoActual = NULL;
@@ -7,6 +9,13 @@ VistaSonora::VistaSonora() {
 	sonidos = new map<int, Mix_Chunk*>();
 	pararDeReproducir = false;
 	debeReproducir = false;
+
+	// TODO: *le hardcode:
+
+	agregarSonido("src/resources/Yoshi/Yoshi-jump-1.wav", SALTANDODER);
+	agregarSonido("src/resources/Yoshi/Yoshi-jump-2.wav", SALTANDOIZQ);
+	agregarSonido("src/resources/Yoshi/Yoshi-happy.wav", QUIETODER);
+	agregarSonido("src/resources/Yoshi/Yoshi-happy-2.wav", QUIETOIZQ);
 }
 
 Mix_Chunk* VistaSonora::cargarSonido(string ruta) {
@@ -17,9 +26,12 @@ bool VistaSonora::agregarSonido(string ruta, int estado) {
 	if (!sonidos)
 		return false;
 
-	Mix_Chunk* sonido = cargarSonido(ruta);
-	if (!sonido)
+	Mix_Chunk* sonido = cargarSonido("./" + ruta);
+	if (!sonido) {
+		printf("No se pudo cargar la ruta: %s\n", ruta.c_str());
+		printf("%s\n", Mix_GetError());
 		return false;
+	}
 
 	sonidos->insert(pair<int, Mix_Chunk*>(estado, sonido));
 
@@ -56,7 +68,17 @@ void VistaSonora::actualizar(Observable* observable) {
 	debeReproducir = true;
 
 	sonidoAnterior = sonidoActual;
-	sonidoActual = sonidos->at(estado);
+	try {
+		sonidoActual = sonidos->at(estado);
+	}
+	catch (exception &e) {
+		// Esto si no encuentro el sonido:
+		sonidoActual = sonidoAnterior;
+	}
+}
+
+bool VistaSonora::dibujar(SDL_Surface* display, int x, int y) {
+	return reproducir();
 }
 
 bool VistaSonora::reproducir() {
