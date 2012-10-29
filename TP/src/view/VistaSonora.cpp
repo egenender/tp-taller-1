@@ -3,7 +3,8 @@
 
 VistaSonora::VistaSonora() {
 	sonidoActual = NULL;
-	sonidos = new map<int,Mix_Chunk*>();
+	sonidoAnterior = NULL;
+	sonidos = new map<int, Mix_Chunk*>();
 	pararDeReproducir = false;
 	debeReproducir = false;
 }
@@ -36,7 +37,7 @@ VistaSonora::~VistaSonora() {
 			}
 		}
 		sonidos->clear();
-		delete(sonidos);
+		delete (sonidos);
 		sonidos = NULL;
 	}
 
@@ -46,7 +47,7 @@ VistaSonora::~VistaSonora() {
 
 void VistaSonora::actualizar(Observable* observable) {
 	int estado = observable->obtenerEstado();
-	if (estado == MUERTO){
+	if (estado == MUERTO) {
 		pararDeReproducir = true;
 		debeReproducir = false;
 		return;
@@ -54,21 +55,25 @@ void VistaSonora::actualizar(Observable* observable) {
 	pararDeReproducir = false;
 	debeReproducir = true;
 
+	sonidoAnterior = sonidoActual;
 	sonidoActual = sonidos->at(estado);
 }
 
 bool VistaSonora::reproducir() {
 	if (sonidoActual == NULL) {
-		Log::getInstance()->writeToLogFile(Log::ADVERTENCIA, "Sonido Actual es NULL");
+		Log::getInstance()->writeToLogFile(Log::ADVERTENCIA,
+				"Sonido Actual es NULL");
 		return false;
 	}
 
-	if (debeReproducir && !pararDeReproducir) {
-		 if(Mix_PlayChannel(-1, sonidoActual, 0) == -1) {
-			 Log::getInstance()->writeToLogFile(Log::ERROR, "Error al intentar reproducir sonido actual");
-			 return false;
-		 }
-		 debeReproducir = false;
+	if (sonidoActual != sonidoAnterior && debeReproducir && !pararDeReproducir) {
+		// El sonido se ejecuta una sola vez:
+		if (Mix_PlayChannel(-1, sonidoActual, 0) == -1) {
+			Log::getInstance()->writeToLogFile(Log::ERROR,
+					"Error al intentar reproducir sonido actual");
+			return false;
+		}
+		debeReproducir = false; // Esto para que no se vuelva a reproducir, a no ser que cambie el estado.
 	}
 
 	return false;
