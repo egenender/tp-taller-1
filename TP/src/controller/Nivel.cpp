@@ -3,6 +3,9 @@
 #include "../controller/GestorConfiguraciones.h" //FIXME
 #include "Server.h"
 
+//TODO: *le hardcode:
+#include "../view/VistaSonora.h"
+
 
 Nivel Nivel::instancia;
 
@@ -57,11 +60,16 @@ void Nivel::iniciar() {
 	parar = false;
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
-	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
-	// Ventana::obtenerInstancia()->redimencionar(gestor->obtenerAnchoPantalla(), gestor->obtenerAltoPantalla());
 	actualizables = gestor->ObtenerActualizables();
-
 	vistas = gestor->ObtenerVistas();
+
+	// TODO: *le hardcode:
+
+	VistaSonora* sonidoYoshi = new VistaSonora();
+	agregarVista(sonidoYoshi);
+	gestor->ObtenerManual()->agregarObservador(sonidoYoshi);
+
+	// Fin TODO
 
 	if(estado==SERVIDOR){
 

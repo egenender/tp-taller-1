@@ -11,11 +11,12 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 #include "../model/Observable.h"
+#include "VistaCuerpo.h"
 #include <string>
 #include <map>
 using namespace std;
 
-class VistaSonora {
+class VistaSonora : public VistaCuerpo {
 protected:
 	map<int,Mix_Chunk*>* sonidos;
 	Mix_Chunk* sonidoActual, *sonidoAnterior;
@@ -29,6 +30,7 @@ public:
 
 	bool agregarSonido(string ruta, int estado);
 	void actualizar(Observable* observable);
+	bool dibujar(SDL_Surface* display, int x, int y); // solo llama al reproducir
 	bool reproducir(); // aka: dibujar();
 };
 
