@@ -25,12 +25,16 @@
 
 #include "yaml-cpp/yaml.h"
 
+#include "SDL/SDL_mixer.h"
+#include "../view/VistaSonora.h"
+
 
 typedef std::map <std::string,std::string> mapa_tex;
 typedef std::map <std::string,TipoProtagonista*> mapa_prot;
 typedef std::map <std::string,TipoPersonaje*> mapa_auto;
 
 typedef std::map <std::string,string> mapa_niveles;
+
 
 class GestorConfiguraciones{
 	private:
@@ -114,6 +118,7 @@ class GestorConfiguraciones{
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
+		VistaSonora* cargarVistaSonora();
 
 };
 

@@ -14,6 +14,8 @@
 #include "../model/Area.h"
 #include "../log/Log.h"
 #include <sstream>
+#include "Sounds.h"
+#include "../model/Observable.h"
 
 #define VEL_PERSONAJE_MINIMA 2
 #define VEL_PERSONAJE 10
@@ -1272,4 +1274,15 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
 	return manuales;
+}
+
+VistaSonora* GestorConfiguraciones::cargarVistaSonora() {
+	VistaSonora* vista = new VistaSonora();
+
+	vista->agregarSonido(JUMP, SALTANDODER);
+	vista->agregarSonido(JUMP, SALTANDOIZQ);
+	vista->agregarSonido(JUMP, SALTAR);
+	vista->agregarSonido(PLAYER_DOWN, MUERTO);
+
+	return vista;
 }
