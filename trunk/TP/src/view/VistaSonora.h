@@ -18,7 +18,7 @@ using namespace std;
 class VistaSonora {
 protected:
 	map<int,Mix_Chunk*>* sonidos;
-	Mix_Chunk* sonidoActual;
+	Mix_Chunk* sonidoActual, sonidoAnterior;
 	bool pararDeReproducir, debeReproducir;
 private:
 	Mix_Chunk* cargarSonido(string ruta);
