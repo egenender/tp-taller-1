@@ -14,6 +14,7 @@ class Cuerpo: public Observable, public Actualizable {
 protected:
 	Area* superficieOcupada;
 	const char* nombre;
+	Area* superficieDeColision;
 public:
 	Cuerpo(const char*, Area*);
 	virtual ~Cuerpo();
