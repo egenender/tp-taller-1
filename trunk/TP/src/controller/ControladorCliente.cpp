@@ -33,7 +33,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
-	if (keystates[SDLK_UP]) {
+	if (keystates[SDLK_SPACE]) {
 		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
 			revisarCambio(SALTAR);
 		//return;

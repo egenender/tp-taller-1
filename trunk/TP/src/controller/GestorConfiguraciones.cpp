@@ -726,7 +726,6 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 		configNivel->actualizables.push_back(contenedor);
 	}else{
 		Posicion* pos = new Posicion(10, Posicion::obtenerPiso()-posiblesTiposProt->at(i)->alto);
-		printf("Piso :%d\n",Posicion::obtenerPiso());
 		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
 		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
 		configNivel->manual->agregarObservador(vista);
