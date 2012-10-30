@@ -21,7 +21,6 @@ EstadoSinglePlayer::EstadoSinglePlayer() {
 }
 
 EstadoSinglePlayer::~EstadoSinglePlayer() {
-	terminar();
 }
 
 EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
@@ -31,7 +30,6 @@ EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
 void EstadoSinglePlayer::iniciar(){
 	crearLbls();
 	crearScroll();
-	SDL_Delay(100); //sino se caga, por alguna razon
 	crearBtns();
 	crearVistas();
 }
