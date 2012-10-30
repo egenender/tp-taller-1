@@ -2,6 +2,7 @@
 #include "../view/VistaProtagonista.h"
 #include "../controller/GestorConfiguraciones.h" //FIXME
 #include "Server.h"
+#include "../model/Colisionador.h"
 
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
@@ -157,6 +158,8 @@ void Nivel::actualizar(float delta) {
 	}
 
 	// Verificar aca colisiones:
+	if (estado == SERVIDOR || estado == SINGLE)
+		generarColisiones(actualizables);
 
 	// Aca vemos si tenemos que eliminar algun cuerpo:
 
