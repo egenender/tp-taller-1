@@ -23,6 +23,7 @@ public:
 	void moverA(Posicion*);
 	//virtual void actualizar(float delta)=0; //o que reciba o devuelva algo ?
 	const char* obtenerNombre();
+	Area* obtenerArea();
 };
 
 #endif /* CUERPO_H_ */

@@ -32,3 +32,7 @@ int Cuerpo::obtenerAlto() {
 const char* Cuerpo::obtenerNombre(){
 	return nombre;
 }
+
+Area* Cuerpo::obtenerArea(){
+	return superficieOcupada;
+}

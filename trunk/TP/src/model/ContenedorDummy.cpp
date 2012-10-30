@@ -140,3 +140,6 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
 	return nuevo;
 }
 
+Area* ContenedorDummy::obtenerArea(){
+	return NULL;
+}

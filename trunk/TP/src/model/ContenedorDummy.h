@@ -19,6 +19,7 @@ public:
 	virtual ~ContenedorDummy();
 	void agregarDummy(Dummy*);
 	void actualizar(float delta);
+	Area* obtenerArea();
 private:
 	void interpretarStruct(structServidor_t*);
 	Dummy* buscarID(unsigned int id);

@@ -135,3 +135,7 @@ void ContenedorManuales::encolarTodos(){
 	}
 	encolarCambios();
 }
+
+Area* ContenedorManuales::obtenerArea(){
+	return NULL;
+}

@@ -20,6 +20,7 @@ public:
 	void agregarManual(Manual*, unsigned int);
 	void encolarCambios();
 	void encolarTodos();
+	Area* obtenerArea();
 private:
 	void actualizarManual(Manual*, int,unsigned int);
 	void actualizarEstados(unsigned int,int);
