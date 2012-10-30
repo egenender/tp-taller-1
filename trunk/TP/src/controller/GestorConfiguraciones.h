@@ -28,6 +28,8 @@
 #include "SDL/SDL_mixer.h"
 #include "../view/VistaSonora.h"
 
+#define ESCALERA 0
+#define PLATAFORMA 1
 
 typedef std::map <std::string,std::string> mapa_tex;
 typedef std::map <std::string,TipoProtagonista*> mapa_prot;
@@ -79,7 +81,7 @@ class GestorConfiguraciones{
 		Ventana* CrearPantalla();
 		void CargarConfiguracionNivel(const YAML::Node&,const YAML::Node&,const YAML::Node&,const YAML::Node&);
 		void CargarPersonajesNivel(const YAML::Node&);
-		void CargarEstaticosNivel(const YAML::Node&, bool, bool);
+		void CargarEstaticosNivel(const YAML::Node&, bool, bool, int);
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 
