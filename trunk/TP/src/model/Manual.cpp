@@ -10,12 +10,14 @@ void Manual::saltar(){
 	if (estado == QUIETODER || estado == CAMINANDODER){
 		estado = SALTANDODER;
 		velocidadY = velocidadSaltoBase;
+		tengoPiso = false;
 		return;
 	}
 
 	if(estado == QUIETOIZQ || estado == CAMINANDOIZQ){
 		estado = SALTANDOIZQ;
 		velocidadY = velocidadSaltoBase;
+		tengoPiso = false;
 		return;
 	}
 }
@@ -67,7 +69,9 @@ void Manual::trasladar(int factorX, int factorY){
 	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
 	superficieOcupada->mover(posDesplazamiento);
 	delete(posDesplazamiento);
-	huboCambios(); //el método se hereda de Observable
+	huboCambios();
+	puedoSubir = false;
+	//tengoPiso = false;
 }
 
 // Viejo:
@@ -76,6 +80,7 @@ void Manual::actualizar(float delta){
 	validarPiso();
 	actualizarSalto();
 	notificarObservadores();
+	tengoPiso = false;
 }
 
 bool Manual::estoySaltando(){
@@ -100,7 +105,7 @@ void Manual::actualizarSalto(){
 
 	trasladar(0,velocidadY);
 	velocidadY += ACELERACION;
-	if (chocaConPiso()){
+	if (chocaConPiso() || tengoPiso){
 		superficieOcupada->ponerEnPiso();
 		velocidadY = 0;
 		if (estado == SALTANDODER) estado = QUIETODER;
@@ -140,5 +145,32 @@ void Manual::subir(){
 
 	puedoSubir = false;
 	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
-	trasladar(0, velocidad);
+	trasladar(0, -velocidad);
+}
+
+void Manual::bajar(){
+	if (!puedoSubir) return;
+	puedoSubir = false;
+	trasladar(0,velocidad);
+}
+
+
+void Manual::chocarCon(Actualizable* ac){
+	ac->chocarConManual(this);
+}
+void Manual::chocarConManual(Manual* manual){
+	//No pasa nada
+}
+void Manual::chocarConPlataforma(Plataforma* p){
+	int y = p->obtenerPosicion()->obtenerY();
+	int MIy = superficieOcupada->obtenerPosicion()->obtenerY();
+
+	if (MIy < y){
+		tengoPiso = true;
+		printf("Estoy sobre la plataforma\n");
+	}
+}
+void Manual::chocarConEscalera(Escalera*){
+	puedoSubir = true;
+	tengoPiso = true;
 }

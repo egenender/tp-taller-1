@@ -139,3 +139,8 @@ void ContenedorManuales::encolarTodos(){
 Area* ContenedorManuales::obtenerArea(){
 	return NULL;
 }
+
+void ContenedorManuales::chocarCon(Actualizable*){}
+void ContenedorManuales::chocarConManual(Manual*){}
+void ContenedorManuales::chocarConPlataforma(Plataforma*){}
+void ContenedorManuales::chocarConEscalera(Escalera*){}

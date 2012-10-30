@@ -22,3 +22,11 @@ int Escalera::obtenerEstado(){
 void Escalera::actualizar(float delta){
 
 }
+
+
+void Escalera::chocarCon(Actualizable* ac){
+	ac->chocarConEscalera(this);
+}
+void Escalera::chocarConManual(Manual*){}
+void Escalera::chocarConPlataforma(Plataforma*){}
+void Escalera::chocarConEscalera(Escalera*){}

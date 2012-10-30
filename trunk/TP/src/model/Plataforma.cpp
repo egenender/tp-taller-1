@@ -14,3 +14,11 @@ int Plataforma::obtenerEstado(){
 void Plataforma::actualizar(float delta){
 
 }
+
+
+void Plataforma::chocarCon(Actualizable* ac){
+	ac->chocarConPlataforma(this);
+}
+void Plataforma::chocarConManual(Manual*){}
+void Plataforma::chocarConPlataforma(Plataforma*){}
+void Plataforma::chocarConEscalera(Escalera*){}

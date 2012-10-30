@@ -3,7 +3,11 @@
 #define VELOCIDAD_STANDARD 150
 #include "Area.h"
 #include "Cuerpo.h"
+#include "Actualizable.h"
 #include "Observable.h"
+
+class Escalera;
+#include "Plataforma.h"
 
 // Nuevo:
 #define DERECHA 1
@@ -36,11 +40,17 @@ public:
 	void atacar();
 	void especial();
 	void subir();
+	void bajar();
 
 	void actualizar(float delta);
 	int obtenerEstado();
 	void morir();
 	bool estaMuerto();
+
+	void chocarCon(Actualizable*);
+	void chocarConManual(Manual*);
+	void chocarConPlataforma(Plataforma*);
+	void chocarConEscalera(Escalera*);
 private:
 	void trasladar(int,int);
 	void actualizarSalto();
