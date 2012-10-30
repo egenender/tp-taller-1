@@ -166,8 +166,9 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	int MIy = superficieOcupada->obtenerPosicion()->obtenerY();
 
 	if (MIy < y){
+		Posicion* posNueva = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX(), (y - superficieOcupada->obtenerAlto()));
+		moverA(posNueva);
 		tengoPiso = true;
-		printf("Estoy sobre la plataforma\n");
 	}
 }
 void Manual::chocarConEscalera(Escalera*){
