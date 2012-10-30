@@ -12,7 +12,7 @@ VistaSonora::VistaSonora() {
 
 	// TODO: *le hardcode:
 
-	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-jump-1.wav", SALTAR);
+	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-jump-3.wav", SALTAR);
 	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-happy-2.wav", CAMINANDODER);
 }
 
@@ -78,7 +78,7 @@ void VistaSonora::actualizar(Observable* observable) {
 	}
 	catch (exception &e) {
 		// Esto si no encuentro el sonido:
-		sonidoActual = sonidoAnterior;
+		sonidoActual = NULL;
 	}
 }
 
@@ -88,8 +88,6 @@ bool VistaSonora::dibujar(SDL_Surface* display, int x, int y) {
 
 bool VistaSonora::reproducir() {
 	if (sonidoActual == NULL) {
-		Log::getInstance()->writeToLogFile(Log::ADVERTENCIA,
-				"Sonido Actual es NULL");
 		return false;
 	}
 
