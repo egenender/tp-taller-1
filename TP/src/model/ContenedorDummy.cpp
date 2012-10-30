@@ -143,3 +143,8 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
 Area* ContenedorDummy::obtenerArea(){
 	return NULL;
 }
+
+void ContenedorDummy::chocarCon(Actualizable*){}
+void ContenedorDummy::chocarConManual(Manual*){}
+void ContenedorDummy::chocarConPlataforma(Plataforma*){}
+void ContenedorDummy::chocarConEscalera(Escalera*){}

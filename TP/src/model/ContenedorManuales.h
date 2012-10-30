@@ -2,10 +2,14 @@
 #define CONTENEDORMANUALES_H_
 #include "Manual.h"
 #include "Observable.h"
+#include "Actualizable.h"
 #include "structures/structServidor.h"
 
 #include <vector>
 #include <map>
+
+class Plataforma;
+class Escalera;
 
 class ContenedorManuales : public Actualizable {
 private:
@@ -21,6 +25,10 @@ public:
 	void encolarCambios();
 	void encolarTodos();
 	Area* obtenerArea();
+	void chocarCon(Actualizable*);
+	void chocarConManual(Manual*);
+	void chocarConPlataforma(Plataforma*);
+	void chocarConEscalera(Escalera*);
 private:
 	void actualizarManual(Manual*, int,unsigned int);
 	void actualizarEstados(unsigned int,int);

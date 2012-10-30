@@ -7,6 +7,9 @@
 #include "structures/structServidor.h"
 #include "../controller/Cliente.h"
 #include "../gui/model/BarraEstado.h"
+class Manual;
+class Plataforma;
+class Escalera;
 #define MAX_ACTUALIZACION 5
 
 class ContenedorDummy : public Actualizable{
@@ -20,6 +23,10 @@ public:
 	void agregarDummy(Dummy*);
 	void actualizar(float delta);
 	Area* obtenerArea();
+	void chocarCon(Actualizable*);
+	void chocarConManual(Manual*);
+	void chocarConPlataforma(Plataforma*);
+	void chocarConEscalera(Escalera*);
 private:
 	void interpretarStruct(structServidor_t*);
 	Dummy* buscarID(unsigned int id);

@@ -36,6 +36,6 @@ bool colisionan(Actualizable* primero, Actualizable* segundo){
 
 void colisionar(Actualizable* primero, Actualizable* segundo){
 	//TODO
-	//Para este commmit no hago nada
-	printf("HUBO COLISION\n");
+	//printf("HUBO COLISION\n");
+	primero->chocarCon(segundo);
 }
