@@ -43,10 +43,6 @@ EstadoGUI* EstadoGUI::obtenerInstancia() {
 }
 
 void EstadoGUI::iniciar() {
-
-	// TODO: aca se deberia configurar la ventana. Habria que hacerla singleton!
-	// Ventana::obtenerInstancia()->volverALasDimensionesDeCreacion();
-
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();
@@ -334,7 +330,6 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnjugar->manejarEvento(evento);
-
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btncrear->manejarEvento(evento);
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
@@ -556,5 +551,3 @@ void EstadoGUI::terminar() {
 		vistaMenu = NULL;
 	}
 }
-
-

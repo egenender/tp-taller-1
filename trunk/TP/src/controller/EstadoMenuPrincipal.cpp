@@ -13,7 +13,6 @@ EstadoMenuPrincipal::EstadoMenuPrincipal() {
 }
 
 EstadoMenuPrincipal::~EstadoMenuPrincipal() {
-	terminar();
 }
 
 EstadoMenuPrincipal* EstadoMenuPrincipal::obtenerInstancia() {
@@ -73,7 +72,8 @@ void EstadoMenuPrincipal::terminar(){
 }
 
 void EstadoMenuPrincipal::manejarEvento(SDL_Event* evento){
-	btnSinglePlayer->manejarEvento(evento);
+	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+		btnSinglePlayer->manejarEvento(evento);
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnMultiPlayer->manejarEvento(evento);
 }
