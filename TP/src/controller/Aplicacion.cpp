@@ -131,10 +131,9 @@ int Aplicacion::ejecutar() {
 		}
 
 		SDL_PumpEvents();
-		manejarEvento(&evento);
-
 		actualizar(FPS::ControlFPS.obtenerDelta());
 		dibujar();
+		manejarEvento(&evento);
 		SDL_Delay(30);
 	}
 	limpiar();

@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include "Observable.h"
+#include "Area.h"
 
 
 class Dummy : public Observable{

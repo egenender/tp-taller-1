@@ -23,6 +23,7 @@ class Area {
 		void ponerEnPiso();
 		bool pasaPiso();
 		bool estaSobreElPiso();
+		bool  colisionaConOtra(Area*);
 };
 
 #endif /* AREA_H_ */

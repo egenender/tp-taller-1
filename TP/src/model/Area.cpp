@@ -77,3 +77,25 @@ bool Area::estaSobreElPiso(){
 	//FIXME: cuando se agreguen colisiones con las plataformas esto tiene que cambiar
 	return ((pos->obtenerY() + alto) == Posicion::obtenerPiso());
 }
+
+bool Area::colisionaConOtra(Area* otra){
+	int aux, auxOtra;
+
+	aux = pos->obtenerX() + ancho;
+	auxOtra = otra->obtenerPosicion()->obtenerX();
+	if (auxOtra > aux) return false;
+
+	aux = pos->obtenerX();
+	auxOtra = otra->obtenerPosicion()->obtenerX() + otra->obtenerAncho();
+	if (auxOtra < aux) return false;
+
+	aux = pos->obtenerY() + alto;
+	auxOtra = otra->obtenerPosicion()->obtenerY();
+	if (auxOtra > aux) return false;
+
+	aux = pos->obtenerY();
+	auxOtra = otra->obtenerPosicion()->obtenerY() + otra->obtenerAlto();
+	if (auxOtra < aux) return false;
+
+	return true;
+}
