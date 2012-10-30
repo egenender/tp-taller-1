@@ -27,7 +27,7 @@ public:
 	Animacion* animacionSaltaProt;
 
 public:
-	Manual* CrearManual(const char*,int, int,int);
+	//Manual* CrearManual(const char*,int, int,int);
 };
 
 

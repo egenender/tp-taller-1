@@ -28,12 +28,6 @@ int Manual::obtenerEstado(){
 	return estado;
 }
 
-Manual::Manual(const char* nombrecito,Area* sup): Cuerpo(nombrecito, sup) {
-	velocidad = VELOCIDAD_STANDARD;
-	velocidadSaltoBase = VELOCIDAD_STANDARD;
-	estado = QUIETODER;
-}
-
 Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(nombrecito, sup){
 	if (vel <= 0){
 		vel = VELOCIDAD_STANDARD;
@@ -43,21 +37,10 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	}
 
 	velocidad = vel;
-
 	velocidadSaltoBase = -fuerza;
-
 	estado = QUIETODER;
-}
-
-Manual::Manual(const char* nombrecito, Area* sup, int vel):Cuerpo(nombrecito, sup){
-	if (vel <= 0){
-		vel = VELOCIDAD_STANDARD;
-	}
-	velocidad = vel;
-
-	velocidadSaltoBase = -vel;
-
-	estado = QUIETODER;
+	puedoSubir = false;
+	tengoPiso = false;
 }
 
 void Manual::moverALaDerecha(){
@@ -90,12 +73,7 @@ void Manual::trasladar(int factorX, int factorY){
 // Viejo:
 void Manual::actualizar(float delta){
 	this->delta = delta;
-	if (!superficieOcupada->estaSobreElPiso()){
-		if (estado == CAMINANDODER || estado == QUIETODER)
-			estado = SALTANDODER;
-		else if (estado == CAMINANDOIZQ || estado == QUIETOIZQ)
-			estado = SALTANDOIZQ;
-	}
+	validarPiso();
 	actualizarSalto();
 	notificarObservadores();
 }
@@ -140,4 +118,27 @@ void Manual::morir(){
 }
 bool Manual::estaMuerto(){
 	return (estado == MUERTO);
+}
+
+void Manual::validarPiso(){
+	if (superficieOcupada->estaSobreElPiso()){
+		tengoPiso = true;
+		return;
+	}
+
+	if (tengoPiso) return;
+
+	if (estado == CAMINANDODER || estado == QUIETODER)
+		estado = SALTANDODER;
+	else if (estado == CAMINANDOIZQ || estado == QUIETOIZQ)
+		estado = SALTANDOIZQ;
+
+}
+
+void Manual::subir(){
+	if (!puedoSubir) return;
+
+	puedoSubir = false;
+	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
+	trasladar(0, velocidad);
 }

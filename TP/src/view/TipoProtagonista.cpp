@@ -20,8 +20,8 @@ TipoProtagonista::TipoProtagonista (){
 	disponible = true;
 }
 
-Manual* TipoProtagonista::CrearManual(const char* nombre,int x, int y, int velocidad){
-
-	return new Manual(nombre,new Area(ancho,alto,new Posicion(x,y)),velocidad);
-
-}
+//Manual* TipoProtagonista::CrearManual(const char* nombre,int x, int y, int velocidad){
+//
+//	return new Manual(nombre,new Area(ancho,alto,new Posicion(x,y)),velocidad);
+//
+//}

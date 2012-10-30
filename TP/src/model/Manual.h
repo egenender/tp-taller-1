@@ -22,18 +22,21 @@ private:
 	int estado;
 	int velocidadY;
 	int velocidadSaltoBase;
+	bool puedoSubir, tengoPiso;
 public:
-	Manual(const char*, Area*);
-	Manual(const char*, Area*, int);
+//	Manual(const char*, Area*);
+//	Manual(const char*, Area*, int);
 	Manual(const char*, Area*, int, int);
 	virtual ~Manual();
+
 	void moverALaIzquierda();
 	void moverALaDerecha();
 	void detener();
-
 	void saltar();
 	void atacar();
 	void especial();
+	void subir();
+
 	void actualizar(float delta);
 	int obtenerEstado();
 	void morir();
@@ -44,6 +47,7 @@ private:
 	bool estoySaltando();
 	void movimiento(int,int,int);
 	bool chocaConPiso();
+	void validarPiso();
 };
 
 
