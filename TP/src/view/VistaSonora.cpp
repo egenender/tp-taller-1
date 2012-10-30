@@ -12,10 +12,8 @@ VistaSonora::VistaSonora() {
 
 	// TODO: *le hardcode:
 
-	agregarSonido("src/resources/Yoshi/Yoshi-jump-1.wav", SALTANDODER);
-	agregarSonido("src/resources/Yoshi/Yoshi-jump-2.wav", SALTANDOIZQ);
-	agregarSonido("src/resources/Yoshi/Yoshi-happy.wav", QUIETODER);
-	agregarSonido("src/resources/Yoshi/Yoshi-happy-2.wav", QUIETOIZQ);
+	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-jump-1.wav", SALTAR);
+	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-happy-2.wav", CAMINANDODER);
 }
 
 Mix_Chunk* VistaSonora::cargarSonido(string ruta) {
@@ -64,6 +62,13 @@ void VistaSonora::actualizar(Observable* observable) {
 		debeReproducir = false;
 		return;
 	}
+
+	else if (estado == SALTANDODER || estado == SALTANDOIZQ)
+		estado = SALTAR;
+
+	else if (estado == CAMINANDOIZQ)
+		estado = CAMINANDODER;
+
 	pararDeReproducir = false;
 	debeReproducir = true;
 

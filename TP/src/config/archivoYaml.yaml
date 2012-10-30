@@ -12,11 +12,11 @@ juego:
       salto: 60
       animaciones:
         quieto:
-          sprites: src/resources/Yoshi/Yoshi-Iddle.bmp
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Iddle.bmp
         caminar:
-          sprites: src/resources/Yoshi/Yoshi-Walking.bmp
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Walking.bmp
         saltar:
-          sprites: src/resources/Yoshi/Yoshi-Jump.bmp
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
     Mono:
       ancho: 140
       alto: 126
