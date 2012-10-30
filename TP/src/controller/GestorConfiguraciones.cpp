@@ -10,7 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include "GestorConfiguraciones.h"
-#include "../model/Estatico.h"
+#include "../model/Escalera.h"
+#include "../model/Plataforma.h"
 #include "../model/Area.h"
 #include "../log/Log.h"
 #include <sstream>
@@ -427,19 +428,19 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 
 	try{
-		CargarEstaticosNivel(nodo[nivelElegido]["plataformas"], false, true);
+		CargarEstaticosNivel(nodo[nivelElegido]["plataformas"], false, true, PLATAFORMA);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las plataformas del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo plataformas, se cargan por defecto");
-		CargarEstaticosNivel(defPlataformas, false, true);
+		CargarEstaticosNivel(defPlataformas, false, true, PLATAFORMA);
 	}
 
 	try{
-		CargarEstaticosNivel(nodo[nivelElegido]["escaleras"], true, false);
+		CargarEstaticosNivel(nodo[nivelElegido]["escaleras"], true, false, ESCALERA);
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las escaleras del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
-		CargarEstaticosNivel(defEscaleras, true, false);
+		CargarEstaticosNivel(defEscaleras, true, false, ESCALERA);
 	}
 
 	try{
@@ -452,11 +453,11 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 }
 
-void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool escalar, bool cortar){
+void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool escalar, bool cortar, int tipo){
 	int posX,posY;
 	int ancho, alto;
 	std::string nombreTex;
-	Estatico* estatico;
+	Cuerpo* estatico;
 	VistaImagen* vista;
 	Superficie* sup;
 
@@ -521,8 +522,10 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo textura del objeto, se carga por defecto");
 			nombreTex = TIPO_DEFECTO;
 		}
-
-		estatico = new Estatico(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
+		if (tipo == ESCALERA)
+			estatico = new Escalera(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
+		else
+			estatico = new Plataforma(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
 		configNivel->actualizables.push_back(estatico);
 
 		std::string rutaImagen;
