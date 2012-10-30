@@ -20,7 +20,7 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 		return;
 	}
-	if (keystates[SDLK_UP]) {
+	if (keystates[SDLK_SPACE]) {
 		principal->saltar();
 	}
 	if (keystates[SDLK_DOWN]) {
