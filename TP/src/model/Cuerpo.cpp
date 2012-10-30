@@ -4,10 +4,15 @@
 Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	superficieOcupada = sup;
 	nombre = nombrecito;
+	superficieDeColision = NULL;
 }
 
 Cuerpo::~Cuerpo() {
 	delete (superficieOcupada);
+	if(superficieDeColision){
+		delete(superficieDeColision);
+	}
+
 	//delete (nombre);
 	//Podría pasarse una función que destruya a los observadores...
 }
@@ -34,5 +39,7 @@ const char* Cuerpo::obtenerNombre(){
 }
 
 Area* Cuerpo::obtenerArea(){
+	if (superficieDeColision)
+		return superficieDeColision;
 	return superficieOcupada;
 }
