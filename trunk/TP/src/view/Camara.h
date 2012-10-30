@@ -4,12 +4,13 @@
 #include "VistaCuerpo.h"
 #include "Superficie.h"
 #include "../model/Posicion.h"
-
+#include "SDL/SDL_mixer.h"
 
 class Camara : public VistaCuerpo {
 	private:
 		// Las dimensiones de la camara:
 		Superficie* imagen;
+		Mix_Music* musica;
 		SDL_Rect* camara;
 		int margenScroll, altoNivel, anchoNivel;
 
