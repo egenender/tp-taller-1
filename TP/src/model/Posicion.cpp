@@ -49,20 +49,20 @@ int Posicion::obtenerY(){
 	return y;
 }
 
-bool Posicion::estaALaDerechaDe(Posicion pos){
-	return (x > pos.x);
+bool Posicion::estaALaDerechaDe(Posicion *pos){
+	return (x > pos->x);
 }
 
-bool Posicion::estaALaIzquierdaDe(Posicion pos){
-	return (x < pos.x);
+bool Posicion::estaALaIzquierdaDe(Posicion *pos){
+	return (x < pos->x);
 }
 
-bool Posicion::estaAbajoDe(Posicion pos){
-	return (y > pos.y);
+bool Posicion::estaAbajoDe(Posicion *pos){
+	return (y > pos->y);
 }
 
-bool Posicion::estaArribaDe(Posicion pos){
-	return (y < pos.y);
+bool Posicion::estaArribaDe(Posicion *pos){
+	return (y < pos->y);
 }
 
 /*void Posicion::moverHorizontalmente(int deltaX){
@@ -128,4 +128,9 @@ void Posicion::indicarPiso(int y){
 }
 int Posicion::obtenerPiso(){
 	return piso;
+}
+
+Posicion* Posicion::restarPosiciones(Posicion* una, Posicion* otra){
+	Posicion* resul = new Posicion (una->x - otra->x, una->y - otra->y);
+	return resul;
 }
