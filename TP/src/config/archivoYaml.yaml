@@ -86,8 +86,8 @@ juego:
           y: 599
       plataformas:
         - textura: viga
-          x: 100
-          y: 450
+          x: 20
+          y: 150
           ancho: 200
           alto: 50
         - textura: viga
@@ -95,10 +95,15 @@ juego:
           y: 150
           ancho: 200
           alto: 50
+        - textura: viga
+          x: 700
+          y: 500
+          ancho: 200
+          alto: 30
       escaleras:
         - textura: esc
-          x: 1200
-          y: 200
+          x: 400
+          y: 150
           ancho: 80
           alto: 400
     - nivel: Moo la Moo
