@@ -64,7 +64,7 @@ Superficie::~Superficie() {
 
 SDL_Surface* Superficie::cargar(string archivo) {
 	SDL_Surface* supTemporal = NULL;
-	//SDL_Surface* supFinal = NULL;
+	SDL_Surface* supFinal = NULL;
 
 	if ((supTemporal = IMG_Load(archivo.c_str())) == NULL) {
 		Log::getInstance()->writeToLogFile(Log::ERROR,
@@ -72,10 +72,13 @@ SDL_Surface* Superficie::cargar(string archivo) {
 		return NULL;
 	}
 
-	//supFinal = SDL_DisplayFormat(supTemporal);
-	//SDL_FreeSurface(supTemporal);
+	supFinal = SDL_DisplayFormat(supTemporal);
+	if (!supFinal)
+		return supTemporal;
 
-	return supTemporal;
+	SDL_FreeSurface(supTemporal);
+
+	return supFinal;
 }
 
 /** Dibuja la imagen sobre supDest, en la posicion (x,y). Si corte es distinto
