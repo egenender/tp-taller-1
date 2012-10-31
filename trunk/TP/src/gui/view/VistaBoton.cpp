@@ -54,11 +54,16 @@ void VistaBoton::actualizar(Observable* observable) {
 }
 
 bool VistaBoton::dibujar(SDL_Surface* display) {
+	if (!display)
+		return false;
 
 	if (!visible) return true;
 
 	// Dibujo el boton:
 	bool dibujeBoton = actual->dibujar(display, x, y);
+
+	if (!mensajeAMostrar)
+		return false;
 
 	/* Centro el texto en el boton */
 	SDL_Rect destino;

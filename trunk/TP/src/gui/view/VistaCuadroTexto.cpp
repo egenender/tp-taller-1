@@ -14,6 +14,7 @@ void VistaCuadroTexto::inicializar() {
 	mensajeActual = "";
 	mensajeAMostrar = NULL;
 	cuadroSinFoco = NULL;
+	cuadroConFoco = NULL;
 }
 
 VistaCuadroTexto::VistaCuadroTexto() {
@@ -65,11 +66,12 @@ void VistaCuadroTexto::actualizar(Observable* observable) {
 }
 
 bool VistaCuadroTexto::dibujar(SDL_Surface* display) {
+	if (!display) return false;
 	if (!visible) return true;
 	// Dibujo la barra:
 	bool dibujeCuadro = imagenActual->dibujar(display, x, y);
 
-	if (mensajeAMostrar == NULL)
+	if (!mensajeAMostrar)
 		return false;
 
 	/* Centro el texto en la barra */

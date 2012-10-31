@@ -20,14 +20,23 @@ VistaLista::VistaLista(unsigned int m) {
 }
 
 VistaLista::~VistaLista() {
-	delete (cuadro);
-	unsigned int largo = mensajeAMostrar->size();
-	for (unsigned int i = 0; i < largo; i++){
-		SDL_Surface* tex = mensajeAMostrar->at(mensajeAMostrar->size()-1);
-		mensajeAMostrar->pop_back();
-		delete (tex);
+	if (cuadro) {
+		delete (cuadro);
+		cuadro = NULL;
 	}
-	delete (mensajeAMostrar);
+
+	if (mensajeAMostrar) {
+		unsigned int largo = mensajeAMostrar->size();
+		for (unsigned int i = 0; i < largo; i++){
+			SDL_Surface* tex = mensajeAMostrar->at(mensajeAMostrar->size()-1);
+			mensajeAMostrar->pop_back();
+			delete (tex);
+			tex = NULL;
+		}
+		mensajeAMostrar->clear();
+		delete (mensajeAMostrar);
+		mensajeAMostrar = NULL;
+	}
 	sinCarga = true;
 }
 
@@ -50,6 +59,7 @@ void VistaLista::actualizar(Observable* observable){
 }
 
 bool VistaLista::dibujar(SDL_Surface* display){
+	if (!display) return false;
 	if (!visible) return true;
 
 	bool dibujeCuadro = cuadro->dibujar(display, x, y);
@@ -60,7 +70,7 @@ bool VistaLista::dibujar(SDL_Surface* display){
 	if (sinCarga){
 		return false;
 	}
-	if (mensajeAMostrar->size() == 0){
+	if (!mensajeAMostrar || mensajeAMostrar->size() == 0){
 		return false;
 	}
 
@@ -80,6 +90,8 @@ bool VistaLista::dibujar(SDL_Surface* display){
 }
 
 void VistaLista::llenarVector(ListaScrolleable* lista){
+	if (!lista) return;
+
 	seleccionadoAnterior = seleccionadoActual;
 	seleccionadoActual = lista->indiceSeleccionado();
 

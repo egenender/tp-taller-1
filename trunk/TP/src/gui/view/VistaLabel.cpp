@@ -39,8 +39,13 @@ void VistaLabel::actualizar(Observable* observable) {
 }
 
 bool VistaLabel::dibujar(SDL_Surface* display) {
+	if (!display)
+		return false;
 	if (!visible) return true;
 	// Dibujo la barra:
+
+	if(!mensajeAMostrar)
+		return false;
 
 	/* Centro el texto en la barra */
 	SDL_Rect destino;

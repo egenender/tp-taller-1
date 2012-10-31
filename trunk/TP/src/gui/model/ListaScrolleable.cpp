@@ -13,7 +13,10 @@ ListaScrolleable::ListaScrolleable(int x, int y, int ancho, int alto):ObjetoGUI(
 }
 
 ListaScrolleable::~ListaScrolleable() {
-	delete (vectorcito);
+	if (vectorcito) {
+		delete (vectorcito);
+		vectorcito = NULL;
+	}
 }
 
 void ListaScrolleable::moverHaciaArriba(){
