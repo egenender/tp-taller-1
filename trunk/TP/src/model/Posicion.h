@@ -22,10 +22,10 @@ public:
 	void setearX(int);
 
 	//Para verificar si una posicion esta a la X de otra
-	bool estaALaDerechaDe(Posicion);
-	bool estaALaIzquierdaDe(Posicion);
-	bool estaArribaDe(Posicion);
-	bool estaAbajoDe(Posicion);
+	bool estaALaDerechaDe(Posicion*);
+	bool estaALaIzquierdaDe(Posicion*);
+	bool estaArribaDe(Posicion*);
+	bool estaAbajoDe(Posicion*);
 
 	//Para mover la posicion
 
@@ -43,6 +43,8 @@ public:
 		void moverHorizontalmente(int);
 		void moverVerticalmente(int);
 		Posicion obtenerIzquierda();*/
+
+	static Posicion* restarPosiciones(Posicion*, Posicion*);
 
 };
 
