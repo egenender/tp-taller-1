@@ -97,31 +97,41 @@ void Nivel::iniciar() {
 }
 
 void Nivel::terminar() {
-	while (!actualizables->empty()){
-		Actualizable* cuerpito = actualizables->back();
-		actualizables->pop_back();
-		if (cuerpito != NULL) {
-			delete(cuerpito);
-			cuerpito = NULL;
+	if (actualizables) {
+		while (!actualizables->empty()){
+			Actualizable* cuerpito = actualizables->back();
+			actualizables->pop_back();
+			if (cuerpito != NULL) {
+				delete(cuerpito);
+				cuerpito = NULL;
+			}
 		}
+
+		actualizables->clear();
+		actualizables = NULL;
 	}
 
-	actualizables->clear();
-	actualizables = NULL;
+	if (vistas) {
+		/*while (!vistas->empty()){
+			VistaCuerpo* vista = vistas->back();
+			vistas->pop_back();
+			if (vista != NULL) {
+				delete (vista);
+				vista = NULL;
+			}
+		}*/
+		vistas->clear();
+		vistas = NULL;
+	}
 
-	/*while (!vistas->empty()){
-		VistaCuerpo* vista = vistas->back();
-		vistas->pop_back();
-		if (vista != NULL) {
-			delete (vista);
-			vista = NULL;
-		}
-	}*/
-	vistas->clear();
-	vistas = NULL;
-
-	delete (camara);
-	delete (controlador);
+	if (camara) {
+		delete (camara);
+		camara = NULL;
+	}
+	if (controlador) {
+		delete (controlador);
+		controlador = NULL;
+	}
 	if (fondoServidor){
 		delete(fondoServidor);
 		fondoServidor = NULL;
