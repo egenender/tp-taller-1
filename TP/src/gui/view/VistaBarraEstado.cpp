@@ -51,9 +51,15 @@ void VistaBarraEstado::actualizar(Observable* observable) {
 }
 
 bool VistaBarraEstado::dibujar(SDL_Surface* display) {
+	if (!display)
+		return false;
+
 	if (!visible) return true;
 	// Dibujo la barra:
 	bool dibujeBarra = barraEstado->dibujar(display, x, y);
+
+	if (!mensajeAMostrar)
+		return false;
 
 	/* Centro el texto en la barra */
 	SDL_Rect destino;

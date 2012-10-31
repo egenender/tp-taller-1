@@ -47,6 +47,9 @@ void Muestra::anterior(){
 
 
 bool Muestra::dibujar(SDL_Surface* display){
+	if (!display)
+		return false;
+
 	if (personajes->size() == 0) return true;
 
 	string aux = "Nombre: ";

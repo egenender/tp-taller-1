@@ -16,6 +16,7 @@ void CuadroTexto::inicializar() {
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
 	unsigned int cantCaracteres) :
 	ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	inicializar();
 	maximosCaracteres = cantCaracteres;
 	estado = INACTIVO;
 	permitido = true;
@@ -24,6 +25,7 @@ CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,
 
 
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,	unsigned int cantCaracteres, int posibles) :ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	inicializar();
 	maximosCaracteres = cantCaracteres;
 	estado = INACTIVO;
 	permitido = true;
@@ -31,6 +33,7 @@ CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,	unsigned int cantCar
 }
 
 CuadroTexto::CuadroTexto(int x, int y, int ancho, int alto,	unsigned int cantCaracteres, int posibles, string inicial) :ObjetoGUI::ObjetoGUI(x, y, ancho, alto) {
+	inicializar();
 	maximosCaracteres = cantCaracteres;
 	permitido = true;
 	validar = posibles;
