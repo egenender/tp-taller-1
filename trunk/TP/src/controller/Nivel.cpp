@@ -22,7 +22,7 @@ Nivel::Nivel() {
 }
 
 Nivel::~Nivel() {
-
+	this->terminar();
 }
 
 void Nivel::setEstado(int state){
