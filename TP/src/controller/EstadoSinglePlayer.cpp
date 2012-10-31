@@ -256,6 +256,9 @@ void EstadoSinglePlayer::manejarEvento(SDL_Event* evento){
 		btnMenu->manejarEvento(evento);
 	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnJugar->manejarEvento(evento);
+
+	if (ManejadorEstados::obtenerEstadoActual() != obtenerInstancia())
+		GestorConfiguraciones::getInstance()->acabarGestor();
 }
 
 void EstadoSinglePlayer::actualizar(float delta){
