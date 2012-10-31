@@ -162,14 +162,14 @@ void Manual::chocarConManual(Manual* manual){
 	//No pasa nada
 }
 void Manual::chocarConPlataforma(Plataforma* p){
-	int y = p->obtenerPosicion()->obtenerY();
-	int MIy = superficieOcupada->obtenerPosicion()->obtenerY();
-
-	if (MIy < y){
-		//Posicion* posNueva = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX(), (y - superficieOcupada->obtenerAlto()));
-		//moverA(posNueva);
-		tengoPiso = true;
-	}
+	if (tengoPiso) return;
+	int y;
+	//Y = diferencia entre mi pos en Y + mi alto, con la pos en Y de la plataforma
+	y = superficieOcupada->obtenerPosicion()->obtenerY() + superficieOcupada->obtenerAlto() - p->obtenerPosicion()->obtenerY();
+	//Como me quiero mover hacia arriba, pongo el signo -
+	Posicion* desp = new Posicion(0, -y);
+	superficieOcupada->mover(desp);
+	tengoPiso = true;
 }
 void Manual::chocarConEscalera(Escalera*){
 	puedoSubir = true;
