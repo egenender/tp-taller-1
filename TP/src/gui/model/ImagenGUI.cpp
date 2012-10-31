@@ -17,9 +17,18 @@ ImagenGUI::ImagenGUI(string ruta, string texto, int x, int y, int ancho, int alt
 }
 
 ImagenGUI::~ImagenGUI() {
-	delete (sup);
-	delete (vista);
-	delete (label);
+	if (sup) {
+		delete (sup);
+		sup = NULL;
+	}
+	if (vista) {
+		delete (vista);
+		vista = NULL;
+	}
+	if (label) {
+		delete (label);
+		label = NULL;
+	}
 }
 
 bool ImagenGUI::dibujar(SDL_Surface *display){
