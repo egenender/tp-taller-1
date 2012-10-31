@@ -126,15 +126,16 @@ int Aplicacion::ejecutar() {
 
 		FPS::ControlFPS.actualizar();
 
-		dibujar();
-		manejarEvento(&evento);
-
 		while (SDL_PollEvent(&evento)) {
 			Evento::manejarEvento(&evento);
 		}
 
 		SDL_PumpEvents();
+		manejarEvento(&evento);
+
 		actualizar(FPS::ControlFPS.obtenerDelta());
+		dibujar();
+
 		SDL_Delay(30);
 	}
 	limpiar();
