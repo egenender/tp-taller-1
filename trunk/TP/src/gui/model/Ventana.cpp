@@ -25,14 +25,14 @@ Ventana::~Ventana() {
 Ventana::Ventana() {
 	inicializar();
 	screen = SDL_SetVideoMode(ANCHO_ESTANDARD, ALTO_ESTANDARD, 32,
-			SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+			SDL_HWSURFACE | /*SDL_RESIZABLE |*/ SDL_DOUBLEBUF);
 
 	if (screen == NULL) {
 		ventanaOK = false;
 		return;
 	}
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_SWSURFACE, ANCHO_ESTANDARD, ALTO_ESTANDARD, 32, 0, 0, 0, 0);
+	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, ANCHO_ESTANDARD, ALTO_ESTANDARD, 32, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		ventanaOK = false;
@@ -73,7 +73,7 @@ Ventana::Ventana(int ancho, int alto) {
 		return;
 	}
 
-	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_SWSURFACE, ANCHO_ESTANDARD, ALTO_ESTANDARD, 32, 0, 0, 0, 0);
+	SDL_Surface* temp = SDL_CreateRGBSurface(SDL_HWSURFACE, ANCHO_ESTANDARD, ALTO_ESTANDARD, 32, 0, 0, 0, 0);
 
 	if (temp == NULL) {
 		ventanaOK = false;
@@ -225,13 +225,13 @@ Superficie* Ventana::obtenerSuperficieDibujable() {
 
 void Ventana::limpiarPantalla() {
 	SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
-	SDL_FillRect(superficieDibujable->obtenerSurface(), NULL, SDL_MapRGB(superficieDibujable->obtenerSurface()->format, 0, 0, 0));
+//	SDL_FillRect(superficieDibujable->obtenerSurface(), NULL, SDL_MapRGB(superficieDibujable->obtenerSurface()->format, 0, 0, 0));
 }
 
 void Ventana::dibujar() {
 //	superficieDibujable->escala(ancho,alto);
     superficieDibujable->dibujar(screen, 0, 0);
-    SDL_Flip(superficieDibujable->obtenerSurface());
+//    SDL_Flip(superficieDibujable->obtenerSurface());
     SDL_Flip(screen);
 }
 

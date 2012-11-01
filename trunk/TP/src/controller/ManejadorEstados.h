@@ -15,6 +15,8 @@
 class ManejadorEstados {
 	private:
 		static Estado* estadoActivo;
+		static int siguienteEstado;
+		static bool cambiaEstado;
 
 	public:
 		static void manejarEvento(SDL_Event* evento);
@@ -22,6 +24,7 @@ class ManejadorEstados {
 		static void dibujar(SDL_Surface* display);
 		static void setearEstadoActual(int ID);
 		static Estado* obtenerEstadoActual();
+		static void cambiarEstado();
 };
 
 #endif

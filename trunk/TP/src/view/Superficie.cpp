@@ -10,7 +10,7 @@ void Superficie::inicializarSuperficie() {
 Superficie::Superficie(string archivo, SDL_Rect* corte) {
 	inicializarSuperficie();
 	SDL_Surface* temp = cargar(archivo);
-	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, corte->w, corte->h,
+	SDL_Surface* final = SDL_CreateRGBSurface(SDL_HWSURFACE, corte->w, corte->h,
 			32, 0, 0, 0, 0);
 	SDL_BlitSurface(temp, corte, final, NULL);
 	superficie = final;
@@ -21,7 +21,7 @@ Superficie::Superficie(string archivo, SDL_Rect* corte) {
 Superficie::Superficie(string archivo, int x, int y, int ancho, int alto) {
 	inicializarSuperficie();
 	SDL_Surface* temp = cargar(archivo);
-	SDL_Surface* final = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto, 32, 0,
+	SDL_Surface* final = SDL_CreateRGBSurface(SDL_HWSURFACE, ancho, alto, 32, 0,
 			0, 0, 0);
 	SDL_Rect corte;
 	corte.x = x;
@@ -107,7 +107,7 @@ void Superficie::transparencia(unsigned int R, unsigned int G, unsigned int B) {
 	}
 
 	Uint32 colorkey = SDL_MapRGB(superficie->format, R, G, B);
-	SDL_SetColorKey(superficie, SDL_SRCCOLORKEY, colorkey);
+	SDL_SetColorKey(superficie, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey);
 }
 
 Uint32 Superficie::getPixel(SDL_Surface *surface, int x, int y) {
@@ -196,12 +196,12 @@ bool Superficie::escala(Uint16 ancho, Uint16 alto) {
 
 	// Caso que la imagen tiene un color seteado como transparente:
 	if (superficie->flags & SDL_SRCCOLORKEY)
-		_ret = SDL_CreateRGBSurface(SDL_SWSURFACE, superficie->w, superficie->h,
+		_ret = SDL_CreateRGBSurface(SDL_HWSURFACE, superficie->w, superficie->h,
 				superficie->format->BitsPerPixel, superficie->format->Rmask,
 				superficie->format->Gmask, superficie->format->Bmask, 0);
 	// Otro caso:
 	else
-		_ret = SDL_CreateRGBSurface(SDL_SWSURFACE, ancho, alto,
+		_ret = SDL_CreateRGBSurface(SDL_HWSURFACE, ancho, alto,
 				superficie->format->BitsPerPixel, superficie->format->Rmask,
 				superficie->format->Gmask, superficie->format->Bmask,
 				superficie->format->Amask);
@@ -275,13 +275,13 @@ Superficie* Superficie::voltear(int flags) {
 
 	// Caso que la imagen tiene un color seteado como transparente:
 	if (superficie->flags & SDL_SRCCOLORKEY)
-		volteada = SDL_CreateRGBSurface(SDL_SWSURFACE, superficie->w,
+		volteada = SDL_CreateRGBSurface(SDL_HWSURFACE, superficie->w,
 				superficie->h, superficie->format->BitsPerPixel,
 				superficie->format->Rmask, superficie->format->Gmask,
 				superficie->format->Bmask, 0);
 	// Otro caso:
 	else
-		volteada = SDL_CreateRGBSurface(SDL_SWSURFACE, superficie->w,
+		volteada = SDL_CreateRGBSurface(SDL_HWSURFACE, superficie->w,
 				superficie->h, superficie->format->BitsPerPixel,
 				superficie->format->Rmask, superficie->format->Gmask,
 				superficie->format->Bmask, superficie->format->Amask);

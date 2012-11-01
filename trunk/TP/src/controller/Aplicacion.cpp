@@ -66,6 +66,9 @@ bool Aplicacion::iniciar() {
 
 /** Manejar eventos (teclado, mouse, etc) **/
 void Aplicacion::manejarEvento(SDL_Event* evento) {
+	if (!ventana)
+		return;
+
 	ventana->manejarEvento(evento);
 	ManejadorEstados::manejarEvento(evento);
 }
@@ -77,6 +80,9 @@ void Aplicacion::actualizar(float delta) {
 
 /** Dibujar **/
 void Aplicacion::dibujar() {
+
+	if (!ventana)
+		return;
 
 	// Primero limpiamos la pantalla:
 	ventana->limpiarPantalla();
@@ -136,6 +142,7 @@ int Aplicacion::ejecutar() {
 		actualizar(FPS::ControlFPS.obtenerDelta());
 		dibujar();
 
+		ManejadorEstados::cambiarEstado();
 		SDL_Delay(30);
 	}
 	limpiar();
