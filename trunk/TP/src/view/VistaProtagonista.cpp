@@ -17,13 +17,20 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 	saltandoDer->transparencia(255,0,255);
 	Animacion* saltandoIzq = saltandoDer->voltear(HORIZONTALMENTE);
 
+
+	Animacion* subiendoQ = caminaDer->voltear(HORIZONTALMENTE);
+	subiendoQ->transparencia(255,0,255);
+	Animacion* subiendoM = caminaIzq->voltear(HORIZONTALMENTE);
+	subiendoM->transparencia(255,0,255);
+
 	animaciones->insert(pair<int, Animacion*>(QUIETODER, quietoDer));
 	animaciones->insert(pair<int, Animacion*>(QUIETOIZQ, quietoIzq));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDODER,caminaDer));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
 	animaciones->insert(pair<int, Animacion*>(SALTANDODER, saltandoDer));
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));
-
+	animaciones->insert(pair<int, Animacion*>(SUBIENDOQUIETO, subiendoQ));
+	animaciones->insert(pair<int, Animacion*>(SUBIENDOMOVIMIENTO, subiendoM));
 	//posicionDibujar = protagonista->obtenerPosicion();
 //	actualizar(protagonista);
 }

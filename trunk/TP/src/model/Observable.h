@@ -18,6 +18,8 @@ using namespace std;
 #define SALTAR 7
 #define MUERTO 8
 #define VIVO 9
+#define SUBIENDOQUIETO 10
+#define SUBIENDOMOVIMIENTO 11
 
 class Observable {
 	private:
