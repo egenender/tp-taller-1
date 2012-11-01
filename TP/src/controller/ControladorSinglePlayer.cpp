@@ -43,7 +43,7 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 	}
 
 	//TODO: en este if va a haber que agregar mas condiciones cuando se permita saltar/etc..
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT])) {
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !(keystates[SDLK_UP] ^ keystates[SDLK_DOWN])) {
 		principal->detener();
 	}
 

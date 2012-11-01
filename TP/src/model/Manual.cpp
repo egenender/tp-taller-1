@@ -51,7 +51,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 //
 //	int anchoC = ancho * 3 / 4;
 //	int altoC = alto * 3/4;
-//	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (ancho/4), sup->obtenerPosicion()->obtenerY() + (alto/4));
+//	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (ancho/8), sup->obtenerPosicion()->obtenerY() + (alto/8));
 //	superficieDeColision = new Area(anchoC, altoC, posC);
 
 }
@@ -95,11 +95,7 @@ void Manual::actualizar(float delta){
 	validarPiso();
 	actualizarSalto();
 	notificarObservadores();
-	tengoPiso = false;
-	if(!chocaConEscalera){
-		atraviesaBloques = false;
-	}
-	chocaConEscalera = false;
+	actualizarEstados();
 }
 
 bool Manual::estoySaltando(){
@@ -110,6 +106,13 @@ bool Manual::estoySaltando(){
 void Manual::detener(){
 	if (estoySaltando()) return;
 	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
+
+	if(estoySubiendo()){
+		if (estado == SUBIENDOMOVIMIENTO)
+			estado = SUBIENDOQUIETO;
+		huboCambios();
+		return;
+	}
 
 	if (estado == CAMINANDODER)
 		estado = QUIETODER;
@@ -165,12 +168,14 @@ void Manual::subir(){
 	puedoSubir = false;
 	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
 	trasladar(0, -velocidad);
+	estado = SUBIENDOMOVIMIENTO;
 }
 
 void Manual::bajar(){
 	if (!puedoSubir) return;
 	puedoSubir = false;
 	trasladar(0,velocidad);
+	estado = SUBIENDOMOVIMIENTO;
 }
 
 
@@ -228,17 +233,35 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	if(posCmp)
 		delete(posCmp);
 
-
 	int y;
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
 	y -= p->obtenerArea()->obtenerPosicion()->obtenerY();
 
 	trasladar(0,-y);
 	tengoPiso = true;
+	chocaConSosten = true;
 }
 void Manual::chocarConEscalera(Escalera*){
+	if (!estoySubiendo()) estado = SUBIENDOQUIETO;
 	puedoSubir = true;
 	tengoPiso = true;
 	atraviesaBloques = true;
 	chocaConEscalera = true;
+	chocaConSosten = true;
+}
+
+void Manual::actualizarEstados(){
+	if(!chocaConEscalera){
+		atraviesaBloques = false;
+	}
+	chocaConEscalera = false;
+
+	if (!chocaConSosten){
+		tengoPiso = false;
+	}
+	chocaConSosten = false;
+}
+
+bool Manual::estoySubiendo(){
+	return (estado == SUBIENDOQUIETO || estado == SUBIENDOMOVIMIENTO);
 }
