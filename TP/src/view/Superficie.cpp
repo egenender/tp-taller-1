@@ -72,7 +72,11 @@ SDL_Surface* Superficie::cargar(string archivo) {
 		return NULL;
 	}
 
-	supFinal = SDL_DisplayFormat(supTemporal);
+	// Caso con png y transparencia incluida:
+	if (archivo.find(".png") != string::npos)
+		supFinal = SDL_DisplayFormatAlpha(supTemporal);
+	else // otro tipo de archivo, sin transparencia incluida
+		supFinal = SDL_DisplayFormat(supTemporal);
 	if (!supFinal)
 		return supTemporal;
 
