@@ -86,20 +86,20 @@ juego:
           y: 599
       plataformas:
         - textura: viga
-          x: 20
+          x: 250
           y: 150
           ancho: 200
           alto: 50
         - textura: viga
           x: 550
-          y: 150
+          y: 480
           ancho: 200
           alto: 50
         - textura: viga
           x: 700
-          y: 500
+          y: 480
           ancho: 200
-          alto: 30
+          alto: 50
       escaleras:
         - textura: esc
           x: 400
