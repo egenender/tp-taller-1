@@ -5,11 +5,23 @@ juego:
   parametros:
     margen_scroll: 40
   tiposProtagonista:
+    Charmeleon:
+      ancho: 65
+      alto: 73
+      vel_personaje: 15
+      salto: 45
+      animaciones:
+        quieto:
+          sprites: src/resources/charmeleonQuieto.bmp
+        caminar:
+          sprites: src/resources/charmeleonMovimiento.bmp
+        saltar:
+          sprites: src/resources/charmeleonQuieto.bmp
     Yoshi:
       ancho: 52
       alto: 70
       vel_personaje: 10
-      salto: 60
+      salto: 55
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Iddle.bmp
