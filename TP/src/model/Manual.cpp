@@ -1,7 +1,6 @@
 #include "Manual.h"
 #include <stdio.h>
 
-
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 }
@@ -43,6 +42,18 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	estado = QUIETODER;
 	puedoSubir = false;
 	tengoPiso = false;
+	atraviesaBloques = false;
+	chocaConEscalera = false;
+	posAnterior = NULL;
+
+//	int ancho = sup->obtenerAncho();
+//	int alto = sup->obtenerAlto();
+//
+//	int anchoC = ancho * 3 / 4;
+//	int altoC = alto * 3/4;
+//	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (ancho/4), sup->obtenerPosicion()->obtenerY() + (alto/4));
+//	superficieDeColision = new Area(anchoC, altoC, posC);
+
 }
 
 void Manual::moverALaDerecha(){
@@ -65,12 +76,16 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 void Manual::trasladar(int factorX, int factorY){
 	//float DeltaX = factorX * delta;
 	//float DeltaY = factorY * delta;
-
+	if (posAnterior) delete(posAnterior);
+	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
 	superficieOcupada->mover(posDesplazamiento);
+//	superficieDeColision->mover(posDesplazamiento);
+
 	delete(posDesplazamiento);
 	huboCambios();
 	puedoSubir = false;
+//	atraviesaBloques = false;
 	//tengoPiso = false;
 }
 
@@ -81,6 +96,10 @@ void Manual::actualizar(float delta){
 	actualizarSalto();
 	notificarObservadores();
 	tengoPiso = false;
+	if(!chocaConEscalera){
+		atraviesaBloques = false;
+	}
+	chocaConEscalera = false;
 }
 
 bool Manual::estoySaltando(){
@@ -162,16 +181,64 @@ void Manual::chocarConManual(Manual* manual){
 	//No pasa nada
 }
 void Manual::chocarConPlataforma(Plataforma* p){
-	if (tengoPiso) return;
+	if(atraviesaBloques) return;
+
+	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
+
+	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
+
+		delete (posCmp);
+		posCmp = NULL;
+		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
+		if (posAnterior->estaAbajoDe(cmpAbajo)){
+			delete(cmpAbajo);
+			if (atraviesaBloques) return;
+			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
+			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
+			trasladar(0,mov+1);
+			velocidadY = 0;
+			return;
+		}
+		delete(cmpAbajo);
+
+		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
+		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion())){
+			delete(cmpIzquierda);
+			if (atraviesaBloques) return;
+			int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
+			mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
+			trasladar(-mov-1,0);
+			return;
+		}
+
+		delete(cmpIzquierda);
+		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho(), p->obtenerArea()->obtenerPosicion()->obtenerY());
+		if (posAnterior->estaALaDerechaDe(cmpDer)){
+			delete (cmpDer);
+			if (atraviesaBloques) return;
+			int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
+			x -= obtenerArea()->obtenerPosicion()->obtenerX();
+			trasladar(x+1,0);
+			return;
+		}
+		delete(cmpDer);
+//		tengoPiso = true;
+//		return;
+	}
+	if(posCmp)
+		delete(posCmp);
+
+
 	int y;
-	//Y = diferencia entre mi pos en Y + mi alto, con la pos en Y de la plataforma
-	y = superficieOcupada->obtenerPosicion()->obtenerY() + superficieOcupada->obtenerAlto() - p->obtenerPosicion()->obtenerY();
-	//Como me quiero mover hacia arriba, pongo el signo -
-	Posicion* desp = new Posicion(0, -y);
-	superficieOcupada->mover(desp);
+	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
+	y -= p->obtenerArea()->obtenerPosicion()->obtenerY();
+
+	trasladar(0,-y);
 	tengoPiso = true;
 }
 void Manual::chocarConEscalera(Escalera*){
 	puedoSubir = true;
 	tengoPiso = true;
+	atraviesaBloques = true;
+	chocaConEscalera = true;
 }
