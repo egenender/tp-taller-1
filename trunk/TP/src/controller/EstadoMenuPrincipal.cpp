@@ -32,8 +32,8 @@ void EstadoMenuPrincipal::crearBtns(){
 }
 
 void EstadoMenuPrincipal::crearVistas(){
-	vistaBtnMulti = new VistaBoton("src/gui/resources/botonPrincipalMulti.bmp","src/gui/resources/botonPrincipalMultiClic.bmp");
-	vistaBtnSingle = new VistaBoton("src/gui/resources/botonPrincipalSingle.bmp","src/gui/resources/botonPrincipalSingleClic.bmp");
+	vistaBtnMulti = new VistaBoton("src/gui/resources/botonPrincipalMulti.png","src/gui/resources/botonPrincipalMultiClic.png");
+	vistaBtnSingle = new VistaBoton("src/gui/resources/botonPrincipalSingle.png","src/gui/resources/botonPrincipalSingleClic.png");
 	btnMultiPlayer->agregarObservador(vistaBtnMulti);
 	btnSinglePlayer->agregarObservador(vistaBtnSingle);
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
