@@ -198,8 +198,6 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
 
-		delete (posCmp);
-		posCmp = NULL;
 		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
 		if (posAnterior->estaAbajoDe(cmpAbajo)){
 			delete(cmpAbajo);
@@ -212,30 +210,35 @@ void Manual::chocarConPlataforma(Plataforma* p){
 		delete(cmpAbajo);
 
 		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
-		printf("La posicion en X (cmp) es: %d ",cmpIzquierda->obtenerX());
-		printf("La posicion en X del bloque es: %d\n",p->obtenerArea()->obtenerPosicion()->obtenerX());
-
-		if (cmpIzquierda->estaALaIzquierdaOIgualDe(p->obtenerArea()->obtenerPosicion())){
-			printf("Entre\n");
-			delete(cmpIzquierda);
-			int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
-			mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
-			trasladar(-mov-1,0,true);
-			return;
+		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion())){
+			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
+				delete(posCmp);
+				posCmp = NULL;
+				delete(cmpIzquierda);
+				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
+				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
+				trasladar(-mov-1,0,true);
+				return;
+			}
 		}
 
 		delete(cmpIzquierda);
 		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho(), p->obtenerArea()->obtenerPosicion()->obtenerY());
 		if (posAnterior->estaALaDerechaDe(cmpDer)){
-			delete (cmpDer);
-			int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
-			x -= obtenerArea()->obtenerPosicion()->obtenerX();
-			trasladar(x+1,0,true);
-			return;
+			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
+				delete(posCmp);
+				posCmp = NULL;
+				delete (cmpDer);
+				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
+				x -= obtenerArea()->obtenerPosicion()->obtenerX();
+				trasladar(x+1,0,true);
+				return;
+			}
 		}
 		delete(cmpDer);
-//		tengoPiso = true;
-//		return;
+		if (posCmp)
+			delete (posCmp);
+		posCmp = NULL;
 	}
 	bool cambio = true;
 	if(posCmp)

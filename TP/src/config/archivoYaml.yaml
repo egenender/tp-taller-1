@@ -104,22 +104,12 @@ juego:
           alto: 50
         - textura: viga
           x: 600
-          y: 460
+          y: 480
           ancho: 50
           alto: 50
         - textura: viga
           x: 550
           y: 480
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 650
-          y: 440
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 700
-          y: 420
           ancho: 50
           alto: 50
       escaleras:
