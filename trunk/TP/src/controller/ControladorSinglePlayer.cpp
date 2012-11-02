@@ -21,19 +21,17 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		return;
 	}
 
-	if (keystates[SDLK_UP]){
+	if (keystates[SDLK_UP] && !keystates[SDLK_DOWN]){
 		principal->subir();
 	}
-	if (keystates[SDLK_DOWN]){
+	if (keystates[SDLK_DOWN] && !keystates[SDLK_UP]){
 		principal->bajar();
 	}
 
 	if (keystates[SDLK_SPACE]) {
 		principal->saltar();
 	}
-	if (keystates[SDLK_DOWN]) {
 
-	}
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
 		principal->moverALaIzquierda();
 	}
