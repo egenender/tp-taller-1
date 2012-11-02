@@ -5,18 +5,18 @@ juego:
   parametros:
     margen_scroll: 40
   tiposProtagonista:
-    Charmeleon:
+    Charmander:
       ancho: 65
       alto: 73
-      vel_personaje: 15
-      salto: 45
+      vel_personaje: 12
+      salto: 30
       animaciones:
         quieto:
-          sprites: src/resources/charmeleonQuieto.bmp
+          sprites: src/resources/charmanderQuieto.bmp
         caminar:
-          sprites: src/resources/charmeleonMovimiento.bmp
+          sprites: src/resources/charmanderMovimiento.bmp
         saltar:
-          sprites: src/resources/charmeleonQuieto.bmp
+          sprites: src/resources/charmanderSalto.bmp
     Yoshi:
       ancho: 52
       alto: 70
