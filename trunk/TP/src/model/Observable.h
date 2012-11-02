@@ -20,6 +20,7 @@ using namespace std;
 #define VIVO 9
 #define SUBIENDOQUIETO 10
 #define SUBIENDOMOVIMIENTO 11
+#define LANZANDO 12
 
 class Observable {
 	private:
