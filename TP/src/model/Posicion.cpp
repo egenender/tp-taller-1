@@ -99,14 +99,14 @@ Posicion Posicion::operator+(Posicion sumando){
 }
 */
 
-void Posicion::sumarlePosicion(Posicion *pos_sumada){
+void Posicion::sumarlePosicion(Posicion *pos_sumada, int pX, int pY){
 	x += pos_sumada->x;
-	if (x < 0) x = 0;
+	if (x < pX) x = pX;
 	if (maximo){
 		if (x > maximo->x) x = maximo->x;}
 
 	y += pos_sumada->y;
-	if (y < 0) y = 0;
+	if (y < pY) y = pY;
 	if (maximo){
 		if (y > maximo->y) y = maximo->y;}
 }

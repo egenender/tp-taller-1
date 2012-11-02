@@ -10,6 +10,7 @@ class Area {
 	private:
 		int ancho, alto;
 		Posicion* pos; //esta posicion indica la posicion que tiene el punto superior izquierdo
+		int permisoX, permisoY;
 	public:
 		//Area(int, int);
 		Area(int, int, Posicion*); //revisar si no deberia ser Posicion a secas
@@ -24,6 +25,7 @@ class Area {
 		bool pasaPiso();
 		bool estaSobreElPiso();
 		bool  colisionaConOtra(Area*);
+		void cambiarPermisos (int, int);
 };
 
 #endif /* AREA_H_ */

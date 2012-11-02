@@ -56,6 +56,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	int difAlto = alto - altoC;
 	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto));
 	superficieDeColision = new Area(anchoC, altoC, posC);
+	superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
 }
 
 void Manual::moverALaDerecha(){
@@ -81,17 +82,17 @@ void Manual::trasladar(int factorX, int factorY, bool cambio){
 		posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 	}
 	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
-	superficieOcupada->mover(posDesplazamiento);
 	superficieDeColision->mover(posDesplazamiento);
+
+	superficieOcupada->mover(posDesplazamiento);
+
 
 	delete(posDesplazamiento);
 	huboCambios();
 	puedoSubir = false;
-//	atraviesaBloques = false;
-	//tengoPiso = false;
+
 }
 
-// Viejo:
 void Manual::actualizar(float delta){
 	this->delta = delta;
 	validarPiso();
