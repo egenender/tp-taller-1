@@ -26,7 +26,7 @@ void Cuerpo::moverA(Posicion* pos){
 	if (superficieDeColision){
 		int difAncho = superficieOcupada->obtenerAncho()-superficieDeColision->obtenerAncho();
 		int difAlto = superficieOcupada->obtenerAlto()-superficieDeColision->obtenerAlto();
-		Posicion* posC = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX() + difAncho/2, superficieOcupada->obtenerPosicion()->obtenerY() + difAlto/2);
+		Posicion* posC = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX() + difAncho/2, superficieOcupada->obtenerPosicion()->obtenerY() + difAlto);
 		superficieDeColision->cambiarPosicion(posC);
 	}
 
