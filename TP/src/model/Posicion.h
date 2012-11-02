@@ -26,6 +26,10 @@ public:
 	bool estaALaIzquierdaDe(Posicion*);
 	bool estaArribaDe(Posicion*);
 	bool estaAbajoDe(Posicion*);
+	bool estaALaDerechaOIgualDe(Posicion*);
+	bool estaALaIzquierdaOIgualDe(Posicion*);
+	bool estaArribaOIgualDe(Posicion*);
+	bool estaAbajoOIgualDe(Posicion*);
 
 	//Para mover la posicion
 
