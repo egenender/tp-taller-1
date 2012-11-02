@@ -1,5 +1,6 @@
 #include "Manual.h"
 #include <stdio.h>
+#include "SDL/SDL.h"
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
@@ -55,7 +56,6 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	int difAlto = alto - altoC;
 	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto));
 	superficieDeColision = new Area(anchoC, altoC, posC);
-
 }
 
 void Manual::moverALaDerecha(){
@@ -198,18 +198,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
 
-		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
-		if (posAnterior->estaAbajoDe(cmpAbajo)){
-			delete(cmpAbajo);
-			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
-			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
-			trasladar(0,mov+1,true);
-			velocidadY = 0;
-			return;
-		}
-		delete(cmpAbajo);
-
-		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
+		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho()-velocidad, posAnterior->obtenerY());
 		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion())){
 			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
 				delete(posCmp);
@@ -221,9 +210,9 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				return;
 			}
 		}
-
 		delete(cmpIzquierda);
-		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho(), p->obtenerArea()->obtenerPosicion()->obtenerY());
+
+		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho()-velocidad, p->obtenerArea()->obtenerPosicion()->obtenerY());
 		if (posAnterior->estaALaDerechaDe(cmpDer)){
 			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
 				delete(posCmp);
@@ -236,16 +225,32 @@ void Manual::chocarConPlataforma(Plataforma* p){
 			}
 		}
 		delete(cmpDer);
+
+		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
+
+		if (posAnterior->obtenerY() >= cmpAbajo->obtenerY()){
+			delete(posCmp);
+			delete(cmpAbajo);
+			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
+			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
+			trasladar(0,mov+1,true);
+			velocidadY = 0;
+			return;
+		}
+		delete(cmpAbajo);
+
 		if (posCmp)
 			delete (posCmp);
 		posCmp = NULL;
+
 	}
+
 	bool cambio = true;
 	if(posCmp)
 		delete(posCmp);
-	else{
+	else
 		cambio = false;
-	}
+
 
 	tengoPiso = true;
 	chocaConSosten = true;
