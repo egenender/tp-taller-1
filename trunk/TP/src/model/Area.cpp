@@ -17,6 +17,7 @@ Area::Area(int ancho, int alto, Posicion *pos_inicial = NULL){
 		pos = new Posicion(0,0);
 	else
 		pos = pos_inicial;
+	permisoX = permisoY = 0;
 }
 
 Area::~Area() {
@@ -33,12 +34,12 @@ void Area::mover(Posicion* traslado){
 	/**pos_nueva = pos->sumar(*traslado);
 	delete(pos);
 	pos = pos_nueva;*/
-	pos->sumarlePosicion(traslado);
+	pos->sumarlePosicion(traslado,-permisoX, -permisoY);
 	Posicion* maximoPosible = Posicion::obtenerMaximo();
-	if (pos->obtenerX() + ancho > maximoPosible->obtenerX())
-		pos->setearX( maximoPosible->obtenerX() - ancho);
-	if (pos->obtenerY() + alto > maximoPosible->obtenerY())
-		pos->setearY( maximoPosible->obtenerY() - alto );
+	if ((pos->obtenerX() + ancho - permisoX) > maximoPosible->obtenerX())
+		pos->setearX( maximoPosible->obtenerX() - ancho + permisoX);
+	if ((pos->obtenerY() + alto - permisoY)> maximoPosible->obtenerY())
+		pos->setearY( maximoPosible->obtenerY() - alto + permisoY);
 }
 
 bool Area::verificarColision(Area otraArea){
@@ -98,4 +99,9 @@ bool Area::colisionaConOtra(Area* otra){
 	if (auxOtra < aux) return false;
 
 	return true;
+}
+
+void Area::cambiarPermisos(int x, int y){
+	permisoX = x;
+	permisoY = y;
 }
