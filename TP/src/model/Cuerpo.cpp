@@ -23,6 +23,13 @@ Posicion* Cuerpo::obtenerPosicion() {
 
 void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
+	if (superficieDeColision){
+		int difAncho = superficieOcupada->obtenerAncho()-superficieDeColision->obtenerAncho();
+		int difAlto = superficieOcupada->obtenerAlto()-superficieDeColision->obtenerAlto();
+		Posicion* posC = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX() + difAncho/2, superficieOcupada->obtenerPosicion()->obtenerY() + difAlto/2);
+		superficieDeColision->cambiarPosicion(posC);
+	}
+
 	huboCambios();
 }
 
