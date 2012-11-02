@@ -12,7 +12,7 @@ class Escalera;
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
-#define FACTOR_DE_ESCALA 85
+#define FACTOR_DE_ESCALA 80
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
  que la altura maxima sea la misma a la que hay ahora:

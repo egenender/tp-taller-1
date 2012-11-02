@@ -44,7 +44,7 @@ juego:
     Gengar:
       ancho: 55
       alto: 55
-      vel_personaje: 18
+      vel_personaje: 30
       salto: 30
       animaciones:
         quieto:
@@ -103,14 +103,14 @@ juego:
           ancho: 200
           alto: 50
         - textura: viga
-          x: 600
-          y: 480
-          ancho: 50
+          x: 550
+          y: 350
+          ancho: 100
           alto: 50
         - textura: viga
           x: 550
           y: 480
-          ancho: 50
+          ancho: 100
           alto: 50
       escaleras:
         - textura: esc
