@@ -65,6 +65,22 @@ bool Posicion::estaArribaDe(Posicion *pos){
 	return (y < pos->y);
 }
 
+bool Posicion::estaALaDerechaOIgualDe(Posicion* pos){
+	return (x >= pos->x);
+}
+
+bool Posicion::estaALaIzquierdaOIgualDe(Posicion* pos){
+	return (x <= pos->x);
+}
+
+bool Posicion::estaArribaOIgualDe(Posicion* pos){
+	return (y >= pos->y);
+}
+
+bool Posicion::estaAbajoOIgualDe(Posicion* pos){
+	return (y <= pos->y);
+}
+
 /*void Posicion::moverHorizontalmente(int deltaX){
 	x += deltaX;
 

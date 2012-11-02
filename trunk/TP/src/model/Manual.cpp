@@ -197,7 +197,6 @@ void Manual::chocarConPlataforma(Plataforma* p){
 		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
 		if (posAnterior->estaAbajoDe(cmpAbajo)){
 			delete(cmpAbajo);
-			if (atraviesaBloques) return;
 			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
 			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
 			trasladar(0,mov+1);
@@ -208,8 +207,8 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
 		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion())){
+
 			delete(cmpIzquierda);
-			if (atraviesaBloques) return;
 			int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
 			mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
 			trasladar(-mov-1,0);
@@ -220,7 +219,6 @@ void Manual::chocarConPlataforma(Plataforma* p){
 		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho(), p->obtenerArea()->obtenerPosicion()->obtenerY());
 		if (posAnterior->estaALaDerechaDe(cmpDer)){
 			delete (cmpDer);
-			if (atraviesaBloques) return;
 			int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
 			x -= obtenerArea()->obtenerPosicion()->obtenerX();
 			trasladar(x+1,0);
