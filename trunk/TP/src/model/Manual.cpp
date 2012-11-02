@@ -50,7 +50,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 //	int alto = sup->obtenerAlto();
 //
 //	int anchoC = ancho * 3 / 4;
-//	int altoC = alto * 3/4;
+//	int altoC = alto * 3 / 4;
 //	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (ancho/8), sup->obtenerPosicion()->obtenerY() + (alto/8));
 //	superficieDeColision = new Area(anchoC, altoC, posC);
 
