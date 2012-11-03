@@ -13,6 +13,7 @@
 #include "../model/Manual.h"
 #include "VistaCuerpo.h"
 #include "VistaProtagonista.h"
+#include "SDL/SDL_mixer.h"
 #include "../model/Actualizable.h"
 #include <vector>
 
@@ -28,6 +29,7 @@ class ConfiguracionNivel{
 		VistaProtagonista* vistaManual;
 		std::vector<Actualizable*> actualizables;
 		std::vector<VistaCuerpo*> vistas;
+		Mix_Music* musica;
 	public:
 		ConfiguracionNivel();
 };

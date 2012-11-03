@@ -10,6 +10,8 @@
 
 #include "Animacion.h"
 #include "../model/Manual.h"
+#include "../view/VistaSonora.h"
+
 
 class TipoProtagonista {
 public:

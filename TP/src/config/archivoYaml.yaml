@@ -71,12 +71,15 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
+          sonido:
           periodo:
         caminar:
           sprites: src/resources/gokumonoGritando.bmp
+          sonido:
           periodo: 3
         grito2:
           sprites: src/resources/gokumonoMovimiento.bmp
+          sonido:
           periodo: 2
     princesa:
       ancho: 55
@@ -84,9 +87,11 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/pikachuQuieto.bmp
+          sonido:
           periodo: 2
         ayudenme:
           sprites: src/resources/pikachuMovimiento.bmp
+          sonido:
           periodo: 7
   texturas:
     viga: src/resources/viga2.jpg
@@ -97,6 +102,7 @@ juego:
       ancho: 1600
       piso: 540
       fondo: src/resources/fondoGrande.png
+      musica: 
       personajes:
         - tipo: mono
           x: 100
@@ -153,6 +159,7 @@ juego:
       alto: 1200
       ancho: 1200
       fondo: src/resources/viga2.jpg
+      musica:
       personajes:
         - tipo: princesa
           x: 400
@@ -161,6 +168,7 @@ juego:
       alto: 600
       ancho: 800
       fondo: src/resources/fondoGrande.png
+      musica:
       personajes:
         - tipo: mono
           x: 400
