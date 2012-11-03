@@ -8,6 +8,8 @@ class Manual;
 class Escalera;
 
 class Plataforma : public Cuerpo{
+private:
+	bool vigaDer, vigaIzq;
 public:
 	Plataforma(const char* , Area*);
 	virtual ~Plataforma();
@@ -18,6 +20,13 @@ public:
 	void chocarConManual(Manual*);
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
+	bool esVigaPorDerecha();
+	bool esVigaPorIzquierda();
+
+	//Significa que tiene a un cacho de viga a la derecha!
+	void setearComoVigaPorDerecha();
+	//Idem con izquierda
+	void setearComoVigaPorIzquierda();
 };
 
 #endif /* PLATAFORMA_H_ */

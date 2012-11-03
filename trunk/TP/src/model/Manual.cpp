@@ -194,13 +194,12 @@ void Manual::chocarConManual(Manual* manual){
 }
 void Manual::chocarConPlataforma(Plataforma* p){
 	if(atraviesaBloques) return;
-
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
 
 		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho()-velocidad, posAnterior->obtenerY());
-		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion())){
+		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion()) && !p->esVigaPorIzquierda()){
 			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
 				delete(posCmp);
 				posCmp = NULL;
@@ -214,7 +213,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 		delete(cmpIzquierda);
 
 		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho()-velocidad, p->obtenerArea()->obtenerPosicion()->obtenerY());
-		if (posAnterior->estaALaDerechaDe(cmpDer)){
+		if (posAnterior->estaALaDerechaDe(cmpDer) && !p->esVigaPorDerecha()){
 			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
 				delete(posCmp);
 				posCmp = NULL;

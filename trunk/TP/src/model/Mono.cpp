@@ -64,6 +64,7 @@ float Mono::calcularTiempo(){
 
 
 	float rta = (-media) * log (1-u);
+	printf("%f ",rta);
 	return rta;
 }
 
