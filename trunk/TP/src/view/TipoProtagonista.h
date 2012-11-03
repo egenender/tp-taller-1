@@ -25,6 +25,7 @@ public:
 	Animacion* animacionPasivaProt;
 	Animacion* animacionActivaProt;
 	Animacion* animacionSaltaProt;
+	VistaSonora* vistaSonora;
 
 public:
 	//Manual* CrearManual(const char*,int, int,int);

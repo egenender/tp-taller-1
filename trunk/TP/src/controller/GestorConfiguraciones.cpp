@@ -721,9 +721,11 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 
 	VistaProtagonista* vista = new VistaProtagonista(posiblesTiposProt->at(i)->animacionActivaProt, posiblesTiposProt->at(i)->animacionPasivaProt, posiblesTiposProt->at(i)->animacionSaltaProt);
 	configNivel->vistas.push_back(vista);
+	configNivel->vistas.push_back(posiblesTiposProt->at(i)->vistaSonora);
 	if (esCliente){
 		dummy = new Dummy(i, new Posicion(50,50), posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto);
 		dummy->agregarObservador(vista);
+		dummy->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
 		contenedor = new ContenedorDummy();
 		contenedor->agregarDummy(dummy);
 		configNivel->actualizables.push_back(contenedor);
@@ -732,6 +734,7 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
 		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
 		configNivel->manual->agregarObservador(vista);
+		configNivel->manual->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
 		configNivel->actualizables.push_back(configNivel->manual);
 	}
 
@@ -1095,7 +1098,6 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El salto en personaje toma valor bajo, se carga salto de 25");
 	}
 
-
 	try{
 		nodo["animaciones"];
 	}catch( YAML::Exception &e) {
@@ -1117,11 +1119,27 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 	const YAML::Node& animaciones=nodo["animaciones"];
 
+
+
+	VistaSonora* vistaSonora = new VistaSonora();
+
+
 	try{
 		animaciones["quieto"]["sprites"] >> ruta;
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionPasivaProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["quieto"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, QUIETO);
+
+		}
+
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		ruta = RUTA_PASIVA;
 		if (esCliente)
@@ -1143,11 +1161,22 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionActivaProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["caminar"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, CAMINANDODER);
+			vistaSonora->agregarSonido(ruta, CAMINANDOIZQ);
+		}
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		ruta = RUTA_PASIVA;
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionActivaProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
 	}catch( YAML::Exception &e) {
 		ruta = RUTA_PASIVA;
@@ -1164,6 +1193,17 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionSaltaProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["saltar"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, SALTANDODER);
+			vistaSonora->agregarSonido(ruta, SALTANDOIZQ);
+
+		}
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		ruta = RUTA_SALTA;
 		if (esCliente)
@@ -1179,6 +1219,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	}
 
 	AgregarAVector(ruta);
+	tipoper->vistaSonora=vistaSonora;
 
 	return tipoper;
 

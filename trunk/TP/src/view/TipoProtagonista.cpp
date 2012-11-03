@@ -17,6 +17,7 @@ TipoProtagonista::TipoProtagonista (){
 	animacionActivaProt=0;
 	animacionSaltaProt=0;
 	salto = 0;
+	vistaSonora=0;
 	disponible = true;
 }
 

@@ -13,10 +13,13 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/charmanderQuieto.bmp
+          sonido:
         caminar:
           sprites: src/resources/charmanderMovimiento.bmp
+          sonido: 
         saltar:
           sprites: src/resources/charmanderSalto.bmp
+          sonido: rutaSonidoChar
     Yoshi:
       ancho: 52
       alto: 70
@@ -25,27 +28,35 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Iddle.bmp
+          sonido:
         caminar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Walking.bmp
+          sonido:
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
+          sonido: rutaSonidoYoshi
     Mono:
       ancho: 140
       alto: 126
       vel_personaje: 10
       salto: 50
+      sonido: rutaSonidoMono
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
+          sonido:
         caminar:
           sprites: src/resources/gokumonoMovimiento.bmp
+          sonido:
         saltar:
           sprites: src/resources/gokumonoSalto.bmp
+          sonido: rutaSonidoMono
     Gengar:
       ancho: 55
       alto: 55
       vel_personaje: 30
       salto: 30
+      sonido: rutaSonidoGengar
       animaciones:
         quieto:
           sprites: src/resources/gengarQuieto.bmp
