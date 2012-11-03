@@ -209,6 +209,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				trasladar(-mov-1,0,true);
 				return;
 			}
+
 		}
 		delete(cmpIzquierda);
 
@@ -233,7 +234,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 			delete(cmpAbajo);
 			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
 			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
-			trasladar(0,mov+1,true);
+			trasladar(0,mov+1,!(p->esVigaPorDerecha() || p->esVigaPorIzquierda()));
 			velocidadY = 0;
 			return;
 		}

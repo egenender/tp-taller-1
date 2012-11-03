@@ -2,7 +2,7 @@
 
 Plataforma::Plataforma(const char* nom, Area* sup): Cuerpo(nom,sup) {
 	vigaDer = false;
-	vigaIzq = true;
+	vigaIzq = false;
 }
 
 Plataforma::~Plataforma() {
