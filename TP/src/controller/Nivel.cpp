@@ -64,14 +64,6 @@ void Nivel::iniciar() {
 	actualizables = gestor->ObtenerActualizables();
 	vistas = gestor->ObtenerVistas();
 
-	// TODO: *le hardcode:
-
-	VistaSonora* sonidoYoshi = new VistaSonora();
-	agregarVista(sonidoYoshi);
-	gestor->ObtenerManual()->agregarObservador(sonidoYoshi);
-
-	// Fin TODO
-
 	if(estado==SERVIDOR){
 
 		Server::obtenerInstancia(0)->escribir(structServidor_obtener_tamanio());
