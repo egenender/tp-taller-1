@@ -13,6 +13,7 @@
 #include "../model/Escalera.h"
 #include "../model/Plataforma.h"
 #include "../model/Area.h"
+#include "SDL/SDL_mixer.h"
 #include "../log/Log.h"
 #include <sstream>
 #include "Sounds.h"
@@ -375,6 +376,19 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto del nivel toma valor muy chico o negativo, se carga minimo valido");
 	}
 
+
+	string ruta;
+
+	nodo[nivelElegido]["musica"] >> ruta;
+
+	if (ruta!="~"){
+
+		ruta=ruta+"./";
+		configNivel->musica=Mix_LoadMUS(ruta.c_str());
+
+	}
+
+
 	try{
 		nodo[nivelElegido]["piso"] >> configNivel->piso;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -397,7 +411,6 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}
 
 
-	string ruta;
 	try{
 		nodo[nivelElegido]["fondo"] >> ruta;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -706,6 +719,11 @@ vector<VistaCuerpo*>* GestorConfiguraciones::ObtenerVistas(){
 	return &configNivel->vistas;
 }
 
+Mix_Music* GestorConfiguraciones::ObtenerMusica(){
+
+	return configNivel->musica;
+
+}
 
 
 void GestorConfiguraciones::setProtagonista(string nombre){
@@ -1200,8 +1218,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 			if (esCliente) ruta=headerTemp+ruta;
 
-			vistaSonora->agregarSonido(ruta, SALTANDODER);
-			vistaSonora->agregarSonido(ruta, SALTANDOIZQ);
+			vistaSonora->agregarSonido(ruta, SALTAR);
 
 		}
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {

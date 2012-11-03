@@ -90,6 +90,7 @@ class GestorConfiguraciones{
 		int ObtenerAnchoNivel();
 		int ObtenerAltoNivel();
 		int ObtenerPisoNivel();
+		Mix_Music* ObtenerMusica();
 		int ObtenerAltoPantalla();
 		int ObtenerAnchoPantalla();
 		int ObtenerMargenScroll();
