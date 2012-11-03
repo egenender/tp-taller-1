@@ -40,7 +40,7 @@ juego:
       alto: 126
       vel_personaje: 10
       salto: 50
-      sonido: rutaSonidoMono
+      sonido: 
       animaciones:
         quieto:
           sprites: src/resources/gokumonoQuieto.bmp
@@ -56,7 +56,7 @@ juego:
       alto: 55
       vel_personaje: 30
       salto: 30
-      sonido: rutaSonidoGengar
+      sonido: 
       animaciones:
         quieto:
           sprites: src/resources/gengarQuieto.bmp
@@ -96,6 +96,18 @@ juego:
           sprites: src/resources/pikachuMovimiento.bmp
           sonido:
           periodo: 7
+    troll:
+      ancho: 200
+      alto: 200
+      animaciones:
+        quieto:
+          sprites: src/resources/trollface.bmp
+          sonido:
+          periodo: 2
+        ayudenme:
+          sprites: src/resources/trollface.bmp
+          sonido:
+          periodo: 7
   texturas:
     viga: src/resources/viga2.jpg
     esc: src/resources/film.png
@@ -105,7 +117,7 @@ juego:
       ancho: 1600
       piso: 540
       fondo: src/resources/fondoGrande.png
-      musica: 
+      musica: src/resources/niveles/route1.wav
       personajes:
         - tipo: mono
           x: 100
@@ -114,6 +126,64 @@ juego:
           x: 700
           y: 150
         - tipo: princesa
+          x: 700
+          y: 599
+      plataformas:
+        - textura: viga
+          x: 250
+          y: 150
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 750
+          y: 350
+          ancho: 50
+          alto: 50
+        - textura: viga
+          x: 700
+          y: 370
+          ancho: 50
+          alto: 50
+        - textura: viga
+          x: 650
+          y: 390
+          ancho: 50
+          alto: 50
+        - textura: viga
+          x: 600
+          y: 410
+          ancho: 50
+          alto: 50
+        - textura: viga
+          x: 550
+          y: 430
+          ancho: 50
+          alto: 50
+        - textura: viga
+          x: 500
+          y: 450
+          ancho: 50
+          alto: 50
+      escaleras:
+        - textura: esc
+          x: 100
+          y: 150
+          ancho: 80
+          alto: 400
+    - nivel: Troll
+      alto: 600
+      ancho: 1600
+      piso: 540
+      fondo: src/resources/fondoGrande.png
+      musica: src/resources/niveles/trololo.wav
+      personajes:
+        - tipo: troll
+          x: 100
+          y: 150
+        - tipo: troll
+          x: 700
+          y: 150
+        - tipo: troll
           x: 700
           y: 599
       plataformas:
