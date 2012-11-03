@@ -383,7 +383,8 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 	if (ruta!="~"){
 
-		ruta=ruta+"./";
+		AgregarAVector(ruta);
+		ruta="./"+ruta;
 		configNivel->musica=Mix_LoadMUS(ruta.c_str());
 
 	}
