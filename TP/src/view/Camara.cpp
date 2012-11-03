@@ -13,8 +13,7 @@ void Camara::iniciarCamara() {
 
 	imagen->escala(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());
 
-	//musica = gestor->ObtenerMusicaNivel();
-	musica = Mix_LoadMUS("./src/resources/niveles/route1.wav");
+	musica = gestor->ObtenerMusica();
 
 	camara = new SDL_Rect();
 	camara->x = 0;
@@ -58,8 +57,10 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 		return false;
 
 	if (Mix_PlayingMusic() == 0) {
-		if (Mix_PlayMusic(musica, -1) == -1)
+		if (Mix_PlayMusic(musica, -1) == -1) {
 			printf("No se puede reproducir la musica\n");
+			printf("%s\n", Mix_GetError());
+		}
 	}
 
 	return imagen->dibujar(display, 0, 0, camara); // 0,0 porque lo dibujamos el fondo nomas!

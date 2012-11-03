@@ -121,7 +121,5 @@ class GestorConfiguraciones{
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
-		VistaSonora* cargarVistaSonora();
-
 };
 

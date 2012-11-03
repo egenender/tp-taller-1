@@ -38,6 +38,8 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 		fuerza = VELOCIDAD_STANDARD;
 	}
 
+	delta = 0;
+	velocidadY = 0;
 	velocidad = vel;
 	velocidadSaltoBase = -fuerza;
 	estado = QUIETODER;
@@ -45,6 +47,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	tengoPiso = false;
 	atraviesaBloques = false;
 	chocaConEscalera = false;
+	chocaConSosten = false;
 	posAnterior = NULL;
 
 	int ancho = sup->obtenerAncho();

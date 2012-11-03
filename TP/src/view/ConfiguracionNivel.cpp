@@ -16,5 +16,6 @@ ConfiguracionNivel::ConfiguracionNivel(){
 	vistas=vector<VistaCuerpo*>();
 	piso = 0;
 	superficieCargada = NULL;
+	musica = NULL;
 }
 
