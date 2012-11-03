@@ -1187,7 +1187,6 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 			if (esCliente) ruta=headerTemp+ruta;
 
 			vistaSonora->agregarSonido(ruta, CAMINANDODER);
-			vistaSonora->agregarSonido(ruta, CAMINANDOIZQ);
 		}
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		ruta = RUTA_PASIVA;
@@ -1334,15 +1333,4 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
 	return manuales;
-}
-
-VistaSonora* GestorConfiguraciones::cargarVistaSonora() {
-	VistaSonora* vista = new VistaSonora();
-
-	vista->agregarSonido(JUMP, SALTANDODER);
-	vista->agregarSonido(JUMP, SALTANDOIZQ);
-	vista->agregarSonido(JUMP, SALTAR);
-	vista->agregarSonido(PLAYER_DOWN, MUERTO);
-
-	return vista;
 }

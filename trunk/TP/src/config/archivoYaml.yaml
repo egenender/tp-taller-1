@@ -19,7 +19,7 @@ juego:
           sonido: 
         saltar:
           sprites: src/resources/charmanderSalto.bmp
-          sonido: rutaSonidoChar
+          sonido: 
     Yoshi:
       ancho: 52
       alto: 70
@@ -31,10 +31,10 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Walking.bmp
-          sonido:
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy-2.wav
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
-          sonido: rutaSonidoYoshi
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.wav
     Mono:
       ancho: 140
       alto: 126
@@ -50,7 +50,7 @@ juego:
           sonido:
         saltar:
           sprites: src/resources/gokumonoSalto.bmp
-          sonido: rutaSonidoMono
+          sonido: 
     Gengar:
       ancho: 55
       alto: 55
@@ -60,10 +60,13 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/gengarQuieto.bmp
+          sonido: 
         caminar:
           sprites: src/resources/gengarMovimiento.bmp
+          sonido: 
         saltar:
           sprites: src/resources/gengarSalto.bmp
+          sonido: 
   tiposAutomatico:  
     mono:
       ancho: 140
