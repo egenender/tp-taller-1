@@ -197,6 +197,7 @@ void Manual::chocarConManual(Manual* manual){
 }
 void Manual::chocarConPlataforma(Plataforma* p){
 	if(atraviesaBloques) return;
+	if(!posAnterior) return;
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
@@ -290,4 +291,10 @@ void Manual::actualizarEstados(){
 
 bool Manual::estoySubiendo(){
 	return (estado == SUBIENDOQUIETO || estado == SUBIENDOMOVIMIENTO);
+}
+
+void Manual::posicionar(Posicion* pose){
+	if(posAnterior) delete(posAnterior);
+	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
+	moverA(pose);
 }
