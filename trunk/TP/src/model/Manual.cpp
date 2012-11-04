@@ -258,6 +258,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 	tengoPiso = true;
 	chocaConSosten = true;
+	velocidadY = 0;
 
 	int y;
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
