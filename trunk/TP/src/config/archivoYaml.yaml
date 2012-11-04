@@ -134,36 +134,6 @@ juego:
           y: 150
           ancho: 200
           alto: 50
-        - textura: viga
-          x: 750
-          y: 350
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 700
-          y: 370
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 650
-          y: 390
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 600
-          y: 410
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 550
-          y: 430
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 500
-          y: 450
-          ancho: 50
-          alto: 50
       escaleras:
         - textura: esc
           x: 100
