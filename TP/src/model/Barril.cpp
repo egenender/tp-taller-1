@@ -12,7 +12,7 @@ Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	if (vel > 0)
 		velocidadX = vel;
 	else
-		velocidadX = VELOCIDAD_STANDARD;
+		velocidadX = VEL_BASE;
 
 	velocidadY = 0;
 	estado = QUIETO;
@@ -22,8 +22,8 @@ Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	bajarEnSiguiente = calculoBajada();
 
 	int anchoN, altoN, difAncho, difAlto;
-	anchoN = (superficieOcupada->obtenerAncho() * FACTOR_DE_ESCALA)/100;
-	altoN = (superficieOcupada->obtenerAlto() * FACTOR_DE_ESCALA)/100;
+	anchoN = (superficieOcupada->obtenerAncho() * ESCALA)/100;
+	altoN = (superficieOcupada->obtenerAlto() * ESCALA)/100;
 	difAncho = superficieOcupada->obtenerAncho() - anchoN;
 	difAlto = superficieOcupada->obtenerAlto() - altoN;
 	int x = superficieOcupada->obtenerPosicion()->obtenerX() + difAncho/2;
@@ -107,6 +107,7 @@ void Barril::actualizarEstados(){
 
 
 void Barril::actualizarMovimiento(){
+	if (estado == SALTAR) return;
 	if (puedoBajar && bajarEnSiguiente){
 		bajar();
 		return;
@@ -146,7 +147,8 @@ bool Barril::calculoBajada(){
 		rnd = w / rnd;
 	}while(rnd == 1);
 
-	float cmp = PROBABILIDAD_BAJADA / 100;
+	float cmp = (float)PROBABILIDAD_BAJADA / 100;
+	if (cmp < 1) return true;
 	return (rnd < cmp);
 }
 

@@ -8,9 +8,9 @@
 class Manual;
 class Escalera;
 
-#define FACTOR_DE_ESCALA 90
+#define ESCALA 90
 #define ACELERACION 8
-#define VELOCIDAD_STANDARD 5
+#define VEL_BASE 5
 #define DIR_IZQ -1
 #define DIR_DER 1
 #define PROBABILIDAD_BAJADA 30
@@ -24,6 +24,7 @@ private:
 	bool chocaConSosten;
 	bool bajarEnSiguiente;
 	Posicion* posAnterior;
+	bool yaPaso;
 
 public:
 	Barril(const char*, Area*, int vel, int dir);
