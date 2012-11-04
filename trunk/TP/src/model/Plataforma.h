@@ -11,6 +11,7 @@ class Plataforma : public Cuerpo{
 private:
 	bool vigaDer, vigaIzq;
 	float angulo;
+	int direccion;
 public:
 	Plataforma(const char* , Area*);
 	virtual ~Plataforma();
@@ -29,6 +30,7 @@ public:
 	//Idem con izquierda
 	void setearComoVigaPorIzquierda();
 	void setearAngulo(float);
+	void setearDireccion(int);
 };
 
 #endif /* PLATAFORMA_H_ */

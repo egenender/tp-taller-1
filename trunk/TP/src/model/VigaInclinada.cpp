@@ -32,6 +32,7 @@ void VigaInclinada::crearPlataformas(){
 		Area* lugar = new Area(superficieOcupada->obtenerAncho(), superficieOcupada->obtenerAlto(), pos);
 		Plataforma* unica = new Plataforma (" ", lugar);
 		plataformas->push_back(unica);
+		unica->setearDireccion(NINGUNO); //ya se hace por default, pero por si acaso :P
 		return;
 	}
 	float PI = 3.14159;
@@ -70,6 +71,7 @@ void VigaInclinada::crearPlataformas(){
 			sup = new Area(anchoP, altoP, pos);
 			Plataforma* plataforma = new Plataforma(" ", sup);
 			plataformas->push_back(plataforma);
+			plataforma->setearDireccion(CRECE_IZQUIERDA);
 			if (i!= cant-1)
 				plataforma->setearComoVigaPorDerecha();
 
@@ -80,6 +82,7 @@ void VigaInclinada::crearPlataformas(){
 			sup = new Area(anchoP, altoP, pos);
 			Plataforma* plataforma = new Plataforma(" ", sup);
 			plataformas->push_back(plataforma);
+			plataforma->setearDireccion(CRECE_DERECHA);
 			if (i != 0)
 				plataforma->setearComoVigaPorIzquierda();
 		}
