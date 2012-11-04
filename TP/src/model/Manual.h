@@ -29,7 +29,7 @@ private:
 	int velocidadSaltoBase;
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten;
-	Posicion* posAnterior;
+
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
@@ -56,7 +56,7 @@ public:
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
 private:
-	void trasladar(int, int, bool);
+	void mtrasladar(int,int,bool);
 	void actualizarSalto();
 	bool estoySaltando();
 	bool estoySubiendo();

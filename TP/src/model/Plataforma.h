@@ -31,6 +31,8 @@ public:
 	void setearComoVigaPorIzquierda();
 	void setearAngulo(float);
 	void setearDireccion(int);
+	bool caeADerecha();
+	bool caeAIzquierda();
 };
 
 #endif /* PLATAFORMA_H_ */

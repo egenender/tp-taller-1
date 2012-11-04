@@ -77,26 +77,9 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 		estado = saltando;
 	else
 		estado = caminando;
-	trasladar(direccion * velocidad, 0,true);
+	mtrasladar(direccion * velocidad, 0,true);
 }
 
-
-void Manual::trasladar(int factorX, int factorY, bool cambio){
-	if (cambio){
-		if (posAnterior) delete(posAnterior);
-		posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
-	}
-	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
-	superficieDeColision->mover(posDesplazamiento);
-
-	superficieOcupada->mover(posDesplazamiento);
-
-
-	delete(posDesplazamiento);
-	huboCambios();
-	puedoSubir = false;
-
-}
 
 void Manual::actualizar(float delta){
 	this->delta = delta;
@@ -133,7 +116,7 @@ void Manual::detener(){
 void Manual::actualizarSalto(){
 	if (!estoySaltando()) return;
 
-	trasladar(0,velocidadY,true);
+	mtrasladar(0,velocidadY,true);
 	velocidadY += ACELERACION;
 	if (chocaConPiso() || tengoPiso){
 		superficieDeColision->ponerEnPiso();
@@ -179,14 +162,14 @@ void Manual::subir(){
 
 	puedoSubir = false;
 	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
-	trasladar(0, -velocidad,true);
+	mtrasladar(0, -velocidad,true);
 	estado = SUBIENDOMOVIMIENTO;
 }
 
 void Manual::bajar(){
 	if (!puedoSubir) return;
 	puedoSubir = false;
-	trasladar(0,velocidad,true);
+	mtrasladar(0,velocidad,true);
 	estado = SUBIENDOMOVIMIENTO;
 }
 
@@ -211,7 +194,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				delete(cmpIzquierda);
 				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
 				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
-				trasladar(-mov-1,0,true);
+				mtrasladar(-mov-1,0,true);
 				return;
 			}
 
@@ -226,7 +209,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				delete (cmpDer);
 				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
 				x -= obtenerArea()->obtenerPosicion()->obtenerX();
-				trasladar(x+1,0,true);
+				mtrasladar(x+1,0,true);
 				return;
 			}
 		}
@@ -239,7 +222,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 			delete(cmpAbajo);
 			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
 			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
-			trasladar(0,mov+1,!(p->esVigaPorDerecha() || p->esVigaPorIzquierda()));
+			mtrasladar(0,mov+1,!(p->esVigaPorDerecha() || p->esVigaPorIzquierda()));
 			velocidadY = 0;
 			return;
 		}
@@ -266,7 +249,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
 	y -= p->obtenerArea()->obtenerPosicion()->obtenerY();
 
-	trasladar(0,-y,cambio);
+	mtrasladar(0,-y,cambio);
 
 }
 void Manual::chocarConEscalera(Escalera*){
@@ -298,4 +281,9 @@ void Manual::posicionar(Posicion* pose){
 	if(posAnterior) delete(posAnterior);
 	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 	moverA(pose);
+}
+
+void Manual::mtrasladar(int fx, int fy, bool c){
+	trasladar(fx,fy,c);
+	puedoSubir = false;
 }

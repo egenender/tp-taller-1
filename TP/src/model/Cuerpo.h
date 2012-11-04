@@ -15,6 +15,7 @@ protected:
 	Area* superficieOcupada;
 	const char* nombre;
 	Area* superficieDeColision;
+	Posicion* posAnterior;
 public:
 	Cuerpo(const char*, Area*);
 	virtual ~Cuerpo();
@@ -25,6 +26,8 @@ public:
 	//virtual void actualizar(float delta)=0; //o que reciba o devuelva algo ?
 	const char* obtenerNombre();
 	Area* obtenerArea();
+protected:
+	void trasladar(int, int, bool);
 };
 
 #endif /* CUERPO_H_ */
