@@ -20,6 +20,21 @@ juego:
         saltar:
           sprites: src/resources/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.wav
+    Squirtle:
+      ancho: 22
+      alto: 22
+      vel_personaje: 10
+      salto: 40
+      animaciones:
+        quieto:
+          sprites: src/resources/cuerpos/Squirtle/squirtleMuerto.bmp
+          sonido:
+        caminar:
+          sprites: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
+          sonido: src/resources/cuerpos/Squirtle/Squirtle-happy.wav
+        saltar:
+          sprites: src/resources/cuerpos/Squirtle/squirtleGirando.bmp
+          sonido: src/resources/cuerpos/Squirtle/Squirtle-jump.wav
     Yoshi:
       ancho: 52
       alto: 70
