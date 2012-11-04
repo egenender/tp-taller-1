@@ -81,7 +81,7 @@ void Nivel::iniciar() {
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
 			Manual* prin = gestor->ObtenerManual();
-			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
+			prin->posicionar(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
 			controlador = new ControladorSinglePlayer(prin);
 		}

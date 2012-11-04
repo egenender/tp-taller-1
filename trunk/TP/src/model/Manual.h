@@ -35,6 +35,7 @@ public:
 //	Manual(const char*, Area*, int);
 	Manual(const char*, Area*, int, int);
 	virtual ~Manual();
+	void posicionar(Posicion*);
 
 	void moverALaIzquierda();
 	void moverALaDerecha();
