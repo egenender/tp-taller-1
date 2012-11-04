@@ -13,13 +13,13 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/charmanderQuieto.bmp
-          sonido:
+          sonido: 
         caminar:
           sprites: src/resources/charmanderMovimiento.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-hurt.wav
         saltar:
           sprites: src/resources/charmanderSalto.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.wav
     Yoshi:
       ancho: 52
       alto: 70
@@ -47,10 +47,10 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/gokumonoMovimiento.bmp
-          sonido:
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy.wav
         saltar:
           sprites: src/resources/gokumonoSalto.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-1.wav
     Gengar:
       ancho: 55
       alto: 55
@@ -59,14 +59,14 @@ juego:
       sonido: 
       animaciones:
         quieto:
-          sprites: src/resources/gengarQuieto.bmp
+          sprites: src/resources/cuerpos/Gengar/gengarQuieto.bmp
           sonido: 
         caminar:
-          sprites: src/resources/gengarMovimiento.bmp
-          sonido: 
+          sprites: src/resources/cuerpos/Gengar/gengarMovimiento.bmp
+          sonido: src/resources/cuerpos/Gengar/Gengar-happy.wav
         saltar:
-          sprites: src/resources/gengarSalto.bmp
-          sonido: 
+          sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
+          sonido: src/resources/cuerpos/Gengar/Gengar-jump.wav
   tiposAutomatico:  
     mono:
       ancho: 140
