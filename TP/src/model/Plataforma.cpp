@@ -4,6 +4,7 @@ Plataforma::Plataforma(const char* nom, Area* sup): Cuerpo(nom,sup) {
 	vigaDer = false;
 	vigaIzq = false;
 	angulo = 0;
+	direccion = 0;
 }
 
 Plataforma::~Plataforma() {
@@ -40,4 +41,7 @@ void Plataforma::setearComoVigaPorIzquierda(){
 void Plataforma::setearAngulo(float alfa){
 	if (alfa < 90 && alfa > -90)
 		angulo = alfa;
+}
+void Plataforma::setearDireccion(int dir){
+	direccion = dir;
 }
