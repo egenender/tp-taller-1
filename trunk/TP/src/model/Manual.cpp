@@ -60,6 +60,8 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto));
 	superficieDeColision = new Area(anchoC, altoC, posC);
 	superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
+
+	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 }
 
 void Manual::moverALaDerecha(){
@@ -197,7 +199,6 @@ void Manual::chocarConManual(Manual* manual){
 }
 void Manual::chocarConPlataforma(Plataforma* p){
 	if(atraviesaBloques) return;
-	if(!posAnterior) return;
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
