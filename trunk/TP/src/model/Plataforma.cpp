@@ -45,3 +45,11 @@ void Plataforma::setearAngulo(float alfa){
 void Plataforma::setearDireccion(int dir){
 	direccion = dir;
 }
+
+bool Plataforma::caeADerecha(){
+	return direccion == 1;
+}
+
+bool Plataforma::caeAIzquierda(){
+	return direccion == -1;
+}

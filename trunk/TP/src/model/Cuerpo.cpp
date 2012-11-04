@@ -5,6 +5,7 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	superficieOcupada = sup;
 	nombre = nombrecito;
 	superficieDeColision = NULL;
+	posAnterior = NULL;
 }
 
 Cuerpo::~Cuerpo() {
@@ -12,6 +13,7 @@ Cuerpo::~Cuerpo() {
 	if(superficieDeColision){
 		delete(superficieDeColision);
 	}
+	if(posAnterior) delete(posAnterior);
 
 	//delete (nombre);
 	//Podría pasarse una función que destruya a los observadores...
@@ -49,4 +51,20 @@ Area* Cuerpo::obtenerArea(){
 	if (superficieDeColision)
 		return superficieDeColision;
 	return superficieOcupada;
+}
+
+void Cuerpo::trasladar(int factorX, int factorY, bool cambio){
+	if (cambio){
+		if (posAnterior) delete(posAnterior);
+		posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
+	}
+	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
+	superficieDeColision->mover(posDesplazamiento);
+
+	superficieOcupada->mover(posDesplazamiento);
+
+
+	delete(posDesplazamiento);
+	huboCambios();
+
 }
