@@ -5,7 +5,7 @@
 #include "ManejadorEstados.h"
 #include "../model/lista.h"
 #include "../view/VistaCuerpo.h"
-#include "../model/Manual.h"
+#include "../model/Personajes/Manual.h"
 #include "../view/Camara.h"
 #include "ControladorCliente.h"
 #include "Controlador.h"

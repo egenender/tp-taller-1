@@ -1,9 +1,9 @@
 #ifndef BARRIL_H_
 #define BARRIL_H_
-#include "Cuerpo.h"
-#include "Actualizable.h"
+#include "../Cuerpo.h"
+#include "../Actualizable.h"
 #include "Plataforma.h"
-#include "Observable.h"
+#include "../Observable.h"
 #include "Escalera.h"
 
 class Manual;

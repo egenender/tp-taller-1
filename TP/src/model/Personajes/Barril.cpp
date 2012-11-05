@@ -1,7 +1,7 @@
 #include "Barril.h"
 #include <time.h>
 #include <stdlib.h>
-#include "Posicion.h"
+#include "../Posicion.h"
 #include <stdio.h>
 
 Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {

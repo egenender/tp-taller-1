@@ -10,7 +10,7 @@
 
 #include "Animacion.h"
 #include "../model/Automatico.h"
-#include "../model/Manual.h"
+#include "../model/Personajes/Manual.h"
 #include "VistaCuerpo.h"
 #include "VistaProtagonista.h"
 #include "SDL/SDL_mixer.h"

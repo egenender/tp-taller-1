@@ -10,8 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include "GestorConfiguraciones.h"
-#include "../model/Escalera.h"
-#include "../model/Plataforma.h"
+#include "../model/Personajes/Escalera.h"
+#include "../model/Personajes/Plataforma.h"
 #include "../model/Area.h"
 #include "SDL/SDL_mixer.h"
 #include "../log/Log.h"

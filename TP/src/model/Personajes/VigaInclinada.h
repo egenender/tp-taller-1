@@ -1,8 +1,8 @@
 #ifndef VIGAINCLINADA_H_
 #define VIGAINCLINADA_H_
-#include "Cuerpo.h"
-#include "Actualizable.h"
-#include "Area.h"
+#include "../Cuerpo.h"
+#include "../Actualizable.h"
+#include "../Area.h"
 #include "Plataforma.h"
 #include <vector>
 

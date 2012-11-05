@@ -1,8 +1,8 @@
 #ifndef MONO_H_
 #define MONO_H_
-#include "Cuerpo.h"
-#include "Timer.h"
-#include "Fabricas/FabricaActualizable.h"
+#include "../Cuerpo.h"
+#include "../Timer.h"
+#include "../Fabricas/FabricaActualizable.h"
 
 class Escalera;
 class Plataforma;
