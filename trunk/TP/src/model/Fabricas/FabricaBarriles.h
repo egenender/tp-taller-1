@@ -2,7 +2,7 @@
 #define FABRICABARRILES_H_
 #include "FabricaActualizable.h"
 #include "../Posicion.h"
-#include "../Barril.h"
+#include "../Personajes/Barril.h"
 
 class FabricaBarriles : public FabricaActualizable{
 public:

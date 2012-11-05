@@ -3,6 +3,7 @@
 
 #include "VistaCuerpo.h"
 #include "Superficie.h"
+#include "../model/Observable.h"
 
 #include <string>
 using namespace std;

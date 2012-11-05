@@ -1,8 +1,8 @@
 #ifndef PLATAFORMA_H_
 #define PLATAFORMA_H_
-#include "Cuerpo.h"
-#include "Area.h"
-#include "Actualizable.h"
+#include "../Cuerpo.h"
+#include "../Area.h"
+#include "../Actualizable.h"
 
 class Manual;
 class Escalera;

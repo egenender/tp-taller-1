@@ -1,5 +1,4 @@
 #include "VistaImagen.h"
-#include "../model/Manual.h"
 
 VistaImagen::VistaImagen() {
 	imagen = NULL;

@@ -2,10 +2,10 @@
 #include <math.h>
 
 //FIXME: quitar esto:
-#include "../controller/GestorConfiguraciones.h"
-#include "../view/Superficie.h"
-#include "../view/VistaImagen.h"
-#include "../view/VistaCuerpo.h"
+#include "../../controller/GestorConfiguraciones.h"
+#include "../../view/Superficie.h"
+#include "../../view/VistaImagen.h"
+#include "../../view/VistaCuerpo.h"
 
 VigaInclinada::VigaInclinada(const char* nom, Area* sup, float alfa):Cuerpo(nom,sup) {
 	angulo = 0;

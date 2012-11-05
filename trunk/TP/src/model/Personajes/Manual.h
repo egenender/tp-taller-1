@@ -1,10 +1,10 @@
 #ifndef MANUAL_H_
 #define MANUAL_H_
 #define VELOCIDAD_STANDARD 150
-#include "Area.h"
-#include "Cuerpo.h"
-#include "Actualizable.h"
-#include "Observable.h"
+#include "../Area.h"
+#include "../Cuerpo.h"
+#include "../Actualizable.h"
+#include "../Observable.h"
 
 class Escalera;
 class Barril;

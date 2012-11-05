@@ -9,7 +9,7 @@
 #define TIPOPROTAGONISTA_H_
 
 #include "Animacion.h"
-#include "../model/Manual.h"
+#include "../model/Personajes/Manual.h"
 #include "../view/VistaSonora.h"
 
 

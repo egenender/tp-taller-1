@@ -12,7 +12,6 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 
-#include "../model/Manual.h"
 #include "../view/Superficie.h"
 #include "../view/VistaProtagonista.h"
 

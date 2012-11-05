@@ -1,6 +1,6 @@
 #ifndef CONTROLADORSINGLEPLAYER_H_
 #define CONTROLADORSINGLEPLAYER_H_
-#include "../model/Manual.h"
+#include "../model/Personajes/Manual.h"
 #include "Controlador.h"
 #include "Evento.h"
 

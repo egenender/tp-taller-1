@@ -18,7 +18,7 @@
 #include "../model/ContenedorDummy.h"
 #include "../model/Dummy.h"
 #include "../model/ContenedorManuales.h"
-#include "../model/Manual.h"
+#include "../model/Personajes/Manual.h"
 #include "../log/Log.h"
 #include "../gui/model/Ventana.h"
 #include <map>

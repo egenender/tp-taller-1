@@ -1,6 +1,6 @@
 #ifndef CONTENEDORMANUALES_H_
 #define CONTENEDORMANUALES_H_
-#include "Manual.h"
+#include "Personajes/Manual.h"
 #include "Observable.h"
 #include "Actualizable.h"
 #include "structures/structServidor.h"
