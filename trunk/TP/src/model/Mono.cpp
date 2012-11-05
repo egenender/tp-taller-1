@@ -4,12 +4,14 @@
 #include <stdlib.h>
 #include <time.h>
 
-Mono::Mono(const char* nom, Area* sup, float m): Cuerpo(nom,sup) {
+Mono::Mono(const char* nom, Area* sup, FabricaActualizable* f,float m): Cuerpo(nom,sup) {
 	/*MEDIA DEBE ESTAR EN SEGUNDOS!*/
 	estado = QUIETO;
 	media = m;
 	srand ( time(NULL) );
 	tiempoEspera = calcularTiempo();
+
+	fabrica = f;
 
 	timer = new Timer();
 	timer->comenzar();
@@ -66,5 +68,14 @@ float Mono::calcularTiempo(){
 }
 
 void Mono::tirarBarril(){
-	printf("Tire Barril\n");
+	if (!fabrica) return;
+
+	int x, y;
+	x = obtenerArea()->obtenerPosicion()->obtenerX()+10;
+	y = obtenerArea()->obtenerPosicion()->obtenerY();
+	Posicion *pos = new Posicion(x,y);
+
+	//digo que vaya hacia la derecha en un estado inicial.. pero podriamos ver de tirar
+	//un random o algo..
+	fabrica->fabricar(pos, 1);
 }

@@ -2,6 +2,7 @@
 #define MONO_H_
 #include "Cuerpo.h"
 #include "Timer.h"
+#include "Fabricas/FabricaActualizable.h"
 
 class Escalera;
 class Plataforma;
@@ -16,8 +17,9 @@ private:
 	Timer* timer;
 	float media;
 	float tiempoEspera;
+	FabricaActualizable* fabrica;
 public:
-	Mono(const char*, Area*, float);
+	Mono(const char*, Area*, FabricaActualizable*,float);
 	virtual ~Mono();
 
 	void actualizar(float);
