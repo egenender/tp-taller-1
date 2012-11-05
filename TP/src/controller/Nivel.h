@@ -43,6 +43,7 @@ private:
 	void agregarCuerpo(Cuerpo*);
 	void agregarVista(VistaCuerpo*);
 	void indicarManual(Manual*);
+	void quitarMuertos();
 
 public:
     static Nivel* obtenerInstancia();

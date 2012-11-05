@@ -34,6 +34,7 @@ public:
 
 	void actualizar(float);
 	int obtenerEstado();
+	bool estaMuerto();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

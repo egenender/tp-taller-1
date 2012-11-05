@@ -13,6 +13,7 @@ public:
 	virtual ~Actualizable();
 	virtual void actualizar(float delta)=0;
 	virtual Area* obtenerArea()= 0;
+	virtual bool estaMuerto();
 
 	/*DOUBLE DISPATCHING*/
 	virtual void chocarCon(Actualizable*)=0;
