@@ -259,6 +259,7 @@ void Manual::chocarConEscalera(Escalera*){
 	atraviesaBloques = true;
 	chocaConEscalera = true;
 	chocaConSosten = true;
+	velocidadY = 0;
 }
 
 void Manual::actualizarEstados(){
