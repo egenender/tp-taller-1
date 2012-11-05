@@ -4,9 +4,9 @@
 #include "Actualizable.h"
 #include "Plataforma.h"
 #include "Observable.h"
+#include "Escalera.h"
 
 class Manual;
-class Escalera;
 
 #define ESCALA 90
 #define ACELERACION 8
@@ -24,7 +24,9 @@ private:
 	bool chocaConSosten;
 	bool bajarEnSiguiente;
 	Posicion* posAnterior;
-	bool yaPaso;
+	bool permito;
+	Escalera* esc;
+	Plataforma* plt;
 
 public:
 	Barril(const char*, Area*, int vel, int dir);

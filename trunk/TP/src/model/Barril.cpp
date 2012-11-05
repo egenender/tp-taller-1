@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "Posicion.h"
+#include <stdio.h>
 
 Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	if (dir <= 1 && dir >= -1)
@@ -31,6 +32,10 @@ Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	superficieDeColision = new Area(anchoN, altoN, new Posicion(x,y));
 
 	posAnterior = new Posicion(x,y);
+
+	esc = NULL;
+	plt = NULL;
+	permito = false;
 }
 
 Barril::~Barril() {
@@ -46,12 +51,18 @@ void Barril::chocarCon(Actualizable* ac){
 	//ac->chocarConBarril(this);
 }
 
-void Barril::chocarConEscalera(Escalera*){
+void Barril::chocarConEscalera(Escalera* e){
 	puedoBajar = true;
 	tengoPiso = true;
 	atraviesaBloques = true;
 	chocaConEscalera = true;
 	chocaConSosten = true;
+
+	//Si cambio la escalera de contacto:
+	if (esc != e){
+		esc = e;
+		plt = NULL;
+	}
 }
 
 void Barril::chocarConManual(Manual*){
@@ -107,16 +118,26 @@ void Barril::actualizarEstados(){
 
 
 void Barril::actualizarMovimiento(){
-	if (estado == SALTAR) return;
-	if (puedoBajar && bajarEnSiguiente){
+	if (estado == MUERTO) printf("JOJO\n");
+	if (estado == SALTAR || estado == MUERTO) return;
+	if (puedoBajar && bajarEnSiguiente && permito){
 		bajar();
 		return;
 	}
 
 	int movX = velocidadX * direccion;
+
 	if (movX != 0){
+		if (movX < 0){
+			if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX() + movX) > Posicion::obtenerMaximo()->obtenerX())){
+				estado = MUERTO;
+				return;
+			}
+
+		}
 		trasladar(movX,0,true);
 		puedoBajar = false;
+
 	}
 
 
@@ -148,7 +169,7 @@ bool Barril::calculoBajada(){
 	}while(rnd == 1);
 
 	float cmp = (float)PROBABILIDAD_BAJADA / 100;
-	if (cmp < 1) return true;
+
 	return (rnd < cmp);
 }
 
@@ -160,7 +181,15 @@ void Barril::bajar(){
 }
 
 void Barril::chocarConPlataforma(Plataforma* p){
-	if(atraviesaBloques) return;
+	if (plt == NULL) plt = p;
+
+	if(atraviesaBloques && plt == p){
+		permito = true;
+		return;
+	}else{
+		permito = false;
+	}
+
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
