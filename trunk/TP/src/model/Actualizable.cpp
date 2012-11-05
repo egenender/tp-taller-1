@@ -20,3 +20,7 @@ void Actualizable::chocarConManual(Manual*){}
 void Actualizable::chocarConPlataforma(Plataforma*){}
 void Actualizable::chocarConEscalera(Escalera*){}
 void Actualizable::chocarConBarril(Barril*){}
+
+bool Actualizable::estaMuerto(){
+	return false;
+}

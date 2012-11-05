@@ -147,14 +147,24 @@ juego:
         - textura: viga
           x: 250
           y: 150
-          ancho: 200
+          ancho: 400
+          alto: 50
+        - textura: viga
+          x: 300
+          y: 350
+          ancho: 400
           alto: 50
       escaleras:
         - textura: esc
-          x: 100
+          x: 400
           y: 150
-          ancho: 80
-          alto: 400
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 600
+          y: 350
+          ancho: 50
+          alto: 200
     - nivel: Troll
       alto: 600
       ancho: 1600

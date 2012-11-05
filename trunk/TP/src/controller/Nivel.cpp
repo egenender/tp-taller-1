@@ -7,7 +7,6 @@
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
 
-
 Nivel Nivel::instancia;
 
 Nivel::Nivel() {
@@ -160,9 +159,10 @@ void Nivel::actualizar(float delta) {
 	}
 
 	// Verificar aca colisiones:
-	if (estado == SERVIDOR || estado == SINGLE)
+	if (estado == SERVIDOR || estado == SINGLE){
 		generarColisiones(actualizables);
-
+		quitarMuertos();
+	}
 	// Aca vemos si tenemos que eliminar algun cuerpo:
 
 	// Aca eliminamos los cuerpos y vistas que tegan que ser eliminados:
@@ -205,4 +205,21 @@ Nivel* Nivel::obtenerInstancia() {
 
 void Nivel::morir(){
 	parar = true;
+}
+
+void Nivel::quitarMuertos(){
+	vector<Actualizable*>* aux = new vector<Actualizable*>();
+	Actualizable* ac;
+	for (unsigned int i = 0; i < actualizables->size(); i++){
+		ac = actualizables->at(i);
+		if (ac->estaMuerto())
+			delete(ac);
+		else
+			aux->push_back(ac);
+	}
+	actualizables->clear();
+	for (unsigned int j = 0; j < aux->size(); j++){
+		actualizables->push_back(aux->at(j));
+	}
+
 }

@@ -269,3 +269,7 @@ void Barril::chocarConBarril(Barril*){
 	//No se muy bien que deberia hacerse.. supongo que morir
 	destruir();
 }
+
+bool Barril::estaMuerto(){
+	return (estado == MUERTO);
+}
