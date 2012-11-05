@@ -8,6 +8,7 @@
 
 class Escalera;
 class Manual;
+class Barril;
 
 using namespace std;
 
@@ -34,9 +35,6 @@ public:
 	void guardarSubPlataformas(vector<Actualizable*>*);
 
 	void chocarCon(Actualizable*);
-	void chocarConEscalera(Escalera*);
-	void chocarConPlataforma(Plataforma*);
-	void chocarConManual(Manual*);
 
 private:
 	void crearPlataformas();

@@ -7,6 +7,7 @@
 class Manual;
 class Plataforma;
 class Escalera;
+class Barril;
 
 class Automatico: public Cuerpo{
 private:
@@ -20,9 +21,6 @@ public:
 	int obtenerEstado();
 
 	void chocarCon(Actualizable*);
-	void chocarConManual(Manual*);
-	void chocarConPlataforma(Plataforma*);
-	void chocarConEscalera(Escalera*);
 };
 
 #endif /* AUTOMATICO_H_ */

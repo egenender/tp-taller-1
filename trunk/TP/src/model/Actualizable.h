@@ -5,6 +5,7 @@
 class Manual;
 class Escalera;
 class Plataforma;
+class Barril;
 
 class Actualizable {
 public:
@@ -15,9 +16,10 @@ public:
 
 	/*DOUBLE DISPATCHING*/
 	virtual void chocarCon(Actualizable*)=0;
-	virtual void chocarConManual(Manual*)=0;
-	virtual void chocarConPlataforma(Plataforma*)=0;
-	virtual void chocarConEscalera(Escalera*)=0;
+	virtual void chocarConManual(Manual*);
+	virtual void chocarConPlataforma(Plataforma*);
+	virtual void chocarConEscalera(Escalera*);
+	virtual void chocarConBarril(Barril*);
 //Los automaticos no haran nada
 };
 

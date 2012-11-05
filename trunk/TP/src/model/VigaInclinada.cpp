@@ -127,11 +127,7 @@ VigaInclinada::~VigaInclinada() {
 	delete(plataformas);
 }
 
-
 void VigaInclinada::chocarCon(Actualizable*){}
-void VigaInclinada::chocarConEscalera(Escalera*){}
-void VigaInclinada::chocarConPlataforma(Plataforma*){}
-void VigaInclinada::chocarConManual(Manual*){}
 
 void VigaInclinada::actualizar(float){}
 

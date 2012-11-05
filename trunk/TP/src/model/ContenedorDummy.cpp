@@ -145,6 +145,3 @@ Area* ContenedorDummy::obtenerArea(){
 }
 
 void ContenedorDummy::chocarCon(Actualizable*){}
-void ContenedorDummy::chocarConManual(Manual*){}
-void ContenedorDummy::chocarConPlataforma(Plataforma*){}
-void ContenedorDummy::chocarConEscalera(Escalera*){}

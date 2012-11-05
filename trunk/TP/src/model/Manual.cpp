@@ -48,6 +48,8 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	atraviesaBloques = false;
 	chocaConEscalera = false;
 	chocaConSosten = false;
+	vidas = CANT_VIDAS;
+
 	posAnterior = NULL;
 
 	int ancho = sup->obtenerAncho();
@@ -287,4 +289,20 @@ void Manual::posicionar(Posicion* pose){
 void Manual::mtrasladar(int fx, int fy, bool c){
 	trasladar(fx,fy,c);
 	puedoSubir = false;
+}
+
+void Manual::perderVida(){
+	if (estado == MUERTO) return;
+	vidas--;
+	if (vidas == 0){
+		morir();
+		return;
+	}
+
+	//aca deberia ponerlo en alguna "posicionInicial"
+	huboCambios();
+}
+
+void Manual::chocarConBarril(Barril*){
+	perderVida();
 }

@@ -6,6 +6,7 @@
 
 class Manual;
 class Escalera;
+class Barril;
 
 class Plataforma : public Cuerpo{
 private:
@@ -19,9 +20,7 @@ public:
 	void actualizar(float delta); 		//de cuerpo
 
 	void chocarCon(Actualizable*);
-	void chocarConManual(Manual*);
-	void chocarConPlataforma(Plataforma*);
-	void chocarConEscalera(Escalera*);
+
 	bool esVigaPorDerecha();
 	bool esVigaPorIzquierda();
 

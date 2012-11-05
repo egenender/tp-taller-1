@@ -6,6 +6,7 @@
 
 class Manual;
 class Plataforma;
+class Barril;
 
 class Escalera : public Cuerpo {
 public:
@@ -16,9 +17,6 @@ public:
 
 
 	void chocarCon(Actualizable*);
-	void chocarConManual(Manual*);
-	void chocarConPlataforma(Plataforma*);
-	void chocarConEscalera(Escalera*);
 };
 
 #endif /* ESCALERA_H_ */

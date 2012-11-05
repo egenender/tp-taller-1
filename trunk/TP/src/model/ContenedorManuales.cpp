@@ -141,6 +141,4 @@ Area* ContenedorManuales::obtenerArea(){
 }
 
 void ContenedorManuales::chocarCon(Actualizable*){}
-void ContenedorManuales::chocarConManual(Manual*){}
-void ContenedorManuales::chocarConPlataforma(Plataforma*){}
-void ContenedorManuales::chocarConEscalera(Escalera*){}
+
