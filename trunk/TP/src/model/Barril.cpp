@@ -95,6 +95,7 @@ void Barril::actualizarSalto(){
 void Barril::validarPiso(){
 	if (obtenerArea()->estaSobreElPiso()){
 		tengoPiso = true;
+		permito = false;
 		return;
 	}
 
@@ -118,7 +119,6 @@ void Barril::actualizarEstados(){
 
 
 void Barril::actualizarMovimiento(){
-	if (estado == MUERTO) printf("JOJO\n");
 	if (estado == SALTAR || estado == MUERTO) return;
 	if (puedoBajar && bajarEnSiguiente && permito){
 		bajar();
@@ -128,12 +128,9 @@ void Barril::actualizarMovimiento(){
 	int movX = velocidadX * direccion;
 
 	if (movX != 0){
-		if (movX < 0){
-			if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX() + movX) > Posicion::obtenerMaximo()->obtenerX())){
+		if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX()+ obtenerArea()->obtenerAncho() + movX) > Posicion::obtenerMaximo()->obtenerX())){
 				estado = MUERTO;
 				return;
-			}
-
 		}
 		trasladar(movX,0,true);
 		puedoBajar = false;

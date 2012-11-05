@@ -61,7 +61,6 @@ void VigaInclinada::crearPlataformas(){
 
 	Posicion* pos;
 	Area* sup;
-	printf("cantidad %d\n",cant);
 	int x = superficieOcupada->obtenerPosicion()->obtenerX();
 	int y = superficieOcupada->obtenerPosicion()->obtenerY();
 	if (creceHacia == CRECE_IZQUIERDA)
