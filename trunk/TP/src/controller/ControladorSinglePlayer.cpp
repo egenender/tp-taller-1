@@ -21,6 +21,13 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		return;
 	}
 
+	//Lo dejo por separado, por si hay que cambiarle algo :P
+	if(principal->obtenerEstado() == MUERTO){
+		GestorConfiguraciones::getInstance()->acabarGestor();
+		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
+		return;
+	}
+
 	if (keystates[SDLK_UP] && !keystates[SDLK_DOWN]){
 		principal->subir();
 	}
