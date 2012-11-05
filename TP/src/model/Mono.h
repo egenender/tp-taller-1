@@ -6,6 +6,7 @@
 class Escalera;
 class Plataforma;
 class Manual;
+class Barril;
 
 #define TIEMPO_LANZAMIENTO 1000
 
@@ -23,9 +24,6 @@ public:
 	int obtenerEstado();
 
 	void chocarCon(Actualizable*);
-	void chocarConEscalera(Escalera*);
-	void chocarConPlataforma(Plataforma*);
-	void chocarConManual(Manual*);
 
 private:
 	float calcularTiempo();

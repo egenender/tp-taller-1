@@ -16,3 +16,7 @@ Actualizable::~Actualizable() {
 	// TODO Auto-generated destructor stub
 }
 
+void Actualizable::chocarConManual(Manual*){}
+void Actualizable::chocarConPlataforma(Plataforma*){}
+void Actualizable::chocarConEscalera(Escalera*){}
+void Actualizable::chocarConBarril(Barril*){}

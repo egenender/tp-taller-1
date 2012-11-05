@@ -24,7 +24,7 @@ private:
 	bool chocaConSosten;
 	bool bajarEnSiguiente;
 	Posicion* posAnterior;
-	bool permito;
+	bool permito; //variable para permitir caida (depende de si ya bajo por una escalera, etc)
 	Escalera* esc;
 	Plataforma* plt;
 
@@ -39,6 +39,7 @@ public:
 	void chocarConManual(Manual*);
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
+	void chocarConBarril(Barril*);
 
 private:
 	void destruir();

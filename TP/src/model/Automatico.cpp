@@ -21,6 +21,3 @@ int Automatico::obtenerEstado(){
 
 
 void Automatico::chocarCon(Actualizable*){}
-void Automatico::chocarConManual(Manual*){}
-void Automatico::chocarConPlataforma(Plataforma*){}
-void Automatico::chocarConEscalera(Escalera*){}

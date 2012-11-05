@@ -48,7 +48,7 @@ int Barril::obtenerEstado(){
 
 
 void Barril::chocarCon(Actualizable* ac){
-	//ac->chocarConBarril(this);
+	ac->chocarConBarril(this);
 }
 
 void Barril::chocarConEscalera(Escalera* e){
@@ -265,3 +265,7 @@ void Barril::chocarConPlataforma(Plataforma* p){
 	puedoBajar = false;
 }
 
+void Barril::chocarConBarril(Barril*){
+	//No se muy bien que deberia hacerse.. supongo que morir
+	destruir();
+}

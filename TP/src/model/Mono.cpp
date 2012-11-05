@@ -27,9 +27,6 @@ int Mono::obtenerEstado(){
 void Mono::chocarCon(Actualizable*){
 
 }
-void Mono::chocarConEscalera(Escalera*){}
-void Mono::chocarConPlataforma(Plataforma*){}
-void Mono::chocarConManual(Manual*){}
 
 
 void Mono::actualizar(float){

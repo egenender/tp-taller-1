@@ -7,12 +7,14 @@
 #include "Observable.h"
 
 class Escalera;
+class Barril;
 #include "Plataforma.h"
 
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
 #define FACTOR_DE_ESCALA 80
+#define CANT_VIDAS 3
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
  que la altura maxima sea la misma a la que hay ahora:
@@ -29,7 +31,7 @@ private:
 	int velocidadSaltoBase;
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten;
-
+	int vidas;
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
@@ -55,6 +57,8 @@ public:
 	void chocarConManual(Manual*);
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
+	void chocarConBarril(Barril*);
+
 private:
 	void mtrasladar(int,int,bool);
 	void actualizarSalto();
@@ -64,6 +68,7 @@ private:
 	bool chocaConPiso();
 	void validarPiso();
 	void actualizarEstados();
+	void perderVida();
 };
 
 
