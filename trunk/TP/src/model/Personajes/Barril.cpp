@@ -152,6 +152,7 @@ void Barril::destruir(){
 	//por ahora solo hago esto:
 	estado = MUERTO;
 	huboCambios();
+	notificarObservadores();
 }
 
 bool Barril::calculoBajada(){
