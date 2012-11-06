@@ -25,4 +25,7 @@ void FabricaBarriles::fabricar(Posicion* inicial, int valorInicial){
 
 void FabricaBarriles::terminarCreacion(Barril* b){
 	// aca tengo que ver como hago para crear al Barril
+
+	//gestor: dame cosas
+	//gestor: toma Este barril y ponele cosas :P
 }

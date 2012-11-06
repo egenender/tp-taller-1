@@ -11,6 +11,10 @@ Escalera::Escalera(const char* nom, Area* sup):Cuerpo(nom,sup) {
 	ancho /= 4;
 	x -= ancho / 2 ;
 
+	int FACTOR = 90;
+	alto = (alto *FACTOR) / 100;
+	y += (alto - superficieOcupada->obtenerAlto()) / 2;
+
 	superficieDeColision = new Area(ancho, alto, new Posicion(x,y));
 }
 
