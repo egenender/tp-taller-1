@@ -12,13 +12,13 @@ juego:
       salto: 30
       animaciones:
         quieto:
-          sprites: src/resources/charmanderQuieto.bmp
+          sprites: src/resources/cuerpos/Charmander/charmanderQuieto.bmp
           sonido: 
         caminar:
-          sprites: src/resources/charmanderMovimiento.bmp
+          sprites: src/resources/cuerpos/Charmander/charmanderMovimiento.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-hurt.wav
         saltar:
-          sprites: src/resources/charmanderSalto.bmp
+          sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.wav
     Squirtle:
       ancho: 22
@@ -58,13 +58,13 @@ juego:
       sonido: 
       animaciones:
         quieto:
-          sprites: src/resources/gokumonoQuieto.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
           sonido:
         caminar:
-          sprites: src/resources/gokumonoMovimiento.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoMovimiento.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-happy.wav
         saltar:
-          sprites: src/resources/gokumonoSalto.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-1.wav
     Gengar:
       ancho: 55
@@ -88,15 +88,15 @@ juego:
       alto: 126
       animaciones:
         quieto:
-          sprites: src/resources/gokumonoQuieto.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
           sonido:
           periodo:
         caminar:
-          sprites: src/resources/gokumonoGritando.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
           sonido:
           periodo: 3
         grito2:
-          sprites: src/resources/gokumonoMovimiento.bmp
+          sprites: src/resources/cuerpos/GokuMono/gokumonoMovimiento.bmp
           sonido:
           periodo: 2
     princesa:
@@ -104,11 +104,11 @@ juego:
       alto: 47
       animaciones:
         quieto:
-          sprites: src/resources/pikachuQuieto.bmp
+          sprites: src/resources/cuerpos/Pikachu/pikachuQuieto.bmp
           sonido:
           periodo: 2
         ayudenme:
-          sprites: src/resources/pikachuMovimiento.bmp
+          sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento.bmp
           sonido:
           periodo: 7
     troll:
@@ -124,8 +124,8 @@ juego:
           sonido:
           periodo: 7
   texturas:
-    viga: src/resources/viga2.jpg
-    esc: src/resources/film.png
+    viga: src/resources/items/viga2.jpg
+    esc: src/resources/items/film.png
   nivel:
     - nivel: MooMooMilk
       alto: 600
@@ -226,7 +226,7 @@ juego:
     - nivel: Moo la Moo
       alto: 1200
       ancho: 1200
-      fondo: src/resources/viga2.jpg
+      fondo: src/resources/items/viga2.jpg
       musica:
       personajes:
         - tipo: princesa
