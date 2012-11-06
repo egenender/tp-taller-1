@@ -212,9 +212,9 @@ void Nivel::quitarMuertos(){
 	Actualizable* ac;
 	for (unsigned int i = 0; i < actualizables->size(); i++){
 		ac = actualizables->at(i);
-		if (ac->estaMuerto())
-			delete(ac);
-		else
+		if (ac->estaMuerto()){
+			//delete(ac); Por ahora no hacemos nada, porque hay un error en C++
+		}else
 			aux->push_back(ac);
 	}
 	actualizables->clear();
