@@ -6,6 +6,7 @@
 #include "../Actualizable.h"
 #include "../Observable.h"
 
+class Hongo;
 class Escalera;
 class Barril;
 #include "Plataforma.h"
@@ -58,6 +59,7 @@ public:
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
 	void chocarConBarril(Barril*);
+	void chocarConHongo(Hongo*);
 
 private:
 	void mtrasladar(int,int,bool);

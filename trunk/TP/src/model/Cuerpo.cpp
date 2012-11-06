@@ -68,3 +68,7 @@ void Cuerpo::trasladar(int factorX, int factorY, bool cambio){
 	huboCambios();
 
 }
+
+Posicion* Cuerpo::obtenerPosicionAnterior(){
+	return posAnterior;
+}
