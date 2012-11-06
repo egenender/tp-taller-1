@@ -26,6 +26,7 @@ public:
 	//virtual void actualizar(float delta)=0; //o que reciba o devuelva algo ?
 	const char* obtenerNombre();
 	Area* obtenerArea();
+	Posicion* obtenerPosicionAnterior();
 protected:
 	void trasladar(int, int, bool);
 };

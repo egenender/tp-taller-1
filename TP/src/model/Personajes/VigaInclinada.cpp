@@ -113,7 +113,7 @@ void VigaInclinada::guardarSubPlataformas(vector<Actualizable*>* vector){
 	Superficie* superf;
 	VistaImagen* img;
 	for (unsigned int j = 0; j < plataformas->size(); j++){
-		superf = new Superficie("src/resources/viga2.jpg");
+		superf = new Superficie("src/resources/items/viga2.jpg");
 		superf->escala(plataformas->at(j)->obtenerAncho(), plataformas->at(j)->obtenerAlto());
 		img = new VistaImagen(superf);
 		plataformas->at(j)->agregarObservador(img);

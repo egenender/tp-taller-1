@@ -1,6 +1,5 @@
 #include "Manual.h"
-#include <stdio.h>
-#include "SDL/SDL.h"
+#include "Hongo.h"
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
@@ -305,4 +304,20 @@ void Manual::perderVida(){
 
 void Manual::chocarConBarril(Barril*){
 	perderVida();
+}
+
+void Manual::chocarConHongo(Hongo* h){
+	//tengo que ver por cual direccion se chocan:
+	Posicion* posPersAnterior = h->obtenerPosicionAnterior();
+	//me fijo nomas si vino de arriba:
+	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
+
+	if(posPersAnterior->estaAbajoDe(posCmp)){
+		tengoPiso = true;
+		estado = QUIETODER;
+		saltar();
+	}else{
+		perderVida();
+	}
+	delete(posCmp);
 }
