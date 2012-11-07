@@ -292,7 +292,6 @@ void Manual::mtrasladar(int fx, int fy, bool c){
 }
 
 void Manual::perderVida(){
-	printf("mori\n");
 	if (estado == MUERTO) return;
 	vidas--;
 	if (vidas == 0){
