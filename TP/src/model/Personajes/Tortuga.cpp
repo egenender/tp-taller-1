@@ -1,6 +1,5 @@
 #include "Tortuga.h"
 #include "../Observable.h"
-#include <stdio.h>
 
 Tortuga::Tortuga(const char* nom, Area* sup, int v): Hongo(nom, sup, v) {
 	velocidadInicial = velocidadX;
@@ -10,7 +9,6 @@ Tortuga::~Tortuga() {
 }
 
 void Tortuga::perderVida(){
-	printf("estado: %d\n", estado);
 	if (estado == QUIETO){
 		morir();
 		return;
