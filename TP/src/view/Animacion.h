@@ -19,7 +19,6 @@ class Animacion {
 		unsigned int delayFrame; //Milisegundos
 		unsigned long tiempoViejo;
 		int puntoDetencion;
-		vector<int>* delaysFrames;
 		int cantVecesAnimado;
 
 	private:
@@ -30,7 +29,6 @@ class Animacion {
 	public:
 		Animacion(HojaSprites* frames);
 		Animacion(HojaSprites* frames, int delayFrame);
-		Animacion(HojaSprites* frames, vector<int>* frameDelays);
 
 		~Animacion();
 
@@ -55,6 +53,7 @@ class Animacion {
 
 		int obtenerAlto();
 		int obtenerAncho();
+		Animacion* obtenerCopia();
 };
 
 #endif

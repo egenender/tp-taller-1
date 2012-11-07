@@ -13,7 +13,6 @@ void Animacion::inicializarAnimacion() {
 	tiempoViejo = 0;
 	corriendo = true;
 	puntoDetencion = -1;
-	delaysFrames = NULL;
 	cantVecesAnimado = 0;
 }
 
@@ -54,17 +53,6 @@ Animacion::Animacion(HojaSprites* frames, int delayFrame) {
 }
 
 
-/** Crea una Animacion a partir de una HojaSprites, con duracion de frames definidos (pueden variar) **/
-Animacion::Animacion(HojaSprites* frames, vector<int>* frameDelays) {
-
-	inicializarAnimacion();
-	cargarFrames(frames);
-
-	if (frameDelays->size() == frames->obtenerNumeroSprites()) {
-		this->delaysFrames = frameDelays;
-	}
-}
-
 /** Anima la animacion (actualiza) **/
 void Animacion::animar() {
 	if (framesTotales <= 0)
@@ -79,10 +67,6 @@ void Animacion::animar() {
 	}
 
 	int delay = delayFrame;
-
-	if (delaysFrames) {
-		delay = delaysFrames->at(frameActual);
-	}
 
 	if (tiempoViejo + delay > SDL_GetTicks()) {
 		return;
@@ -219,4 +203,15 @@ int Animacion::obtenerAlto() {
 
 int Animacion::obtenerAncho() {
 	return frames->obtenerAnchoSprite();
+}
+
+Animacion* Animacion::obtenerCopia() {
+	if (this->frames == NULL)
+		return NULL;
+
+	HojaSprites* copia = this->frames->obtenerCopia();
+	if (copia == NULL)
+		return NULL;
+
+	return new Animacion(copia, delayFrame);
 }
