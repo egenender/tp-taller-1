@@ -22,6 +22,8 @@ using namespace std;
 #define SUBIENDOMOVIMIENTO 11
 #define LANZANDO 12
 #define GRITANDO 13
+#define MOVILDERECHA 14
+#define MOVILIZQUIERDA 15
 
 class Observable {
 	private:

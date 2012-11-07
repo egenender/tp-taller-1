@@ -43,7 +43,7 @@ void Hongo::chocarCon(Actualizable* ac){
 }
 
 void Hongo::chocarConBarril(Barril*){
-	morir();
+	perderVida();
 }
 
 int Hongo::calculoDireccionRandom(){
@@ -145,14 +145,30 @@ void Hongo::chocarConManual(Manual* pers){
 	Posicion* posCmp = new Posicion(posPersAnterior->obtenerX(), posPersAnterior->obtenerY()+ pers->obtenerArea()->obtenerAlto());
 
 	if(posCmp->estaArribaDe(posAnterior)){
-		morir();
-	}else{
-		if (direccion == DERECHA)
-			direccion = IZQUIERDA;
-		else
-			direccion = DERECHA;
+		perderVida();
+		delete(posCmp);
+		return;
 	}
 	delete(posCmp);
+
+	posCmp = new Posicion(posPersAnterior->obtenerX() + pers->obtenerArea()->obtenerAncho(),posPersAnterior->obtenerY() );
+
+	if (posCmp->estaALaIzquierdaDe(posAnterior)){
+		modificacionMovimiento(IZQUIERDA);
+		delete (posCmp);
+		return;
+	}
+	delete(posCmp);
+
+	posCmp = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY() );
+
+	if (posCmp->estaALaIzquierdaDe(posPersAnterior)){
+		modificacionMovimiento(DERECHA);
+		delete(posCmp);
+		return;
+	}
+	delete(posCmp);
+
 }
 
 void Hongo::chocarConPlataforma(Plataforma* p){
@@ -227,4 +243,20 @@ void Hongo::chocarConPlataforma(Plataforma* p){
 
 	trasladar(0,-y,cambio);
 
+}
+
+void Hongo::perderVida(){
+	morir();
+}
+
+void Hongo::chocarConHongo(Hongo* h){
+	if (h->obtenerEstado() == MOVILIZQUIERDA || h->obtenerEstado() == MOVILDERECHA)
+		morir();
+}
+
+void Hongo::modificacionMovimiento(int dir){
+	if (dir == IZQUIERDA)
+		direccion = DERECHA;
+	else
+		direccion = IZQUIERDA;
 }

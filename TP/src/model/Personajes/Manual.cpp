@@ -318,7 +318,8 @@ void Manual::chocarConHongo(Hongo* h){
 		estado = QUIETODER;
 		saltar();
 	}else{
-		perderVida();
+		if (h->obtenerEstado() != QUIETO)
+			perderVida();
 	}
 	delete(posCmp);
 }
