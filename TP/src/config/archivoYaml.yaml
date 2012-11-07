@@ -21,8 +21,8 @@ juego:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.wav
     Squirtle:
-      ancho: 22
-      alto: 22
+      ancho: 40
+      alto: 40
       vel_personaje: 10
       salto: 40
       animaciones:
