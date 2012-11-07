@@ -18,6 +18,7 @@ EstadoSinglePlayer::EstadoSinglePlayer() {
 	vistaScrollNiveles = vistaScrollPersonajes = NULL;
 	fondo = fondo2 = NULL;
 	animaciones = NULL;
+	musica = NULL;
 }
 
 EstadoSinglePlayer::~EstadoSinglePlayer() {
@@ -28,6 +29,7 @@ EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
 }
 
 void EstadoSinglePlayer::iniciar(){
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.wav");
 	crearLbls();
 	crearScroll();
 	crearBtns();
@@ -244,7 +246,11 @@ void EstadoSinglePlayer::terminar(){
 		delete(animaciones);
 		animaciones = NULL;
 	}
-
+	if(musica) {
+		Mix_HaltMusic();
+		Mix_FreeMusic(musica);
+		musica = NULL;
+	}
 }
 
 void EstadoSinglePlayer::manejarEvento(SDL_Event* evento){
@@ -281,6 +287,12 @@ void EstadoSinglePlayer::actualizar(float delta){
 }
 
 void EstadoSinglePlayer::dibujar(SDL_Surface* display){
+	if (musica && (Mix_PlayingMusic() == 0)) {
+		if (Mix_PlayMusic(musica, -1) == -1) {
+			printf("No se puede reproducir la musica\n");
+			printf("%s\n", Mix_GetError());
+		}
+	}
 	fondo->dibujar(display,0,0);
 	fondo2->dibujar(display,80,80);
 	vistaBtnMenu->dibujar(display);

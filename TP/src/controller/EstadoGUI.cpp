@@ -32,6 +32,7 @@ EstadoGUI::EstadoGUI() {
 	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
 	scrollPersonajes = scrollNiveles = NULL;
 	animaciones = NULL;
+	musica = NULL;
 }
 
 EstadoGUI::~EstadoGUI() {
@@ -43,6 +44,7 @@ EstadoGUI* EstadoGUI::obtenerInstancia() {
 }
 
 void EstadoGUI::iniciar() {
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.wav");
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();
@@ -282,6 +284,12 @@ void EstadoGUI::actualizar(float delta){
 }
 
 void EstadoGUI::dibujar(SDL_Surface* display) {
+	if (musica && (Mix_PlayingMusic() == 0)) {
+		if (Mix_PlayMusic(musica, -1) == -1) {
+			printf("No se puede reproducir la musica\n");
+			printf("%s\n", Mix_GetError());
+		}
+	}
 	fondo->dibujar(display,0,0);
 	fondoPestania->dibujar(display,10,40);
 	imgCliente->dibujar(display);
@@ -549,5 +557,10 @@ void EstadoGUI::terminar() {
 	if (vistaMenu){
 		delete (vistaMenu);
 		vistaMenu = NULL;
+	}
+	if(musica) {
+		Mix_HaltMusic();
+		Mix_FreeMusic(musica);
+		musica = NULL;
 	}
 }

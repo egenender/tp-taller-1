@@ -10,6 +10,7 @@ EstadoMenuPrincipal::EstadoMenuPrincipal() {
 	btnMultiPlayer = btnSinglePlayer = NULL;
 	animacion = NULL;
 	vistaBtnMulti = vistaBtnSingle = NULL;
+	musica = NULL;
 }
 
 EstadoMenuPrincipal::~EstadoMenuPrincipal() {
@@ -20,6 +21,7 @@ EstadoMenuPrincipal* EstadoMenuPrincipal::obtenerInstancia() {
 }
 
 void EstadoMenuPrincipal::iniciar(){
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Theme Song.wav");
 	crearBtns();
 	crearVistas();
 }
@@ -69,6 +71,11 @@ void EstadoMenuPrincipal::terminar(){
 		delete (animacion);
 		animacion = NULL;
 	}
+	if (musica) {
+		Mix_HaltMusic();
+		Mix_FreeMusic(musica);
+		musica = NULL;
+	}
 }
 
 void EstadoMenuPrincipal::manejarEvento(SDL_Event* evento){
@@ -84,6 +91,13 @@ void EstadoMenuPrincipal::actualizar(float delta){
 }
 
 void EstadoMenuPrincipal::dibujar(SDL_Surface* display){
+	if (musica && (Mix_PlayingMusic() == 0)) {
+		if (Mix_PlayMusic(musica, -1) == -1) {
+			printf("No se puede reproducir la musica\n");
+			printf("%s\n", Mix_GetError());
+		}
+	}
+
 	fondo->dibujar(display,0,0);
 	vistaBtnSingle->dibujar(display);
 	vistaBtnMulti->dibujar(display);
