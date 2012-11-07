@@ -17,9 +17,10 @@ class Barril;
 
 class Hongo : public Cuerpo{
 private:
+	bool tengoPiso, chocaConSosten;
+protected:
 	int estado;
 	int velocidadX, velocidadY, direccion;
-	bool tengoPiso, chocaConSosten;
 
 public:
 	Hongo(const char*, Area*, int);
@@ -33,14 +34,18 @@ public:
 	void chocarConPlataforma(Plataforma*);
 	void chocarConManual(Manual*);
 	void chocarConBarril(Barril*);
+	void chocarConHongo(Hongo*);
 private:
 	int calculoDireccionRandom();
-	void morir();
 	void validarPiso();
 	void actualizarSalto();
 	void actualizarMovimiento();
 	void actualizarEstados();
 	bool estoySaltando();
+protected:
+	void morir();
+	virtual void perderVida();
+	virtual void modificacionMovimiento(int);
 };
 
 #endif /* HONGO_H_ */
