@@ -21,6 +21,7 @@ void Actualizable::chocarConPlataforma(Plataforma*){}
 void Actualizable::chocarConEscalera(Escalera*){}
 void Actualizable::chocarConBarril(Barril*){}
 void Actualizable::chocarConHongo(Hongo*){}
+void Actualizable::chocarConPrincesa(Princesa*){}
 
 bool Actualizable::estaMuerto(){
 	return false;

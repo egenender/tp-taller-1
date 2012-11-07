@@ -47,6 +47,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	atraviesaBloques = false;
 	chocaConEscalera = false;
 	chocaConSosten = false;
+	juegoGanado = false;
 	vidas = CANT_VIDAS;
 
 	posAnterior = NULL;
@@ -160,7 +161,6 @@ void Manual::validarPiso(){
 
 void Manual::subir(){
 	if (!puedoSubir) return;
-
 	puedoSubir = false;
 	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
 	mtrasladar(0, -velocidad,true);
@@ -169,6 +169,7 @@ void Manual::subir(){
 
 void Manual::bajar(){
 	if (!puedoSubir) return;
+	if (obtenerArea()->estaSobreElPiso()) return;
 	puedoSubir = false;
 	mtrasladar(0,velocidad,true);
 	estado = SUBIENDOMOVIMIENTO;
@@ -320,4 +321,12 @@ void Manual::chocarConHongo(Hongo* h){
 		perderVida();
 	}
 	delete(posCmp);
+}
+
+bool Manual::esGanador(){
+	return juegoGanado;
+}
+
+void Manual::chocarConPrincesa(Princesa*){
+	juegoGanado = true;
 }

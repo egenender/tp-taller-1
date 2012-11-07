@@ -6,11 +6,11 @@
 #include "../Area.h"
 #include "../Observable.h"
 
-#define VELOCIDAD_HONGO_STANDARD 5
+#define VELOCIDAD_HONGO_STANDARD 3
 #define DERECHA 1
 #define IZQUIERDA -1
 #define FACTOR_ESCALA_HONGO 90
-#define ACELERACION_HONGO 1
+#define ACELERACION_HONGO 8
 
 class Manual;
 class Barril;

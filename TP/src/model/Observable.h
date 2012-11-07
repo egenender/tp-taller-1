@@ -21,6 +21,7 @@ using namespace std;
 #define SUBIENDOQUIETO 10
 #define SUBIENDOMOVIMIENTO 11
 #define LANZANDO 12
+#define GRITANDO 13
 
 class Observable {
 	private:

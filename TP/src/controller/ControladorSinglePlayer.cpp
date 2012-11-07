@@ -22,7 +22,13 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 	}
 
 	//Lo dejo por separado, por si hay que cambiarle algo :P
-	if(principal->obtenerEstado() == MUERTO){
+	if(principal->estaMuerto()){
+		GestorConfiguraciones::getInstance()->acabarGestor();
+		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
+		return;
+	}
+
+	if (principal->esGanador()){
 		GestorConfiguraciones::getInstance()->acabarGestor();
 		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 		return;
