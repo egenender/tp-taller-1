@@ -31,6 +31,7 @@ void Princesa::chocarCon(Actualizable* ac){
 }
 
 void Princesa::actualizar(float){
+
 	if (timer->obtenerTiempo() > (tiempo_actual * 1000)){
 		cambiar_estado();
 	}
@@ -45,6 +46,7 @@ void Princesa::cambiar_estado(){
 		estado = QUIETO;
 		tiempo_actual = tiempo_espera;
 	}
+	huboCambios();
 	timer->detener();
 	timer->comenzar();
 }
