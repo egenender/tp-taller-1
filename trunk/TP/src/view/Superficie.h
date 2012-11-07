@@ -41,6 +41,7 @@ class Superficie {
 		int obtenerAlto();
 		int obtenerAncho();
 		Superficie* voltear(int flags);
+		bool girar(int grados);
 		SDL_Surface* obtenerSurface();
 		Superficie* obtenerCopia();
 		SDL_Surface* obtenerCopia(SDL_Surface* otra);
