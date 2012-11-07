@@ -134,9 +134,9 @@ void Hongo::actualizarMovimiento(){
 	}
 	trasladar(movX,0,true);
 
-	if (direccion == DERECHA)
+	if (direccion == DERECHA && estado != MOVILDERECHA && estado != MOVILIZQUIERDA)
 		estado = CAMINANDODER;
-	else
+	else if (direccion == IZQUIERDA && estado != MOVILIZQUIERDA && estado != MOVILDERECHA)
 		estado = CAMINANDOIZQ;
 }
 
