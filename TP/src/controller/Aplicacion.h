@@ -3,12 +3,14 @@
 
 #include "../gui/model/Ventana.h"
 #include "../controller/Evento.h"
+#include "SDL/SDL_framerate.h"
 
 class Aplicacion: public Evento {
 	private:
 		bool FPS_ON; // Si mostramos los FPS o no
 		bool corriendo; // Si esta corriendo
 		Ventana* ventana;
+		FPSmanager frames;
 
 	// Constructor:
 	public:

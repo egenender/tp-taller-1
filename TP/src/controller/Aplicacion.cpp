@@ -9,7 +9,6 @@
 #include "LectorArchivo.h"
 #include "EscrituraArchivo.h"
 #include "ManejadorCliente.h"
-#include "SDL/SDL.h"
 #include "SDL/SDL_mixer.h"
 
 #include "../view/Superficie.h"
@@ -60,6 +59,10 @@ bool Aplicacion::iniciar() {
     // Seteamos el primer estado al entrar al juego:
     ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 
+    SDL_initFramerate(&frames);
+    if (SDL_setFramerate(&frames, 24) == -1)
+       	Log::getInstance()->writeToLogFile(Log::ADVERTENCIA, "No se pudo incializar a 24 fps");
+
     return true;
 }
 
@@ -89,7 +92,7 @@ void Aplicacion::dibujar() {
     // Mostramos los FPS:
     if (FPS_ON) {
     	stringstream out;
-    	out << "FPS: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
+    	out << "FPS: " << SDL_getFramerate(&frames) << " - FPS_old: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
     	ventana->setearTitulo(out.str());
     }
 
@@ -143,6 +146,7 @@ int Aplicacion::ejecutar() {
 
 		ManejadorEstados::cambiarEstado();
 		SDL_Delay(30);
+		SDL_framerateDelay(&frames);
 	}
 	limpiar();
 	return 0;
