@@ -50,6 +50,21 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.wav
+    Totodile:
+      ancho: 61
+      alto: 74
+      vel_personaje: 1
+      salto: 30
+      animaciones:
+        quieto:
+          sprites: src/resources/cuerpos/Totodile/totodileQuieto.bmp
+          sonido:
+        caminar:
+          sprites: src/resources/cuerpos/Totodile/totodileMovimiento.bmp
+          sonido: 
+        saltar:
+          sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
+          sonido: 
     Mono:
       ancho: 140
       alto: 126
