@@ -5,6 +5,7 @@
 #include "../view/Animacion.h"
 #include "../gui/model/Boton.h"
 #include "../gui/view/VistaBoton.h"
+#include "SDL/SDL_mixer.h"
 
 class EstadoMenuPrincipal : public Estado {
 private:
@@ -14,6 +15,7 @@ private:
 	Boton *btnMultiPlayer, *btnSinglePlayer;
 	Animacion *animacion;
 	VistaBoton *vistaBtnMulti, *vistaBtnSingle;
+	Mix_Music* musica;
 private:
 	EstadoMenuPrincipal();
 	void crearBtns();

@@ -16,6 +16,7 @@
 #include "../view/Superficie.h"
 #include "../gui/model/ImagenGUI.h"
 #include "../gui/model/Muestra.h"
+#include "SDL/SDL_mixer.h"
 
 #include "Evento.h"
 #include "GestorConfiguraciones.h"
@@ -49,6 +50,7 @@ private:
 	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
 
 	Superficie* fondoPestania, *fondo;
+	Mix_Music* musica;
 private:
         EstadoGUI();
         void crearBtns();

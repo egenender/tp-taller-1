@@ -8,6 +8,7 @@
 #include "../gui/model/Label.h"
 #include "../gui/view/VistaLabel.h"
 #include "../gui/model/Muestra.h"
+#include "SDL/SDL_mixer.h"
 
 class EstadoSinglePlayer : public Estado{
 private:
@@ -24,6 +25,7 @@ private:
 
 	Superficie *fondo, *fondo2;
 	Muestra* animaciones;
+	Mix_Music* musica;
 private:
 	EstadoSinglePlayer();
 	void crearBtns();
