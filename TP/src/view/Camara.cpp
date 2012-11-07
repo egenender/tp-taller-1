@@ -56,7 +56,7 @@ bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 	if (display == NULL || imagen == NULL)
 		return false;
 
-	if (Mix_PlayingMusic() == 0) {
+	if (musica && (Mix_PlayingMusic() == 0)) {
 		if (Mix_PlayMusic(musica, -1) == -1) {
 			printf("No se puede reproducir la musica\n");
 			printf("%s\n", Mix_GetError());

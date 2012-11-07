@@ -1,5 +1,6 @@
 #include "Superficie.h"
 #include "../log/Log.h"
+#include "SDL/SDL_rotozoom.h"
 
 void Superficie::inicializarSuperficie() {
 	alto = 0;
@@ -348,4 +349,26 @@ SDL_Surface* Superficie::obtenerCopia(SDL_Surface* otra) {
 		return NULL;
 
 	return SDL_ConvertSurface(otra, otra->format, otra->flags);
+}
+
+bool Superficie::girar(int grados) {
+	if (!superficie)
+		return false;
+
+	if (grados == 0 || grados == 360)
+		return true;
+
+	SDL_Surface* rotada = rotozoomSurface(superficie, grados, 0, SMOOTHING_ON);
+	if (!rotada)
+		return false;
+
+	SDL_FreeSurface(superficie);
+	superficie = rotada;
+
+	alto = superficie->h;
+	ancho = superficie->w;
+
+	// TODO: revisar que pasa con la posicion de dibujado al ser rotada!
+
+	return true;
 }
