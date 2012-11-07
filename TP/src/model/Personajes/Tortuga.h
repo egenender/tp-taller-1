@@ -3,6 +3,8 @@
 
 #include "Hongo.h"
 #include "../Area.h"
+#define MULTIPLICADOR 5
+#define FACTOR_TORTUGA_CHICA 50
 
 class Tortuga: public Hongo {
 private:

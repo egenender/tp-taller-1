@@ -1,5 +1,6 @@
 #include "Manual.h"
 #include "Hongo.h"
+#include <stdio.h>
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
@@ -292,6 +293,7 @@ void Manual::mtrasladar(int fx, int fy, bool c){
 }
 
 void Manual::perderVida(){
+	printf("mori\n");
 	if (estado == MUERTO) return;
 	vidas--;
 	if (vidas == 0){
@@ -320,6 +322,8 @@ void Manual::chocarConHongo(Hongo* h){
 	}else{
 		if (h->obtenerEstado() != QUIETO)
 			perderVida();
+		else
+			printf("no perdi vida\n");
 	}
 	delete(posCmp);
 }

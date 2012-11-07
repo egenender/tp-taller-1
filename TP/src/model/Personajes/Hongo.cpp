@@ -119,6 +119,12 @@ void Hongo::actualizarEstados(){
 
 void Hongo::actualizarMovimiento(){
 	if (estoySaltando() || estaMuerto()) return;
+
+	if (direccion == 0){
+		estado = QUIETO;
+		return;
+	}
+
 	int movX = velocidadX * direccion;
 
 
