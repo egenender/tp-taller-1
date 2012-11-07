@@ -9,6 +9,7 @@
 class Hongo;
 class Escalera;
 class Barril;
+class Princesa;
 #include "Plataforma.h"
 
 // Nuevo:
@@ -32,6 +33,7 @@ private:
 	int velocidadSaltoBase;
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten;
+	bool juegoGanado;
 	int vidas;
 public:
 //	Manual(const char*, Area*);
@@ -53,6 +55,7 @@ public:
 	int obtenerEstado();
 	void morir();
 	bool estaMuerto();
+	bool esGanador();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);
@@ -60,6 +63,7 @@ public:
 	void chocarConEscalera(Escalera*);
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);
+	void chocarConPrincesa(Princesa*);
 
 private:
 	void mtrasladar(int,int,bool);

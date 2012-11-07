@@ -7,6 +7,7 @@ class Escalera;
 class Plataforma;
 class Barril;
 class Hongo;
+class Princesa;
 
 class Actualizable {
 public:
@@ -23,6 +24,7 @@ public:
 	virtual void chocarConEscalera(Escalera*);
 	virtual void chocarConBarril(Barril*);
 	virtual void chocarConHongo(Hongo*);
+	virtual void chocarConPrincesa(Princesa*);
 //Los automaticos no haran nada
 };
 
