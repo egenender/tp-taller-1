@@ -1,4 +1,3 @@
-
 #include "Mono.h"
 #include <math.h>
 #include <stdlib.h>
@@ -38,12 +37,17 @@ void Mono::actualizar(float){
 		tiempoEspera = calcularTiempo();
 		timer->comenzar();
 		estado = LANZANDO;
+		huboCambios();
 		return;
 	}
 
-	if (timer->obtenerTiempo() >= TIEMPO_LANZAMIENTO)
+	if (timer->obtenerTiempo() >= TIEMPO_LANZAMIENTO){
 		estado = QUIETO;
+		huboCambios();
+	}
 
+
+	notificarObservadores();
 }
 
 float Mono::calcularTiempo(){
@@ -63,7 +67,6 @@ float Mono::calcularTiempo(){
 
 
 	float rta = (-media) * log (1-u);
-	printf("%f ",rta);
 	return rta;
 }
 
