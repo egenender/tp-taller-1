@@ -39,6 +39,7 @@ public:
 	void chocarConManual(Manual*);
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);
+	void chocarConBolaDeFuego(BolaDeFuego*);
 private:
 	int calculoDireccionRandom();
 	void validarPiso();

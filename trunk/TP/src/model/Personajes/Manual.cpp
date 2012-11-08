@@ -330,3 +330,7 @@ bool Manual::esGanador(){
 void Manual::chocarConPrincesa(Princesa*){
 	juegoGanado = true;
 }
+
+void Manual::chocarConBolaDeFuego(BolaDeFuego*){
+	//Por ahora no hago nada
+}

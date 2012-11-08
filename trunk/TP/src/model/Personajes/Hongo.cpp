@@ -275,3 +275,7 @@ void Hongo::modificacionMovimiento(int dir){
 bool Hongo::recienMovido(){
 	return false;
 }
+
+void Hongo::chocarConBolaDeFuego(BolaDeFuego*){
+	morir();
+}

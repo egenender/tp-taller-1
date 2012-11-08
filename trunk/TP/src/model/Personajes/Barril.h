@@ -41,6 +41,7 @@ public:
 	void chocarConPlataforma(Plataforma*);
 	void chocarConEscalera(Escalera*);
 	void chocarConBarril(Barril*);
+	void chocarConBolaDeFuego(BolaDeFuego*);
 
 private:
 	void destruir();

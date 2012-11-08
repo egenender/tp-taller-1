@@ -273,3 +273,7 @@ void Barril::chocarConBarril(Barril*){
 bool Barril::estaMuerto(){
 	return (estado == MUERTO);
 }
+
+void Barril::chocarConBolaDeFuego(BolaDeFuego*){
+	destruir();
+}
