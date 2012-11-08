@@ -27,12 +27,22 @@ VistaAnimada::~VistaAnimada() {
 	}*/
 }
 
-bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara ) {
+void VistaAnimada::actualizar(Observable* observable) {
+	VistaCuerpo::actualizar(observable);
+}
+
+bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara, bool debug ) {
 	if (pararDeDibujar) return true;
-	if (display == NULL || animacionActual == NULL || posicionDibujar == NULL)
+	if (display == NULL || animacionActual == NULL || posicionDibujar == NULL || posicionColision == NULL)
 		return false;
 
 	animacionActual->animar();
 
-	return animacionActual->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
+	bool dibuje = animacionActual->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
+
+	if (debug && supDebug) {
+		supDebug->dibujar(display, posicionColision->obtenerX() - xCamara, posicionColision->obtenerY() - yCamara);
+	}
+
+	return dibuje;
 }

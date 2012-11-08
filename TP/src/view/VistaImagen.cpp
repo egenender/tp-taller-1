@@ -30,12 +30,18 @@ void VistaImagen::cambiarImagen(Superficie* imagenNueva) {
 }
 
 void VistaImagen::actualizar(Observable* observable) {
-	posicionDibujar = observable->obtenerPosicion();
+	VistaCuerpo::actualizar(observable);
 }
 
-bool VistaImagen::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
+bool VistaImagen::dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug) {
 	if (display == NULL || imagen == NULL || posicionDibujar == NULL)
 		return false;
 
-	return imagen->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
+	bool dibuje = imagen->dibujar(display, posicionDibujar->obtenerX() - xCamara, posicionDibujar->obtenerY() - yCamara);
+
+	if (debug && supDebug) {
+		supDebug->dibujar(display, posicionColision->obtenerX() - xCamara, posicionColision->obtenerY() - yCamara);
+	}
+
+	return dibuje;
 }

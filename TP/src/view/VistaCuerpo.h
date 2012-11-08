@@ -1,19 +1,20 @@
 #ifndef VISTACUERPO_H_
 #define VISTACUERPO_H_
 
-#include "SDL/SDL.h"
+#include "Superficie.h"
 #include "../common/Observador.h"
 #include "../model/Posicion.h"
 
 class VistaCuerpo : public Observador {
 protected:
-	Posicion* posicionDibujar;
+	Posicion* posicionDibujar, *posicionColision;
+	Superficie* supDebug;
 
 public:
 	VistaCuerpo();
 	~VistaCuerpo();
-	virtual void actualizar(Observable* observable) = 0;
-	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara) = 0;
+	virtual void actualizar(Observable* observable);
+	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug) = 0;
 };
 
 

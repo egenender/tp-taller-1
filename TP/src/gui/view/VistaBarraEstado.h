@@ -24,7 +24,7 @@ public:
 	~VistaBarraEstado();
 	virtual void actualizar(Observable* observable);
 	virtual bool dibujar(SDL_Surface* display);
-	bool dibujar(SDL_Surface*, int, int);
+	bool dibujar(SDL_Surface*, int, int, bool);
 };
 
 

@@ -8,6 +8,7 @@
 #include "../view/VistaSonora.h"
 
 Nivel Nivel::instancia;
+bool Nivel::DEBUGMODE = false;
 
 Nivel::Nivel() {
 	estado = -1;
@@ -174,13 +175,13 @@ void Nivel::dibujar(SDL_Surface* display) {
 		return;
 	}
 	// Dibujamos el fondo:
-	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
+	camara->dibujar(display, 0, 0, DEBUGMODE); // No importa los numeros, porque camara no le da bola :P
 
 	// Dibujamos las vistas:
 
 	for (unsigned int i = 0; i < vistas->size(); i++) {
 		VistaCuerpo* vista = vistas->at(i);
-		vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
+		vista->dibujar(display, camara->obtenerX(), camara->obtenerY(), DEBUGMODE); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
 	}
 	// Ponele que se reproducen los sonidos (?)
 }
@@ -222,4 +223,12 @@ void Nivel::quitarMuertos(){
 		actualizables->push_back(aux->at(j));
 	}
 
+}
+
+void Nivel::setDebugMode(bool debug) {
+	DEBUGMODE = debug;
+}
+
+bool Nivel::getDebugMode() {
+	return DEBUGMODE;
 }
