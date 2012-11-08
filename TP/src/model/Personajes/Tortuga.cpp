@@ -3,17 +3,19 @@
 
 Tortuga::Tortuga(const char* nom, Area* sup, int v): Hongo(nom, sup, v) {
 	velocidadInicial = velocidadX;
+	recien_movido = false;
 }
 
 Tortuga::~Tortuga() {
 }
 
 void Tortuga::perderVida(){
+	huboCambios();
 	if (estado == QUIETO){
 		morir();
 		return;
 	}
-
+	permitoMovEnSalto = true;
 	estado = QUIETO;
 	direccion = 0;
 	velocidadX = MULTIPLICADOR * velocidadInicial;
@@ -26,16 +28,30 @@ void Tortuga::perderVida(){
 	y = superficieOcupada->obtenerPosicion()->obtenerY() + (superficieOcupada->obtenerAlto() - altoH);
 
 	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
-
+	if(posAnterior) delete(posAnterior);
+	posAnterior = new Posicion(x,y);
 }
 
 void Tortuga::modificacionMovimiento(int dir){
+	Hongo::modificacionMovimiento(dir);
 	if (estado == MOVILIZQUIERDA || estado == MOVILDERECHA)
 		return;
 
-	Hongo::modificacionMovimiento(dir);
-	if (dir == IZQUIERDA)
-		estado = MOVILDERECHA;
-	else
-		estado = MOVILIZQUIERDA;
+	if (estado == QUIETO){
+		if (dir == IZQUIERDA)
+			estado = MOVILDERECHA;
+		else
+			estado = MOVILIZQUIERDA;
+	}
+	huboCambios();
+	recien_movido = true;
+}
+
+bool Tortuga::recienMovido(){
+	return recien_movido;
+}
+
+void Tortuga::actualizar(float a){
+	Hongo::actualizar(a);
+	recien_movido = false;
 }
