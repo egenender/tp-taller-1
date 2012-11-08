@@ -215,50 +215,213 @@ void GestorConfiguraciones::inicioCarga(){
 		CargarTexturas(nodoRaizDef["texturas"]);
 	}
 
-	nodoRaiz["hongo"];
 
-	parametrosPersonaje* paramPersonajes= (parametrosPersonaje*)malloc(sizeof(parametrosPersonaje));
-
-	paramPersonajes->animaciones= new std::vector<Animacion*>();
-	paramPersonajes->matrizEstados= new std::vector<std::vector<int>*>();
+	CargarPersonajes(nodoRaiz);
 
 
-	nodoRaiz["hongo"]["alto"]>>paramPersonajes->alto;
-	nodoRaiz["hongo"]["ancho"]>>paramPersonajes->ancho;
-	nodoRaiz["hongo"]["velocidad"]>>paramPersonajes->velocidad;
+}
 
-	mapaParam->insert(pair<string,parametrosPersonaje*>("hongo",paramPersonajes));
+void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
+
+	// Hongo
+	parametrosPersonaje* paramHongo= crearParametrosPersonaje(nodoRaiz["hongo"],"hongo");
 
 	string ruta;
 
 	nodoRaiz["hongo"]["animaciones"]["caminando"]>>ruta;
 
-	Animacion* animacionCaminando= new Animacion(new HojaSprites(ruta,paramPersonajes->ancho,paramPersonajes->alto));
+	Animacion* animacionCaminando= new Animacion(new HojaSprites(ruta,paramHongo->ancho,paramHongo->alto));
 
-	paramPersonajes->animaciones->push_back(animacionCaminando);
+	paramHongo->animaciones->push_back(animacionCaminando);
 
 	nodoRaiz["hongo"]["animaciones"]["cayendo"]>>ruta;
 
-	Animacion* animacionCayendo= new Animacion(new HojaSprites(ruta,paramPersonajes->ancho,paramPersonajes->alto));
+	Animacion* animacionCayendo= new Animacion(new HojaSprites(ruta,paramHongo->ancho,paramHongo->alto));
 
-	paramPersonajes->animaciones->push_back(animacionCayendo);
+	paramHongo->animaciones->push_back(animacionCayendo);
 
 	std::vector<int>* aux= new std::vector<int>();
 
 	aux->push_back(CAMINANDODER);
 	aux->push_back(CAMINANDOIZQ);
 
-	paramPersonajes->matrizEstados->push_back(aux);
+	paramHongo->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
 
 	aux->push_back(SALTANDODER);
 	aux->push_back(SALTANDOIZQ);
 
-	paramPersonajes->matrizEstados->push_back(aux);
+	paramHongo->matrizEstados->push_back(aux);
+
+	// Princesa
+	parametrosPersonaje* paramPrincesa= crearParametrosPersonaje(nodoRaiz["princesa"],"princesa");
+
+	nodoRaiz["princesa"]["animaciones"]["quieto"]>>ruta;
+
+	Animacion* animacionQuieto= new Animacion(new HojaSprites(ruta,paramPrincesa->ancho,paramPrincesa->alto));
+
+	paramPrincesa->animaciones->push_back(animacionQuieto);
+
+	nodoRaiz["princesa"]["animaciones"]["gritando"]>>ruta;
+
+	Animacion* animacionGritando= new Animacion(new HojaSprites(ruta,paramPrincesa->ancho,paramPrincesa->alto));
+
+	paramPrincesa->animaciones->push_back(animacionGritando);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(QUIETO);
+
+	paramPrincesa->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(GRITANDO);
+
+	paramPrincesa->matrizEstados->push_back(aux);
+
+	// Mono
+
+	parametrosPersonaje* paramMono= crearParametrosPersonaje(nodoRaiz["mono"],"mono");
+
+	nodoRaiz["mono"]["animaciones"]["quieto"]>>ruta;
+
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramMono->ancho,paramMono->alto));
+
+	paramMono->animaciones->push_back(animacionQuieto);
+
+	nodoRaiz["mono"]["animaciones"]["lanzando"]>>ruta;
+
+	Animacion* animacionLanzando= new Animacion(new HojaSprites(ruta,paramMono->ancho,paramMono->alto));
+
+	paramMono->animaciones->push_back(animacionLanzando);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(QUIETO);
+
+	paramMono->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(LANZANDO);
+
+	paramMono->matrizEstados->push_back(aux);
+
+	// Barril
+
+	parametrosPersonaje* paramBarril= crearParametrosPersonaje(nodoRaiz["barril"],"barril");
+
+	nodoRaiz["barril"]["animaciones"]["saltar"]>>ruta;
+
+	Animacion* animacionSaltar= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
+
+	paramBarril->animaciones->push_back(animacionSaltar);
+
+	nodoRaiz["barril"]["animaciones"]["quieto"]>>ruta;
+
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
+
+	paramBarril->animaciones->push_back(animacionGritando);
+
+	nodoRaiz["barril"]["animaciones"]["caminando"]>>ruta;
+
+	animacionCaminando= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
+
+	paramBarril->animaciones->push_back(animacionCaminando);
 
 
+	aux= new std::vector<int>();
 
+	aux->push_back(SALTAR);
+
+	paramBarril->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(QUIETO);
+
+	paramBarril->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDOIZQ);
+	aux->push_back(CAMINANDODER);
+
+	paramBarril->matrizEstados->push_back(aux);
+
+	// Tortuga
+	parametrosPersonaje* paramTortuga= crearParametrosPersonaje(nodoRaiz["tortuga"],"tortuga");
+
+	nodoRaiz["tortuga"]["animaciones"]["saltando"]>>ruta;
+
+	Animacion* animacionSaltando= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+
+	paramTortuga->animaciones->push_back(animacionSaltando);
+
+	nodoRaiz["tortuga"]["animaciones"]["quieto"]>>ruta;
+
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+
+	paramTortuga->animaciones->push_back(animacionQuieto);
+
+	nodoRaiz["tortuga"]["animaciones"]["caminando"]>>ruta;
+
+	animacionCaminando= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+
+	paramTortuga->animaciones->push_back(animacionCaminando);
+
+	nodoRaiz["tortuga"]["animaciones"]["movil"]>>ruta;
+
+	Animacion* animacionMovil= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+
+	paramTortuga->animaciones->push_back(animacionMovil);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(SALTANDODER);
+	aux->push_back(SALTANDOIZQ);
+
+	paramTortuga->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(QUIETO);
+
+	paramTortuga->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDOIZQ);
+	aux->push_back(CAMINANDODER);
+
+	paramTortuga->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(MOVILDERECHA);
+	aux->push_back(MOVILIZQUIERDA);
+
+	paramTortuga->matrizEstados->push_back(aux);
+
+}
+
+parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
+
+	parametrosPersonaje* param= (parametrosPersonaje*)malloc(sizeof(parametrosPersonaje));
+
+	param->animaciones= new std::vector<Animacion*>();
+	param->matrizEstados= new std::vector<std::vector<int>*>();
+
+
+	nodo["alto"]>>param->alto;
+	nodo["ancho"]>>param->ancho;
+	nodo["velocidad"]>>param->velocidad;
+
+	mapaParam->insert(pair<string,parametrosPersonaje*>(nombre,param));
+
+	return param;
 }
 
 parametrosPersonaje* GestorConfiguraciones::obtenerParametrosPersonaje(string nombre){
