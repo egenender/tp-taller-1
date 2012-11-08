@@ -19,6 +19,8 @@ EstadoSinglePlayer::EstadoSinglePlayer() {
 	fondo = fondo2 = NULL;
 	animaciones = NULL;
 	musica = NULL;
+	checkbox1 = NULL;
+	vistaCheckbox1 = NULL;
 }
 
 EstadoSinglePlayer::~EstadoSinglePlayer() {
@@ -30,6 +32,7 @@ EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
 
 void EstadoSinglePlayer::iniciar(){
 	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.wav");
+	checkbox1 = new Checkbox(289,500, 21, 21, NULL);
 	crearLbls();
 	crearScroll();
 	crearBtns();
@@ -131,6 +134,9 @@ void EstadoSinglePlayer::crearVistas(){
 	scrollNiveles->agregarObservador(vistaScrollNiveles);
 	scrollPersonajes->agregarObservador(vistaScrollPersonajes);
 
+
+	vistaCheckbox1 = new VistaCheckbox("src/gui/resources/checkbox-unchecked.png", "src/gui/resources/checkbox-checked.png");
+	checkbox1->agregarObservador(vistaCheckbox1);
 }
 
 void EstadoSinglePlayer::terminar(){
@@ -251,9 +257,20 @@ void EstadoSinglePlayer::terminar(){
 		Mix_FreeMusic(musica);
 		musica = NULL;
 	}
+
+	if (vistaCheckbox1) {
+		delete(vistaCheckbox1);
+		vistaCheckbox1 = NULL;
+	}
+
+	if (checkbox1) {
+		delete(checkbox1);
+		checkbox1 = NULL;
+	}
 }
 
 void EstadoSinglePlayer::manejarEvento(SDL_Event* evento){
+	checkbox1->manejarEvento(evento);
 	btnScrollNivelesArriba->manejarEvento(evento);
 	btnScrollNivelesAbajo->manejarEvento(evento);
 	btnScrollPersonajesArriba->manejarEvento(evento);
@@ -284,6 +301,8 @@ void EstadoSinglePlayer::actualizar(float delta){
 	lblVelocidad->actualizar();
 
 	animaciones->actualizar();
+
+	checkbox1->actualizar();
 }
 
 void EstadoSinglePlayer::dibujar(SDL_Surface* display){
@@ -312,4 +331,6 @@ void EstadoSinglePlayer::dibujar(SDL_Surface* display){
 	vistaLblSalto->dibujar(display);
 
 	animaciones->dibujar(display);
+
+	vistaCheckbox1->dibujar(display);
 }
