@@ -38,6 +38,18 @@ typedef std::map <std::string,TipoPersonaje*> mapa_auto;
 typedef std::map <std::string,string> mapa_niveles;
 
 
+typedef struct _parametrosPersonaje{
+
+	int ancho;
+	int alto;
+	int velocidad;
+	std::vector<Animacion*>* animaciones;
+	std::vector<std::vector<int>* >* matrizEstados;
+
+}parametrosPersonaje;
+
+typedef std::map <std::string,parametrosPersonaje*> mapa_parametrosPersonaje;
+
 class GestorConfiguraciones{
 	private:
 		static GestorConfiguraciones* instancia;
@@ -65,6 +77,8 @@ class GestorConfiguraciones{
 		string headerTemp;
 		string rutaYaml;
 		string rutaYamlDefecto;
+		mapa_parametrosPersonaje* mapaParam;
+
 
 	public:
 		static GestorConfiguraciones* getInstance();
@@ -84,7 +98,8 @@ class GestorConfiguraciones{
 		void CargarEstaticosNivel(const YAML::Node&, bool, bool, int);
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
-
+		void crearVista(Cuerpo*,string);
+		parametrosPersonaje* obtenerParametrosPersonaje(string);
 		//void CargarPantalla();
 		bool Entra(int , int , int , int );
 		int ObtenerAnchoNivel();
