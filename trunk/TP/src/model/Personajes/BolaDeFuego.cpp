@@ -204,9 +204,26 @@ void BolaDeFuego::actualizarMovimiento(){
 		return;
 	}
 	trasladar(movX,0,true);
+	saltar();
 //
 //	if (direccion == DERECHA_BF && !estoySaltando())
 //		estado = CAMINANDODER;
 //	else if (direccion == IZQUIERDA_BF && !estoySaltando())
 //		estado = CAMINANDOIZQ;
+}
+
+void BolaDeFuego::saltar(){
+	if (estado == CAMINANDODER){
+		estado = SALTANDODER;
+		velocidadY = velocidadSaltoBase;
+		tengoPiso = false;
+		return;
+	}
+
+	if(estado == CAMINANDOIZQ){
+		estado = SALTANDOIZQ;
+		velocidadY = velocidadSaltoBase;
+		tengoPiso = false;
+		return;
+	}
 }
