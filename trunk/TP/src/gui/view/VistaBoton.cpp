@@ -49,8 +49,10 @@ void VistaBoton::actualizar(Observable* observable) {
 
 	ancho = boton->obtenerAncho();
 	alto = boton->obtenerAlto();
-	activo->escala(ancho,alto);
-	inactivo->escala(ancho,alto);
+	if (activo)
+		activo->escala(ancho,alto);
+	if (inactivo)
+		inactivo->escala(ancho,alto);
 }
 
 bool VistaBoton::dibujar(SDL_Surface* display) {

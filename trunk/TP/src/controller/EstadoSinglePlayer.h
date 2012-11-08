@@ -7,6 +7,8 @@
 #include "../gui/view/VistaLista.h"
 #include "../gui/model/Label.h"
 #include "../gui/view/VistaLabel.h"
+#include "../gui/model/Checkbox.h"
+#include "../gui/view/VistaCheckbox.h"
 #include "../gui/model/Muestra.h"
 #include "SDL/SDL_mixer.h"
 
@@ -26,6 +28,10 @@ private:
 	Superficie *fondo, *fondo2;
 	Muestra* animaciones;
 	Mix_Music* musica;
+
+	Checkbox* checkbox1;
+	VistaCheckbox* vistaCheckbox1;
+
 private:
 	EstadoSinglePlayer();
 	void crearBtns();
