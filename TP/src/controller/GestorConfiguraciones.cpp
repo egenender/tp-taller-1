@@ -17,6 +17,7 @@
 #include "../log/Log.h"
 #include <sstream>
 #include "Sounds.h"
+#include "../view/VistaVarios.h"
 #include "../model/Observable.h"
 
 #define VEL_PERSONAJE_MINIMA 2
@@ -95,6 +96,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	nombresProt = NULL;
 	posiblesNiveles = NULL;
 	posiblesTiposProt = NULL;
+	mapaParam = new mapa_parametrosPersonaje();
 }
 
 void GestorConfiguraciones::setEsCliente (){
@@ -212,6 +214,87 @@ void GestorConfiguraciones::inicioCarga(){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo texturas, se cargan por defecto");
 		CargarTexturas(nodoRaizDef["texturas"]);
 	}
+
+	nodoRaiz["hongo"];
+
+	parametrosPersonaje* paramPersonajes= (parametrosPersonaje*)malloc(sizeof(parametrosPersonaje));
+
+	paramPersonajes->animaciones= new std::vector<Animacion*>();
+	paramPersonajes->matrizEstados= new std::vector<std::vector<int>*>();
+
+
+	nodoRaiz["hongo"]["alto"]>>paramPersonajes->alto;
+	nodoRaiz["hongo"]["ancho"]>>paramPersonajes->ancho;
+	nodoRaiz["hongo"]["velocidad"]>>paramPersonajes->velocidad;
+
+	mapaParam->insert(pair<string,parametrosPersonaje*>("hongo",paramPersonajes));
+
+	string ruta;
+
+	nodoRaiz["hongo"]["animaciones"]["caminando"]>>ruta;
+
+	Animacion* animacionCaminando= new Animacion(new HojaSprites(ruta,paramPersonajes->ancho,paramPersonajes->alto));
+
+	paramPersonajes->animaciones->push_back(animacionCaminando);
+
+	nodoRaiz["hongo"]["animaciones"]["cayendo"]>>ruta;
+
+	Animacion* animacionCayendo= new Animacion(new HojaSprites(ruta,paramPersonajes->ancho,paramPersonajes->alto));
+
+	paramPersonajes->animaciones->push_back(animacionCayendo);
+
+	std::vector<int>* aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+
+	paramPersonajes->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(SALTANDODER);
+	aux->push_back(SALTANDOIZQ);
+
+	paramPersonajes->matrizEstados->push_back(aux);
+
+
+
+}
+
+parametrosPersonaje* GestorConfiguraciones::obtenerParametrosPersonaje(string nombre){
+
+	return mapaParam->at(nombre);
+
+}
+
+void GestorConfiguraciones::crearVista(Cuerpo* cuerpo,string clave){
+
+	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
+
+	VistaVarios* vista=new VistaVarios();
+
+	for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
+
+
+		if (paramPersonaje->matrizEstados->size()==1){
+
+			vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
+
+
+		}else{
+
+			vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
+
+		}
+		cuerpo->agregarObservador(vista);
+		configNivel->actualizables.push_back(cuerpo);
+		configNivel->vistas.push_back(vista);
+
+
+	}
+
+
+
 }
 
 void GestorConfiguraciones::CargaRestante(){
