@@ -27,7 +27,7 @@ private:
 	int estado;
 	bool parar;
 	Superficie* fondoServidor;
-	static bool DEBUGMODE;
+	bool DEBUGMODE;
 public:
 	Nivel();
 	virtual ~Nivel();
@@ -38,9 +38,6 @@ public:
 	void dibujar(SDL_Surface* display);
 	void setEstado(int);
 	void morir();
-
-	static void setDebugMode(bool);
-	static bool getDebugMode();
 
 private:
 	//Para agregar elementos al nivel:

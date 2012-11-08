@@ -8,7 +8,6 @@
 #include "../view/VistaSonora.h"
 
 Nivel Nivel::instancia;
-bool Nivel::DEBUGMODE = false;
 
 Nivel::Nivel() {
 	estado = -1;
@@ -19,6 +18,7 @@ Nivel::Nivel() {
 	camara = NULL;
 	controlador = NULL;
 	fondoServidor = NULL;
+	DEBUGMODE = false;
 }
 
 Nivel::~Nivel() {
@@ -52,6 +52,14 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 			}
 		}
 		return;
+	}
+
+	if ((evento->type == SDL_KEYDOWN)
+			&& (evento->key.keysym.sym == SDLK_d)) {
+		if (DEBUGMODE)
+			DEBUGMODE = false;
+		else
+			DEBUGMODE = true;
 	}
 
 	controlador->manejarEvento(evento);
@@ -223,12 +231,4 @@ void Nivel::quitarMuertos(){
 		actualizables->push_back(aux->at(j));
 	}
 
-}
-
-void Nivel::setDebugMode(bool debug) {
-	DEBUGMODE = debug;
-}
-
-bool Nivel::getDebugMode() {
-	return DEBUGMODE;
 }
