@@ -70,7 +70,6 @@ juego:
       alto: 126
       vel_personaje: 10
       salto: 50
-      sonido: 
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
@@ -138,6 +137,13 @@ juego:
           sprites: src/resources/trollface.bmp
           sonido:
           periodo: 7
+  hongo:
+    ancho: 36
+    alto: 35
+    velocidad: 3
+    animaciones:
+      caminando: src/resources/items/shroomishMovimiento.bmp
+      cayendo: src/resources/items/shroomishCaida.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png
@@ -149,15 +155,15 @@ juego:
       fondo: src/resources/fondoGrande.png
       musica: src/resources/niveles/route1.wav
       personajes:
-        - tipo: mono
-          x: 100
-          y: 150
-        - tipo: princesa
-          x: 700
-          y: 150
-        - tipo: princesa
-          x: 700
-          y: 599
+      #  - tipo: mono
+     #     x: 100
+    #      y: 150
+     #   - tipo: princesa
+    #      x: 700
+   #       y: 150
+  #      - tipo: princesa
+ #         x: 700
+#          y: 599
       plataformas:
         - textura: viga
           x: 250
