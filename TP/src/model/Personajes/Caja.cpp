@@ -23,6 +23,7 @@ void Caja::chocarConManual(Manual* pers){
 		huboCambios();
 		notificarObservadores();
 	}
+	delete(posCmp);
 }
 
 void Caja::fabricar(){
