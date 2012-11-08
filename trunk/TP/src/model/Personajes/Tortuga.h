@@ -10,6 +10,7 @@ class Tortuga: public Hongo {
 private:
 	int velocidadInicial;
 	bool recien_movido;
+	Area* superficieReemplazo;
 public:
 	Tortuga(const char*, Area*, int);
 	virtual ~Tortuga();

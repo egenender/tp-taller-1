@@ -312,7 +312,6 @@ void Manual::chocarConHongo(Hongo* h){
 	Posicion* posPersAnterior = h->obtenerPosicionAnterior();
 	//me fijo nomas si vino de arriba:
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
-
 	if(posPersAnterior->estaAbajoDe(posCmp)){
 		tengoPiso = true;
 		estado = QUIETODER;
