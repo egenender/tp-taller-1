@@ -191,6 +191,7 @@ void ManejadorCliente::recibirArchivo(EscrituraArchivo* escritor,int largo){
 			j++;
 		}
 	}
+	free(algo);
 
 }
 
