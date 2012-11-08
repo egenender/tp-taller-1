@@ -36,6 +36,7 @@ private:
 	void actualizarMovimiento();
 	void actualizarEstados();
 	bool estoySaltando();
+	void saltar();
 };
 
 #endif /* BOLADEFUEGO_H_ */
