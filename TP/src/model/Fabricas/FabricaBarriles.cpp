@@ -1,5 +1,6 @@
 #include "FabricaBarriles.h"
 #include "../Area.h"
+#include "../../controller/GestorConfiguraciones.h"
 
 FabricaBarriles::FabricaBarriles() {
 
@@ -10,22 +11,15 @@ FabricaBarriles::~FabricaBarriles() {
 }
 
 void FabricaBarriles::fabricar(Posicion* inicial, int valorInicial){
-	int anchoBarril, altoBarril, velocidadBarril;
 
-	//Por ahora los seteo a mano, pero necesito conseguir esta informacion de algun lado!
-	anchoBarril = 70;
-	altoBarril = 40;
-	velocidadBarril = 10;
+	parametrosPersonaje* parametros = GestorConfiguraciones::getInstance()->obtenerParametrosPersonaje("barril");
 
-	Area* sup = new Area(anchoBarril, altoBarril, inicial);
-	Barril* barril = new Barril (" ", sup, velocidadBarril, valorInicial);
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY()));
+	Barril* barril = new Barril ("barril", sup, parametros->velocidad, valorInicial);
 
 	terminarCreacion(barril);
 }
 
 void FabricaBarriles::terminarCreacion(Barril* b){
-	// aca tengo que ver como hago para crear al Barril
-
-	//gestor: dame cosas
-	//gestor: toma Este barril y ponele cosas :P
+	GestorConfiguraciones::getInstance()->crearVista(b, "barril");
 }

@@ -64,7 +64,7 @@ public:
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);
 	void chocarConPrincesa(Princesa*);
-
+	void chocarConBolaDeFuego(BolaDeFuego*);
 private:
 	void mtrasladar(int,int,bool);
 	void actualizarSalto();
