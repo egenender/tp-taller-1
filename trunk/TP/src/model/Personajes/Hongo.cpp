@@ -130,6 +130,7 @@ void Hongo::actualizarMovimiento(){
 
 	if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX()+ obtenerArea()->obtenerAncho() + movX) > Posicion::obtenerMaximo()->obtenerX())){
 		estado = MUERTO;
+		huboCambios();
 		return;
 	}
 	trasladar(movX,0,true);
