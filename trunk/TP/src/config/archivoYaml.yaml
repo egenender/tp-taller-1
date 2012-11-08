@@ -16,10 +16,10 @@ juego:
           sonido: 
         caminar:
           sprites: src/resources/cuerpos/Charmander/charmanderMovimiento.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-hurt.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-hurt.ogg
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
     Squirtle:
       ancho: 40
       alto: 40
@@ -31,10 +31,10 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
-          sonido: src/resources/cuerpos/Squirtle/Squirtle-happy.wav
+          sonido: src/resources/cuerpos/Squirtle/Squirtle-happy.ogg
         saltar:
           sprites: src/resources/cuerpos/Squirtle/squirtleGirando.bmp
-          sonido: src/resources/cuerpos/Squirtle/Squirtle-jump.wav
+          sonido: src/resources/cuerpos/Squirtle/Squirtle-jump.ogg
     Yoshi:
       ancho: 52
       alto: 70
@@ -46,10 +46,10 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Walking.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy-2.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy-2.ogg
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
     Totodile:
       ancho: 61
       alto: 74
@@ -76,10 +76,10 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/GokuMono/gokumonoMovimiento.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy.ogg
         saltar:
           sprites: src/resources/cuerpos/GokuMono/gokumonoSalto.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-1.wav
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-1.ogg
     Gengar:
       ancho: 55
       alto: 55
@@ -92,10 +92,10 @@ juego:
           sonido: 
         caminar:
           sprites: src/resources/cuerpos/Gengar/gengarMovimiento.bmp
-          sonido: src/resources/cuerpos/Gengar/Gengar-happy.wav
+          sonido: src/resources/cuerpos/Gengar/Gengar-happy.ogg
         saltar:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
-          sonido: src/resources/cuerpos/Gengar/Gengar-jump.wav
+          sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
   tiposAutomatico:  
     mono:
       ancho: 140
@@ -153,7 +153,7 @@ juego:
       ancho: 1600
       piso: 540
       fondo: src/resources/fondoGrande.png
-      musica: src/resources/niveles/route1.wav
+      musica: src/resources/niveles/route1.ogg
       personajes:
       #  - tipo: mono
      #     x: 100
@@ -191,7 +191,7 @@ juego:
       ancho: 1600
       piso: 540
       fondo: src/resources/fondoGrande.png
-      musica: src/resources/niveles/trololo.wav
+      musica: src/resources/niveles/trololo.ogg
       personajes:
         - tipo: troll
           x: 100
