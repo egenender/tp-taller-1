@@ -4,6 +4,7 @@
 #include "ManejadorCliente.h"
 #include "GestorConfiguraciones.h"
 #include "ManejadorEstados.h"
+#include "Nivel.h"
 
 ControladorCliente::ControladorCliente(unsigned int id, Dummy* tonto) {
 	ID = id;
@@ -53,6 +54,13 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 			if(controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
 				revisarCambio(QUIETO);
 			//return;
+	}
+
+	if (keystates[SDLK_d]) {
+		if (Nivel::getDebugMode())
+			Nivel::setDebugMode(false);
+		else
+			Nivel::setDebugMode(true);
 	}
 
 //	if (keystates[SDLK_UP]){
