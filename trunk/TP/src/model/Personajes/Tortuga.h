@@ -9,13 +9,16 @@
 class Tortuga: public Hongo {
 private:
 	int velocidadInicial;
+	bool recien_movido;
 public:
 	Tortuga(const char*, Area*, int);
 	virtual ~Tortuga();
-
+	bool recienMovido();
+	void actualizar(float);
 protected:
 	void perderVida();
 	void modificacionMovimiento(int);
+
 };
 
 #endif /* TORTUGA_H_ */

@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include "../Posicion.h"
 #include "Manual.h"
+#include <stdio.h>
+#include "SDL/SDL.h"
 
 Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 	if (vel <= 0) vel = VELOCIDAD_HONGO_STANDARD;
 	velocidadX = vel;
-
+	permitoMovEnSalto = false;
 	velocidadY = 0;
+	saltoMov = false;
 	direccion = calculoDireccionRandom();
 
 	if (direccion == DERECHA)
@@ -57,7 +60,7 @@ int Hongo::calculoDireccionRandom(){
 			rnd = rnd/w;
 	}while(rnd == 1);
 
-	if (rnd < 0.5)
+	if (rnd < -0.5)
 		return 1;
 	else
 		return -1;
@@ -80,6 +83,7 @@ void Hongo::actualizar(float){
 void Hongo::validarPiso(){
 	if (obtenerArea()->estaSobreElPiso()){
 		tengoPiso = true;
+		saltoMov = false;
 		return;
 	}
 
@@ -87,13 +91,14 @@ void Hongo::validarPiso(){
 
 	if (estado == CAMINANDODER)
 		estado = SALTANDODER;
-	else
+	else if(estado == CAMINANDOIZQ)
 		estado = SALTANDOIZQ;
+	saltoMov = true;
 }
 
 
 void Hongo::actualizarSalto(){
-	if (!estoySaltando()) return;
+	if (!(estoySaltando() || saltoMov)) return;
 
 	trasladar(0,velocidadY,true);
 	velocidadY += ACELERACION_HONGO;
@@ -104,7 +109,7 @@ void Hongo::actualizarSalto(){
 		velocidadY = 0;
 		if (estado == SALTANDODER)
 			estado = CAMINANDODER;
-		else
+		else if(estado == SALTANDOIZQ)
 			estado = CAMINANDOIZQ;
 	}
 
@@ -118,7 +123,7 @@ void Hongo::actualizarEstados(){
 }
 
 void Hongo::actualizarMovimiento(){
-	if (estoySaltando() || estaMuerto()) return;
+	if ((estoySaltando() && !permitoMovEnSalto)|| estaMuerto()) return;
 
 	if (direccion == 0){
 		estado = QUIETO;
@@ -126,7 +131,6 @@ void Hongo::actualizarMovimiento(){
 	}
 
 	int movX = velocidadX * direccion;
-
 
 	if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX()+ obtenerArea()->obtenerAncho() + movX) > Posicion::obtenerMaximo()->obtenerX())){
 		estado = MUERTO;
@@ -146,6 +150,7 @@ bool Hongo::estoySaltando(){
 }
 
 void Hongo::chocarConManual(Manual* pers){
+
 	//tengo que ver por cual direccion se chocan:
 	Posicion* posPersAnterior = pers->obtenerPosicionAnterior();
 	//me fijo nomas si vino de arriba:
@@ -159,7 +164,6 @@ void Hongo::chocarConManual(Manual* pers){
 	delete(posCmp);
 
 	posCmp = new Posicion(posPersAnterior->obtenerX() + pers->obtenerArea()->obtenerAncho(),posPersAnterior->obtenerY() );
-
 	if (posCmp->estaALaIzquierdaDe(posAnterior)){
 		modificacionMovimiento(IZQUIERDA);
 		delete (posCmp);
@@ -266,4 +270,10 @@ void Hongo::modificacionMovimiento(int dir){
 		direccion = DERECHA;
 	else
 		direccion = IZQUIERDA;
+
+	huboCambios();
+}
+
+bool Hongo::recienMovido(){
+	return false;
 }

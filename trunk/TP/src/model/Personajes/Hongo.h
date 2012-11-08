@@ -21,14 +21,18 @@ private:
 protected:
 	int estado;
 	int velocidadX, velocidadY, direccion;
-
+	bool permitoMovEnSalto;
+	int estadoAnterior;
+	bool saltoMov;
 public:
 	Hongo(const char*, Area*, int);
 	virtual ~Hongo();
 
-	void actualizar(float);
+	virtual void actualizar(float);
 	int obtenerEstado();
 	bool estaMuerto();
+	virtual bool recienMovido();
+
 
 	void chocarCon(Actualizable*);
 	void chocarConPlataforma(Plataforma*);
