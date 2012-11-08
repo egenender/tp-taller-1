@@ -1,6 +1,7 @@
 #include "ControladorSinglePlayer.h"
 #include "GestorConfiguraciones.h"
 #include "ManejadorEstados.h"
+#include "Nivel.h"
 
 ControladorSinglePlayer::ControladorSinglePlayer(Manual* ob) {
 	principal = ob;
@@ -58,4 +59,11 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		principal->detener();
 	}
 
+
+	if (keystates[SDLK_d]) {
+		if (Nivel::getDebugMode())
+			Nivel::setDebugMode(false);
+		else
+			Nivel::setDebugMode(true);
+	}
 }

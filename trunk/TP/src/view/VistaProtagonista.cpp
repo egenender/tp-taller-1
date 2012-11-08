@@ -37,6 +37,8 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 
 void VistaProtagonista::actualizar(Observable* observable) {
 
+	VistaAnimada::actualizar(observable);
+
 	int estado = observable->obtenerEstado();
 	if (estado == MUERTO){
 		pararDeDibujar = true;
@@ -44,7 +46,6 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	}
 	pararDeDibujar = false;
 
-	posicionDibujar = observable->obtenerPosicion();
 	animacionActual = animaciones->at(estado);
 }
 
