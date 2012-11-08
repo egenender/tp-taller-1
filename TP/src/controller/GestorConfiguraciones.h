@@ -83,6 +83,8 @@ class GestorConfiguraciones{
 	public:
 		static GestorConfiguraciones* getInstance();
 		void acabarGestor();
+		parametrosPersonaje* crearParametrosPersonaje(const YAML::Node&, string);
+		void CargarPersonajes(const YAML::Node&);
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
