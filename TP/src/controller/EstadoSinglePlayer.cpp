@@ -135,7 +135,7 @@ void EstadoSinglePlayer::crearVistas(){
 	scrollPersonajes->agregarObservador(vistaScrollPersonajes);
 
 
-	vistaCheckbox1 = new VistaCheckbox("src/gui/resources/checkbox-unchecked.png", "src/gui/resources/checkbox-checked.png");
+	vistaCheckbox1 = new VistaCheckbox("src/gui/resources/checkbox-unchecked.bmp", "src/gui/resources/checkbox-checked.bmp");
 	checkbox1->agregarObservador(vistaCheckbox1);
 }
 

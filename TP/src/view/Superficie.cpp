@@ -358,7 +358,7 @@ bool Superficie::girar(int grados) {
 	if (grados == 0 || grados == 360)
 		return true;
 
-	SDL_Surface* rotada = rotozoomSurface(superficie, grados, 0, SMOOTHING_ON);
+	SDL_Surface* rotada = rotozoomSurface(superficie, grados, 1, SMOOTHING_ON);
 	if (!rotada)
 		return false;
 
