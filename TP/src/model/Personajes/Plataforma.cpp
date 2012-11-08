@@ -5,6 +5,7 @@ Plataforma::Plataforma(const char* nom, Area* sup): Cuerpo(nom,sup) {
 	vigaIzq = false;
 	angulo = 0;
 	direccion = 0;
+	estado = 0;
 }
 
 Plataforma::~Plataforma() {
@@ -12,7 +13,7 @@ Plataforma::~Plataforma() {
 }
 
 int Plataforma::obtenerEstado(){
-	return 0;
+	return estado;
 }
 void Plataforma::actualizar(float delta){
 

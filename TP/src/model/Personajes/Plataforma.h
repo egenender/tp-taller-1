@@ -13,6 +13,8 @@ private:
 	bool vigaDer, vigaIzq;
 	float angulo;
 	int direccion;
+protected:
+	int estado;
 public:
 	Plataforma(const char* , Area*);
 	virtual ~Plataforma();
