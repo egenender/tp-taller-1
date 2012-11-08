@@ -10,7 +10,7 @@
 #define DERECHA 1
 #define IZQUIERDA -1
 #define FACTOR_ESCALA_HONGO 90
-#define ACELERACION_HONGO 3
+#define ACELERACION_HONGO 1
 
 class Manual;
 class Barril;
