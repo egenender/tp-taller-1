@@ -44,7 +44,7 @@ EstadoGUI* EstadoGUI::obtenerInstancia() {
 }
 
 void EstadoGUI::iniciar() {
-	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.wav");
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.ogg");
 	solapaCliente1 = lista_crear();
 	solapaCliente2 = lista_crear();
 	solapaServidor = lista_crear();

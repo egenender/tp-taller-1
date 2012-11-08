@@ -21,7 +21,7 @@ EstadoMenuPrincipal* EstadoMenuPrincipal::obtenerInstancia() {
 }
 
 void EstadoMenuPrincipal::iniciar(){
-	musica = Mix_LoadMUS("./src/resources/estados/musica/Theme Song.wav");
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Theme Song.ogg");
 	crearBtns();
 	crearVistas();
 }

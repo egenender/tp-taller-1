@@ -31,7 +31,7 @@ EstadoSinglePlayer* EstadoSinglePlayer::obtenerInstancia(){
 }
 
 void EstadoSinglePlayer::iniciar(){
-	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.wav");
+	musica = Mix_LoadMUS("./src/resources/estados/musica/Select player.ogg");
 	checkbox1 = new Checkbox(289,500, 21, 21, NULL);
 	crearLbls();
 	crearScroll();
