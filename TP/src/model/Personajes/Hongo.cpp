@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include "../Posicion.h"
 #include "Manual.h"
-#include <stdio.h>
-#include "SDL/SDL.h"
 
 Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 	if (vel <= 0) vel = VELOCIDAD_HONGO_STANDARD;
@@ -60,7 +58,7 @@ int Hongo::calculoDireccionRandom(){
 			rnd = rnd/w;
 	}while(rnd == 1);
 
-	if (rnd < -0.5)
+	if (rnd < 10)
 		return 1;
 	else
 		return -1;

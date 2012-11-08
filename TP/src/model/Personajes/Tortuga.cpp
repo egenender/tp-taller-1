@@ -4,6 +4,7 @@
 Tortuga::Tortuga(const char* nom, Area* sup, int v): Hongo(nom, sup, v) {
 	velocidadInicial = velocidadX;
 	recien_movido = false;
+	superficieReemplazo = NULL;
 }
 
 Tortuga::~Tortuga() {
@@ -20,16 +21,13 @@ void Tortuga::perderVida(){
 	direccion = 0;
 	velocidadX = MULTIPLICADOR * velocidadInicial;
 
-	delete(superficieDeColision);
 	int anchoH, altoH, x, y;
 	anchoH = (superficieOcupada->obtenerAncho() * FACTOR_TORTUGA_CHICA) / 100;
 	altoH = (superficieOcupada->obtenerAlto() * FACTOR_TORTUGA_CHICA) / 100;
 	x = superficieOcupada->obtenerPosicion()->obtenerX() + (superficieOcupada->obtenerAncho() - anchoH)/2;
 	y = superficieOcupada->obtenerPosicion()->obtenerY() + (superficieOcupada->obtenerAlto() - altoH);
 
-	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
-	if(posAnterior) delete(posAnterior);
-	posAnterior = new Posicion(x,y);
+	superficieReemplazo = new Area(anchoH, altoH, new Posicion(x,y));
 }
 
 void Tortuga::modificacionMovimiento(int dir){
@@ -52,6 +50,13 @@ bool Tortuga::recienMovido(){
 }
 
 void Tortuga::actualizar(float a){
+	if (superficieReemplazo){
+		delete(superficieDeColision);
+		superficieDeColision = superficieReemplazo;
+		superficieReemplazo = NULL;
+		if(posAnterior) delete(posAnterior);
+		posAnterior = new Posicion(superficieDeColision->obtenerPosicion()->obtenerX(),superficieDeColision->obtenerPosicion()->obtenerY());
+	}
 	Hongo::actualizar(a);
 	recien_movido = false;
 }
