@@ -54,17 +54,46 @@ void ManejadorCliente::destruirCliente(){
 void ManejadorCliente::recibirRecursos(){
 	char* ruta = (char*) malloc (90*sizeof(char));
 	sprintf(ruta,"%s %s","mkdir","Temp");
-	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
 	system(ruta);
 	sprintf(ruta,"%s %s","mkdir","Temp/src");
-	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
 	system(ruta);
 	sprintf(ruta,"%s %s","mkdir","Temp/src/resources");
-	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
 	system(ruta);
 	sprintf(ruta,"%s %s","mkdir","Temp/src/config");
-	//llama al sistema, con el comando ingresado, espacio, la ruta del M3U
 	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/sounds");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/estados");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/items");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/niveles");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Charmander");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Charmeleon");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Croconaw");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Gengar");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/GokuMono");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Pikachu");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Primeape");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Raichu");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Squirtle");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Totodile");
+	system(ruta);
+	sprintf(ruta,"%s %s","mkdir","Temp/src/resources/cuerpos/Yoshi");
+	system(ruta);
+
 	free(ruta);
 
 
