@@ -61,60 +61,14 @@ bool BolaDeFuego::estaMuerto(){
 }
 
 void BolaDeFuego::chocarConPlataforma(Plataforma* p){
+
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
-
-		Posicion* cmpIzquierda = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho()-velocidadX, posAnterior->obtenerY());
-		if (cmpIzquierda->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion()) && !p->esVigaPorIzquierda()){
-			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
-				delete(posCmp);
-				posCmp = NULL;
-				delete(cmpIzquierda);
-//				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
-//				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
-//				trasladar(-mov-1,0,true);
-//				direccion = IZQUIERDA_BF;
-				morir();
-				return;
-			}
-
-		}
-		delete(cmpIzquierda);
-
-		Posicion* cmpDer = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho()-velocidadX, p->obtenerArea()->obtenerPosicion()->obtenerY());
-		if (posAnterior->estaALaDerechaDe(cmpDer) && !p->esVigaPorDerecha()){
-			if (!(posCmp->obtenerY() == p->obtenerArea()->obtenerPosicion()->obtenerY())){
-				delete(posCmp);
-				posCmp = NULL;
-				delete (cmpDer);
-//				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
-//				x -= obtenerArea()->obtenerPosicion()->obtenerX();
-//				trasladar(x+1,0,true);
-//				direccion = DERECHA_BF;
-				morir();
-				return;
-			}
-		}
-		delete(cmpDer);
-
-		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
-
-		if (posAnterior->obtenerY() >= cmpAbajo->obtenerY()){
-			delete(posCmp);
-			delete(cmpAbajo);
-			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
-			mov -= obtenerArea()->obtenerPosicion()->obtenerY();
-			trasladar(0,mov+1,!(p->esVigaPorDerecha() || p->esVigaPorIzquierda()));
-			velocidadY = 0;
-			return;
-		}
-		delete(cmpAbajo);
-
-		if (posCmp)
-			delete (posCmp);
+		delete(posCmp);
 		posCmp = NULL;
-
+		morir();
+		return;
 	}
 
 	bool cambio = true;
@@ -137,6 +91,8 @@ void BolaDeFuego::chocarConPlataforma(Plataforma* p){
 }
 
 void BolaDeFuego::actualizar(float){
+	if (posAnterior) delete(posAnterior);
+	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 	validarPiso();
 	actualizarSalto();
 	actualizarMovimiento();
@@ -157,12 +113,11 @@ void BolaDeFuego::validarPiso(){
 		saltar();
 		huboCambios();
 	}
-
 }
 
 
 void BolaDeFuego::actualizarSalto(){
-	trasladar(0,velocidadY,true);
+	trasladar(0,velocidadY,false);
 	velocidadY += ACELERACION_BF;
 
 	if (obtenerArea()->pasaPiso() || tengoPiso){
@@ -187,7 +142,7 @@ void BolaDeFuego::actualizarMovimiento(){
 		huboCambios();
 		return;
 	}
-	trasladar(movX,0,true);
+	trasladar(movX,0,false);
 	//saltar();
 //
 //	if (direccion == DERECHA_BF && !estoySaltando())
@@ -198,6 +153,6 @@ void BolaDeFuego::actualizarMovimiento(){
 
 void BolaDeFuego::saltar(){
 	if(!tengoPiso) return;
-	velocidadY = velocidadSaltoBase;
+	velocidadY = -velocidadSaltoBase;
 	tengoPiso = false;
 }

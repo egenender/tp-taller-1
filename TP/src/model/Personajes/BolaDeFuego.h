@@ -4,7 +4,7 @@
 #include "../Cuerpo.h"
 #include "../Actualizable.h"
 
-#define FACTOR_BOLA_FUEGO 60
+#define FACTOR_BOLA_FUEGO 80
 #define VELOCIDAD_BOLA_STD 10
 #define DERECHA_BF 1
 #define IZQUIERDA_BF -1
