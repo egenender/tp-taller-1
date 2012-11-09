@@ -41,6 +41,7 @@ class Observable {
 		bool cambio();
 		int cantidadObservadores();
 		virtual Posicion* obtenerPosicion()=0;
+		virtual int obtenerVidas();
 	protected:
 		void huboCambios();
 		void limpiarCambio();
