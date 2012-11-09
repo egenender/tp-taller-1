@@ -34,7 +34,7 @@ private:
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten;
 	bool juegoGanado;
-	int vidas;
+	int vidas, x_inicial;
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
@@ -56,6 +56,7 @@ public:
 	void morir();
 	bool estaMuerto();
 	bool esGanador();
+	void setearXInicial(int);
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);
