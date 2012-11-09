@@ -198,7 +198,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				delete(cmpIzquierda);
 				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
 				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
-				mtrasladar(-mov-1,0,true);
+				mtrasladar(-mov-1,0,false);
 				return;
 			}
 
@@ -213,7 +213,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 				delete (cmpDer);
 				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
 				x -= obtenerArea()->obtenerPosicion()->obtenerX();
-				mtrasladar(x+1,0,true);
+				mtrasladar(x+1,0,false);
 				return;
 			}
 		}
@@ -344,4 +344,8 @@ void Manual::chocarConBolaDeFuego(BolaDeFuego*){
 void Manual::setearXInicial(int x){
 	if (x >= 0 && x <= Posicion::obtenerMaximo()->obtenerX())
 		x_inicial = x;
+}
+
+int Manual::obtenerVidas(){
+	return vidas;
 }
