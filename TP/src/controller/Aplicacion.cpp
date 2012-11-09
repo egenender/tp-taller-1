@@ -160,6 +160,6 @@ void Aplicacion::mostrarFPS(bool mostrar) {
 /** Se ejecuta el programa **/
 int main(int argc, char* argv[]) {
 	Aplicacion aplicacion;
-
+	srand ( time(NULL) );
 	return aplicacion.ejecutar();
 }
