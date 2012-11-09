@@ -3,6 +3,7 @@
 #include "../controller/GestorConfiguraciones.h" //FIXME
 #include "Server.h"
 #include "../model/Colisionador.h"
+#include "../view/VistaVidas.h"
 
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
@@ -82,15 +83,20 @@ void Nivel::iniciar() {
 	Posicion::indicarPiso(gestor->ObtenerPisoNivel());
 	if (estado == CLIENTE || estado == SINGLE){
 		//Cliente::obtenerInstancia("",0) -> escuchar( structServidor_obtener_tamanio());
+		VistaVidas* corazones = new VistaVidas();
+		vistas->push_back(corazones);
 		camara = new Camara(0, 0);
 		if (estado == CLIENTE){
 			Dummy* algo = gestor->obtenerDummyMio();
 			algo->agregarObservador(camara);
+			algo->agregarObservador(corazones);
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
+			//XXX: le lugar de hardcode de pruebas:
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
+			prin->agregarObservador(corazones);
 			controlador = new ControladorSinglePlayer(prin);
 		}
 	}
