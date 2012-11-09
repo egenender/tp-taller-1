@@ -18,7 +18,7 @@ Mono::Mono(const char* nom, Area* sup, FabricaActualizable* f,float m): Cuerpo(n
 }
 
 Mono::~Mono() {
-	// TODO Auto-generated destructor stub
+	delete(timer);
 }
 
 int Mono::obtenerEstado(){

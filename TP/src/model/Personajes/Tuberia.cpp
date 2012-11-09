@@ -1,0 +1,91 @@
+#include "Tuberia.h"
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+Tuberia::Tuberia(const char* nom, Area* sup, float m, int dir, std::vector<int>* pb ,std::vector<FabricaActualizable*>* f ): Plataforma(nom, sup) {
+	media = m;
+	if (media <= 1)
+		media = MEDIA_TUBERIA_STD;
+
+	direccion = dir;
+
+	fabricas = f;
+
+	int acum = 0;
+	for (unsigned int i = 0; i < pb->size(); i++)
+		acum += pb->at(i);
+
+	if (acum!=100){
+		probabilidades = new std::vector<int>();
+		int equiprobable = 100 / pb->size();
+		for (unsigned int i = 0; i < pb->size(); i++)
+			probabilidades->push_back(equiprobable);
+	}else{
+		probabilidades = pb;
+	}
+
+	timer = new Timer();
+
+	crearPosicion();
+	tiempo_espera = calcularTiempo();
+	timer->comenzar();
+}
+
+Tuberia::~Tuberia() {
+	delete (probabilidades);
+	delete (fabricas);
+	delete(timer);
+	delete(posCreacion);
+}
+
+void Tuberia::actualizar(float delta){
+	if (timer->obtenerTiempo() >= (tiempo_espera * 1000)){
+		int indice = calcularFabrica();
+		fabricas->at(indice)->fabricar(posCreacion, direccion);
+		timer->detener();
+		tiempo_espera = calcularTiempo();
+		timer->comenzar();
+	}
+}
+
+float Tuberia::calcularTiempo(){
+	float u = tirarRandom();
+
+	float rta = (-media) * log (1-u);
+	return rta;
+}
+
+float Tuberia::tirarRandom(){
+	float u;
+	do{
+		u =(rand() % 1000) + 1;
+		float w;
+		do{
+			w =(rand() % 1000);
+		}while (w >= u);
+		u = w / u;
+	}while(u == 1);
+	return u;
+}
+
+int Tuberia::calcularFabrica(){
+	float rnd = tirarRandom();
+	int i = 0;
+	int acum = 0;
+
+	while (acum < (rnd * 100)){
+		acum += probabilidades->at(i);
+		i++;
+	}
+
+	return (i-1);
+}
+
+void Tuberia::crearPosicion(){
+	int x,y;
+	x = obtenerArea()->obtenerPosicion()->obtenerX();
+	y = obtenerArea()->obtenerPosicion()->obtenerY();
+
+	posCreacion = new Posicion(x,y);
+}

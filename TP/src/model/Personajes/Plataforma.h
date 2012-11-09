@@ -19,7 +19,7 @@ public:
 	Plataforma(const char* , Area*);
 	virtual ~Plataforma();
 	int obtenerEstado();	 //de observable
-	void actualizar(float delta); 		//de cuerpo
+	virtual void actualizar(float delta); 		//de cuerpo
 
 	void chocarCon(Actualizable*);
 
