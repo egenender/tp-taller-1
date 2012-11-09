@@ -57,6 +57,7 @@ public:
 	bool estaMuerto();
 	bool esGanador();
 	void setearXInicial(int);
+	int obtenerVidas();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);
