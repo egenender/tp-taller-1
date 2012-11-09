@@ -346,8 +346,8 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	aux= new std::vector<int>();
 
-	aux->push_back(CAMINANDOIZQ);
 	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
 
 	paramBarril->matrizEstados->push_back(aux);
 
@@ -393,8 +393,8 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	aux= new std::vector<int>();
 
-	aux->push_back(CAMINANDOIZQ);
 	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
 
 	paramTortuga->matrizEstados->push_back(aux);
 
@@ -435,31 +435,23 @@ void GestorConfiguraciones::crearVista(Cuerpo* cuerpo,string clave){
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
 
 	VistaVarios* vista=new VistaVarios();
-
 	for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
 
-
-		if (paramPersonaje->matrizEstados->size()==1){
+		if (paramPersonaje->matrizEstados->at(i)->size()==1){
 
 			vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
 
-
 		}else{
-
 			vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
 
 		}
-		cuerpo->agregarObservador(vista);
-		configNivel->actualizables.push_back(cuerpo);
-		configNivel->vistas.push_back(vista);
-
 
 	}
 
-
-
+	cuerpo->agregarObservador(vista);
+	configNivel->actualizables.push_back(cuerpo);
+	configNivel->vistas.push_back(vista);
 }
-
 void GestorConfiguraciones::CargaRestante(){
 	YAML::Node nodo,nodoDef;
 	try{
