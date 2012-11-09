@@ -15,7 +15,7 @@ void FabricaTortugas::fabricar(Posicion* inicial,int valor){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje("tortuga");
 
-	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY()));
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY() - parametros->alto));
 	Tortuga* tortuga = new Tortuga ("tortuga", sup, parametros->velocidad);
 	gestor->crearVista(tortuga, "tortuga");
 }
