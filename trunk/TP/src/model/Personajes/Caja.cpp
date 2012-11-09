@@ -29,6 +29,9 @@ void Caja::chocarConManual(Manual* pers){
 void Caja::fabricar(){
 	if (!fabrica) return;
 
-	fabrica->fabricar(obtenerArea()->obtenerPosicion(), 0);
+	Posicion* pos = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(), obtenerArea()->obtenerPosicion()->obtenerY()-1);
+
+	fabrica->fabricar(pos, 0);
+	delete(pos);
 
 }
