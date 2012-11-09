@@ -58,7 +58,7 @@ int Hongo::calculoDireccionRandom(){
 			rnd = rnd/w;
 	}while(rnd == 1);
 
-	if (rnd < 10)
+	if (rnd < 0.5)
 		return 1;
 	else
 		return -1;
