@@ -63,3 +63,7 @@ bool Observable::cambio() {
 int Observable::cantidadObservadores() {
 	return observadores->size();
 }
+
+int Observable::obtenerVidas(){
+	return 0;
+}
