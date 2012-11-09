@@ -40,7 +40,7 @@ void Tortuga::modificacionMovimiento(int dir){
 			estado = MOVILDERECHA;
 		else
 			estado = MOVILIZQUIERDA;
-		recien_movido = false;
+		recien_movido = true;
 	}
 	huboCambios();
 
