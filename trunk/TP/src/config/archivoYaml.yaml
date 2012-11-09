@@ -137,6 +137,37 @@ juego:
           sprites: src/resources/trollface.bmp
           sonido:
           periodo: 7
+  princesa:
+    ancho: 45
+    alto: 45
+    velocidad: 45
+    animaciones:
+      quieto:
+      gritando:
+  mono:
+    ancho: 45
+    alto: 45
+    velocidad: 45
+    animaciones:
+      quieto:
+      lanzando:
+  barril:
+    ancho: 45
+    alto: 45
+    velocidad: 45
+    animaciones:
+      saltar:
+      quieto:
+      caminando:
+  tortuga:
+    ancho: 45
+    alto: 45
+    velocidad: 45
+    animaciones:
+      saltando:
+      quieto:
+      caminando:
+      movil:
   hongo:
     ancho: 36
     alto: 35
