@@ -16,9 +16,9 @@ BolaDeFuego::BolaDeFuego(const char* nom, Area* sup, int velX, int velY, int dir
 
 	velocidadY = 0;
 	if (direccion == DERECHA_BF)
-		estado = CAMINANDODER;
+		estado = SALTANDODER;
 	else
-		estado = CAMINANDOIZQ;
+		estado = SALTANDOIZQ;
 
 	int anchoC = (superficieOcupada->obtenerAncho() * FACTOR_BOLA_FUEGO )/100;
 	int altoC = (superficieOcupada->obtenerAlto() * FACTOR_BOLA_FUEGO) / 100;
@@ -152,24 +152,16 @@ void BolaDeFuego::actualizarEstados(){
 }
 
 void BolaDeFuego::validarPiso(){
-	if (obtenerArea()->estaSobreElPiso()){
+	if (obtenerArea()->estaSobreElPiso() || tengoPiso){
 		tengoPiso = true;
-		return;
+		saltar();
+		huboCambios();
 	}
 
-	if (tengoPiso) return;
-
-	if (estado == CAMINANDODER)
-		estado = SALTANDODER;
-	else if(estado == CAMINANDOIZQ)
-		estado = SALTANDOIZQ;
-	huboCambios();
 }
 
 
 void BolaDeFuego::actualizarSalto(){
-	if (!estoySaltando()) return;
-
 	trasladar(0,velocidadY,true);
 	velocidadY += ACELERACION_BF;
 
@@ -177,10 +169,6 @@ void BolaDeFuego::actualizarSalto(){
 		superficieDeColision->ponerEnPiso();
 		superficieOcupada->ponerEnPiso();
 		velocidadY = 0;
-		if (estado == SALTANDODER)
-			estado = CAMINANDODER;
-		else if(estado == SALTANDOIZQ)
-			estado = CAMINANDOIZQ;
 	}
 
 }
@@ -189,10 +177,6 @@ void BolaDeFuego::morir(){
 	estado = MUERTO;
 	huboCambios();
 	notificarObservadores();
-}
-
-bool BolaDeFuego::estoySaltando(){
-	return (estado == SALTANDODER || estado == SALTANDOIZQ);
 }
 
 void BolaDeFuego::actualizarMovimiento(){
@@ -204,7 +188,7 @@ void BolaDeFuego::actualizarMovimiento(){
 		return;
 	}
 	trasladar(movX,0,true);
-	saltar();
+	//saltar();
 //
 //	if (direccion == DERECHA_BF && !estoySaltando())
 //		estado = CAMINANDODER;
@@ -213,17 +197,7 @@ void BolaDeFuego::actualizarMovimiento(){
 }
 
 void BolaDeFuego::saltar(){
-	if (estado == CAMINANDODER){
-		estado = SALTANDODER;
-		velocidadY = velocidadSaltoBase;
-		tengoPiso = false;
-		return;
-	}
-
-	if(estado == CAMINANDOIZQ){
-		estado = SALTANDOIZQ;
-		velocidadY = velocidadSaltoBase;
-		tengoPiso = false;
-		return;
-	}
+	if(!tengoPiso) return;
+	velocidadY = velocidadSaltoBase;
+	tengoPiso = false;
 }

@@ -35,7 +35,6 @@ private:
 	void actualizarSalto();
 	void actualizarMovimiento();
 	void actualizarEstados();
-	bool estoySaltando();
 	void saltar();
 };
 
