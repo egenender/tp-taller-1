@@ -8,7 +8,7 @@ Tuberia::Tuberia(const char* nom, Area* sup, float m, int dir, std::vector<int>*
 	if (media <= 1)
 		media = MEDIA_TUBERIA_STD;
 
-	direccion = dir;
+	sentido = dir;
 
 	fabricas = f;
 
@@ -40,9 +40,10 @@ Tuberia::~Tuberia() {
 }
 
 void Tuberia::actualizar(float delta){
+
 	if (timer->obtenerTiempo() >= (tiempo_espera * 1000)){
-		int indice = calcularFabrica();
-		fabricas->at(indice)->fabricar(posCreacion, direccion);
+		unsigned int indice = calcularFabrica();
+		fabricas->at(indice)->fabricar(posCreacion, sentido);
 		timer->detener();
 		tiempo_espera = calcularTiempo();
 		timer->comenzar();
@@ -69,9 +70,9 @@ float Tuberia::tirarRandom(){
 	return u;
 }
 
-int Tuberia::calcularFabrica(){
+unsigned int Tuberia::calcularFabrica(){
 	float rnd = tirarRandom();
-	int i = 0;
+	unsigned int i = 0;
 	int acum = 0;
 
 	while (acum < (rnd * 100)){

@@ -7,7 +7,6 @@ Mono::Mono(const char* nom, Area* sup, FabricaActualizable* f,float m): Cuerpo(n
 	/*MEDIA DEBE ESTAR EN SEGUNDOS!*/
 	estado = QUIETO;
 	media = m;
-	srand ( time(NULL) );
 	tiempoEspera = calcularTiempo();
 
 	fabrica = f;
