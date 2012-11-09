@@ -20,7 +20,7 @@ private:
 	float tiempo_espera;
 	std::vector<int>* probabilidades;
 	std::vector<FabricaActualizable*>* fabricas;
-	int direccion;
+	int sentido;
 	Posicion* posCreacion;
 public:
 	Tuberia(const char*, Area*, float, int, std::vector<int>* ,std::vector<FabricaActualizable*>* );
@@ -30,7 +30,7 @@ public:
 
 private:
 	float calcularTiempo();
-	int calcularFabrica();
+	unsigned int calcularFabrica();
 	void crearPosicion();
 	float tirarRandom();
 };
