@@ -208,11 +208,11 @@ juego:
           alto: 50
       vigas:
         - textura: viga
-          x: 34
-          y: 43
-          ancho: 43
+          x: 650
+          y: 150
+          ancho: 500
           alto: 43
-          inclinacion: 15
+          inclinacion: 30
       escaleras:
         - textura: esc
           x: 400

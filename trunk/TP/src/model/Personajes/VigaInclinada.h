@@ -17,7 +17,7 @@ using namespace std;
 #define CRECE_DERECHA -1
 #define CRECE_IZQUIERDA 1
 #define NINGUNO 0
-#define CANT_PLATAFORMAS 15
+#define CANT_PLATAFORMAS 50
 
 class VigaInclinada: public Cuerpo {
 private:
