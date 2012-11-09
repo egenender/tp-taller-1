@@ -138,36 +138,36 @@ juego:
           sonido:
           periodo: 7
   princesa:
-    ancho: 62
-    alto: 54
+    ancho: 45
+    alto: 45
     velocidad: 45
     animaciones:
-      quieto: src/resources/cuerpos/Primeape/primeapeQuieto.bmp
-      gritando: src/resources/cuerpos/Primeape/primeapeMovimiento.bmp
+      quieto:
+      gritando:
   mono:
-    ancho: 140
-    alto: 126
+    ancho: 45
+    alto: 45
     velocidad: 45
     animaciones:
-      quieto: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
-      lanzando: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
+      quieto:
+      lanzando:
   barril:
     ancho: 45
     alto: 45
-    velocidad: 10
+    velocidad: 45
     animaciones:
-      saltar: src/resources/items/viga2.jpg
-      quieto: src/resources/items/viga2.jpg
-      caminando: src/resources/items/viga2.jpg
+      saltar:
+      quieto:
+      caminando:
   tortuga:
-    ancho: 40
-    alto: 40
-    velocidad: 7
+    ancho: 45
+    alto: 45
+    velocidad: 45
     animaciones:
-      saltando: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
-      quieto: src/resources/cuerpos/Squirtle/squirtleMuerto.bmp
-      caminando: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
-      movil: src/resources/cuerpos/Squirtle/squirtleGirando.bmp
+      saltando:
+      quieto:
+      caminando:
+      movil:
   hongo:
     ancho: 36
     alto: 35
@@ -206,6 +206,13 @@ juego:
           y: 350
           ancho: 400
           alto: 50
+      vigas:
+        - textura: viga
+          x: 34
+          y: 43
+          ancho: 43
+          alto: 43
+          inclinacion: 15
       escaleras:
         - textura: esc
           x: 400
