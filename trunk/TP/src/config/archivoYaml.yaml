@@ -138,36 +138,36 @@ juego:
           sonido:
           periodo: 7
   princesa:
-    ancho: 45
-    alto: 45
-    velocidad: 45
+    ancho: 62
+    alto: 54
+    velocidad: 0
     animaciones:
-      quieto:
-      gritando:
+      quieto: src/resources/cuerpos/Primeape/primeapeQuieto.bmp
+      gritando: src/resources/cuerpos/Primeape/primeapeMovimiento.bmp
   mono:
-    ancho: 45
-    alto: 45
-    velocidad: 45
+    ancho: 140
+    alto: 126
+    velocidad: 0
     animaciones:
-      quieto:
-      lanzando:
+      quieto: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
+      lanzando: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
   barril:
     ancho: 45
     alto: 45
-    velocidad: 45
+    velocidad: 10
     animaciones:
-      saltar:
-      quieto:
-      caminando:
+      saltar: src/resources/items/viga2.jpg
+      quieto: src/resources/items/viga2.jpg
+      caminando: src/resources/items/viga2.jpg
   tortuga:
-    ancho: 45
-    alto: 45
-    velocidad: 45
+    ancho: 40
+    alto: 40
+    velocidad: 7
     animaciones:
-      saltando:
-      quieto:
-      caminando:
-      movil:
+      saltando: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
+      quieto: src/resources/cuerpos/Squirtle/squirtleMuerto.bmp
+      caminando: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
+      movil: src/resources/cuerpos/Squirtle/squirtleGirando.bmp
   hongo:
     ancho: 36
     alto: 35
