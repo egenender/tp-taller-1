@@ -1,5 +1,6 @@
 #include "Manual.h"
 #include "Hongo.h"
+#include <stdio.h>
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
@@ -49,6 +50,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	chocaConSosten = false;
 	juegoGanado = false;
 	vidas = CANT_VIDAS;
+	x_inicial = 0;
 
 	posAnterior = NULL;
 
@@ -300,6 +302,8 @@ void Manual::perderVida(){
 	}
 
 	//aca deberia ponerlo en alguna "posicionInicial"
+	Posicion* pos = new Posicion (x_inicial, Posicion::obtenerPiso() - obtenerArea()->obtenerAlto());
+	posicionar(pos);
 	huboCambios();
 }
 
@@ -308,6 +312,7 @@ void Manual::chocarConBarril(Barril*){
 }
 
 void Manual::chocarConHongo(Hongo* h){
+
 	//tengo que ver por cual direccion se chocan:
 	Posicion* posPersAnterior = h->obtenerPosicionAnterior();
 	//me fijo nomas si vino de arriba:
@@ -319,6 +324,7 @@ void Manual::chocarConHongo(Hongo* h){
 	}else{
 		if (!(h->obtenerEstado() == QUIETO || h->recienMovido()))
 			perderVida();
+
 	}
 	delete(posCmp);
 }
@@ -333,4 +339,9 @@ void Manual::chocarConPrincesa(Princesa*){
 
 void Manual::chocarConBolaDeFuego(BolaDeFuego*){
 	//Por ahora no hago nada
+}
+
+void Manual::setearXInicial(int x){
+	if (x >= 0 && x <= Posicion::obtenerMaximo()->obtenerX())
+		x_inicial = x;
 }
