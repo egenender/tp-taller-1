@@ -635,6 +635,35 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 	}
 
+	int ancho,alto,x,y;
+	float inclinacion;
+	string rutaImagen,tex;
+	//VistaImagen * vista;
+	for(unsigned i=0;i<nodo[nivelElegido]["vigas"].size();i++) {
+
+		nodo[nivelElegido]["vigas"][i]["textura"] >> tex;
+		nodo[nivelElegido]["vigas"][i]["ancho"]>> ancho;
+		nodo[nivelElegido]["vigas"][i]["alto"]>> alto;
+		nodo[nivelElegido]["vigas"][i]["inclinacion"]>> inclinacion;
+		nodo[nivelElegido]["vigas"][i]["x"]>> x;
+		nodo[nivelElegido]["vigas"][i]["y"]>> y;
+
+
+		VigaInclinada* viga= new VigaInclinada("nombre",new Area(ancho,alto,new Posicion(x,y)),inclinacion);
+
+		viga->guardarSubPlataformas(&configNivel->actualizables);
+
+		configNivel->actualizables.push_back(viga);
+
+//		rutaImagen = texturas->at(texturas->at(tex));
+//		vista = new VistaImagen(new Superficie(rutaImagen)); // warap, aca tema rotable
+//
+//		configNivel->vistas.push_back(vista);
+//
+//		viga->agregarObservador(vista);
+
+	}
+
 
 	try{
 		nodo[nivelElegido]["piso"] >> configNivel->piso;

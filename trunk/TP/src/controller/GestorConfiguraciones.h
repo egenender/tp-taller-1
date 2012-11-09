@@ -17,6 +17,7 @@
 #include "../view/ConfiguracionNivel.h"
 #include "../model/ContenedorDummy.h"
 #include "../model/Dummy.h"
+#include "../model/Personajes/VigaInclinada.h"
 #include "../model/ContenedorManuales.h"
 #include "../model/Personajes/Manual.h"
 #include "../log/Log.h"
