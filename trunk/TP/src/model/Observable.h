@@ -24,6 +24,7 @@ using namespace std;
 #define GRITANDO 13
 #define MOVILDERECHA 14
 #define MOVILIZQUIERDA 15
+#define EVOLUCION 30
 
 class Observable {
 	private:

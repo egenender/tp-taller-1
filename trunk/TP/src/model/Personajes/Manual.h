@@ -18,6 +18,8 @@ class Princesa;
 #define FACTOR_DE_ESCALA 75
 #define FACTOR_EVOLUCION 90
 #define CANT_VIDAS 3
+#define SUPERFICIE_EVOLUCION 1
+#define SUPERFICIE_INVOLUCION 0
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
  que la altura maxima sea la misma a la que hay ahora:
@@ -36,6 +38,10 @@ private:
 	bool chocaConSosten, enViga;
 	bool juegoGanado;
 	int vidas, x_inicial;
+
+	Area* superficieReemplazo;
+	int evolucionado;
+	int supActual;
 
 	//Amistades:
 	friend class VidaExtra;
@@ -81,6 +87,8 @@ private:
 	void validarPiso();
 	void actualizarEstados();
 	void perderVida();
+	void evolucionar();
+	void actualizarEvolucion();
 };
 
 

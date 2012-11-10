@@ -4,6 +4,7 @@
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
+	delete(superficieReemplazo);
 }
 
 void Manual::saltar(){
@@ -27,7 +28,7 @@ void Manual::atacar(){} //idem
 void Manual::especial(){} //idem
 
 int Manual::obtenerEstado(){
-	return estado;
+	return (estado + evolucionado);
 }
 
 Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(nombrecito, sup){
@@ -54,6 +55,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	x_inicial = 0;
 
 	posAnterior = NULL;
+	evolucionado = 0;
 
 	int ancho = sup->obtenerAncho();
 	int alto = sup->obtenerAlto();
@@ -67,6 +69,16 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
 
 	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
+
+	int anchoE = (ancho * FACTOR_EVOLUCION )/100;
+	int altoE = (alto * FACTOR_EVOLUCION) / 100;
+	difAncho = ancho - anchoE;
+	difAlto = alto - altoE;
+	Posicion* posE = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto));
+	superficieReemplazo = new Area(anchoE, altoE, posE);
+	//superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
+	supActual = SUPERFICIE_INVOLUCION;
+
 }
 
 void Manual::moverALaDerecha(){
@@ -88,6 +100,7 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 
 void Manual::actualizar(float delta){
 	this->delta = delta;
+	actualizarEvolucion();
 	validarPiso();
 	actualizarSalto();
 	notificarObservadores();
@@ -300,6 +313,11 @@ void Manual::mtrasladar(int fx, int fy, bool c){
 }
 
 void Manual::perderVida(){
+	if (evolucionado == EVOLUCION){
+		evolucionado = 0;
+		//habria que poner el timeOut
+		return;
+	}
 	if (estado == MUERTO) return;
 	vidas--;
 	if (vidas == 0){
@@ -354,4 +372,29 @@ void Manual::setearXInicial(int x){
 
 int Manual::obtenerVidas(){
 	return vidas;
+}
+
+void Manual::evolucionar(){
+	evolucionado = EVOLUCION;
+}
+
+void Manual::actualizarEvolucion(){
+	if (supActual == SUPERFICIE_EVOLUCION && evolucionado == EVOLUCION) return;
+	if (supActual == SUPERFICIE_INVOLUCION && evolucionado == 0) return;
+
+	Area* aux = superficieDeColision;
+	superficieDeColision = superficieReemplazo;
+	superficieReemplazo = aux;
+
+	int anchoC = superficieDeColision->obtenerAncho();
+	int altoC = superficieDeColision->obtenerAlto();
+	int difAncho = superficieOcupada->obtenerAncho() - anchoC;
+	int difAlto = superficieOcupada->obtenerAlto() - altoC;
+
+	superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
+
+	if (evolucionado == EVOLUCION)
+		supActual = SUPERFICIE_EVOLUCION;
+	else
+		supActual = SUPERFICIE_INVOLUCION;
 }
