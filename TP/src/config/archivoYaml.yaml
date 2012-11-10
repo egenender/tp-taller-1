@@ -183,8 +183,8 @@ juego:
     animaciones:
       movimiento: src/resources/items/rareCandy.bmp
   piedraEvolucion:
-    ancho: 50
-    alto: 50
+    ancho: 40
+    alto: 40
     velocidad: 2
     animaciones:
       movimiento: src/resources/items/piedras.bmp
