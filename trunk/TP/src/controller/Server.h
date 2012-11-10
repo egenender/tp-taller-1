@@ -83,6 +83,8 @@ class Server{
 		fd_set activos;
 		bool desco;
 
+		bool aceptando;
+
 		Timer* envio;
 	private:
 

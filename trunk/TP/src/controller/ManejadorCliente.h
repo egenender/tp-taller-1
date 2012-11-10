@@ -24,7 +24,7 @@ class ManejadorCliente{
 		static ManejadorCliente* obtenerInstancia(Cliente*);
 		static ManejadorCliente* reiniciarInstancia(Cliente *client);
 
-		void recibirRecursos();
+		bool recibirRecursos();
 		char* recibirRuta(int);
 		void recibirArchivo(EscrituraArchivo*,int);
 		ManejadorCliente(Cliente*);

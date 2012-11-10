@@ -646,6 +646,16 @@ int GestorConfiguraciones::ObtenerNivelElegido(){
 void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, const YAML::Node& defPersonajes, const YAML::Node& defPlataformas, const YAML::Node& defEscaleras){
 
 	try{
+		nodo[nivelElegido]["players"] >> configNivel->players;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo players dentro del nivel, se carga por defecto");
+		configNivel->players = 2;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El valor de players no toma valor valido, se carga por defecto");
+		configNivel->players = 2;
+	}
+
+	try{
 		nodo[nivelElegido]["ancho"] >> configNivel->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro del nivel, se carga por defecto");
@@ -794,6 +804,11 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		}
 
 }
+
+int GestorConfiguraciones::obtenerCantidadDeJugadores (){
+	return configNivel->players;
+}
+
 
 void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool escalar, bool cortar, int tipo){
 	int posX,posY;

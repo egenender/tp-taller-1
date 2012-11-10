@@ -51,7 +51,22 @@ void ManejadorCliente::destruirCliente(){
 	pthread_mutex_destroy(&mutex);
 }
 
-void ManejadorCliente::recibirRecursos(){
+bool ManejadorCliente::recibirRecursos(){
+	struct timeval intervaloTiempo;
+
+	intervaloTiempo.tv_sec=10;
+	intervaloTiempo.tv_usec=0;
+
+	fd_set set= fd_set();
+
+	FD_SET(cliente->sock,&set);
+
+
+	if(select(FD_SETSIZE,&set,NULL,NULL,&intervaloTiempo)==0){
+		Log::getInstance()->writeToLogFile("ERROR","El juego en el servidor esta completo");
+		return false;
+	}
+
 	char* ruta = (char*) malloc (90*sizeof(char));
 	sprintf(ruta,"%s %s","mkdir","Temp");
 	system(ruta);
@@ -126,7 +141,7 @@ void ManejadorCliente::recibirRecursos(){
 	elNivel = cliente->escuchar_un_entero();
 
 	recibirDisponibles();
-
+	return true;
 }
 
 void ManejadorCliente::seleccionarProt(string nombre){

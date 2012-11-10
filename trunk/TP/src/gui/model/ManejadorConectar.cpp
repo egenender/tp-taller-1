@@ -36,7 +36,12 @@ void ManejadorConectar::manejarClic(){
 	}
 
 	ManejadorCliente* manejadorCliente= ManejadorCliente::reiniciarInstancia(client);
-	manejadorCliente->recibirRecursos();
+	bool recibio = manejadorCliente->recibirRecursos();
+	if (!recibio){
+		barra->setearMensaje("No se ha podido realizar la conexion");
+		return;
+	}
+
 	manejadorCliente->iniciarCarga();
 
 	GestorConfiguraciones* gestor =GestorConfiguraciones::getInstance();

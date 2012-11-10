@@ -54,9 +54,6 @@ class Cliente {
 		// Esta conectado o no
 		bool conectado;
 
-		// El file descriptor del sock suyo
-		int sock;
-
 		// Direccion del servidor
 		const char* serverhost;
 
@@ -75,6 +72,9 @@ class Cliente {
 
 	public:
 		bool ok;
+
+		// El file descriptor del sock suyo
+		int sock;
 
 		// Metodos viejos
 		//bool iniciar ();
