@@ -5,14 +5,14 @@
 #include "../Cuerpo.h"
 #include "../Actualizable.h"
 #include "../Observable.h"
+#include "Plataforma.h"
+#include "../Fabricas/FabricaBolasDeFuego.h"
 
 class Hongo;
 class Escalera;
 class Barril;
 class Princesa;
-#include "Plataforma.h"
 
-// Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
 #define FACTOR_DE_ESCALA 75
@@ -43,6 +43,9 @@ private:
 	int evolucionado;
 	int supActual;
 
+	bool especialHabilitado;
+	FabricaBolasDeFuego *fabrica;
+
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
@@ -68,6 +71,7 @@ public:
 	int obtenerVidas();
 	void aumentarVida();
 	void evolucionar();
+	void habilitarEspecial();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

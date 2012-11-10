@@ -34,6 +34,10 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		return;
 	}
 
+	if (keystates[SDLK_z]){
+		principal->especial();
+	}
+
 	if (keystates[SDLK_UP] && !keystates[SDLK_DOWN]){
 		principal->subir();
 	}

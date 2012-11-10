@@ -24,8 +24,17 @@ void FabricaBolasDeFuego::fabricar(Posicion* inicial,int valor){
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(aux);
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY()));
-	//REVISAR de agregarle el salto!
-	bola = new BolaDeFuego (aux.c_str(), sup, parametros->velocidad, parametros->velocidad, valor);
+	int vel , dir;
+
+	if (valor < 0){
+		vel = -valor;
+		dir = -1;
+	}else{
+		vel = valor;
+		dir = 1;
+	}
+
+	bola = new BolaDeFuego (aux.c_str(), sup, vel, parametros->velocidad, dir);
 	gestor->crearVista(bola, aux);
 }
 

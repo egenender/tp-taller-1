@@ -31,8 +31,32 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));
 	animaciones->insert(pair<int, Animacion*>(SUBIENDOQUIETO, subiendoQ));
 	animaciones->insert(pair<int, Animacion*>(SUBIENDOMOVIMIENTO, subiendoM));
-	//posicionDibujar = protagonista->obtenerPosicion();
-//	actualizar(protagonista);
+
+
+	//FIXME: Le hardcode para que se pueda ver la evolucion:
+	Animacion* anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp", 65, 73));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + QUIETODER, anim));
+	anim = anim->voltear(HORIZONTALMENTE);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + QUIETOIZQ, anim));
+
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp", 65, 73));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + CAMINANDODER, anim));
+	anim = anim->voltear(HORIZONTALMENTE);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + CAMINANDOIZQ, anim));
+
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp", 65, 73));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + SALTANDODER, anim));
+	anim = anim->voltear(HORIZONTALMENTE);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + SALTANDOIZQ, anim));
+
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp", 65, 73));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + SUBIENDOQUIETO, anim));
+	anim = anim->voltear(HORIZONTALMENTE);
+	animaciones->insert(pair<int, Animacion*>(EVOLUCION + SUBIENDOMOVIMIENTO, anim));
 }
 
 void VistaProtagonista::actualizar(Observable* observable) {

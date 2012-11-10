@@ -25,7 +25,32 @@ void Manual::saltar(){
 
 void Manual::atacar(){} //idem
 
-void Manual::especial(){} //idem
+void Manual::especial(){
+	if (!especialHabilitado) return;
+
+	int direccion = 0;
+	if (estado == CAMINANDODER || estado == SALTANDODER || estado == QUIETODER)
+		direccion = DERECHA;
+	else if (estado == CAMINANDOIZQ || estado == SALTANDOIZQ || estado == QUIETOIZQ)
+		direccion = IZQUIERDA;
+
+	if (direccion == 0) return;
+	int vel = velocidad + 1;
+
+	int x,y;
+	x = obtenerArea()->obtenerPosicion()->obtenerX();
+	y = obtenerArea()->obtenerPosicion()->obtenerY();
+
+	int dif = obtenerArea()->obtenerAncho() + 1;
+	if (direccion == DERECHA)
+		x += dif;
+	else
+		x -= dif;
+
+	Posicion* pos = new Posicion(x,y);
+	fabrica->fabricar(pos,(vel*direccion));
+	delete(pos);
+}
 
 int Manual::obtenerEstado(){
 	return (estado + evolucionado);
@@ -51,11 +76,14 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	chocaConSosten = false;
 	juegoGanado = false;
 	enViga = false;
+	especialHabilitado = false;
 	vidas = CANT_VIDAS;
 	x_inicial = 0;
 
 	posAnterior = NULL;
 	evolucionado = 0;
+	fabrica = new FabricaBolasDeFuego(nombrecito);
+
 
 	int ancho = sup->obtenerAncho();
 	int alto = sup->obtenerAlto();
@@ -404,4 +432,8 @@ void Manual::actualizarEvolucion(){
 
 void Manual::aumentarVida(){
 	vidas++;
+}
+
+void Manual::habilitarEspecial(){
+	especialHabilitado = true;
 }
