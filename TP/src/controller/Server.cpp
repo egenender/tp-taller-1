@@ -47,7 +47,10 @@ Server::Server(){
 	desco = false;
 	envio = new Timer();
 	timerSockets = new std::map <int,Timer*>();
+
+	aceptando = true;
 }
+
 Server* Server::reiniciarInstancia(int port) {
     instancia = new Server(port);
 
@@ -89,6 +92,8 @@ Server::Server(int port){
 	desco = false;
 	envio = new Timer();
 	timerSockets = new std::map <int,Timer*>();
+
+	aceptando = true;
 
 }
 
@@ -525,6 +530,9 @@ void* _escuchar(void* parametros){
 		for (i = 0; i < FD_SETSIZE; ++i){
 			if (FD_ISSET (i, rd)){
 				if (i == sock) {
+					Server* server = Server::obtenerInstancia(0);
+					if (! server->aceptando)
+						continue;
 					Log::getInstance()->writeToLogFile("INFO","SOCK: Se inicia la escucha del server");
 					// Si el socket es sock (el que acepta conexiones) quiere decir que le estan pidiendo conectarse
 					size = sizeof (nombre_cliente);
@@ -537,6 +545,9 @@ void* _escuchar(void* parametros){
 
 					sockets->erase(status);
 					sockets->insert(pair<int,bool>(status,false));
+
+					if (sockets->size() == GestorConfiguraciones::getInstance()->obtenerCantidadDeJugadores())
+						server->aceptando = false;
 
 					//Aca el thread de inicializacion, en el que se deberia agregar a "status" al set de sockets
 					pthread_t threadInicializacion;

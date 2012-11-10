@@ -119,8 +119,9 @@ int Cliente::escuchar_un_entero_out (int t) {
 			escuchado = true;
 		}
 		i++;
-		Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "El server se ha desconectado.");
 	}
+
+	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "El server se ha desconectado.");
 	if(!escuchado){
 		return -2;
 	}
@@ -239,6 +240,7 @@ bool Cliente::conectar(){
 	return true;
 
 }
+
 void* privEscuchar(void* param){
 
 	parametrosCliente_t* parametros= (parametrosCliente_t*) param;

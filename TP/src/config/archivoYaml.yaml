@@ -199,6 +199,7 @@ juego:
     esc: src/resources/items/film.png
   nivel:
     - nivel: MooMooMilk
+      players: 2
       alto: 600
       ancho: 1600
       piso: 540
@@ -244,6 +245,7 @@ juego:
           ancho: 50
           alto: 200
     - nivel: Troll
+      players: 4
       alto: 600
       ancho: 1600
       piso: 540
@@ -302,6 +304,7 @@ juego:
           ancho: 80
           alto: 400
     - nivel: Moo la Moo
+      players: 3
       alto: 1200
       ancho: 1200
       fondo: src/resources/items/viga2.jpg
@@ -311,6 +314,7 @@ juego:
           x: 400
           y: 300
     - nivel: CUCU
+      players: 1
       alto: 600
       ancho: 800
       fondo: src/resources/fondoGrande.png

@@ -17,5 +17,6 @@ ConfiguracionNivel::ConfiguracionNivel(){
 	piso = 0;
 	superficieCargada = NULL;
 	musica = NULL;
+	players = 0;
 }
 
