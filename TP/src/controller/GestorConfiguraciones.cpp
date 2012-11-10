@@ -422,7 +422,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	nodoRaiz["vidaExtra"]["animaciones"]["movimiento"]>>ruta;
 
-	Animacion* animacionMov= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+	Animacion* animacionMov= new Animacion(new HojaSprites(ruta,paramVidaExtra->ancho,paramVidaExtra->alto));
 
 	paramVidaExtra->animaciones->push_back(animacionMov);
 
