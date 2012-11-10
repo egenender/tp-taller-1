@@ -49,6 +49,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	chocaConEscalera = false;
 	chocaConSosten = false;
 	juegoGanado = false;
+	enViga = false;
 	vidas = CANT_VIDAS;
 	x_inicial = 0;
 
@@ -118,8 +119,8 @@ void Manual::detener(){
 
 
 void Manual::actualizarSalto(){
-	if (!estoySaltando()) return;
-
+	if (!estoySaltando() && !enViga) return;
+	enViga = false;
 	mtrasladar(0,velocidadY,true);
 	velocidadY += ACELERACION;
 	if (chocaConPiso() || tengoPiso){
@@ -130,7 +131,7 @@ void Manual::actualizarSalto(){
 //		delete(trs);
 		velocidadY = 0;
 		if (estado == SALTANDODER) estado = QUIETODER;
-		else estado = QUIETOIZQ;
+		else if (estado == SALTANDOIZQ)estado = QUIETOIZQ;
 	}
 }
 
@@ -248,6 +249,11 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	tengoPiso = true;
 	chocaConSosten = true;
 	velocidadY = 0;
+
+	if (p->esVigaPorDerecha() || p->esVigaPorIzquierda()){
+		velocidadY = 15;
+		enViga = true;
+	}
 
 	int y;
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();

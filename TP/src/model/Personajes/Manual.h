@@ -32,7 +32,7 @@ private:
 	int velocidadY;
 	int velocidadSaltoBase;
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
-	bool chocaConSosten;
+	bool chocaConSosten, enViga;
 	bool juegoGanado;
 	int vidas, x_inicial;
 public:
