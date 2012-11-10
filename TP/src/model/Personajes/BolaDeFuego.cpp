@@ -24,7 +24,7 @@ BolaDeFuego::BolaDeFuego(const char* nom, Area* sup, int velX, int velY, int dir
 	int altoC = (superficieOcupada->obtenerAlto() * FACTOR_BOLA_FUEGO) / 100;
 	int difAncho = superficieOcupada->obtenerAncho() - anchoC;
 	int difAlto = superficieOcupada->obtenerAlto() - altoC;
-	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto));
+	Posicion* posC = new Posicion(sup->obtenerPosicion()->obtenerX() + (difAncho/2), sup->obtenerPosicion()->obtenerY() + (difAlto/2));
 	superficieDeColision = new Area(anchoC, altoC, posC);
 	//superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
 	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
