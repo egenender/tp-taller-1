@@ -405,6 +405,23 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramTortuga->matrizEstados->push_back(aux);
 
+	//PowerUp Vida Extra:
+
+	parametrosPersonaje* paramVidaExtra= crearParametrosPersonaje(nodoRaiz["vidaExtra"],"vidaExtra");
+
+	nodoRaiz["tortuga"]["animaciones"]["movimiento"]>>ruta;
+
+	Animacion* animacionMov= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
+
+	paramVidaExtra->animaciones->push_back(animacionMov);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+
+	paramVidaExtra->matrizEstados->push_back(aux);
+
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
