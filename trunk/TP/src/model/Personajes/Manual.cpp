@@ -7,10 +7,11 @@ Manual::~Manual() {
 	delete(superficieReemplazo);
 }
 
-void Manual::saltar(){
+void Manual::saltar(bool autogenerado){
 	if (estado == QUIETODER || estado == CAMINANDODER){
 		estado = SALTANDODER;
 		velocidadY = velocidadSaltoBase;
+		if (saltoAlto && !autogenerado) velocidadY *= 2;
 		tengoPiso = false;
 		return;
 	}
@@ -85,7 +86,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	posAnterior = NULL;
 	evolucionado = 0;
 	fabrica = new FabricaBolasDeFuego(nombrecito);
-
+	chocaConCama = saltoAlto = false;
 
 	int ancho = sup->obtenerAncho();
 	int alto = sup->obtenerAlto();
@@ -323,8 +324,13 @@ void Manual::chocarConCamaElastica(CamaElastica* ce){
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 	if(posPersAnterior->estaAbajoDe(posCmp)){
 		tengoPiso = true;
+		chocaConSosten = true;
 		estado = QUIETODER;
-		saltar();
+		if (saltoAlto){
+			saltar(true);
+		}
+		saltoAlto = true;
+		chocaConCama = true;
 	}
 	delete(posCmp);
 }
@@ -339,6 +345,10 @@ void Manual::actualizarEstados(){
 		tengoPiso = false;
 	}
 	chocaConSosten = false;
+
+	if(!chocaConCama)
+		saltoAlto = false;
+	chocaConCama = false;
 }
 
 bool Manual::estoySubiendo(){
