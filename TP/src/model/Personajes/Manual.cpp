@@ -39,13 +39,13 @@ void Manual::especial(){
 
 	int x,y;
 	x = obtenerArea()->obtenerPosicion()->obtenerX();
-	y = obtenerArea()->obtenerPosicion()->obtenerY();
+	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto() / 2;
 
 	int dif = obtenerArea()->obtenerAncho() + 1;
 	if (direccion == DERECHA)
 		x += dif;
 	else
-		x -= dif;
+		x -= 1;
 
 	Posicion* pos = new Posicion(x,y);
 	fabrica->fabricar(pos,(vel*direccion));
