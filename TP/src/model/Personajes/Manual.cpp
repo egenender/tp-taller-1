@@ -397,4 +397,9 @@ void Manual::actualizarEvolucion(){
 		supActual = SUPERFICIE_EVOLUCION;
 	else
 		supActual = SUPERFICIE_INVOLUCION;
+	huboCambios();
+}
+
+void Manual::aumentarVida(){
+	vidas++;
 }

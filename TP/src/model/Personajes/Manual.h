@@ -43,8 +43,6 @@ private:
 	int evolucionado;
 	int supActual;
 
-	//Amistades:
-	friend class VidaExtra;
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
@@ -68,6 +66,8 @@ public:
 	bool esGanador();
 	void setearXInicial(int);
 	int obtenerVidas();
+	void aumentarVida();
+	void evolucionar();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);
@@ -87,7 +87,6 @@ private:
 	void validarPiso();
 	void actualizarEstados();
 	void perderVida();
-	void evolucionar();
 	void actualizarEvolucion();
 };
 

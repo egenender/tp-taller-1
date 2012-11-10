@@ -433,6 +433,23 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramVidaExtra->matrizEstados->push_back(aux);
 
+	//PowerUp Piedra de Evolucion:
+
+	parametrosPersonaje* paramPiedraEvolve= crearParametrosPersonaje(nodoRaiz["piedraEvolucion"],"piedraEvolucion");
+
+	nodoRaiz["piedraEvolucion"]["animaciones"]["movimiento"]>>ruta;
+
+	animacionMov= new Animacion(new HojaSprites(ruta,paramPiedraEvolve->ancho,paramPiedraEvolve->alto));
+
+	paramPiedraEvolve->animaciones->push_back(animacionMov);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+
+	paramPiedraEvolve->matrizEstados->push_back(aux);
+
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
