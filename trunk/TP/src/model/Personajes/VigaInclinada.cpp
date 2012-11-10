@@ -85,8 +85,6 @@ void VigaInclinada::crearPlataformas(){
 			if (i != 0)
 				plataforma->setearComoVigaPorIzquierda();
 		}
-
-
 	//si crece hacia la derecha, tengo que tener los elementos desde el de mas arriba hacia el de mas abajo
 	//entonces tengo que darlos vuelta en el vector:
 //	if (creceHacia == DERECHA){
