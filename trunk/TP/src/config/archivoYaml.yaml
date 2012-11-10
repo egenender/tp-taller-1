@@ -177,11 +177,17 @@ juego:
       caminando: src/resources/items/shroomishMovimiento.bmp
       cayendo: src/resources/items/shroomishCaida.bmp
   vidaExtra:
-    ancho: 36
-    alto: 35
+    ancho: 50
+    alto: 49
     velocidad: 1
     animaciones:
-      movimiento: src/resources/items/shroomishMovimiento.bmp
+      movimiento: src/resources/items/rareCandy.bmp
+  piedraEvolucion:
+    ancho: 50
+    alto: 49
+    velocidad: 1
+    animaciones:
+      movimiento: src/resources/items/rareCandy.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png

@@ -10,7 +10,7 @@ VidaExtra::~VidaExtra() {
 }
 
 void VidaExtra::chocarConManual(Manual* prin){
-	prin->vidas++;
+	prin->aumentarVida();
 	estado = MUERTO;
 	huboCambios();
 	notificarObservadores();
