@@ -450,6 +450,22 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramPiedraEvolve->matrizEstados->push_back(aux);
 
+	//PowerUp Activador de Especial:
+
+	parametrosPersonaje* paramAcEsp= crearParametrosPersonaje(nodoRaiz["activaEspecial"],"activaEspecial");
+
+	nodoRaiz["activaEspecial"]["animaciones"]["movimiento"]>>ruta;
+
+	animacionMov= new Animacion(new HojaSprites(ruta,paramAcEsp->ancho,paramAcEsp->alto));
+
+	paramAcEsp->animaciones->push_back(animacionMov);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+
+	paramAcEsp->matrizEstados->push_back(aux);
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
