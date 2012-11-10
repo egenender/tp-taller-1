@@ -11,4 +11,7 @@ VidaExtra::~VidaExtra() {
 
 void VidaExtra::chocarConManual(Manual* prin){
 	prin->vidas++;
+	estado = MUERTO;
+	huboCambios();
+	notificarObservadores();
 }
