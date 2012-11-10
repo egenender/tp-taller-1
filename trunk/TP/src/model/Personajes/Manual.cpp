@@ -391,6 +391,8 @@ void Manual::actualizarEvolucion(){
 	int difAncho = superficieOcupada->obtenerAncho() - anchoC;
 	int difAlto = superficieOcupada->obtenerAlto() - altoC;
 
+	Posicion* posC = new Posicion(superficieOcupada->obtenerPosicion()->obtenerX() + (difAncho/2), superficieOcupada->obtenerPosicion()->obtenerY() + (difAlto));
+	superficieDeColision->cambiarPosicion(posC);
 	superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
 
 	if (evolucionado == EVOLUCION)
