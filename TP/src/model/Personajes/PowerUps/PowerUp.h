@@ -13,7 +13,9 @@
 class PowerUp : public Cuerpo{
 private:
 	bool tengoPiso, chocaConSosten;
-	int velocidadX, velocidadY, direccion, estado;
+	int velocidadX, velocidadY, direccion;
+protected:
+	int estado;
 
 public:
 	PowerUp(const char*, Area*, int);
