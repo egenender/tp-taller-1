@@ -17,6 +17,6 @@ void FabricaActivaEspeciales::fabricar(Posicion* inicial, int valor){
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje("activaEspecial");
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY() - parametros->alto));
-	ActivaEspecial* especial = new Stone ("activaEspecial", sup, parametros->velocidad);
+	ActivaEspecial* especial = new ActivaEspecial ("activaEspecial", sup, parametros->velocidad);
 	gestor->crearVista(especial, "activaEspecial");
 }
