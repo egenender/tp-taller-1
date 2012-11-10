@@ -3,10 +3,10 @@
 
 #include "PowerUp.h"
 
-class activaEspecial: public PowerUp {
+class ActivaEspecial: public PowerUp {
 public:
-	activaEspecial(const char*, Area*, int);
-	virtual ~activaEspecial();
+	ActivaEspecial(const char*, Area*, int);
+	virtual ~ActivaEspecial();
 	void chocarConManual(Manual*);
 };
 
