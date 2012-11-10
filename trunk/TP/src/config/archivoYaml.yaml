@@ -179,15 +179,15 @@ juego:
   vidaExtra:
     ancho: 50
     alto: 49
-    velocidad: 1
+    velocidad: 2
     animaciones:
       movimiento: src/resources/items/rareCandy.bmp
   piedraEvolucion:
     ancho: 50
-    alto: 49
-    velocidad: 1
+    alto: 50
+    velocidad: 2
     animaciones:
-      movimiento: src/resources/items/rareCandy.bmp
+      movimiento: src/resources/items/piedras.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png
