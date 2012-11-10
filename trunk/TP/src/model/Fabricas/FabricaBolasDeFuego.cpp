@@ -22,17 +22,19 @@ void FabricaBolasDeFuego::fabricar(Posicion* inicial,int valor){
 	aux += nombre;
 
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(aux);
-
-	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY()));
+	int x = inicial->obtenerX();
 	int vel , dir;
 
 	if (valor < 0){
 		vel = -valor;
 		dir = -1;
+		x -= parametros->ancho;
 	}else{
 		vel = valor;
 		dir = 1;
 	}
+
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x, inicial->obtenerY()));
 
 	bola = new BolaDeFuego (aux.c_str(), sup, vel, parametros->velocidad, dir);
 	gestor->crearVista(bola, aux);
