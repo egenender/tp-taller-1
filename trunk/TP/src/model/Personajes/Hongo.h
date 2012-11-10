@@ -22,7 +22,6 @@ protected:
 	int estado;
 	int velocidadX, velocidadY, direccion;
 	bool permitoMovEnSalto;
-	int estadoAnterior;
 	bool saltoMov;
 public:
 	Hongo(const char*, Area*, int);

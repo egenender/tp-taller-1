@@ -1,6 +1,6 @@
 #ifndef MANUAL_H_
 #define MANUAL_H_
-#define VELOCIDAD_STANDARD 150
+#define VELOCIDAD_STANDARD 10
 #include "../Area.h"
 #include "../Cuerpo.h"
 #include "../Actualizable.h"
@@ -15,7 +15,8 @@ class Princesa;
 // Nuevo:
 #define DERECHA 1
 #define IZQUIERDA -1
-#define FACTOR_DE_ESCALA 80
+#define FACTOR_DE_ESCALA 75
+#define FACTOR_EVOLUCION 90
 #define CANT_VIDAS 3
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
@@ -35,6 +36,9 @@ private:
 	bool chocaConSosten, enViga;
 	bool juegoGanado;
 	int vidas, x_inicial;
+
+	//Amistades:
+	friend class VidaExtra;
 public:
 //	Manual(const char*, Area*);
 //	Manual(const char*, Area*, int);
