@@ -81,6 +81,7 @@ public:
 	void chocarConHongo(Hongo*);
 	void chocarConPrincesa(Princesa*);
 	void chocarConBolaDeFuego(BolaDeFuego*);
+	void chocarConCamaElastica(CamaElastica*);
 private:
 	void mtrasladar(int,int,bool);
 	void actualizarSalto();

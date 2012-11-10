@@ -3,7 +3,9 @@
 #include "../controller/GestorConfiguraciones.h" //FIXME
 #include "Server.h"
 #include "../model/Colisionador.h"
+#include "../model/Personajes/CamaElastica.h"
 #include "../view/VistaVidas.h"
+#include "../view/VistaVarios.h"
 
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
@@ -93,6 +95,13 @@ void Nivel::iniciar() {
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
 			//XXX: le lugar de hardcode de pruebas:
+			// Descomentar para una cama elastica
+//			CamaElastica* cama= new CamaElastica("warap",new Area(56,45,new Posicion(200,200)));
+//			gestor->ObtenerActualizables()->push_back(cama);
+//			VistaVarios* vista= new VistaVarios();
+//			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/cubosMovimiento.bmp",56,45)));
+//			vistas->push_back(vista);
+//			cama->agregarObservador(vista);
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);

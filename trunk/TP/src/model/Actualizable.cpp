@@ -23,6 +23,8 @@ void Actualizable::chocarConBarril(Barril*){}
 void Actualizable::chocarConHongo(Hongo*){}
 void Actualizable::chocarConPrincesa(Princesa*){}
 void Actualizable::chocarConBolaDeFuego(BolaDeFuego*){}
+void Actualizable::chocarConCamaElastica(CamaElastica*){}
+
 
 bool Actualizable::estaMuerto(){
 	return false;
