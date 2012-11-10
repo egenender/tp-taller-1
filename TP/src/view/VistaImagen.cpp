@@ -4,8 +4,11 @@ VistaImagen::VistaImagen() {
 	imagen = NULL;
 }
 
-VistaImagen::VistaImagen(Superficie* imagenNueva) {
+VistaImagen::VistaImagen(Superficie* imagenNueva, int angulo) {
 	imagen = imagenNueva;
+	if (imagen) {
+		imagen->girar(angulo);
+	}
 }
 
 VistaImagen::VistaImagen(string ID) {
