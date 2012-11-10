@@ -701,7 +701,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	int ancho,alto,x,y;
 	float inclinacion;
 	string rutaImagen,tex;
-	//VistaImagen * vista;
+	VistaImagen * vista;
 	for(unsigned i=0;i<nodo[nivelElegido]["vigas"].size();i++) {
 
 		nodo[nivelElegido]["vigas"][i]["textura"] >> tex;
@@ -718,12 +718,12 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 		configNivel->actualizables.push_back(viga);
 
-//		rutaImagen = texturas->at(texturas->at(tex));
-//		vista = new VistaImagen(new Superficie(rutaImagen)); // warap, aca tema rotable
-//
-//		configNivel->vistas.push_back(vista);
-//
-//		viga->agregarObservador(vista);
+		rutaImagen = texturas->at(tex);
+		vista = new VistaImagen(new Superficie(rutaImagen),inclinacion);
+
+		configNivel->vistas.push_back(vista);
+
+		viga->agregarObservador(vista);
 
 	}
 

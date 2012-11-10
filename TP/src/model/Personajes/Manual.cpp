@@ -21,6 +21,8 @@ void Manual::saltar(){
 		tengoPiso = false;
 		return;
 	}
+
+
 }
 
 void Manual::atacar(){} //idem
@@ -311,6 +313,20 @@ void Manual::chocarConEscalera(Escalera*){
 	chocaConEscalera = true;
 	chocaConSosten = true;
 	velocidadY = 0;
+}
+
+void Manual::chocarConCamaElastica(CamaElastica* ce){
+
+	//tengo que ver por cual direccion se chocan:
+	Posicion* posPersAnterior = ((Cuerpo*)ce)->obtenerPosicionAnterior();
+		//me fijo nomas si vino de arriba:
+	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
+	if(posPersAnterior->estaAbajoDe(posCmp)){
+		tengoPiso = true;
+		estado = QUIETODER;
+		saltar();
+	}
+	delete(posCmp);
 }
 
 void Manual::actualizarEstados(){
