@@ -36,6 +36,7 @@ private:
 	int velocidadSaltoBase;
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten, enViga;
+	bool chocaConCama, saltoAlto;
 	bool juegoGanado;
 	int vidas, x_inicial;
 
@@ -56,7 +57,7 @@ public:
 	void moverALaIzquierda();
 	void moverALaDerecha();
 	void detener();
-	void saltar();
+	void saltar(bool autogenerado = false);
 	void atacar();
 	void especial();
 	void subir();
