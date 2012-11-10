@@ -156,8 +156,9 @@ juego:
     alto: 45
     velocidad: 10
     animaciones:
-      cayendo: src/resources/items/barril-falling.bmp
-      rodando: src/resources/items/barril-rodando.bmp
+      saltando: src/resources/items/barril-falling.bmp
+      caminando: src/resources/items/barril-rodando.bmp
+      quieto: src/resources/items/barril-falling.bmp
   tortuga:
     ancho: 40
     alto: 40
