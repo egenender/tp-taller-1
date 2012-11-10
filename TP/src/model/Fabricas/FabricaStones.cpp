@@ -3,7 +3,6 @@
 #include "../Area.h"
 #include "../../controller/GestorConfiguraciones.h"
 
-
 FabricaStones::FabricaStones() {
 }
 
