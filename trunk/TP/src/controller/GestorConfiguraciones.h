@@ -116,7 +116,7 @@ class GestorConfiguraciones{
 		void AgregarAVector(string ruta);
 		void setEsCliente ();
 
-		int obtenerCantidadDeJugadores();
+		unsigned int obtenerCantidadDeJugadores();
 
 		void setNivelElegido(int);
 		int ObtenerNivelElegido();

@@ -805,7 +805,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 }
 
-int GestorConfiguraciones::obtenerCantidadDeJugadores (){
+unsigned int GestorConfiguraciones::obtenerCantidadDeJugadores (){
 	return configNivel->players;
 }
 
