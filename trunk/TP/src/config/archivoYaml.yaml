@@ -156,9 +156,10 @@ juego:
     alto: 45
     velocidad: 10
     animaciones:
-      saltando: src/resources/items/barril-falling.bmp
-      caminando: src/resources/items/barril-rodando.bmp
-      quieto: src/resources/items/barril-falling.bmp
+      cayendo: src/resources/items/barill-rodando.bmp
+      quieto: src/resources/items/barill-rodando.bmp
+      rodando: src/resources/items/barril-falling.bmp
+      bajando: 
   tortuga:
     ancho: 40
     alto: 40
@@ -175,6 +176,12 @@ juego:
     animaciones:
       caminando: src/resources/items/shroomishMovimiento.bmp
       cayendo: src/resources/items/shroomishCaida.bmp
+  vidaExtra:
+    ancho: 36
+    alto: 35
+    velocidad: 1
+    animaciones:
+      movimiento: src/resources/items/shroomishMovimiento.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png
@@ -208,11 +215,11 @@ juego:
           alto: 50
       vigas:
         - textura: viga
-          x: 650
-          y: 150
+          x: 700
+          y: 330
           ancho: 500
-          alto: 43
-          inclinacion: 30
+          alto: 50
+          inclinacion: 20
       escaleras:
         - textura: esc
           x: 400
@@ -220,7 +227,7 @@ juego:
           ancho: 50
           alto: 200
         - textura: esc
-          x: 600
+          x: 400
           y: 350
           ancho: 50
           alto: 200
