@@ -11,7 +11,7 @@ class EstadoMenuPrincipal : public Estado {
 private:
 	static EstadoMenuPrincipal instancia;
 
-	Superficie* fondo;
+	Superficie* fondo, *titulo;
 	Boton *btnMultiPlayer, *btnSinglePlayer;
 	Animacion *animacion;
 	VistaBoton *vistaBtnMulti, *vistaBtnSingle;

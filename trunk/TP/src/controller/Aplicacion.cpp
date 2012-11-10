@@ -92,7 +92,7 @@ void Aplicacion::dibujar() {
     // Mostramos los FPS:
     if (FPS_ON) {
     	stringstream out;
-    	out << "FPS: " << SDL_getFramerate(&frames) << " - FPS_old: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
+    	out << "DonkeyMon!" <<" - FPS: " << SDL_getFramerate(&frames) << " - FPS_old: " << FPS::ControlFPS.obtenerFPS() << " - Delta: " << FPS::ControlFPS.obtenerDelta();
     	ventana->setearTitulo(out.str());
     }
 

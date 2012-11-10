@@ -6,7 +6,7 @@
 EstadoMenuPrincipal EstadoMenuPrincipal::instancia;
 
 EstadoMenuPrincipal::EstadoMenuPrincipal() {
-	fondo = NULL;
+	fondo = titulo = NULL;
 	btnMultiPlayer = btnSinglePlayer = NULL;
 	animacion = NULL;
 	vistaBtnMulti = vistaBtnSingle = NULL;
@@ -40,6 +40,7 @@ void EstadoMenuPrincipal::crearVistas(){
 	btnSinglePlayer->agregarObservador(vistaBtnSingle);
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
 	fondo->escala(800,600);
+	titulo = new Superficie("src/gui/resources/titulo.png");
 
 	/*TODO:
 	 animacion = superMegaAnimacionDeFondo(); jaja
@@ -50,6 +51,10 @@ void EstadoMenuPrincipal::terminar(){
 	if (fondo){
 		delete (fondo);
 		fondo = NULL;
+	}
+	if(titulo){
+		delete(titulo);
+		titulo = NULL;
 	}
 	if (btnMultiPlayer){
 		delete (btnMultiPlayer);
@@ -99,6 +104,7 @@ void EstadoMenuPrincipal::dibujar(SDL_Surface* display){
 	}
 
 	fondo->dibujar(display,0,0);
+	titulo->dibujar(display, 200,200);
 	vistaBtnSingle->dibujar(display);
 	vistaBtnMulti->dibujar(display);
 	/*animacion->dibujar(display, 400,200);
