@@ -313,7 +313,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	parametrosPersonaje* paramBarril= crearParametrosPersonaje(nodoRaiz["barril"],"barril");
 
-	nodoRaiz["barril"]["animaciones"]["saltar"]>>ruta;
+	nodoRaiz["barril"]["animaciones"]["cayendo"]>>ruta;
 
 	Animacion* animacionSaltar= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
 
@@ -325,12 +325,17 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramBarril->animaciones->push_back(animacionGritando);
 
-	nodoRaiz["barril"]["animaciones"]["caminando"]>>ruta;
+	nodoRaiz["barril"]["animaciones"]["rodando"]>>ruta;
 
 	animacionCaminando= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
 
 	paramBarril->animaciones->push_back(animacionCaminando);
 
+	nodoRaiz["barril"]["animaciones"]["bajando"]>>ruta;
+
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
+
+	paramBarril->animaciones->push_back(animacionGritando);
 
 	aux= new std::vector<int>();
 
@@ -348,6 +353,12 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	aux->push_back(CAMINANDODER);
 	aux->push_back(CAMINANDOIZQ);
+
+	paramBarril->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(SUBIENDOMOVIMIENTO);
 
 	paramBarril->matrizEstados->push_back(aux);
 
