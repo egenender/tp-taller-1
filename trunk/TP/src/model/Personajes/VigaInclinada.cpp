@@ -1,12 +1,6 @@
 #include "VigaInclinada.h"
 #include <math.h>
 
-//FIXME: quitar esto:
-#include "../../controller/GestorConfiguraciones.h"
-#include "../../view/Superficie.h"
-#include "../../view/VistaImagen.h"
-#include "../../view/VistaCuerpo.h"
-
 VigaInclinada::VigaInclinada(const char* nom, Area* sup, float alfa):Cuerpo(nom,sup) {
 	angulo = 0;
 	if (alfa < 90 && alfa > -90)
@@ -103,22 +97,6 @@ void VigaInclinada::guardarSubPlataformas(vector<Actualizable*>* vector){
 	for (unsigned int i = 0; i < plataformas->size(); i++){
 		vector->push_back(plataformas->at(i));
 	}
-
-	//FIXME: BORRAR ESTO, hardcode para ver que ande!
-//	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
-//
-//	std::vector<VistaCuerpo*>* vistas = gestor->ObtenerVistas();
-//	Superficie* superf;
-//	VistaImagen* img;
-//	for (unsigned int j = 0; j < plataformas->size(); j++){
-//		superf = new Superficie("src/resources/items/viga2.jpg");
-//		superf->escala(plataformas->at(j)->obtenerAncho(), plataformas->at(j)->obtenerAlto());
-//		img = new VistaImagen(superf);
-//		plataformas->at(j)->agregarObservador(img);
-//		vistas->push_back(img);
-//	}
-
-	//BORRAR HASTA ACA
 }
 
 VigaInclinada::~VigaInclinada() {

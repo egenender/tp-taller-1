@@ -719,7 +719,9 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->actualizables.push_back(viga);
 
 		rutaImagen = texturas->at(tex);
-		vista = new VistaImagen(new Superficie(rutaImagen),inclinacion);
+		Superficie* sup = new Superficie(rutaImagen);
+		sup->escala(ancho,alto);
+		vista = new VistaImagen(sup,-inclinacion);
 
 		configNivel->vistas.push_back(vista);
 
