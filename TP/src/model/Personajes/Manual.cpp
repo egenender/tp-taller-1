@@ -1,5 +1,6 @@
 #include "Manual.h"
 #include "Hongo.h"
+#include "CamaElastica.h"
 #include <stdio.h>
 
 Manual::~Manual() {
@@ -319,7 +320,7 @@ void Manual::chocarConEscalera(Escalera*){
 void Manual::chocarConCamaElastica(CamaElastica* ce){
 
 	//tengo que ver por cual direccion se chocan:
-	Posicion* posPersAnterior = ((Cuerpo*)ce)->obtenerPosicionAnterior();
+	Posicion* posPersAnterior = ce->obtenerArea()->obtenerPosicion();
 		//me fijo nomas si vino de arriba:
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 	if(posPersAnterior->estaAbajoDe(posCmp)){
