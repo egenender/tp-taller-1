@@ -9,6 +9,7 @@
 
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
+#include "../model/Personajes/PlataformaMovil.h"
 
 Nivel Nivel::instancia;
 
@@ -96,12 +97,21 @@ void Nivel::iniciar() {
 		}else{
 			//XXX: le lugar de hardcode de pruebas:
 			// Descomentar para una cama elastica
-//			CamaElastica* cama= new CamaElastica("warap",new Area(56,45,new Posicion(200,200)));
-//			gestor->ObtenerActualizables()->push_back(cama);
-//			VistaVarios* vista= new VistaVarios();
-//			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/cubosMovimiento.bmp",56,45)));
-//			vistas->push_back(vista);
-//			cama->agregarObservador(vista);
+			CamaElastica* cama= new CamaElastica("warap",new Area(56,45,new Posicion(200,500)));
+			gestor->ObtenerActualizables()->push_back(cama);
+			VistaVarios* vista= new VistaVarios();
+			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/cubosMovimiento.bmp",56,45)));
+			vistas->push_back(vista);
+			cama->agregarObservador(vista);
+
+			PlataformaMovil* plat = new PlataformaMovil ("p", new Area(200, 50, new Posicion (800, 200)), 10, 250);
+			actualizables->push_back(plat);
+			Superficie* sup = new Superficie("src/resources/items/viga2.jpg");
+			sup->escala(200,50);
+			VistaImagen* v = new VistaImagen (sup);
+			vistas->push_back(v);
+			plat->agregarObservador(v);
+
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
