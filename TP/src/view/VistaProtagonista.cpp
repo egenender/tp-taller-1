@@ -4,7 +4,7 @@
 VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* caminar, Animacion* quieto, Animacion* saltar/*, BarraEstado* labarra*/) {
 	//barra = labarra;
 	//primeraVez = true;
-
+	invisible = false;
 	Animacion* caminaDer = caminar;
 	caminaDer->transparencia(255,0,255);
 	Animacion* caminaIzq = caminaDer->voltear(HORIZONTALMENTE);
@@ -71,6 +71,7 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	pararDeDibujar = false;
 
 	animacionActual = animaciones->at(estado);
+	invisible = !invisible && observable->estaInvencible();
 }
 
 void VistaProtagonista::reiniciar(){
@@ -78,3 +79,8 @@ void VistaProtagonista::reiniciar(){
 }
 
 VistaProtagonista::~VistaProtagonista() {}
+
+bool VistaProtagonista::dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug){
+	if (!invisible) return VistaAnimada::dibujar(display, xCamara, yCamara, debug);
+	return true;
+}
