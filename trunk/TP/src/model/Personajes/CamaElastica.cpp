@@ -18,7 +18,7 @@ CamaElastica::CamaElastica(const char* nom, Area* sup): Cuerpo(nom,sup) {
 
 	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
 
-	posAnterior= superficieOcupada->obtenerPosicion();
+	//posAnterior= superficieOcupada->obtenerPosicion();
 
 }
 
