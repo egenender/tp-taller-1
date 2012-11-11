@@ -7,8 +7,9 @@
 
 class VistaVidas :public VistaCuerpo{
 private:
-	Superficie* sup;
+	Superficie* sup, *timeout;
 	int vidas;
+	bool tieneTimeout;
 
 public:
 	VistaVidas();

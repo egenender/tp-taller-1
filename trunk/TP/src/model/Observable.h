@@ -43,6 +43,7 @@ class Observable {
 		int cantidadObservadores();
 		virtual Posicion* obtenerPosicion()=0;
 		virtual int obtenerVidas();
+		virtual bool estaInvencible();
 	protected:
 		void huboCambios();
 		void limpiarCambio();

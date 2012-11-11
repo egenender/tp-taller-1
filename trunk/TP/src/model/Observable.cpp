@@ -67,3 +67,7 @@ int Observable::cantidadObservadores() {
 int Observable::obtenerVidas(){
 	return 0;
 }
+
+bool Observable::estaInvencible(){
+	return false;
+}

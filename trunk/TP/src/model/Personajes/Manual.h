@@ -74,6 +74,7 @@ public:
 	bool esGanador();
 	void setearXInicial(int);
 	int obtenerVidas();
+	bool estaInvencible();
 	void aumentarVida();
 	void evolucionar();
 	void habilitarEspecial();
