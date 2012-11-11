@@ -16,6 +16,7 @@ protected:
 	const char* nombre;
 	Area* superficieDeColision;
 	Posicion* posAnterior;
+	friend class PlataformaMovil;
 public:
 	Cuerpo(const char*, Area*);
 	virtual ~Cuerpo();

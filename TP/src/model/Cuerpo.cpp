@@ -59,7 +59,8 @@ void Cuerpo::trasladar(int factorX, int factorY, bool cambio){
 		posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 	}
 	Posicion* posDesplazamiento = new Posicion (factorX,factorY);
-	superficieDeColision->mover(posDesplazamiento);
+	if (superficieDeColision)
+		superficieDeColision->mover(posDesplazamiento);
 
 	superficieOcupada->mover(posDesplazamiento);
 
