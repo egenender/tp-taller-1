@@ -1,11 +1,11 @@
 #include "Manual.h"
 #include "Hongo.h"
 #include "CamaElastica.h"
-#include <stdio.h>
 
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 	delete(superficieReemplazo);
+	delete(timeout);
 }
 
 void Manual::saltar(bool autogenerado){
@@ -111,6 +111,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	//superficieOcupada->cambiarPermisos(difAncho/2, difAlto);
 	supActual = SUPERFICIE_INVOLUCION;
 
+	timeout = new Timer();
 }
 
 void Manual::moverALaDerecha(){
@@ -132,6 +133,7 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 
 void Manual::actualizar(float delta){
 	this->delta = delta;
+	actualizarTimeOut();
 	actualizarEvolucion();
 	validarPiso();
 	actualizarSalto();
@@ -368,6 +370,7 @@ void Manual::mtrasladar(int fx, int fy, bool c){
 }
 
 void Manual::perderVida(){
+	timeout->comenzar();
 	if (evolucionado == EVOLUCION){
 		evolucionado = 0;
 		//habria que poner el timeOut
@@ -387,10 +390,12 @@ void Manual::perderVida(){
 }
 
 void Manual::chocarConBarril(Barril*){
+	if (timeout->estaEmpezado()) return;
 	perderVida();
 }
 
 void Manual::chocarConHongo(Hongo* h){
+	if (timeout->estaEmpezado()) return;
 
 	//tengo que ver por cual direccion se chocan:
 	Posicion* posPersAnterior = h->obtenerPosicionAnterior();
@@ -463,4 +468,9 @@ void Manual::aumentarVida(){
 
 void Manual::habilitarEspecial(){
 	especialHabilitado = true;
+}
+
+void Manual::actualizarTimeOut(){
+	if (timeout->obtenerTiempo() >= (TIEMPO_TIMEOUT * 1000))
+		timeout->detener();
 }

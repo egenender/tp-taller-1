@@ -7,6 +7,7 @@
 #include "../Observable.h"
 #include "Plataforma.h"
 #include "../Fabricas/FabricaBolasDeFuego.h"
+#include "../Timer.h"
 
 class Hongo;
 class Escalera;
@@ -20,6 +21,7 @@ class Princesa;
 #define CANT_VIDAS 3
 #define SUPERFICIE_EVOLUCION 1
 #define SUPERFICIE_INVOLUCION 0
+#define TIEMPO_TIMEOUT 3
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
  que la altura maxima sea la misma a la que hay ahora:
@@ -46,6 +48,8 @@ private:
 
 	bool especialHabilitado;
 	FabricaBolasDeFuego *fabrica;
+
+	Timer *timeout;
 
 public:
 //	Manual(const char*, Area*);
@@ -94,6 +98,7 @@ private:
 	void actualizarEstados();
 	void perderVida();
 	void actualizarEvolucion();
+	void actualizarTimeOut();
 };
 
 
