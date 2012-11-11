@@ -474,3 +474,7 @@ void Manual::actualizarTimeOut(){
 	if (timeout->obtenerTiempo() >= (TIEMPO_TIMEOUT * 1000))
 		timeout->detener();
 }
+
+bool Manual::estaInvencible(){
+	return timeout->estaEmpezado();
+}
