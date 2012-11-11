@@ -10,6 +10,8 @@
 //TODO: *le hardcode:
 #include "../view/VistaSonora.h"
 #include "../model/Personajes/PlataformaMovil.h"
+#include "../model/Personajes/Tuberia.h"
+#include "../model/Fabricas/FabricaHongos.h"
 
 Nivel Nivel::instancia;
 
@@ -111,6 +113,20 @@ void Nivel::iniciar() {
 			VistaImagen* v = new VistaImagen (sup);
 			vistas->push_back(v);
 			plat->agregarObservador(v);
+
+			std::vector<int>* probs = new std::vector<int>();
+			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
+			fabrs->push_back(new FabricaHongos());
+			probs->push_back(100);
+			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, 1, probs, fabrs);
+			actualizables->push_back(tub);
+
+			sup = new Superficie("src/resources/items/tuberia.bmp");
+			sup->escala(60,60);
+			sup->transparencia(255,0,255);
+			VistaImagen *vi = new VistaImagen(sup);
+			vistas->push_back(vi);
+			tub->agregarObservador(vi);
 
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
