@@ -99,6 +99,9 @@ class GestorConfiguraciones{
 		void CargarConfiguracionNivel(const YAML::Node&,const YAML::Node&,const YAML::Node&,const YAML::Node&);
 		void CargarPersonajesNivel(const YAML::Node&);
 		void CargarEstaticosNivel(const YAML::Node&, bool, bool, int);
+
+		void CargarElementosNivel(const YAML::Node& personajes);
+
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 		void crearVista(Cuerpo*,string);
@@ -141,5 +144,7 @@ class GestorConfiguraciones{
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
+
+		Cuerpo* instanciarCuerpo(std::string, int, int);
 };
 
