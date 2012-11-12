@@ -31,6 +31,9 @@ class Princesa;
 
 class Manual:public Cuerpo {
 private:
+	static bool cooperativo;
+
+private:
 	int velocidad;
 	float delta;
 	int estado;
@@ -52,8 +55,7 @@ private:
 	Timer *timeout;
 
 public:
-//	Manual(const char*, Area*);
-//	Manual(const char*, Area*, int);
+	static void setearCooperatividad(bool);
 	Manual(const char*, Area*, int, int);
 	virtual ~Manual();
 	void posicionar(Posicion*);

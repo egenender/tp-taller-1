@@ -79,5 +79,23 @@ void Mono::tirarBarril(){
 
 	//digo que vaya hacia la derecha en un estado inicial.. pero podriamos ver de tirar
 	//un random o algo..
-	fabrica->fabricar(pos, 1);
+	fabrica->fabricar(pos, calculoDireccionRandom());
+}
+
+
+int Mono::calculoDireccionRandom(){
+	float rnd;
+	do{
+		rnd = (rand() % 1000)+1;
+		float w = (rand() % 1000)+1;
+		if (rnd > w)
+			rnd = w / rnd;
+		else
+			rnd = rnd/w;
+	}while(rnd == 1);
+
+	if (rnd < 0.5)
+		return 1;
+	else
+		return -1;
 }

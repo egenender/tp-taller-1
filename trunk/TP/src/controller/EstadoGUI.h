@@ -16,6 +16,8 @@
 #include "../view/Superficie.h"
 #include "../gui/model/ImagenGUI.h"
 #include "../gui/model/Muestra.h"
+#include "../gui/model/Checkbox.h"
+#include "../gui/view/VistaCheckbox.h"
 #include "SDL/SDL_mixer.h"
 
 #include "Evento.h"
@@ -33,7 +35,7 @@ private:
 	CuadroTexto *txtPuertoServidor, *txtPuertoCliente, *txtIP;
 	BarraEstado* barra;
 	//TODO: faltan las imagenes y las listas
-	Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto;
+	Label *lblPuertoServidor, *lblIP, *lblPuertoCliente, *lblnombrePersonaje, *lblvelocidad, *lblsalto, *lblCoop;
 
 	ListaScrolleable* scrollPersonajes, *scrollNiveles ;
 	Boton *btnscrollarribaPersonajes, *btnscrollabajoPersonajes, *btnscrollarribaNiveles, *btnscrollabajoNiveles;
@@ -47,10 +49,13 @@ private:
 	VistaBoton *vistaBtncrear, *vistaBtnsolapacliente1, *vistaBtnsolapacliente2, *vistaBtnsolapaservidor, *vistaBtnconectar, *vistaBtnjugar;
 	VistaCuadroTexto *vistaTxtPuertoServidor, *vistaTxtPuertoCliente, *vistaTxtIP;
 	VistaBarraEstado *vistaBarra;
-	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto;
+	VistaLabel *vistalblpuertoservidor, *vistalblpuertocliente, *vistalblIP, *vistalblnombre, *vistalblvelocidad, *vistalblsalto, *vistalblcoop;
 
 	Superficie* fondoPestania, *fondo;
 	Mix_Music* musica;
+
+	Checkbox* checkCooperativo;
+	VistaCheckbox* vistaCheck;
 private:
         EstadoGUI();
         void crearBtns();
