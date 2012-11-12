@@ -9,6 +9,7 @@ class Hongo;
 class Princesa;
 class BolaDeFuego;
 class CamaElastica;
+class Pluma;
 
 class Actualizable {
 public:
@@ -28,6 +29,7 @@ public:
 	virtual void chocarConPrincesa(Princesa*);
 	virtual void chocarConBolaDeFuego(BolaDeFuego*);
 	virtual void chocarConCamaElastica(CamaElastica*);
+	virtual void chocarConPluma(Pluma*);
 //Los automaticos no haran nada
 };
 
