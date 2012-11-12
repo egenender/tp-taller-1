@@ -14,7 +14,12 @@ void FabricaVidasExtra::fabricar(Posicion* inicial, int valor){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje("vidaExtra");
 
-	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY() - parametros->alto));
+	int x = inicial->obtenerX();
+	int y = inicial->obtenerY();
+
+	definirXY(&x, &y, inicial, valor, parametros->ancho, parametros->alto);
+
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	VidaExtra* vida = new VidaExtra ("vidaExtra", sup, parametros->velocidad);
 	gestor->crearVista(vida, "vidaExtra");
 }
