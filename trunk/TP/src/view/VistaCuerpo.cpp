@@ -28,9 +28,9 @@ void VistaCuerpo::actualizar(Observable* observable) {
 		return;
 
 	posicionDibujar = observable->obtenerPosicion();
-	Cuerpo* cuerpo = (Cuerpo*) observable;
+/*	Cuerpo* cuerpo = (Cuerpo*) observable;
 	if (supDebug) {
 		supDebug->escala(cuerpo->obtenerArea()->obtenerAncho(), cuerpo->obtenerArea()->obtenerAlto());
 	}
-	posicionColision = cuerpo->obtenerArea()->obtenerPosicion();
+	posicionColision = cuerpo->obtenerArea()->obtenerPosicion();*/
 }
