@@ -49,3 +49,8 @@ void PlataformaMovil::actualizar(float){
 	}
 	cuerposContacto->clear();
 }
+
+void PlataformaMovil::chocarConPlataforma(Plataforma*){
+	actual = 0;
+	velocidad *= (-1);
+}
