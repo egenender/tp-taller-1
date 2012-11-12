@@ -49,7 +49,7 @@ Camara::Camara(int x, int y) {
 	}
 }
 
-bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug) {
+bool Camara::dibujar(SDL_Surface* display, int xCamara, int yCamara) {
 	// TODO: deberia preguntarle el fondo a nivel? o lo tiene el?
 	// Por ahora lo dejo como que lo tiene el:
 

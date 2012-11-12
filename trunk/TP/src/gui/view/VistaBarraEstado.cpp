@@ -74,6 +74,6 @@ bool VistaBarraEstado::dibujar(SDL_Surface* display) {
 	return dibujeBarra;
 }
 
-bool VistaBarraEstado::dibujar(SDL_Surface* display, int x, int y, bool debug) {
+bool VistaBarraEstado::dibujar(SDL_Surface* display, int x, int y) {
 	return dibujar(display);
 }

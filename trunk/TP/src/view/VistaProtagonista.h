@@ -14,7 +14,7 @@ public:
 	~VistaProtagonista();
 	void actualizar(Observable* observable);
 	void reiniciar();
-	bool dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug);
+	bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 };
 
 #endif /* VISTAPROTAGONISTA_H_ */

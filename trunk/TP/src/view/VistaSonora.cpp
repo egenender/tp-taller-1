@@ -78,7 +78,7 @@ void VistaSonora::actualizar(Observable* observable) {
 	}
 }
 
-bool VistaSonora::dibujar(SDL_Surface* display, int x, int y, bool debug) {
+bool VistaSonora::dibujar(SDL_Surface* display, int x, int y) {
 	return reproducir();
 }
 

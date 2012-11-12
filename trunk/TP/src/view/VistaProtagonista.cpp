@@ -60,9 +60,6 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 }
 
 void VistaProtagonista::actualizar(Observable* observable) {
-
-	VistaAnimada::actualizar(observable);
-
 	int estado = observable->obtenerEstado();
 	if (estado == MUERTO){
 		pararDeDibujar = true;
@@ -70,6 +67,7 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	}
 	pararDeDibujar = false;
 
+	posicionDibujar = observable->obtenerPosicion();
 	animacionActual = animaciones->at(estado);
 	invisible = !invisible && observable->estaInvencible();
 }
@@ -80,7 +78,7 @@ void VistaProtagonista::reiniciar(){
 
 VistaProtagonista::~VistaProtagonista() {}
 
-bool VistaProtagonista::dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug){
-	if (!invisible) return VistaAnimada::dibujar(display, xCamara, yCamara, debug);
+bool VistaProtagonista::dibujar(SDL_Surface* display, int xCamara, int yCamara){
+	if (!invisible) return VistaAnimada::dibujar(display, xCamara, yCamara);
 	return true;
 }

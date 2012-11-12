@@ -39,7 +39,7 @@ VistaAutomatico::~VistaAutomatico() {
 
 
 void VistaAutomatico::actualizar(Observable* observable) {
-	VistaAnimada::actualizar(observable);
+	posicionDibujar = observable->obtenerPosicion();
 
 	if (quieto){
 		if (timer->obtenerTiempo() >= (periodos->at(actual) * 1000)){

@@ -14,8 +14,7 @@ protected:
 public:
 	VistaAnimada();
 	~VistaAnimada();
-	void actualizar(Observable* observable);
-	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug);
+	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 	virtual void reiniciar()=0;
 };
 
