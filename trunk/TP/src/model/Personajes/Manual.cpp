@@ -286,12 +286,11 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 	}
 
-	bool cambio = true;
-	if(posCmp)
-		delete(posCmp);
-	else
-		cambio = false;
-
+//	bool cambio = true;
+//	if(posCmp)
+//		delete(posCmp);
+//	else
+//		cambio = false;
 
 	tengoPiso = true;
 	chocaConSosten = true;
@@ -306,7 +305,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
 	y -= p->obtenerArea()->obtenerPosicion()->obtenerY();
 
-	mtrasladar(0,-y,cambio);
+	mtrasladar(0,-y,false);
 
 }
 void Manual::chocarConEscalera(Escalera*){
