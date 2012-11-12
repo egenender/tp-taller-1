@@ -1034,6 +1034,8 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 			return new Hongo("hongo",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "tortuga" ) == 0 )
 			return new Hongo("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
+	if( strcmp ( tipo.c_str() , "mono" ) == 0 )
+			return new Mono("mono",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), new FabricaBarriles(),mapaParam->at(tipo)->velocidad);
 
 	return NULL;
 }

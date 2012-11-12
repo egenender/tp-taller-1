@@ -23,6 +23,7 @@ private:
 	bool puedoBajar, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten;
 	bool bajarEnSiguiente;
+	bool enViga;
 	Posicion* posAnterior;
 	bool permito; //variable para permitir caida (depende de si ya bajo por una escalera, etc)
 	Escalera* esc;

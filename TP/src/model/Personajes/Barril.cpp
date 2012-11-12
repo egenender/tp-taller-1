@@ -35,6 +35,7 @@ Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	esc = NULL;
 	plt = NULL;
 	permito = false;
+	enViga = false;
 }
 
 Barril::~Barril() {
@@ -77,8 +78,8 @@ void Barril::actualizar(float){
 }
 
 void Barril::actualizarSalto(){
-	if (estado != SALTAR) return;
-
+	if (estado != SALTAR && !enViga) return;
+	enViga = false;
 	trasladar(0,velocidadY,true); //aca ya se avisa que hubo cambios (a los observadores cuando los notifique)
 	puedoBajar = false;
 
@@ -129,6 +130,7 @@ void Barril::actualizarMovimiento(){
 	if (movX != 0){
 		if (((obtenerArea()->obtenerPosicion()->obtenerX() + movX) < 0) || ((obtenerArea()->obtenerPosicion()->obtenerX()+ obtenerArea()->obtenerAncho() + movX) > Posicion::obtenerMaximo()->obtenerX())){
 				estado = MUERTO;
+				huboCambios();
 				return;
 		}
 		trasladar(movX,0,true);
@@ -252,10 +254,15 @@ void Barril::chocarConPlataforma(Plataforma* p){
 	tengoPiso = true;
 	chocaConSosten = true;
 	velocidadY = 0;
-	if(p->caeADerecha())
+	if(p->caeADerecha()){
 		direccion = 1;
-	else if(p->caeAIzquierda())
+		enViga = true;
+	}else if(p->caeAIzquierda()){
 		direccion = -1;
+		enViga = true;
+	}
+	if(enViga)
+		velocidadY = 15;
 
 	int y;
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();

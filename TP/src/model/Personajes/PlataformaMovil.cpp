@@ -53,6 +53,7 @@ void PlataformaMovil::actualizar(float){
 void PlataformaMovil::chocarConPlataforma(Plataforma* p){
 	Posicion* pos = p->obtenerArea()->obtenerPosicion();
 	Posicion* posCmp = new Posicion(pos->obtenerX() + p->obtenerAncho(), pos->obtenerY());
+
 	bool choque = false;
 	if (posCmp->estaALaIzquierdaDe(posAnterior))
 		choque = true;
@@ -66,7 +67,7 @@ void PlataformaMovil::chocarConPlataforma(Plataforma* p){
 	delete(posCmp);
 
 	if(choque){
-		actual = 0;
-		velocidad *= (-1);
+	actual = 0;
+	velocidad *= (-1);
 	}
 }
