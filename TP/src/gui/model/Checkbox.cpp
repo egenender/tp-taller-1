@@ -52,12 +52,12 @@ void Checkbox::manejarEvento(SDL_Event* evento) {
 	if (evento->type == SDL_MOUSEBUTTONUP) {
 		if (evento->button.button == SDL_BUTTON_LEFT && pressed) {
 			pressed = false;
-			if (manejador)
-				manejador->manejarClic();
 			if (checked)
 				checked = false;
 			else
 				checked = true;
+			if (manejador)
+				manejador->manejarClic();
 		}
 	}
 

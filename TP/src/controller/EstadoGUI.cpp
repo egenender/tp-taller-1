@@ -7,6 +7,7 @@
 #include "../gui/model/ManejadorJugar.h"
 #include "../gui/model/ManejadorDesconectar.h"
 #include "../gui/model/ManejadorCambiaEstado.h"
+#include "../gui/model/ManejadorCooperativo.h"
 
 EstadoGUI EstadoGUI::instancia;
 
@@ -33,6 +34,8 @@ EstadoGUI::EstadoGUI() {
 	scrollPersonajes = scrollNiveles = NULL;
 	animaciones = NULL;
 	musica = NULL;
+	checkCooperativo = NULL;
+	vistaCheck = NULL;
 }
 
 EstadoGUI::~EstadoGUI() {
@@ -91,6 +94,11 @@ void EstadoGUI::crearBtns(){
 	btnjugar = new Boton(400, 400, 100, 50,  new ManejadorJugar(scrollPersonajes, barra));
 	btnMenu = new Boton(450,80,150,50, new ManejadorCambiaEstado(ESTADO_MENU));
 
+	ManejadorCooperativo* cop = new ManejadorCooperativo();
+	checkCooperativo = new Checkbox(100,350, 21, 21, cop);
+	cop->setearCheckbox(checkCooperativo);
+	cop->manejarClic();
+
 	btnsolapacliente1->setearMensaje("Servidor");
 	btnsolapacliente2->setearMensaje("Servidor");
 	btnsolapaservidor->setearMensaje("Cliente");
@@ -131,6 +139,8 @@ void EstadoGUI::crearLabels(){
 	lblvelocidad->setearMensaje("Velocidad");
 	lblsalto = new Label(100, 400, 200, 30);
 	lblsalto->setearMensaje("Salto");
+	lblCoop = new Label(140,345, 200,30);
+	lblCoop->setearMensaje("Jugar en Modo Cooperativo");
 
 	imgCliente = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Cliente", 230, 40, 206, 50);
 	imgServidor = new ImagenGUI("src/gui/resources/pestanialbl.bmp", "Servidor", 25,40, 206, 50);
@@ -145,6 +155,8 @@ void EstadoGUI::crearSolapaServidor(){
 	lista_insertar_ultimo(solapaServidor, scrollNiveles);
 	lista_insertar_ultimo(solapaServidor, btnscrollarribaNiveles);
 	lista_insertar_ultimo(solapaServidor, btnscrollabajoNiveles);
+	lista_insertar_ultimo(solapaServidor, checkCooperativo);
+	lista_insertar_ultimo(solapaServidor, lblCoop);
 }
 
 void EstadoGUI::crearSolapaCliente(){
@@ -181,6 +193,7 @@ void EstadoGUI::crearSolapaCliente(){
 	btnscrollabajoPersonajes->hacerInvisible();
 	imgCliente->hacerInvisible();
 	animaciones->hacerInvisible();
+
 }
 
 void EstadoGUI::crearVistas(){
@@ -218,6 +231,7 @@ void EstadoGUI::crearVistas(){
 	vistalblnombre = new VistaLabel();
 	vistalblvelocidad = new VistaLabel();
 	vistalblsalto = new VistaLabel();
+	vistalblcoop = new VistaLabel();
 
 	vistaScrollPersonajes = new VistaLista(3);
 	scrollPersonajes->agregarObservador(vistaScrollPersonajes);
@@ -247,11 +261,14 @@ void EstadoGUI::crearVistas(){
 	lblnombrePersonaje->agregarObservador(vistalblnombre);
 	lblvelocidad->agregarObservador(vistalblvelocidad);
 	lblsalto->agregarObservador(vistalblsalto);
+	lblCoop->agregarObservador(vistalblcoop);
 
 	fondoPestania = new Superficie("src/gui/resources/fondoPestanias.bmp");
 	fondoPestania->transparencia(255,0,255);
 	fondo = new Superficie("src/gui/resources/fondo.bmp");
 
+	vistaCheck = new VistaCheckbox("src/gui/resources/checkbox-unchecked.bmp", "src/gui/resources/checkbox-checked.bmp");
+	checkCooperativo->agregarObservador(vistaCheck);
 }
 
 
@@ -280,7 +297,9 @@ void EstadoGUI::actualizar(float delta){
 	lblnombrePersonaje->actualizar();
 	lblvelocidad->actualizar();
 	lblsalto->actualizar();
+	lblCoop->actualizar();
 	animaciones->actualizar();
+	checkCooperativo->actualizar();
 }
 
 void EstadoGUI::dibujar(SDL_Surface* display) {
@@ -311,12 +330,14 @@ void EstadoGUI::dibujar(SDL_Surface* display) {
 	vistalblIP->dibujar(display);
 	vistalblpuertoservidor->dibujar(display);
 	vistalblpuertocliente->dibujar(display);
+	vistalblcoop->dibujar(display);
 	vistaScrollPersonajes->dibujar(display);
 	vistaScrollNiveles->dibujar(display);
 	vistaArribaPersonajes->dibujar(display);
 	vistaAbajoPersonajes->dibujar(display);
 	vistaArribaNiveles->dibujar(display);
 	vistaAbajoNiveles->dibujar(display);
+	vistaCheck->dibujar(display);
 	animaciones->dibujar(display);
 
 }
@@ -331,16 +352,18 @@ void EstadoGUI::manejarEvento(SDL_Event* evento) {
 	btnscrollarribaNiveles->manejarEvento(evento);
 	btnscrollabajoNiveles->manejarEvento(evento);
 
+	checkCooperativo->manejarEvento(evento);
+
 	txtPuertoServidor->manejarEvento(evento);
 	txtPuertoCliente->manejarEvento(evento);
 	txtIP->manejarEvento(evento);
 
 
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+	//if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnjugar->manejarEvento(evento);
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+	//if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btncrear->manejarEvento(evento);
-	if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
+	//if (ManejadorEstados::obtenerEstadoActual() == obtenerInstancia())
 		btnMenu->manejarEvento(evento);
 }
 
@@ -562,5 +585,21 @@ void EstadoGUI::terminar() {
 		Mix_HaltMusic();
 		Mix_FreeMusic(musica);
 		musica = NULL;
+	}
+	if(checkCooperativo){
+		delete(checkCooperativo);
+		checkCooperativo = NULL;
+	}
+	if (vistaCheck){
+		delete(vistaCheck);
+		vistaCheck = NULL;
+	}
+	if(lblCoop){
+		delete(lblCoop);
+		lblCoop = NULL;
+	}
+	if(vistalblcoop){
+		delete(vistalblcoop);
+		vistalblcoop = NULL;
 	}
 }

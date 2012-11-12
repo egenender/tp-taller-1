@@ -30,6 +30,7 @@ public:
 private:
 	float calcularTiempo();
 	void tirarBarril();
+	int calculoDireccionRandom();
 };
 
 #endif /* MONO_H_ */

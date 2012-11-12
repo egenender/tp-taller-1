@@ -2,6 +2,8 @@
 #include "../Observable.h"
 #include "Plataforma.h"
 
+bool BolaDeFuego::cooperativo = true;
+
 BolaDeFuego::BolaDeFuego(const char* nom, Area* sup, int velX, int velY, int dir) : Cuerpo(nom,sup){
 	direccion = dir;
 	tengoPiso = chocaConSosten = false;
@@ -43,10 +45,14 @@ void BolaDeFuego::chocarCon(Actualizable* ac){
 }
 
 void BolaDeFuego::chocarConManual(Manual*){
-	//por ahora no hago nada
+	if (!cooperativo)
+		morir();
 }
 
-
+void BolaDeFuego::chocarConBolaDeFuego(BolaDeFuego*){
+	if (cooperativo)
+		morir();
+}
 
 void BolaDeFuego::chocarConHongo(Hongo*){
 	morir();
@@ -155,4 +161,8 @@ void BolaDeFuego::saltar(){
 	if(!tengoPiso) return;
 	velocidadY = -velocidadSaltoBase;
 	tengoPiso = false;
+}
+
+void BolaDeFuego::setearCooperatividad(bool c){
+	cooperativo = c;
 }

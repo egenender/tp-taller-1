@@ -1,6 +1,8 @@
 #include "ManejadorSinglePlayer.h"
 #include "../../controller/Nivel.h"
 #include "../../controller/GestorConfiguraciones.h"
+#include "../../model/Personajes/BolaDeFuego.h"
+#include "../../model/Personajes/Manual.h"
 
 ManejadorSinglePlayer::ManejadorSinglePlayer(ListaScrolleable *n, ListaScrolleable *p) {
 	personaje = p;
@@ -22,5 +24,9 @@ void ManejadorSinglePlayer::manejarClic(){
 	gestor->setProtagonista(nombrePer);
 
 	Nivel::obtenerInstancia()->setEstado(SINGLE);
+
+	BolaDeFuego::setearCooperatividad(true);
+	Manual::setearCooperatividad(true);
+
 	manejador->manejarClic();
 }

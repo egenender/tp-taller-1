@@ -29,9 +29,6 @@ private:
 	Muestra* animaciones;
 	Mix_Music* musica;
 
-	Checkbox* checkbox1;
-	VistaCheckbox* vistaCheckbox1;
-
 private:
 	EstadoSinglePlayer();
 	void crearBtns();

@@ -2,6 +2,8 @@
 #include "Hongo.h"
 #include "CamaElastica.h"
 
+bool Manual::cooperativo = true;
+
 Manual::~Manual() {
 	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 	delete(superficieReemplazo);
@@ -230,7 +232,13 @@ void Manual::chocarCon(Actualizable* ac){
 	ac->chocarConManual(this);
 }
 void Manual::chocarConManual(Manual* manual){
-	//No pasa nada
+	if (cooperativo) return;
+
+	Posicion* posCmp = new Posicion (manual->obtenerArea()->obtenerPosicion()->obtenerX(),manual->obtenerArea()->obtenerPosicion()->obtenerY() + manual->obtenerArea()->obtenerAlto());
+
+	if (posCmp->estaArribaOIgualDe(posAnterior))
+		perderVida();
+
 }
 void Manual::chocarConPlataforma(Plataforma* p){
 	if(atraviesaBloques) return;
@@ -421,7 +429,9 @@ void Manual::chocarConPrincesa(Princesa*){
 }
 
 void Manual::chocarConBolaDeFuego(BolaDeFuego*){
-	//Por ahora no hago nada
+	if(cooperativo) return;
+
+	perderVida();
 }
 
 void Manual::setearXInicial(int x){
@@ -478,4 +488,8 @@ void Manual::actualizarTimeOut(){
 
 bool Manual::estaInvencible(){
 	return timeout->estaEmpezado();
+}
+
+void Manual::setearCooperatividad(bool c){
+	cooperativo = c;
 }

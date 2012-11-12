@@ -13,18 +13,21 @@
 
 class BolaDeFuego: public Cuerpo {
 private:
+	static bool cooperativo;
 	int direccion, estado, velocidadX, velocidadY, velocidadSaltoBase;
 	bool tengoPiso, chocaConSosten;
 
 public:
 	BolaDeFuego(const char*, Area*, int, int, int);
 	virtual ~BolaDeFuego();
+	static void setearCooperatividad(bool);
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);
 	void chocarConPlataforma(Plataforma*);
 	void chocarConHongo(Hongo*);
 	void chocarConBarril(Barril*);
+	void chocarConBolaDeFuego(BolaDeFuego*);
 
 	void actualizar(float);
 	int obtenerEstado();
