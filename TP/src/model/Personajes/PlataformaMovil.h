@@ -19,6 +19,7 @@ public:
 	void chocarConManual(Manual*);
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);
+	void chocarConPlataforma(Plataforma*);
 	//virtual void chocarConPrincesa(Princesa*); Por ahora este no lo pongo...
 };
 
