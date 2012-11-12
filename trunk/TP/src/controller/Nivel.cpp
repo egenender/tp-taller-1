@@ -100,11 +100,11 @@ void Nivel::iniciar() {
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
 			//XXX: le lugar de hardcode de pruebas:
-			// Descomentar para una cama elastica
 			CamaElastica* cama= new CamaElastica("warap",new Area(56,63,new Posicion(200,500)));
 			gestor->ObtenerActualizables()->push_back(cama);
 			VistaVarios* vista= new VistaVarios();
 			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
+			vista->agregarEstadoSoportado(12,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
 			vistas->push_back(vista);
 			cama->agregarObservador(vista);
 
