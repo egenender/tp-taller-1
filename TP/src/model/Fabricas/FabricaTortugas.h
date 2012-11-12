@@ -9,6 +9,7 @@ public:
 	FabricaTortugas();
 	virtual ~FabricaTortugas();
 	void fabricar(Posicion*,int);
+
 };
 
 #endif /* FABRICATORTUGAS_H_ */

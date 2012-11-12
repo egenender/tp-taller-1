@@ -14,7 +14,12 @@ void FabricaStones::fabricar(Posicion* inicial, int valor){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje("piedraEvolucion");
 
-	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY() - parametros->alto));
+	int x = inicial->obtenerX();
+	int y = inicial->obtenerY();
+
+	definirXY(&x, &y, inicial, valor, parametros->ancho, parametros->alto);
+
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	Stone* piedra = new Stone ("piedraEvolucion", sup, parametros->velocidad);
 	gestor->crearVista(piedra, "piedraEvolucion");
 }

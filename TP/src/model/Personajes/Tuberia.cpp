@@ -88,5 +88,22 @@ void Tuberia::crearPosicion(){
 	x = obtenerArea()->obtenerPosicion()->obtenerX();
 	y = obtenerArea()->obtenerPosicion()->obtenerY();
 
+	if (sentido == ARRIBA_TB){
+		x += (obtenerArea()->obtenerAncho()/2);
+	}
+	if (sentido == ABAJO_TB){
+		y += obtenerArea()->obtenerAlto();
+		x += (obtenerArea()->obtenerAncho()/2);
+	}
+	if (sentido == DERECHA_TB){
+
+		y += obtenerArea()->obtenerAlto();
+		x += obtenerArea()->obtenerAncho() + 1;
+		printf("(%d, %d)\n", x,y);
+	}
+	if (sentido == IZQUIERDA_TB){
+		y += obtenerArea()->obtenerAlto();
+	}
+
 	posCreacion = new Posicion(x,y);
 }
