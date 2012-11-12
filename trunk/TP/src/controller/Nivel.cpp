@@ -4,6 +4,7 @@
 #include "Server.h"
 #include "../model/Colisionador.h"
 #include "../model/Personajes/CamaElastica.h"
+#include "../model/Personajes/Pluma.h"
 #include "../view/VistaVidas.h"
 #include "../view/VistaVarios.h"
 
@@ -106,6 +107,17 @@ void Nivel::iniciar() {
 			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
 			vistas->push_back(vista);
 			cama->agregarObservador(vista);
+
+			Pluma* pluma= new Pluma("pluma",new Area(30,30,new Posicion(200,350)));
+			gestor->ObtenerActualizables()->push_back(pluma);
+
+			VistaVarios* vistaPluma= new VistaVarios();
+
+			Animacion* animacionPluma = new Animacion(new HojaSprites("src/resources/items/Pluma.bmp",30,30));
+			animacionPluma->transparencia(255,0,255);
+			vistaPluma->agregarEstadoSoportado(0,animacionPluma);
+			vistas->push_back(vistaPluma);
+			pluma->agregarObservador(vistaPluma);
 
 			PlataformaMovil* plat = new PlataformaMovil ("p", new Area(200, 50, new Posicion (800, 200)), 10, 250);
 			actualizables->push_back(plat);
