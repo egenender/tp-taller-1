@@ -97,34 +97,6 @@ juego:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
           sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
   tiposAutomatico:  
-    mono:
-      ancho: 140
-      alto: 126
-      animaciones:
-        quieto:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
-          sonido:
-          periodo:
-        caminar:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
-          sonido:
-          periodo: 3
-        grito2:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoMovimiento.bmp
-          sonido:
-          periodo: 2
-    princesa:
-      ancho: 55
-      alto: 47
-      animaciones:
-        quieto:
-          sprites: src/resources/cuerpos/Pikachu/pikachuQuieto.bmp
-          sonido:
-          periodo: 2
-        ayudenme:
-          sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento.bmp
-          sonido:
-          periodo: 7
     troll:
       ancho: 200
       alto: 200
@@ -140,10 +112,10 @@ juego:
   princesa:
     ancho: 62
     alto: 54
-    velocidad: 0
+    velocidad: 5
     animaciones:
-      quieto: src/resources/cuerpos/Primeape/primeapeQuieto.bmp
-      gritando: src/resources/cuerpos/Primeape/primeapeMovimiento.bmp
+      quieto: src/resources/cuerpos/Pikachu/pikachuQuieto.bmp
+      gritando: src/resources/cuerpos/Pikachu/pikachuMovimiento.bmp
   mono:
     ancho: 140
     alto: 126
@@ -205,13 +177,13 @@ juego:
       piso: 540
       fondo: src/resources/fondoGrande.png
       musica: src/resources/niveles/route1.ogg
-      personajes:
+      elementos:
       #  - tipo: mono
      #     x: 100
     #      y: 150
-     #   - tipo: princesa
-    #      x: 700
-   #       y: 150
+        - tipo: princesa
+          x: 700
+          y: 150
   #      - tipo: princesa
  #         x: 700
 #          y: 599
@@ -224,6 +196,11 @@ juego:
         - textura: viga
           x: 300
           y: 350
+          ancho: 400
+          alto: 50
+        - textura: viga
+          x: 100
+          y: 400
           ancho: 400
           alto: 50
       vigas:

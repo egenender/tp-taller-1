@@ -19,6 +19,22 @@
 #include "Sounds.h"
 #include "../view/VistaVarios.h"
 #include "../model/Observable.h"
+#include "../model/Personajes/Princesa.h"
+#include "../model/Personajes/Mono.h"
+#include "../model/Personajes/Hongo.h"
+#include "../model/Personajes/Tortuga.h"
+#include "../model/Personajes/Caja.h"
+#include "../model/Personajes/PlataformaMovil.h"
+#include "../model/Personajes/CamaElastica.h"
+#include "../model/Personajes/Tuberia.h"
+
+#include "../model/Fabricas/FabricaActivaEspeciales.h"
+#include "../model/Fabricas/FabricaStones.h"
+#include "../model/Fabricas/FabricaBarriles.h"
+#include "../model/Fabricas/FabricaTortugas.h"
+#include "../model/Fabricas/FabricaHongos.h"
+#include "../model/Fabricas/FabricaVidasExtra.h"
+
 
 #define VEL_PERSONAJE_MINIMA 2
 #define VEL_PERSONAJE 10
@@ -466,6 +482,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	aux->push_back(CAMINANDOIZQ);
 
 	paramAcEsp->matrizEstados->push_back(aux);
+
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
@@ -795,15 +812,23 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
 		CargarEstaticosNivel(defEscaleras, true, false, ESCALERA);
-	}
+}
+
 
 	try{
-			CargarPersonajesNivel(nodo[nivelElegido]["personajes"]);
-			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
-		}catch(YAML::TypedKeyNotFound<std::string> &e){
-			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
-			CargarPersonajesNivel(defPersonajes);
-		}
+		CargarElementosNivel(nodo[nivelElegido]["elementos"]);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los elementos del nivel");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo elementos");
+	}
+
+//	try{
+//		CargarPersonajesNivel(nodo[nivelElegido]["personajes"]);
+//		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
+//	}catch(YAML::TypedKeyNotFound<std::string> &e){
+//		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo personajes, se cargan por defecto");
+//		CargarPersonajesNivel(defPersonajes);
+//	}
 
 }
 
@@ -920,6 +945,97 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 		estatico->agregarObservador(vista);
 		configNivel->vistas.push_back(vista);
 	}
+}
+
+void GestorConfiguraciones::CargarElementosNivel(const YAML::Node& elementos){
+	std::string tipo;
+	int posX,posY;
+	Cuerpo* cuerpo;
+	VistaCuerpo* vistaCuerpo;
+	for(unsigned i=0;i<elementos.size();i++) {
+		try{
+			elementos[i]["tipo"] >> tipo;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tipo del personaje, se carga por defecto");
+			tipo = TIPO_DEFECTO;
+		}
+
+		try{
+			elementos[i]["x"] >> posX;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo x dentro del personaje, se carga por defecto");
+			posX = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
+			posX = POS_DEFECTO;
+		}
+		if (posX<0 || posX>= configNivel->ancho){
+			posX=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del personaje no toma valor valido, se carga por defecto");
+		}
+
+		try{
+			elementos[i]["y"] >> posY;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo y dentro del personaje, se carga por defecto");
+			posY = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
+			posY = POS_DEFECTO;
+		}
+		if (posY<0 || posY>=configNivel->alto){
+			posY=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del personaje no toma valor valido, se carga por defecto");
+		}
+
+		int x,y;
+		int ancho, alto;
+
+		//debo asegurarme de que pasen un tipo de personaje que ya exista:
+		try{
+			ancho = mapaParam->at(tipo)->ancho;
+			alto = mapaParam->at(tipo)->alto;
+			//el posX posY indica el punto inferior central del personaje (consigna)
+			x = posX - ( ancho/2 );
+			y = posY - alto;
+			//veo si entra en el nivel
+			if (!Entra(x,y,ancho,alto)){
+				if (!Entra(0,0,ancho,alto)){
+					ancho = ANCHO_PERSONAJE;
+					alto = ALTO_PERSONAJE;
+					mapaParam->at(tipo)->ancho = ANCHO_PERSONAJE;
+					mapaParam->at(tipo)->alto = ALTO_PERSONAJE;
+					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-dimensionado para entrar en el nivel");
+				}else{
+					x = 0;
+					y = 0;
+					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
+				}
+			}
+			if (!Entra(x,y,ancho,alto)){
+				x=0;
+				y=0;
+				Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-ubicado para entrar en el nivel");
+			}
+			cuerpo = instanciarCuerpo(tipo, x, y);
+			this->crearVista(cuerpo,tipo);
+		}catch(std::out_of_range &e){
+			//si no hay, por defecto
+		}
+
+	}
+
+}
+
+Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
+	if( strcmp ( tipo.c_str() , "princesa" ) == 0 )
+		return new Princesa("princesa",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
+	if( strcmp ( tipo.c_str() , "hongo" ) == 0 )
+			return new Hongo("hongo",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
+	if( strcmp ( tipo.c_str() , "tortuga" ) == 0 )
+			return new Hongo("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
+
+	return NULL;
 }
 
 void GestorConfiguraciones::CargarPersonajesNivel(const YAML::Node& personajes){
