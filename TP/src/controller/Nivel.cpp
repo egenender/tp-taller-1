@@ -12,6 +12,7 @@
 #include "../model/Personajes/PlataformaMovil.h"
 #include "../model/Personajes/Tuberia.h"
 #include "../model/Fabricas/FabricaHongos.h"
+#include "../model/Fabricas/FabricaTortugas.h"
 
 Nivel Nivel::instancia;
 
@@ -99,10 +100,10 @@ void Nivel::iniciar() {
 		}else{
 			//XXX: le lugar de hardcode de pruebas:
 			// Descomentar para una cama elastica
-			CamaElastica* cama= new CamaElastica("warap",new Area(56,45,new Posicion(200,500)));
+			CamaElastica* cama= new CamaElastica("warap",new Area(56,63,new Posicion(200,500)));
 			gestor->ObtenerActualizables()->push_back(cama);
 			VistaVarios* vista= new VistaVarios();
-			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/cubosMovimiento.bmp",56,45)));
+			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
 			vistas->push_back(vista);
 			cama->agregarObservador(vista);
 
@@ -117,7 +118,9 @@ void Nivel::iniciar() {
 			std::vector<int>* probs = new std::vector<int>();
 			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
 			fabrs->push_back(new FabricaHongos());
-			probs->push_back(100);
+			probs->push_back(50);
+			fabrs->push_back(new FabricaTortugas());
+			probs->push_back(50);
 			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, 1, probs, fabrs);
 			actualizables->push_back(tub);
 
