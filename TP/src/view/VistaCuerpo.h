@@ -7,14 +7,13 @@
 
 class VistaCuerpo : public Observador {
 protected:
-	Posicion* posicionDibujar, *posicionColision;
-	Superficie* supDebug;
+	Posicion* posicionDibujar;
 
 public:
 	VistaCuerpo();
 	~VistaCuerpo();
-	virtual void actualizar(Observable* observable);
-	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug) = 0;
+	virtual void actualizar(Observable* observable) = 0;
+	virtual bool dibujar(SDL_Surface* display, int xCamara, int yCamara) = 0;
 };
 
 

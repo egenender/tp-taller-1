@@ -9,7 +9,9 @@ VistaVarios::~VistaVarios() {
 }
 
 void VistaVarios::actualizar(Observable* observable){
-	VistaAnimada::actualizar(observable);
+	if (!observable)
+		return;
+	posicionDibujar = observable->obtenerPosicion();
 
 	int estado = observable->obtenerEstado();
 	if (estado == MUERTO){

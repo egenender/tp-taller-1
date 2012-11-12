@@ -20,7 +20,7 @@ class Camara : public VistaCuerpo {
 	public:
 		Camara(int x, int y);
 		void actualizar(Observable* observable);
-		bool dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug);
+		bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 		int obtenerX();
 		int obtenerY();
 		Posicion* obtenerPosicion();

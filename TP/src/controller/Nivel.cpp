@@ -26,7 +26,6 @@ Nivel::Nivel() {
 	camara = NULL;
 	controlador = NULL;
 	fondoServidor = NULL;
-	DEBUGMODE = false;
 }
 
 Nivel::~Nivel() {
@@ -60,14 +59,6 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 			}
 		}
 		return;
-	}
-
-	if ((evento->type == SDL_KEYDOWN)
-			&& (evento->key.keysym.sym == SDLK_d)) {
-		if (DEBUGMODE)
-			DEBUGMODE = false;
-		else
-			DEBUGMODE = true;
 	}
 
 	controlador->manejarEvento(evento);
@@ -239,13 +230,13 @@ void Nivel::dibujar(SDL_Surface* display) {
 		return;
 	}
 	// Dibujamos el fondo:
-	camara->dibujar(display, 0, 0, DEBUGMODE); // No importa los numeros, porque camara no le da bola :P
+	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
 
 	// Dibujamos las vistas:
 
 	for (unsigned int i = 0; i < vistas->size(); i++) {
 		VistaCuerpo* vista = vistas->at(i);
-		vista->dibujar(display, camara->obtenerX(), camara->obtenerY(), DEBUGMODE); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
+		vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
 	}
 	// Ponele que se reproducen los sonidos (?)
 }

@@ -30,7 +30,7 @@ public:
 
 	bool agregarSonido(string ruta, int estado);
 	void actualizar(Observable* observable);
-	bool dibujar(SDL_Surface* display, int x, int y, bool debug); // solo llama al reproducir
+	bool dibujar(SDL_Surface* display, int x, int y); // solo llama al reproducir
 	bool reproducir(); // aka: dibujar();
 };
 

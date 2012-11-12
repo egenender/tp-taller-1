@@ -13,11 +13,18 @@ VistaVidas::VistaVidas() {
 	timeout->escala(DIM_CORAZON,DIM_CORAZON);
 	timeout->transparencia(255,0,255);
 
+	tieneTimeout = true;
 }
 
 VistaVidas::~VistaVidas() {
-	delete(sup);
-	delete(timeout);
+	if (sup) {
+		delete(sup);
+		sup = NULL;
+	}
+	if (timeout) {
+		delete(timeout);
+		timeout = NULL;
+	}
 }
 
 void VistaVidas::actualizar(Observable* observable){
@@ -25,7 +32,7 @@ void VistaVidas::actualizar(Observable* observable){
 	tieneTimeout = observable->estaInvencible();
 }
 
-bool VistaVidas::dibujar(SDL_Surface* display, int xCamara, int yCamara, bool debug){
+bool VistaVidas::dibujar(SDL_Surface* display, int xCamara, int yCamara){
 	bool retorno = true;;
 	int inicial = 10;
 	for (int i = 0; i < vidas; i++){

@@ -27,7 +27,6 @@ private:
 	int estado;
 	bool parar;
 	Superficie* fondoServidor;
-	bool DEBUGMODE;
 public:
 	Nivel();
 	virtual ~Nivel();
