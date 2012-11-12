@@ -50,7 +50,23 @@ void PlataformaMovil::actualizar(float){
 	cuerposContacto->clear();
 }
 
-void PlataformaMovil::chocarConPlataforma(Plataforma*){
-	actual = 0;
-	velocidad *= (-1);
+void PlataformaMovil::chocarConPlataforma(Plataforma* p){
+	Posicion* pos = p->obtenerArea()->obtenerPosicion();
+	Posicion* posCmp = new Posicion(pos->obtenerX() + p->obtenerAncho(), pos->obtenerY());
+	bool choque = false;
+	if (posCmp->estaALaIzquierdaDe(posAnterior))
+		choque = true;
+
+	delete(posCmp);
+	posCmp = new Posicion (posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
+
+	if(posCmp->estaALaIzquierdaDe(pos))
+		choque = true;
+
+	delete(posCmp);
+
+	if(choque){
+		actual = 0;
+		velocidad *= (-1);
+	}
 }
