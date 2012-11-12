@@ -114,12 +114,12 @@ juego:
     alto: 54
     velocidad: 5
     animaciones:
-      quieto: src/resources/cuerpos/Pikachu/pikachuQuieto.bmp
-      gritando: src/resources/cuerpos/Pikachu/pikachuMovimiento.bmp
+      quieto: src/resources/cuerpos/Primeape/primeapeQuieto.bmp
+      gritando: src/resources/cuerpos/Primeape/primeapeMovimiento.bmp
   mono:
     ancho: 140
     alto: 126
-    velocidad: 0
+    velocidad: 10
     animaciones:
       quieto: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
       lanzando: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
@@ -182,7 +182,10 @@ juego:
      #     x: 100
     #      y: 150
         - tipo: princesa
-          x: 700
+          x: 600
+          y: 150
+        - tipo: mono
+          x: 650
           y: 150
   #      - tipo: princesa
  #         x: 700
@@ -196,11 +199,6 @@ juego:
         - textura: viga
           x: 300
           y: 350
-          ancho: 400
-          alto: 50
-        - textura: viga
-          x: 100
-          y: 400
           ancho: 400
           alto: 50
       vigas:
