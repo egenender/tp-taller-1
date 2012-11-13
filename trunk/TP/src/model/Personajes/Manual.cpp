@@ -413,8 +413,14 @@ void Manual::chocarConHongo(Hongo* h){
 		estado = QUIETODER;
 		saltar();
 	}else{
-		if (!(h->obtenerEstado() == QUIETO || h->recienMovido()))
+		int state = h->obtenerEstado();
+		if (state == QUIETO){
+			delete(posCmp);
+			return;
+		}
+		if (!((state == MOVILDERECHA && posAnterior->estaALaIzquierdaDe(posPersAnterior))|| (state == MOVILIZQUIERDA && posAnterior->estaALaDerechaDe(posPersAnterior))))
 			perderVida();
+
 
 	}
 	delete(posCmp);

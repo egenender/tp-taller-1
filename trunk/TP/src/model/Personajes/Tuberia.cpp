@@ -99,7 +99,6 @@ void Tuberia::crearPosicion(){
 
 		y += obtenerArea()->obtenerAlto();
 		x += obtenerArea()->obtenerAncho() + 1;
-		printf("(%d, %d)\n", x,y);
 	}
 	if (sentido == IZQUIERDA_TB){
 		y += obtenerArea()->obtenerAlto();
