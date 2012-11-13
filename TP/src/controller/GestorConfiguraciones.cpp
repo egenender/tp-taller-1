@@ -339,7 +339,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	animacionQuieto= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
 
-	paramBarril->animaciones->push_back(animacionGritando);
+	paramBarril->animaciones->push_back(animacionQuieto);
 
 	nodoRaiz["barril"]["animaciones"]["rodando"]>>ruta;
 
@@ -351,7 +351,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	animacionQuieto= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
 
-	paramBarril->animaciones->push_back(animacionGritando);
+	paramBarril->animaciones->push_back(animacionQuieto);
 
 	aux= new std::vector<int>();
 
