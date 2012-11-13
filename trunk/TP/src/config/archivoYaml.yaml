@@ -166,6 +166,12 @@ juego:
     velocidad: 5
     animaciones:
       movimiento: src/resources/items/fireball.bmp
+  invencibilidad:
+    ancho: 30
+    alto: 30
+    velocidad: 5
+    animaciones:
+      movimiento: src/resources/items/pluma.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png

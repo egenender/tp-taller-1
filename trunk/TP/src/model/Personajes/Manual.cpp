@@ -83,6 +83,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	juegoGanado = false;
 	enViga = false;
 	especialHabilitado = false;
+	invencible = false;
 	vidas = CANT_VIDAS;
 	x_inicial = 0;
 
@@ -380,7 +381,6 @@ void Manual::perderVida(){
 	timeout->comenzar();
 	if (evolucionado == EVOLUCION){
 		evolucionado = 0;
-		//habria que poner el timeOut
 		return;
 	}
 	if (estado == MUERTO) return;
@@ -486,10 +486,18 @@ void Manual::habilitarEspecial(){
 }
 
 void Manual::actualizarTimeOut(){
-	if (timeout->obtenerTiempo() >= (TIEMPO_TIMEOUT * 1000))
-		timeout->detener();
+	if (!timeout->estaEmpezado()) return;
+	int tiempo;
+	if (invencible)
+		tiempo = TIEMPO_INVENCIBLE;
 	else
-		huboCambios();
+		tiempo = TIEMPO_TIMEOUT;
+
+	if (timeout->obtenerTiempo() >= (tiempo * 1000)){
+		timeout->detener();
+		invencible = false;
+	}
+	huboCambios();
 }
 
 bool Manual::estaInvencible(){
@@ -498,4 +506,10 @@ bool Manual::estaInvencible(){
 
 void Manual::setearCooperatividad(bool c){
 	cooperativo = c;
+}
+
+void Manual::hacerInvencible(){
+	timeout->detener();
+	timeout->comenzar();
+	invencible = true;
 }

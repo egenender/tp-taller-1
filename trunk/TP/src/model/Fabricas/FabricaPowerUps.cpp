@@ -2,6 +2,7 @@
 #include "FabricaActivaEspeciales.h"
 #include "FabricaVidasExtra.h"
 #include "FabricaStones.h"
+#include "FabricaInvencibilidad.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -11,6 +12,7 @@ FabricaPowerUps::FabricaPowerUps() {
 	fabricas->push_back(new FabricaActivaEspeciales());
 	fabricas->push_back(new FabricaVidasExtra());
 	fabricas->push_back(new FabricaStones());
+	fabricas->push_back(new FabricaInvencibilidad());
 }
 
 FabricaPowerUps::~FabricaPowerUps() {

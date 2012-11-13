@@ -95,7 +95,7 @@ void Nivel::iniciar() {
 			gestor->ObtenerActualizables()->push_back(cama);
 			VistaVarios* vista= new VistaVarios();
 			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
-			vista->agregarEstadoSoportado(12,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
+			vista->agregarEstadoSoportado(12,new Animacion(new HojaSprites("src/resources/items/camaLanza.bmp",56,63)));
 			vistas->push_back(vista);
 			cama->agregarObservador(vista);
 
@@ -121,10 +121,10 @@ void Nivel::iniciar() {
 			std::vector<int>* probs = new std::vector<int>();
 			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
 			fabrs->push_back(new FabricaHongos());
-			probs->push_back(50);
+			probs->push_back(10);
 			fabrs->push_back(new FabricaTortugas());
-			probs->push_back(50);
-			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, 1, probs, fabrs);
+			probs->push_back(90);
+			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, -2, probs, fabrs);
 			actualizables->push_back(tub);
 
 			sup = new Superficie("src/resources/items/tuberia.bmp");
