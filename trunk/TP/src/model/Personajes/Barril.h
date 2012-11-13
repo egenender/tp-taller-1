@@ -43,7 +43,7 @@ public:
 	void chocarConEscalera(Escalera*);
 	void chocarConBarril(Barril*);
 	void chocarConBolaDeFuego(BolaDeFuego*);
-
+	void chocarConHongo(Hongo*);
 private:
 	void destruir();
 	void actualizarEstados();
