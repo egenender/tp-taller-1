@@ -439,7 +439,7 @@ void Manual::chocarConPrincesa(Princesa*){
 
 void Manual::chocarConBolaDeFuego(BolaDeFuego*){
 	if(cooperativo) return;
-
+	if (estaInvencible()) return;
 	perderVida();
 }
 
