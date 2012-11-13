@@ -13,6 +13,7 @@ PlataformaMovil::PlataformaMovil(const char* nom, Area* sup, int vel, int dist):
 	if (desplazamiento <= 0)
 		desplazamiento = DIST_PLTMOVIL_STD;
 
+	actual = 0;
 }
 
 PlataformaMovil::~PlataformaMovil() {
