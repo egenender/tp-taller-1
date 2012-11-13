@@ -1,5 +1,7 @@
 #include "FabricaInvencibilidad.h"
 #include "../Personajes/PowerUps/Invencibilidad.h"
+#include "../Area.h"
+#include "../../controller/GestorConfiguraciones.h"
 FabricaInvencibilidad::FabricaInvencibilidad() {
 
 }

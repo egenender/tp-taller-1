@@ -148,6 +148,7 @@ bool Hongo::estoySaltando(){
 }
 
 void Hongo::chocarConManual(Manual* pers){
+	if (pers->mataAlContacto()) morir();
 
 	//tengo que ver por cual direccion se chocan:
 	Posicion* posPersAnterior = pers->obtenerPosicionAnterior();

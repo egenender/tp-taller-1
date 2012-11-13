@@ -14,6 +14,8 @@
 #include "../model/Personajes/Tuberia.h"
 #include "../model/Fabricas/FabricaHongos.h"
 #include "../model/Fabricas/FabricaTortugas.h"
+#include "../model/Fabricas/FabricaPowerUps.h"
+#include "../model/Personajes/Caja.h"
 
 Nivel Nivel::instancia;
 
@@ -99,24 +101,14 @@ void Nivel::iniciar() {
 			vistas->push_back(vista);
 			cama->agregarObservador(vista);
 
-			Pluma* pluma= new Pluma("pluma",new Area(30,30,new Posicion(200,350)));
-			gestor->ObtenerActualizables()->push_back(pluma);
+			Caja* caja = new Caja ("cajita", new Area(50,50, new Posicion(50, 400)), new FabricaPowerUps());
+			actualizables->push_back(caja);
+			vista = new VistaVarios();
+			vista->agregarEstadoSoportado(QUIETO, new Animacion(new HojaSprites("src/resources/items/caja.bmp", 50, 50)));
+			vista->agregarEstadoSoportado(LANZANDO, new Animacion(new HojaSprites("src/resources/items/cajadsp.bmp", 50, 50)));
+			vistas->push_back(vista);
+			caja->agregarObservador(vista);
 
-			VistaVarios* vistaPluma= new VistaVarios();
-
-			Animacion* animacionPluma = new Animacion(new HojaSprites("src/resources/items/Pluma.bmp",30,30));
-			animacionPluma->transparencia(255,0,255);
-			vistaPluma->agregarEstadoSoportado(0,animacionPluma);
-			vistas->push_back(vistaPluma);
-			pluma->agregarObservador(vistaPluma);
-
-			PlataformaMovil* plat = new PlataformaMovil ("p", new Area(200, 50, new Posicion (800, 200)), 10, 250);
-			actualizables->push_back(plat);
-			Superficie* sup = new Superficie("src/resources/items/viga2.jpg");
-			sup->escala(200,50);
-			VistaImagen* v = new VistaImagen (sup);
-			vistas->push_back(v);
-			plat->agregarObservador(v);
 
 			std::vector<int>* probs = new std::vector<int>();
 			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
@@ -127,7 +119,7 @@ void Nivel::iniciar() {
 			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, -2, probs, fabrs);
 			actualizables->push_back(tub);
 
-			sup = new Superficie("src/resources/items/tuberia.bmp");
+			Superficie* sup = new Superficie("src/resources/items/tuberia.bmp");
 			sup->escala(60,60);
 			sup->transparencia(255,0,255);
 			VistaImagen *vi = new VistaImagen(sup);

@@ -234,7 +234,10 @@ void Manual::chocarCon(Actualizable* ac){
 }
 void Manual::chocarConManual(Manual* manual){
 	if (cooperativo) return;
-
+	if (manual->mataAlContacto() && !this->estaInvencible()){
+		perderVida();
+		return;
+	}
 	Posicion* posCmp = new Posicion (manual->obtenerArea()->obtenerPosicion()->obtenerX(),manual->obtenerArea()->obtenerPosicion()->obtenerY() + manual->obtenerArea()->obtenerAlto());
 
 	if (posCmp->estaArribaOIgualDe(posAnterior))
@@ -512,4 +515,8 @@ void Manual::hacerInvencible(){
 	timeout->detener();
 	timeout->comenzar();
 	invencible = true;
+}
+
+bool Manual::mataAlContacto(){
+	return invencible;
 }

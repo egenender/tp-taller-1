@@ -79,6 +79,7 @@ public:
 	void setearXInicial(int);
 	int obtenerVidas();
 	bool estaInvencible();
+	bool mataAlContacto();
 	void aumentarVida();
 	void evolucionar();
 	void habilitarEspecial();
