@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "../Posicion.h"
+#include "Hongo.h"
 
 Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 	if (dir <= 1 && dir >= -1)
@@ -283,4 +284,9 @@ bool Barril::estaMuerto(){
 
 void Barril::chocarConBolaDeFuego(BolaDeFuego*){
 	destruir();
+}
+
+void Barril::chocarConHongo(Hongo* h){
+	if (h->obtenerEstado() == MOVILDERECHA || h->obtenerEstado() == MOVILIZQUIERDA)
+		destruir();
 }
