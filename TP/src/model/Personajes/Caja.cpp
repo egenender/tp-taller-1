@@ -3,6 +3,7 @@
 Caja::Caja(const char* nom, Area* sup, FabricaActualizable *f): Plataforma(nom, sup) {
 	fabrica = f;
 	estado = QUIETO;
+	timer = new Timer();
 }
 
 Caja::~Caja() {
@@ -22,6 +23,7 @@ void Caja::chocarConManual(Manual* pers){
 		fabricar();
 		huboCambios();
 		notificarObservadores();
+		timer->comenzar();
 	}
 	delete(posCmp);
 }
@@ -34,4 +36,15 @@ void Caja::fabricar(){
 	fabrica->fabricar(pos, ARRIBA_FABR);
 	delete(pos);
 
+}
+
+void Caja::actualizar(float){
+	if (estado == QUIETO) return;
+
+	if (timer->obtenerTiempo() >= (TIEMPO_CAJA*1000)){
+		timer->detener();
+		estado = QUIETO;
+		huboCambios();
+		notificarObservadores();
+	}
 }
