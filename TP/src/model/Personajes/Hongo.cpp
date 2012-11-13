@@ -25,6 +25,7 @@ Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 	y = superficieOcupada->obtenerPosicion()->obtenerY() + (superficieOcupada->obtenerAlto() - altoH);
 
 	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
+	proxDir = 0;
 }
 
 Hongo::~Hongo() {
