@@ -22,6 +22,7 @@ class Princesa;
 #define SUPERFICIE_EVOLUCION 1
 #define SUPERFICIE_INVOLUCION 0
 #define TIEMPO_TIMEOUT 3
+#define TIEMPO_INVENCIBLE 10
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
  que la altura maxima sea la misma a la que hay ahora:
@@ -53,6 +54,7 @@ private:
 	FabricaBolasDeFuego *fabrica;
 
 	Timer *timeout;
+	bool invencible;
 
 public:
 	static void setearCooperatividad(bool);
@@ -80,6 +82,7 @@ public:
 	void aumentarVida();
 	void evolucionar();
 	void habilitarEspecial();
+	void hacerInvencible();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

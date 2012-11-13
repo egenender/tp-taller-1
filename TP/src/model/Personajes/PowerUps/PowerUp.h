@@ -33,7 +33,7 @@ private:
 	void validarPiso();
 	void actualizarEstados();
 protected:
-	void actualizarMovimiento();
+	virtual void actualizarMovimiento();
 	void actualizarSalto();
 };
 

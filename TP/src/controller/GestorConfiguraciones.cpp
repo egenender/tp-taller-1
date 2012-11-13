@@ -483,6 +483,23 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramAcEsp->matrizEstados->push_back(aux);
 
+	//PowerUp Invencibilidad:
+
+	parametrosPersonaje* paramInvencibilidad= crearParametrosPersonaje(nodoRaiz["invencibilidad"],"invencibilidad");
+
+	nodoRaiz["invencibilidad"]["animaciones"]["movimiento"]>>ruta;
+
+	animacionMov= new Animacion(new HojaSprites(ruta,paramInvencibilidad->ancho,paramInvencibilidad->alto));
+
+	paramInvencibilidad->animaciones->push_back(animacionMov);
+
+	aux= new std::vector<int>();
+
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+
+	paramInvencibilidad->matrizEstados->push_back(aux);
+
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
