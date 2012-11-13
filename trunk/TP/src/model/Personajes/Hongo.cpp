@@ -123,6 +123,12 @@ void Hongo::actualizarEstados(){
 void Hongo::actualizarMovimiento(){
 	if ((estoySaltando() && !permitoMovEnSalto)|| estaMuerto()) return;
 
+	if (proxDir == DERECHA)
+		direccion = DERECHA;
+	else if (proxDir ==IZQUIERDA )
+		direccion = IZQUIERDA;
+	proxDir = 0;
+
 	if (direccion == 0){
 		estado = QUIETO;
 		return;
@@ -266,9 +272,9 @@ void Hongo::chocarConHongo(Hongo* h){
 
 void Hongo::modificacionMovimiento(int dir){
 	if (dir == IZQUIERDA)
-		direccion = DERECHA;
+		proxDir = DERECHA;
 	else
-		direccion = IZQUIERDA;
+		proxDir = IZQUIERDA;
 
 	huboCambios();
 }

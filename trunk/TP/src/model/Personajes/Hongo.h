@@ -18,6 +18,7 @@ class Barril;
 class Hongo : public Cuerpo{
 private:
 	bool tengoPiso, chocaConSosten;
+	int proxDir;
 protected:
 	int estado;
 	int velocidadX, velocidadY, direccion;
