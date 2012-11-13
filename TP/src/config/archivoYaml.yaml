@@ -124,13 +124,13 @@ juego:
       quieto: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
       lanzando: src/resources/cuerpos/GokuMono/gokumonoGritando.bmp
   barril:
-    ancho: 45
-    alto: 45
+    ancho: 54
+    alto: 46
     velocidad: 10
     animaciones:
-      cayendo: src/resources/items/barill-rodando.bmp
-      quieto: src/resources/items/barill-rodando.bmp
-      rodando: src/resources/items/barill-rodando.bmp
+      cayendo: src/resources/items/barril-falling.bmp
+      quieto: src/resources/items/barril-rodando.bmp
+      rodando: src/resources/items/barril-rodando.bmp
       bajando: src/resources/items/barril-falling.bmp
   tortuga:
     ancho: 40
