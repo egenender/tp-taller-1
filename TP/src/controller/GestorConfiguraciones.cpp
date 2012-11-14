@@ -64,7 +64,11 @@
 #define ANCHO_OBJETO 40
 #define ALTO_OBJETO 80
 #define POS_DEFECTO_OBJ 80
-#define TEXTURA_DEFECTO "src/resources/viga2.jpg"
+#define TEXTURA_DEFECTO "src/resources/items/viga2.jpg"
+#define ALTURA_BOLA 30
+#define ANCHO_BOLA 30
+#define SALTO_BOLA 15
+#define RUTA_BOLA "src/resources/cubosQuieto.bmp"
 
 
 // Puntero estatico para controlar la instanciacion.
@@ -1750,6 +1754,76 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 	std::string n = nombrecito;
 	mapaParam->insert(pair<string, parametrosPersonaje*>(n, param));
+
+	/*INTENTO DE LEVANTAR BOLAS DE FUEGO*/
+	parametrosPersonaje *bola = (parametrosPersonaje*) malloc (sizeof(parametrosPersonaje));
+
+	try{
+		nodo["bolaDeFuego"]["ancho"] >> bola->ancho;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de ancho de la bola de fuego, se carga por defecto");
+		bola->ancho = ANCHO_BOLA;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de ancho de la bola de fuego, se carga por defecto");
+		bola->ancho = ANCHO_BOLA;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de ancho de la bola de fuego, se carga por defecto");
+		bola->ancho = ANCHO_BOLA;
+	}
+
+	try{
+		nodo["bolaDeFuego"]["alto"] >> bola->alto;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de altura de la bola de fuego, se carga por defecto");
+		bola->alto = ALTURA_BOLA;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de altura de la bola de fuego, se carga por defecto");
+		bola->alto = ALTURA_BOLA;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de altura de la bola de fuego, se carga por defecto");
+		bola->alto = ALTURA_BOLA;
+	}
+
+
+	try{
+		nodo["bolaDeFuego"]["salto"] >> bola->velocidad;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de salto de la bola de fuego, se carga por defecto");
+		bola->velocidad = SALTO_BOLA;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de salto de la bola de fuego, se carga por defecto");
+		bola->velocidad = SALTO_BOLA;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de salto de la bola de fuego, se carga por defecto");
+		bola->velocidad = SALTO_BOLA;
+	}
+
+	try{
+		nodo["bolaDeFuego"]["animacion"] >> ruta;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de animacion de la bola de fuego, se carga por defecto");
+		ruta = RUTA_BOLA;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de animacion de la bola de fuego, se carga por defecto");
+		ruta = RUTA_BOLA;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de animacion de la bola de fuego, se carga por defecto");
+		ruta = RUTA_BOLA;
+	}
+
+	Animacion* animacionBola = new Animacion(new HojaSprites(ruta, bola->ancho, bola->alto));
+	bola->animaciones = new std::vector<Animacion*>();
+	bola->animaciones->push_back(animacionBola);
+	bola->matrizEstados = new std::vector<vector<int>*>();
+	aux = new std::vector<int>();
+	aux->push_back(SALTANDODER);
+	aux->push_back(SALTANDOIZQ);
+	bola->matrizEstados->push_back(aux);
+	std::string b = "bola";
+	b += n;
+	mapaParam->insert(pair<std::string, parametrosPersonaje*>(b,bola));
+
+
 	return tipoper;
 
 }

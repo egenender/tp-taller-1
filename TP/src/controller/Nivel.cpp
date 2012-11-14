@@ -113,9 +113,9 @@ void Nivel::iniciar() {
 			std::vector<int>* probs = new std::vector<int>();
 			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
 			fabrs->push_back(new FabricaHongos());
-			probs->push_back(10);
+			probs->push_back(50);
 			fabrs->push_back(new FabricaTortugas());
-			probs->push_back(90);
+			probs->push_back(50);
 			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, -2, probs, fabrs);
 			actualizables->push_back(tub);
 
