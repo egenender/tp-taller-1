@@ -1534,6 +1534,9 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 	std::string ruta;
 
+	parametrosPersonaje *param = (parametrosPersonaje)malloc (sizeof(parametrosPersonaje));
+
+
 	try{
 		nodo["ancho"] >> tipoper->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -1546,6 +1549,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho, se carga por defecto");
 		tipoper->ancho = ANCHO_PERSONAJE;
 	}
+	param->ancho = tipoper->ancho;
 
 	try{
 		nodo["alto"] >> tipoper->alto;
@@ -1559,6 +1563,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo alto, se carga por defecto");
 		tipoper->alto = ALTO_PERSONAJE;
 	}
+	param->alto = tipoper->alto;
 
 	try{
 		nodo["vel_personaje"] >> tipoper->velocidad;
@@ -1572,12 +1577,12 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje en personaje no toma valor valido, se carga por defecto");
 		tipoper->velocidad = VEL_PERSONAJE;
 	}
+	param->velocidad = tipoper->velocidad;
 
 	if (tipoper->velocidad<VEL_PERSONAJE_MINIMA){
 		tipoper->velocidad = VEL_PERSONAJE_MINIMA;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: La vel_personaje en personaje toma valor bajo, se carga velocidad de 25");
 	}
-
 
 	try{
 		nodo["salto"] >> tipoper->salto;
@@ -1613,8 +1618,10 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 			ruta = headerTemp + ruta;
 		tipoper->animacionSaltaProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones dentro del personaje, se cargan por defecto");
+		//Faltan las animaciones de subir escalera y que quede quieto + todas en modo evolucion
 		return tipoper;
 	}
+
 
 	const YAML::Node& animaciones=nodo["animaciones"];
 
@@ -1718,6 +1725,31 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	AgregarAVector(ruta);
 	tipoper->vistaSonora=vistaSonora;
 
+	//debe copiarse luego tambien en la zona donde debe cargarse el default
+	param->animaciones = new std::vector<Animacion*>();
+	param->animaciones->push_back(tipoper->animacionPasivaProt);
+	param->animaciones->push_back(tipoper->animacionActivaProt);
+	param->animaciones->push_back(tipoper->animacionSaltaProt);
+
+	param->matrizEstados = new std::vector<vector<int>*>();
+
+	vector<int>* aux = new vector<int>();
+	aux->push_back(QUIETODER);
+	aux->push_back(QUIETOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	aux->push_back(CAMINANDODER);
+	aux->push_back(CAMINANDOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	aux->push_back(SALTANDODER);
+	aux->push_back(SALTANDOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	std::string n = nombrecito;
+	mapaParam->insert(pair<string, parametrosPersonaje*>(n, param));
 	return tipoper;
 
 }
