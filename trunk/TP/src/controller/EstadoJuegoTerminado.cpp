@@ -1,4 +1,5 @@
 #include "EstadoJuegoTerminado.h"
+#include "ManejadorEstados.h"
 
 EstadoJuegoTerminado::EstadoJuegoTerminado() {
 	fondo = NULL;

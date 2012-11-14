@@ -1534,7 +1534,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 	std::string ruta;
 
-	parametrosPersonaje *param = (parametrosPersonaje)malloc (sizeof(parametrosPersonaje));
+	parametrosPersonaje *param = (parametrosPersonaje*)malloc (sizeof(parametrosPersonaje));
 
 
 	try{
