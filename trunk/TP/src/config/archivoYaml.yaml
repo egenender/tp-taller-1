@@ -20,21 +20,11 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
-    Squirtle:
-      ancho: 40
-      alto: 40
-      vel_personaje: 10
-      salto: 40
-      animaciones:
-        quieto:
-          sprites: src/resources/cuerpos/Squirtle/squirtleMuerto.bmp
-          sonido:
-        caminar:
-          sprites: src/resources/cuerpos/Squirtle/squirtleMovimiento.bmp
-          sonido: src/resources/cuerpos/Squirtle/Squirtle-happy.ogg
-        saltar:
-          sprites: src/resources/cuerpos/Squirtle/squirtleGirando.bmp
-          sonido: src/resources/cuerpos/Squirtle/Squirtle-jump.ogg
+      bolaDeFuego:
+        ancho: 25
+        alto: 20
+        salto: 20
+        animacion: src/resources/items/lanzallamas.bmp
     Yoshi:
       ancho: 52
       alto: 70
@@ -50,10 +40,15 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
+      bolaDeFuego:
+        ancho: 25
+        alto: 25
+        salto: 30
+        animacion: src/resources/items/huevos.bmp
     Totodile:
       ancho: 61
       alto: 74
-      vel_personaje: 1
+      vel_personaje: 10
       salto: 30
       animaciones:
         quieto:
@@ -65,21 +60,11 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
-    Mono:
-      ancho: 140
-      alto: 126
-      vel_personaje: 10
-      salto: 50
-      animaciones:
-        quieto:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoQuieto.bmp
-          sonido:
-        caminar:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoMovimiento.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy.ogg
-        saltar:
-          sprites: src/resources/cuerpos/GokuMono/gokumonoSalto.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-1.ogg
+      bolaDeFuego:
+        ancho: 22
+        alto: 22
+        salto: 30
+        animacion: src/resources/items/chorroDeAgua.bmp
     Gengar:
       ancho: 55
       alto: 55
@@ -96,6 +81,32 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
           sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
+      bolaDeFuego:
+        ancho: 40
+        alto: 25
+        salto: 20
+        animacion: src/resources/items/bolaSombra.bmp
+    Pikachu:
+      ancho: 73
+      alto: 66
+      vel_personaje: 25
+      salto: 25
+      sonido: 
+      animaciones:
+        quieto:
+          sprites: src/resources/cuerpos/Pikachu/pikachuQuieto2.bmp
+          sonido: 
+        caminar:
+          sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento2.bmp
+          sonido: 
+        saltar:
+          sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
+          sonido: 
+      bolaDeFuego:
+        ancho: 51
+        alto: 24
+        salto: 8
+        animacion: src/resources/items/thundershock.bmp
   tiposAutomatico:  
     troll:
       ancho: 200
