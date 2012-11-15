@@ -491,6 +491,7 @@ void Manual::actualizarEvolucion(){
 
 void Manual::aumentarVida(){
 	vidas++;
+	huboCambios();
 }
 
 void Manual::habilitarEspecial(){
