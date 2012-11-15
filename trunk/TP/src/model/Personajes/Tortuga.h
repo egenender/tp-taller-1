@@ -11,6 +11,7 @@ private:
 	int velocidadInicial;
 	bool recien_movido;
 	Area* superficieReemplazo;
+	int proxEstado;
 public:
 	Tortuga(const char*, Area*, int);
 	virtual ~Tortuga();

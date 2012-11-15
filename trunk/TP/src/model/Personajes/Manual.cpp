@@ -5,7 +5,6 @@
 bool Manual::cooperativo = true;
 
 Manual::~Manual() {
-	//Por ahora,  lo que se tiene se elimina en el destructor del padre.
 	delete(superficieReemplazo);
 	delete(timeout);
 }
@@ -421,11 +420,19 @@ void Manual::chocarConHongo(Hongo* h){
 			delete(posCmp);
 			return;
 		}
-		Posicion* posDer = new Posicion (posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
-		if (!((state == MOVILDERECHA && posDer->estaALaIzquierdaDe(posPersAnterior))|| (state == MOVILIZQUIERDA && posAnterior->estaALaDerechaDe(posPersAnterior))))
-			perderVida();
-		delete (posDer);
 
+		if (state == MOVILDERECHA && posAnterior->estaALaDerechaOIgualDe(posPersAnterior)){
+			perderVida();
+		}
+
+		else if (state == MOVILIZQUIERDA && posAnterior->estaALaIzquierdaOIgualDe(posPersAnterior)){
+			perderVida();
+		}
+
+		else if (state != MOVILIZQUIERDA && state != MOVILDERECHA && state != QUIETO)
+			perderVida();
+//		if (!((state == MOVILDERECHA && (posAnterior->estaALaIzquierdaDe(posPersAnterior) || h->recienMovido()) )|| (state == MOVILIZQUIERDA && (posAnterior->estaALaDerechaDe(posPersAnterior) || h->recienMovido()))))
+//			perderVida();
 
 	}
 	delete(posCmp);
