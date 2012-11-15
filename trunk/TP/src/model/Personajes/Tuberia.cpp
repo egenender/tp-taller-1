@@ -71,7 +71,11 @@ float Tuberia::tirarRandom(){
 }
 
 unsigned int Tuberia::calcularFabrica(){
-	float rnd = tirarRandom();
+	float rnd;
+	do{
+		rnd = tirarRandom();
+	}while (rnd == 0 || rnd == 1);
+
 	unsigned int i = 0;
 	int acum = 0;
 

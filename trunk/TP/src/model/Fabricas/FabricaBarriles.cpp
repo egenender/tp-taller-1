@@ -14,7 +14,7 @@ void FabricaBarriles::fabricar(Posicion* inicial, int valorInicial){
 
 	parametrosPersonaje* parametros = GestorConfiguraciones::getInstance()->obtenerParametrosPersonaje("barril");
 
-	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY()));
+	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(inicial->obtenerX(), inicial->obtenerY() - parametros->alto-1));
 	Barril* barril = new Barril ("barril", sup, parametros->velocidad, valorInicial);
 
 	terminarCreacion(barril);
