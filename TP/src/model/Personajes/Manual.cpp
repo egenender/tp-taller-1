@@ -173,16 +173,15 @@ void Manual::actualizarSalto(){
 	enViga = false;
 	mtrasladar(0,velocidadY,true);
 	velocidadY += ACELERACION;
+
 	if (chocaConPiso() || tengoPiso){
 		superficieDeColision->ponerEnPiso();
 		superficieOcupada->ponerEnPiso();
-//		//Posicion* trs = new Posicion (0, (superficieOcupada->obtenerAlto()-superficieDeColision->obtenerAlto()));
-//		superficieOcupada->mover(trs);
-//		delete(trs);
 		velocidadY = 0;
 		if (estado == SALTANDODER) estado = QUIETODER;
 		else if (estado == SALTANDOIZQ)estado = QUIETOIZQ;
 	}
+
 }
 
 bool Manual::chocaConPiso(){
@@ -199,7 +198,8 @@ bool Manual::estaMuerto(){
 
 void Manual::validarPiso(){
 	if (obtenerArea()->estaSobreElPiso()){
-		tengoPiso = true;
+		if (!estoySaltando())
+			tengoPiso = true;
 		return;
 	}
 
