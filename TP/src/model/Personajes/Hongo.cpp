@@ -148,6 +148,19 @@ void Hongo::actualizarMovimiento(){
 		estado = QUIETO;
 		return;
 	}
+	if (direccion == DERECHA){
+		if (estado == MOVILDERECHA || estado == MOVILIZQUIERDA)
+			estado = MOVILDERECHA;
+		else
+			estado = CAMINANDODER;
+	}
+	if (direccion == IZQUIERDA){
+		if (estado == MOVILDERECHA || estado == MOVILIZQUIERDA)
+			estado = MOVILIZQUIERDA;
+		else
+			estado = CAMINANDOIZQ;
+	}
+
 
 	int movX = velocidadX * direccion;
 

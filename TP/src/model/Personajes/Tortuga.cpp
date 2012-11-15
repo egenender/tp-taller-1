@@ -1,10 +1,12 @@
 #include "Tortuga.h"
 #include "../Observable.h"
+#include <stdio.h>
 
 Tortuga::Tortuga(const char* nom, Area* sup, int v): Hongo(nom, sup, v) {
 	velocidadInicial = velocidadX;
 	recien_movido = false;
 	superficieReemplazo = NULL;
+	proxEstado = -1;
 }
 
 Tortuga::~Tortuga() {
@@ -32,14 +34,15 @@ void Tortuga::perderVida(){
 
 void Tortuga::modificacionMovimiento(int dir){
 	Hongo::modificacionMovimiento(dir);
-	if (estado == MOVILIZQUIERDA || estado == MOVILDERECHA)
-		return;
 
-	if (estado == QUIETO){
+//	if (estado == MOVILIZQUIERDA || estado == MOVILDERECHA)
+//		return;
+
+	if (estado == QUIETO || estado == MOVILDERECHA || estado == MOVILIZQUIERDA){
 		if (dir == IZQUIERDA)
-			estado = MOVILDERECHA;
+			proxEstado = MOVILDERECHA;
 		else
-			estado = MOVILIZQUIERDA;
+			proxEstado = MOVILIZQUIERDA;
 		recien_movido = true;
 	}
 	huboCambios();
@@ -59,5 +62,11 @@ void Tortuga::actualizar(float a){
 		posAnterior = new Posicion(superficieDeColision->obtenerPosicion()->obtenerX(),superficieDeColision->obtenerPosicion()->obtenerY());
 	}
 	Hongo::actualizar(a);
+	if (proxEstado != -1){
+		estado = proxEstado;
+		huboCambios();
+		proxEstado = -1;
+	}
+	notificarObservadores();
 	recien_movido = false;
 }
