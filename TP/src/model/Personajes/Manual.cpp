@@ -421,8 +421,10 @@ void Manual::chocarConHongo(Hongo* h){
 			delete(posCmp);
 			return;
 		}
-		if (!((state == MOVILDERECHA && posAnterior->estaALaIzquierdaDe(posPersAnterior))|| (state == MOVILIZQUIERDA && posAnterior->estaALaDerechaDe(posPersAnterior))))
+		Posicion* posDer = new Posicion (posAnterior->obtenerX() + obtenerArea()->obtenerAncho(), posAnterior->obtenerY());
+		if (!((state == MOVILDERECHA && posDer->estaALaIzquierdaDe(posPersAnterior))|| (state == MOVILIZQUIERDA && posAnterior->estaALaDerechaDe(posPersAnterior))))
 			perderVida();
+		delete (posDer);
 
 
 	}

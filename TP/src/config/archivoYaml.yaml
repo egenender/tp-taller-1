@@ -232,7 +232,7 @@ juego:
           ancho: 50
           alto: 200
         - textura: esc
-          x: 400
+          x: 600
           y: 350
           ancho: 50
           alto: 200

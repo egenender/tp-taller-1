@@ -73,8 +73,8 @@ void Mono::tirarBarril(){
 	if (!fabrica) return;
 
 	int x, y;
-	x = obtenerArea()->obtenerPosicion()->obtenerX()+10;
-	y = obtenerArea()->obtenerPosicion()->obtenerY();
+	x = obtenerArea()->obtenerPosicion()->obtenerX();
+	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
 	Posicion *pos = new Posicion(x,y);
 
 	//digo que vaya hacia la derecha en un estado inicial.. pero podriamos ver de tirar

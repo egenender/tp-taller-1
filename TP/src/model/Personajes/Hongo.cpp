@@ -26,9 +26,11 @@ Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 
 	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
 	proxDir = 0;
+	fabrica = new FabricaPowerUps();
 }
 
 Hongo::~Hongo() {
+	delete(fabrica);
 }
 
 int Hongo::obtenerEstado(){
@@ -48,7 +50,7 @@ void Hongo::chocarConBarril(Barril*){
 	perderVida();
 }
 
-int Hongo::calculoDireccionRandom(){
+float Hongo::tirarRandom(){
 	float rnd;
 	do{
 		rnd = (rand() % 1000)+1;
@@ -58,6 +60,11 @@ int Hongo::calculoDireccionRandom(){
 		else
 			rnd = rnd/w;
 	}while(rnd == 1);
+	return rnd;
+}
+
+int Hongo::calculoDireccionRandom(){
+	float rnd = tirarRandom();
 
 	if (rnd < 0.5)
 		return 1;
@@ -69,6 +76,13 @@ void Hongo::morir(){
 	estado = MUERTO;
 	huboCambios();
 	notificarObservadores();
+
+
+	float rnd = tirarRandom();
+	if (PROB_FABRICAR > (rnd * 1000)) return;
+
+	Posicion* posCreacion = new Posicion (obtenerArea()->obtenerPosicion()->obtenerX(), obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto());
+	fabrica->fabricar(posCreacion, -2);
 }
 
 void Hongo::actualizar(float){

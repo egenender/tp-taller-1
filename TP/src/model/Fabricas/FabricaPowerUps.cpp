@@ -28,17 +28,20 @@ void FabricaPowerUps::fabricar(Posicion* pos, int valor){
 }
 
 int FabricaPowerUps::eleccionFabrica(){
-	float equiprobable = 100 / fabricas->size();
-	float rnd = tirarRandom();
+	float equiprobable = (float) 100 / fabricas->size();
+	float rnd;
+	do{
+		rnd = tirarRandom();
+	}while (rnd == 1 || rnd == 0);
 
 	unsigned int i = 0;
 	int acum = 0;
-
 	while (acum < (rnd * 100)){
 		acum += equiprobable;
 		i++;
 	}
-
+	if (i >= fabricas->size())
+		return eleccionFabrica();
 	return (i-1);
 
 }
