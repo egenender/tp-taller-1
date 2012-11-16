@@ -56,6 +56,8 @@ private:
 	Timer *timeout;
 	bool invencible;
 
+	int YEscalera;
+
 public:
 	static void setearCooperatividad(bool);
 	Manual(const char*, Area*, int, int);
