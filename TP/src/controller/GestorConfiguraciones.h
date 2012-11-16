@@ -121,7 +121,7 @@ class GestorConfiguraciones{
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 
-		void crearVistaElemento(Cuerpo*,string);
+		void crearVistaElemento(Observable*,string, bool esCuerpo = true);
 		void crearVistaTuberia(Cuerpo*,string, int);
 
 		parametrosPersonaje* obtenerParametrosPersonaje(string);

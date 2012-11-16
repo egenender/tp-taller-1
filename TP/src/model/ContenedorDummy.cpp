@@ -156,7 +156,7 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
 
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(nombre);
 	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), parametros->ancho, parametros->alto);
-	gestor->crearVista(nuevo, nombre, false);
+	gestor->crearVistaElemento(nuevo, nombre, false);
 
 	agregarDummy(nuevo);
 	return nuevo;

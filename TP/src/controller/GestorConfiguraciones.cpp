@@ -660,7 +660,7 @@ void GestorConfiguraciones::crearVistaTuberia(Cuerpo* cuerpo,string clave, int d
 }
 
 
-void GestorConfiguraciones::crearVistaElemento(Cuerpo* cuerpo,string clave){
+void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, bool esCuerpo){
 
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
 	VistaVarios* vista=new VistaVarios();
@@ -675,7 +675,8 @@ void GestorConfiguraciones::crearVistaElemento(Cuerpo* cuerpo,string clave){
 	}
 
 	cuerpo->agregarObservador(vista);
-	configNivel->actualizables.push_back(cuerpo);
+	if (esCuerpo)
+		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
 	configNivel->vistas.push_back(vista);
 }
 
