@@ -82,7 +82,42 @@ GestorConfiguraciones* GestorConfiguraciones::getInstance() {
 }
 
 void GestorConfiguraciones::acabarGestor() {
-   instancia = NULL;
+	destruir = true;
+	//instancia = NULL;
+}
+
+void GestorConfiguraciones::destruirGestor(){
+	if (!destruir) return;
+	//aca va all the fucking shit a destruir:
+
+	//destruiyo el mapaParam, que tiene las animaciones (la cosa heavy)
+	std::map<std::string, parametrosPersonaje*>::iterator iter;
+	parametrosPersonaje* parametros;
+	for (iter = mapaParam->begin(); iter != mapaParam->end(); ++iter) {
+		 parametros = (*iter).second;
+		 destruirParametrosPersonaje(parametros);
+		 free(parametros);
+	}
+	instancia = NULL;
+}
+
+void GestorConfiguraciones::destruirParametrosPersonaje(parametrosPersonaje* param){
+	std::vector<Animacion*>* anim = param->animaciones;
+	for (unsigned int i = 0; i< anim->size(); i++){
+		delete (anim->at(i));
+	}
+	anim->clear();
+	delete (anim);
+
+	std::vector<std::vector<int>* >* matriz = param->matrizEstados;
+	std::vector<int>* vector;
+	for (unsigned int j = 0; j < matriz->size(); j++){
+		vector = matriz->at(j);
+		vector->clear();
+		delete (vector);
+	}
+	matriz->clear();
+	delete (matriz);
 }
 
 void GestorConfiguraciones::AgregarAVector(string ruta){
@@ -117,6 +152,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	posiblesNiveles = NULL;
 	posiblesTiposProt = NULL;
 	mapaParam = new mapa_parametrosPersonaje();
+	destruir = false;
 }
 
 void GestorConfiguraciones::setEsCliente (){

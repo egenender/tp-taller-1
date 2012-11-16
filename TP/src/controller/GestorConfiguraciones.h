@@ -80,10 +80,11 @@ class GestorConfiguraciones{
 		string rutaYamlDefecto;
 		mapa_parametrosPersonaje* mapaParam;
 
-
+		bool destruir;
 	public:
 		static GestorConfiguraciones* getInstance();
 		void acabarGestor();
+		void destruirGestor();
 		parametrosPersonaje* crearParametrosPersonaje(const YAML::Node&, string);
 		void CargarPersonajes(const YAML::Node&);
 
@@ -146,5 +147,7 @@ class GestorConfiguraciones{
 		vector<VistaCuerpo*>* ObtenerVistas();
 
 		Cuerpo* instanciarCuerpo(std::string, int, int);
+	private:
+		void destruirParametrosPersonaje(parametrosPersonaje*);
 };
 
