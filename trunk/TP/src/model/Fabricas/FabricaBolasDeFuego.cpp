@@ -37,6 +37,6 @@ void FabricaBolasDeFuego::fabricar(Posicion* inicial,int valor){
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x, inicial->obtenerY()));
 
 	bola = new BolaDeFuego (aux.c_str(), sup, vel, parametros->velocidad, dir);
-	gestor->crearVista(bola, aux);
+	gestor->crearVistaElemento(bola, aux.c_str());
 }
 

@@ -22,5 +22,5 @@ void FabricaTortugas::fabricar(Posicion* inicial,int sentido){
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	Tortuga* tortuga = new Tortuga ("tortuga", sup, parametros->velocidad);
-	gestor->crearVista(tortuga, "tortuga");
+	gestor->crearVistaElemento(tortuga, "tortuga");
 }

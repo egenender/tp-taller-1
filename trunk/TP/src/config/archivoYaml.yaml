@@ -183,6 +183,38 @@ juego:
     velocidad: 5
     animaciones:
       movimiento: src/resources/items/Pluma.bmp
+  tuberias:
+    tuberiaHongo:
+      ancho: 30
+      alto: 30
+      probabilidades:
+        hongo: 100
+      animaciones:
+        abajo: src/resources/items/tuberia3.bmp
+        arriba: src/resources/items/tuberia.bmp
+        derecha: src/resources/items/tuberia2.bmp
+        izquierda: src/resources/items/tuberia4.bmp
+    tuberiaTortuga:
+      ancho: 30
+      alto: 30
+      probabilidades:
+        tortuga: 100
+      animaciones:
+        abajo: src/resources/items/tuberia3.bmp
+        arriba: src/resources/items/tuberia.bmp
+        derecha: src/resources/items/tuberia2.bmp
+        izquierda: src/resources/items/tuberia4.bmp
+    tuberiaHT:
+      ancho: 60
+      alto: 60
+      probabilidades:
+        hongo: 100
+        tortuga: 100
+      animaciones:
+        abajo: src/resources/items/tuberia3.bmp
+        arriba: src/resources/items/tuberia.bmp
+        derecha: src/resources/items/tuberia2.bmp
+        izquierda: src/resources/items/tuberia4.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png
@@ -207,6 +239,22 @@ juego:
   #      - tipo: princesa
  #         x: 700
 #          y: 599
+      tuberias:
+#        - tipo: tuberiaHongo
+#          x: 200
+#          y: 400
+#          direccion: abajo
+#          eme: 5
+#        - tipo: tuberiaTortuga
+#          x: 500
+#          y: 550
+#          direccion: arriba
+#          eme: 5
+        - tipo: tuberiaHT
+          x: 800
+          y: 380
+          direccion: arriba
+          eme: 5
       plataformas:
         - textura: viga
           x: 250

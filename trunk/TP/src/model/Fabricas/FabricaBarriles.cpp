@@ -21,5 +21,5 @@ void FabricaBarriles::fabricar(Posicion* inicial, int valorInicial){
 }
 
 void FabricaBarriles::terminarCreacion(Barril* b){
-	GestorConfiguraciones::getInstance()->crearVista(b, "barril");
+	GestorConfiguraciones::getInstance()->crearVistaElemento(b, "barril");
 }
