@@ -9,6 +9,7 @@ VistaSonora::VistaSonora() {
 	sonidos = new map<int, Mix_Chunk*>();
 	pararDeReproducir = false;
 	debeReproducir = false;
+	caminando = false;
 }
 
 Mix_Chunk* VistaSonora::cargarSonido(string ruta) {
@@ -58,15 +59,15 @@ void VistaSonora::actualizar(Observable* observable) {
 		return;
 	}
 
+	caminando = false;
+
 	// TODO: esto deberia mejorarse:
-	else if (estado == SALTANDODER || estado == SALTANDOIZQ)
+	if (estado == SALTANDODER || estado == SALTANDOIZQ)
 		estado = SALTAR;
-	else if (estado == CAMINANDOIZQ)
+	else if (estado == CAMINANDOIZQ || estado == CAMINANDODER) {
 		estado = CAMINANDODER;
-
-
-	pararDeReproducir = false;
-	debeReproducir = true;
+		caminando = true;
+	}
 
 	sonidoAnterior = sonidoActual;
 	try {
@@ -76,6 +77,15 @@ void VistaSonora::actualizar(Observable* observable) {
 		// Esto si no encuentro el sonido:
 		sonidoActual = NULL;
 	}
+
+	if (sonidoActual == sonidoAnterior && !caminando) {
+		debeReproducir = false;
+		pararDeReproducir = false;
+		return;
+	}
+
+	pararDeReproducir = false;
+	debeReproducir = true;
 }
 
 bool VistaSonora::dibujar(SDL_Surface* display, int x, int y) {
@@ -87,14 +97,17 @@ bool VistaSonora::reproducir() {
 		return false;
 	}
 
-	if (sonidoActual != sonidoAnterior && debeReproducir && !pararDeReproducir) {
+	if (debeReproducir && !pararDeReproducir) {
 		// El sonido se ejecuta una sola vez:
-		if (Mix_PlayChannel(-1, sonidoActual, 0) == -1) {
+
+		if (Mix_Playing(0))
+			return true;
+
+		if (Mix_PlayChannel(0, sonidoActual, 0) == -1) {
 			Log::getInstance()->writeToLogFile(Log::ERROR,
 					"Error al intentar reproducir sonido actual");
 			return false;
 		}
-		debeReproducir = false; // Esto para que no se vuelva a reproducir, a no ser que cambie el estado.
 	}
 
 	return false;

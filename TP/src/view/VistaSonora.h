@@ -20,7 +20,7 @@ class VistaSonora : public VistaCuerpo {
 protected:
 	map<int,Mix_Chunk*>* sonidos;
 	Mix_Chunk* sonidoActual, *sonidoAnterior;
-	bool pararDeReproducir, debeReproducir;
+	bool pararDeReproducir, debeReproducir, caminando;
 private:
 	Mix_Chunk* cargarSonido(string ruta);
 
