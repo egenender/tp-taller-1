@@ -6,6 +6,8 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	nombre = nombrecito;
 	superficieDeColision = NULL;
 	posAnterior = NULL;
+	id = 0;
+	tipo = 0;
 }
 
 Cuerpo::~Cuerpo() {
@@ -74,4 +76,12 @@ void Cuerpo::trasladar(int factorX, int factorY, bool cambio){
 
 Posicion* Cuerpo::obtenerPosicionAnterior(){
 	return posAnterior;
+}
+
+unsigned int Cuerpo::obtenerID(){
+	return id;
+}
+
+unsigned int Cuerpo::obtenerTipo(){
+	return tipo;
 }

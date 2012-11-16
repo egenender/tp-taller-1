@@ -9,6 +9,7 @@ Tuberia::Tuberia(const char* nom, Area* sup, float m, int dir, std::vector<int>*
 		media = MEDIA_TUBERIA_STD;
 
 	sentido = dir;
+	estado = sentido;
 
 	fabricas = f;
 

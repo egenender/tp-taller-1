@@ -4,19 +4,21 @@
 
 struct structServidor{
 	unsigned int id;
+	unsigned int tipo;
 	int estado;
 	int x;
 	int y;
 };
 
 
-structServidor_t* structServidor_crear(unsigned int id, int x, int y ,int estado){
+structServidor_t* structServidor_crear(unsigned int id, int x, int y ,int estado, unsigned int tipo){
 	structServidor_t* estructura = (structServidor_t*) malloc (sizeof(structServidor_t));
 	if (!estructura) return NULL;
 	estructura->estado = estado;
 	estructura->id = id;
 	estructura->x = x;
 	estructura->y = y;
+	estructura->tipo = tipo;
 	return estructura;
 }
 
@@ -39,4 +41,8 @@ void structServidor_destruir(structServidor_t* estructura){
 
 size_t structServidor_obtener_tamanio(){
 	return sizeof(structServidor_t);
+}
+
+unsigned int structServidor_obtener_tipo(structServidor_t* estructura){
+	return estructura->tipo;
 }

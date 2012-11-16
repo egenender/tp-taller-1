@@ -104,7 +104,7 @@ void ContenedorManuales::encolarCambios(){
 		if (huboCambios->at(idActual)){
 			int estado = manuales->at(idActual)->obtenerEstado();
 			Posicion* pos = manuales->at(idActual)->obtenerPosicion();
-			estructura = structServidor_crear(idActual, pos->obtenerX(), pos->obtenerY(), estado);
+			estructura = structServidor_crear(idActual, pos->obtenerX(), pos->obtenerY(), estado,0);
 
 			if (estructura)
 				servidor->encolar_cambio(estructura);
@@ -123,7 +123,7 @@ structServidor_t* ContenedorManuales::crearEnvio(Manual* manual, unsigned int id
 	structServidor_t* estructura;
 	int estado = manual->obtenerEstado();
 	Posicion* pos = manual->obtenerPosicion();
-	estructura = structServidor_crear(id, pos->obtenerX(), pos->obtenerY(), estado);
+	estructura = structServidor_crear(id, pos->obtenerX(), pos->obtenerY(), estado,0);
 	return estructura;
 }
 
