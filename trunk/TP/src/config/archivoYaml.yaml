@@ -16,7 +16,7 @@ juego:
           sonido: 
         caminar:
           sprites: src/resources/cuerpos/Charmander/charmanderMovimiento.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-hurt.ogg
+          sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
@@ -36,7 +36,7 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Walking.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-happy-2.ogg
+          sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
@@ -56,7 +56,7 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Totodile/totodileMovimiento.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
@@ -77,7 +77,7 @@ juego:
           sonido: 
         caminar:
           sprites: src/resources/cuerpos/Gengar/gengarMovimiento.bmp
-          sonido: src/resources/cuerpos/Gengar/Gengar-happy.ogg
+          sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
           sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
@@ -98,7 +98,7 @@ juego:
           sonido: 
         caminar:
           sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento2.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
           sonido: 
