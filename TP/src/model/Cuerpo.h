@@ -16,6 +16,8 @@ protected:
 	const char* nombre;
 	Area* superficieDeColision;
 	Posicion* posAnterior;
+	unsigned int id;
+	unsigned int tipo;
 	friend class PlataformaMovil;
 public:
 	Cuerpo(const char*, Area*);
@@ -28,6 +30,10 @@ public:
 	const char* obtenerNombre();
 	Area* obtenerArea();
 	Posicion* obtenerPosicionAnterior();
+
+	unsigned int obtenerID();
+	unsigned int obtenerTipo();
+
 protected:
 	void trasladar(int, int, bool);
 };

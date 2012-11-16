@@ -30,7 +30,7 @@ private:
 	void interpretarStruct(structServidor_t*);
 	Dummy* buscarID(unsigned int id);
 	void borrarID(unsigned int id);
-	Dummy* crearDummyNuevo(unsigned int);
+	Dummy* crearDummyNuevo(unsigned int, unsigned int);
 	string intToString(unsigned int);
 };
 

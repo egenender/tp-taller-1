@@ -3,6 +3,7 @@
 #include "../gui/view/VistaBarraEstado.h"
 #include "../controller/GestorConfiguraciones.h"
 #include "../controller/ManejadorEstados.h"
+#include "Tipos.h"
 #include <string>
 
 string ContenedorDummy::intToString(unsigned int numero){
@@ -58,7 +59,7 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	unsigned int id = structServidor_obtener_id(mod);
 	Dummy* tonto = buscarID(id);
 	if (!tonto) {
-		tonto = crearDummyNuevo(id);
+		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod));
 	}
 	int x, y;
 	structServidor_obtener_posicion(mod, &x,&y);
@@ -119,26 +120,48 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 	return tonto;
 }
 
-Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
-	//Obtengo de los tiposProtagonistas el que corresponde al ID a crear
+//Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo){
+//	//Obtengo de los tiposProtagonistas el que corresponde al ID a crear
+//	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+//	vector<TipoProtagonista*>* tipos = gestor->ObtenerPosiblesTiposProtagonistas();
+//	TipoProtagonista* tipo = tipos->at(idNuevo);
+//	//Creo el nuevo Dummy, en una posicion Arbitraria
+//	//FIXME: ver que onda esa posicion rara jaja
+//	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), tipo->ancho, tipo->alto);
+//
+//	//Le asigno una vista para poder dibujarlo
+//	VistaProtagonista* vistaNueva = new VistaProtagonista (tipo->animacionActivaProt, tipo->animacionPasivaProt, tipo->animacionSaltaProt);
+//	nuevo->agregarObservador(vistaNueva);
+//
+//	//agrego la vista al vector de vistas del Nivel para que se dibuje:
+//	gestor->ObtenerVistas()->push_back(vistaNueva);
+//
+//	//lo agrego al contenedor:
+//	agregarDummy(nuevo);
+//	return nuevo;
+//}
+
+Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
-	vector<TipoProtagonista*>* tipos = gestor->ObtenerPosiblesTiposProtagonistas();
-	TipoProtagonista* tipo = tipos->at(idNuevo);
-	//Creo el nuevo Dummy, en una posicion Arbitraria
-	//FIXME: ver que onda esa posicion rara jaja
-	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), tipo->ancho, tipo->alto);
 
-	//Le asigno una vista para poder dibujarlo
-	VistaProtagonista* vistaNueva = new VistaProtagonista (tipo->animacionActivaProt, tipo->animacionPasivaProt, tipo->animacionSaltaProt);
-	nuevo->agregarObservador(vistaNueva);
+	std::string nombre = "";
+	if (tipo == TIPO_BOLA_FUEGO)
+		nombre = "bola";
 
-	//agrego la vista al vector de vistas del Nivel para que se dibuje:
-	gestor->ObtenerVistas()->push_back(vistaNueva);
+	if (tipo != TIPO_MANUAL && tipo != TIPO_BOLA_FUEGO){
+		nombre = decodificarTipo(tipo);
+	}else{
+		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(idNuevo)->nombre;
+	}
 
-	//lo agrego al contenedor:
+	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(nombre);
+	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), parametros->ancho, parametros->alto);
+	gestor->crearVista(nuevo, nombre, false);
+
 	agregarDummy(nuevo);
 	return nuevo;
 }
+
 
 Area* ContenedorDummy::obtenerArea(){
 	return NULL;

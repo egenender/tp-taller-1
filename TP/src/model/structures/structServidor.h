@@ -6,7 +6,7 @@
 
 typedef struct structServidor structServidor_t;
 
-structServidor_t* structServidor_crear(unsigned int id, int x, int y, int estado);
+structServidor_t* structServidor_crear(unsigned int id, int x, int y, int estado, unsigned int tipo);
 
 unsigned int structServidor_obtener_id(structServidor_t*);
 
@@ -17,5 +17,7 @@ int structServidor_obtener_estado(structServidor_t*);
 void structServidor_destruir(structServidor_t*);
 
 size_t structServidor_obtener_tamanio();
+
+unsigned int structServidor_obtener_tipo(structServidor_t*);
 
 #endif /* STRUCTSERVIDOR_H_ */
