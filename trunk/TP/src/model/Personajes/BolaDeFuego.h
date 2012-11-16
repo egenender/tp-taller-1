@@ -32,6 +32,7 @@ public:
 	void actualizar(float);
 	int obtenerEstado();
 	bool estaMuerto();
+	bool esEliminable();
 private:
 	void morir();
 	void validarPiso();

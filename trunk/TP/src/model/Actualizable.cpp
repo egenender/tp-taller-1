@@ -30,3 +30,7 @@ void Actualizable::chocarConPluma(Pluma*){}
 bool Actualizable::estaMuerto(){
 	return false;
 }
+
+bool Actualizable::esEliminable(){
+	return true;
+}
