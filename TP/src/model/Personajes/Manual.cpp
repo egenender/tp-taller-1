@@ -222,8 +222,14 @@ void Manual::subir(){
 void Manual::bajar(){
 	if (!puedoSubir) return;
 	if (obtenerArea()->estaSobreElPiso()) return;
+	int posBaja = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
+	if (posBaja >= YEscalera) return;
+	int movY = velocidad;
+	if (posBaja + velocidad >= YEscalera) {
+		movY = velocidad - (YEscalera - posBaja);
+	}
 	puedoSubir = false;
-	mtrasladar(0,velocidad,true);
+	mtrasladar(0,movY,true);
 	estado = SUBIENDOMOVIMIENTO;
 }
 
@@ -319,7 +325,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 	mtrasladar(0,-y,false);
 
 }
-void Manual::chocarConEscalera(Escalera*){
+void Manual::chocarConEscalera(Escalera* esc){
 	if (!estoySubiendo()) estado = SUBIENDOQUIETO;
 	puedoSubir = true;
 	tengoPiso = true;
@@ -327,6 +333,9 @@ void Manual::chocarConEscalera(Escalera*){
 	chocaConEscalera = true;
 	chocaConSosten = true;
 	velocidadY = 0;
+
+	Cuerpo* e = (Cuerpo*)esc;
+	YEscalera = e->obtenerArea()->obtenerPosicion()->obtenerY() + e->obtenerArea()->obtenerAlto();
 }
 
 void Manual::chocarConCamaElastica(CamaElastica* ce){
