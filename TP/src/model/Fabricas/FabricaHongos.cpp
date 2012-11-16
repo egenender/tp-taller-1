@@ -21,5 +21,5 @@ void FabricaHongos::fabricar(Posicion* inicial, int valor){
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	Hongo* hongo = new Hongo ("hongo", sup, parametros->velocidad);
-	gestor->crearVista(hongo, "hongo");
+	gestor->crearVistaElemento(hongo, "hongo");
 }

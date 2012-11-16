@@ -21,5 +21,5 @@ void FabricaStones::fabricar(Posicion* inicial, int valor){
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	Stone* piedra = new Stone ("piedraEvolucion", sup, parametros->velocidad);
-	gestor->crearVista(piedra, "piedraEvolucion");
+	gestor->crearVistaElemento(piedra, "piedraEvolucion");
 }

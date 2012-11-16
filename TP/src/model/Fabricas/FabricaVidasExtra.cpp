@@ -21,6 +21,6 @@ void FabricaVidasExtra::fabricar(Posicion* inicial, int valor){
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	VidaExtra* vida = new VidaExtra ("vidaExtra", sup, parametros->velocidad);
-	gestor->crearVista(vida, "vidaExtra");
+	gestor->crearVistaElemento(vida, "vidaExtra");
 }
 

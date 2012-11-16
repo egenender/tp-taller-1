@@ -38,6 +38,15 @@ typedef std::map <std::string,TipoPersonaje*> mapa_auto;
 
 typedef std::map <std::string,string> mapa_niveles;
 
+typedef struct _parametrosTuberia{
+
+	int ancho;
+	int alto;
+	std::vector<int>* probabilidades;
+	std::map<int, Superficie*>* superficies;
+	std::vector<std::vector<int>* >* matrizEstados;
+
+}parametrosTuberia;
 
 typedef struct _parametrosPersonaje{
 
@@ -50,6 +59,7 @@ typedef struct _parametrosPersonaje{
 }parametrosPersonaje;
 
 typedef std::map <std::string,parametrosPersonaje*> mapa_parametrosPersonaje;
+typedef std::map <std::string,parametrosTuberia*> mapa_parametrosTuberia;
 
 class GestorConfiguraciones{
 	private:
@@ -79,6 +89,7 @@ class GestorConfiguraciones{
 		string rutaYaml;
 		string rutaYamlDefecto;
 		mapa_parametrosPersonaje* mapaParam;
+		mapa_parametrosTuberia* mapaTub;
 
 		bool destruir;
 	public:
@@ -87,6 +98,9 @@ class GestorConfiguraciones{
 		void destruirGestor();
 		parametrosPersonaje* crearParametrosPersonaje(const YAML::Node&, string);
 		void CargarPersonajes(const YAML::Node&);
+
+		parametrosTuberia* crearParametrosTuberia(const YAML::Node&, string);
+		void CargarTuberias(const YAML::Node&);
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
@@ -101,11 +115,15 @@ class GestorConfiguraciones{
 		void CargarPersonajesNivel(const YAML::Node&);
 		void CargarEstaticosNivel(const YAML::Node&, bool, bool, int);
 
-		void CargarElementosNivel(const YAML::Node& personajes);
+		void CargarElementosNivel(const YAML::Node& , int);
+		void CargarTuberiasNivel(const YAML::Node& );
 
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
-		void crearVista(Cuerpo*,string);
+
+		void crearVistaElemento(Cuerpo*,string);
+		void crearVistaTuberia(Cuerpo*,string, int);
+
 		parametrosPersonaje* obtenerParametrosPersonaje(string);
 		//void CargarPantalla();
 		bool Entra(int , int , int , int );
@@ -146,7 +164,9 @@ class GestorConfiguraciones{
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();
 
-		Cuerpo* instanciarCuerpo(std::string, int, int);
+		Cuerpo* instanciarCuerpo(std::string, int, int );
+		Cuerpo* instanciarTuberia(std::string, int, int, float, int );
+
 	private:
 		void destruirParametrosPersonaje(parametrosPersonaje*);
 };

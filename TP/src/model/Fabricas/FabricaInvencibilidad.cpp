@@ -21,6 +21,6 @@ void FabricaInvencibilidad::fabricar(Posicion* inicial, int valor){
 
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x,y));
 	Invencibilidad* inv = new Invencibilidad ("invencibilidad", sup, parametros->velocidad);
-	gestor->crearVista(inv, "invencibilidad");
+	gestor->crearVistaElemento(inv, "invencibilidad");
 }
 
