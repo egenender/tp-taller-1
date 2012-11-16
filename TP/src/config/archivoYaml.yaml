@@ -3,7 +3,7 @@ juego:
 #    ancho: 1000
 #    alto: 550
   parametros:
-    margen_scroll: 40
+    margen_scroll: 70
   tiposProtagonista:
     Charmander:
       ancho: 65
@@ -251,7 +251,7 @@ juego:
 #          direccion: arriba
 #          eme: 5
         - tipo: tuberiaHT
-          x: 800
+          x: 500
           y: 380
           direccion: arriba
           eme: 5
@@ -284,6 +284,95 @@ juego:
           y: 350
           ancho: 50
           alto: 200
+    - nivel: cUCU
+      players: 1
+      alto: 560
+      ancho: 1600
+      fondo: src/resources/ph-101661.jpg
+      musica: src/resources/niveles/route1.ogg
+      piso: 1450
+      elementos:
+        - tipo: princesa
+          x: 600
+          y: 150
+        - tipo: mono
+          x: 650
+          y: 150
+      tuberias:
+        - tipo: tuberiaHongo
+          x: 200
+          y: 400
+          direccion: abajo
+          eme: 5
+        - tipo: tuberiaTortuga
+          x: 500
+          y: 550
+          direccion: arriba
+          eme: 5
+        - tipo: tuberiaHT
+          x: 800
+          y: 380
+          direccion: arriba
+          eme: 5
+        - tipo: tuberiaHT
+          x: 800
+          y: 380
+          direccion: izquierda
+          eme: 5
+      plataformas:
+        - textura: viga
+          x: 250
+          y: 150
+          ancho: 400
+          alto: 50
+        - textura: viga
+          x: 300
+          y: 350
+          ancho: 400
+          alto: 50
+        - textura: viga
+          x: 90
+          y: 2130
+          ancho: 1300
+          alto: 50
+        - textura: viga
+          x: 0
+          y: 2400
+          ancho: 1600
+          alto: 50
+        - textura: viga
+          x: 700
+          y: 1135
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 400
+          y: 1135
+          ancho: 200
+          alto: 50
+      vigas:
+        - textura: viga
+          x: 700
+          y: 330
+          ancho: 500
+          alto: 50
+          inclinacion: 20
+      escaleras:
+        - textura: esc
+          x: 800
+          y: 1135
+          ancho: 50
+          alto: 1000
+        - textura: esc
+          x: 520
+          y: 135
+          ancho: 50
+          alto: 1000
+        - textura: esc
+          x: 600
+          y: 2130
+          ancho: 50
+          alto: 270
     - nivel: Troll
       players: 4
       alto: 600
@@ -351,15 +440,5 @@ juego:
       musica:
       personajes:
         - tipo: princesa
-          x: 400
-          y: 300
-    - nivel: CUCU
-      players: 1
-      alto: 600
-      ancho: 800
-      fondo: src/resources/fondoGrande.png
-      musica:
-      personajes:
-        - tipo: mono
           x: 400
           y: 300
