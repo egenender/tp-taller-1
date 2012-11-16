@@ -10,6 +10,7 @@ Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 	permitoMovEnSalto = false;
 	velocidadY = 0;
 	saltoMov = false;
+	enViga = false;
 	direccion = calculoDireccionRandom();
 
 	if (direccion == DERECHA)
@@ -111,8 +112,8 @@ void Hongo::validarPiso(){
 
 
 void Hongo::actualizarSalto(){
-	if (!(estoySaltando() || saltoMov)) return;
-
+	if (!(estoySaltando() || saltoMov) && !enViga) return;
+	enViga = false;
 	trasladar(0,velocidadY,true);
 	velocidadY += ACELERACION_HONGO;
 
@@ -276,10 +277,14 @@ void Hongo::chocarConPlataforma(Plataforma* p){
 	else
 		cambio = false;
 
-
 	tengoPiso = true;
 	chocaConSosten = true;
 	velocidadY = 0;
+
+	if (p->esVigaPorDerecha() || p->esVigaPorIzquierda()){
+		velocidadY = 15;
+		enViga = true;
+	}
 
 	int y;
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
