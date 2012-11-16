@@ -109,23 +109,6 @@ void Nivel::iniciar() {
 			vistas->push_back(vista);
 			caja->agregarObservador(vista);
 
-
-			std::vector<int>* probs = new std::vector<int>();
-			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
-			fabrs->push_back(new FabricaHongos());
-			probs->push_back(70);
-			fabrs->push_back(new FabricaTortugas());
-			probs->push_back(30);
-			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, -2, probs, fabrs);
-			actualizables->push_back(tub);
-
-			Superficie* sup = new Superficie("src/resources/items/tuberia.bmp");
-			sup->escala(60,60);
-			sup->transparencia(255,0,255);
-			VistaImagen *vi = new VistaImagen(sup);
-			vistas->push_back(vi);
-			tub->agregarObservador(vi);
-
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
