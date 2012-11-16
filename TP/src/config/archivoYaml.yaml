@@ -3,7 +3,7 @@ juego:
 #    ancho: 1000
 #    alto: 550
   parametros:
-    margen_scroll: 70
+    margen_scroll: 100
   tiposProtagonista:
     Charmander:
       ancho: 65
@@ -251,7 +251,7 @@ juego:
 #          direccion: arriba
 #          eme: 5
         - tipo: tuberiaHT
-          x: 500
+          x: 600
           y: 380
           direccion: arriba
           eme: 5
@@ -286,11 +286,11 @@ juego:
           alto: 200
     - nivel: cUCU
       players: 1
-      alto: 560
+      alto: 2560
       ancho: 1600
       fondo: src/resources/ph-101661.jpg
       musica: src/resources/niveles/route1.ogg
-      piso: 1450
+      piso: 2450
       elementos:
         - tipo: princesa
           x: 600
@@ -299,34 +299,34 @@ juego:
           x: 650
           y: 150
       tuberias:
-        - tipo: tuberiaHongo
+        - tipo: tuberiaHT
           x: 200
-          y: 400
+          y: 2140
+          direccion: arriba
+          eme: 5
+        - tipo: tuberiaHongo
+          x: 800
+          y: 2200
           direccion: abajo
           eme: 5
-        - tipo: tuberiaTortuga
-          x: 500
-          y: 550
-          direccion: arriba
-          eme: 5
         - tipo: tuberiaHT
           x: 800
           y: 380
-          direccion: arriba
-          eme: 5
-        - tipo: tuberiaHT
-          x: 800
-          y: 380
-          direccion: izquierda
+          direccion: derecha
           eme: 5
       plataformas:
         - textura: viga
-          x: 250
+          x: 450
           y: 150
-          ancho: 400
+          ancho: 200
           alto: 50
         - textura: viga
-          x: 300
+          x: 10
+          y: 540
+          ancho: 300
+          alto: 50
+        - textura: viga
+          x: 380
           y: 350
           ancho: 400
           alto: 50
@@ -364,7 +364,7 @@ juego:
           ancho: 50
           alto: 1000
         - textura: esc
-          x: 520
+          x: 435
           y: 135
           ancho: 50
           alto: 1000
