@@ -73,8 +73,18 @@ void BolaDeFuego::chocarConPlataforma(Plataforma* p){
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
 		delete(posCmp);
 		posCmp = NULL;
-		morir();
-		return;
+		Posicion* posIzq = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX() + p->obtenerArea()->obtenerAncho(), 0);
+		bool viga = posIzq->estaALaIzquierdaDe(posAnterior) && p->esVigaPorDerecha();
+		delete (posIzq);
+		Posicion* posDer = new Posicion(posAnterior->obtenerX() + obtenerArea()->obtenerAncho(),0);
+		viga = viga || posDer->estaALaIzquierdaDe(p->obtenerArea()->obtenerPosicion());
+		delete(posDer);
+
+		if (!viga){
+			morir();
+			return;
+		}
+
 	}
 
 	bool cambio = true;

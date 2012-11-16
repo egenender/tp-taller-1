@@ -395,6 +395,7 @@ void Manual::perderVida(){
 		return;
 	}
 	if (estado == MUERTO) return;
+	especialHabilitado = false;
 	vidas--;
 	if (vidas == 0){
 		morir();
