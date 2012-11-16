@@ -11,7 +11,8 @@ using namespace std;
 class VistaImagen : public VistaCuerpo {
 protected:
 	Superficie* imagen;
-
+	int movY;
+	int alpha;
 public:
 	VistaImagen();
 	VistaImagen(string ID);
