@@ -113,9 +113,9 @@ void Nivel::iniciar() {
 			std::vector<int>* probs = new std::vector<int>();
 			std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
 			fabrs->push_back(new FabricaHongos());
-			probs->push_back(50);
+			probs->push_back(70);
 			fabrs->push_back(new FabricaTortugas());
-			probs->push_back(50);
+			probs->push_back(30);
 			Tuberia* tub = new Tuberia ("tub", new Area(60,60, new Posicion (500, 300)), 5, -2, probs, fabrs);
 			actualizables->push_back(tub);
 
@@ -261,7 +261,8 @@ void Nivel::quitarMuertos(){
 	for (unsigned int i = 0; i < actualizables->size(); i++){
 		ac = actualizables->at(i);
 		if (ac->estaMuerto()){
-			//delete(ac); Por ahora no hacemos nada, porque hay un error en C++
+			if (ac->esEliminable())
+				delete(ac);
 		}else
 			aux->push_back(ac);
 	}

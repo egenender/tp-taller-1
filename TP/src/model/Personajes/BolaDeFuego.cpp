@@ -176,3 +176,7 @@ void BolaDeFuego::saltar(){
 void BolaDeFuego::setearCooperatividad(bool c){
 	cooperativo = c;
 }
+
+bool BolaDeFuego::esEliminable(){
+	return false;
+}

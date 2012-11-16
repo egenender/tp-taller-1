@@ -86,6 +86,7 @@ public:
 	void evolucionar();
 	void habilitarEspecial();
 	void hacerInvencible();
+	bool esEliminable();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

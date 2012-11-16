@@ -540,3 +540,7 @@ void Manual::hacerInvencible(){
 bool Manual::mataAlContacto(){
 	return invencible;
 }
+
+bool Manual::esEliminable(){
+	return false;
+}
