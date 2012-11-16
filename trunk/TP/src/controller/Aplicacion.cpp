@@ -145,6 +145,7 @@ int Aplicacion::ejecutar() {
 		dibujar();
 
 		ManejadorEstados::cambiarEstado();
+		GestorConfiguraciones::getInstance()->destruirGestor();
 		SDL_Delay(30);
 		SDL_framerateDelay(&frames);
 	}
