@@ -11,7 +11,7 @@
 #define DERECHA 1
 #define IZQUIERDA -1
 #define FACTOR_ESCALA_HONGO 90
-#define ACELERACION_HONGO 1
+#define ACELERACION_HONGO 3
 #define PROB_FABRICAR 5
 
 class Manual;
@@ -19,7 +19,7 @@ class Barril;
 
 class Hongo : public Cuerpo{
 private:
-	bool tengoPiso, chocaConSosten;
+	bool tengoPiso, chocaConSosten, enViga;
 	int proxDir;
 	FabricaPowerUps* fabrica;
 protected:
