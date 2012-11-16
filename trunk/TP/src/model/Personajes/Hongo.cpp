@@ -79,7 +79,7 @@ void Hongo::morir(){
 
 
 	float rnd = tirarRandom();
-	if (PROB_FABRICAR > (rnd * 1000)) return;
+	if (PROB_FABRICAR <= (rnd * 1000)) return;
 
 	Posicion* posCreacion = new Posicion (obtenerArea()->obtenerPosicion()->obtenerX(), obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto());
 	fabrica->fabricar(posCreacion, -2);
