@@ -35,6 +35,7 @@ public:
 	Animacion* animacionSaltaEvo;
 	Animacion* animacionEscaleraEvo;
 	Animacion* animacionEscalarEvo;
+	Animacion* animacionHeridoEvo;
 	VistaSonora* vistaSonora;
 
 public:
