@@ -39,7 +39,7 @@ void VigaInclinada::crearPlataformas(){
 	int anchoEst = superficieOcupada->obtenerAncho() * cos(angulito);
 	if (cant > anchoEst)
 		cant = anchoEst;
-	cant++;
+	cant+=2;
 	int separacionX = 0;
 
 	anchoP = superficieOcupada->obtenerAncho() * cos(angulito) / cant;
