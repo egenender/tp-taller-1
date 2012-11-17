@@ -5,16 +5,16 @@ std::string decodificarTipo(unsigned int tipo){
 
 	//Los casos 0 y 3 deben ser tratados desde afuera
 	switch(tipo){
-	case 0: aux = " "; break;
-	case 1: aux = "hongo"; break;
-	case 2: aux = "tortuga"; break;
-	case 3: aux = " "; break;
-	case 4: aux = "plataformaMovil"; break;
-	case 5: aux = "cama"; break;
-	case 6: aux = "barril"; break;
-	case 7: aux = "caja"; break;
-	case 8: aux = "mono"; break;
-	case 9: aux = "princesa"; break;
+	case TIPO_MANUAL: aux = " "; break;
+	case TIPO_HONGO: aux = "hongo"; break;
+	case TIPO_TORTUGA: aux = "tortuga"; break;
+	case TIPO_BOLA_FUEGO: aux = " "; break;
+	case TIPO_PLATAFORMA_MOVIL: aux = "plataformaMovil"; break;
+	case TIPO_CAMA_ELASTICA: aux = "camaElastica"; break;
+	case TIPO_BARRIL: aux = "barril"; break;
+	case TIPO_CAJA: aux = "cajaRandom"; break;
+	case TIPO_MONO: aux = "mono"; break;
+	case TIPO_PRINCESA: aux = "princesa"; break;
 	}
 
 	return aux;

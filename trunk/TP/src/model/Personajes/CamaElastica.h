@@ -16,6 +16,7 @@ public:
 	virtual ~CamaElastica();
 	int obtenerEstado();	 //de observable
 	virtual void actualizar(float delta); 		//de cuerpo
+	unsigned int obtenerTipo();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

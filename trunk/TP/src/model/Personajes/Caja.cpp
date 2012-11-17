@@ -1,5 +1,5 @@
 #include "Caja.h"
-
+#include "../Tipos.h"
 Caja::Caja(const char* nom, Area* sup, FabricaActualizable *f): Plataforma(nom, sup) {
 	fabrica = f;
 	estado = QUIETO;
@@ -47,4 +47,8 @@ void Caja::actualizar(float){
 		huboCambios();
 		notificarObservadores();
 	}
+}
+
+unsigned int Caja::obtenerTipo(){
+	return TIPO_CAJA;
 }

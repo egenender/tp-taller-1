@@ -1,5 +1,6 @@
 #include "Princesa.h"
 #include "../Observable.h"
+#include "../Tipos.h"
 
 Princesa::Princesa(const char* nom, Area* sup, int t): Cuerpo(nom, sup) {
 	tiempo_espera = t;
@@ -49,4 +50,8 @@ void Princesa::cambiar_estado(){
 	huboCambios();
 	timer->detener();
 	timer->comenzar();
+}
+
+unsigned int Princesa::obtenerTipo(){
+	return TIPO_PRINCESA;
 }

@@ -1,6 +1,7 @@
 #include "Tortuga.h"
 #include "../Observable.h"
 #include <stdio.h>
+#include "../Tipos.h"
 
 Tortuga::Tortuga(const char* nom, Area* sup, int v): Hongo(nom, sup, v) {
 	velocidadInicial = velocidadX;
@@ -71,4 +72,8 @@ void Tortuga::actualizar(float a){
 	}
 	notificarObservadores();
 	recien_movido = false;
+}
+
+unsigned int Tortuga::obtenerTipo(){
+	return TIPO_TORTUGA;
 }

@@ -35,7 +35,7 @@ public:
 	int obtenerEstado();
 	bool estaMuerto();
 	virtual bool recienMovido();
-
+	virtual unsigned int obtenerTipo();
 
 	void chocarCon(Actualizable*);
 	void chocarConPlataforma(Plataforma*);

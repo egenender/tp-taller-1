@@ -2,6 +2,7 @@
 #include "Hongo.h"
 #include "Manual.h"
 #include "Barril.h"
+#include "../Tipos.h"
 
 PlataformaMovil::PlataformaMovil(const char* nom, Area* sup, int vel, int dist):Plataforma(nom,sup) {
 	velocidad = vel;
@@ -71,4 +72,8 @@ void PlataformaMovil::chocarConPlataforma(Plataforma* p){
 	actual = 0;
 	velocidad *= (-1);
 	}
+}
+
+unsigned int PlataformaMovil::obtenerTipo(){
+	return TIPO_PLATAFORMA_MOVIL;
 }

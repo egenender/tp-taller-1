@@ -16,6 +16,8 @@ public:
 	PlataformaMovil(const char*, Area*, int, int D = 0);
 	virtual ~PlataformaMovil();
 	void actualizar(float);
+	unsigned int obtenerTipo();
+
 	void chocarConManual(Manual*);
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);

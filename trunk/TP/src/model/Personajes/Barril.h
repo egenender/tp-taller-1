@@ -43,6 +43,8 @@ public:
 	void chocarConBarril(Barril*);
 	void chocarConBolaDeFuego(BolaDeFuego*);
 	void chocarConHongo(Hongo*);
+
+	unsigned int obtenerTipo();
 private:
 	void destruir();
 	void actualizarEstados();

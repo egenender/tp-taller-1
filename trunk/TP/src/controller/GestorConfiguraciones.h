@@ -20,6 +20,7 @@
 #include "../model/Dummy.h"
 #include "../model/Personajes/VigaInclinada.h"
 #include "../model/ContenedorManuales.h"
+#include "../model/ContenedorCuerpos.h"
 #include "../model/Personajes/Manual.h"
 #include "../log/Log.h"
 #include "../gui/model/Ventana.h"
@@ -90,12 +91,13 @@ class GestorConfiguraciones{
 		std::vector<TipoProtagonista*>* posiblesTiposProt;
 		std::vector<string>* nombresProt;
 
-		bool esCliente;
+		bool esCliente, esServidor;
 
 		int nivelElegido;
 		ContenedorDummy* contenedor;
 		Dummy* dummy;
 		ContenedorManuales* manuales;
+		ContenedorCuerpos* contCuerpos;
 
 		string headerTemp;
 		string rutaYaml;
@@ -159,6 +161,7 @@ class GestorConfiguraciones{
 		Superficie* ObtenerFondo();
 		void AgregarAVector(string ruta);
 		void setEsCliente ();
+		void setEsServidor();
 
 		unsigned int obtenerCantidadDeJugadores();
 
@@ -182,6 +185,7 @@ class GestorConfiguraciones{
 		Dummy* obtenerDummyMio();
 		void crearManual(unsigned int);
 		ContenedorManuales* obtenerContenedorManuales();
+		ContenedorCuerpos* obtenerContenedorCuerpos();
 
 		vector<Actualizable*>* ObtenerActualizables();
 		vector<VistaCuerpo*>* ObtenerVistas();

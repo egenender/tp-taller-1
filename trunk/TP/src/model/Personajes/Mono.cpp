@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../Tipos.h"
 
 Mono::Mono(const char* nom, Area* sup, FabricaActualizable* f,float m): Cuerpo(nom,sup) {
 	/*MEDIA DEBE ESTAR EN SEGUNDOS!*/
@@ -13,7 +14,6 @@ Mono::Mono(const char* nom, Area* sup, FabricaActualizable* f,float m): Cuerpo(n
 
 	timer = new Timer();
 	timer->comenzar();
-
 }
 
 Mono::~Mono() {
@@ -44,7 +44,6 @@ void Mono::actualizar(float){
 		estado = QUIETO;
 		huboCambios();
 	}
-
 
 	notificarObservadores();
 }
@@ -98,4 +97,8 @@ int Mono::calculoDireccionRandom(){
 		return 1;
 	else
 		return -1;
+}
+
+unsigned int Mono::obtenerTipo(){
+	return TIPO_MONO;
 }

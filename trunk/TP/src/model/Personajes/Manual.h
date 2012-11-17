@@ -93,6 +93,7 @@ public:
 	bool esEliminable();
 	bool puedeMover(); // NEW
 	int obtenerVelocidad();
+	unsigned int obtenerTipo();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

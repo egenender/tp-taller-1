@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../Posicion.h"
 #include "Manual.h"
+#include "../Tipos.h"
 
 Hongo::Hongo(const char* nom, Area* sup, int vel): Cuerpo(nom,sup) {
 	if (vel <= 0) vel = VELOCIDAD_HONGO_STANDARD;
@@ -322,4 +323,8 @@ bool Hongo::recienMovido(){
 
 void Hongo::chocarConBolaDeFuego(BolaDeFuego*){
 	morir();
+}
+
+unsigned int Hongo::obtenerTipo(){
+	return TIPO_HONGO;
 }

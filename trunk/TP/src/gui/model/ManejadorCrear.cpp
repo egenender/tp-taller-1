@@ -17,7 +17,7 @@ ManejadorCrear::~ManejadorCrear() {
 void ManejadorCrear::manejarClic(){
 	barra->setearMensaje("Iniciando Conexion");
 	GestorConfiguraciones* gestor=GestorConfiguraciones::getInstance();
-
+	gestor->setEsServidor();
 	gestor->inicioCarga();
 
 	string puerto = txtPuerto->obtenerMensaje();

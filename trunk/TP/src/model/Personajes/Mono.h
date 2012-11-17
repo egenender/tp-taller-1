@@ -24,6 +24,7 @@ public:
 
 	void actualizar(float);
 	int obtenerEstado();
+	unsigned int obtenerTipo();
 
 	void chocarCon(Actualizable*);
 

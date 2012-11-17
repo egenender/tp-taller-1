@@ -17,6 +17,7 @@ public:
 	virtual ~Tortuga();
 	bool recienMovido();
 	void actualizar(float);
+	unsigned int obtenerTipo();
 protected:
 	void perderVida();
 	void modificacionMovimiento(int);

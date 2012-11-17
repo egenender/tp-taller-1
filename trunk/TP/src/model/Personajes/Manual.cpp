@@ -1,6 +1,7 @@
 #include "Manual.h"
 #include "Hongo.h"
 #include "CamaElastica.h"
+#include "../Tipos.h"
 
 bool Manual::cooperativo = true;
 
@@ -581,4 +582,8 @@ bool Manual::esEliminable(){
 
 int Manual::obtenerVelocidad(){
 	return velocidad;
+}
+
+unsigned int Manual::obtenerTipo(){
+	return TIPO_MANUAL;
 }
