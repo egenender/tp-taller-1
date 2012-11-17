@@ -2377,6 +2377,11 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	aux->push_back(EVOLUCION + SUBIENDOMOVIMIENTO);
 	param->matrizEstados->push_back(aux);
 
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionHeridoProt);
+	aux->push_back(EVOLUCION + HERIDO);
+	param->matrizEstados->push_back(aux);
+
 
 	std::string n = nombrecito;
 	mapaParam->insert(pair<string, parametrosPersonaje*>(n, param));
