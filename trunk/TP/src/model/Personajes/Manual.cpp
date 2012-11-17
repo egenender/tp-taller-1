@@ -250,7 +250,7 @@ void Manual::chocarConManual(Manual* manual){
 
 }
 void Manual::chocarConPlataforma(Plataforma* p){
-	if(atraviesaBloques) return;
+
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
@@ -283,7 +283,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 			}
 		}
 		delete(cmpDer);
-
+		if(atraviesaBloques) return;
 		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
 
 		if (posAnterior->obtenerY() >= cmpAbajo->obtenerY()){
@@ -329,12 +329,13 @@ void Manual::chocarConEscalera(Escalera* esc){
 	if (!estoySubiendo()) estado = SUBIENDOQUIETO;
 	puedoSubir = true;
 	tengoPiso = true;
-	atraviesaBloques = true;
 	chocaConEscalera = true;
 	chocaConSosten = true;
 	velocidadY = 0;
+	atraviesaBloques = true;
 
 	Cuerpo* e = (Cuerpo*)esc;
+
 	YEscalera = e->obtenerArea()->obtenerPosicion()->obtenerY() + e->obtenerArea()->obtenerAlto();
 }
 

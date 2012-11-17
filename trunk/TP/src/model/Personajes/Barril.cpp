@@ -40,7 +40,7 @@ Barril::Barril(const char* nom, Area* sup, int vel, int dir):Cuerpo(nom,sup) {
 }
 
 Barril::~Barril() {
-	if (posAnterior) delete(posAnterior);
+
 }
 
 int Barril::obtenerEstado(){
@@ -200,10 +200,11 @@ void Barril::chocarConPlataforma(Plataforma* p){
 				delete(posCmp);
 				posCmp = NULL;
 				delete(cmpIzquierda);
-				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
-				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
-				trasladar(-mov-1,0,true);
-				puedoBajar = false;
+//				int mov = obtenerArea()->obtenerPosicion()->obtenerX() + obtenerArea()->obtenerAncho();
+//				mov	-= p->obtenerArea()->obtenerPosicion()->obtenerX();
+//				trasladar(-mov-1,0,true);
+//				puedoBajar = false;
+				destruir();
 				return;
 			}
 
@@ -216,10 +217,11 @@ void Barril::chocarConPlataforma(Plataforma* p){
 				delete(posCmp);
 				posCmp = NULL;
 				delete (cmpDer);
-				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
-				x -= obtenerArea()->obtenerPosicion()->obtenerX();
-				trasladar(x+1,0,true);
-				puedoBajar = false;
+//				int x = p->obtenerArea()->obtenerPosicion()->obtenerX() +p->obtenerArea()->obtenerAncho();
+//				x -= obtenerArea()->obtenerPosicion()->obtenerX();
+//				trasladar(x+1,0,true);
+//				puedoBajar = false;
+				destruir();
 				return;
 			}
 		}
