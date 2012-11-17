@@ -27,7 +27,6 @@ public:
 	Animacion* animacionPasivaProt;
 	Animacion* animacionActivaProt;
 	Animacion* animacionSaltaProt;
-	Animacion* animacionHeridoProt;
 	VistaSonora* vistaSonora;
 
 public:
