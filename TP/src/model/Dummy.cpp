@@ -10,7 +10,7 @@
 Dummy::Dummy(unsigned int elID, Posicion* posicion, int x, int y){
 	ID = elID;
 	pos = posicion;
-	estado = QUIETODER;
+	estado = MUERTO;
 	ancho = x;
 	alto = y;
 }

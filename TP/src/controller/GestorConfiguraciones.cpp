@@ -753,28 +753,36 @@ VistaVarios* GestorConfiguraciones::crearVistaProt(string clave){
 void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, bool esCuerpo){
 
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
-	VistaVarios* vista=new VistaVarios();
-	for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
+	VistaVarios* vista = new VistaVarios();
+	if (!esServidor){
 
-		if (paramPersonaje->matrizEstados->at(i)->size()==1){
-			vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
-		}else{
-			vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
+		printf("la cantidad es: %d\n", paramPersonaje->animaciones->size() );
+		for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
 
+			if (paramPersonaje->matrizEstados->at(i)->size()==1){
+				vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
+			}else{
+				vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
+
+			}
 		}
+
 	}
 
-	cuerpo->agregarObservador(vista);
 
 	if (esCuerpo)
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
-	configNivel->vistas.push_back(vista);
+
 
 	if (esServidor){
 		cuerpo->agregarObservador(contCuerpos);
 		Cuerpo* c = (Cuerpo*) cuerpo;
 		c->setearID(IDACT);
 		IDACT++;
+		delete (vista);
+	}else{
+		cuerpo->agregarObservador(vista);
+		configNivel->vistas.push_back(vista);
 	}
 }
 
@@ -1083,28 +1091,28 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		CargarEstaticosNivel(defEscaleras, true, false, ESCALERA);
 	}
 
+	if (!esCliente){
+		try{
+			CargarElementosNivel(nodo[nivelElegido]["elementos"], ELEMENTO);
+			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los elementos del nivel");
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo elementos");
+		}
 
-	try{
-		CargarElementosNivel(nodo[nivelElegido]["elementos"], ELEMENTO);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los elementos del nivel");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo elementos");
+		try{
+			CargarTuberiasNivel(nodo[nivelElegido]["tuberias"]);
+			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las tuberias del nivel");
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tuberias");
+		}
+
+		try{
+			CargarCajasNivel(nodo[nivelElegido]["cajas"]);
+			Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las cajas del nivel");
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo cajas");
+		}
 	}
-
-	try{
-		CargarTuberiasNivel(nodo[nivelElegido]["tuberias"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las tuberias del nivel");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tuberias");
-	}
-
-	try{
-		CargarCajasNivel(nodo[nivelElegido]["cajas"]);
-		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las cajas del nivel");
-	}catch(YAML::TypedKeyNotFound<std::string> &e){
-		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo cajas");
-	}
-
 //	try{
 //		CargarPersonajesNivel(nodo[nivelElegido]["personajes"]);
 //		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");

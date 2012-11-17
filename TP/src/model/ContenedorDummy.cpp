@@ -154,6 +154,8 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
 		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(idNuevo)->nombre;
 	}
 
+	printf("nombre: %s\n", nombre.c_str());
+
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(nombre);
 	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), parametros->ancho, parametros->alto);
 	gestor->crearVistaElemento(nuevo, nombre, false);
