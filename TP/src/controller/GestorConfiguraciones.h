@@ -11,6 +11,7 @@
 #include "../view/VistaAnimada.h"
 #include "../view/VistaImagen.h"
 #include "../view/VistaAutomatico.h"
+#include "../view/VistaVarios.h"
 #include "../view/TipoPersonaje.h"
 #include "../view/TipoProtagonista.h"
 #include "../view/ConfiguracionPantalla.h"
@@ -140,6 +141,7 @@ class GestorConfiguraciones{
 		void crearVistaElemento(Observable*,string, bool esCuerpo = true);
 		void crearVistaTuberia(Cuerpo*,string, int);
 		void crearVistaCaja(Cuerpo*,string );
+		VistaVarios* crearVistaProt(string );
 
 		parametrosPersonaje* obtenerParametrosPersonaje(string);
 		//void CargarPantalla();

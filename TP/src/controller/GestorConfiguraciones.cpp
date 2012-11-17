@@ -722,6 +722,23 @@ void GestorConfiguraciones::crearVistaTuberia(Cuerpo* cuerpo,string clave, int d
 }
 
 
+VistaVarios* GestorConfiguraciones::crearVistaProt(string clave){
+
+	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
+	VistaVarios* vista=new VistaVarios();
+	for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
+
+		if (paramPersonaje->matrizEstados->at(i)->size()==1){
+			vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
+		}else{
+			vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
+
+		}
+	}
+
+	return vista;
+}
+
 void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, bool esCuerpo){
 
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
@@ -1361,7 +1378,7 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 	if( strcmp ( tipo.c_str() , "hongo" ) == 0 )
 		return new Hongo("hongo",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "tortuga" ) == 0 )
-		return new Hongo("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
+		return new Tortuga("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "mono" ) == 0 )
 		return new Mono("mono",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), new FabricaBarriles(),mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "camaElastica" ) == 0 )
@@ -1530,12 +1547,12 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 	if (!encontrado)
 		return ;
 
-	VistaProtagonista* vista = new VistaProtagonista(posiblesTiposProt->at(i)->animacionActivaProt, posiblesTiposProt->at(i)->animacionPasivaProt, posiblesTiposProt->at(i)->animacionSaltaProt);
-	configNivel->vistas.push_back(vista);
+	VistaVarios* vistaProt = this->crearVistaProt(nombre);
+	configNivel->vistas.push_back(vistaProt);
 	configNivel->vistas.push_back(posiblesTiposProt->at(i)->vistaSonora);
 	if (esCliente){
 		dummy = new Dummy(i, new Posicion(50,50), posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto);
-		dummy->agregarObservador(vista);
+		dummy->agregarObservador(vistaProt);
 		dummy->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
 		contenedor = new ContenedorDummy();
 		contenedor->agregarDummy(dummy);
@@ -1544,7 +1561,7 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 		Posicion* pos = new Posicion(10, Posicion::obtenerPiso()-posiblesTiposProt->at(i)->alto);
 		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
 		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
-		configNivel->manual->agregarObservador(vista);
+		configNivel->manual->agregarObservador(vistaProt);
 		configNivel->manual->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
 		configNivel->actualizables.push_back(configNivel->manual);
 	}
@@ -2035,30 +2052,331 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	}
 
 	AgregarAVector(ruta);
+
+
+	try{
+		animaciones["escalera"]["sprites"] >> ruta;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscaleraProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["escalera"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, SUBIENDOQUIETO);
+		}
+	}catch( YAML::TypedKeyNotFound<std::string> &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscaleraProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}catch( YAML::Exception &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscaleraProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}
+
+	AgregarAVector(ruta);
+
+	try{
+		animaciones["escalar"]["sprites"] >> ruta;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscalarProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["escalar"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, SUBIENDOMOVIMIENTO);
+		}
+	}catch( YAML::TypedKeyNotFound<std::string> &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscalarProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}catch( YAML::Exception &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionEscalarProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}
+
+	AgregarAVector(ruta);
+
+
+	try{
+		animaciones["herido"]["sprites"] >> ruta;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["herido"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, SUBIENDOMOVIMIENTO);
+		}
+	}catch( YAML::TypedKeyNotFound<std::string> &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}catch( YAML::Exception &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+	}
+
+	AgregarAVector(ruta);
+
+
+
+	try{
+			animaciones["evoquieto"]["sprites"] >> ruta;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionPasivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			AgregarAVector(ruta);
+			animaciones["evoquieto"]["sonido"] >> ruta;
+			if (ruta!="~"){
+
+				if (esCliente) ruta=headerTemp+ruta;
+
+				vistaSonora->agregarSonido(ruta, QUIETO);
+
+			}
+
+		}catch( YAML::TypedKeyNotFound<std::string> &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionPasivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones quieto dentro del personaje, se cargan por defecto");
+		}catch( YAML::Exception &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionPasivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones quieto dentro del personaje, se cargan por defecto");
+		}
+
+		AgregarAVector(ruta);
+
+		try{
+			animaciones["evocaminar"]["sprites"] >> ruta;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionActivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			AgregarAVector(ruta);
+			animaciones["evocaminar"]["sonido"] >> ruta;
+			if (ruta!="~"){
+
+				if (esCliente) ruta=headerTemp+ruta;
+
+				vistaSonora->agregarSonido(ruta, CAMINANDODER);
+			}
+		}catch( YAML::TypedKeyNotFound<std::string> &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionActivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}catch( YAML::Exception &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionActivaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}
+
+		AgregarAVector(ruta);
+
+		try{
+			animaciones["evosaltar"]["sprites"] >> ruta;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionSaltaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			AgregarAVector(ruta);
+			animaciones["evosaltar"]["sonido"] >> ruta;
+			if (ruta!="~"){
+
+				if (esCliente) ruta=headerTemp+ruta;
+
+				vistaSonora->agregarSonido(ruta, SALTAR);
+
+			}
+		}catch( YAML::TypedKeyNotFound<std::string> &e) {
+			ruta = RUTA_SALTA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionSaltaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones saltar dentro del personaje, se cargan por defecto");
+		}catch( YAML::Exception &e) {
+			ruta = RUTA_SALTA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionSaltaEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones saltar dentro del personaje, se cargan por defecto");
+		}
+
+		AgregarAVector(ruta);
+
+
+		try{
+			animaciones["evoescalera"]["sprites"] >> ruta;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscaleraEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			AgregarAVector(ruta);
+			animaciones["evoescalera"]["sonido"] >> ruta;
+			if (ruta!="~"){
+
+				if (esCliente) ruta=headerTemp+ruta;
+
+				vistaSonora->agregarSonido(ruta, SUBIENDOQUIETO);
+			}
+		}catch( YAML::TypedKeyNotFound<std::string> &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscaleraEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}catch( YAML::Exception &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscaleraEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}
+
+		AgregarAVector(ruta);
+
+		try{
+			animaciones["evoescalar"]["sprites"] >> ruta;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscalarEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			AgregarAVector(ruta);
+			animaciones["evoescalar"]["sonido"] >> ruta;
+			if (ruta!="~"){
+
+				if (esCliente) ruta=headerTemp+ruta;
+
+				vistaSonora->agregarSonido(ruta, SUBIENDOMOVIMIENTO);
+			}
+		}catch( YAML::TypedKeyNotFound<std::string> &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscalarEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}catch( YAML::Exception &e) {
+			ruta = RUTA_PASIVA;
+			if (esCliente)
+				ruta = headerTemp + ruta;
+			tipoper->animacionEscalarEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
+		}
+
+		AgregarAVector(ruta);
+
+
+
 	tipoper->vistaSonora=vistaSonora;
 
 	//debe copiarse luego tambien en la zona donde debe cargarse el default
 	param->animaciones = new std::vector<Animacion*>();
-	param->animaciones->push_back(tipoper->animacionPasivaProt);
-	param->animaciones->push_back(tipoper->animacionActivaProt);
-	param->animaciones->push_back(tipoper->animacionSaltaProt);
-
 	param->matrizEstados = new std::vector<vector<int>*>();
 
 	vector<int>* aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionPasivaProt);
 	aux->push_back(QUIETODER);
 	aux->push_back(QUIETOIZQ);
 	param->matrizEstados->push_back(aux);
 
 	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionActivaProt);
 	aux->push_back(CAMINANDODER);
 	aux->push_back(CAMINANDOIZQ);
 	param->matrizEstados->push_back(aux);
 
 	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionSaltaProt);
 	aux->push_back(SALTANDODER);
 	aux->push_back(SALTANDOIZQ);
 	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionEscaleraProt);
+	aux->push_back(SUBIENDOQUIETO);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionEscalarProt);
+	aux->push_back(SUBIENDOMOVIMIENTO);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionHeridoProt);
+	aux->push_back(HERIDO);
+	param->matrizEstados->push_back(aux);
+
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionPasivaEvo);
+	aux->push_back(EVOLUCION + QUIETODER);
+	aux->push_back(EVOLUCION + QUIETOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionActivaEvo);
+	aux->push_back(EVOLUCION + CAMINANDODER);
+	aux->push_back(EVOLUCION + CAMINANDOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionSaltaEvo);
+	aux->push_back(EVOLUCION + SALTANDODER);
+	aux->push_back(EVOLUCION + SALTANDOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionEscaleraEvo);
+	aux->push_back(EVOLUCION + SUBIENDOQUIETO);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	param->animaciones->push_back(tipoper->animacionEscalarEvo);
+	aux->push_back(EVOLUCION + SUBIENDOMOVIMIENTO);
+	param->matrizEstados->push_back(aux);
+
 
 	std::string n = nombrecito;
 	mapaParam->insert(pair<string, parametrosPersonaje*>(n, param));
@@ -2118,6 +2436,9 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: no hay nodo de animacion de la bola de fuego, se carga por defecto");
 		ruta = RUTA_BOLA;
 	}
+	if (esCliente)
+		ruta = headerTemp + ruta;
+	AgregarAVector(ruta);
 
 	Animacion* animacionBola = new Animacion(new HojaSprites(ruta, bola->ancho, bola->alto));
 	bola->animaciones = new std::vector<Animacion*>();

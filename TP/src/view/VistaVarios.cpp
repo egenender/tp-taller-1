@@ -2,7 +2,7 @@
 #include "../model/Observable.h"
 
 VistaVarios::VistaVarios() {
-
+	invisible = false;
 }
 
 VistaVarios::~VistaVarios() {
@@ -20,7 +20,21 @@ void VistaVarios::actualizar(Observable* observable){
 	}
 	pararDeDibujar = false;
 
-	animacionActual = animaciones->at(estado);
+	// NEW:
+
+	// Si el estado cambio, actualizo la animacion, y reseteo la anterior
+	if (estado != estadoActual) {
+		if (animacionActual)
+			animacionActual->resetear(); // Reseteo la anterior, asi comienza del frame 0.
+		animacionActual = animaciones->at(estado); // Actualizo la nueva animacion
+		estadoActual = estado;
+	}
+
+	// OLD:
+	// animacionActual = animaciones->at(estado);
+
+
+	invisible = !invisible && observable->estaInvencible();
 
 }
 void VistaVarios::reiniciar(){}
@@ -39,3 +53,7 @@ void VistaVarios::agregarEstadoSoportadoEInverso(int estado,int estadoInverso, A
 	animaciones->insert(pair<int, Animacion*>(estadoInverso, inversa));
 }
 
+bool VistaVarios::dibujar(SDL_Surface* display, int xCamara, int yCamara){
+	if (!invisible) return VistaAnimada::dibujar(display, xCamara, yCamara);
+	return true;
+}
