@@ -93,13 +93,7 @@ void Nivel::iniciar() {
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
 			//XXX: le lugar de hardcode de pruebas:
-			CamaElastica* cama= new CamaElastica("warap",new Area(56,63,new Posicion(200,500)));
-			gestor->ObtenerActualizables()->push_back(cama);
 			VistaVarios* vista= new VistaVarios();
-			vista->agregarEstadoSoportado(0,new Animacion(new HojaSprites("src/resources/items/camaElastica.bmp",56,63)));
-			vista->agregarEstadoSoportado(12,new Animacion(new HojaSprites("src/resources/items/camaLanza.bmp",56,63)));
-			vistas->push_back(vista);
-			cama->agregarObservador(vista);
 
 			Caja* caja = new Caja ("cajita", new Area(50,50, new Posicion(50, 400)), new FabricaPowerUps());
 			actualizables->push_back(caja);
