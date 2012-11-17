@@ -92,6 +92,7 @@ public:
 	void hacerInvencible();
 	bool esEliminable();
 	bool puedeMover(); // NEW
+	int obtenerVelocidad();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

@@ -580,3 +580,7 @@ bool Manual::mataAlContacto(){
 bool Manual::esEliminable(){
 	return false;
 }
+
+int Manual::obtenerVelocidad(){
+	return velocidad;
+}
