@@ -252,15 +252,18 @@ juego:
         - tipo: princesa
           x: 600
           y: 150
-        - tipo: mono
-          x: 650
-          y: 150
+#        - tipo: mono
+#          x: 650
+#          y: 150
         - tipo: camaElastica
           x: 200
           y: 562
   #      - tipo: princesa
  #         x: 700
 #          y: 599
+        - tipo: tortuga
+          x: 500
+          y: 100
       cajas:
         - tipo: cajaRandom
           x: 250
@@ -273,7 +276,7 @@ juego:
 #          eme: 5
 #        - tipo: tuberiaTortuga
 #          x: 500
-#          y: 550
+#          y: 350
 #          direccion: arriba
 #          eme: 5
 #        - tipo: tuberiaHT
