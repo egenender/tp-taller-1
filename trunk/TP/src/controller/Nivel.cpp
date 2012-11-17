@@ -230,7 +230,7 @@ void Nivel::quitarMuertos(){
 	for (unsigned int i = 0; i < actualizables->size(); i++){
 		ac = actualizables->at(i);
 		if (ac->estaMuerto()){
-			if (ac->esEliminable())
+			if (ac->esEliminable() && estado != SERVIDOR)
 				delete(ac);
 		}else
 			aux->push_back(ac);
