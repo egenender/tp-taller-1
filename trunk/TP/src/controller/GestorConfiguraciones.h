@@ -106,6 +106,9 @@ class GestorConfiguraciones{
 
 		bool destruir;
 	public:
+		std::vector<Cuerpo*>* lasCajas;
+		std::vector<VistaVarios*>* lasVistaDeCajas;
+
 		static GestorConfiguraciones* getInstance();
 		void acabarGestor();
 		void destruirGestor();

@@ -291,12 +291,18 @@ juego:
         - tipo: camaElastica
           x: 200
           y: 562
+        - tipo: camaElastica
+          x: 970
+          y: 562
   #      - tipo: princesa
  #         x: 700
 #          y: 599
       cajas:
         - tipo: cajaRandom
-          x: 250
+          x: 70
+          y: 470
+        - tipo: cajaRandom
+          x: 900
           y: 470
       tuberias:
 #        - tipo: tuberiaHongo

@@ -157,6 +157,9 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	mapaParam = new mapa_parametrosPersonaje();
 	mapaTub = new mapa_parametrosTuberia();
 	mapaCajas = new mapa_parametrosCaja();
+	lasCajas = new std::vector<Cuerpo*>();
+	lasVistaDeCajas = new std::vector<VistaVarios*>();
+
 	destruir = false;
 }
 
@@ -767,9 +770,12 @@ void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
 	vista->agregarEstadoSoportado(QUIETO , paramCaja->quieto);
 	vista->agregarEstadoSoportado(LANZANDO , paramCaja->lanzando);
 
-	configNivel->actualizables.push_back(cuerpo);
-	cuerpo->agregarObservador(vista);
-	configNivel->vistas.push_back(vista);
+	//configNivel->actualizables.push_back(cuerpo);
+	//cuerpo->agregarObservador(vista);
+	//configNivel->vistas.push_back(vista);
+
+	lasCajas->push_back( cuerpo );
+	lasVistaDeCajas->push_back( vista );
 }
 
 
@@ -2122,6 +2128,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		tipoper->animacionHeridoEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
 
 		AgregarAVector(ruta);
 		animaciones["herido"]["sonido"] >> ruta;
@@ -2136,6 +2143,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		tipoper->animacionHeridoEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
 
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones caminar dentro del personaje, se cargan por defecto");
 	}catch( YAML::Exception &e) {
@@ -2143,6 +2151,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 		if (esCliente)
 			ruta = headerTemp + ruta;
 		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		tipoper->animacionHeridoEvo=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones caminar dentro del personaje, se cargan por defecto");
 	}
 
@@ -2378,7 +2387,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	param->matrizEstados->push_back(aux);
 
 	aux = new vector<int>();
-	param->animaciones->push_back(tipoper->animacionHeridoProt);
+	param->animaciones->push_back(tipoper->animacionHeridoEvo);
 	aux->push_back(EVOLUCION + HERIDO);
 	param->matrizEstados->push_back(aux);
 

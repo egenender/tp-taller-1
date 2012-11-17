@@ -9,11 +9,6 @@
 #include "../view/VistaVarios.h"
 
 //TODO: *le hardcode:
-#include "../view/VistaSonora.h"
-#include "../model/Personajes/PlataformaMovil.h"
-#include "../model/Personajes/Tuberia.h"
-#include "../model/Fabricas/FabricaHongos.h"
-#include "../model/Fabricas/FabricaTortugas.h"
 #include "../model/Fabricas/FabricaPowerUps.h"
 #include "../model/Personajes/Caja.h"
 
@@ -92,22 +87,17 @@ void Nivel::iniciar() {
 			algo->agregarObservador(corazones);
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
-			//XXX: le lugar de hardcode de pruebas:
-			VistaVarios* vista= new VistaVarios();
-
-			Caja* caja = new Caja ("cajita", new Area(50,50, new Posicion(50, 400)), new FabricaPowerUps());
-			actualizables->push_back(caja);
-			vista = new VistaVarios();
-			vista->agregarEstadoSoportado(QUIETO, new Animacion(new HojaSprites("src/resources/items/caja.bmp", 50, 50)));
-			vista->agregarEstadoSoportado(LANZANDO, new Animacion(new HojaSprites("src/resources/items/cajadsp.bmp", 50, 50)));
-			vistas->push_back(vista);
-			caja->agregarObservador(vista);
-
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
 			prin->agregarObservador(corazones);
 			controlador = new ControladorSinglePlayer(prin);
+
+			for (unsigned int i = 0; i < gestor->lasCajas->size() ; i++){
+				actualizables->push_back(gestor->lasCajas->at(i));
+				gestor->lasCajas->at(i)->agregarObservador(gestor->lasVistaDeCajas->at(i));
+				vistas->push_back(gestor->lasVistaDeCajas->at(i));
+			}
 		}
 	}
 }
