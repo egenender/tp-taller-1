@@ -12,7 +12,7 @@ VistaImagen::VistaImagen(Superficie* imagenNueva, int angulo) {
 		angulo += 2;
 
 	if (angulo > 0)
-		angulo -= 4;
+		angulo -= 2;
 	alpha = angulo;
 	if (imagen) {
 		imagen->girar(angulo);
