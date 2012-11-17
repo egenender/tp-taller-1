@@ -21,7 +21,7 @@ class Princesa;
 #define CANT_VIDAS 3
 #define SUPERFICIE_EVOLUCION 1
 #define SUPERFICIE_INVOLUCION 0
-#define TIEMPO_TIMEOUT 3
+#define TIEMPO_TIMEOUT 4
 #define TIEMPO_INVENCIBLE 10
 
 /* si quiero cambiar la aceleracion para que caiga mas rapido, pero quiero
@@ -57,6 +57,10 @@ private:
 	bool invencible;
 
 	int YEscalera;
+	
+	// NEW:
+	bool reposicionar; // Si se tiene que cambiar de posicion (cuando lo matan)
+	bool bloquearMovimiento; // Si recibe estimulos de teclado (cuando lo matan)
 
 public:
 	static void setearCooperatividad(bool);
@@ -87,6 +91,7 @@ public:
 	void habilitarEspecial();
 	void hacerInvencible();
 	bool esEliminable();
+	bool puedeMover(); // NEW
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

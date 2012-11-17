@@ -17,24 +17,29 @@ VistaProtagonista::VistaProtagonista(/*Observable* protagonista,*/ Animacion* ca
 	saltandoDer->transparencia(255,0,255);
 	Animacion* saltandoIzq = saltandoDer->voltear(HORIZONTALMENTE);
 
-
-	Animacion* subiendoQ = caminaDer->voltear(HORIZONTALMENTE);
-	subiendoQ->transparencia(255,0,255);
-	Animacion* subiendoM = caminaIzq->voltear(HORIZONTALMENTE);
-	subiendoM->transparencia(255,0,255);
-
 	animaciones->insert(pair<int, Animacion*>(QUIETODER, quietoDer));
 	animaciones->insert(pair<int, Animacion*>(QUIETOIZQ, quietoIzq));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDODER,caminaDer));
 	animaciones->insert(pair<int, Animacion*>(CAMINANDOIZQ,caminaIzq));
 	animaciones->insert(pair<int, Animacion*>(SALTANDODER, saltandoDer));
 	animaciones->insert(pair<int, Animacion*>(SALTANDOIZQ, saltandoIzq));
-	animaciones->insert(pair<int, Animacion*>(SUBIENDOQUIETO, subiendoQ));
-	animaciones->insert(pair<int, Animacion*>(SUBIENDOMOVIMIENTO, subiendoM));
 
+	//FIXME: Le hardcode para que se pueda ver subiendo:
+	Animacion* anim = new Animacion (new HojaSprites("src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp", 64, 76));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(SUBIENDOMOVIMIENTO, anim));
+
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp", 64, 76));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(SUBIENDOQUIETO, anim));
+
+	//FIXME: Le hardcode para que se pueda ver herido:
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp", 64, 76));
+	anim->transparencia(255,0,255);
+	animaciones->insert(pair<int, Animacion*>(HERIDO, anim));
 
 	//FIXME: Le hardcode para que se pueda ver la evolucion:
-	Animacion* anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp", 65, 73));
+	anim = new Animacion (new HojaSprites("src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp", 65, 73));
 	anim->transparencia(255,0,255);
 	animaciones->insert(pair<int, Animacion*>(EVOLUCION + QUIETODER, anim));
 	anim = anim->voltear(HORIZONTALMENTE);
@@ -68,7 +73,20 @@ void VistaProtagonista::actualizar(Observable* observable) {
 	pararDeDibujar = false;
 
 	posicionDibujar = observable->obtenerPosicion();
-	animacionActual = animaciones->at(estado);
+
+	// NEW:
+
+	// Si el estado cambio, actualizo la animacion, y reseteo la anterior
+	if (estado != estadoActual) {
+		if (animacionActual)
+			animacionActual->resetear(); // Reseteo la anterior, asi comienza del frame 0.
+		animacionActual = animaciones->at(estado); // Actualizo la nueva animacion
+		estadoActual = estado;
+	}
+	
+	// OLD:
+	// animacionActual = animaciones->at(estado);
+
 	invisible = !invisible && observable->estaInvencible();
 }
 

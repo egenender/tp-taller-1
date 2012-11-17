@@ -21,6 +21,7 @@ VistaAnimada::~VistaAnimada() {
 		animaciones = NULL;
 	}
 
+	animacionActual = NULL;
 /*	if (animacionActual != NULL) {
 		delete(animacionActual);
 		animacionActual = NULL;

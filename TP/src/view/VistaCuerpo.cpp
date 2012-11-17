@@ -2,6 +2,7 @@
 
 VistaCuerpo::VistaCuerpo() {
 	posicionDibujar = NULL;
+	estadoActual = -1; // NEW
 };
 
 VistaCuerpo::~VistaCuerpo() {
