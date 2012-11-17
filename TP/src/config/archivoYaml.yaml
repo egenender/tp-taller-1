@@ -26,10 +26,10 @@ juego:
         salto: 20
         animacion: src/resources/items/lanzallamas.bmp
     Yoshi:
-      ancho: 52
-      alto: 70
+      ancho: 64
+      alto: 76
       vel_personaje: 10
-      salto: 55
+      salto: 50
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Iddle.bmp
