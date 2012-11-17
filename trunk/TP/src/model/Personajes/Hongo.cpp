@@ -87,7 +87,6 @@ void Hongo::morir(){
 }
 
 void Hongo::actualizar(float){
-	printf("dir %d\n", direccion);
 	validarPiso();
 	actualizarSalto();
 	actualizarMovimiento();
@@ -201,6 +200,8 @@ void Hongo::chocarConManual(Manual* pers){
 	posCmp = new Posicion(posPersAnterior->obtenerX() + pers->obtenerArea()->obtenerAncho() - pers->obtenerVelocidad(),posPersAnterior->obtenerY() );
 	if (posCmp->estaALaIzquierdaDe(posAnterior)){
 		modificacionMovimiento(IZQUIERDA);
+		if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+			trasladar(40,0,false);
 		delete (posCmp);
 		return;
 	}
@@ -210,6 +211,8 @@ void Hongo::chocarConManual(Manual* pers){
 
 	if (posCmp->estaALaIzquierdaDe(posPersAnterior)){
 		modificacionMovimiento(DERECHA);
+		if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+			trasladar(-40,0,false);
 		delete(posCmp);
 		return;
 	}
