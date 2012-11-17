@@ -156,6 +156,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	posiblesTiposProt = NULL;
 	mapaParam = new mapa_parametrosPersonaje();
 	mapaTub = new mapa_parametrosTuberia();
+	mapaCajas = new mapa_parametrosCaja();
 	destruir = false;
 }
 
@@ -278,8 +279,27 @@ void GestorConfiguraciones::inicioCarga(){
 
 	CargarPersonajes(nodoRaiz);
 	CargarTuberias(nodoRaiz);
+	CargarCajas(nodoRaiz);
 
 }
+
+void GestorConfiguraciones::CargarCajas(const YAML::Node& nodoRaiz){
+	int prob;
+
+	//Caja Random
+	parametrosCaja* paramCajaR = crearParametrosCaja(nodoRaiz["cajas"]["cajaRandom"],"cajaRandom");
+
+	nodoRaiz["cajas"]["cajaRandom"]["probabilidades"]["vida"] >> prob;
+	paramCajaR->probabilidades->push_back( prob );
+	nodoRaiz["cajas"]["cajaRandom"]["probabilidades"]["especial"] >> prob;
+	paramCajaR->probabilidades->push_back( prob );
+	nodoRaiz["cajas"]["cajaRandom"]["probabilidades"]["evolucion"] >> prob;
+	paramCajaR->probabilidades->push_back( prob );
+	nodoRaiz["cajas"]["cajaRandom"]["probabilidades"]["invencibilidad"] >> prob;
+	paramCajaR->probabilidades->push_back( prob );
+
+}
+
 
 void GestorConfiguraciones::CargarTuberias(const YAML::Node& nodoRaiz){
 	int prob;
@@ -577,13 +597,38 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	paramCama->animaciones->push_back(animacionLanza);
 
 	aux= new std::vector<int>();
-	aux->push_back(0);
+	aux->push_back(QUIETO);
 	paramCama->matrizEstados->push_back(aux);
 	aux= new std::vector<int>();
-	aux->push_back(12);
+	aux->push_back(LANZANDO);
 	paramCama->matrizEstados->push_back(aux);
 
+	//Plataforma Movil
+
+
 }
+
+parametrosCaja* GestorConfiguraciones::crearParametrosCaja(const YAML::Node& nodo, string nombre){
+
+	parametrosCaja* param= (parametrosCaja*)malloc(sizeof(parametrosCaja));
+
+	param->probabilidades= new std::vector<int>();
+
+	std::string ruta;
+
+	nodo["alto"]>>param->alto;
+	nodo["ancho"]>>param->ancho;
+
+	nodo["animaciones"]["laCajaLaCaja"] >> ruta;
+	param->quieto = new Animacion(new HojaSprites(ruta , param->ancho, param->alto));
+	nodo["animaciones"]["destruida"] >> ruta;
+	param->lanzando = new Animacion(new HojaSprites(ruta , param->ancho, param->alto));
+
+	mapaCajas->insert(pair<string,parametrosCaja*>(nombre,param));
+
+	return param;
+}
+
 
 parametrosTuberia* GestorConfiguraciones::crearParametrosTuberia(const YAML::Node& nodo, string nombre){
 
@@ -696,6 +741,20 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
 	configNivel->vistas.push_back(vista);
 }
+
+void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
+
+	parametrosCaja* paramCaja = mapaCajas->at(clave);
+
+	VistaVarios* vista=new VistaVarios();
+	vista->agregarEstadoSoportado(QUIETO , paramCaja->quieto);
+	vista->agregarEstadoSoportado(LANZANDO , paramCaja->lanzando);
+
+	configNivel->actualizables.push_back(cuerpo);
+	cuerpo->agregarObservador(vista);
+	configNivel->vistas.push_back(vista);
+}
+
 
 void GestorConfiguraciones::CargaRestante(){
 	YAML::Node nodo,nodoDef;
@@ -979,7 +1038,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo escaleras, se cargan por defecto");
 		CargarEstaticosNivel(defEscaleras, true, false, ESCALERA);
-}
+	}
 
 
 	try{
@@ -994,6 +1053,13 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las tuberias del nivel");
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tuberias");
+	}
+
+	try{
+		CargarCajasNivel(nodo[nivelElegido]["cajas"]);
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de las cajas del nivel");
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo cajas");
 	}
 
 //	try{
@@ -1125,6 +1191,10 @@ void GestorConfiguraciones::CargarTuberiasNivel(const YAML::Node& tuberias){
 	CargarElementosNivel(tuberias, TUBERIA);
 }
 
+void GestorConfiguraciones::CargarCajasNivel(const YAML::Node& cajas){
+	CargarElementosNivel(cajas, CAJA);
+}
+
 void GestorConfiguraciones::CargarElementosNivel(const YAML::Node& elementos, int tipoElem){
 	std::string tipo, direccion;
 	int posX,posY, m, dir;
@@ -1203,6 +1273,10 @@ void GestorConfiguraciones::CargarElementosNivel(const YAML::Node& elementos, in
 				ancho = mapaTub->at(tipo)->ancho;
 				alto = mapaTub->at(tipo)->alto;
 			}
+			if(tipoElem == CAJA){
+				ancho = mapaCajas->at(tipo)->ancho;
+				alto = mapaCajas->at(tipo)->alto;
+			}
 			//el posX posY indica el punto inferior central del personaje (consigna)
 			x = posX - ( ancho/2 );
 			y = posY - alto;
@@ -1218,6 +1292,10 @@ void GestorConfiguraciones::CargarElementosNivel(const YAML::Node& elementos, in
 					if(tipoElem == TUBERIA){
 						mapaTub->at(tipo)->ancho = ANCHO_PERSONAJE;
 						mapaTub->at(tipo)->alto = ALTO_PERSONAJE;
+					}
+					if(tipoElem == CAJA){
+						mapaCajas->at(tipo)->ancho = ANCHO_PERSONAJE;
+						mapaCajas->at(tipo)->alto = ALTO_PERSONAJE;
 					}
 					Log::getInstance()->writeToLogFile("ERROR","PARSER: El personaje fue re-dimensionado para entrar en el nivel");
 				}else{
@@ -1240,11 +1318,21 @@ void GestorConfiguraciones::CargarElementosNivel(const YAML::Node& elementos, in
 				cuerpo = instanciarTuberia(tipo, x, y, m , dir);
 				this->crearVistaTuberia(cuerpo,tipo, dir);
 			}
+			if(tipoElem == CAJA){
+				cuerpo = instanciarCaja(tipo, x, y);
+				this->crearVistaCaja(cuerpo,tipo);
+			}
 		//}catch(std::out_of_range &e){
 			//si no hay, por defecto
 		//}
 	}
 
+}
+
+Cuerpo* GestorConfiguraciones::instanciarCaja(std::string tipo, int x, int y){
+	if( strcmp ( tipo.c_str() , "cajaRandom" ) == 0 )
+		return new Caja("cajaRandom", new Area(mapaCajas->at(tipo)->ancho,mapaCajas->at(tipo)->alto, new Posicion(x,y) ) , new FabricaPowerUps() );
+	return NULL;
 }
 
 Cuerpo* GestorConfiguraciones::instanciarTuberia(std::string tipo, int x, int y, float m, int dir){
