@@ -456,8 +456,6 @@ void Manual::chocarConHongo(Hongo* h){
 
 		else if (state != MOVILIZQUIERDA && state != MOVILDERECHA && state != QUIETO)
 			perderVida();
-//		if (!((state == MOVILDERECHA && (posAnterior->estaALaIzquierdaDe(posPersAnterior) || h->recienMovido()) )|| (state == MOVILIZQUIERDA && (posAnterior->estaALaDerechaDe(posPersAnterior) || h->recienMovido()))))
-//			perderVida();
 
 	}
 	delete(posCmp);

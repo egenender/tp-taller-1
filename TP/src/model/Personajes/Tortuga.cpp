@@ -19,8 +19,10 @@ void Tortuga::perderVida(){
 		return;
 	}
 	permitoMovEnSalto = true;
-	estado = QUIETO;
-	direccion = 0;
+	if ((estado != MOVILDERECHA && estado != MOVILIZQUIERDA) || !enViga){
+		estado = QUIETO;
+		direccion = 0;
+	}
 	velocidadX = MULTIPLICADOR * velocidadInicial;
 
 	int anchoH, altoH, x, y;
