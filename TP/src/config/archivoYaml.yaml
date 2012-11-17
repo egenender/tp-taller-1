@@ -222,6 +222,18 @@ juego:
         arriba: src/resources/items/tuberia.bmp
         derecha: src/resources/items/tuberia2.bmp
         izquierda: src/resources/items/tuberia4.bmp
+  cajas:
+    cajaRandom:
+      ancho: 50
+      alto: 50
+      probabilidades:
+        vida: 25
+        especial: 25
+        evolucion: 25
+        invencibilidad: 25
+      animaciones:
+        laCajaLaCaja: src/resources/items/caja.bmp
+        destruida: src/resources/items/cajadsp.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/film.png
@@ -249,6 +261,10 @@ juego:
   #      - tipo: princesa
  #         x: 700
 #          y: 599
+      cajas:
+        - tipo: cajaRandom
+          x: 250
+          y: 470
       tuberias:
 #        - tipo: tuberiaHongo
 #          x: 200

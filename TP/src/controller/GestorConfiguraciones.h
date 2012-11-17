@@ -48,6 +48,16 @@ typedef struct _parametrosTuberia{
 
 }parametrosTuberia;
 
+typedef struct _parametrosCajas{
+
+	int ancho;
+	int alto;
+	std::vector<int>* probabilidades;
+	Animacion* quieto;
+	Animacion* lanzando;
+
+}parametrosCaja;
+
 typedef struct _parametrosPersonaje{
 
 	int ancho;
@@ -60,6 +70,7 @@ typedef struct _parametrosPersonaje{
 
 typedef std::map <std::string,parametrosPersonaje*> mapa_parametrosPersonaje;
 typedef std::map <std::string,parametrosTuberia*> mapa_parametrosTuberia;
+typedef std::map <std::string,parametrosCaja*> mapa_parametrosCaja;
 
 class GestorConfiguraciones{
 	private:
@@ -90,6 +101,7 @@ class GestorConfiguraciones{
 		string rutaYamlDefecto;
 		mapa_parametrosPersonaje* mapaParam;
 		mapa_parametrosTuberia* mapaTub;
+		mapa_parametrosCaja* mapaCajas;
 
 		bool destruir;
 	public:
@@ -101,6 +113,9 @@ class GestorConfiguraciones{
 
 		parametrosTuberia* crearParametrosTuberia(const YAML::Node&, string);
 		void CargarTuberias(const YAML::Node&);
+
+		parametrosCaja* crearParametrosCaja(const YAML::Node&, string);
+		void CargarCajas(const YAML::Node&);
 
 		//GestorConfiguraciones();
 		ConfiguracionPantalla* CargarConfiguracionPantalla(const YAML::Node&);
@@ -117,12 +132,14 @@ class GestorConfiguraciones{
 
 		void CargarElementosNivel(const YAML::Node& , int);
 		void CargarTuberiasNivel(const YAML::Node& );
+		void CargarCajasNivel(const YAML::Node& );
 
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);
 
 		void crearVistaElemento(Observable*,string, bool esCuerpo = true);
 		void crearVistaTuberia(Cuerpo*,string, int);
+		void crearVistaCaja(Cuerpo*,string );
 
 		parametrosPersonaje* obtenerParametrosPersonaje(string);
 		//void CargarPantalla();
@@ -166,6 +183,7 @@ class GestorConfiguraciones{
 
 		Cuerpo* instanciarCuerpo(std::string, int, int );
 		Cuerpo* instanciarTuberia(std::string, int, int, float, int );
+		Cuerpo* instanciarCaja(std::string, int, int );
 
 	private:
 		void destruirParametrosPersonaje(parametrosPersonaje*);
