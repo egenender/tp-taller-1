@@ -2035,6 +2035,38 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	}
 
 	AgregarAVector(ruta);
+
+	try{
+		animaciones["herido"]["sprites"] >> ruta;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+
+		AgregarAVector(ruta);
+		animaciones["herido"]["sonido"] >> ruta;
+		if (ruta!="~"){
+
+			if (esCliente) ruta=headerTemp+ruta;
+
+			vistaSonora->agregarSonido(ruta, HERIDO);
+
+		}
+	}catch( YAML::TypedKeyNotFound<std::string> &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo animaciones herido dentro del personaje, se cargan por defecto");
+	}catch( YAML::Exception &e) {
+		ruta = RUTA_PASIVA;
+		if (esCliente)
+			ruta = headerTemp + ruta;
+		tipoper->animacionHeridoProt=new Animacion(new HojaSprites(ruta,tipoper->ancho,tipoper->alto));
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: Problemas con nodo animaciones herido dentro del personaje, se cargan por defecto");
+	}
+
+	AgregarAVector(ruta);
+
 	tipoper->vistaSonora=vistaSonora;
 
 	//debe copiarse luego tambien en la zona donde debe cargarse el default
@@ -2042,6 +2074,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	param->animaciones->push_back(tipoper->animacionPasivaProt);
 	param->animaciones->push_back(tipoper->animacionActivaProt);
 	param->animaciones->push_back(tipoper->animacionSaltaProt);
+	param->animaciones->push_back(tipoper->animacionHeridoProt);
 
 	param->matrizEstados = new std::vector<vector<int>*>();
 
@@ -2058,6 +2091,11 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 	aux = new vector<int>();
 	aux->push_back(SALTANDODER);
 	aux->push_back(SALTANDOIZQ);
+	param->matrizEstados->push_back(aux);
+
+	aux = new vector<int>();
+	aux->push_back(HERIDO);
+//	aux->push_back(HERIDO);
 	param->matrizEstados->push_back(aux);
 
 	std::string n = nombrecito;
