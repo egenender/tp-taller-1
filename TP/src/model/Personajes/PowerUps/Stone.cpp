@@ -10,6 +10,8 @@ Stone::~Stone() {
 }
 
 void Stone::chocarConManual(Manual* prin){
+	if(prin->obtenerEstado() == HERIDO)
+			return ;
 	prin->evolucionar();
 	estado = MUERTO;
 	huboCambios();

@@ -11,6 +11,8 @@ Invencibilidad::~Invencibilidad() {
 }
 
 void Invencibilidad::chocarConManual(Manual* prin){
+	if(prin->obtenerEstado() == HERIDO)
+			return ;
 	prin->hacerInvencible();
 	estado = MUERTO;
 	huboCambios();

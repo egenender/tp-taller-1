@@ -11,6 +11,8 @@ ActivaEspecial::~ActivaEspecial() {
 }
 
 void ActivaEspecial::chocarConManual(Manual* prin){
+	if(prin->obtenerEstado() == HERIDO)
+			return ;
 	prin->habilitarEspecial();
 	estado = MUERTO;
 	huboCambios();

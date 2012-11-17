@@ -10,6 +10,8 @@ VidaExtra::~VidaExtra() {
 }
 
 void VidaExtra::chocarConManual(Manual* prin){
+	if(prin->obtenerEstado() == HERIDO)
+		return ;
 	prin->aumentarVida();
 	estado = MUERTO;
 	huboCambios();
