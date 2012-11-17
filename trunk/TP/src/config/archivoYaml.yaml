@@ -27,7 +27,7 @@ juego:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
         herido:
-          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sprites: src/resources/cuerpos/Charmander/charmanderHerido.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
         evoquieto:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp
