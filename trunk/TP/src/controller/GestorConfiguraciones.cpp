@@ -765,12 +765,17 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 	}
 
 	cuerpo->agregarObservador(vista);
+
 	if (esCuerpo)
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
 	configNivel->vistas.push_back(vista);
 
-	if (esServidor)
+	if (esServidor){
 		cuerpo->agregarObservador(contCuerpos);
+		Cuerpo* c = (Cuerpo*) cuerpo;
+		c->setearID(IDACT);
+		IDACT++;
+	}
 }
 
 void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
@@ -901,6 +906,7 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 		posiblesTiposProt->push_back(tipoper);
 		nombresProt->push_back(nombre);
 	}
+	IDACT = posiblesTiposProt->size();
 }
 
 
@@ -2580,6 +2586,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	configNivel->actualizables.push_back(nuevoManual);
 
 	nuevoManual->agregarObservador(contCuerpos);
+	nuevoManual->setearID(id);
 }
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
