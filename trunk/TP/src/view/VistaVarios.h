@@ -11,8 +11,11 @@ public:
 	void actualizar(Observable* observable);
 	void reiniciar();
 
+	bool invisible;
+
 	void agregarEstadoSoportado(int, Animacion*);
 	void agregarEstadoSoportadoEInverso(int,int, Animacion*);
+	bool dibujar(SDL_Surface* display, int xCamara, int yCamara);
 };
 
 #endif /* VISTAVARIOS_H_ */
