@@ -92,7 +92,7 @@ class GestorConfiguraciones{
 		std::vector<string>* nombresProt;
 
 		bool esCliente, esServidor;
-
+		unsigned int IDACT;
 		int nivelElegido;
 		ContenedorDummy* contenedor;
 		Dummy* dummy;
