@@ -276,11 +276,11 @@ juego:
 #          y: 550
 #          direccion: arriba
 #          eme: 5
-        - tipo: tuberiaHT
-          x: 500
-          y: 350
-          direccion: arriba
-          eme: 5
+#        - tipo: tuberiaHT
+#          x: 500
+#          y: 350
+#          direccion: arriba
+#          eme: 5
       plataformas:
         - textura: viga
           x: 250
@@ -292,11 +292,22 @@ juego:
           y: 350
           ancho: 400
           alto: 50
+        - textura: viga
+          x: 1050
+          y: 250
+          ancho: 170
+          alto: 50
       vigas:
+        - textura: viga
+          x: 1200
+          y: 250
+          ancho: 500
+          alto: 30
+          inclinacion: 20
         - textura: viga
           x: 680
           y: 350
-          ancho: 500
+          ancho: 400
           alto: 50
           inclinacion: -20
       escaleras:
