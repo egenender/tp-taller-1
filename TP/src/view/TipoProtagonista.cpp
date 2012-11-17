@@ -24,7 +24,6 @@ TipoProtagonista::TipoProtagonista (){
 	animacionSaltaEvo=0;
 	animacionEscaleraEvo=0;
 	animacionEscalarEvo=0;
-	animacionHeridoEvo=0;
 	salto = 0;
 	vistaSonora=0;
 	disponible = true;
