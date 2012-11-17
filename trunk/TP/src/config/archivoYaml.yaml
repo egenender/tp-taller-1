@@ -20,6 +20,30 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        escalera:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        escalar:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
+        evoquieto:
+          sprites: src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp
+          sonido: 
+        evocaminar:
+          sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
+          sonido: src/resources/cuerpos/footstep.ogg
+        evosaltar:
+          sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
+          sonido: 
+        evoescalera:
+          sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
+          sonido: 
+        evoescalar:
+          sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
+          sonido: 
       bolaDeFuego:
         ancho: 25
         alto: 20
@@ -40,6 +64,15 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
+        escalera:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        escalar:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 25
         alto: 25
@@ -252,18 +285,15 @@ juego:
         - tipo: princesa
           x: 600
           y: 150
-#        - tipo: mono
-#          x: 650
-#          y: 150
+        - tipo: mono
+          x: 650
+          y: 150
         - tipo: camaElastica
           x: 200
           y: 562
   #      - tipo: princesa
  #         x: 700
 #          y: 599
-        - tipo: tortuga
-          x: 500
-          y: 100
       cajas:
         - tipo: cajaRandom
           x: 250
@@ -276,14 +306,14 @@ juego:
 #          eme: 5
 #        - tipo: tuberiaTortuga
 #          x: 500
-#          y: 350
+#          y: 550
 #          direccion: arriba
 #          eme: 5
-#        - tipo: tuberiaHT
-#          x: 500
-#          y: 350
-#          direccion: arriba
-#          eme: 5
+        - tipo: tuberiaHT
+          x: 500
+          y: 350
+          direccion: arriba
+          eme: 5
       plataformas:
         - textura: viga
           x: 250
@@ -295,22 +325,11 @@ juego:
           y: 350
           ancho: 400
           alto: 50
-        - textura: viga
-          x: 1050
-          y: 250
-          ancho: 170
-          alto: 50
       vigas:
-        - textura: viga
-          x: 1200
-          y: 250
-          ancho: 500
-          alto: 30
-          inclinacion: 20
         - textura: viga
           x: 680
           y: 350
-          ancho: 400
+          ancho: 500
           alto: 50
           inclinacion: -20
       escaleras:
