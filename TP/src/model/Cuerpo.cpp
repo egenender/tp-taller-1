@@ -85,3 +85,7 @@ unsigned int Cuerpo::obtenerID(){
 unsigned int Cuerpo::obtenerTipo(){
 	return tipo;
 }
+
+void Cuerpo::setearID(unsigned int newID){
+	id = newID;
+}

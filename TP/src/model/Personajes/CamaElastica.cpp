@@ -1,12 +1,6 @@
-/*
- * CamaElastica.cpp
- *
- *  Created on: Nov 9, 2012
- *      Author: juaqi
- */
-
 #include "CamaElastica.h"
-#include <stdio.h>
+#include "../Tipos.h"
+
 CamaElastica::CamaElastica(const char* nom, Area* sup): Cuerpo(nom,sup) {
 
 	estado=0;
@@ -59,6 +53,6 @@ void CamaElastica::chocarConManual(Manual* m){
 	delete (posCmp);
 }
 
-
-
-
+unsigned int CamaElastica::obtenerTipo(){
+	return TIPO_CAMA_ELASTICA;
+}

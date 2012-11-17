@@ -32,7 +32,8 @@ public:
 	Posicion* obtenerPosicionAnterior();
 
 	unsigned int obtenerID();
-	unsigned int obtenerTipo();
+	virtual unsigned int obtenerTipo();
+	void setearID(unsigned int);
 
 protected:
 	void trasladar(int, int, bool);

@@ -1,6 +1,7 @@
 #include "BolaDeFuego.h"
 #include "../Observable.h"
 #include "Plataforma.h"
+#include "../Tipos.h"
 
 bool BolaDeFuego::cooperativo = true;
 
@@ -179,4 +180,8 @@ void BolaDeFuego::setearCooperatividad(bool c){
 
 bool BolaDeFuego::esEliminable(){
 	return false;
+}
+
+unsigned int BolaDeFuego::obtenerTipo(){
+	return TIPO_BOLA_FUEGO;
 }

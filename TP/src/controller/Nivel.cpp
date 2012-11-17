@@ -162,7 +162,7 @@ void Nivel::actualizar(float delta) {
 	}
 
 	if (estado == SERVIDOR){
-		ContenedorManuales* cont = GestorConfiguraciones::getInstance()->obtenerContenedorManuales();
+		ContenedorCuerpos* cont = GestorConfiguraciones::getInstance()->obtenerContenedorCuerpos();
 		if (cont){
 			Server* server = Server::obtenerInstancia(0);
 			if (server->envio->obtenerTiempo() >= 1000*TIEMPO_ENVIO){

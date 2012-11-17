@@ -33,6 +33,7 @@ public:
 	int obtenerEstado();
 	bool estaMuerto();
 	bool esEliminable();
+	unsigned int obtenerTipo();
 private:
 	void morir();
 	void validarPiso();

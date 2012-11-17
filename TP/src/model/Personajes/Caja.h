@@ -14,6 +14,7 @@ public:
 	virtual ~Caja();
 	void chocarConManual(Manual*);
 	void actualizar(float);
+	unsigned int obtenerTipo();
 private:
 	void fabricar();
 };

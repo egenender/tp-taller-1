@@ -144,7 +144,7 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	texturas=new mapa_tex();
 	vectorRutas=new std::vector<string>();
 	manuales = NULL;
-	esCliente = false;
+	esCliente = esServidor = false;
 	headerTemp = "Temp/";
 	rutaYaml = "src/config/archivoYaml.yaml";
 	rutaYamlDefecto = "src/config/defecto.yaml";
@@ -161,12 +161,17 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	lasVistaDeCajas = new std::vector<VistaVarios*>();
 
 	destruir = false;
+	contCuerpos = new ContenedorCuerpos();
 }
 
 void GestorConfiguraciones::setEsCliente (){
 	esCliente = true;
 	rutaYaml = headerTemp + rutaYaml;
 	rutaYamlDefecto = headerTemp + rutaYamlDefecto;
+}
+
+void GestorConfiguraciones::setEsServidor (){
+	esServidor = true;
 }
 
 //void GestorConfiguraciones::CargarPantalla(){
@@ -717,11 +722,14 @@ void GestorConfiguraciones::crearVistaTuberia(Cuerpo* cuerpo,string clave, int d
 
 	parametrosTuberia* paramTub=mapaTub->at(clave);
 
-	VistaImagen *vista = new VistaImagen(mapaTub->at(clave)->superficies->at(dir));
+	VistaImagen *vista = new VistaImagen(paramTub->superficies->at(dir));
 
 	cuerpo->agregarObservador(vista);
 	configNivel->actualizables.push_back(cuerpo);
 	configNivel->vistas.push_back(vista);
+
+//	if (esServidor)
+//		cuerpo->agregarObservador(contCuerpos);
 }
 
 
@@ -760,6 +768,9 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 	if (esCuerpo)
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
 	configNivel->vistas.push_back(vista);
+
+	if (esServidor)
+		cuerpo->agregarObservador(contCuerpos);
 }
 
 void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
@@ -776,6 +787,9 @@ void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
 
 	lasCajas->push_back( cuerpo );
 	lasVistaDeCajas->push_back( vista );
+
+	if (esServidor)
+		cuerpo->agregarObservador(contCuerpos);
 }
 
 
@@ -1567,9 +1581,14 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 		Posicion* pos = new Posicion(10, Posicion::obtenerPiso()-posiblesTiposProt->at(i)->alto);
 		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
 		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
-		configNivel->manual->agregarObservador(vistaProt);
-		configNivel->manual->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
 		configNivel->actualizables.push_back(configNivel->manual);
+
+		if (esServidor)
+			configNivel->manual->agregarObservador(contCuerpos);
+		else{
+			configNivel->manual->agregarObservador(vistaProt);
+			configNivel->manual->agregarObservador(posiblesTiposProt->at(i)->vistaSonora);
+		}
 	}
 
 }
@@ -2559,8 +2578,14 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	Manual* nuevoManual = new Manual(tipo->nombre, sup,tipo->velocidad, tipo->salto);
 	manuales->agregarManual(nuevoManual, id);
 	configNivel->actualizables.push_back(nuevoManual);
+
+	nuevoManual->agregarObservador(contCuerpos);
 }
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
 	return manuales;
+}
+
+ContenedorCuerpos* GestorConfiguraciones::obtenerContenedorCuerpos(){
+	return contCuerpos;
 }
