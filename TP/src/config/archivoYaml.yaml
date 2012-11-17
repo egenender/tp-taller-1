@@ -20,6 +20,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 25
         alto: 20
@@ -40,6 +43,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Jump.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 25
         alto: 25
@@ -60,6 +66,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 22
         alto: 22
@@ -81,6 +90,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
           sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 40
         alto: 25
@@ -102,6 +114,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
           sonido: 
+        herido:
+          sprites: src/resources/cuerpos/Yoshi/Yoshi-Dead.bmp
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
       bolaDeFuego:
         ancho: 51
         alto: 24
