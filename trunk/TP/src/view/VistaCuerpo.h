@@ -8,6 +8,7 @@
 class VistaCuerpo : public Observador {
 protected:
 	Posicion* posicionDibujar;
+	int estadoActual; // NEW
 
 public:
 	VistaCuerpo();

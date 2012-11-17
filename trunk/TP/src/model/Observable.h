@@ -24,6 +24,7 @@ using namespace std;
 #define GRITANDO 13
 #define MOVILDERECHA 14
 #define MOVILIZQUIERDA 15
+#define HERIDO 16 // Cuando pierde vida. NEW
 #define EVOLUCION 30
 
 class Observable {

@@ -13,6 +13,16 @@ ControladorSinglePlayer::~ControladorSinglePlayer() {
 
 // VIEJO MANEJAR EVENTO:
 void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
+
+// NEW:
+	if (!principal)
+		return;
+
+	// Si el controlado no acepta movimiento, no hay nada que hacer:	
+	if (!principal->puedeMover())
+		return;
+// end NEW
+
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
 	if (keystates[SDLK_ESCAPE]) {

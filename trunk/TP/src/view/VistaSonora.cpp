@@ -10,6 +10,9 @@ VistaSonora::VistaSonora() {
 	pararDeReproducir = false;
 	debeReproducir = false;
 	caminando = false;
+
+	//FIXME: Le hardcode para cuando se muere:
+	agregarSonido("src/resources/cuerpos/Yoshi/Yoshi-dead.ogg", HERIDO);
 }
 
 Mix_Chunk* VistaSonora::cargarSonido(string ruta) {

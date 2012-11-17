@@ -85,7 +85,8 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	invencible = false;
 	vidas = CANT_VIDAS;
 	x_inicial = 0;
-
+	YEscalera = 0;
+	
 	posAnterior = NULL;
 	evolucionado = 0;
 	fabrica = new FabricaBolasDeFuego(nombrecito);
@@ -114,6 +115,11 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	supActual = SUPERFICIE_INVOLUCION;
 
 	timeout = new Timer();
+	
+	
+	//NEW:
+	reposicionar = false; // Cuando pierde una vida, hay que moverlo.
+	bloquearMovimiento = false; // Hace que no responda a las teclas.
 }
 
 void Manual::moverALaDerecha(){
@@ -404,8 +410,16 @@ void Manual::perderVida(){
 	}
 
 	//aca deberia ponerlo en alguna "posicionInicial"
-	Posicion* pos = new Posicion (x_inicial, Posicion::obtenerPiso() - obtenerArea()->obtenerAlto());
-	posicionar(pos);
+	
+	// NEW:
+	reposicionar = true; // Lo marco para que luego sea reposicionado
+	estado = HERIDO; // Lo seteo en el estado HERIDO, asi la vista pone su animacion
+	bloquearMovimiento = true; // Evito que se mueva durante el estado HERIDO
+
+	// OLD:
+	//Posicion* pos = new Posicion (x_inicial, Posicion::obtenerPiso() - obtenerArea()->obtenerAlto());
+	//posicionar(pos);
+
 	huboCambios();
 }
 
@@ -511,17 +525,38 @@ void Manual::habilitarEspecial(){
 
 void Manual::actualizarTimeOut(){
 	if (!timeout->estaEmpezado()) return;
-	int tiempo;
+	int tiempo = TIEMPO_TIMEOUT;
 	if (invencible)
 		tiempo = TIEMPO_INVENCIBLE;
-	else
-		tiempo = TIEMPO_TIMEOUT;
 
-	if (timeout->obtenerTiempo() >= (tiempo * 1000)){
+	// NEW:
+
+	// Si paso la mitad del tiempo de espera, y tenia que reposicionarlo:
+	if (timeout->obtenerTiempo() >= (tiempo * 500) && reposicionar) {
+		// Lo cambiamos de posicion:
+		Posicion* pos = new Posicion (x_inicial, Posicion::obtenerPiso() - obtenerArea()->obtenerAlto());
+		posicionar(pos);
+		// Ya no hay que moverlo:
+		reposicionar = false;
+		// Recobra el movimiento:
+		bloquearMovimiento = false;
+		// Queda en un estado por defecto:
+		estado = QUIETODER;
+	}
+
+	// (end del NEW)
+
+	// Este es el caso de invensible, cuando se termino el tiempo deja de serlo:
+	else if (timeout->obtenerTiempo() >= (tiempo * 1000)){
 		timeout->detener();
 		invencible = false;
 	}
 	huboCambios();
+}
+
+// Devuelve si el manual esta aceptando movimiento por teclas:
+bool Manual::puedeMover() {
+	return !bloquearMovimiento;
 }
 
 bool Manual::estaInvencible(){
