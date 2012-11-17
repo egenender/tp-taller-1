@@ -566,6 +566,23 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramInvencibilidad->matrizEstados->push_back(aux);
 
+	//Cama Elastica
+	parametrosPersonaje* paramCama= crearParametrosPersonaje(nodoRaiz["camaElastica"],"camaElastica");
+	nodoRaiz["camaElastica"]["animaciones"]["quieto"]>>ruta;
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramCama->ancho,paramCama->alto));
+	paramCama->animaciones->push_back(animacionQuieto);
+
+	nodoRaiz["camaElastica"]["animaciones"]["lanza"]>>ruta;
+	Animacion* animacionLanza= new Animacion(new HojaSprites(ruta,paramCama->ancho,paramCama->alto));
+	paramCama->animaciones->push_back(animacionLanza);
+
+	aux= new std::vector<int>();
+	aux->push_back(0);
+	paramCama->matrizEstados->push_back(aux);
+	aux= new std::vector<int>();
+	aux->push_back(12);
+	paramCama->matrizEstados->push_back(aux);
+
 }
 
 parametrosTuberia* GestorConfiguraciones::crearParametrosTuberia(const YAML::Node& nodo, string nombre){
@@ -1259,7 +1276,8 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 		return new Hongo("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "mono" ) == 0 )
 		return new Mono("mono",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), new FabricaBarriles(),mapaParam->at(tipo)->velocidad);
-
+	if( strcmp ( tipo.c_str() , "camaElastica" ) == 0 )
+		return new CamaElastica("camaElastica",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)));
 	return NULL;
 }
 
