@@ -264,7 +264,7 @@ void Manual::chocarConManual(Manual* manual){
 
 }
 void Manual::chocarConPlataforma(Plataforma* p){
-
+	if(atraviesaBloques) return;
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(),posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
 
 	if (!posCmp->estaArribaDe(p->obtenerArea()->obtenerPosicion())){
@@ -297,7 +297,7 @@ void Manual::chocarConPlataforma(Plataforma* p){
 			}
 		}
 		delete(cmpDer);
-		if(atraviesaBloques) return;
+
 		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
 
 		if (posAnterior->obtenerY() >= cmpAbajo->obtenerY()){
