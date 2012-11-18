@@ -4,7 +4,6 @@
 
 #include "Area.h"
 #include <stdbool.h>
-#include "lista.h"
 #include "Observable.h"
 #include "Actualizable.h"
 
