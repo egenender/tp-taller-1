@@ -14,6 +14,8 @@ public:
 	void chocarConManual(Manual*);
 protected:
 	void actualizarMovimiento();
+	void saltar();
+	void validarPiso();
 };
 
 #endif /* INVENCIBILIDAD_H_ */

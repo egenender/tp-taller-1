@@ -12,10 +12,12 @@
 
 class PowerUp : public Cuerpo{
 private:
-	bool tengoPiso, chocaConSosten;
-	int velocidadX, velocidadY, direccion;
+	bool chocaConSosten;
+	int  velocidadX, direccion;
 protected:
-	int estado;
+	int velocidadY, estado;
+	bool tengoPiso;
+	bool puedoMovermeEnElAire;
 
 public:
 	PowerUp(const char*, Area*, int);
@@ -30,11 +32,11 @@ public:
 
 private:
 	int calculoDireccionRandom();
-	void validarPiso();
 	void actualizarEstados();
 protected:
 	virtual void actualizarMovimiento();
 	void actualizarSalto();
+	virtual void validarPiso();
 };
 
 #endif /* POWERUP_H_ */
