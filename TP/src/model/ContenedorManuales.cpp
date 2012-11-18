@@ -6,9 +6,6 @@
 #include "Posicion.h"
 
 ContenedorManuales::ContenedorManuales() {
-	//FIXME: Si no se van agregando los ID de manera secuancial correlativa,
-	//hay que cambiar a todos estos por hashes!
-
 	estados = new map<unsigned int, int>();
 	huboCambios = new map<unsigned int, bool>();
 	manuales = new map<unsigned int, Manual*>();
@@ -80,7 +77,18 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 				huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			}
 			break;
+		case SUBIR:
+			manual->subir();
+			huboCambios->erase(indice);
+			huboCambios->insert(pair<unsigned int, bool>(indice,true));
+			break;
+		case BAJAR:
+			manual->bajar();
+			huboCambios->erase(indice);
+			huboCambios->insert(pair<unsigned int, bool>(indice,true));
+			break;
 		}
+
 }
 
 void ContenedorManuales::actualizarEstados(unsigned int id, int estado){

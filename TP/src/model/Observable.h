@@ -25,6 +25,8 @@ using namespace std;
 #define MOVILDERECHA 14
 #define MOVILIZQUIERDA 15
 #define HERIDO 16 // Cuando pierde vida. NEW
+#define SUBIR 17
+#define BAJAR 18
 #define EVOLUCION 30
 
 class Observable {
