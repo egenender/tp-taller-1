@@ -8,7 +8,7 @@
 #define FACTOR_PWRUP 85
 #define IZQUIERDA -1
 #define DERECHA 1
-#define ACELERACION_PWRUP 2
+#define ACELERACION_PWRUP 1
 
 class PowerUp : public Cuerpo{
 private:

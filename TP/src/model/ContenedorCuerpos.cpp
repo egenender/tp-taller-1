@@ -27,7 +27,6 @@ void ContenedorCuerpos::actualizar(Observable* observable){
 	for (unsigned int i = 0; i < IDs->size(); i++)
 		if (IDs->at(i) == id) return;
 	IDs->push_back(id);
-	printf("cant cuerpos: %d\n",IDs->size());
 }
 
 void ContenedorCuerpos::encolarCambios(){
