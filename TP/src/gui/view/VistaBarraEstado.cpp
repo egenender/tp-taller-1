@@ -8,11 +8,14 @@ void VistaBarraEstado::inicializar() {
 	mensajeAMostrar = NULL;
 	barraEstado = NULL;
 	visible = true;
+	notificacion = NULL;
+	hayNotificacion = false;
 }
 
 VistaBarraEstado::VistaBarraEstado() {
 	inicializar();
 	barraEstado = new Superficie("src/gui/resources/barraEstado.bmp");
+	notificacion = Mix_LoadWAV("./src/gui/resources/notification.ogg");
 /*	if(barraEstado)
 		SDL_BlitSurface(mensajeAMostrar, NULL, barraEstado->obtenerSurface(), NULL);*/
 }
@@ -25,6 +28,11 @@ VistaBarraEstado::~VistaBarraEstado() {
 	if (mensajeAMostrar) {
 		delete(mensajeAMostrar);
 		mensajeAMostrar = NULL;
+	}
+
+	if (notificacion) {
+		Mix_FreeChunk(notificacion);
+		notificacion = NULL;
 	}
 }
 
@@ -44,6 +52,7 @@ void VistaBarraEstado::actualizar(Observable* observable) {
 		mensajeAnterior = mensajeActual;
 		SDL_FreeSurface(mensajeAMostrar);
 		mensajeAMostrar = TTF_RenderText_Solid(Fuente::obtenerInstancia()->obtenerFuente(), mensajeActual.c_str(), Fuente::obtenerInstancia()->obtenerColor());
+		hayNotificacion = true;
 	}
 
 	// Por si hay que redimencionarla:
@@ -55,6 +64,12 @@ bool VistaBarraEstado::dibujar(SDL_Surface* display) {
 		return false;
 
 	if (!visible) return true;
+
+	if (notificacion && hayNotificacion)
+		Mix_PlayChannel(-1, notificacion, 0);
+
+	hayNotificacion = false;
+
 	// Dibujo la barra:
 	bool dibujeBarra = barraEstado->dibujar(display, x, y);
 

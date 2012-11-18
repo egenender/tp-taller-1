@@ -2,9 +2,10 @@
 #define VISTABARRAESTADO_H_
 
 
+#include "../../view/VistaCuerpo.h"
 #include "../../view/Superficie.h"
 #include "SDL/SDL_ttf.h"
-#include "../../view/VistaCuerpo.h"
+#include "SDL/SDL_mixer.h"
 #include <string>
 using namespace std;
 
@@ -14,7 +15,8 @@ private:
 	string mensajeActual, mensajeAnterior;
 	SDL_Surface* mensajeAMostrar;
 	Superficie* barraEstado;
-	bool visible;
+	bool visible, hayNotificacion;
+	Mix_Chunk* notificacion;
 
 private:
 	void inicializar();
