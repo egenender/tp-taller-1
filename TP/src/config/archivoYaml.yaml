@@ -93,12 +93,33 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
+        escalera:
+          sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
+          sonido: 
+        escalar:
+          sprites: src/resources/cuerpos/Totodile/totodileMovimiento.bmp
+          sonido: 
+        evoquieto:
+          sprites: src/resources/cuerpos/Croconaw/croconawQuieto.bmp
+          sonido: 
+        evocaminar:
+          sprites: src/resources/cuerpos/Croconaw/croconawMovimiento.bmp
+          sonido: src/resources/cuerpos/footstep.ogg
+        evosaltar:
+          sprites: src/resources/cuerpos/Croconaw/croconawSalto.bmp
+          sonido: 
+        evoescalera:
+          sprites: src/resources/cuerpos/Croconaw/croconawQuieto.bmp
+          sonido: 
+        evoescalar:
+          sprites: src/resources/cuerpos/Croconaw/croconawMovimiento.bmp
+          sonido: 
       bolaDeFuego:
         ancho: 22
         alto: 22
         salto: 30
         animacion: src/resources/items/chorroDeAgua.bmp
-    Gengar:
+    Gastly:
       ancho: 55
       alto: 55
       vel_personaje: 30
@@ -106,14 +127,38 @@ juego:
       sonido: 
       animaciones:
         quieto:
-          sprites: src/resources/cuerpos/Gengar/gengarQuieto.bmp
-          sonido: 
+          sprites: src/resources/cuerpos/Gastly/gastlyQuieto.bmp
+          sonido:
         caminar:
-          sprites: src/resources/cuerpos/Gengar/gengarMovimiento.bmp
+          sprites: src/resources/cuerpos/Gastly/gastlyMovimiento.bmp
           sonido: src/resources/cuerpos/footstep.ogg
         saltar:
+          sprites: src/resources/cuerpos/Gastly/gastlySalto.bmp
+          sonido: 
+        herido:
+          sprites: src/resources/cuerpos/Gastly/gastlyHerido.bmp
+          sonido: 
+        escalera:
+          sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
+          sonido: 
+        escalar:
+          sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
+          sonido: 
+        evoquieto:
+          sprites: src/resources/cuerpos/Gengar/gengarQuieto.bmp
+          sonido: 
+        evocaminar:
+          sprites: src/resources/cuerpos/Gengar/gengarMovimiento.bmp
+          sonido: src/resources/cuerpos/footstep.ogg
+        evosaltar:
           sprites: src/resources/cuerpos/Gengar/gengarSalto.bmp
           sonido: src/resources/cuerpos/Gengar/Gengar-jump.ogg
+        evoescalera:
+          sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
+          sonido: 
+        evoescalar:
+          sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
+          sonido: 
       bolaDeFuego:
         ancho: 40
         alto: 25
@@ -128,12 +173,33 @@ juego:
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/Pikachu/pikachuQuieto2.bmp
-          sonido: 
+          sonido:
         caminar:
           sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento2.bmp
           sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
+          sonido: 
+        escalera:
+          sprites: src/resources/cuerpos/Pikachu/pikachuQuieto2.bmp
+          sonido: 
+        escalar:
+          sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento2.bmp
+          sonido: 
+        evoquieto:
+          sprites: src/resources/cuerpos/Raichu/raichuQuieto.bmp
+          sonido: 
+        evocaminar:
+          sprites: src/resources/cuerpos/Raichu/raichuMovimiento.bmp
+          sonido: src/resources/cuerpos/footstep.ogg
+        evosaltar:
+          sprites: src/resources/cuerpos/Raichu/raichuSalto.bmp
+          sonido:
+        evoescalera:
+          sprites: src/resources/cuerpos/Raichu/raichuSalto.bmp
+          sonido: 
+        evoescalar:
+          sprites: src/resources/cuerpos/Raichu/raichuSalto.bmp
           sonido: 
       bolaDeFuego:
         ancho: 51
