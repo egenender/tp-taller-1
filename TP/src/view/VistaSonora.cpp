@@ -48,6 +48,9 @@ VistaSonora::~VistaSonora() {
 		sonidos = NULL;
 	}
 
+	sonidoActual = NULL;
+	sonidoAnterior = NULL;
+
 	debeReproducir = false;
 	pararDeReproducir = true;
 }
