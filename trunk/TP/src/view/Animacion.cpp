@@ -1,7 +1,10 @@
 #include "Animacion.h"
 
 Animacion::~Animacion() {
-	delete(frames);
+	if (frames) {
+		delete(frames);
+		frames = NULL;
+	}
 }
 
 void Animacion::inicializarAnimacion() {

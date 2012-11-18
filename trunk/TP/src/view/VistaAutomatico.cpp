@@ -30,7 +30,11 @@ VistaAutomatico::~VistaAutomatico() {
 		delete(timer);
 		timer = NULL;
 	}
-	delete (periodos);
+	if (periodos) {
+		delete (periodos);
+		periodos = NULL;
+	}
+	animacionQuieto = NULL;
 /*	if (animacionQuieto) {
 		delete (animacionQuieto);
 		animacionQuieto = NULL;

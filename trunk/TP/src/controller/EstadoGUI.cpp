@@ -19,7 +19,7 @@ EstadoGUI::EstadoGUI() {
 	vistaBarra = NULL;
 	vistaBtncrear = vistaBtnconectar = vistaBtnjugar = vistaBtnsolapacliente1 = vistaBtnsolapacliente2 = vistaBtnsolapaservidor = NULL;
 	vistalblIP = vistalblnombre = vistalblpuertocliente = vistalblpuertoservidor = NULL;
-	vistalblsalto = vistalblvelocidad = NULL;
+	vistalblsalto = vistalblvelocidad = vistalblcoop = NULL;
 	txtIP = NULL;
 	vistaMenu = NULL;
 	vistaScrollNiveles = vistaScrollPersonajes = NULL;
@@ -30,7 +30,7 @@ EstadoGUI::EstadoGUI() {
 	btnMenu = btnscrollarribaNiveles = btnscrollabajoNiveles =	btnscrollarribaPersonajes = btnscrollabajoPersonajes = btncrear = btnsolapacliente1 = btnsolapacliente2 = btnsolapaservidor = btnconectar = btnjugar = NULL;
 	txtPuertoServidor = txtPuertoCliente = txtIP;
 	barra = NULL;
-	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = NULL;
+	lblPuertoServidor = lblIP = lblPuertoCliente = lblnombrePersonaje = lblvelocidad = lblsalto = lblCoop = NULL;
 	scrollPersonajes = scrollNiveles = NULL;
 	animaciones = NULL;
 	musica = NULL;

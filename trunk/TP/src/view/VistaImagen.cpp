@@ -3,10 +3,13 @@
 #include "../model/Cuerpo.h"
 
 VistaImagen::VistaImagen() {
+	movY = 0;
+	alpha = 0;
 	imagen = NULL;
 }
 
 VistaImagen::VistaImagen(Superficie* imagenNueva, int angulo) {
+	movY = 0;
 	imagen = imagenNueva;
 	if (angulo < 0)
 		angulo += 2;
@@ -22,6 +25,8 @@ VistaImagen::VistaImagen(Superficie* imagenNueva, int angulo) {
 VistaImagen::VistaImagen(string ID) {
 //	cambiarImagen(ID);
 	imagen = NULL;
+	movY = 0;
+	alpha = 0;
 }
 
 VistaImagen::~VistaImagen() {
