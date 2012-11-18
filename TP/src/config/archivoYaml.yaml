@@ -19,16 +19,16 @@ juego:
           sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+          sonido: 
         escalera:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+          sonido: 
         escalar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+          sonido: 
         herido:
           sprites: src/resources/cuerpos/Charmander/charmanderHerido.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-dead.ogg
+          sonido: 
         evoquieto:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp
           sonido: 
@@ -66,7 +66,7 @@ juego:
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
         escalera:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp
-          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
+          sonido: 
         escalar:
           sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
           sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
