@@ -71,3 +71,7 @@ int Observable::obtenerVidas(){
 bool Observable::estaInvencible(){
 	return false;
 }
+
+bool Observable::mataAlContacto() {
+	return false;
+}
