@@ -4,6 +4,13 @@ Caja::Caja(const char* nom, Area* sup, FabricaActualizable *f): Plataforma(nom, 
 	fabrica = f;
 	estado = QUIETO;
 	timer = new Timer();
+//	int anchoH, altoH, x, y;
+//	anchoH = (superficieOcupada->obtenerAncho());
+//	altoH = (superficieOcupada->obtenerAlto()) ;
+//	x = superficieOcupada->obtenerPosicion()->obtenerX() + (superficieOcupada->obtenerAncho() - anchoH)/2;
+//	y = superficieOcupada->obtenerPosicion()->obtenerY() + (superficieOcupada->obtenerAlto() - altoH);
+//
+//	superficieDeColision = new Area(anchoH, altoH, new Posicion(x,y));
 }
 
 Caja::~Caja() {

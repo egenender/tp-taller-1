@@ -26,6 +26,7 @@ private:
 	Camara* camara;
 	int estado;
 	bool parar;
+	bool puedoJugar;
 	Superficie* fondoServidor;
 public:
 	Nivel();
@@ -37,6 +38,8 @@ public:
 	void dibujar(SDL_Surface* display);
 	void setEstado(int);
 	void morir();
+
+	void sePuedeJugar();
 
 private:
 	//Para agregar elementos al nivel:

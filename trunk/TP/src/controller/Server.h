@@ -86,6 +86,8 @@ class Server{
 		bool aceptando;
 
 		Timer* envio;
+
+		int yaJugando;
 	private:
 
 		static Server* instancia;
