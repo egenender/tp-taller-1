@@ -201,7 +201,8 @@ void Hongo::chocarConManual(Manual* pers){
 	posCmp = new Posicion(posPersAnterior->obtenerX() + pers->obtenerArea()->obtenerAncho() - pers->obtenerVelocidad(),posPersAnterior->obtenerY() );
 	if (posCmp->estaALaIzquierdaDe(posAnterior)){
 		modificacionMovimiento(IZQUIERDA);
-		if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+		//if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+		if (estado == QUIETO)
 			trasladar(40,0,false);
 		delete (posCmp);
 		return;
@@ -212,7 +213,8 @@ void Hongo::chocarConManual(Manual* pers){
 
 	if (posCmp->estaALaIzquierdaDe(posPersAnterior)){
 		modificacionMovimiento(DERECHA);
-		if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+		//if (estado != CAMINANDODER && estado != CAMINANDOIZQ)
+		if (estado == QUIETO)
 			trasladar(-40,0,false);
 		delete(posCmp);
 		return;
