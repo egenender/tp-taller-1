@@ -88,6 +88,9 @@ class Server{
 		Timer* envio;
 
 		int yaJugando;
+
+		int sock;
+		bool jugando;
 	private:
 
 		static Server* instancia;
@@ -112,7 +115,6 @@ class Server{
 		// Conjuntos de sockets (veremos esto)
 		fd_set leidos;
 		// El file descriptor del socket del servidor
-		int sock;
 
 		pthread_t thread_escuchar;
 		pthread_t thread_escritura;

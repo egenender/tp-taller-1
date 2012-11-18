@@ -156,6 +156,8 @@ void Nivel::terminar() {
 		delete(fondoServidor);
 		fondoServidor = NULL;
 	}
+
+	puedoJugar = false;
 }
 
 void Nivel::sePuedeJugar(){
