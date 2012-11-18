@@ -1,6 +1,7 @@
 #include "PowerUp.h"
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 PowerUp::PowerUp(const char* nom, Area* sup, int vel): Cuerpo(nom, sup) {
 	velocidadX = vel;
@@ -70,7 +71,7 @@ void PowerUp::chocarConPlataforma(Plataforma* p){
 
 		Posicion* cmpAbajo = new Posicion(p->obtenerArea()->obtenerPosicion()->obtenerX(), p->obtenerArea()->obtenerPosicion()->obtenerY()+p->obtenerArea()->obtenerAlto());
 
-		if (posAnterior->obtenerY() >= cmpAbajo->obtenerY()){
+		if ((posAnterior->obtenerY()+obtenerArea()->obtenerAlto()) >= cmpAbajo->obtenerY()){
 			delete(posCmp);
 			delete(cmpAbajo);
 			int mov = p->obtenerArea()->obtenerPosicion()->obtenerY() + p->obtenerArea()->obtenerAlto();
@@ -80,18 +81,12 @@ void PowerUp::chocarConPlataforma(Plataforma* p){
 			return;
 		}
 		delete(cmpAbajo);
-
+		velocidadY = 0;
 		if (posCmp)
 			delete (posCmp);
 		posCmp = NULL;
 
 	}
-
-	bool cambio = true;
-	if(posCmp)
-		delete(posCmp);
-	else
-		cambio = false;
 
 	if (p->esVigaPorDerecha())
 		direccion = DERECHA;
@@ -106,7 +101,7 @@ void PowerUp::chocarConPlataforma(Plataforma* p){
 	y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
 	y -= p->obtenerArea()->obtenerPosicion()->obtenerY();
 
-	trasladar(0,-y,cambio);
+	trasladar(0,-y,false);
 
 }
 
