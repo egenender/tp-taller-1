@@ -4,6 +4,7 @@
 Invencibilidad::Invencibilidad(const char* nom, Area* sup, int vel):PowerUp(nom, sup, vel) {
 	timer = new Timer();
 	timer->comenzar();
+	puedoMovermeEnElAire = true;
 }
 
 Invencibilidad::~Invencibilidad() {
@@ -12,7 +13,7 @@ Invencibilidad::~Invencibilidad() {
 
 void Invencibilidad::chocarConManual(Manual* prin){
 	if(prin->obtenerEstado() == HERIDO)
-			return ;
+		return;
 	prin->hacerInvencible();
 	estado = MUERTO;
 	huboCambios();
@@ -33,3 +34,16 @@ void Invencibilidad::actualizarMovimiento(){
 }
 
 
+void Invencibilidad::saltar(){
+	if(!tengoPiso) return;
+	velocidadY = -20;
+	tengoPiso = false;
+}
+
+void Invencibilidad::validarPiso(){
+	if (obtenerArea()->estaSobreElPiso() || tengoPiso){
+		tengoPiso = true;
+		saltar();
+		huboCambios();
+	}
+}

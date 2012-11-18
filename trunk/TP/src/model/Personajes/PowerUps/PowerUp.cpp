@@ -14,6 +14,7 @@ PowerUp::PowerUp(const char* nom, Area* sup, int vel): Cuerpo(nom, sup) {
 		estado = CAMINANDOIZQ;
 	tengoPiso = chocaConSosten = false;
 
+	puedoMovermeEnElAire = false;
 
 	int anchoH, altoH, x, y;
 	anchoH = (superficieOcupada->obtenerAncho() * FACTOR_PWRUP) / 100;
@@ -145,7 +146,7 @@ void PowerUp::actualizarEstados(){
 }
 
 void PowerUp::actualizarMovimiento(){
-	if (!tengoPiso || estaMuerto()) return;
+	if ((!tengoPiso && !puedoMovermeEnElAire)|| estaMuerto()) return;
 
 	int movX = velocidadX * direccion;
 
