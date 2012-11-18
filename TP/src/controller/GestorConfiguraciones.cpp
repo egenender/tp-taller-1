@@ -16,7 +16,6 @@
 #include "SDL/SDL_mixer.h"
 #include "../log/Log.h"
 #include <sstream>
-#include "Sounds.h"
 #include "../view/VistaVarios.h"
 #include "../model/Observable.h"
 #include "../model/Personajes/Princesa.h"
