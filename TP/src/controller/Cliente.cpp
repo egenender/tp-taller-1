@@ -15,14 +15,6 @@
 #include "../log/Log.h"
 #include "../model/structures/structCliente.h"
 
-#include <linux/ethtool.h>
-#include <stdio.h>
-#include <sys/socket.h>
-#include <sys/ioctl.h>
-#include <netinet/in.h>
-#include <linux/sockios.h>
-#include <linux/if.h>
-#include <linux/ethtool.h>
 #include <string.h>
 #include <stdlib.h>
 

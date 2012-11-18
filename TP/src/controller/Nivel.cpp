@@ -158,7 +158,13 @@ void Nivel::terminar() {
 	}
 }
 
+void Nivel::sePuedeJugar(){
+	puedoJugar = true;
+}
+
 void Nivel::actualizar(float delta) {
+	if (!puedoJugar) return;
+
 	if (parar && estado==CLIENTE){
 		Cliente::obtenerInstancia("",0)->detener_escuchar();
 		Cliente::obtenerInstancia("",0)->detener_escribir();

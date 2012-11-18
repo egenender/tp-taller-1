@@ -23,6 +23,8 @@ void ManejadorSinglePlayer::manejarClic(){
 	gestor->CargaRestante();
 	gestor->setProtagonista(nombrePer);
 
+	Nivel::obtenerInstancia()->sePuedeJugar();
+
 	Nivel::obtenerInstancia()->setEstado(SINGLE);
 
 	BolaDeFuego::setearCooperatividad(true);
