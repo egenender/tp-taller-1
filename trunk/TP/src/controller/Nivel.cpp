@@ -7,7 +7,6 @@
 #include "../model/Personajes/Pluma.h"
 #include "../view/VistaVidas.h"
 #include "../view/VistaVarios.h"
-#include "../view/VistaMusical.h"
 
 //TODO: *le hardcode:
 #include "../model/Fabricas/FabricaPowerUps.h"
@@ -22,8 +21,10 @@ Nivel::Nivel() {
 	actualizables = NULL;
 	vistas = NULL;
 	camara = NULL;
+	musica = NULL;
 	controlador = NULL;
 	fondoServidor = NULL;
+	puedoJugar = false;
 }
 
 Nivel::~Nivel() {
@@ -84,10 +85,8 @@ void Nivel::iniciar() {
 		VistaVidas* corazones = new VistaVidas();
 		vistas->push_back(corazones);
 
-		// Muisca:
-		VistaMusical* musica = new VistaMusical();
-		vistas->push_back(musica);
-
+		// Musica:
+		musica = new VistaMusical();
 		// Camara:
 		camara = new Camara(0, 0);
 
@@ -148,6 +147,11 @@ void Nivel::terminar() {
 		delete (camara);
 		camara = NULL;
 	}
+	if (musica) {
+		delete(musica);
+		musica = NULL;
+	}
+
 	if (controlador) {
 		delete (controlador);
 		controlador = NULL;
@@ -212,6 +216,7 @@ void Nivel::dibujar(SDL_Surface* display) {
 	}
 	// Dibujamos el fondo:
 	camara->dibujar(display, 0, 0); // No importa los numeros, porque camara no le da bola :P
+	musica->dibujar(display,0, 0);
 
 	// Dibujamos las vistas:
 
