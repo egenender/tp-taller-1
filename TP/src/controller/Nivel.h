@@ -11,6 +11,7 @@
 #include "Controlador.h"
 #include "ControladorSinglePlayer.h"
 #include "../model/Actualizable.h"
+#include "../view/VistaMusical.h"
 
 #define CLIENTE 0
 #define SERVIDOR 1
@@ -24,6 +25,7 @@ private:
 	vector<VistaCuerpo*>* vistas;
 	Manual* principal;
 	Camara* camara;
+	VistaMusical* musica;
 	int estado;
 	bool parar;
 	bool puedoJugar;

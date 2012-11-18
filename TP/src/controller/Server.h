@@ -87,7 +87,7 @@ class Server{
 
 		Timer* envio;
 
-		int yaJugando;
+		unsigned int yaJugando;
 
 		int sock;
 		bool jugando;
