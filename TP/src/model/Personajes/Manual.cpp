@@ -449,20 +449,17 @@ void Manual::chocarConHongo(Hongo* h){
 
 		if (state == MOVILDERECHA && posAnterior->estaALaDerechaOIgualDe(posPersAnterior)){
 			perderVida();
-			return;
 		}
 
 		else if (state == MOVILIZQUIERDA && posAnterior->estaALaIzquierdaOIgualDe(posPersAnterior)){
 			perderVida();
-			return;
 		}
 
 		else if (state != MOVILIZQUIERDA && state != MOVILDERECHA && state != QUIETO){
 			perderVida();
-			return;
 		}
 	}
-	if (enViga) perderVida();
+	//if (enViga) perderVida();
 	delete(posCmp);
 }
 
