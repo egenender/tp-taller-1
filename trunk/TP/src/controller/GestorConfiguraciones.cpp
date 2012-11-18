@@ -162,6 +162,8 @@ GestorConfiguraciones::GestorConfiguraciones (){
 
 	destruir = false;
 	contCuerpos = new ContenedorCuerpos();
+
+	IDACT = 0;
 }
 
 void GestorConfiguraciones::setEsCliente (){
@@ -2169,7 +2171,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 			if (esCliente) ruta=headerTemp+ruta;
 
-			vistaSonora->agregarSonido(ruta, SUBIENDOMOVIMIENTO);
+			vistaSonora->agregarSonido(ruta, HERIDO);
 		}
 	}catch( YAML::TypedKeyNotFound<std::string> &e) {
 		ruta = RUTA_PASIVA;
