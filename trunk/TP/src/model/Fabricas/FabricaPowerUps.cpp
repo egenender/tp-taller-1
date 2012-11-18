@@ -5,6 +5,7 @@
 #include "FabricaInvencibilidad.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 FabricaPowerUps::FabricaPowerUps() {
 	fabricas = new std::vector<FabricaActualizable*>();
@@ -13,6 +14,7 @@ FabricaPowerUps::FabricaPowerUps() {
 	fabricas->push_back(new FabricaVidasExtra());
 	fabricas->push_back(new FabricaStones());
 	fabricas->push_back(new FabricaInvencibilidad());
+
 }
 
 FabricaPowerUps::~FabricaPowerUps() {
@@ -36,25 +38,20 @@ int FabricaPowerUps::eleccionFabrica(){
 
 	unsigned int i = 0;
 	int acum = 0;
-	while (acum < (rnd * 100)){
+
+	while (acum < (rnd*100)){
 		acum += equiprobable;
 		i++;
 	}
-	if (i >= fabricas->size())
+	if ((i-1) >= fabricas->size())
 		return eleccionFabrica();
+
 	return (i-1);
 
 }
 
 float FabricaPowerUps::tirarRandom(){
-	float u;
-	do{
-		u =(rand() % 1000) + 1;
-		float w;
-		do{
-			w =(rand() % 1000);
-		}while (w >= u);
-		u = w / u;
-	}while(u == 1);
-	return u;
+	float max = (float)RAND_MAX + 1;
+	float tuvieja = ((float) rand() / max) ;
+	return tuvieja;
 }
