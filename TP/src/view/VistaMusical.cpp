@@ -63,6 +63,5 @@ bool VistaMusical::reproducirMusica() {
 }
 
 void VistaMusical::actualizar(Observable* observable) {
-	Manual* manual = (Manual*) observable;
-	invensibilidad = manual->mataAlContacto();
+	invensibilidad = observable->mataAlContacto();
 }

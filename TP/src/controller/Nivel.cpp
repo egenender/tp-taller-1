@@ -7,6 +7,7 @@
 #include "../model/Personajes/Pluma.h"
 #include "../view/VistaVidas.h"
 #include "../view/VistaVarios.h"
+#include "../view/VistaMusical.h"
 
 //TODO: *le hardcode:
 #include "../model/Fabricas/FabricaPowerUps.h"
@@ -78,19 +79,30 @@ void Nivel::iniciar() {
 	Posicion::indicarPiso(gestor->ObtenerPisoNivel());
 	if (estado == CLIENTE || estado == SINGLE){
 		//Cliente::obtenerInstancia("",0) -> escuchar( structServidor_obtener_tamanio());
+
+		// Vidas:
 		VistaVidas* corazones = new VistaVidas();
 		vistas->push_back(corazones);
+
+		// Muisca:
+		VistaMusical* musica = new VistaMusical();
+		vistas->push_back(musica);
+
+		// Camara:
 		camara = new Camara(0, 0);
+
 		if (estado == CLIENTE){
 			Dummy* algo = gestor->obtenerDummyMio();
 			algo->agregarObservador(camara);
 			algo->agregarObservador(corazones);
+	//		algo->agregarObservador(musica);
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 		}else{
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
 			prin->agregarObservador(camara);
 			prin->agregarObservador(corazones);
+			prin->agregarObservador(musica);
 			controlador = new ControladorSinglePlayer(prin);
 
 			for (unsigned int i = 0; i < gestor->lasCajas->size() ; i++){
