@@ -4,6 +4,7 @@
 using namespace std;
 
 VistaSonora::VistaSonora() {
+	estadoActual = estadoAnterior = -1;
 	sonidoActual = NULL;
 	sonidoAnterior = NULL;
 	sonidos = new map<int, Mix_Chunk*>();
@@ -52,8 +53,10 @@ VistaSonora::~VistaSonora() {
 }
 
 void VistaSonora::actualizar(Observable* observable) {
-	int estado = observable->obtenerEstado();
-	if (estado == MUERTO) {
+	estadoAnterior = estadoActual;
+
+	estadoActual = observable->obtenerEstado();
+	if (estadoActual == MUERTO) {
 		pararDeReproducir = true;
 		debeReproducir = false;
 		return;
@@ -62,23 +65,23 @@ void VistaSonora::actualizar(Observable* observable) {
 	caminando = false;
 
 	// TODO: esto deberia mejorarse:
-	if (estado == SALTANDODER || estado == SALTANDOIZQ)
-		estado = SALTAR;
-	else if (estado == CAMINANDOIZQ || estado == CAMINANDODER) {
-		estado = CAMINANDODER;
+	if (estadoActual == SALTANDODER || estadoActual == SALTANDOIZQ)
+		estadoActual = SALTAR;
+	else if (estadoActual == CAMINANDOIZQ || estadoActual == CAMINANDODER) {
+		estadoActual = CAMINANDODER;
 		caminando = true;
 	}
 
 	sonidoAnterior = sonidoActual;
 	try {
-		sonidoActual = sonidos->at(estado);
+		sonidoActual = sonidos->at(estadoActual);
 	}
 	catch (exception &e) {
 		// Esto si no encuentro el sonido:
 		sonidoActual = NULL;
 	}
 
-	if (sonidoActual == sonidoAnterior && !caminando) {
+	if (estadoAnterior == estadoActual && !caminando) {
 		debeReproducir = false;
 		pararDeReproducir = false;
 		return;
@@ -100,7 +103,7 @@ bool VistaSonora::reproducir() {
 	if (debeReproducir && !pararDeReproducir) {
 		// El sonido se ejecuta una sola vez:
 
-		if (Mix_Playing(0))
+		if (Mix_Playing(0) && estadoActual == estadoAnterior)
 			return true;
 
 		if (Mix_PlayChannel(0, sonidoActual, 0) == -1) {
