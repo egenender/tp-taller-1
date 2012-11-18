@@ -497,13 +497,93 @@ juego:
           y: 150
           ancho: 80
           alto: 400
-    - nivel: Moo la Moo
-      players: 3
-      alto: 1200
-      ancho: 1200
-      fondo: src/resources/items/viga2.jpg
-      musica:
-      personajes:
-        - tipo: princesa
-          x: 400
-          y: 300
+    - nivel: Simetria
+      players: 2
+      alto: 2500
+      ancho: 2000
+      fondo: src/resources/ph-101661.jpg
+      musica: src/resources/niveles/trololo.ogg
+      piso: 2450
+      elementos:
+#        - tipo: princesa
+#          x: 600
+#          y: 150
+#        - tipo: mono
+#          x: 650
+#          y: 150
+      tuberias:
+#        - tipo: tuberiaHT
+#          x: 200
+#          y: 2140
+#          direccion: arriba
+#          eme: 5
+#        - tipo: tuberiaHongo
+#          x: 800
+#          y: 2200
+#          direccion: abajo
+#          eme: 5
+#        - tipo: tuberiaHT
+#          x: 800
+#          y: 380
+#          direccion: derecha
+#          eme: 5
+      plataformas:
+        - textura: viga
+          x: 200
+          y: 2200
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 1600
+          y: 2200
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 100
+          y: 2000
+          ancho: 2000
+          alto: 50
+        - textura: viga
+          x: 300
+          y: 1850
+          ancho: 1600
+          alto: 50
+        - textura: viga
+          x: 50
+          y: 400
+          ancho: 100
+          alto: 50
+        - textura: viga
+          x: 1800
+          y: 400
+          ancho: 100
+          alto: 50
+        - textura: viga
+          x: 1000
+          y: 150
+          ancho: 200
+          alto: 50
+      vigas:
+#        - textura: viga
+#          x: 700
+#          y: 330
+#          ancho: 500
+#          alto: 50
+#          inclinacion: 20
+      escaleras:
+        - textura: esc
+          x: 200
+          y: 2200
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 1750
+          y: 2200
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 1000
+          y: 2000
+          ancho: 50
+          alto: 450
+
