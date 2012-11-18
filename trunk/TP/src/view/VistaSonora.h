@@ -18,6 +18,7 @@ using namespace std;
 
 class VistaSonora : public VistaCuerpo {
 protected:
+	int estadoActual, estadoAnterior;
 	map<int,Mix_Chunk*>* sonidos;
 	Mix_Chunk* sonidoActual, *sonidoAnterior;
 	bool pararDeReproducir, debeReproducir, caminando;
