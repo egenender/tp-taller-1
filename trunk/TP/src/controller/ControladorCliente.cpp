@@ -39,6 +39,16 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		//return;
 	}
 
+	if (keystates[SDLK_UP] && !keystates[SDLK_DOWN]) {
+			revisarCambio(SUBIR);
+			return;
+	}
+
+	if (!keystates[SDLK_UP] && keystates[SDLK_DOWN]) {
+		revisarCambio(BAJAR);
+		return;
+	}
+
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
 		revisarCambio(CAMINANDOIZQ);
 		return;
@@ -49,7 +59,7 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
-	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) /*&& !keystates[SDLK_UP]*/) {
+	if (!(keystates[SDLK_LEFT] ^ keystates[SDLK_RIGHT]) && !(keystates[SDLK_UP] ^ keystates[SDLK_DOWN])) {
 			if(controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
 				revisarCambio(QUIETO);
 			//return;
