@@ -43,6 +43,9 @@ private:
 	bool puedoSubir, tengoPiso, atraviesaBloques, chocaConEscalera;
 	bool chocaConSosten, enViga;
 	bool chocaConCama, saltoAlto;
+
+	bool pisareViga;
+
 	bool juegoGanado;
 	int vidas, x_inicial;
 

@@ -93,6 +93,8 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	fabrica = new FabricaBolasDeFuego(nombrecito);
 	chocaConCama = saltoAlto = false;
 
+	pisareViga = false;
+
 	int ancho = sup->obtenerAncho();
 	int alto = sup->obtenerAlto();
 
@@ -148,6 +150,10 @@ void Manual::actualizar(float delta){
 	actualizarSalto();
 	notificarObservadores();
 	actualizarEstados();
+	if(pisareViga){
+		enViga = true;
+		pisareViga = false;
+	}
 }
 
 bool Manual::estoySaltando(){
@@ -176,6 +182,7 @@ void Manual::detener(){
 
 void Manual::actualizarSalto(){
 	if (!estoySaltando() && !enViga) return;
+
 	enViga = false;
 	mtrasladar(0,velocidadY,true);
 	velocidadY += ACELERACION;
@@ -322,7 +329,8 @@ void Manual::chocarConPlataforma(Plataforma* p){
 
 	if (p->esVigaPorDerecha() || p->esVigaPorIzquierda()){
 		velocidadY = 15;
-		enViga = true;
+		//enViga = true;
+		pisareViga = true;
 	}
 
 	int y;
@@ -379,6 +387,7 @@ void Manual::actualizarEstados(){
 	if(!chocaConCama)
 		saltoAlto = false;
 	chocaConCama = false;
+
 }
 
 bool Manual::estoySubiendo(){
@@ -434,9 +443,10 @@ void Manual::chocarConHongo(Hongo* h){
 
 	//tengo que ver por cual direccion se chocan:
 	Posicion* posPersAnterior = h->obtenerPosicionAnterior();
+
 	//me fijo nomas si vino de arriba:
 	Posicion* posCmp = new Posicion(posAnterior->obtenerX(), posAnterior->obtenerY() + obtenerArea()->obtenerAlto());
-	if(posPersAnterior->estaAbajoDe(posCmp)){
+	if(posPersAnterior->estaAbajoDe(posCmp) && !enViga){
 		tengoPiso = true;
 		estado = QUIETODER;
 		saltar();
@@ -449,17 +459,20 @@ void Manual::chocarConHongo(Hongo* h){
 
 		if (state == MOVILDERECHA && posAnterior->estaALaDerechaOIgualDe(posPersAnterior)){
 			perderVida();
+			return;
 		}
 
 		else if (state == MOVILIZQUIERDA && posAnterior->estaALaIzquierdaOIgualDe(posPersAnterior)){
 			perderVida();
+			return;
 		}
 
 		else if (state != MOVILIZQUIERDA && state != MOVILDERECHA && state != QUIETO){
 			perderVida();
+			return;
 		}
 	}
-	//if (enViga) perderVida();
+	if (enViga) perderVida();
 	delete(posCmp);
 }
 
