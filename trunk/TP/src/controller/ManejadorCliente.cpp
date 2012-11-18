@@ -141,6 +141,8 @@ bool ManejadorCliente::recibirRecursos(){
 	elNivel = cliente->escuchar_un_entero();
 
 	recibirDisponibles();
+
+
 	return true;
 }
 
@@ -149,7 +151,8 @@ void ManejadorCliente::seleccionarProt(string nombre){
 	cliente->escribir_al_server(&ID,sizeof(int));
 	Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se envia protagonista a usar.");
 
-	int dato = cliente->escuchar_un_entero_out(1000);
+	//int dato = cliente->escuchar_un_entero_out(1000);
+	int dato = cliente->escuchar_un_entero();
 
 	if (dato == 1)
 		IDprot = ID;

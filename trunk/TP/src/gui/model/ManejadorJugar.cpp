@@ -1,5 +1,6 @@
 
 #include "ManejadorJugar.h"
+#include "../../controller/Nivel.h"
 #include "../../controller/ManejadorCliente.h"
 #include "../../controller/ManejadorEstados.h"
 #include "../../controller/GestorConfiguraciones.h"
@@ -40,9 +41,13 @@ void ManejadorJugar::manejarClic(){
 	gestor->setProtagonista(elegido);
 
 	Cliente* cliente = Cliente::obtenerInstancia("Hola Diego",0);
+
+	cliente->escuchar_un_entero();
+
 	cliente->escritura(structCliente_obtener_tamanio());
 	cliente->escuchar(structServidor_obtener_tamanio());
 	ManejadorEstados::setearEstadoActual(ESTADO_JUEGO);
+	Nivel::obtenerInstancia()->sePuedeJugar();
 
 
 	/*Cliente* cliente = Cliente::ObtenerInstancia();

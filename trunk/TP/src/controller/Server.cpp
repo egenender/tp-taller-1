@@ -284,6 +284,26 @@ void* leer_de_cliente (int filedes,size_t tam){
     }
 }
 
+void mandarComienzo(void* parametros){
+	fd_set* clientes=((parametrosInit_t*)parametros)->act;
+	std::map <int,bool> *sockets = ((parametrosInit_t*)parametros)->sockets;
+	int i, sock, num;
+	num = 0;
+
+	Server* server = Server::obtenerInstancia(0);
+	sock = server->sock;
+
+	for ( i = 0; i < FD_SETSIZE; ++i){
+		if (FD_ISSET (i, clientes)){
+			if (i != sock) {
+				//if(sockets->at(i))
+					server->escribir_a_cliente(i, &num, sizeof(int) );
+			}
+		}
+	}
+}
+
+
 void* _enviar_inicializacion(void* parametros){
 
 	//Mandar todos los archivos para inicializar
@@ -402,12 +422,18 @@ void* _enviar_inicializacion(void* parametros){
 			*entero = 1;
 			tiposProt->at( idElegida )->disponible = false;
 			Log::getInstance()->writeToLogFile("INFO","SOCK: La eleccion de protagonista es correcta");
-			Server::obtenerInstancia(0)->yaJugando++;
-			if (Server::obtenerInstancia(0)->yaJugando == gestor->obtenerCantidadDeJugadores()){
-				Nivel::obtenerInstancia()->sePuedeJugar();
-			}
 		}
 		escribir_a_cliente(cliente, entero, ( sizeof(int) ) );
+
+		if( *entero == 1 ){
+			Server::obtenerInstancia(0)->yaJugando++;
+
+			if (Server::obtenerInstancia(0)->yaJugando == gestor->obtenerCantidadDeJugadores()){
+				mandarComienzo( parametros);
+				Nivel::obtenerInstancia()->sePuedeJugar();
+				Server::obtenerInstancia(0)->jugando = true;
+			}
+		}
 
 	}
 
@@ -654,6 +680,9 @@ void* _escribir(void* parametros){
 	Log::getInstance()->writeToLogFile("INFO","PARSER: Se inicia la escritura del server");
 
 	while (true){
+		if ( !Server::obtenerInstancia(0)->jugando )
+			continue ;
+
 		if (!cola_salientes->empty()){
 
 			void *cambio = cola_salientes->front();
@@ -664,6 +693,7 @@ void* _escribir(void* parametros){
 					if (i!=sock){
 						if(sockets->at(i)){
 							escribir_a_cliente(i,cambio,tamanio);
+							printf("se envia struct\n");
 						}
 					}
 				}
