@@ -222,7 +222,7 @@ juego:
     alto: 30
     velocidad: 5
     animaciones:
-      movimiento: src/resources/items/Pluma.bmp
+      movimiento: src/resources/items/estrella.bmp
   tuberias:
     tuberiaHongo:
       ancho: 30
@@ -505,6 +505,12 @@ juego:
       musica: src/resources/niveles/trololo.ogg
       piso: 2450
       elementos:
+        - tipo: camaElastica
+          x: 280
+          y: 2020
+        - tipo: camaElastica
+          x: 1950
+          y: 2020
 #        - tipo: princesa
 #          x: 600
 #          y: 150
@@ -545,7 +551,7 @@ juego:
           alto: 50
         - textura: viga
           x: 300
-          y: 1850
+          y: 1750
           ancho: 1600
           alto: 50
         - textura: viga
@@ -555,7 +561,7 @@ juego:
           alto: 50
         - textura: viga
           x: 1800
-          y: 400
+          y: 1000
           ancho: 100
           alto: 50
         - textura: viga
@@ -564,12 +570,18 @@ juego:
           ancho: 200
           alto: 50
       vigas:
-#        - textura: viga
-#          x: 700
-#          y: 330
-#          ancho: 500
-#          alto: 50
-#          inclinacion: 20
+        - textura: viga
+          x: 200
+          y: 1500
+          ancho: 300
+          alto: 50
+          inclinacion: -20
+        - textura: viga
+          x: 1650
+          y: 1420
+          ancho: 300
+          alto: 50
+          inclinacion: 20
       escaleras:
         - textura: esc
           x: 200
@@ -586,4 +598,23 @@ juego:
           y: 2000
           ancho: 50
           alto: 450
-
+        - textura: esc
+          x: 350
+          y: 2000
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 1600
+          y: 2000
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 350
+          y: 1460
+          ancho: 50
+          alto: 290
+        - textura: esc
+          x: 1800
+          y: 1460
+          ancho: 50
+          alto: 290
