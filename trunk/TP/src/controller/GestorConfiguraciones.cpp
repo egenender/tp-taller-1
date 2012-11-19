@@ -23,6 +23,7 @@
 #include "../model/Personajes/Hongo.h"
 #include "../model/Personajes/Tortuga.h"
 #include "../model/Personajes/Caja.h"
+#include "../model/Personajes/Barril.h"
 #include "../model/Personajes/PlataformaMovil.h"
 #include "../model/Personajes/CamaElastica.h"
 #include "../model/Personajes/Tuberia.h"
@@ -1416,6 +1417,8 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 		return new Tortuga("tortuga",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad);
 	if( strcmp ( tipo.c_str() , "mono" ) == 0 )
 		return new Mono("mono",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), new FabricaBarriles(),mapaParam->at(tipo)->velocidad);
+	if( strcmp ( tipo.c_str() , "barril" ) == 0 )
+			return new Barril("barril",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad, 1);
 	if( strcmp ( tipo.c_str() , "camaElastica" ) == 0 )
 		return new CamaElastica("camaElastica",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)));
 	return NULL;
