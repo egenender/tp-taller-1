@@ -777,10 +777,10 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 
 
 	if (esServidor){
-		cuerpo->agregarObservador(contCuerpos);
 		Cuerpo* c = (Cuerpo*) cuerpo;
 		c->setearID(IDACT);
 		IDACT++;
+		cuerpo->agregarObservador(contCuerpos);
 		delete (vista);
 	}else{
 		cuerpo->agregarObservador(vista);
@@ -803,8 +803,11 @@ void GestorConfiguraciones::crearVistaCaja(Cuerpo* cuerpo,string clave){
 	lasCajas->push_back( cuerpo );
 	lasVistaDeCajas->push_back( vista );
 
-	if (esServidor)
+	if (esServidor){
+		cuerpo->setearID(IDACT);
+		IDACT++;
 		cuerpo->agregarObservador(contCuerpos);
+	}
 }
 
 
@@ -1599,6 +1602,7 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 		Posicion* pos = new Posicion(10, Posicion::obtenerPiso()-posiblesTiposProt->at(i)->alto);
 		Area* sup = new Area(posiblesTiposProt->at(i)->ancho, posiblesTiposProt->at(i)->alto, pos);
 		configNivel->manual = new Manual(nombresProt->at(i).c_str(), sup, posiblesTiposProt->at(i)->velocidad, posiblesTiposProt->at(i)->salto);
+		configNivel->manual->setearID(i);
 		configNivel->actualizables.push_back(configNivel->manual);
 
 		if (esServidor)
@@ -2597,8 +2601,8 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	manuales->agregarManual(nuevoManual, id);
 	configNivel->actualizables.push_back(nuevoManual);
 
-	nuevoManual->agregarObservador(contCuerpos);
 	nuevoManual->setearID(id);
+	nuevoManual->agregarObservador(contCuerpos);
 }
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
