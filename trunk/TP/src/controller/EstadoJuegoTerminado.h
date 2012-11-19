@@ -5,16 +5,20 @@
 #include "../view/Superficie.h"
 
 class EstadoJuegoTerminado: public Estado {
+private:
 	Superficie* fondo;
 	Superficie* ganador;
-public:
+	static EstadoJuegoTerminado instancia;
+private:
 	EstadoJuegoTerminado();
+public:
 	virtual ~EstadoJuegoTerminado();
 	void manejarEvento(SDL_Event* evento);
 	void iniciar();
 	void terminar();
 	void actualizar(float delta);
 	void dibujar(SDL_Surface* display);
+	static EstadoJuegoTerminado* obtenerInstancia();
 
 };
 

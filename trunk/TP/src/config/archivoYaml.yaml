@@ -44,6 +44,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
           sonido: 
+      poster: src/resources/cuerpos/Charmander/poster.png
       bolaDeFuego:
         ancho: 25
         alto: 20
@@ -201,6 +202,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Raichu/raichuSalto.bmp
           sonido: 
+      poster: src/resources/cuerpos/Pikachu/poster.png
       bolaDeFuego:
         ancho: 51
         alto: 24
@@ -338,28 +340,31 @@ juego:
     esc: src/resources/items/film.png
   nivel:
     - nivel: MooMooMilk
-      players: 2
+      players: 1
       alto: 600
       ancho: 1600
       piso: 540
       fondo: src/resources/fondoGrande.png
       musica: src/resources/niveles/route1.ogg
       elementos:
-      #  - tipo: mono
-     #     x: 100
-    #      y: 150
+#        - tipo: mono
+#          x: 100
+#          y: 150
         - tipo: princesa
           x: 600
           y: 150
-        - tipo: mono
-          x: 650
-          y: 150
-        - tipo: camaElastica
-          x: 200
-          y: 562
-        - tipo: camaElastica
-          x: 970
-          y: 562
+#        - tipo: hongo
+#          x: 600
+#          y: 150
+#        - tipo: mono
+#          x: 650
+#          y: 150
+#        - tipo: camaElastica
+#          x: 200
+#          y: 562
+#        - tipo: camaElastica
+#          x: 970
+#          y: 562
   #      - tipo: princesa
  #         x: 700
 #          y: 599
@@ -367,9 +372,9 @@ juego:
         - tipo: cajaRandom
           x: 70
           y: 470
-        - tipo: cajaRandom
-          x: 900
-          y: 470
+#        - tipo: cajaRandom
+#          x: 900
+#          y: 470
       tuberias:
 #        - tipo: tuberiaHongo
 #          x: 200
@@ -381,11 +386,11 @@ juego:
 #          y: 550
 #          direccion: arriba
 #          eme: 5
-        - tipo: tuberiaHT
-          x: 500
-          y: 350
-          direccion: arriba
-          eme: 5
+#        - tipo: tuberiaHT
+#          x: 500
+#          y: 350
+#          direccion: arriba
+#          eme: 5
       plataformas:
         - textura: viga
           x: 250

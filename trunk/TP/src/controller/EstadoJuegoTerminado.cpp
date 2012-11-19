@@ -1,5 +1,8 @@
 #include "EstadoJuegoTerminado.h"
 #include "ManejadorEstados.h"
+#include "GestorConfiguraciones.h"
+
+EstadoJuegoTerminado EstadoJuegoTerminado::instancia;
 
 EstadoJuegoTerminado::EstadoJuegoTerminado() {
 	fondo = NULL;
@@ -12,16 +15,16 @@ EstadoJuegoTerminado::~EstadoJuegoTerminado() {
 
 void EstadoJuegoTerminado::manejarEvento(SDL_Event* evento){
 	if ((evento->type == SDL_KEYDOWN)&& (evento->key.keysym.sym == SDLK_ESCAPE)) {
-				//Server::obtenerInstancia(0)->detenerServer();
-				ManejadorEstados::setearEstadoActual(ESTADO_GUI);
-			}
+		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+	}
 }
 
 void EstadoJuegoTerminado::iniciar(){
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
 	fondo->escala(800,600);
 	//tengo que ver como consigo al ganador-> seguro lo obtengo por el nombre ;)
-	ganador = NULL;
+	ganador = new Superficie(GestorConfiguraciones::getInstance()->rutaGanador() );
+	ganador->transparencia(255,0,255);
 }
 
 void EstadoJuegoTerminado::terminar(){
@@ -43,4 +46,8 @@ void EstadoJuegoTerminado::dibujar(SDL_Surface* display){
 	fondo->dibujar(display, 0 ,0);
 	if (ganador)
 		ganador->dibujar(display, 100, 100);
+}
+
+EstadoJuegoTerminado* EstadoJuegoTerminado::obtenerInstancia(){
+	return &instancia;
 }

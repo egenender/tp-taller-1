@@ -37,6 +37,7 @@ public:
 	Animacion* animacionEscalarEvo;
 	Animacion* animacionHeridoEvo;
 	VistaSonora* vistaSonora;
+	std::string rutaGanador;
 
 public:
 	//Manual* CrearManual(const char*,int, int,int);

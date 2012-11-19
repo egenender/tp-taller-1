@@ -103,14 +103,16 @@ void Nivel::iniciar() {
 			prin->agregarObservador(corazones);
 			prin->agregarObservador(musica);
 			controlador = new ControladorSinglePlayer(prin);
-
-			for (unsigned int i = 0; i < gestor->lasCajas->size() ; i++){
-				actualizables->push_back(gestor->lasCajas->at(i));
-				gestor->lasCajas->at(i)->agregarObservador(gestor->lasVistaDeCajas->at(i));
-				vistas->push_back(gestor->lasVistaDeCajas->at(i));
-			}
 		}
 	}
+	if (estado == SINGLE ){
+		for (unsigned int i = 0; i < gestor->lasCajas->size() ; i++){
+			actualizables->push_back(gestor->lasCajas->at(i));
+			gestor->lasCajas->at(i)->agregarObservador(gestor->lasVistaDeCajas->at(i));
+			vistas->push_back(gestor->lasVistaDeCajas->at(i));
+		}
+	}
+
 }
 
 void Nivel::terminar() {
