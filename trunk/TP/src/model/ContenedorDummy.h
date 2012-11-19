@@ -11,7 +11,7 @@ class Manual;
 class Plataforma;
 class Escalera;
 class Barril;
-#define MAX_ACTUALIZACION 5
+#define MAX_ACTUALIZACION 100
 
 class ContenedorDummy : public Actualizable{
 private:
