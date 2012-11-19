@@ -6,7 +6,7 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	nombre = nombrecito;
 	superficieDeColision = NULL;
 	posAnterior = NULL;
-	id = 0;
+	id = 1000;
 	tipo = 0;
 }
 
@@ -70,7 +70,8 @@ void Cuerpo::trasladar(int factorX, int factorY, bool cambio){
 
 
 	delete(posDesplazamiento);
-	huboCambios();
+	if (cambio)
+		huboCambios();
 
 }
 
