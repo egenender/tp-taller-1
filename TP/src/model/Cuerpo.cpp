@@ -6,7 +6,7 @@ Cuerpo::Cuerpo(const char* nombrecito,Area* sup) {
 	nombre = nombrecito;
 	superficieDeColision = NULL;
 	posAnterior = NULL;
-	id = 1000;
+	id = 0;
 	tipo = 0;
 }
 
