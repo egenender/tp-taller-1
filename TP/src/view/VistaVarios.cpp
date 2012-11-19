@@ -26,7 +26,11 @@ void VistaVarios::actualizar(Observable* observable){
 	if (estado != estadoActual) {
 		if (animacionActual)
 			animacionActual->resetear(); // Reseteo la anterior, asi comienza del frame 0.
-		animacionActual = animaciones->at(estado); // Actualizo la nueva animacion
+		try{
+			animacionActual = animaciones->at(estado); // Actualizo la nueva animacion
+		}catch (exception &e) {
+			printf("\n");
+		}
 		estadoActual = estado;
 	}
 
