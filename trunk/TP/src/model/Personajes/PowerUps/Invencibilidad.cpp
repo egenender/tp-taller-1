@@ -1,5 +1,6 @@
 #include "Invencibilidad.h"
 #include "../Manual.h"
+#include "../../Tipos.h"
 
 Invencibilidad::Invencibilidad(const char* nom, Area* sup, int vel):PowerUp(nom, sup, vel) {
 	timer = new Timer();
@@ -46,4 +47,8 @@ void Invencibilidad::validarPiso(){
 		saltar();
 		huboCambios();
 	}
+}
+
+unsigned int Invencibilidad::obtenerTipo(){
+	return TIPO_PU_INVENCIBILIDAD;
 }

@@ -15,6 +15,10 @@ std::string decodificarTipo(unsigned int tipo){
 	case TIPO_CAJA: aux = "cajaRandom"; break;
 	case TIPO_MONO: aux = "mono"; break;
 	case TIPO_PRINCESA: aux = "princesa"; break;
+	case TIPO_PU_INVENCIBILIDAD: aux = "invencibilidad"; break;
+	case TIPO_PU_PIEDRA: aux = "piedraEvolucion"; break;
+	case TIPO_PU_VIDA: aux = "vidaExtra"; break;
+	case TIPO_PU_BOLA: aux = "activaEspecial"; break;
 	}
 
 	return aux;

@@ -12,6 +12,7 @@ public:
 	Invencibilidad(const char*, Area*, int);
 	virtual ~Invencibilidad();
 	void chocarConManual(Manual*);
+	unsigned int obtenerTipo();
 protected:
 	void actualizarMovimiento();
 	void saltar();
