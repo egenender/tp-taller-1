@@ -693,7 +693,9 @@ void* _escribir(void* parametros){
 					if (i!=sock){
 						if(sockets->at(i)){
 							escribir_a_cliente(i,cambio,tamanio);
-							printf("se envia struct\n");
+							structServidor_t* lala = (structServidor_t*)cambio;
+							printf("ID: %d\n", structServidor_obtener_id(lala) );
+							printf("estado: %d\n", structServidor_obtener_estado(lala) );
 						}
 					}
 				}
