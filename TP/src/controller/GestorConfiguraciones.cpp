@@ -636,6 +636,30 @@ parametrosCaja* GestorConfiguraciones::crearParametrosCaja(const YAML::Node& nod
 
 	mapaCajas->insert(pair<string,parametrosCaja*>(nombre,param));
 
+
+	parametrosPersonaje* paramPer = (parametrosPersonaje*)malloc(sizeof(parametrosPersonaje));
+	paramPer->animaciones= new std::vector<Animacion*>();
+	paramPer->matrizEstados= new std::vector<std::vector<int>*>();
+
+	nodo["alto"]>>paramPer->alto;
+	nodo["ancho"]>>paramPer->ancho;
+
+	nodo["animaciones"]["laCajaLaCaja"] >> ruta;
+	Animacion* animacionQ= new Animacion(new HojaSprites(ruta,paramPer->ancho,paramPer->alto));
+	paramPer->animaciones->push_back(animacionQ);
+	std::vector<int>* aux= new std::vector<int>();
+	aux->push_back(QUIETO);
+	paramPer->matrizEstados->push_back(aux);
+
+	nodo["animaciones"]["destruida"] >> ruta;
+	Animacion* animacionL= new Animacion(new HojaSprites(ruta,paramPer->ancho,paramPer->alto));
+	paramPer->animaciones->push_back(animacionL);
+	aux= new std::vector<int>();
+	aux->push_back(LANZANDO);
+	paramPer->matrizEstados->push_back(aux);
+
+	mapaParam->insert(pair<string,parametrosPersonaje*>(nombre,paramPer));
+
 	return param;
 }
 
@@ -919,7 +943,7 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 		posiblesTiposProt->push_back(tipoper);
 		nombresProt->push_back(nombre);
 	}
-	IDACT = posiblesTiposProt->size();
+	IDACT = posiblesTiposProt->size() + 1;
 }
 
 
@@ -1912,6 +1936,18 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 	parametrosPersonaje *param = (parametrosPersonaje*)malloc (sizeof(parametrosPersonaje));
 
+	try{
+		nodo["poster"] >> tipoper->rutaGanador;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo poster dentro del personaje, se carga por defecto");
+		tipoper->rutaGanador = RUTA_ACTIVA;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El poster no toma valor valido, se carga por defecto");
+		tipoper->rutaGanador = RUTA_ACTIVA;
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo poster, se carga por defecto");
+		tipoper->rutaGanador = RUTA_ACTIVA;
+	}
 
 	try{
 		nodo["ancho"] >> tipoper->ancho;
@@ -2591,7 +2627,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	}
 	TipoProtagonista* tipo = posiblesTiposProt->at(id);
 
-	int x = id * 80 + tipo->ancho;
+	int x = id * 100 + tipo->ancho;
 
 	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
 
@@ -2603,6 +2639,15 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 
 	nuevoManual->setearID(id);
 	nuevoManual->agregarObservador(contCuerpos);
+
+	if ( manuales->obtenerCantidad() == configNivel->players ){
+		for (unsigned int i = 0; i < lasCajas->size() ; i++){
+			configNivel->actualizables.push_back(lasCajas->at(i));
+			lasCajas->at(i)->agregarObservador(lasVistaDeCajas->at(i));
+			configNivel->vistas.push_back(lasVistaDeCajas->at(i));
+		}
+	}
+
 }
 
 ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
@@ -2611,4 +2656,11 @@ ContenedorManuales* GestorConfiguraciones::obtenerContenedorManuales(){
 
 ContenedorCuerpos* GestorConfiguraciones::obtenerContenedorCuerpos(){
 	return contCuerpos;
+}
+
+std::string GestorConfiguraciones::rutaGanador(){
+	if (quienGano != ObtenerPosiblesTiposProtagonistas()->size() )
+		return ObtenerPosiblesTiposProtagonistas()->at(quienGano)->rutaGanador;
+	else
+		return "src/resources/cuerpos/GokuMono/poster.jpg";
 }

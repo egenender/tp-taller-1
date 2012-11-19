@@ -1,8 +1,8 @@
 #include "ContenedorManuales.h"
 #include "../controller/Server.h"
 #include "structures/structCliente.h"
-
-
+#include "../controller/ManejadorEstados.h"
+#include "../controller/GestorConfiguraciones.h"
 #include "Posicion.h"
 
 ContenedorManuales::ContenedorManuales() {
@@ -18,6 +18,11 @@ ContenedorManuales::~ContenedorManuales() {
 	delete(estados);
 	delete (IDs);
 }
+
+unsigned int ContenedorManuales::obtenerCantidad(){
+	return IDs->size();
+}
+
 
 void ContenedorManuales::agregarManual(Manual* principal, unsigned int id){
 	huboCambios->erase(id);
@@ -39,10 +44,38 @@ void ContenedorManuales::actualizar(float delta){
 		structCliente_destruir(cambio);
 	}
 
+	bool muertos = true;
+	bool ganado = false;
+	unsigned int ganador;
+
 	for (unsigned int i = 0; i < IDs->size(); i++){
 		unsigned int idActual = IDs->at(i);
 		actualizarManual(manuales->at(idActual), estados->at(idActual), idActual);
+		muertos &= manuales->at(idActual)->estaMuerto();
+		if (manuales->at(idActual)->esGanador()){
+			ganado = true;
+			ganador = idActual;
+		}
 	}
+
+	if (muertos){
+		structServidor_t* estructura;
+		int tipo = GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size();
+		estructura = structServidor_crear(tipo, 0, 0, 0,tipo);
+		Server::obtenerInstancia(0)->encolar_cambio(estructura);
+		//ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+		return;
+	}
+
+	if (ganado){
+		structServidor_t* estructura;
+		int tipo = GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size();
+		estructura = structServidor_crear(tipo, 0, 0, 0,ganador);
+		Server::obtenerInstancia(0)->encolar_cambio(estructura);
+		//ManejadorEstados::setearEstadoActual(ESTADO_GUI);
+		return;
+	}
+
 
 }
 void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned int indice){

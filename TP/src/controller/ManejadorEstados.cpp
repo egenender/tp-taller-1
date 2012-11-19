@@ -5,6 +5,7 @@
 #include "EstadoGUI.h"
 #include "EstadoMenuPrincipal.h"
 #include "EstadoSinglePlayer.h"
+#include "EstadoJuegoTerminado.h"
 
 Estado* ManejadorEstados::estadoActivo = 0;
 int ManejadorEstados::siguienteEstado;
@@ -62,6 +63,9 @@ void ManejadorEstados::cambiarEstado(){
 		break;
 	case ESTADO_SINGLE:
 		estadoActivo = EstadoSinglePlayer::obtenerInstancia();
+		break;
+	case ESTADO_TERMINADO:
+		estadoActivo = EstadoJuegoTerminado::obtenerInstancia();
 		break;
 	}
 

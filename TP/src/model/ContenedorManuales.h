@@ -27,6 +27,8 @@ public:
 	void encolarTodos();
 	Area* obtenerArea();
 
+	unsigned int obtenerCantidad();
+
 	void chocarCon(Actualizable*);
 
 private:

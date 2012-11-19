@@ -3,6 +3,7 @@
 #include "../gui/view/VistaBarraEstado.h"
 #include "../controller/GestorConfiguraciones.h"
 #include "../controller/ManejadorEstados.h"
+#include "../controller/ManejadorCliente.h"
 #include "Tipos.h"
 #include <string>
 
@@ -60,6 +61,8 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	Dummy* tonto = buscarID(id);
 	if (!tonto) {
 		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod));
+		if (!tonto)
+			return;
 	}
 	int x, y;
 	structServidor_obtener_posicion(mod, &x,&y);
@@ -143,6 +146,17 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 
 Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+
+	if (idNuevo == gestor->ObtenerPosiblesTiposProtagonistas()->size()){
+		gestor->quienGano = tipo;
+		ManejadorCliente::obtenerInstancia(NULL)->detener();
+		Cliente::obtenerInstancia("",0)->detener_escuchar();
+		Cliente::obtenerInstancia("",0)->detener_escribir();
+		Cliente::obtenerInstancia("",0)->detener();
+		GestorConfiguraciones::getInstance()->acabarGestor();
+		ManejadorEstados::setearEstadoActual(ESTADO_TERMINADO);
+		return NULL;
+	}
 
 	std::string nombre = "";
 	if (tipo == TIPO_BOLA_FUEGO)

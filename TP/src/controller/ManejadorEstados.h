@@ -11,6 +11,7 @@
 #define	ESTADO_GUI 3
 #define	ESTADO_SINGLE 4
 #define	ESTADO_JUEGO 5
+#define	ESTADO_TERMINADO 6
 
 class ManejadorEstados {
 	private:

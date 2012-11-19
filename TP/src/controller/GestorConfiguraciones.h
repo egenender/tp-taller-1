@@ -108,6 +108,10 @@ class GestorConfiguraciones{
 
 		bool destruir;
 	public:
+		unsigned int quienGano;
+
+		std::string rutaGanador();
+
 		std::vector<Cuerpo*>* lasCajas;
 		std::vector<VistaVarios*>* lasVistaDeCajas;
 

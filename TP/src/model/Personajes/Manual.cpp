@@ -11,6 +11,7 @@ Manual::~Manual() {
 }
 
 void Manual::saltar(bool autogenerado){
+	if (estaMuerto()) return;
 	if (estado == QUIETODER || estado == CAMINANDODER){
 		estado = SALTANDODER;
 		velocidadY = velocidadSaltoBase;
@@ -32,6 +33,7 @@ void Manual::saltar(bool autogenerado){
 void Manual::atacar(){} //idem
 
 void Manual::especial(){
+	if (estaMuerto()) return;
 	if (!especialHabilitado) return;
 
 	int direccion = 0;
@@ -134,6 +136,7 @@ void Manual::moverALaIzquierda(){
 }
 
 void Manual::movimiento(int saltando, int caminando, int direccion){
+	if (estaMuerto()) return;
 	if (estoySaltando())
 		estado = saltando;
 	else
@@ -143,6 +146,7 @@ void Manual::movimiento(int saltando, int caminando, int direccion){
 
 
 void Manual::actualizar(float delta){
+	if (estaMuerto()) return;
 	this->delta = delta;
 	actualizarTimeOut();
 	actualizarEvolucion();
@@ -162,6 +166,7 @@ bool Manual::estoySaltando(){
 
 // Viejo:
 void Manual::detener(){
+	if (estaMuerto()) return;
 	if (estoySaltando()) return;
 	if (estado == QUIETO || estado == QUIETODER || estado == QUIETOIZQ) return;
 
@@ -226,6 +231,7 @@ void Manual::validarPiso(){
 }
 
 void Manual::subir(){
+	if (estaMuerto()) return;
 	if (!puedoSubir) return;
 	puedoSubir = false;
 	//por ahora digo que la velocidad a la que sube, es la misma a la que se mueve
@@ -234,6 +240,7 @@ void Manual::subir(){
 }
 
 void Manual::bajar(){
+	if (estaMuerto()) return;
 	if (!puedoSubir) return;
 	if (obtenerArea()->estaSobreElPiso()) return;
 	int posBaja = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
@@ -249,6 +256,7 @@ void Manual::bajar(){
 
 
 void Manual::chocarCon(Actualizable* ac){
+	if (estaMuerto()) return;
 	ac->chocarConManual(this);
 }
 void Manual::chocarConManual(Manual* manual){
