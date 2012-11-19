@@ -9,6 +9,7 @@ public:
 	virtual ~VidaExtra();
 
 	void chocarConManual(Manual*);
+	unsigned int obtenerTipo();
 };
 
 #endif /* VIDAEXTRA_H_ */

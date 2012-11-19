@@ -1,5 +1,6 @@
 #include "Stone.h"
 #include "../Manual.h"
+#include "../../Tipos.h"
 
 Stone::Stone(const char* nom, Area* sup, int vel): PowerUp(nom, sup, vel) {
 
@@ -16,4 +17,8 @@ void Stone::chocarConManual(Manual* prin){
 	estado = MUERTO;
 	huboCambios();
 	notificarObservadores();
+}
+
+unsigned int Stone::obtenerTipo(){
+	return TIPO_PU_PIEDRA;
 }

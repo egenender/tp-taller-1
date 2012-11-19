@@ -13,6 +13,10 @@
 #define TIPO_CAJA 7
 #define TIPO_MONO 8
 #define TIPO_PRINCESA 9
+#define TIPO_PU_INVENCIBILIDAD 10
+#define TIPO_PU_PIEDRA 11
+#define TIPO_PU_VIDA 12
+#define TIPO_PU_BOLA 13
 
 
 std::string decodificarTipo(unsigned int);

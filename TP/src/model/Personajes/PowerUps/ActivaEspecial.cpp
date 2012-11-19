@@ -1,6 +1,6 @@
 #include "ActivaEspecial.h"
 #include "../Manual.h"
-
+#include "../../Tipos.h"
 ActivaEspecial::ActivaEspecial(const char* nom, Area* sup, int vel): PowerUp(nom, sup, vel) {
 	timer = new Timer();
 	timer->comenzar();
@@ -28,4 +28,8 @@ void ActivaEspecial::actualizarMovimiento(){
 		timer->detener();
 	}
 
+}
+
+unsigned int ActivaEspecial::obtenerTipo(){
+	return TIPO_PU_BOLA;
 }

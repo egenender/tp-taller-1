@@ -12,7 +12,7 @@ public:
 	ActivaEspecial(const char*, Area*, int);
 	virtual ~ActivaEspecial();
 	void chocarConManual(Manual*);
-
+	unsigned int obtenerTipo();
 protected:
 	void actualizarMovimiento();
 };

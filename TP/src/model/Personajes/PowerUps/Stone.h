@@ -7,6 +7,7 @@ public:
 	Stone(const char*, Area*, int);
 	virtual ~Stone();
 	void chocarConManual(Manual*);
+	unsigned int obtenerTipo();
 };
 
 #endif /* STONE_H_ */
