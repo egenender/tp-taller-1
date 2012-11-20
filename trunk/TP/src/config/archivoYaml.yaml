@@ -267,6 +267,20 @@ juego:
     animaciones:
       caminando: src/resources/items/shroomishMovimiento.bmp
       cayendo: src/resources/items/shroomishCaida.bmp
+  plataformaMovil:
+    ancho: 350
+    alto: 50
+    velocidad: 10
+    distancia: 400
+    animaciones:
+      plataforma: src/resources/items/viga2.jpg
+  elevador:
+    ancho: 50
+    alto: 50
+    velocidad: 20
+    distancia: 100
+    animaciones:
+      elevador: src/resources/items/viga2.jpg
   vidaExtra:
     ancho: 50
     alto: 49
@@ -292,37 +306,26 @@ juego:
     animaciones:
       movimiento: src/resources/items/estrella.bmp
   tuberias:
-    tuberiaHongo:
-      ancho: 30
-      alto: 30
-      probabilidades:
-        hongo: 100
-      animaciones:
-        abajo: src/resources/items/tuberia3.bmp
-        arriba: src/resources/items/tuberia.bmp
-        derecha: src/resources/items/tuberia2.bmp
-        izquierda: src/resources/items/tuberia4.bmp
-    tuberiaTortuga:
-      ancho: 30
-      alto: 30
-      probabilidades:
-        tortuga: 100
-      animaciones:
-        abajo: src/resources/items/tuberia3.bmp
-        arriba: src/resources/items/tuberia.bmp
-        derecha: src/resources/items/tuberia2.bmp
-        izquierda: src/resources/items/tuberia4.bmp
-    tuberiaHT:
+    tuberiaHTarriba:
       ancho: 60
       alto: 60
-      probabilidades:
-        hongo: 100
-        tortuga: 100
       animaciones:
-        abajo: src/resources/items/tuberia3.bmp
-        arriba: src/resources/items/tuberia.bmp
-        derecha: src/resources/items/tuberia2.bmp
-        izquierda: src/resources/items/tuberia4.bmp
+        tuberia: src/resources/items/tuberia.bmp
+    tuberiaHTabajo:
+      ancho: 60
+      alto: 60
+      animaciones:
+        tuberia: src/resources/items/tuberia3.bmp
+    tuberiaHTderecha:
+      ancho: 60
+      alto: 60
+      animaciones:
+        tuberia: src/resources/items/tuberia2.bmp
+    tuberiaHTizquierda:
+      ancho: 60
+      alto: 60
+      animaciones:
+        tuberia: src/resources/items/tuberia4.bmp
   cajas:
     cajaRandom:
       ancho: 50
@@ -359,15 +362,21 @@ juego:
 #        - tipo: mono
 #          x: 650
 #          y: 150
-#        - tipo: camaElastica
-#          x: 200
-#          y: 562
+        - tipo: camaElastica
+          x: 200
+          y: 562
 #        - tipo: camaElastica
 #          x: 970
 #          y: 562
   #      - tipo: princesa
  #         x: 700
 #          y: 599
+        - tipo: plataformaMovil
+          x: 950
+          y: 150
+#        - tipo: elevador
+#          x: 800
+#          y: 350
       cajas:
         - tipo: cajaRandom
           x: 70
@@ -376,21 +385,22 @@ juego:
 #          x: 900
 #          y: 470
       tuberias:
-#        - tipo: tuberiaHongo
-#          x: 200
-#          y: 400
-#          direccion: abajo
-#          eme: 5
-#        - tipo: tuberiaTortuga
+        - tipo: tuberiaHTarriba
+          x: 100
+          y: 350
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 200
+          y: 350
+          eme: 5
+#        - tipo: tuberiaHTderecha
 #          x: 500
-#          y: 550
-#          direccion: arriba
+#          y: 250
 #          eme: 5
-#        - tipo: tuberiaHT
-#          x: 500
-#          y: 350
-#          direccion: arriba
-#          eme: 5
+        - tipo: tuberiaHTizquierda
+          x: 500
+          y: 350
+          eme: 5
       plataformas:
         - textura: viga
           x: 250
