@@ -136,6 +136,7 @@ void GestorConfiguraciones::AgregarAVector(string ruta){
 }
 
 GestorConfiguraciones::GestorConfiguraciones (){
+	quienGano = 0;
 	margen_scroll=0;
 	configPantalla=0;
 	nivelElegido = 0;
@@ -1051,7 +1052,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		nodo[nivelElegido]["vigas"][i]["y"]>> y;
 
 
-		VigaInclinada* viga= new VigaInclinada("nombre",new Area(ancho,alto,new Posicion(x,y)),inclinacion);
+		VigaInclinada* viga= new VigaInclinada("viga",new Area(ancho,alto,new Posicion(x,y)),inclinacion);
 
 		viga->guardarSubPlataformas(&configNivel->actualizables);
 
@@ -1305,9 +1306,9 @@ void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool es
 			nombreTex = TIPO_DEFECTO;
 		}
 		if (tipo == ESCALERA)
-			estatico = new Escalera(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
+			estatico = new Escalera("escalera", new Area(ancho,alto,new Posicion(posX,posY) ) );
 		else
-			estatico = new Plataforma(nombreTex.c_str(), new Area(ancho,alto,new Posicion(posX,posY) ) );
+			estatico = new Plataforma("plat", new Area(ancho,alto,new Posicion(posX,posY) ) );
 		configNivel->actualizables.push_back(estatico);
 
 		std::string rutaImagen;
