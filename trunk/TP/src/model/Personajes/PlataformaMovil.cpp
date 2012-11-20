@@ -15,6 +15,7 @@ PlataformaMovil::PlataformaMovil(const char* nom, Area* sup, int vel, int dist):
 		desplazamiento = DIST_PLTMOVIL_STD;
 
 	actual = 0;
+	esElevador = false;
 }
 
 PlataformaMovil::~PlataformaMovil() {
@@ -31,10 +32,16 @@ void PlataformaMovil::chocarConHongo(Hongo* h){
 	cuerposContacto->push_back(h);
 }
 void PlataformaMovil::actualizar(float){
-	trasladar(velocidad, 0, true);
+	if (!esElevador)
+		trasladar(velocidad, 0, true);
+	else
+		trasladar(0,velocidad, true);
 
 	for (unsigned int i = 0; i < cuerposContacto->size(); i++){
-		cuerposContacto->at(i)->trasladar(velocidad,0,true);
+		if (!esElevador)
+			cuerposContacto->at(i)->trasladar(velocidad,0,true);
+		else
+			cuerposContacto->at(i)->trasladar(0,velocidad,true);
 	}
 
 
@@ -79,4 +86,8 @@ void PlataformaMovil::chocarConPlataforma(Plataforma* p){
 
 unsigned int PlataformaMovil::obtenerTipo(){
 	return TIPO_PLATAFORMA_MOVIL;
+}
+
+void PlataformaMovil::setearElevador(){
+	esElevador = true;
 }

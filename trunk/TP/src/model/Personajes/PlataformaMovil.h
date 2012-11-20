@@ -12,17 +12,20 @@ class PlataformaMovil: public Plataforma {
 private:
 	std::vector<Cuerpo*>* cuerposContacto;
 	int velocidad, desplazamiento, actual;
+	bool esElevador;
 public:
 	PlataformaMovil(const char*, Area*, int, int D = 0);
 	virtual ~PlataformaMovil();
 	void actualizar(float);
 	unsigned int obtenerTipo();
+	void setearElevador();
 
 	void chocarConManual(Manual*);
 	void chocarConBarril(Barril*);
 	void chocarConHongo(Hongo*);
 	void chocarConPlataforma(Plataforma*);
 	//virtual void chocarConPrincesa(Princesa*); Por ahora este no lo pongo...
+
 };
 
 #endif /* PLATAFORMAMOVIL_H_ */
