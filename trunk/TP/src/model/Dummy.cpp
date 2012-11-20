@@ -86,3 +86,7 @@ int Dummy::obtenerAlto(){
 bool Dummy::puedeMover(){
 	return !(estado == HERIDO);
 }
+
+bool Dummy::estaMuerto(){
+	return estado == MUERTO;
+}
