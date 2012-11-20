@@ -44,7 +44,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
           sonido: 
-      poster: src/resources/cuerpos/Charmander/poster.png
+      poster: src/resources/cuerpos/Charmander/poster.bmp
       bolaDeFuego:
         ancho: 25
         alto: 20
@@ -134,7 +134,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Croconaw/croconawMovimiento.bmp
           sonido: 
-      poster: src/resources/cuerpos/Totodile/poster.png
+      poster: src/resources/cuerpos/Totodile/poster.bmp
       bolaDeFuego:
         ancho: 22
         alto: 22
@@ -180,7 +180,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
           sonido: 
-      poster: src/resources/cuerpos/Gastly/poster.png
+      poster: src/resources/cuerpos/Gastly/poster.bmp
       bolaDeFuego:
         ancho: 40
         alto: 25
@@ -226,7 +226,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Raichu/raichuSalto.bmp
           sonido: 
-      poster: src/resources/cuerpos/Pikachu/poster.png
+      poster: src/resources/cuerpos/Pikachu/poster.bmp
       bolaDeFuego:
         ancho: 51
         alto: 24
