@@ -269,8 +269,8 @@ juego:
       rodando: src/resources/items/barril-rodando.bmp
       bajando: src/resources/items/barril-falling.bmp
   camaElastica:
-    ancho: 56
-    alto: 63
+    ancho: 23
+    alto: 43
     velocidad: 0
     animaciones:
       quieto: src/resources/items/camaElastica.bmp
