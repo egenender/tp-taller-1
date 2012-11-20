@@ -82,13 +82,13 @@ juego:
           sonido: src/resources/cuerpos/footstep.ogg
         evosaltar:
           sprites: src/resources/cuerpos/SuperYoshi/SuperYoshi-Jump.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-3.ogg
         evoescalera:
           sprites: src/resources/cuerpos/SuperYoshi/SuperYoshi-Climb.bmp
           sonido: 
         evoescalar:
           sprites: src/resources/cuerpos/SuperYoshi/SuperYoshi-Climbing.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Yoshi/Yoshi-jump-2.ogg
       poster: src/resources/cuerpos/Yoshi/poster.bmp
       bolaDeFuego:
         ancho: 25
