@@ -212,6 +212,7 @@ bool Manual::chocaConPiso(){
 void Manual::morir(){
 	estado = MUERTO;
 	huboCambios();
+	notificarObservadores();
 }
 bool Manual::estaMuerto(){
 	return (estado == MUERTO);
@@ -263,6 +264,7 @@ void Manual::chocarCon(Actualizable* ac){
 	ac->chocarConManual(this);
 }
 void Manual::chocarConManual(Manual* manual){
+	return;
 	if (cooperativo) return;
 	if (estaMuerto()) return;
 	if (manual->mataAlContacto() && !this->estaInvencible()){
