@@ -33,14 +33,18 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 
 	//Lo dejo por separado, por si hay que cambiarle algo :P
 	if(principal->estaMuerto()){
-		GestorConfiguraciones::getInstance()->acabarGestor();
-		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
+		//GestorConfiguraciones::getInstance()->acabarGestor();
+		GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+		gestor->quienGano = gestor->ObtenerPosiblesTiposProtagonistas()->size();
+		ManejadorEstados::setearEstadoActual(ESTADO_TERMINADO);
 		return;
 	}
 
 	if (principal->esGanador()){
-		GestorConfiguraciones::getInstance()->acabarGestor();
-		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
+		//GestorConfiguraciones::getInstance()->acabarGestor();
+		GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
+		gestor->quienGano = principal->obtenerID();
+		ManejadorEstados::setearEstadoActual(ESTADO_TERMINADO);
 		return;
 	}
 
