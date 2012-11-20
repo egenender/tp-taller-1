@@ -486,7 +486,7 @@ juego:
           ancho: 50
           alto: 200
     - nivel: Scalar
-      players: 1
+      players: 2
       alto: 2560
       ancho: 1600
       fondo: src/resources/ph-101661.jpg
