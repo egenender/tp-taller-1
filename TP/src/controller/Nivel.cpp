@@ -203,8 +203,8 @@ void Nivel::actualizar(float delta) {
 
 	// Verificar aca colisiones:
 	if (estado == SERVIDOR || estado == SINGLE){
-		generarColisiones(actualizables);
 		quitarMuertos();
+		generarColisiones(actualizables);
 	}
 	// Aca vemos si tenemos que eliminar algun cuerpo:
 

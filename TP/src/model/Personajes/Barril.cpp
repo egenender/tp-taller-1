@@ -50,10 +50,12 @@ int Barril::obtenerEstado(){
 
 
 void Barril::chocarCon(Actualizable* ac){
+	if (estaMuerto()) return;
 	ac->chocarConBarril(this);
 }
 
 void Barril::chocarConEscalera(Escalera* e){
+	if (estaMuerto()) return;
 	puedoBajar = true;
 	tengoPiso = true;
 	atraviesaBloques = true;
@@ -68,10 +70,12 @@ void Barril::chocarConEscalera(Escalera* e){
 }
 
 void Barril::chocarConManual(Manual*){
+	if (estaMuerto()) return;
 	destruir();
 }
 
 void Barril::actualizar(float){
+	if (estaMuerto()) return;
 	validarPiso();
 	actualizarSalto();
 	actualizarMovimiento();
@@ -182,6 +186,7 @@ void Barril::bajar(){
 }
 
 void Barril::chocarConPlataforma(Plataforma* p){
+	if (estaMuerto()) return;
 	if (plt == NULL) plt = p;
 
 	if(atraviesaBloques && plt == p){
@@ -277,6 +282,7 @@ void Barril::chocarConPlataforma(Plataforma* p){
 }
 
 void Barril::chocarConBarril(Barril*){
+	if (estaMuerto()) return;
 	//No se muy bien que deberia hacerse.. supongo que morir
 	destruir();
 }
@@ -286,10 +292,12 @@ bool Barril::estaMuerto(){
 }
 
 void Barril::chocarConBolaDeFuego(BolaDeFuego*){
+	if (estaMuerto()) return;
 	destruir();
 }
 
 void Barril::chocarConHongo(Hongo* h){
+	if (estaMuerto()) return;
 	if (h->obtenerEstado() == MOVILDERECHA || h->obtenerEstado() == MOVILIZQUIERDA)
 		destruir();
 }
