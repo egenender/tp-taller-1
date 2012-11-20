@@ -29,29 +29,29 @@ void VigaInclinada::crearPlataformas(){
 		unica->setearDireccion(NINGUNO); //ya se hace por default, pero por si acaso :P
 		return;
 	}
-	float PI = 3.14159;
+	float PI = 3.14159265358979;
 	float angulito = (angulo * PI)/180;
 
-	int altoP = superficieOcupada->obtenerAlto();
-	int cant = CANT_PLATAFORMAS;
-	int anchoP;
+	float altoP = superficieOcupada->obtenerAlto();
+	float cant = CANT_PLATAFORMAS;
+	float anchoP;
 
-	int anchoEst = superficieOcupada->obtenerAncho() * cos(angulito);
+	float anchoEst = superficieOcupada->obtenerAncho() * cos(angulito);
 	if (cant > anchoEst)
 		cant = anchoEst;
 	cant+=2;
-	int separacionX = 0;
+	float separacionX = 0;
 
 	anchoP = superficieOcupada->obtenerAncho() * cos(angulito) / cant;
 	if ((anchoP*cant) < (superficieOcupada->obtenerAncho() * cos(angulito)/2))
 		separacionX = 1;
 
 
-	int difAltura = superficieOcupada->obtenerAncho() * sin(angulito) / cant;
+	float difAltura = superficieOcupada->obtenerAncho() * sin(angulito) / cant;
 
-	int separacionY = 0;
+	float separacionY = 0;
 	if ((difAltura*cant) < (superficieOcupada->obtenerAncho() * sin(angulito)/2))
-		separacionY = 0;
+		separacionY = 1;
 
 	Posicion* pos;
 	Area* sup;
@@ -90,7 +90,6 @@ void VigaInclinada::crearPlataformas(){
 //		free(plataformas);
 //		plataformas = aux;
 //	}
-
 }
 
 void VigaInclinada::guardarSubPlataformas(vector<Actualizable*>* vector){
