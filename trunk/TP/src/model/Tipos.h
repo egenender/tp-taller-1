@@ -23,7 +23,7 @@
 #define TIPO_TUB_IZQUIERDA 17
 #define INVENCIBLE 18
 #define MATADOR 19
-#define ELEVADOR 20
+#define TIPO_ELEVADOR 20
 #define SALTOALTO 21
 
 
