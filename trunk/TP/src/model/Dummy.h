@@ -12,12 +12,15 @@ private:
 	unsigned int ID;
 	Posicion* pos;
 	int ancho, alto;
+	bool invencible;
+	bool matador;
+
 public:
 	Dummy(unsigned int,Posicion*, int ancho, int alto);
 
 	virtual ~Dummy();
 	void setXY(int,int);
-	void setEstado(int);
+	void setEstado(int, int);
 	int obtenerEstado();
 	Posicion* obtenerPosicion();
 	bool esMio(unsigned int);
@@ -25,6 +28,9 @@ public:
 	unsigned int obtenerID();
 	int obtenerAncho();
 	int obtenerAlto();
+
+	bool estaInvencible();
+	bool mataAlContacto();
 };
 
 #endif /* DUMMY_H_ */

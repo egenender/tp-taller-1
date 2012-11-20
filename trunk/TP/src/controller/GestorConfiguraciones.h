@@ -44,9 +44,7 @@ typedef struct _parametrosTuberia{
 
 	int ancho;
 	int alto;
-	std::vector<int>* probabilidades;
-	std::map<int, Superficie*>* superficies;
-	std::vector<std::vector<int>* >* matrizEstados;
+	Superficie* superficie;
 
 }parametrosTuberia;
 
@@ -65,6 +63,7 @@ typedef struct _parametrosPersonaje{
 	int ancho;
 	int alto;
 	int velocidad;
+	int algo;
 	std::vector<Animacion*>* animaciones;
 	std::vector<std::vector<int>* >* matrizEstados;
 
@@ -115,6 +114,12 @@ class GestorConfiguraciones{
 		std::vector<Cuerpo*>* lasCajas;
 		std::vector<VistaVarios*>* lasVistaDeCajas;
 
+		std::vector<Cuerpo*>* camasElasticas;
+		std::vector<VistaVarios*>* vistasCamasElasticas;
+
+		std::vector<Cuerpo*>* tuberias;
+		std::vector<VistaVarios*>* vistasTuberias;
+
 		static GestorConfiguraciones* getInstance();
 		void acabarGestor();
 		void destruirGestor();
@@ -143,6 +148,9 @@ class GestorConfiguraciones{
 		void CargarElementosNivel(const YAML::Node& , int);
 		void CargarTuberiasNivel(const YAML::Node& );
 		void CargarCajasNivel(const YAML::Node& );
+
+		void CargarVistasTuberias(const YAML::Node& );
+
 
 		Automatico* CrearAutomaticoDefecto(const char* ,int, int);
 		VistaAutomatico* CrearVistaAutomaticaDefecto(Automatico*);

@@ -50,6 +50,9 @@ void PlataformaMovil::actualizar(float){
 		velocidad *= (-1);
 	}
 	cuerposContacto->clear();
+
+	huboCambios();
+	notificarObservadores();
 }
 
 void PlataformaMovil::chocarConPlataforma(Plataforma* p){

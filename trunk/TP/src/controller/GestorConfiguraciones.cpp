@@ -157,8 +157,13 @@ GestorConfiguraciones::GestorConfiguraciones (){
 	mapaParam = new mapa_parametrosPersonaje();
 	mapaTub = new mapa_parametrosTuberia();
 	mapaCajas = new mapa_parametrosCaja();
+
 	lasCajas = new std::vector<Cuerpo*>();
 	lasVistaDeCajas = new std::vector<VistaVarios*>();
+	camasElasticas = new std::vector<Cuerpo*>();
+	vistasCamasElasticas = new std::vector<VistaVarios*>();
+	tuberias = new std::vector<Cuerpo*>();
+	vistasTuberias = new std::vector<VistaVarios*>();
 
 	destruir = false;
 	contCuerpos = new ContenedorCuerpos();
@@ -312,25 +317,14 @@ void GestorConfiguraciones::CargarCajas(const YAML::Node& nodoRaiz){
 
 
 void GestorConfiguraciones::CargarTuberias(const YAML::Node& nodoRaiz){
-	int prob;
-
-	//tuberia Hongo
-	parametrosTuberia* paramHongo= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHongo"],"tuberiaHongo");
-	nodoRaiz["tuberias"]["tuberiaHongo"]["probabilidades"]["hongo"] >> prob;
-	paramHongo->probabilidades->push_back( prob );
-
-	//tuberia Tortuga
-	parametrosTuberia* paramTortuga= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHongo"],"tuberiaTortuga");
-	nodoRaiz["tuberias"]["tuberiaTortuga"]["probabilidades"]["tortuga"] >> prob;
-	paramTortuga->probabilidades->push_back( prob );
-
-	//tuberia Hongo-Tortuga
-	parametrosTuberia* paramHT= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHT"],"tuberiaHT");
-	nodoRaiz["tuberias"]["tuberiaHT"]["probabilidades"]["hongo"] >> prob;
-	paramHT->probabilidades->push_back( prob );
-	nodoRaiz["tuberias"]["tuberiaHT"]["probabilidades"]["tortuga"] >> prob;
-	paramHT->probabilidades->push_back( prob );
-
+	//tuberia Hongo-Tortuga arriba
+	parametrosTuberia* paramHT= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHTarriba"],"tuberiaHTarriba");
+	//tuberia Hongo-Tortuga  abajo
+	paramHT= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHTabajo"],"tuberiaHTabajo");
+	//tuberia Hongo-Tortuga derecha
+	paramHT= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHTderecha"],"tuberiaHTderecha");
+	//tuberia Hongo-Tortuga izquierda
+	paramHT= crearParametrosTuberia(nodoRaiz["tuberias"]["tuberiaHTizquierda"],"tuberiaHTizquierda");
 }
 
 void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
@@ -615,6 +609,29 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	//Plataforma Movil
 
+	parametrosPersonaje* paramPlataMovil= crearParametrosPersonaje(nodoRaiz["plataformaMovil"],"plataformaMovil");
+	nodoRaiz["plataformaMovil"]["distancia"] >> paramPlataMovil->algo;
+
+	nodoRaiz["plataformaMovil"]["animaciones"]["plataforma"]>>ruta;
+	animacionQuieto= new Animacion(new HojaSprites( ruta ,paramPlataMovil->ancho,paramPlataMovil->alto));
+	paramPlataMovil->animaciones->push_back(animacionQuieto);
+
+	aux= new std::vector<int>();
+	aux->push_back(QUIETO);
+	paramPlataMovil->matrizEstados->push_back(aux);
+
+	//Eleador
+
+	parametrosPersonaje* paramElevador= crearParametrosPersonaje(nodoRaiz["elevador"],"elevador");
+	nodoRaiz["elevador"]["distancia"] >> paramElevador->algo;
+
+	nodoRaiz["elevador"]["animaciones"]["elevador"]>>ruta;
+	animacionQuieto= new Animacion(new HojaSprites(ruta,paramElevador->ancho,paramElevador->alto));
+	paramElevador->animaciones->push_back(animacionQuieto);
+
+	aux= new std::vector<int>();
+	aux->push_back(QUIETO);
+	paramElevador->matrizEstados->push_back(aux);
 
 }
 
@@ -666,59 +683,36 @@ parametrosCaja* GestorConfiguraciones::crearParametrosCaja(const YAML::Node& nod
 
 parametrosTuberia* GestorConfiguraciones::crearParametrosTuberia(const YAML::Node& nodo, string nombre){
 
-	parametrosTuberia* param= (parametrosTuberia*)malloc(sizeof(parametrosTuberia));
+	parametrosTuberia* paramTub= (parametrosTuberia*)malloc(sizeof(parametrosTuberia));
 
-	param->probabilidades= new std::vector<int>();
-	param->superficies= new std::map<int,Superficie*>();
-	param->matrizEstados= new std::vector<std::vector<int>*>();
+	nodo["alto"]>>paramTub->alto;
+	nodo["ancho"]>>paramTub->ancho;
 
-	nodo["alto"]>>param->alto;
-	nodo["ancho"]>>param->ancho;
-
-	mapaTub->insert(pair<string,parametrosTuberia*>(nombre,param));
+	mapaTub->insert(pair<string,parametrosTuberia*>(nombre,paramTub));
 
 	std::string ruta;
-	nodo["animaciones"]["abajo"]>>ruta;
-	Superficie* sup= new Superficie(ruta);
-	sup->escala(param->ancho,param->alto);
-	sup->transparencia(255,0,255);
-	param->superficies->insert(pair<int , Superficie*>(2, sup));
+	nodo["animaciones"]["tuberia"] >> ruta;
+	paramTub->superficie = new Superficie(ruta);
+	paramTub->superficie->escala(paramTub->ancho,paramTub->alto);
+	paramTub->superficie->transparencia(255,0,255);
 
-	nodo["animaciones"]["arriba"]>>ruta;
-	sup = new Superficie(ruta);
-	sup->escala(param->ancho,param->alto);
-	sup->transparencia(255,0,255);
-	param->superficies->insert(pair<int , Superficie*>(-2, sup));
 
-	nodo["animaciones"]["derecha"]>>ruta;
-	sup = new Superficie(ruta);
-	sup->escala(param->ancho,param->alto);
-	sup->transparencia(255,0,255);
-	param->superficies->insert(pair<int , Superficie*>(1, sup));
+	parametrosPersonaje* paramPer = (parametrosPersonaje*)malloc(sizeof(parametrosPersonaje));
+	paramPer->animaciones= new std::vector<Animacion*>();
+	paramPer->matrizEstados= new std::vector<std::vector<int>*>();
 
-	nodo["animaciones"]["izquierda"]>>ruta;
-	sup = new Superficie(ruta);
-	sup->escala(param->ancho,param->alto);
-	sup->transparencia(255,0,255);
-	param->superficies->insert(pair<int , Superficie*>(-1, sup));
 
+	nodo["alto"]>>paramPer->alto;
+	nodo["ancho"]>>paramPer->ancho;
+
+	Animacion* animacionT= new Animacion(new HojaSprites(ruta,paramPer->ancho,paramPer->alto));
+	paramPer->animaciones->push_back(animacionT);
 	std::vector<int>* aux= new std::vector<int>();
-	aux->push_back(2);
-	param->matrizEstados->push_back(aux);
+	aux->push_back(QUIETO);
+	paramPer->matrizEstados->push_back(aux);
 
-	aux= new std::vector<int>();
-	aux->push_back(-2);
-	param->matrizEstados->push_back(aux);
-
-	aux= new std::vector<int>();
-	aux->push_back(1);
-	param->matrizEstados->push_back(aux);
-
-	aux= new std::vector<int>();
-	aux->push_back(-1);
-	param->matrizEstados->push_back(aux);
-
-	return param;
+	mapaParam->insert(pair<string,parametrosPersonaje*>(nombre,paramPer));
+	return paramTub;
 }
 
 parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML::Node& nodo, string nombre){
@@ -728,6 +722,7 @@ parametrosPersonaje* GestorConfiguraciones::crearParametrosPersonaje(const YAML:
 	param->animaciones= new std::vector<Animacion*>();
 	param->matrizEstados= new std::vector<std::vector<int>*>();
 
+	param->algo = 0;
 
 	nodo["alto"]>>param->alto;
 	nodo["ancho"]>>param->ancho;
@@ -745,17 +740,16 @@ parametrosPersonaje* GestorConfiguraciones::obtenerParametrosPersonaje(string no
 }
 
 void GestorConfiguraciones::crearVistaTuberia(Cuerpo* cuerpo,string clave, int dir){
+	if (!esCliente && !esServidor){
+		VistaImagen* vista = new VistaImagen(mapaTub->at(clave)->superficie);
+		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
+		cuerpo->agregarObservador(vista);
+		configNivel->vistas.push_back(vista);
+		return ;
+	}
 
-	parametrosTuberia* paramTub=mapaTub->at(clave);
+	crearVistaElemento(cuerpo, clave);
 
-	VistaImagen *vista = new VistaImagen(paramTub->superficies->at(dir));
-
-	cuerpo->agregarObservador(vista);
-	configNivel->actualizables.push_back(cuerpo);
-	configNivel->vistas.push_back(vista);
-
-//	if (esServidor)
-//		cuerpo->agregarObservador(contCuerpos);
 }
 
 
@@ -777,12 +771,12 @@ VistaVarios* GestorConfiguraciones::crearVistaProt(string clave){
 }
 
 void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, bool esCuerpo){
+	printf("clave: %s\n", clave.c_str());
 
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
 	VistaVarios* vista = new VistaVarios();
 	if (!esServidor){
 
-		printf("la cantidad es: %d\n", paramPersonaje->animaciones->size() );
 		for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
 
 			if (paramPersonaje->matrizEstados->at(i)->size()==1){
@@ -795,10 +789,32 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 
 	}
 
+	if ( strcmp(clave.c_str() , "plataformaMovil") == 0 ){
+		YAML::Node nodoRaiz;
+		std::ifstream fin(rutaYaml.c_str());
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodoRaiz);
+		std::string ruta;
+		nodoRaiz["juego"]["plataformaMovil"]["animaciones"]["plataforma"] >> ruta;
+		Superficie* sup = new Superficie(ruta);
+		sup->escala(mapaParam->at(clave)->ancho,mapaParam->at(clave)->alto);
+		VistaImagen* vi = new VistaImagen(sup);
+		if (esCuerpo)
+				configNivel->actualizables.push_back((Cuerpo*)cuerpo);
+		cuerpo->agregarObservador(vi);
+		configNivel->vistas.push_back(vi);
+		if (esServidor){
+			Cuerpo* c = (Cuerpo*) cuerpo;
+			c->setearID(IDACT);
+			IDACT++;
+			cuerpo->agregarObservador(contCuerpos);
+			delete (vista);
+		}
+		return ;
+	}
 
 	if (esCuerpo)
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
-
 
 	if (esServidor){
 		Cuerpo* c = (Cuerpo*) cuerpo;
@@ -1142,6 +1158,10 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo cajas");
 		}
 	}
+	if ( esCliente ){
+		CargarVistasTuberias(nodo[nivelElegido]["tuberias"]);
+	}
+
 //	try{
 //		CargarPersonajesNivel(nodo[nivelElegido]["personajes"]);
 //		Log::getInstance()->writeToLogFile("INFO","PARSER: Se cargaron configuraciones de los personajes del nivel");
@@ -1156,6 +1176,64 @@ unsigned int GestorConfiguraciones::obtenerCantidadDeJugadores (){
 	return configNivel->players;
 }
 
+
+void GestorConfiguraciones::CargarVistasTuberias(const YAML::Node& tubs){
+	Plataforma* plat;
+	std::string tipo;
+	int posX,posY;
+	for(unsigned i=0;i<tubs.size();i++) {
+		try{
+			tubs[i]["tipo"] >> tipo;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo tipo del elemento, se carga por defecto");
+			tipo = TIPO_DEFECTO;
+		}
+
+		try{
+			tubs[i]["x"] >> posX;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo x dentro del elemento, se carga por defecto");
+			posX = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x no toma valor valido, se carga por defecto");
+			posX = POS_DEFECTO;
+		}
+		if (posX<0 || posX>= configNivel->ancho){
+			posX=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El x del elemento no toma valor valido, se carga por defecto");
+		}
+
+		try{
+			tubs[i]["y"] >> posY;
+		}catch(YAML::TypedKeyNotFound<std::string> &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo y dentro del elemento, se carga por defecto");
+			posY = POS_DEFECTO;
+		}catch(YAML::InvalidScalar &e){
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y no toma valor valido, se carga por defecto");
+			posY = POS_DEFECTO;
+		}
+		if (posY<0 || posY>=configNivel->alto){
+			posY=POS_DEFECTO;
+			Log::getInstance()->writeToLogFile("ERROR","PARSER: El y del elemento no toma valor valido, se carga por defecto");
+		}
+
+		int x,y;
+		int ancho, alto;
+
+		ancho = mapaParam->at(tipo)->ancho;
+		alto = mapaParam->at(tipo)->alto;
+
+		//el posX posY indica el punto inferior central del personaje (consigna)
+		x = posX - ( ancho/2 );
+		y = posY - alto;
+		plat = new Plataforma("plat", new Area (ancho, alto, new Posicion (x,y)) );
+		VistaImagen* vista = new VistaImagen(mapaTub->at(tipo)->superficie);
+		configNivel->vistas.push_back(vista);
+		plat->agregarObservador(vista);
+		//configNivel->actualizables.push_back(plat);
+	}
+
+}
 
 void GestorConfiguraciones::CargarEstaticosNivel(const YAML::Node& nodo, bool escalar, bool cortar, int tipo){
 	int posX,posY;
@@ -1416,21 +1494,32 @@ Cuerpo* GestorConfiguraciones::instanciarCaja(std::string tipo, int x, int y){
 }
 
 Cuerpo* GestorConfiguraciones::instanciarTuberia(std::string tipo, int x, int y, float m, int dir){
-	if( strcmp ( tipo.c_str() , "tuberiaHongo" ) == 0 ){
-		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
-		fabrs->push_back(new FabricaHongos());
-		return new Tuberia("tuberiaHongo", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , dir, mapaTub->at(tipo)->probabilidades, fabrs );
-	}
-	if( strcmp ( tipo.c_str() , "tuberiaTortuga" ) == 0 ){
-		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
-		fabrs->push_back(new FabricaTortugas());
-		return new Tuberia("tuberiaTortuga", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , dir, mapaTub->at(tipo)->probabilidades, fabrs );
-	}
-	if( strcmp ( tipo.c_str() , "tuberiaHT" ) == 0 ){
+	std::vector<int>* probabilidades = new std::vector<int>;
+	probabilidades->push_back(50);
+	probabilidades->push_back(50);
+	if( strcmp ( tipo.c_str() , "tuberiaHTarriba" ) == 0 ){
 		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
 		fabrs->push_back(new FabricaHongos());
 		fabrs->push_back(new FabricaTortugas());
-		return new Tuberia("tuberiaHT", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , dir, mapaTub->at(tipo)->probabilidades, fabrs );
+		return new Tuberia("tuberiaHTarriba", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , -2, probabilidades, fabrs );
+	}
+	if( strcmp ( tipo.c_str() , "tuberiaHTabajo" ) == 0 ){
+		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
+		fabrs->push_back(new FabricaHongos());
+		fabrs->push_back(new FabricaTortugas());
+		return new Tuberia("tuberiaHTabajo", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , 2, probabilidades, fabrs );
+	}
+	if( strcmp ( tipo.c_str() , "tuberiaHTderecha" ) == 0 ){
+		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
+		fabrs->push_back(new FabricaHongos());
+		fabrs->push_back(new FabricaTortugas());
+		return new Tuberia("tuberiaHTderecha", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , 1, probabilidades, fabrs );
+	}
+	if( strcmp ( tipo.c_str() , "tuberiaHTizquierda" ) == 0 ){
+		std::vector<FabricaActualizable*>* fabrs = new std::vector<FabricaActualizable*>();
+		fabrs->push_back(new FabricaHongos());
+		fabrs->push_back(new FabricaTortugas());
+		return new Tuberia("tuberiaHTizquierda", new Area(mapaTub->at(tipo)->ancho,mapaTub->at(tipo)->alto, new Posicion(x,y) ), m , -1, probabilidades, fabrs );
 	}
 	return NULL;
 }
@@ -1448,6 +1537,8 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 			return new Barril("barril",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto, new Posicion(x,y)), mapaParam->at(tipo)->velocidad, 1);
 	if( strcmp ( tipo.c_str() , "camaElastica" ) == 0 )
 		return new CamaElastica("camaElastica",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)));
+	if( strcmp ( tipo.c_str() , "plataformaMovil" ) == 0 )
+		return new PlataformaMovil("plataformaMovil",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)), mapaParam->at(tipo)->velocidad, mapaParam->at(tipo)->algo );
 	return NULL;
 }
 
@@ -2646,6 +2737,18 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 			lasCajas->at(i)->agregarObservador(lasVistaDeCajas->at(i));
 			configNivel->vistas.push_back(lasVistaDeCajas->at(i));
 		}
+
+		contCuerpos->reinsertar();
+//		for (unsigned int i = 0; i < camasElasticas->size() ; i++){
+//			configNivel->actualizables.push_back(camasElasticas->at(i));
+//			camasElasticas->at(i)->agregarObservador(vistasCamasElasticas->at(i));
+//			configNivel->vistas.push_back(vistasCamasElasticas->at(i));
+//		}
+//		for (unsigned int i = 0; i < tuberias->size() ; i++){
+//			configNivel->actualizables.push_back(tuberias->at(i));
+//			tuberias->at(i)->agregarObservador(vistasTuberias->at(i));
+//			configNivel->vistas.push_back(vistasTuberias->at(i));
+//		}
 	}
 
 }

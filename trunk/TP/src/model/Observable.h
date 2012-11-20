@@ -48,8 +48,9 @@ class Observable {
 		virtual int obtenerVidas();
 		virtual bool estaInvencible();
 		virtual bool mataAlContacto();
-	protected:
 		void huboCambios();
+	protected:
+
 		void limpiarCambio();
 
 };

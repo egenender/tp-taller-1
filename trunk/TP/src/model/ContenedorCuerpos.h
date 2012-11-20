@@ -18,6 +18,7 @@ public:
 	void actualizar(Observable*);
 	void encolarCambios();
 	void encolarTodos();
+	void reinsertar();
 };
 
 #endif

@@ -6,6 +6,7 @@
  */
 
 #include "Dummy.h"
+#include "Tipos.h"
 
 Dummy::Dummy(unsigned int elID, Posicion* posicion, int x, int y){
 	ID = elID;
@@ -29,12 +30,33 @@ void Dummy::setXY(int x, int y){
 	pos = new Posicion(x, y);
 }
 
-void Dummy::setEstado(int state){
+void Dummy::setEstado(int state, int tipo){
+	if (tipo == INVENCIBLE){
+		invencible = true;
+	}else{
+		invencible = false;
+		matador = false;
+	}
+	if (tipo == MATADOR){
+		matador = true;
+		invencible = true;
+	}else{
+		matador = false;
+	}
+
 	estado = state;
 }
 
 bool Dummy::esMio(unsigned int comparacion){
 	return (comparacion == ID);
+}
+
+bool Dummy::estaInvencible(){
+	return invencible;
+}
+
+bool Dummy::mataAlContacto(){
+	return matador;
 }
 
 int Dummy::obtenerEstado(){
