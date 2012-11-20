@@ -11,11 +11,6 @@ VistaImagen::VistaImagen() {
 VistaImagen::VistaImagen(Superficie* imagenNueva, int angulo) {
 	movY = 0;
 	imagen = imagenNueva;
-	if (angulo < 0)
-		angulo += 2;
-
-	if (angulo > 0)
-		angulo -= 2;
 	alpha = angulo;
 	if (imagen) {
 		imagen->girar(angulo);
@@ -50,9 +45,14 @@ void VistaImagen::actualizar(Observable* observable) {
 	movY = 0;
 	Cuerpo* c = (Cuerpo*)observable;
 	if (alpha > 0){
-		float angulito = alpha * 3.1415 / 180;
+		float angulito = (alpha * 3.14159265358979) / 180;
 		movY = c->obtenerAncho() * sin (angulito) ;
 		movY += 5;
+	}
+	else if (alpha < 0){
+		float angulito = (alpha * 3.14159265358979) / 180;
+		movY = c->obtenerAlto() * sin (angulito);
+		movY += 10;
 	}
 
 }
