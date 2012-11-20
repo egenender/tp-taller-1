@@ -33,6 +33,7 @@ void ContenedorCuerpos::actualizar(Observable* observable){
 void ContenedorCuerpos::encolarCambios(){
 	Server* servidor = Server::obtenerInstancia(0);
 	structServidor_t* estructura;
+	vector<int>* eliminables = new vector<int>();
 	for (unsigned int i = 0; i < IDs->size(); i++){
 		unsigned int idActual = IDs->at(i);
 		if (huboCambios->at(idActual)){
@@ -47,6 +48,9 @@ void ContenedorCuerpos::encolarCambios(){
 
 			if (estructura)
 				servidor->encolar_cambio(estructura);
+			if (estado == MUERTO){
+				eliminables->push_back(idActual);
+			}
 		}
 		/*Pongo que ya no hay cambios, ya que ya estoy mandando los cambios actuales
 		ademas sirve en caso que en el vector de IDs haya alguno repetido: NO quiero
@@ -54,6 +58,20 @@ void ContenedorCuerpos::encolarCambios(){
 		huboCambios->erase(idActual);
 		huboCambios->insert(pair<unsigned int, bool>(idActual, false));
 	}
+	unsigned int cant = eliminables->size();
+	for (unsigned int i = 0; i < cant; i++){
+		unsigned int cantj = IDs->size();
+		vector<int>* aux = new vector<int>();
+		for (unsigned int j = 0; j < cantj; j++){
+			unsigned int valor = IDs->pop_back();
+			if (eliminables->at(i) != valor)
+				aux->push_back(valor);
+		}
+		delete (IDs);
+		IDs = aux;
+	}
+
+
 }
 
 void ContenedorCuerpos::encolarTodos(){
