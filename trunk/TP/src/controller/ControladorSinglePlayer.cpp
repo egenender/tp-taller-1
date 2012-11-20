@@ -17,11 +17,7 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 // NEW:
 	if (!principal)
 		return;
-
-	// Si el controlado no acepta movimiento, no hay nada que hacer:	
-	if (!principal->puedeMover())
-		return;
-// end NEW
+	// end NEW
 
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
@@ -30,6 +26,13 @@ void ControladorSinglePlayer::manejarEvento(SDL_Event* evento) {
 		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 		return;
 	}
+
+//New
+	// Si el controlado no acepta movimiento, no hay nada que hacer:
+	if (!principal->puedeMover())
+		return;
+// end NEW
+
 
 	//Lo dejo por separado, por si hay que cambiarle algo :P
 	if(principal->estaMuerto()){
