@@ -18,7 +18,6 @@ private:
 	map<unsigned int, bool>* huboCambios;
 	map<unsigned int, Manual*>* manuales;
 	map<unsigned int, int>* vidas;
-	map<unsigned int, bool>* vidasCambiadas;
 	vector<unsigned int>* IDs;
 public:
 	ContenedorManuales();
