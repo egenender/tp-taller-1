@@ -16,6 +16,7 @@ private:
 	static bool cooperativo;
 	int direccion, estado, velocidadX, velocidadY, velocidadSaltoBase;
 	bool tengoPiso, chocaConSosten;
+	unsigned int duenio;
 
 public:
 	BolaDeFuego(const char*, Area*, int, int, int);
@@ -34,6 +35,7 @@ public:
 	bool estaMuerto();
 	bool esEliminable();
 	unsigned int obtenerTipo();
+	void setearDuenio(unsigned int);
 private:
 	void morir();
 	void validarPiso();

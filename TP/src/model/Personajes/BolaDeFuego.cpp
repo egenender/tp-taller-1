@@ -22,6 +22,7 @@ BolaDeFuego::BolaDeFuego(const char* nom, Area* sup, int velX, int velY, int dir
 		estado = SALTANDODER;
 	else
 		estado = SALTANDOIZQ;
+	duenio = 0;
 
 	int anchoC = (superficieOcupada->obtenerAncho() * FACTOR_BOLA_FUEGO )/100;
 	int altoC = (superficieOcupada->obtenerAlto() * FACTOR_BOLA_FUEGO) / 100;
@@ -183,5 +184,9 @@ bool BolaDeFuego::esEliminable(){
 }
 
 unsigned int BolaDeFuego::obtenerTipo(){
-	return TIPO_BOLA_FUEGO;
+	return TIPO_BOLA_FUEGO + duenio;
+}
+
+void BolaDeFuego::setearDuenio(unsigned int d){
+	duenio = d;
 }
