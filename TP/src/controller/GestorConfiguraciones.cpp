@@ -814,6 +814,31 @@ void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, 
 		return ;
 	}
 
+	if ( strcmp(clave.c_str() , "elevador") == 0 ){
+		YAML::Node nodoRaiz;
+		std::ifstream fin(rutaYaml.c_str());
+		YAML::Parser parser(fin);
+		parser.GetNextDocument(nodoRaiz);
+		std::string ruta;
+		nodoRaiz["juego"]["elevador"]["animaciones"]["elevador"] >> ruta;
+		Superficie* sup = new Superficie(ruta);
+		sup->escala(mapaParam->at(clave)->ancho,mapaParam->at(clave)->alto);
+		VistaImagen* vi = new VistaImagen(sup);
+		if (esCuerpo)
+			configNivel->actualizables.push_back((Cuerpo*)cuerpo);
+		cuerpo->agregarObservador(vi);
+		configNivel->vistas.push_back(vi);
+		if (esServidor){
+			Cuerpo* c = (Cuerpo*) cuerpo;
+			c->setearID(IDACT);
+			IDACT++;
+			cuerpo->agregarObservador(contCuerpos);
+			delete (vista);
+		}
+		return ;
+	}
+
+
 	if (esCuerpo)
 		configNivel->actualizables.push_back((Cuerpo*)cuerpo);
 
@@ -1540,6 +1565,11 @@ Cuerpo* GestorConfiguraciones::instanciarCuerpo(std::string tipo, int x, int y){
 		return new CamaElastica("camaElastica",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)));
 	if( strcmp ( tipo.c_str() , "plataformaMovil" ) == 0 )
 		return new PlataformaMovil("plataformaMovil",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)), mapaParam->at(tipo)->velocidad, mapaParam->at(tipo)->algo );
+	if( strcmp ( tipo.c_str() , "elevador" ) == 0 ){
+		PlataformaMovil* p = new PlataformaMovil("elevador",new Area(mapaParam->at(tipo)->ancho,mapaParam->at(tipo)->alto,new Posicion(x,y)), mapaParam->at(tipo)->velocidad, mapaParam->at(tipo)->algo );
+		p->setearElevador();
+		return p;
+	}
 	return NULL;
 }
 
