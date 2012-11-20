@@ -67,6 +67,7 @@ private:
 
 public:
 	static void setearCooperatividad(bool);
+	static bool esCooperativo();
 	Manual(const char*, Area*, int, int);
 	virtual ~Manual();
 	void posicionar(Posicion*);

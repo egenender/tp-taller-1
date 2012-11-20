@@ -7,10 +7,11 @@ EstadoJuegoTerminado EstadoJuegoTerminado::instancia;
 EstadoJuegoTerminado::EstadoJuegoTerminado() {
 	fondo = NULL;
 	ganador = NULL;
+	ganadores = NULL;
+	timer = NULL;
 }
 
 EstadoJuegoTerminado::~EstadoJuegoTerminado() {
-	// TODO Auto-generated destructor stub
 }
 
 void EstadoJuegoTerminado::manejarEvento(SDL_Event* evento){
@@ -23,9 +24,13 @@ void EstadoJuegoTerminado::iniciar(){
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
 	fondo->escala(800,600);
 	//tengo que ver como consigo al ganador-> seguro lo obtengo por el nombre ;)
-	ganador = new Superficie(GestorConfiguraciones::getInstance()->rutaGanador() );
-	ganador->transparencia(255,0,255);
+	ganadores = GestorConfiguraciones::getInstance()->obtenerGanadores();
+	ganador = ganadores->at(0);
+	actual = 0;
 	GestorConfiguraciones::getInstance()->acabarGestor();
+	timer = new Timer();
+	if (ganadores->size() > 1)
+		timer->comenzar();
 }
 
 void EstadoJuegoTerminado::terminar(){
@@ -33,14 +38,31 @@ void EstadoJuegoTerminado::terminar(){
 		delete (fondo);
 		fondo = NULL;
 	}
-	if (ganador){
-		delete (ganador);
+	if (ganadores){
+		for (unsigned int i = 0; i < ganadores->size(); i++)
+			delete(ganadores->at(i));
+		ganadores->clear();
+		delete (ganadores);
+		ganadores = NULL;
 		ganador = NULL;
+	}
+	if (timer){
+		delete (timer);
+		timer = NULL;
 	}
 }
 
 void EstadoJuegoTerminado::actualizar(float delta){
-	// no hay que hacer nada
+	if (ganadores->size() == 1) return;
+
+	if (timer->obtenerTiempo() >= (TIEMPO_GANADOR*1000)){
+		actual++;
+		if (actual == ganadores->size())
+			actual = 0;
+		ganador = ganadores->at(actual);
+		timer->detener();
+		timer->comenzar();
+	}
 }
 
 void EstadoJuegoTerminado::dibujar(SDL_Surface* display){

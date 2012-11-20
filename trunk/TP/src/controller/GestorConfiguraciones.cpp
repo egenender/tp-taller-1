@@ -2769,3 +2769,21 @@ std::string GestorConfiguraciones::rutaGanador(){
 	else
 		return "src/resources/cuerpos/GokuMono/poster.jpg";
 }
+
+std::vector<Superficie*>* GestorConfiguraciones::obtenerGanadores(){
+	std::vector<Superficie*>* sups = new std::vector<Superficie*>();
+	if (quienGano == ObtenerPosiblesTiposProtagonistas()->size() ){
+		sups->push_back( new Superficie("src/resources/cuerpos/GokuMono/poster.jpg"));
+		return sups;
+	}
+	if (quienGano < (ObtenerPosiblesTiposProtagonistas()->size()) ){
+		sups->push_back( new Superficie(ObtenerPosiblesTiposProtagonistas()->at(quienGano)->rutaGanador));
+		return sups;
+	}
+
+	for (unsigned int i = 0; i < this->ObtenerPosiblesTiposProtagonistas()->size(); i++){
+		if (this->ObtenerPosiblesTiposProtagonistas()->at(i)->jugando)
+			sups->push_back(new Superficie(this->ObtenerPosiblesTiposProtagonistas()->at(i)->rutaGanador));
+	}
+	return sups;
+}

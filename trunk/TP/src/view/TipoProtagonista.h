@@ -38,6 +38,7 @@ public:
 	Animacion* animacionHeridoEvo;
 	VistaSonora* vistaSonora;
 	std::string rutaGanador;
+	bool jugando;
 
 public:
 	//Manual* CrearManual(const char*,int, int,int);

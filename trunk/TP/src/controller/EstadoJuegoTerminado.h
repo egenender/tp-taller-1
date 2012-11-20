@@ -3,12 +3,18 @@
 
 #include "Estado.h"
 #include "../view/Superficie.h"
+#include <vector>
+#include "../model/Timer.h"
+#define TIEMPO_GANADOR 5
 
 class EstadoJuegoTerminado: public Estado {
 private:
 	Superficie* fondo;
-	Superficie* ganador;
+	std::vector<Superficie*>* ganadores;
 	static EstadoJuegoTerminado instancia;
+	Superficie* ganador;
+	unsigned int actual;
+	Timer* timer;
 private:
 	EstadoJuegoTerminado();
 public:

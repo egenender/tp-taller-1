@@ -200,6 +200,10 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 	Dummy* nuevo = new Dummy(idNuevo, new Posicion(x,y), parametros->ancho, parametros->alto);
 	gestor->crearVistaElemento(nuevo, nombre, false);
 
+	if (tipo == TIPO_MANUAL){
+		gestor->ObtenerPosiblesTiposProtagonistas()->at(idNuevo)->jugando = true;
+	}
+
 	agregarDummy(nuevo);
 	return nuevo;
 }

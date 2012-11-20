@@ -615,3 +615,7 @@ int Manual::obtenerVelocidad(){
 unsigned int Manual::obtenerTipo(){
 	return TIPO_MANUAL;
 }
+
+bool Manual::esCooperativo(){
+	return cooperativo;
+}
