@@ -301,8 +301,8 @@ juego:
   elevador:
     ancho: 50
     alto: 50
-    velocidad: 20
-    distancia: 100
+    velocidad: 2
+    distancia: 10
     animaciones:
       elevador: src/resources/items/viga2.jpg
   vidaExtra:
@@ -399,9 +399,9 @@ juego:
         - tipo: plataformaMovil
           x: 950
           y: 150
-#        - tipo: elevador
-#          x: 800
-#          y: 350
+        - tipo: elevador
+          x: 150
+          y: 350
       cajas:
         - tipo: cajaRandom
           x: 70
@@ -505,9 +505,9 @@ juego:
         - tipo: plataformaMovil
           x: 900
           y: 1450
-#        - tipo: elevador
-#          x: 800
-#          y: 350
+        - tipo: elevador
+          x: 800
+          y: 350
         - tipo: camaElastica
           x: 210
           y: 2425
