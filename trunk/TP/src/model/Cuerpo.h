@@ -34,6 +34,8 @@ public:
 	virtual unsigned int obtenerTipo();
 	void setearID(unsigned int);
 
+	virtual bool saltaAlto();
+
 protected:
 	void trasladar(int, int, bool);
 };

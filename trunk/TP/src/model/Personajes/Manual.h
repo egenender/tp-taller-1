@@ -16,7 +16,7 @@ class Princesa;
 
 #define DERECHA 1
 #define IZQUIERDA -1
-#define FACTOR_DE_ESCALA 75
+#define FACTOR_DE_ESCALA 90
 #define FACTOR_EVOLUCION 90
 #define CANT_VIDAS 3
 #define SUPERFICIE_EVOLUCION 1
@@ -98,6 +98,7 @@ public:
 	bool puedeMover(); // NEW
 	int obtenerVelocidad();
 	unsigned int obtenerTipo();
+	bool saltaAlto();
 
 	void chocarCon(Actualizable*);
 	void chocarConManual(Manual*);

@@ -43,10 +43,17 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 
 
 	if (keystates[SDLK_SPACE]) {
-		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
+		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ && controlable->obtenerEstado()!=(EVOLUCION + SALTANDODER) && controlable->obtenerEstado()!=(EVOLUCION + SALTANDOIZQ))
 			revisarCambio(SALTAR);
-		//return;
+//		if (controlable->saltoAlto)
+//			enviarStruct(SALTAR);
+	}else if (controlable->saltoAlto){
+		controlable->saltoAlto = false;
+		enviarStruct(QUIETO);
 	}
+	if (controlable->saltoAlto && keystates[SDLK_SPACE])
+		enviarStruct(SALTAR);
+
 
 	if (keystates[SDLK_UP] && !keystates[SDLK_DOWN]) {
 			revisarCambio(SUBIR);

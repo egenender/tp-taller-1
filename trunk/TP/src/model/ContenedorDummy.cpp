@@ -200,7 +200,7 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 		ref = tipo - TIPO_BOLA_FUEGO;
 	}
 
-	if (tipo != TIPO_MANUAL && tipo <= TIPO_BOLA_FUEGO){
+	if (tipo != TIPO_MANUAL && tipo < TIPO_BOLA_FUEGO){
 		nombre = decodificarTipo(tipo);
 	}else{
 		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(ref)->nombre;

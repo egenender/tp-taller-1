@@ -24,6 +24,7 @@
 #define INVENCIBLE 18
 #define MATADOR 19
 #define ELEVADOR 20
+#define SALTOALTO 21
 
 
 std::string decodificarTipo(unsigned int);

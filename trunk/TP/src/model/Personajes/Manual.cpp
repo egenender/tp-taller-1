@@ -30,6 +30,10 @@ void Manual::saltar(bool autogenerado){
 
 }
 
+bool Manual::saltaAlto(){
+	return saltoAlto;
+}
+
 void Manual::atacar(){} //idem
 
 void Manual::especial(){

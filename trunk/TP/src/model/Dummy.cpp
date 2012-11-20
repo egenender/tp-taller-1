@@ -32,6 +32,11 @@ void Dummy::setXY(int x, int y){
 }
 
 void Dummy::setEstado(int state, int tipo){
+	if (tipo == SALTOALTO){
+		saltoAlto = true;
+	}else{
+		saltoAlto = false;
+	}
 	if (tipo == INVENCIBLE){
 		invencible = true;
 	}else{
@@ -43,6 +48,15 @@ void Dummy::setEstado(int state, int tipo){
 		invencible = true;
 	}else{
 		matador = false;
+	}
+	if (tipo == SALTOALTO + INVENCIBLE){
+		saltoAlto = true;
+		invencible = true;
+	}
+	if (tipo == SALTOALTO + MATADOR){
+		saltoAlto = true;
+		matador = true;
+		invencible = true;
 	}
 
 	estado = state;
