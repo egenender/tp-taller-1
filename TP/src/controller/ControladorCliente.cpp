@@ -20,10 +20,6 @@ ControladorCliente::~ControladorCliente() {
 
 void ControladorCliente::manejarEvento(SDL_Event* evento){
 	Uint8 *keystates = SDL_GetKeyState(NULL);
-
-	if (!controlable->puedeMover())
-		return ;
-
 	if (keystates[SDLK_ESCAPE]) {
 		Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se volvera al Estado de seleccion.");
 		ManejadorCliente::obtenerInstancia(NULL)->detener();
@@ -35,6 +31,16 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		ManejadorEstados::setearEstadoActual(ESTADO_GUI);
 		return;
 	}
+
+	if (mantieneVivo->obtenerTiempo() >= (TIEMPO_ESPERA * 1000)){
+		enviarStruct(VIVO);
+	}
+
+	if (!controlable->puedeMover())
+		return ;
+	if (controlable->estaMuerto())
+			return ;
+
 
 	if (keystates[SDLK_SPACE]) {
 		if (controlable->obtenerEstado()!=SALTANDODER && controlable->obtenerEstado()!=SALTANDOIZQ)
@@ -108,9 +114,6 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 //		enviarStruct(QUIETO);
 //	}
 
-	if (mantieneVivo->obtenerTiempo() >= (TIEMPO_ESPERA * 1000)){
-		enviarStruct(VIVO);
-	}
 }
 
 void ControladorCliente::enviarStruct(int nuevoEstado){
