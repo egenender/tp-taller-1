@@ -2728,6 +2728,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	Manual* nuevoManual = new Manual(tipo->nombre, sup,tipo->velocidad, tipo->salto);
 	manuales->agregarManual(nuevoManual, id);
 	configNivel->actualizables.push_back(nuevoManual);
+	nuevoManual->setearXInicial(x);
 
 	nuevoManual->setearID(id);
 	nuevoManual->agregarObservador(contCuerpos);
