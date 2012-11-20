@@ -25,6 +25,7 @@ void EstadoJuegoTerminado::iniciar(){
 	//tengo que ver como consigo al ganador-> seguro lo obtengo por el nombre ;)
 	ganador = new Superficie(GestorConfiguraciones::getInstance()->rutaGanador() );
 	ganador->transparencia(255,0,255);
+	GestorConfiguraciones::getInstance()->acabarGestor();
 }
 
 void EstadoJuegoTerminado::terminar(){
