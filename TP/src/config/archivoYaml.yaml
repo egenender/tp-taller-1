@@ -373,7 +373,7 @@ juego:
       ancho: 2000
       piso: 540
       fondo: src/resources/niveles/superMario.png
-      musica: src/resources/niveles/route1.ogg
+      musica: src/resources/estados/musica/Bowser.ogg
       elementos:
 #        - tipo: mono
 #          x: 100
