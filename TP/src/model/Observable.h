@@ -27,6 +27,7 @@ using namespace std;
 #define HERIDO 16 // Cuando pierde vida. NEW
 #define SUBIR 17
 #define BAJAR 18
+#define ESPECIAL 19
 #define EVOLUCION 30
 
 class Observable {

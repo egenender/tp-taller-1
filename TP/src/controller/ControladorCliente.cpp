@@ -49,6 +49,11 @@ void ControladorCliente::manejarEvento(SDL_Event* evento){
 		return;
 	}
 
+	if (keystates[SDLK_z] ) {
+		revisarCambio(ESPECIAL);
+		return;
+	}
+
 	if (keystates[SDLK_LEFT] && !keystates[SDLK_RIGHT]) {
 		revisarCambio(CAMINANDOIZQ);
 		return;

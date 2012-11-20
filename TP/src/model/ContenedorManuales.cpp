@@ -128,6 +128,11 @@ void ContenedorManuales::actualizarEstados(unsigned int id, int estado){
 	if(estado == VIVO){
 		return;
 	}
+	if (estado == ESPECIAL){
+		manuales->at(id)->especial();
+		return;
+	}
+
 	estados->erase(id);
 	estados->insert(pair<unsigned int, int>(id, estado));
 	if (estado == SALTAR){
