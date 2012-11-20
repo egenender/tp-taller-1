@@ -25,6 +25,8 @@ void EstadoJuegoTerminado::iniciar(){
 	fondo->escala(800,600);
 	//tengo que ver como consigo al ganador-> seguro lo obtengo por el nombre ;)
 	ganadores = GestorConfiguraciones::getInstance()->obtenerGanadores();
+	for (unsigned int i = 0; i < ganadores->size(); i++)
+		ganadores->at(i)->transparencia(255,0,255);
 	ganador = ganadores->at(0);
 	actual = 0;
 	GestorConfiguraciones::getInstance()->acabarGestor();
@@ -68,7 +70,7 @@ void EstadoJuegoTerminado::actualizar(float delta){
 void EstadoJuegoTerminado::dibujar(SDL_Surface* display){
 	fondo->dibujar(display, 0 ,0);
 	if (ganador)
-		ganador->dibujar(display, 100, 100);
+		ganador->dibujar(display, 350, 150);
 }
 
 EstadoJuegoTerminado* EstadoJuegoTerminado::obtenerInstancia(){
