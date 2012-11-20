@@ -181,14 +181,17 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 		return NULL;
 	}
 
+	unsigned int ref = idNuevo;
 	std::string nombre = "";
-	if (tipo == TIPO_BOLA_FUEGO)
+	if (tipo >= TIPO_BOLA_FUEGO){
 		nombre = "bola";
+		ref = tipo - TIPO_BOLA_FUEGO;
+	}
 
 	if (tipo != TIPO_MANUAL && tipo != TIPO_BOLA_FUEGO){
 		nombre = decodificarTipo(tipo);
 	}else{
-		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(idNuevo)->nombre;
+		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(ref)->nombre;
 	}
 
 	printf("nombre: %s\n", nombre.c_str());

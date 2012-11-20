@@ -55,6 +55,9 @@ void Manual::especial(){
 	else
 		x -= 1;
 
+
+	vel = vel * 100 + id;
+
 	Posicion* pos = new Posicion(x,y);
 	fabrica->fabricar(pos,(vel*direccion));
 	delete(pos);

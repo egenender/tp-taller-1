@@ -23,7 +23,7 @@ void FabricaBolasDeFuego::fabricar(Posicion* inicial,int valor){
 
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(aux);
 	int x = inicial->obtenerX();
-	int vel , dir;
+	int vel , dir, duenio;
 
 	if (valor < 0){
 		vel = -valor;
@@ -34,9 +34,13 @@ void FabricaBolasDeFuego::fabricar(Posicion* inicial,int valor){
 		dir = 1;
 	}
 
+	duenio = vel % 100;
+	vel = vel / 100;
+
 	Area* sup = new Area(parametros->ancho, parametros->alto, new Posicion(x, inicial->obtenerY()));
 
 	bola = new BolaDeFuego (aux.c_str(), sup, vel, parametros->velocidad, dir);
+	bola->setearDuenio(duenio);
 	gestor->crearVistaElemento(bola, aux.c_str());
 }
 
