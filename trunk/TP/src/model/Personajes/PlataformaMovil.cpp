@@ -26,10 +26,12 @@ void PlataformaMovil::chocarConManual(Manual* m){
 	cuerposContacto->push_back(m);
 }
 void PlataformaMovil::chocarConBarril(Barril* b){
-	cuerposContacto->push_back(b);
+	if(! b->estaMuerto())
+		cuerposContacto->push_back(b);
 }
 void PlataformaMovil::chocarConHongo(Hongo* h){
-	cuerposContacto->push_back(h);
+	if(! h->estaMuerto())
+		cuerposContacto->push_back(h);
 }
 void PlataformaMovil::actualizar(float){
 	if (!esElevador)
@@ -38,10 +40,14 @@ void PlataformaMovil::actualizar(float){
 		trasladar(0,velocidad, true);
 
 	for (unsigned int i = 0; i < cuerposContacto->size(); i++){
-		if (!esElevador)
-			cuerposContacto->at(i)->trasladar(velocidad,0,true);
-		else
-			cuerposContacto->at(i)->trasladar(0,velocidad,true);
+		try{
+			if (!esElevador)
+				cuerposContacto->at(i)->trasladar(velocidad,0,true);
+			else
+				cuerposContacto->at(i)->trasladar(0,velocidad,true);
+		}catch(exception &e){
+
+		}
 	}
 
 
