@@ -485,7 +485,7 @@ juego:
           y: 350
           ancho: 50
           alto: 200
-    - nivel: cUCU
+    - nivel: Scalar
       players: 1
       alto: 2560
       ancho: 1600
@@ -500,24 +500,37 @@ juego:
           x: 650
           y: 150
         - tipo: plataformaMovil
-          x: 950
+          x: 1050
           y: 150
+        - tipo: plataformaMovil
+          x: 900
+          y: 1450
 #        - tipo: elevador
 #          x: 800
 #          y: 350
+        - tipo: camaElastica
+          x: 210
+          y: 2425
+      cajas:
+        - tipo: cajaRandom
+          x: 140
+          y: 2320
+        - tipo: cajaRandom
+          x: 100
+          y: 460
       tuberias:
         - tipo: tuberiaHTarriba
           x: 200
           y: 2140
-          eme: 5
+          eme: 10
         - tipo: tuberiaHTabajo
           x: 800
           y: 2200
-          eme: 5
+          eme: 10
         - tipo: tuberiaHTderecha
           x: 800
           y: 380
-          eme: 5
+          eme: 10
       plataformas:
         - textura: viga
           x: 450
