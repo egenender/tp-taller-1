@@ -118,6 +118,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Croconaw/croconawMovimiento.bmp
           sonido: 
+      poster: src/resources/cuerpos/Totodile/poster.png
       bolaDeFuego:
         ancho: 22
         alto: 22
@@ -163,6 +164,7 @@ juego:
         evoescalar:
           sprites: src/resources/cuerpos/Gastly/gastlyEspaldas.bmp
           sonido: 
+      poster: src/resources/cuerpos/Gastly/poster.png
       bolaDeFuego:
         ancho: 40
         alto: 25
