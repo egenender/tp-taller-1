@@ -29,7 +29,7 @@ public:
 	unsigned int obtenerID();
 	int obtenerAncho();
 	int obtenerAlto();
-	unsigned int obtenerVidas();
+	int obtenerVidas();
 	void setearVidas(unsigned int);
 
 	bool estaInvencible();

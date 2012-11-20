@@ -92,7 +92,7 @@ bool Dummy::estaMuerto(){
 	return estado == MUERTO;
 }
 
-unsigned int Dummy::obtenerVidas(){
+int Dummy::obtenerVidas(){
 	return vidas;
 }
 

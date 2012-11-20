@@ -17,7 +17,7 @@ private:
 	map<unsigned int, int>* estados;
 	map<unsigned int, bool>* huboCambios;
 	map<unsigned int, Manual*>* manuales;
-	map<unsigned int, unsigned int>* vidas;
+	map<unsigned int, int>* vidas;
 	map<unsigned int, bool>* vidasCambiadas;
 	vector<unsigned int>* IDs;
 public:
