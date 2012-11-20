@@ -14,6 +14,7 @@ private:
 	int ancho, alto;
 	bool invencible;
 	bool matador;
+	unsigned int vidas;
 
 public:
 	Dummy(unsigned int,Posicion*, int ancho, int alto);
@@ -28,6 +29,8 @@ public:
 	unsigned int obtenerID();
 	int obtenerAncho();
 	int obtenerAlto();
+	unsigned int obtenerVidas();
+	void setearVidas(unsigned int);
 
 	bool estaInvencible();
 	bool mataAlContacto();

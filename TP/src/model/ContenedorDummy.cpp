@@ -64,7 +64,7 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	if (!tonto) {
 		int x, y;
 		structServidor_obtener_posicion(mod, &x, &y);
-		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod), x,y );
+		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod),structServidor_obtener_estado(mod) , x,y );
 		if (!tonto)
 			return;
 	}
@@ -168,10 +168,10 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 //	return nuevo;
 //}
 
-Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, int x, int y){
+Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, int estado, int x, int y){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
-	if (idNuevo == gestor->ObtenerPosiblesTiposProtagonistas()->size()){
+	if (idNuevo == gestor->ObtenerPosiblesTiposProtagonistas()->size() || idNuevo == (gestor->ObtenerPosiblesTiposProtagonistas()->size() + 1)){
 		gestor->quienGano = tipo;
 		ManejadorCliente::obtenerInstancia(NULL)->detener();
 		Cliente::obtenerInstancia("",0)->detener_escuchar();
@@ -182,6 +182,14 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 		return NULL;
 	}
 
+	else if (idNuevo == (gestor->ObtenerPosiblesTiposProtagonistas()->size() + 2)){
+		Dummy* dum = buscarID(tipo);
+		unsigned int state = estado;
+		dum->setearVidas(state);
+		dum->notificar();
+		return NULL;
+	}
+
 	unsigned int ref = idNuevo;
 	std::string nombre = "";
 	if (tipo >= TIPO_BOLA_FUEGO){
@@ -189,7 +197,7 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 		ref = tipo - TIPO_BOLA_FUEGO;
 	}
 
-	if (tipo != TIPO_MANUAL && tipo != TIPO_BOLA_FUEGO){
+	if (tipo != TIPO_MANUAL && tipo <= TIPO_BOLA_FUEGO){
 		nombre = decodificarTipo(tipo);
 	}else{
 		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(ref)->nombre;
