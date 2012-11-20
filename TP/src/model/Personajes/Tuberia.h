@@ -27,7 +27,7 @@ public:
 	virtual ~Tuberia();
 
 	void actualizar(float delta);
-
+	unsigned int obtenerTipo();
 private:
 	float calcularTiempo();
 	unsigned int calcularFabrica();
