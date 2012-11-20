@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../Tipos.h"
 
 Tuberia::Tuberia(const char* nom, Area* sup, float m, int dir, std::vector<int>* pb ,std::vector<FabricaActualizable*>* f ): Plataforma(nom, sup) {
 	media = m;
@@ -110,4 +111,16 @@ void Tuberia::crearPosicion(){
 	}
 
 	posCreacion = new Posicion(x,y);
+}
+
+unsigned int Tuberia::obtenerTipo(){
+	if (sentido == ABAJO_TB)
+		return TIPO_TUB_ABAJO;
+	if (sentido == ARRIBA_TB)
+		return TIPO_TUB_ARRIBA;
+	if (sentido == DERECHA_TB)
+		return TIPO_TUB_DERECHA;
+	if (sentido == IZQUIERDA_TB)
+		return TIPO_TUB_IZQUIERDA;
+	return 0;
 }
