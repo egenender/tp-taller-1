@@ -14,6 +14,7 @@ Dummy::Dummy(unsigned int elID, Posicion* posicion, int x, int y){
 	estado = MUERTO;
 	ancho = x;
 	alto = y;
+	vidas = 0;
 }
 
 Dummy::~Dummy() {
@@ -89,4 +90,12 @@ bool Dummy::puedeMover(){
 
 bool Dummy::estaMuerto(){
 	return estado == MUERTO;
+}
+
+unsigned int Dummy::obtenerVidas(){
+	return vidas;
+}
+
+void Dummy::setearVidas(unsigned int v){
+	vidas = v;
 }
