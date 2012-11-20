@@ -94,6 +94,9 @@ juego:
         saltar:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
+        herido:
+          sprites: src/resources/cuerpos/Totodile/totodileHerido.bmp
+          sonido:
         escalera:
           sprites: src/resources/cuerpos/Totodile/totodileSalto.bmp
           sonido: 
