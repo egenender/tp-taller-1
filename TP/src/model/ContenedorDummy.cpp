@@ -112,8 +112,9 @@ void ContenedorDummy::limpiarLista(){
 		tonto = (Dummy*) lista_borrar_primero(lista_dummies);
 		if (tonto->obtenerEstado() != MUERTO)
 			lista_insertar_ultimo(aux, tonto);
-		else
-			delete (tonto);
+		else{
+			//delete (tonto);
+		}
 	}
 	lista_destruir(lista_dummies, NULL);
 	lista_dummies = aux;
@@ -193,8 +194,6 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 	}else{
 		nombre += gestor->ObtenerPosiblesTiposProtagonistas()->at(ref)->nombre;
 	}
-
-	printf("nombre: %s\n", nombre.c_str());
 
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(nombre);
 	Dummy* nuevo = new Dummy(idNuevo, new Posicion(x,y), parametros->ancho, parametros->alto);
