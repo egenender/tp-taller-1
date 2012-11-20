@@ -15,7 +15,7 @@ EstadoJuegoTerminado::~EstadoJuegoTerminado() {
 
 void EstadoJuegoTerminado::manejarEvento(SDL_Event* evento){
 	if ((evento->type == SDL_KEYDOWN)&& (evento->key.keysym.sym == SDLK_ESCAPE)) {
-		ManejadorEstados::setearEstadoActual(ESTADO_MENU_PRINCIPAL);
+		ManejadorEstados::setearEstadoActual(ESTADO_MENU);
 	}
 }
 
