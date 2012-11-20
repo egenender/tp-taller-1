@@ -33,7 +33,7 @@ void ContenedorCuerpos::actualizar(Observable* observable){
 void ContenedorCuerpos::encolarCambios(){
 	Server* servidor = Server::obtenerInstancia(0);
 	structServidor_t* estructura;
-	vector<int>* eliminables = new vector<int>();
+	vector<unsigned int>* eliminables = new vector<unsigned int>();
 	for (unsigned int i = 0; i < IDs->size(); i++){
 		unsigned int idActual = IDs->at(i);
 		if (huboCambios->at(idActual)){
@@ -61,9 +61,10 @@ void ContenedorCuerpos::encolarCambios(){
 	unsigned int cant = eliminables->size();
 	for (unsigned int i = 0; i < cant; i++){
 		unsigned int cantj = IDs->size();
-		vector<int>* aux = new vector<int>();
+		vector<unsigned int>* aux = new vector<unsigned int>();
 		for (unsigned int j = 0; j < cantj; j++){
-			unsigned int valor = IDs->pop_back();
+			unsigned int valor = IDs->at(IDs->size()-1);
+			IDs->pop_back();
 			if (eliminables->at(i) != valor)
 				aux->push_back(valor);
 		}
