@@ -60,14 +60,16 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	unsigned int id = structServidor_obtener_id(mod);
 	Dummy* tonto = buscarID(id);
 	if (!tonto) {
-		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod));
+		int x, y;
+		structServidor_obtener_posicion(mod, &x, &y);
+		tonto = crearDummyNuevo(id, structServidor_obtener_tipo(mod), x,y );
 		if (!tonto)
 			return;
 	}
 	int x, y;
 	structServidor_obtener_posicion(mod, &x,&y);
 	tonto->setXY(x,y);
-	tonto->setEstado(structServidor_obtener_estado(mod));
+	tonto->setEstado(structServidor_obtener_estado(mod), structServidor_obtener_tipo(mod));
 	tonto->notificar();
 
 
@@ -144,7 +146,7 @@ Dummy* ContenedorDummy::buscarID(unsigned int id){
 //	return nuevo;
 //}
 
-Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
+Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, int x, int y){
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
 	if (idNuevo == gestor->ObtenerPosiblesTiposProtagonistas()->size()){
@@ -171,7 +173,7 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo){
 	printf("nombre: %s\n", nombre.c_str());
 
 	parametrosPersonaje* parametros = gestor->obtenerParametrosPersonaje(nombre);
-	Dummy* nuevo = new Dummy(idNuevo, new Posicion(300,150), parametros->ancho, parametros->alto);
+	Dummy* nuevo = new Dummy(idNuevo, new Posicion(x,y), parametros->ancho, parametros->alto);
 	gestor->crearVistaElemento(nuevo, nombre, false);
 
 	agregarDummy(nuevo);

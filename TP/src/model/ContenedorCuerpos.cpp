@@ -1,6 +1,7 @@
 #include "ContenedorCuerpos.h"
 #include "../controller/Server.h"
 #include "structures/structServidor.h"
+#include "../model/Tipos.h"
 
 ContenedorCuerpos::ContenedorCuerpos() {
 	huboCambios = new map<unsigned int, bool>() ;
@@ -38,6 +39,10 @@ void ContenedorCuerpos::encolarCambios(){
 			int estado = cuerpos->at(idActual)->obtenerEstado();
 			Posicion* pos = cuerpos->at(idActual)->obtenerPosicion();
 			unsigned int tipo = cuerpos->at(idActual)->obtenerTipo();
+			if (cuerpos->at(idActual)->estaInvencible())
+				tipo = INVENCIBLE;
+			if (cuerpos->at(idActual)->mataAlContacto())
+				tipo = MATADOR;
 			estructura = structServidor_crear(idActual, pos->obtenerX(), pos->obtenerY(), estado, tipo);
 
 			if (estructura)
@@ -58,4 +63,13 @@ void ContenedorCuerpos::encolarTodos(){
 		huboCambios->insert(pair<unsigned int, bool> (idActual, true));
 	}
 	encolarCambios();
+}
+
+void ContenedorCuerpos::reinsertar(){
+	for (unsigned int i = 0; i < IDs->size(); i++){
+		unsigned int idAct = IDs->at(i);
+		Cuerpo* cuerpo = cuerpos->at(idAct);
+		cuerpo->huboCambios();
+		cuerpo->notificarObservadores();
+	}
 }
