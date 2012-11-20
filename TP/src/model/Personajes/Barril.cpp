@@ -50,7 +50,6 @@ int Barril::obtenerEstado(){
 
 
 void Barril::chocarCon(Actualizable* ac){
-	if (estaMuerto()) return;
 	ac->chocarConBarril(this);
 }
 
