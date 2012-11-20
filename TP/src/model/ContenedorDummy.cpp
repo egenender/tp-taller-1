@@ -172,7 +172,10 @@ Dummy* ContenedorDummy::crearDummyNuevo(unsigned int idNuevo,unsigned int tipo, 
 	GestorConfiguraciones* gestor = GestorConfiguraciones::getInstance();
 
 	if (idNuevo == gestor->ObtenerPosiblesTiposProtagonistas()->size() || idNuevo == (gestor->ObtenerPosiblesTiposProtagonistas()->size() + 1)){
-		gestor->quienGano = tipo;
+		if (idNuevo == (gestor->ObtenerPosiblesTiposProtagonistas()->size() + 1) )
+			gestor->quienGano = (gestor->ObtenerPosiblesTiposProtagonistas()->size() + 1);
+		else
+			gestor->quienGano = tipo;
 		ManejadorCliente::obtenerInstancia(NULL)->detener();
 		Cliente::obtenerInstancia("",0)->detener_escuchar();
 		Cliente::obtenerInstancia("",0)->detener_escribir();
