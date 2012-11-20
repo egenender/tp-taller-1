@@ -30,6 +30,7 @@ TipoProtagonista::TipoProtagonista (){
 	vistaSonora=0;
 	disponible = true;
 	rutaGanador = "";
+	jugando = false;
 }
 
 //Manual* TipoProtagonista::CrearManual(const char* nombre,int x, int y, int velocidad){

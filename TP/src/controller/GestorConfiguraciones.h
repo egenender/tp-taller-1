@@ -110,6 +110,7 @@ class GestorConfiguraciones{
 		unsigned int quienGano;
 
 		std::string rutaGanador();
+		std::vector<Superficie*>* obtenerGanadores();
 
 		std::vector<Cuerpo*>* lasCajas;
 		std::vector<VistaVarios*>* lasVistaDeCajas;

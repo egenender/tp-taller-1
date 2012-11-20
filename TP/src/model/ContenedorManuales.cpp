@@ -70,6 +70,8 @@ void ContenedorManuales::actualizar(float delta){
 	if (ganado){
 		structServidor_t* estructura;
 		int tipo = GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size();
+		if (Manual::esCooperativo())
+			tipo++;
 		estructura = structServidor_crear(tipo, 0, 0, 0,ganador);
 		Server::obtenerInstancia(0)->encolar_cambio(estructura);
 		//ManejadorEstados::setearEstadoActual(ESTADO_GUI);
