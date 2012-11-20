@@ -51,9 +51,11 @@ void ContenedorDummy::actualizar(float delta){
 	while (cliente->hay_cambios() && interpretado < MAX_ACTUALIZACION){
 		structServidor_t* mod = (structServidor_t*)cliente->desencolar_cambio();
 		interpretarStruct(mod);
+		structServidor_destruir(mod);
 		interpretado++;
 	}
 	barra->actualizar();
+	limpiarLista();
 }
 
 void ContenedorDummy::interpretarStruct(structServidor_t* mod){
@@ -85,6 +87,8 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 
 }
 
+
+
 void ContenedorDummy::borrarID(unsigned int id){
 	lista_iter_t* iter = lista_iter_crear(lista_dummies);
 	bool encontrado = false;
@@ -98,6 +102,23 @@ void ContenedorDummy::borrarID(unsigned int id){
 	if (!encontrado) return ;
 	//lista_borrar(lista_dummies, iter);
 }
+
+void ContenedorDummy::limpiarLista(){
+
+	lista_t* aux = lista_crear();
+	unsigned int largo = lista_largo(lista_dummies);
+	Dummy* tonto;
+	for (unsigned int i = 0; i < largo; i++){
+		tonto = (Dummy*) lista_borrar_primero(lista_dummies);
+		if (tonto->obtenerEstado() != MUERTO)
+			lista_insertar_ultimo(aux, tonto);
+		else
+			delete (tonto);
+	}
+	lista_destruir(lista_dummies, NULL);
+	lista_dummies = aux;
+}
+
 
 Dummy* ContenedorDummy::buscarID(unsigned int id){
 	lista_iter_t* iter = lista_iter_crear(lista_dummies);

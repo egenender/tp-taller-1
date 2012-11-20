@@ -32,6 +32,7 @@ private:
 	void borrarID(unsigned int id);
 	Dummy* crearDummyNuevo(unsigned int, unsigned int, int , int);
 	string intToString(unsigned int);
+	void limpiarLista();
 };
 
 #endif /* CONTENEDORDUMMY_H_ */
