@@ -351,7 +351,7 @@ juego:
       alto: 600
       ancho: 2000
       piso: 540
-      fondo: src/resources/fondoGrande.png
+      fondo: src/resources/niveles/superMario.png
       musica: src/resources/niveles/route1.ogg
       elementos:
 #        - tipo: mono
@@ -558,7 +558,7 @@ juego:
       alto: 600
       ancho: 1600
       piso: 540
-      fondo: src/resources/niveles/superMario.png
+      fondo: src/resources/fondoGrande.png
       musica: src/resources/niveles/trololo.ogg
       elementos:
 #        - tipo: mono
