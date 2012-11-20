@@ -367,7 +367,7 @@ juego:
     esc: src/resources/items/ladder.png
     esc2: src/resources/items/film.png
   nivel:
-    - nivel: MooMooMilk
+    - nivel: Classic
       players: 1
       alto: 600
       ancho: 2000
@@ -410,14 +410,14 @@ juego:
 #          x: 900
 #          y: 470
       tuberias:
-        - tipo: tuberiaHTarriba
-          x: 100
-          y: 350
-          eme: 5
-        - tipo: tuberiaHTabajo
-          x: 200
-          y: 350
-          eme: 5
+#        - tipo: tuberiaHTarriba
+#          x: 100
+#          y: 350
+#          eme: 5
+#        - tipo: tuberiaHTabajo
+#          x: 200
+#          y: 350
+#          eme: 5
 #        - tipo: tuberiaHTderecha
 #          x: 500
 #          y: 250
