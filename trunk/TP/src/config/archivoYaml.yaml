@@ -246,12 +246,12 @@ juego:
           sonido:
           periodo: 7
   princesa:
-    ancho: 62
-    alto: 54
+    ancho: 70
+    alto: 60
     velocidad: 5
     animaciones:
-      quieto: src/resources/cuerpos/Primeape/primeapeQuieto.bmp
-      gritando: src/resources/cuerpos/Primeape/primeapeMovimiento.bmp
+      quieto: src/resources/cuerpos/Jynx/jynxQuieto.bmp
+      gritando: src/resources/cuerpos/Jynx/jynxCanto.bmp
   mono:
     ancho: 140
     alto: 126
