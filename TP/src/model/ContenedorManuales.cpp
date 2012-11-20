@@ -9,7 +9,7 @@ ContenedorManuales::ContenedorManuales() {
 	estados = new map<unsigned int, int>();
 	huboCambios = new map<unsigned int, bool>();
 	manuales = new map<unsigned int, Manual*>();
-	vidas = new map<unsigned int, unsigned int>();
+	vidas = new map<unsigned int, int>();
 	vidasCambiadas = new map<unsigned int, bool>();
 	IDs = new vector<unsigned int>();
 }
@@ -36,7 +36,7 @@ void ContenedorManuales::agregarManual(Manual* principal, unsigned int id){
 	huboCambios->insert(pair<unsigned int, bool>(id, true));
 	estados->insert(pair<unsigned int, int>(id, principal->obtenerEstado()));
 	manuales->insert(pair<unsigned int, Manual*>(id, principal));
-	vidas->insert(pair<unsigned int, unsigned int>(id, principal->obtenerVidas()));
+	vidas->insert(pair<unsigned int, int>(id, principal->obtenerVidas()));
 	vidasCambiadas->insert(pair<unsigned int, bool>(id, true));
 	IDs->push_back(id);
 }
@@ -128,11 +128,11 @@ void ContenedorManuales::actualizarManual(Manual* manual, int estado, unsigned i
 			huboCambios->erase(indice);
 			huboCambios->insert(pair<unsigned int, bool>(indice,true));
 			break;
-		}
+	}
 	if (manual->obtenerVidas() != vidas->at(indice)){
 		vidasCambiadas->erase(indice);
 		vidas->erase(indice);
-		vidas->insert(pair<unsigned int,unsigned int>(indice, manual->obtenerVidas()));
+		vidas->insert(pair<unsigned int,int>(indice, manual->obtenerVidas()));
 		vidasCambiadas->insert(pair<unsigned int, bool>(indice,true));
 	}
 }
