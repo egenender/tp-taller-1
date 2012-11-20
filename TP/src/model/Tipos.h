@@ -17,6 +17,13 @@
 #define TIPO_PU_PIEDRA 11
 #define TIPO_PU_VIDA 12
 #define TIPO_PU_BOLA 13
+#define TIPO_TUB_ARRIBA 14
+#define TIPO_TUB_ABAJO 15
+#define TIPO_TUB_DERECHA 16
+#define TIPO_TUB_IZQUIERDA 17
+#define INVENCIBLE 18
+#define MATADOR 19
+#define ELEVADOR 20
 
 
 std::string decodificarTipo(unsigned int);

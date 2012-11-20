@@ -10,6 +10,7 @@ std::string decodificarTipo(unsigned int tipo){
 	case TIPO_TORTUGA: aux = "tortuga"; break;
 	case TIPO_BOLA_FUEGO: aux = " "; break;
 	case TIPO_PLATAFORMA_MOVIL: aux = "plataformaMovil"; break;
+	case ELEVADOR: aux = "elevador"; break;
 	case TIPO_CAMA_ELASTICA: aux = "camaElastica"; break;
 	case TIPO_BARRIL: aux = "barril"; break;
 	case TIPO_CAJA: aux = "cajaRandom"; break;
@@ -19,6 +20,10 @@ std::string decodificarTipo(unsigned int tipo){
 	case TIPO_PU_PIEDRA: aux = "piedraEvolucion"; break;
 	case TIPO_PU_VIDA: aux = "vidaExtra"; break;
 	case TIPO_PU_BOLA: aux = "activaEspecial"; break;
+	case TIPO_TUB_ARRIBA: aux = "tuberiaHTarriba"; break;
+	case TIPO_TUB_ABAJO: aux = "tuberiaHTabajo"; break;
+	case TIPO_TUB_DERECHA: aux = "tuberiaHTderecha"; break;
+	case TIPO_TUB_IZQUIERDA: aux = "tuberiaHTizquierda"; break;
 	}
 
 	return aux;
