@@ -96,6 +96,7 @@ void Nivel::iniciar() {
 			algo->agregarObservador(corazones);
 	//		algo->agregarObservador(musica);
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
+			gestor->ObtenerPosiblesTiposProtagonistas()->at( algo->obtenerID() )->jugando = true;
 		}else{
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));

@@ -960,7 +960,7 @@ void GestorConfiguraciones::setPosiblesTiposProtagonistas(){
 		posiblesTiposProt->push_back(tipoper);
 		nombresProt->push_back(nombre);
 	}
-	IDACT = posiblesTiposProt->size() + 1;
+	IDACT = posiblesTiposProt->size() + 3;
 }
 
 

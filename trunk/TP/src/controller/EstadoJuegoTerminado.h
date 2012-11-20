@@ -5,7 +5,7 @@
 #include "../view/Superficie.h"
 #include <vector>
 #include "../model/Timer.h"
-#define TIEMPO_GANADOR 5
+#define TIEMPO_GANADOR 1
 
 class EstadoJuegoTerminado: public Estado {
 private:
