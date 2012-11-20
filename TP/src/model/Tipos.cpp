@@ -10,7 +10,7 @@ std::string decodificarTipo(unsigned int tipo){
 	case TIPO_TORTUGA: aux = "tortuga"; break;
 	case TIPO_BOLA_FUEGO: aux = " "; break;
 	case TIPO_PLATAFORMA_MOVIL: aux = "plataformaMovil"; break;
-	case ELEVADOR: aux = "elevador"; break;
+	case TIPO_ELEVADOR: aux = "elevador"; break;
 	case TIPO_CAMA_ELASTICA: aux = "camaElastica"; break;
 	case TIPO_BARRIL: aux = "barril"; break;
 	case TIPO_CAJA: aux = "cajaRandom"; break;

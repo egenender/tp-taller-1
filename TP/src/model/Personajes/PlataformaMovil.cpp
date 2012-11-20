@@ -91,6 +91,8 @@ void PlataformaMovil::chocarConPlataforma(Plataforma* p){
 }
 
 unsigned int PlataformaMovil::obtenerTipo(){
+	if ( esElevador )
+		return TIPO_ELEVADOR;
 	return TIPO_PLATAFORMA_MOVIL;
 }
 

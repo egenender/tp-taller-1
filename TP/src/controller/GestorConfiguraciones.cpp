@@ -621,7 +621,7 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	aux->push_back(QUIETO);
 	paramPlataMovil->matrizEstados->push_back(aux);
 
-	//Eleador
+	//Elevador
 
 	parametrosPersonaje* paramElevador= crearParametrosPersonaje(nodoRaiz["elevador"],"elevador");
 	nodoRaiz["elevador"]["distancia"] >> paramElevador->algo;
