@@ -56,7 +56,7 @@ void Camara::actualizar(Observable* observable) {
 	int x = observable->obtenerPosicion()->obtenerX();
 	int y = observable->obtenerPosicion()->obtenerY();
 	int ancho = observable->obtenerAncho();
-//	int alto = observable->obtenerAlto();
+	int alto = observable->obtenerAlto();
 
 	// Centramos la camara:
 	if ( (x ) < camara->x + margenScroll) {
@@ -67,7 +67,13 @@ void Camara::actualizar(Observable* observable) {
 			camara->x = (x + ancho ) + margenScroll - camara->w;
 	}
 
-	camara->y = (y + 50 / 2) - camara->h / 2;
+	if ( (y ) < camara->y + margenScroll) {
+		camara->y = (y) - margenScroll;
+	}
+
+	if ( (y + alto) > camara->y + camara->h - margenScroll) {
+			camara->y = (y + alto ) + margenScroll - camara->h;
+	}
 
 	// No dejo que se vaya del nivel:
 	if (camara->x < 0) {
