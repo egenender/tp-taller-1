@@ -182,10 +182,13 @@ juego:
           sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
           sonido: 
         escalera:
-          sprites: src/resources/cuerpos/Pikachu/pikachuQuieto2.bmp
+          sprites: src/resources/cuerpos/Pikachu/pikachuClimb.bmp
           sonido: 
         escalar:
-          sprites: src/resources/cuerpos/Pikachu/pikachuMovimiento2.bmp
+          sprites: src/resources/cuerpos/Pikachu/pikachuClimbing.bmp
+          sonido: 
+        herido:
+          sprites: src/resources/cuerpos/Pikachu/pikachuHerido.bmp
           sonido: 
         evoquieto:
           sprites: src/resources/cuerpos/Raichu/raichuQuieto.bmp
@@ -340,7 +343,8 @@ juego:
         destruida: src/resources/items/cajadsp.bmp
   texturas:
     viga: src/resources/items/viga2.jpg
-    esc: src/resources/items/film.png
+    esc: src/resources/items/ladder.png
+    esc2: src/resources/items/film.png
   nivel:
     - nivel: MooMooMilk
       players: 1
@@ -554,60 +558,119 @@ juego:
       alto: 600
       ancho: 1600
       piso: 540
-      fondo: src/resources/fondoGrande.png
+      fondo: src/resources/niveles/superMario.png
       musica: src/resources/niveles/trololo.ogg
-      personajes:
-        - tipo: troll
+      elementos:
+#        - tipo: mono
+#          x: 100
+#          y: 150
+        - tipo: princesa
+          x: 600
+          y: 150
+#        - tipo: hongo
+#          x: 600
+#          y: 150
+#        - tipo: mono
+#          x: 650
+#          y: 150
+        - tipo: camaElastica
+          x: 200
+          y: 562
+#        - tipo: camaElastica
+#          x: 970
+#          y: 562
+  #      - tipo: princesa
+ #         x: 700
+#          y: 599
+        - tipo: plataformaMovil
+          x: 950
+          y: 150
+#        - tipo: elevador
+#          x: 800
+#          y: 350
+      cajas:
+        - tipo: cajaRandom
+          x: 70
+          y: 470
+#        - tipo: cajaRandom
+#          x: 900
+#          y: 470
+      tuberias:
+        - tipo: tuberiaHTarriba
           x: 100
-          y: 150
-        - tipo: troll
-          x: 700
-          y: 150
-        - tipo: troll
-          x: 700
-          y: 599
+          y: 350
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 200
+          y: 350
+          eme: 5
+#        - tipo: tuberiaHTderecha
+#          x: 500
+#          y: 250
+#          eme: 5
+        - tipo: tuberiaHTizquierda
+          x: 500
+          y: 350
+          eme: 5
       plataformas:
         - textura: viga
           x: 250
           y: 150
-          ancho: 200
+          ancho: 400
           alto: 50
         - textura: viga
-          x: 500
-          y: 450
-          ancho: 50
+          x: 300
+          y: 350
+          ancho: 400
           alto: 50
-        - textura: viga
-          x: 550
-          y: 430
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 600
-          y: 410
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 650
-          y: 390
-          ancho: 50
-          alto: 50
+      vigas:
         - textura: viga
           x: 700
-          y: 370
-          ancho: 50
-          alto: 50
-        - textura: viga
-          x: 750
           y: 350
-          ancho: 50
+          ancho: 500
           alto: 50
+          inclinacion: 45
+        - textura: viga
+          x: 700
+          y: 350
+          ancho: 500
+          alto: 50
+          inclinacion: -45
+        - textura: viga
+          x: 1000
+          y: 350
+          ancho: 500
+          alto: 50
+          inclinacion: 25
+        - textura: viga
+          x: 1000
+          y: 350
+          ancho: 500
+          alto: 50
+          inclinacion: -25
+        - textura: viga
+          x: 1400
+          y: 350
+          ancho: 200
+          alto: 50
+          inclinacion: 5
+        - textura: viga
+          x: 1400
+          y: 500
+          ancho: 200
+          alto: 50
+          inclinacion: -5
       escaleras:
         - textura: esc
-          x: 100
+          x: 400
           y: 150
-          ancho: 80
-          alto: 400
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 600
+          y: 350
+          ancho: 50
+          alto: 200
     - nivel: Simetria
       players: 2
       alto: 2500
