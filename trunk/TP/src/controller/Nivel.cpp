@@ -94,9 +94,11 @@ void Nivel::iniciar() {
 			Dummy* algo = gestor->obtenerDummyMio();
 			algo->agregarObservador(camara);
 			algo->agregarObservador(corazones);
-	//		algo->agregarObservador(musica);
+			gestor->invenciTester->agregarDummy(algo);
 			controlador = new ControladorCliente(algo->obtenerID(), algo);
 			gestor->ObtenerPosiblesTiposProtagonistas()->at( algo->obtenerID() )->jugando = true;
+			gestor->invenciTester->agregarObservador(musica);
+
 		}else{
 			Manual* prin = gestor->ObtenerManual();
 			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));

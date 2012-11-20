@@ -9,6 +9,7 @@
 #include "../view/HojaSprites.h"
 #include "../view/VistaProtagonista.h"
 #include "../view/VistaAnimada.h"
+#include "../model/Personajes/SonInvencibles.h"
 #include "../view/VistaImagen.h"
 #include "../view/VistaAutomatico.h"
 #include "../view/VistaVarios.h"
@@ -108,6 +109,7 @@ class GestorConfiguraciones{
 		bool destruir;
 	public:
 		unsigned int quienGano;
+		SonInvencibles* invenciTester;
 
 		std::string rutaGanador();
 		std::vector<Superficie*>* obtenerGanadores();

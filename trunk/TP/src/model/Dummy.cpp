@@ -7,6 +7,7 @@
 
 #include "Dummy.h"
 #include "Tipos.h"
+#include "../controller/GestorConfiguraciones.h"
 
 Dummy::Dummy(unsigned int elID, Posicion* posicion, int x, int y){
 	ID = elID;
@@ -58,7 +59,8 @@ void Dummy::setEstado(int state, int tipo){
 		matador = true;
 		invencible = true;
 	}
-
+	GestorConfiguraciones::getInstance()->invenciTester->huboCambios();
+	GestorConfiguraciones::getInstance()->invenciTester->notificarObservadores();
 	estado = state;
 }
 
