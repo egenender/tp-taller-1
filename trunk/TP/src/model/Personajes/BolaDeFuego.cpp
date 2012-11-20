@@ -161,6 +161,7 @@ void BolaDeFuego::actualizarMovimiento(){
 		return;
 	}
 	trasladar(movX,0,false);
+	huboCambios();
 	//saltar();
 //
 //	if (direccion == DERECHA_BF && !estoySaltando())
