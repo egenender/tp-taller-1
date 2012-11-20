@@ -247,7 +247,7 @@ void* privEscuchar(void* param){
 
 		void* dato = malloc (tamanio);
 		int bytes;
-		intervaloTiempo.tv_sec=10;
+		intervaloTiempo.tv_sec=CLIENTE_ENVIO;
 		intervaloTiempo.tv_usec=0;
 
 		fd_set set= fd_set();

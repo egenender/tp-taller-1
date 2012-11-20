@@ -25,6 +25,7 @@ using namespace std;
 #define PORT		5556
 #define SERVERHOST 	"127.0.0.1"
 #define MAX_INTENTOS 8
+#define CLIENTE_ENVIO 10
 
 typedef queue <void*> Cola ;
 
