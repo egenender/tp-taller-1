@@ -297,6 +297,7 @@ void GestorConfiguraciones::inicioCarga(){
 	CargarTuberias(nodoRaiz);
 	CargarCajas(nodoRaiz);
 
+	invenciTester = new SonInvencibles();
 }
 
 void GestorConfiguraciones::CargarCajas(const YAML::Node& nodoRaiz){
