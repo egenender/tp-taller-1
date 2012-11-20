@@ -25,6 +25,10 @@ Posicion* Cuerpo::obtenerPosicion() {
 	return superficieOcupada->obtenerPosicion();
 }
 
+bool Cuerpo::saltaAlto(){
+	return false;
+}
+
 void Cuerpo::moverA(Posicion* pos){
 	superficieOcupada->cambiarPosicion(pos);
 	if (superficieDeColision){

@@ -44,6 +44,12 @@ void ContenedorCuerpos::encolarCambios(){
 				tipo = INVENCIBLE;
 			if (cuerpos->at(idActual)->mataAlContacto())
 				tipo = MATADOR;
+			if (cuerpos->at(idActual)->saltaAlto())
+				tipo = SALTOALTO;
+			if (cuerpos->at(idActual)->estaInvencible()  && cuerpos->at(idActual)->saltaAlto() )
+				tipo = SALTOALTO + INVENCIBLE;
+			if (cuerpos->at(idActual)->mataAlContacto()  && cuerpos->at(idActual)->saltaAlto() )
+				tipo = SALTOALTO + MATADOR;
 			estructura = structServidor_crear(idActual, pos->obtenerX(), pos->obtenerY(), estado, tipo);
 
 			if (estructura)
