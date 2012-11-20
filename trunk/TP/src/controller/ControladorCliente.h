@@ -5,7 +5,7 @@
 #include "../model/Observable.h"
 #include "../model/Dummy.h"
 #include "../model/Timer.h"
-#define TIEMPO_ESPERA 20
+#define TIEMPO_ESPERA 60
 
 class ControladorCliente : public Controlador {
 private:

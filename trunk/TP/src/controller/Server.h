@@ -26,9 +26,10 @@
 using namespace std;
 
 #define PORT	5556
-#define TIEMPO_ENVIO 7
+#define TIEMPO_ENVIO 50
 #define TIME_OUT_SERVER  100
-#define CLIENTE_TIME_OUT 50
+#define CLIENTE_TIME_OUT 100
+
 
 typedef struct prueba{
 
