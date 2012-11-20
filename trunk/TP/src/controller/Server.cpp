@@ -550,6 +550,7 @@ void* _escuchar(void* parametros){
 					structCliente_t* haMuerto =  structCliente_crear( IDsockets->at(j) , MUERTO );
 					server->Autoencolar_cambio(haMuerto);
 					_TerminarCliente(j);
+					Log::getInstance()->writeToLogFile("INFO","se autoencola muerto");
 				}
 			}catch (std::out_of_range &e){
 
@@ -641,6 +642,7 @@ void* _escuchar(void* parametros){
 								_TerminarCliente(i);
 								Server *server = Server::obtenerInstancia(0);
 								server->desco = true;
+								Log::getInstance()->writeToLogFile("INFO","LLega un cliente muerto");
 							}
 							pthread_mutex_unlock(&mutex);
 							pthread_mutex_destroy(&mutex);
@@ -694,8 +696,8 @@ void* _escribir(void* parametros){
 						if(sockets->at(i)){
 							escribir_a_cliente(i,cambio,tamanio);
 							structServidor_t* lala = (structServidor_t*)cambio;
-							printf("ID: %d\n", structServidor_obtener_id(lala) );
-							printf("estado: %d\n", structServidor_obtener_estado(lala) );
+							//printf("ID: %d\n", structServidor_obtener_id(lala) );
+							//printf("estado: %d\n", structServidor_obtener_estado(lala) );
 						}
 					}
 				}
