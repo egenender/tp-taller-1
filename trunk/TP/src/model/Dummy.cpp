@@ -82,3 +82,7 @@ int Dummy::obtenerAncho(){
 int Dummy::obtenerAlto(){
 	return alto;
 }
+
+bool Dummy::puedeMover(){
+	return !(estado == HERIDO);
+}

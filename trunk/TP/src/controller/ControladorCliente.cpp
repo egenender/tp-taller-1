@@ -21,6 +21,9 @@ ControladorCliente::~ControladorCliente() {
 void ControladorCliente::manejarEvento(SDL_Event* evento){
 	Uint8 *keystates = SDL_GetKeyState(NULL);
 
+	if (!controlable->puedeMover())
+		return ;
+
 	if (keystates[SDLK_ESCAPE]) {
 		Log::getInstance()->writeToLogFile(Log::INFORMATIVO, "Se volvera al Estado de seleccion.");
 		ManejadorCliente::obtenerInstancia(NULL)->detener();

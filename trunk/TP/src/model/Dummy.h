@@ -31,6 +31,7 @@ public:
 
 	bool estaInvencible();
 	bool mataAlContacto();
+	bool puedeMover();
 };
 
 #endif /* DUMMY_H_ */
