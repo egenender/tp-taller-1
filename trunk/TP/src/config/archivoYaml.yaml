@@ -371,7 +371,7 @@ juego:
   nivel:
     - nivel: Classic
       players: 1
-      alto: 600
+      alto: 700
       ancho: 2000
       piso: 540
       fondo: src/resources/niveles/superMario.png
