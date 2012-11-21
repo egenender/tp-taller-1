@@ -39,9 +39,14 @@ ContenedorDummy::~ContenedorDummy() {
 
 void ContenedorDummy::agregarDummy(Dummy* tonto){
 	lista_insertar_ultimo(lista_dummies, tonto);
-
-	string aux1 = "Se ha conectado el cliente ";
-	string aux2 = intToString(tonto->obtenerID());
+	int id = tonto->obtenerID();
+	string aux1 = "";
+	if (id < GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size() ){
+		aux1 = "Se ha conectado el cliente ";
+	}else{
+		aux1 = "Ha aparecido el elemento ";
+	}
+	string aux2 = intToString(id);
 	string aux3 = aux1 + aux2;
 	barra->setearMensaje(aux3);
 }
@@ -79,8 +84,13 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 	//igual da lo mismo porque no va a volver a cambiar
 
 	if (structServidor_obtener_estado(mod) == MUERTO){
-		string aux1 = "Se ha desconectado el cliente ";
-		string aux2 = intToString(id);
+		string aux1 = "";
+		if (id < GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size() ){
+			aux1 = "Se ha desconectado el cliente ";
+		}else{
+			aux1 = "Ha muerto el personaje ";
+		}
+		string aux2 = intToString(id+1);
 		string aux3 = aux1 + aux2;
 		barra->setearMensaje(aux3);
 	}
