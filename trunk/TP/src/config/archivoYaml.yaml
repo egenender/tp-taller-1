@@ -369,6 +369,255 @@ juego:
     viga2: src/resources/items/viga.jpg
     invisible: src/resources/items/mag.bmp
   nivel:
+    - nivel: Simetria
+      players: 2
+      alto: 2500
+      ancho: 2000
+      fondo: src/resources/ph-101661.jpg
+      musica: src/resources/niveles/trololo.ogg
+      piso: 2450
+      elementos:
+        - tipo: camaElastica
+          x: 280
+          y: 2000
+        - tipo: camaElastica
+          x: 1950
+          y: 2000
+        - tipo: camaElastica
+          x: 1200
+          y: 800
+        - tipo: princesa
+          x: 1400
+          y: 140
+        - tipo: mono
+          x: 1300
+          y: 140
+        - tipo: elevador
+          x: 100
+          y: 1200
+        - tipo: elevador
+          x: 1900
+          y: 1200
+        - tipo: plataformaMovil
+          x: 350
+          y: 1150
+        - tipo: plataformaMovil
+          x: 1250
+          y: 1150
+      plataformas:
+        - textura: viga2
+          x: 920
+          y: 1050
+          ancho: 150
+          alto: 50
+        - textura: viga
+          x: 200
+          y: 2200
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 1600
+          y: 2200
+          ancho: 200
+          alto: 50
+        - textura: viga
+          x: 100
+          y: 2000
+          ancho: 2000
+          alto: 50
+        - textura: viga
+          x: 300
+          y: 1750
+          ancho: 1600
+          alto: 50
+        - textura: viga
+          x: 50
+          y: 400
+          ancho: 100
+          alto: 50
+        - textura: viga
+          x: 750
+          y: 140
+          ancho: 700
+          alto: 80
+        - textura: viga2
+          x: 410
+          y: 800
+          ancho: 1000
+          alto: 50
+      vigas:
+        - textura: viga
+          x: 200
+          y: 1530
+          ancho: 300
+          alto: 50
+          inclinacion: -20
+        - textura: viga
+          x: 1500
+          y: 1400
+          ancho: 300
+          alto: 50
+          inclinacion: 20
+        - textura: viga
+          x: 510
+          y: 460
+          ancho: 500
+          alto: 50
+          inclinacion: 40
+        - textura: viga
+          x: 510
+          y: 390
+          ancho: 350
+          alto: 50
+          inclinacion: -40
+      escaleras:
+        - textura: esc
+          x: 200
+          y: 2200
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 1750
+          y: 2200
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 1000
+          y: 2000
+          ancho: 50
+          alto: 450
+        - textura: esc
+          x: 350
+          y: 2000
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 1600
+          y: 2000
+          ancho: 50
+          alto: 200
+        - textura: esc
+          x: 350
+          y: 1460
+          ancho: 50
+          alto: 290
+        - textura: esc
+          x: 1650
+          y: 1460
+          ancho: 50
+          alto: 290
+        - textura: esc
+          x: 970
+          y: 800
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 590
+          y: 300
+          ancho: 30
+          alto: 230
+      cajas:
+        - tipo: cajaRandom
+          x: 1500
+          y: 1910
+        - tipo: cajaRandom
+          x: 1300
+          y: 2350
+        - tipo: cajaRandom
+          x: 1300
+          y: 680
+      tuberias:
+        - tipo: tuberiaHTabajo
+          x: 600
+          y: 2100
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 1400
+          y: 2100
+          eme: 5
+        - tipo: tuberiaHTizquierda
+          x: 1820
+          y: 2000
+          eme: 3
+        - tipo: tuberiaHTarriba
+          x: 1000
+          y: 1750
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 850
+          y: 280
+          eme: 10
+    - nivel: Hardcode
+      players: 2
+      alto: 700
+      ancho: 1200
+      fondo: src/resources/fondoH.bmp
+      musica: src/resources/niveles/trololo.ogg
+      piso: 650
+      elementos:
+        - tipo: princesa
+          x: 300
+          y: 320
+        - tipo: mono
+          x: 400
+          y: 325
+      cajas:
+      vigas:
+        - textura: viga
+          x: 50
+          y: 300
+          ancho: 1000 
+          alto: 60
+          inclinacion: 5
+      plataformas:
+      escaleras:
+        - textura: esc
+          x: 900
+          y: 350
+          ancho: 50
+          alto: 300
+        - textura: invisible
+          x: 1
+          y: 11
+          ancho: 10
+          alto: 600
+      tuberias:
+        - tipo: tuberiaHTabajo
+          x: 200
+          y: 420
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 280
+          y: 425
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 360
+          y: 430
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 440
+          y: 435
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 520
+          y: 440
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 600
+          y: 445
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 680
+          y: 450
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 760
+          y: 455
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 840
+          y: 460
+          eme: 2
     - nivel: Classic
       players: 1
       alto: 700
@@ -710,253 +959,3 @@ juego:
           y: 350
           ancho: 50
           alto: 200
-    - nivel: Simetria
-      players: 2
-      alto: 2500
-      ancho: 2000
-      fondo: src/resources/ph-101661.jpg
-      musica: src/resources/niveles/trololo.ogg
-      piso: 2450
-      elementos:
-        - tipo: camaElastica
-          x: 280
-          y: 2000
-        - tipo: camaElastica
-          x: 1950
-          y: 2000
-        - tipo: camaElastica
-          x: 1200
-          y: 800
-        - tipo: princesa
-          x: 1400
-          y: 140
-        - tipo: mono
-          x: 1300
-          y: 140
-        - tipo: elevador
-          x: 100
-          y: 1200
-        - tipo: elevador
-          x: 1900
-          y: 1200
-        - tipo: plataformaMovil
-          x: 350
-          y: 1150
-        - tipo: plataformaMovil
-          x: 1250
-          y: 1150
-      plataformas:
-        - textura: viga2
-          x: 920
-          y: 1050
-          ancho: 150
-          alto: 50
-        - textura: viga
-          x: 200
-          y: 2200
-          ancho: 200
-          alto: 50
-        - textura: viga
-          x: 1600
-          y: 2200
-          ancho: 200
-          alto: 50
-        - textura: viga
-          x: 100
-          y: 2000
-          ancho: 2000
-          alto: 50
-        - textura: viga
-          x: 300
-          y: 1750
-          ancho: 1600
-          alto: 50
-        - textura: viga
-          x: 50
-          y: 400
-          ancho: 100
-          alto: 50
-        - textura: viga
-          x: 750
-          y: 140
-          ancho: 700
-          alto: 80
-        - textura: viga2
-          x: 410
-          y: 800
-          ancho: 1000
-          alto: 50
-      vigas:
-        - textura: viga
-          x: 200
-          y: 1530
-          ancho: 300
-          alto: 50
-          inclinacion: -20
-        - textura: viga
-          x: 1500
-          y: 1400
-          ancho: 300
-          alto: 50
-          inclinacion: 20
-        - textura: viga
-          x: 510
-          y: 460
-          ancho: 500
-          alto: 50
-          inclinacion: 40
-        - textura: viga
-          x: 510
-          y: 390
-          ancho: 350
-          alto: 50
-          inclinacion: -40
-      escaleras:
-        - textura: esc
-          x: 200
-          y: 2200
-          ancho: 50
-          alto: 250
-        - textura: esc
-          x: 1750
-          y: 2200
-          ancho: 50
-          alto: 250
-        - textura: esc
-          x: 1000
-          y: 2000
-          ancho: 50
-          alto: 450
-        - textura: esc
-          x: 350
-          y: 2000
-          ancho: 50
-          alto: 200
-        - textura: esc
-          x: 1600
-          y: 2000
-          ancho: 50
-          alto: 200
-        - textura: esc
-          x: 350
-          y: 1460
-          ancho: 50
-          alto: 290
-        - textura: esc
-          x: 1650
-          y: 1460
-          ancho: 50
-          alto: 290
-        - textura: esc
-          x: 970
-          y: 800
-          ancho: 50
-          alto: 250
-        - textura: esc
-          x: 590
-          y: 300
-          ancho: 30
-          alto: 230
-      cajas:
-        - tipo: cajaRandom
-          x: 1500
-          y: 1910
-        - tipo: cajaRandom
-          x: 1300
-          y: 2350
-        - tipo: cajaRandom
-          x: 1300
-          y: 680
-      tuberias:
-        - tipo: tuberiaHTabajo
-          x: 600
-          y: 2100
-          eme: 5
-        - tipo: tuberiaHTabajo
-          x: 1400
-          y: 2100
-          eme: 5
-        - tipo: tuberiaHTizquierda
-          x: 1820
-          y: 2000
-          eme: 3
-        - tipo: tuberiaHTarriba
-          x: 1000
-          y: 1750
-          eme: 5
-        - tipo: tuberiaHTabajo
-          x: 850
-          y: 280
-          eme: 10
-
-    - nivel: Hardcode
-      players: 2
-      alto: 600
-      ancho: 1200
-      fondo: src/resources/fondoH.bmp
-      musica: src/resources/niveles/trololo.ogg
-      piso: 550
-      elementos:
-        - tipo: princesa
-          x: 300
-          y: 220
-        - tipo: mono
-          x: 400
-          y: 225
-      cajas:
-      vigas:
-        - textura: viga
-          x: 50
-          y: 200
-          ancho: 1000 
-          alto: 60
-          inclinacion: 5
-      plataformas:
-      escaleras:
-        - textura: esc
-          x: 900
-          y: 250
-          ancho: 50
-          alto: 300
-        - textura: invisible
-          x: 1
-          y: 1
-          ancho: 10
-          alto: 600
-      tuberias:
-        - tipo: tuberiaHTabajo
-          x: 200
-          y: 320
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 280
-          y: 325
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 360
-          y: 330
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 440
-          y: 335
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 520
-          y: 340
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 600
-          y: 345
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 680
-          y: 350
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 760
-          y: 355
-          eme: 2
-        - tipo: tuberiaHTabajo
-          x: 840
-          y: 360
-          eme: 2
