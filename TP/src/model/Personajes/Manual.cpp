@@ -268,13 +268,14 @@ void Manual::chocarCon(Actualizable* ac){
 	ac->chocarConManual(this);
 }
 void Manual::chocarConManual(Manual* manual){
-	return;
+
 	if (cooperativo) return;
 	if (estaMuerto()) return;
 	if (manual->mataAlContacto() && !this->estaInvencible()){
 		perderVida();
 		return;
 	}
+	return;
 
 	Posicion* posCmp = new Posicion (manual->obtenerPosicionAnterior()->obtenerX(), manual->obtenerPosicionAnterior()->obtenerY() + manual->obtenerArea()->obtenerAlto());
 	if (posCmp->estaArribaDe(posAnterior))
