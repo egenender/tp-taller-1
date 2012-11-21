@@ -152,7 +152,7 @@ juego:
           sonido:
         caminar:
           sprites: src/resources/cuerpos/Gastly/gastlyMovimiento.bmp
-          sonido: src/resources/cuerpos/footstep.ogg
+          sonido: 
         saltar:
           sprites: src/resources/cuerpos/Gastly/gastlySalto.bmp
           sonido: 
