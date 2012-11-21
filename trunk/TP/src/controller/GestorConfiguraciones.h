@@ -91,7 +91,7 @@ class GestorConfiguraciones{
 		std::vector<TipoProtagonista*>* posiblesTiposProt;
 		std::vector<string>* nombresProt;
 
-		bool esCliente, esServidor;
+		bool esServidor;
 		unsigned int IDACT;
 		int nivelElegido;
 		ContenedorDummy* contenedor;
@@ -108,6 +108,7 @@ class GestorConfiguraciones{
 
 		bool destruir;
 	public:
+		bool esCliente;
 		VistaVarios* vistaProt;
 		unsigned int quienGano;
 		SonInvencibles* invenciTester;
