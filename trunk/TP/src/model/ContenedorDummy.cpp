@@ -39,7 +39,7 @@ ContenedorDummy::~ContenedorDummy() {
 
 void ContenedorDummy::agregarDummy(Dummy* tonto){
 	lista_insertar_ultimo(lista_dummies, tonto);
-	int id = tonto->obtenerID();
+	unsigned int id = tonto->obtenerID();
 	string aux1 = "";
 	if (id < GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size() ){
 		aux1 = "Se ha conectado el cliente ";
