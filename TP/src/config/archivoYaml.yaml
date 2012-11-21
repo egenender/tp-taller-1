@@ -19,16 +19,16 @@ juego:
           sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Charmander/charmanderSalto.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Charmander/Charmander-Jump.ogg
         escalera:
-          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climb.bmp
+          sprites: src/resources/cuerpos/Charmander/charmanderQuieto.bmp
           sonido: 
         escalar:
-          sprites: src/resources/cuerpos/Yoshi/Yoshi-Climbing.bmp
-          sonido: 
+          sprites: src/resources/cuerpos/Charmander/charmanderMovimiento.bmp
+          sonido: src/resources/cuerpos/Charmander/Charmander-Climbing.ogg
         herido:
           sprites: src/resources/cuerpos/Charmander/charmanderHerido.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Charmander/Charmander-Hurt.ogg
         evoquieto:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonQuieto.bmp
           sonido: 
@@ -37,13 +37,13 @@ juego:
           sonido: src/resources/cuerpos/footstep.ogg
         evosaltar:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Charmeleon/Charmeleon-Jump.ogg
         evoescalera:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
           sonido: 
         evoescalar:
           sprites: src/resources/cuerpos/Charmeleon/charmeleonMovimiento.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Charmeleon/Charmeleon-Climbing.ogg
       poster: src/resources/cuerpos/Charmander/poster.bmp
       bolaDeFuego:
         ancho: 25
@@ -201,16 +201,16 @@ juego:
           sonido: src/resources/cuerpos/footstep.ogg
         saltar:
           sprites: src/resources/cuerpos/Pikachu/pikachuSalto.bmp
-          sonido: 
+          sonido:  src/resources/cuerpos/Pikachu/Pikachu-Jump.ogg
         escalera:
           sprites: src/resources/cuerpos/Pikachu/pikachuClimb.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Pikachu/Pikachu-Jump2.ogg 
         escalar:
           sprites: src/resources/cuerpos/Pikachu/pikachuClimbing.bmp
-          sonido: 
+          sonido: src/resources/cuerpos/Pikachu/Pikachu-Climbing.ogg
         herido:
           sprites: src/resources/cuerpos/Pikachu/pikachuHerido.bmp
-          sonido: 
+          sonido:  src/resources/cuerpos/Pikachu/hurt.wav
         evoquieto:
           sprites: src/resources/cuerpos/Raichu/raichuQuieto.bmp
           sonido: 
