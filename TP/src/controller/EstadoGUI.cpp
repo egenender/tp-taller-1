@@ -265,7 +265,7 @@ void EstadoGUI::crearVistas(){
 
 	fondoPestania = new Superficie("src/gui/resources/fondoPestanias.bmp");
 	fondoPestania->transparencia(255,0,255);
-	fondo = new Superficie("src/gui/resources/fondo.bmp");
+	fondo = new Superficie("src/gui/resources/fondo2.bmp");
 
 	vistaCheck = new VistaCheckbox("src/gui/resources/checkbox-unchecked.bmp", "src/gui/resources/checkbox-checked.bmp");
 	checkCooperativo->agregarObservador(vistaCheck);

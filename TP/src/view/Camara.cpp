@@ -1,6 +1,7 @@
 #include "Camara.h"
 #include "../model/Personajes/Manual.h"
 #include "../controller/GestorConfiguraciones.h" //FIXME
+#include "../gui/model/Ventana.h"
 
 void Camara::iniciarCamara() {
 
@@ -16,8 +17,8 @@ void Camara::iniciarCamara() {
 	camara = new SDL_Rect();
 	camara->x = 0;
 	camara->y = 0;
-	camara->w = 800;
-	camara->h = 600;
+	camara->w = ANCHO_ESTANDARD;
+	camara->h = ALTO_ESTANDARD;
 }
 
 Camara::~Camara() {

@@ -10,8 +10,8 @@
 
 #include "../../view/Superficie.h"
 
-#define ANCHO_ESTANDARD 800
-#define ALTO_ESTANDARD 600
+#define ANCHO_ESTANDARD 1200
+#define ALTO_ESTANDARD 700
 
 class Ventana {
 private:

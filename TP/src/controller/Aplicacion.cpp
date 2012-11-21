@@ -38,7 +38,7 @@ bool Aplicacion::iniciar() {
     // Creamos la ventana:
     //if((display = SDL_SetVideoMode(ANCHO_VENTANA, ALTO_VENTANA, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL)
 
-    if((ventana=new Ventana(800,600))==NULL)
+    if((ventana=new Ventana(ANCHO_ESTANDARD,ALTO_ESTANDARD))==NULL)
     	return false;
 
     /*if ((ventana = new Ventana()) == NULL)
