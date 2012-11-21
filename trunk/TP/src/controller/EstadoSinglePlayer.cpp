@@ -111,7 +111,7 @@ void EstadoSinglePlayer::crearVistas(){
 	vistaScrollNiveles = new VistaLista(3);
 	vistaScrollPersonajes = new VistaLista(4);
 
-	fondo = new Superficie ("src/gui/resources/fondo.bmp");
+	fondo = new Superficie ("src/gui/resources/fondo2.bmp");
 	fondo2 = new Superficie ("src/gui/resources/fondoPestanias.bmp");
 	fondo2->transparencia(255,0,255);
 

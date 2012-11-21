@@ -2,6 +2,7 @@
 #include "../gui/model/ManejadorEjemplo.h"
 #include "ManejadorEstados.h"
 #include "../gui/model/ManejadorCambiaEstado.h"
+#include "../gui/model/Ventana.h"
 
 EstadoMenuPrincipal EstadoMenuPrincipal::instancia;
 
@@ -39,7 +40,7 @@ void EstadoMenuPrincipal::crearVistas(){
 	btnMultiPlayer->agregarObservador(vistaBtnMulti);
 	btnSinglePlayer->agregarObservador(vistaBtnSingle);
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
-	fondo->escala(800,600);
+	fondo->escala(ANCHO_ESTANDARD,ALTO_ESTANDARD);
 	titulo = new Superficie("src/gui/resources/titulo.png");
 
 	/*TODO:

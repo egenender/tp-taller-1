@@ -1,6 +1,7 @@
 #include "EstadoJuegoTerminado.h"
 #include "ManejadorEstados.h"
 #include "GestorConfiguraciones.h"
+#include "../gui/model/Ventana.h"
 
 EstadoJuegoTerminado EstadoJuegoTerminado::instancia;
 
@@ -23,7 +24,7 @@ void EstadoJuegoTerminado::manejarEvento(SDL_Event* evento){
 
 void EstadoJuegoTerminado::iniciar(){
 	fondo = new Superficie("src/gui/resources/fondoPrincipal.jpg");
-	fondo->escala(800,600);
+	fondo->escala(ANCHO_ESTANDARD,ALTO_ESTANDARD);
 	//tengo que ver como consigo al ganador-> seguro lo obtengo por el nombre ;)
 	ganadores = GestorConfiguraciones::getInstance()->obtenerGanadores();
 	for (unsigned int i = 0; i < ganadores->size(); i++)
