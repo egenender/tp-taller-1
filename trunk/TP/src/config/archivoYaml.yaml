@@ -367,7 +367,7 @@ juego:
     esc: src/resources/items/ladder.png
     esc2: src/resources/items/film.png
     viga2: src/resources/items/viga.jpg
-    invisible: src/resources/items/mag.bmp
+    invisible: src/resources/items/transp.png
   nivel:
     - nivel: Simetria
       players: 2
