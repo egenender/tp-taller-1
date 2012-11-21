@@ -163,18 +163,14 @@ void Barril::destruir(){
 
 bool Barril::calculoBajada(){
 	float rnd;
-	do{
-		rnd =(rand() % 1000) + 1;
-		float w;
-		do{
-			w =(rand() % 1000);
-		}while (w >= rnd);
-		rnd = w / rnd;
-	}while(rnd == 1);
+	float max = (float)RAND_MAX + 1;
+	rnd = ((float) rand() / max) ;
+
 
 	float cmp = (float)PROBABILIDAD_BAJADA / 100;
 
 	return (rnd < cmp);
+
 }
 
 void Barril::bajar(){
