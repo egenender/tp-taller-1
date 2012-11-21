@@ -68,11 +68,25 @@ void VistaSonora::actualizar(Observable* observable) {
 	caminando = false;
 
 	// TODO: esto deberia mejorarse:
-	if (estadoActual == SALTANDODER || estadoActual == SALTANDOIZQ)
-		estadoActual = SALTAR;
-	else if (estadoActual == CAMINANDOIZQ || estadoActual == CAMINANDODER) {
-		estadoActual = CAMINANDODER;
-		caminando = true;
+	switch (estadoActual) {
+		case SALTANDODER:
+		case SALTANDOIZQ:
+			estadoActual = SALTAR;
+			break;
+		case (EVOLUCION + SALTANDODER):
+		case (EVOLUCION + SALTANDOIZQ):
+			estadoActual = EVOLUCION + SALTAR;
+			break;
+		case CAMINANDOIZQ:
+		case CAMINANDODER:
+			estadoActual = CAMINANDODER;
+			caminando = true;
+			break;
+		case (EVOLUCION + CAMINANDOIZQ):
+		case (EVOLUCION + CAMINANDODER):
+			estadoActual = EVOLUCION + CAMINANDODER;
+			caminando = true;
+		break;
 	}
 
 	sonidoAnterior = sonidoActual;

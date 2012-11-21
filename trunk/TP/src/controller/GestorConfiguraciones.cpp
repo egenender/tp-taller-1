@@ -135,7 +135,9 @@ void GestorConfiguraciones::AgregarAVector(string ruta){
 
 }
 
-GestorConfiguraciones::GestorConfiguraciones (){
+GestorConfiguraciones::GestorConfiguraciones () {
+	vistaProt = NULL;
+	invenciTester = NULL;
 	quienGano = 0;
 	margen_scroll=0;
 	configPantalla=0;
@@ -2371,7 +2373,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 				if (esCliente) ruta=headerTemp+ruta;
 
-				vistaSonora->agregarSonido(ruta, QUIETO);
+				vistaSonora->agregarSonido(ruta, EVOLUCION + QUIETO);
 
 			}
 
@@ -2403,7 +2405,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 				if (esCliente) ruta=headerTemp+ruta;
 
-				vistaSonora->agregarSonido(ruta, CAMINANDODER);
+				vistaSonora->agregarSonido(ruta, EVOLUCION + CAMINANDODER);
 			}
 		}catch( YAML::TypedKeyNotFound<std::string> &e) {
 			ruta = RUTA_PASIVA;
@@ -2434,7 +2436,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 				if (esCliente) ruta=headerTemp+ruta;
 
-				vistaSonora->agregarSonido(ruta, SALTAR);
+				vistaSonora->agregarSonido(ruta, EVOLUCION + SALTAR);
 
 			}
 		}catch( YAML::TypedKeyNotFound<std::string> &e) {
@@ -2466,7 +2468,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 				if (esCliente) ruta=headerTemp+ruta;
 
-				vistaSonora->agregarSonido(ruta, SUBIENDOQUIETO);
+				vistaSonora->agregarSonido(ruta, EVOLUCION + SUBIENDOQUIETO);
 			}
 		}catch( YAML::TypedKeyNotFound<std::string> &e) {
 			ruta = RUTA_PASIVA;
@@ -2497,7 +2499,7 @@ TipoProtagonista* GestorConfiguraciones::_CargarTipoProtagonista(const YAML::Nod
 
 				if (esCliente) ruta=headerTemp+ruta;
 
-				vistaSonora->agregarSonido(ruta, SUBIENDOMOVIMIENTO);
+				vistaSonora->agregarSonido(ruta, EVOLUCION + SUBIENDOMOVIMIENTO);
 			}
 		}catch( YAML::TypedKeyNotFound<std::string> &e) {
 			ruta = RUTA_PASIVA;
