@@ -723,8 +723,11 @@ juego:
         - tipo: camaElastica
           x: 1950
           y: 2000
+        - tipo: camaElastica
+          x: 1200
+          y: 800
         - tipo: princesa
-          x: 1450
+          x: 1400
           y: 140
         - tipo: mono
           x: 1300
@@ -741,22 +744,6 @@ juego:
         - tipo: plataformaMovil
           x: 1250
           y: 1150
-      tuberias:
-#        - tipo: tuberiaHT
-#          x: 200
-#          y: 2140
-#          direccion: arriba
-#          eme: 5
-#        - tipo: tuberiaHongo
-#          x: 800
-#          y: 2200
-#          direccion: abajo
-#          eme: 5
-#        - tipo: tuberiaHT
-#          x: 800
-#          y: 380
-#          direccion: derecha
-#          eme: 5
       plataformas:
         - textura: viga2
           x: 920
@@ -874,9 +861,29 @@ juego:
           x: 1500
           y: 1910
         - tipo: cajaRandom
-          x: 1000
-          y: 50
+          x: 1300
+          y: 2350
         - tipo: cajaRandom
           x: 1300
           y: 680
-
+      tuberias:
+        - tipo: tuberiaHTabajo
+          x: 600
+          y: 2100
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 1400
+          y: 2100
+          eme: 5
+        - tipo: tuberiaHTizquierda
+          x: 1820
+          y: 2000
+          eme: 3
+        - tipo: tuberiaHTarriba
+          x: 1000
+          y: 1750
+          eme: 5
+        - tipo: tuberiaHTabajo
+          x: 850
+          y: 280
+          eme: 10
