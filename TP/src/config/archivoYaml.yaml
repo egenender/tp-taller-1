@@ -3,7 +3,7 @@ juego:
 #    ancho: 1000
 #    alto: 550
   parametros:
-    margen_scroll: 100
+    margen_scroll: 150
   tiposProtagonista:
     Charmander:
       ancho: 65
@@ -190,7 +190,7 @@ juego:
       ancho: 73
       alto: 66
       vel_personaje: 25
-      salto: 25
+      salto: 33
       sonido: 
       animaciones:
         quieto:
@@ -293,16 +293,16 @@ juego:
       cayendo: src/resources/items/shroomishCaida.bmp
   plataformaMovil:
     ancho: 350
-    alto: 50
+    alto: 35
     velocidad: 10
     distancia: 400
     animaciones:
       plataforma: src/resources/items/viga2.jpg
   elevador:
-    ancho: 50
-    alto: 50
-    velocidad: 2
-    distancia: 10
+    ancho: 100
+    alto: 35
+    velocidad: 10
+    distancia: 300
     animaciones:
       elevador: src/resources/items/viga2.jpg
   vidaExtra:
@@ -366,6 +366,7 @@ juego:
     viga: src/resources/items/viga2.jpg
     esc: src/resources/items/ladder.png
     esc2: src/resources/items/film.png
+    viga2: src/resources/items/viga.jpg
   nivel:
     - nivel: Classic
       players: 1
@@ -399,9 +400,9 @@ juego:
         - tipo: plataformaMovil
           x: 950
           y: 150
-        - tipo: elevador
-          x: 150
-          y: 350
+#        - tipo: elevador
+#          x: 800
+#          y: 350
       cajas:
         - tipo: cajaRandom
           x: 70
@@ -505,9 +506,9 @@ juego:
         - tipo: plataformaMovil
           x: 900
           y: 1450
-        - tipo: elevador
-          x: 800
-          y: 350
+#        - tipo: elevador
+#          x: 800
+#          y: 350
         - tipo: camaElastica
           x: 210
           y: 2425
@@ -718,22 +719,28 @@ juego:
       elementos:
         - tipo: camaElastica
           x: 280
-          y: 2020
+          y: 2000
         - tipo: camaElastica
           x: 1950
-          y: 2020
-#        - tipo: princesa
-#          x: 600
-#          y: 150
-#        - tipo: mono
-#          x: 650
-#          y: 150
+          y: 2000
+        - tipo: princesa
+          x: 1450
+          y: 140
+        - tipo: mono
+          x: 1300
+          y: 140
+        - tipo: elevador
+          x: 100
+          y: 1200
+        - tipo: elevador
+          x: 1900
+          y: 1200
         - tipo: plataformaMovil
-          x: 950
-          y: 150
-#        - tipo: elevador
-#          x: 800
-#          y: 350
+          x: 350
+          y: 1150
+        - tipo: plataformaMovil
+          x: 1250
+          y: 1150
       tuberias:
 #        - tipo: tuberiaHT
 #          x: 200
@@ -751,6 +758,11 @@ juego:
 #          direccion: derecha
 #          eme: 5
       plataformas:
+        - textura: viga2
+          x: 920
+          y: 1050
+          ancho: 150
+          alto: 50
         - textura: viga
           x: 200
           y: 2200
@@ -777,28 +789,40 @@ juego:
           ancho: 100
           alto: 50
         - textura: viga
-          x: 1800
-          y: 1000
-          ancho: 100
-          alto: 50
-        - textura: viga
-          x: 1000
-          y: 150
-          ancho: 200
+          x: 750
+          y: 140
+          ancho: 700
+          alto: 80
+        - textura: viga2
+          x: 410
+          y: 800
+          ancho: 1000
           alto: 50
       vigas:
         - textura: viga
           x: 200
-          y: 1500
+          y: 1530
           ancho: 300
           alto: 50
           inclinacion: -20
         - textura: viga
-          x: 1650
-          y: 1420
+          x: 1500
+          y: 1400
           ancho: 300
           alto: 50
           inclinacion: 20
+        - textura: viga
+          x: 510
+          y: 460
+          ancho: 500
+          alto: 50
+          inclinacion: 40
+        - textura: viga
+          x: 510
+          y: 390
+          ancho: 350
+          alto: 50
+          inclinacion: -40
       escaleras:
         - textura: esc
           x: 200
@@ -831,7 +855,28 @@ juego:
           ancho: 50
           alto: 290
         - textura: esc
-          x: 1800
+          x: 1650
           y: 1460
           ancho: 50
           alto: 290
+        - textura: esc
+          x: 970
+          y: 800
+          ancho: 50
+          alto: 250
+        - textura: esc
+          x: 590
+          y: 300
+          ancho: 30
+          alto: 230
+      cajas:
+        - tipo: cajaRandom
+          x: 1500
+          y: 1910
+        - tipo: cajaRandom
+          x: 1000
+          y: 50
+        - tipo: cajaRandom
+          x: 1300
+          y: 680
+
