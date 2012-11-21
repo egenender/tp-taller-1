@@ -184,7 +184,9 @@ void Barril::chocarConPlataforma(Plataforma* p){
 	if (estaMuerto()) return;
 	if (plt == NULL) plt = p;
 
-	if(atraviesaBloques && plt == p){
+	//anterior:
+	//if (atraviesaBloques && plt == p){
+	if(atraviesaBloques && (plt == p || p->esVigaPorDerecha() || p->esVigaPorIzquierda())){
 		permito = true;
 		return;
 	}else{
