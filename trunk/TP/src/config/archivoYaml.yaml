@@ -374,7 +374,7 @@ juego:
       alto: 2500
       ancho: 2000
       fondo: src/resources/ph-101661.jpg
-      musica: src/resources/niveles/trololo.ogg
+      musica: src/resources/niveles/assassin.ogg
       piso: 2450
       elementos:
         - tipo: camaElastica
@@ -552,7 +552,7 @@ juego:
       alto: 700
       ancho: 1200
       fondo: src/resources/mario-hardcore.jpg
-      musica: src/resources/niveles/trololo.ogg
+      musica: src/resources/niveles/byob.ogg
       piso: 650
       elementos:
         - tipo: princesa
