@@ -26,7 +26,7 @@ FabricaPowerUps::~FabricaPowerUps() {
 }
 
 void FabricaPowerUps::fabricar(Posicion* pos, int valor){
-	fabricas->at(3)->fabricar(pos, valor);
+	fabricas->at( eleccionFabrica() )->fabricar(pos, valor);
 }
 
 int FabricaPowerUps::eleccionFabrica(){
