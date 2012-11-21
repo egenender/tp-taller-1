@@ -367,6 +367,7 @@ juego:
     esc: src/resources/items/ladder.png
     esc2: src/resources/items/film.png
     viga2: src/resources/items/viga.jpg
+    invisible: src/resources/items/mag.bmp
   nivel:
     - nivel: Classic
       players: 1
@@ -887,3 +888,75 @@ juego:
           x: 850
           y: 280
           eme: 10
+
+    - nivel: Hardcode
+      players: 2
+      alto: 600
+      ancho: 1200
+      fondo: src/resources/fondoH.bmp
+      musica: src/resources/niveles/trololo.ogg
+      piso: 550
+      elementos:
+        - tipo: princesa
+          x: 300
+          y: 220
+        - tipo: mono
+          x: 400
+          y: 225
+      cajas:
+      vigas:
+        - textura: viga
+          x: 50
+          y: 200
+          ancho: 1000 
+          alto: 60
+          inclinacion: 5
+      plataformas:
+      escaleras:
+        - textura: esc
+          x: 900
+          y: 250
+          ancho: 50
+          alto: 300
+        - textura: invisible
+          x: 1
+          y: 1
+          ancho: 10
+          alto: 600
+      tuberias:
+        - tipo: tuberiaHTabajo
+          x: 200
+          y: 320
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 280
+          y: 325
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 360
+          y: 330
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 440
+          y: 335
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 520
+          y: 340
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 600
+          y: 345
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 680
+          y: 350
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 760
+          y: 355
+          eme: 2
+        - tipo: tuberiaHTabajo
+          x: 840
+          y: 360
+          eme: 2
