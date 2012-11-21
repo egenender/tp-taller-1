@@ -230,6 +230,9 @@ void Nivel::dibujar(SDL_Surface* display) {
 		vista->dibujar(display, camara->obtenerX(), camara->obtenerY()); // Estos si le dan bola a los numeros, porque tienen que dibujarse RESPECTO a la camara.
 	}
 	// Ponele que se reproducen los sonidos (?)
+
+	if (estado == CLIENTE)
+		GestorConfiguraciones::getInstance()->vistaProt->dibujar(display, camara->obtenerX(), camara->obtenerY());
 }
 
 void Nivel::agregarCuerpo(Cuerpo* c) {

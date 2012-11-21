@@ -108,6 +108,7 @@ class GestorConfiguraciones{
 
 		bool destruir;
 	public:
+		VistaVarios* vistaProt;
 		unsigned int quienGano;
 		SonInvencibles* invenciTester;
 
