@@ -1735,7 +1735,7 @@ void GestorConfiguraciones::setProtagonista(string nombre){
 	if (!encontrado)
 		return ;
 
-	VistaVarios* vistaProt = this->crearVistaProt(nombre);
+	vistaProt = this->crearVistaProt(nombre);
 	configNivel->vistas.push_back(vistaProt);
 	configNivel->vistas.push_back(posiblesTiposProt->at(i)->vistaSonora);
 	if (esCliente){
