@@ -775,8 +775,6 @@ VistaVarios* GestorConfiguraciones::crearVistaProt(string clave){
 }
 
 void GestorConfiguraciones::crearVistaElemento(Observable* cuerpo,string clave, bool esCuerpo){
-	printf("clave: %s\n", clave.c_str());
-
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
 	VistaVarios* vista = new VistaVarios();
 	if (!esServidor){
