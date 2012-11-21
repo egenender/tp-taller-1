@@ -9,6 +9,7 @@ EstadoJuegoTerminado::EstadoJuegoTerminado() {
 	ganador = NULL;
 	ganadores = NULL;
 	timer = NULL;
+	actual = 0;
 }
 
 EstadoJuegoTerminado::~EstadoJuegoTerminado() {
@@ -69,8 +70,9 @@ void EstadoJuegoTerminado::actualizar(float delta){
 
 void EstadoJuegoTerminado::dibujar(SDL_Surface* display){
 	fondo->dibujar(display, 0 ,0);
-	if (ganador)
+	if (ganador) {
 		ganador->dibujar(display, 350, 150);
+	}
 }
 
 EstadoJuegoTerminado* EstadoJuegoTerminado::obtenerInstancia(){
