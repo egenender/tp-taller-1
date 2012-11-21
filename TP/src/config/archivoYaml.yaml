@@ -551,7 +551,7 @@ juego:
       players: 2
       alto: 700
       ancho: 1200
-      fondo: src/resources/fondoH.bmp
+      fondo: src/resources/mario-hardcore.jpg
       musica: src/resources/niveles/trololo.ogg
       piso: 650
       elementos:
@@ -577,10 +577,10 @@ juego:
           ancho: 50
           alto: 300
         - textura: invisible
-          x: 1
-          y: 11
+          x: 0
+          y: 0
           ancho: 10
-          alto: 600
+          alto: 700
       tuberias:
         - tipo: tuberiaHTabajo
           x: 200
