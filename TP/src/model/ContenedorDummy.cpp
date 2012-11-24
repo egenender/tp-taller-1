@@ -43,12 +43,10 @@ void ContenedorDummy::agregarDummy(Dummy* tonto){
 	string aux1 = "";
 	if (id < GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size() ){
 		aux1 = "Se ha conectado el cliente ";
-	}else{
-		aux1 = "Ha aparecido el elemento ";
+		string aux2 = intToString(id+1);
+		string aux3 = aux1 + aux2;
+		barra->setearMensaje(aux3);
 	}
-	string aux2 = intToString(id);
-	string aux3 = aux1 + aux2;
-	barra->setearMensaje(aux3);
 }
 
 void ContenedorDummy::actualizar(float delta){
@@ -87,12 +85,10 @@ void ContenedorDummy::interpretarStruct(structServidor_t* mod){
 		string aux1 = "";
 		if (id < GestorConfiguraciones::getInstance()->ObtenerPosiblesTiposProtagonistas()->size() ){
 			aux1 = "Se ha desconectado el cliente ";
-		}else{
-			aux1 = "Ha muerto el personaje ";
+			string aux2 = intToString(id+1);
+			string aux3 = aux1 + aux2;
+			barra->setearMensaje(aux3);
 		}
-		string aux2 = intToString(id+1);
-		string aux3 = aux1 + aux2;
-		barra->setearMensaje(aux3);
 	}
 
 }
