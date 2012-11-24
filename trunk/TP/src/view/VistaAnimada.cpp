@@ -29,7 +29,14 @@ VistaAnimada::~VistaAnimada() {
 }
 
 bool VistaAnimada::dibujar(SDL_Surface *display, int xCamara, int yCamara) {
-	if (pararDeDibujar) return true;
+	if (pararDeDibujar){
+//		if (animaciones){
+//			animaciones->clear();
+//			delete(animaciones);
+//			animaciones = NULL;
+//		}
+		return true;
+	}
 	if (display == NULL || animacionActual == NULL || posicionDibujar == NULL)
 		return false;
 
