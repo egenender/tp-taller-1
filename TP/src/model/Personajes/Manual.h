@@ -16,7 +16,7 @@ class Princesa;
 
 #define DERECHA 1
 #define IZQUIERDA -1
-#define FACTOR_DE_ESCALA 90
+#define FACTOR_DE_ESCALA 70
 #define FACTOR_EVOLUCION 90
 #define CANT_VIDAS 3
 #define SUPERFICIE_EVOLUCION 1
@@ -60,6 +60,7 @@ private:
 	bool invencible;
 
 	int YEscalera;
+	int YTecho;
 	
 	// NEW:
 	bool reposicionar; // Si se tiene que cambiar de posicion (cuando lo matan)
