@@ -982,7 +982,7 @@ void GestorConfiguraciones::CargaRestante(){
 	}
 
 	try{
-		nodoRaiz["parametros"]["margen_scroll"] >> margen_scrollY;
+		nodoRaiz["parametros"]["margen_scroll_Y"] >> margen_scrollY;
 		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga margen_scroll");
 	}catch(YAML::BadDereference &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll Y, se carga por defecto");

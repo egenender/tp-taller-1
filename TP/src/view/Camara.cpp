@@ -69,12 +69,12 @@ void Camara::actualizar(Observable* observable) {
 			camara->x = (x + ancho ) + margenScroll - camara->w;
 	}
 
-	if ( (y ) < camara->y + margenScroll) {
-		camara->y = (y) - margenScroll;
+	if ( (y ) < camara->y + margenScrollY) {
+		camara->y = (y) - margenScrollY;
 	}
 
-	if ( (y + alto) > camara->y + camara->h - margenScroll) {
-			camara->y = (y + alto ) + margenScroll - camara->h;
+	if ( (y + alto) > camara->y + camara->h - margenScrollY) {
+			camara->y = (y + alto ) + margenScrollY - camara->h;
 	}
 
 	// No dejo que se vaya del nivel:
