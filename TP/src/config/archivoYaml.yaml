@@ -1,9 +1,7 @@
 juego:
-#  pantalla:
-#    ancho: 1000
-#    alto: 550
   parametros:
-    margen_scroll: 150
+    margen_scroll: 350
+    margen_scroll_Y: 80
   tiposProtagonista:
     Charmander:
       ancho: 65
@@ -373,8 +371,17 @@ juego:
       players: 2
       alto: 2500
       ancho: 2000
+      posiciones:
+        - jugador: j1
+          posX: 1000
+        - jugador: j2
+          posX: 100
+        - jugador: j3
+          posX: 400
+        - jugador: j4
+          posX: 700
       fondo: src/resources/ph-101661.jpg
-      musica: src/resources/niveles/assassin.ogg
+      musica: src/resources/estados/musica/Bowser.ogg
       piso: 2450
       elementos:
         - tipo: camaElastica
@@ -387,8 +394,8 @@ juego:
           x: 1200
           y: 800
         - tipo: princesa
-          x: 1400
-          y: 140
+          x: 120
+          y: 1800
         - tipo: mono
           x: 1300
           y: 140
@@ -548,9 +555,14 @@ juego:
           y: 280
           eme: 10
     - nivel: Hardcode
-      players: 2
+      players: 1
       alto: 700
       ancho: 1200
+      posiciones:
+        - jugador: hola
+          posX: 1000
+        - jugador: hola2
+          posX: 100
       fondo: src/resources/mario-hardcore.jpg
       musica: src/resources/niveles/byob.ogg
       piso: 650
@@ -623,6 +635,13 @@ juego:
       alto: 700
       ancho: 2000
       piso: 540
+      posiciones:
+        - jugador: j1
+          posX: 1000
+        - jugador: j2
+          posX: 100
+        - jugador: j3
+          posX: 700
       fondo: src/resources/niveles/superMario.png
       musica: src/resources/estados/musica/Bowser.ogg
       elementos:
@@ -740,6 +759,13 @@ juego:
       players: 2
       alto: 2560
       ancho: 1600
+      posiciones:
+        - jugador: j1
+          posX: 1000
+        - jugador: j2
+          posX: 100
+        - jugador: j3
+          posX: 700
       fondo: src/resources/ph-101661.jpg
       musica: src/resources/niveles/route1.ogg
       piso: 2450
@@ -846,6 +872,15 @@ juego:
       alto: 600
       ancho: 1600
       piso: 540
+      posiciones:
+        - jugador: j1
+          posX: 1000
+        - jugador: j2
+          posX: 100
+        - jugador: j3
+          posX: 400
+        - jugador: j4
+          posX: 700
       fondo: src/resources/fondoGrande.png
       musica: src/resources/niveles/trololo.ogg
       elementos:
