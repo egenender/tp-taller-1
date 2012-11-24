@@ -10,6 +10,7 @@ void Camara::iniciarCamara() {
 	anchoNivel = gestor->ObtenerAnchoNivel();
 	altoNivel = gestor->ObtenerAltoNivel();
 	margenScroll = gestor->ObtenerMargenScroll();
+	margenScrollY = gestor->ObtenerMargenScrollY();
 	imagen = gestor->ObtenerFondo();
 
 	imagen->escala(gestor->ObtenerAnchoNivel(), gestor->ObtenerAltoNivel());

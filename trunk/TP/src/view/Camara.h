@@ -10,7 +10,7 @@ class Camara : public VistaCuerpo {
 		Superficie* imagen;
 		// Las dimensiones de la camara:
 		SDL_Rect* camara;
-		int margenScroll, altoNivel, anchoNivel;
+		int margenScroll, margenScrollY, altoNivel, anchoNivel;
 
 	private:
 		void iniciarCamara();
