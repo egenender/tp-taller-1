@@ -35,14 +35,13 @@
 #include "../model/Fabricas/FabricaHongos.h"
 #include "../model/Fabricas/FabricaVidasExtra.h"
 
+#include "../gui/model/Ventana.h"
 
 #define VEL_PERSONAJE_MINIMA 2
 #define VEL_PERSONAJE 10
 #define SALTO_PERSONAJE 20
 #define SALTO_PERSONAJE_MINIMO 10
 #define MARGEN_SCROLL 80
-#define ANCHO_PANTALLA 800
-#define ALTO_PANTALLA 600
 #define ANCHO_PANTALLA_MINIMO 633
 #define ALTO_PANTALLA_MINIMO 530
 #define ANCHO_PANTALLA_MAXIMO 1300
@@ -57,8 +56,8 @@
 #define RUTA_SALTA "src/resources/cruzCuadroError4.png"
 #define PERIODO_PERSONAJE 15
 #define ANCHO_NIVEL 1200
-#define ALTO_NIVEL 600
-#define PISO_NIVEL 600
+#define ALTO_NIVEL 700
+#define PISO_NIVEL 700
 #define POS_DEFECTO 60
 #define TIPO_DEFECTO "defe"
 #define ANCHO_OBJETO 40
@@ -140,6 +139,7 @@ GestorConfiguraciones::GestorConfiguraciones () {
 	invenciTester = NULL;
 	quienGano = 0;
 	margen_scroll=0;
+	margen_scrollY=0;
 	configPantalla=0;
 	nivelElegido = 0;
 	tiposProtagonista=new mapa_prot();
@@ -171,6 +171,7 @@ GestorConfiguraciones::GestorConfiguraciones () {
 	destruir = false;
 	contCuerpos = new ContenedorCuerpos();
 
+	posManual = new std::vector<int>();
 	IDACT = 0;
 }
 
@@ -343,6 +344,8 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	Animacion* animacionCaminando= new Animacion(new HojaSprites(ruta,paramHongo->ancho,paramHongo->alto));
 
 	paramHongo->animaciones->push_back(animacionCaminando);
+	Animacion* inversa = animacionCaminando->voltear(HORIZONTALMENTE);
+	paramHongo->animaciones->push_back(inversa);
 
 	nodoRaiz["hongo"]["animaciones"]["cayendo"]>>ruta;
 
@@ -350,9 +353,14 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramHongo->animaciones->push_back(animacionCayendo);
 
-	std::vector<int>* aux= new std::vector<int>();
+	inversa = animacionCayendo->voltear(HORIZONTALMENTE);
+	paramHongo->animaciones->push_back(inversa);
 
+	std::vector<int>* aux= new std::vector<int>();
 	aux->push_back(CAMINANDODER);
+	paramHongo->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(CAMINANDOIZQ);
 
 	paramHongo->matrizEstados->push_back(aux);
@@ -360,6 +368,8 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	aux= new std::vector<int>();
 
 	aux->push_back(SALTANDODER);
+	paramHongo->matrizEstados->push_back(aux);
+	aux= new std::vector<int>();
 	aux->push_back(SALTANDOIZQ);
 
 	paramHongo->matrizEstados->push_back(aux);
@@ -441,6 +451,9 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramBarril->animaciones->push_back(animacionCaminando);
 
+	inversa = animacionCaminando->voltear(HORIZONTALMENTE);
+	paramBarril->animaciones->push_back(inversa);
+
 	nodoRaiz["barril"]["animaciones"]["bajando"]>>ruta;
 
 	animacionQuieto= new Animacion(new HojaSprites(ruta,paramBarril->ancho,paramBarril->alto));
@@ -460,70 +473,73 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	paramBarril->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
-
 	aux->push_back(CAMINANDODER);
-	aux->push_back(CAMINANDOIZQ);
-
 	paramBarril->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
+	aux->push_back(CAMINANDOIZQ);
+	paramBarril->matrizEstados->push_back(aux);
 
+	aux= new std::vector<int>();
 	aux->push_back(SUBIENDOMOVIMIENTO);
-
 	paramBarril->matrizEstados->push_back(aux);
 
 	// Tortuga
 	parametrosPersonaje* paramTortuga= crearParametrosPersonaje(nodoRaiz["tortuga"],"tortuga");
 
 	nodoRaiz["tortuga"]["animaciones"]["saltando"]>>ruta;
-
 	Animacion* animacionSaltando= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
-
 	paramTortuga->animaciones->push_back(animacionSaltando);
 
+	inversa = animacionSaltando->voltear(HORIZONTALMENTE);
+	paramTortuga->animaciones->push_back(inversa);
+
+
 	nodoRaiz["tortuga"]["animaciones"]["quieto"]>>ruta;
-
 	animacionQuieto= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
-
 	paramTortuga->animaciones->push_back(animacionQuieto);
 
+
 	nodoRaiz["tortuga"]["animaciones"]["caminando"]>>ruta;
-
 	animacionCaminando= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
-
 	paramTortuga->animaciones->push_back(animacionCaminando);
 
+	inversa = animacionCaminando->voltear(HORIZONTALMENTE);
+	paramTortuga->animaciones->push_back(inversa);
 	nodoRaiz["tortuga"]["animaciones"]["movil"]>>ruta;
 
 	Animacion* animacionMovil= new Animacion(new HojaSprites(ruta,paramTortuga->ancho,paramTortuga->alto));
-
 	paramTortuga->animaciones->push_back(animacionMovil);
 
-	aux= new std::vector<int>();
+	inversa = animacionMovil->voltear(HORIZONTALMENTE);
+	paramTortuga->animaciones->push_back(inversa);
 
+	aux= new std::vector<int>();
 	aux->push_back(SALTANDODER);
+	paramTortuga->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(SALTANDOIZQ);
-
 	paramTortuga->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
-
 	aux->push_back(QUIETO);
-
 	paramTortuga->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
-
 	aux->push_back(CAMINANDODER);
-	aux->push_back(CAMINANDOIZQ);
-
 	paramTortuga->matrizEstados->push_back(aux);
 
 	aux= new std::vector<int>();
+	aux->push_back(CAMINANDOIZQ);
+	paramTortuga->matrizEstados->push_back(aux);
 
+	aux= new std::vector<int>();
 	aux->push_back(MOVILDERECHA);
-	aux->push_back(MOVILIZQUIERDA);
+	paramTortuga->matrizEstados->push_back(aux);
 
+	aux= new std::vector<int>();
+	aux->push_back(MOVILIZQUIERDA);
 	paramTortuga->matrizEstados->push_back(aux);
 
 	//PowerUp Vida Extra:
@@ -535,10 +551,15 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	Animacion* animacionMov= new Animacion(new HojaSprites(ruta,paramVidaExtra->ancho,paramVidaExtra->alto));
 
 	paramVidaExtra->animaciones->push_back(animacionMov);
+	inversa = animacionMov->voltear(HORIZONTALMENTE);
+	paramVidaExtra->animaciones->push_back(inversa);
 
 	aux= new std::vector<int>();
 
 	aux->push_back(CAMINANDODER);
+	paramVidaExtra->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(CAMINANDOIZQ);
 
 	paramVidaExtra->matrizEstados->push_back(aux);
@@ -553,9 +574,15 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 
 	paramPiedraEvolve->animaciones->push_back(animacionMov);
 
+	inversa = animacionMov->voltear(HORIZONTALMENTE);
+	paramPiedraEvolve->animaciones->push_back(inversa);
+
 	aux= new std::vector<int>();
 
 	aux->push_back(CAMINANDODER);
+	paramPiedraEvolve->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(CAMINANDOIZQ);
 
 	paramPiedraEvolve->matrizEstados->push_back(aux);
@@ -569,10 +596,16 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	animacionMov= new Animacion(new HojaSprites(ruta,paramAcEsp->ancho,paramAcEsp->alto));
 
 	paramAcEsp->animaciones->push_back(animacionMov);
+	inversa = animacionMov->voltear(HORIZONTALMENTE);
+	paramAcEsp->animaciones->push_back(inversa);
+
 
 	aux= new std::vector<int>();
 
 	aux->push_back(CAMINANDODER);
+	paramAcEsp->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(CAMINANDOIZQ);
 
 	paramAcEsp->matrizEstados->push_back(aux);
@@ -586,10 +619,15 @@ void GestorConfiguraciones::CargarPersonajes(const YAML::Node& nodoRaiz){
 	animacionMov= new Animacion(new HojaSprites(ruta,paramInvencibilidad->ancho,paramInvencibilidad->alto));
 
 	paramInvencibilidad->animaciones->push_back(animacionMov);
+	inversa = animacionMov->voltear(HORIZONTALMENTE);
+	paramInvencibilidad->animaciones->push_back(inversa);
 
 	aux= new std::vector<int>();
 
 	aux->push_back(CAMINANDODER);
+	paramInvencibilidad->matrizEstados->push_back(aux);
+
+	aux= new std::vector<int>();
 	aux->push_back(CAMINANDOIZQ);
 
 	paramInvencibilidad->matrizEstados->push_back(aux);
@@ -761,10 +799,12 @@ VistaVarios* GestorConfiguraciones::crearVistaProt(string clave){
 
 	parametrosPersonaje* paramPersonaje=mapaParam->at(clave);
 	VistaVarios* vista=new VistaVarios();
+
 	for (unsigned int i =0; i<paramPersonaje->animaciones->size();i++){
 
 		if (paramPersonaje->matrizEstados->at(i)->size()==1){
 			vista->agregarEstadoSoportado(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->animaciones->at(i));
+
 		}else{
 			vista->agregarEstadoSoportadoEInverso(paramPersonaje->matrizEstados->at(i)->at(0),paramPersonaje->matrizEstados->at(i)->at(1),paramPersonaje->animaciones->at(i));
 
@@ -941,9 +981,28 @@ void GestorConfiguraciones::CargaRestante(){
 		margen_scroll = MARGEN_SCROLL;
 	}
 
+	try{
+		nodoRaiz["parametros"]["margen_scroll"] >> margen_scrollY;
+		Log::getInstance()->writeToLogFile("INFO","PARSER: Se carga margen_scroll");
+	}catch(YAML::BadDereference &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll Y, se carga por defecto");
+		margen_scrollY = MARGEN_SCROLL;
+	}catch(YAML::TypedKeyNotFound<std::string> &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo margen_scroll Y, se carga por defecto");
+		margen_scrollY = MARGEN_SCROLL;
+	}catch(YAML::InvalidScalar &e){
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll Y no toma valor valido, se carga por defecto");
+		margen_scrollY = MARGEN_SCROLL;
+	}
+
 	if (margen_scroll<=0 || margen_scroll*2 >= configNivel->ancho ){
 		margen_scroll=(configNivel->ancho)/2;
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll no toma valor valido dentro de las dimensiones del nivel, se carga uno valido");
+	}
+
+	if (margen_scrollY<=0 || margen_scrollY*2 >= configNivel->alto ){
+		margen_scrollY=(configNivel->alto)/2;
+		Log::getInstance()->writeToLogFile("ERROR","PARSER: El margen_scroll Y no toma valor valido dentro de las dimensiones del nivel, se carga uno valido");
 	}
 
 }
@@ -1021,6 +1080,13 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 		configNivel->players = 2;
 	}
 
+	int posicionInicialX;
+	const YAML::Node& posiciones = nodo[nivelElegido]["posiciones"];
+	for ( unsigned int j = 0 ; j < posiciones.size(); j++ ){
+		nodo[nivelElegido]["posiciones"][j]["posX"] >> posicionInicialX;
+		posManual->push_back(posicionInicialX);
+	}
+
 	try{
 		nodo[nivelElegido]["ancho"] >> configNivel->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
@@ -1058,7 +1124,7 @@ void GestorConfiguraciones::CargarConfiguracionNivel(const YAML::Node& nodo, con
 
 	if (ruta!="~"){
 
-		AgregarAVector(ruta);
+		//AgregarAVector(ruta);
 		ruta="./"+ruta;
 		configNivel->musica=Mix_LoadMUS(ruta.c_str());
 
@@ -1775,13 +1841,13 @@ Superficie* GestorConfiguraciones::ObtenerFondo(){
 }
 
 int GestorConfiguraciones::ObtenerAltoPantalla(){
-	return 600;
+	return ANCHO_ESTANDARD;
 	//return configPantalla->alto;
 }
 
 
 int GestorConfiguraciones::ObtenerAnchoPantalla(){
-	return 800;
+	return ALTO_ESTANDARD;
 	//return configPantalla->ancho;
 }
 
@@ -1799,6 +1865,10 @@ int GestorConfiguraciones::ObtenerPisoNivel(){
 
 int GestorConfiguraciones::ObtenerMargenScroll(){
 	return margen_scroll;
+}
+
+int GestorConfiguraciones::ObtenerMargenScrollY(){
+	return margen_scrollY;
 }
 
 void GestorConfiguraciones::CargarTexturas(const YAML::Node& nodo){
@@ -2688,10 +2758,10 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 		nodo["alto"] >> config->alto;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo alto dentro de pantalla, se carga por defecto");
-		config->alto = ALTO_PANTALLA;
+		config->alto = ALTO_ESTANDARD;
 	}catch(YAML::InvalidScalar &e){
 			Log::getInstance()->writeToLogFile("ERROR","PARSER: El alto no toma valor valido, se carga por defecto");
-			config->alto = ALTO_PANTALLA;
+			config->alto = ALTO_ESTANDARD;
 	}
 	if(config->alto < ALTO_PANTALLA_MINIMO){
 		config->alto = ALTO_PANTALLA_MINIMO;
@@ -2707,10 +2777,10 @@ ConfiguracionPantalla* GestorConfiguraciones::CargarConfiguracionPantalla(const 
 		nodo["ancho"] >> config->ancho;
 	}catch(YAML::TypedKeyNotFound<std::string> &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: No hay nodo ancho dentro de pantalla, se carga por defecto");
-		config->ancho = ANCHO_PANTALLA;
+		config->ancho = ANCHO_ESTANDARD;
 	}catch(YAML::InvalidScalar &e){
 		Log::getInstance()->writeToLogFile("ERROR","PARSER: El ancho no toma valor valido, se carga por defecto");
-		config->ancho = ANCHO_PANTALLA;
+		config->ancho = ANCHO_ESTANDARD;
 	}
 	if(config->ancho < ANCHO_PANTALLA_MINIMO){
 		config->ancho = ANCHO_PANTALLA_MINIMO;
@@ -2750,7 +2820,7 @@ void GestorConfiguraciones::crearManual(unsigned int id){
 	}
 	TipoProtagonista* tipo = posiblesTiposProt->at(id);
 
-	int x = id * 100 + tipo->ancho;
+	int x = posManual->at(manuales->obtenerCantidad());
 
 	Posicion* pos = new Posicion (x,Posicion::obtenerPiso() - tipo->alto);
 
