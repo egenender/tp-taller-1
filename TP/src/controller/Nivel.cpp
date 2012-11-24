@@ -49,6 +49,7 @@ void Nivel::manejarEvento(SDL_Event* evento) {
 
 	}
 	if(estado==SERVIDOR){
+		//SDL_Delay (10);
 		Server* server = Server::obtenerInstancia(0);
 		if (server->desco){
 			if ( server->IDsockets->size() == 0){
@@ -101,7 +102,8 @@ void Nivel::iniciar() {
 
 		}else{
 			Manual* prin = gestor->ObtenerManual();
-			prin->moverA(new Posicion(10, Posicion::obtenerPiso()-prin->obtenerAlto()));
+			prin->moverA( new Posicion ( gestor->posManual->at(0)  ,Posicion::obtenerPiso()-prin->obtenerAlto()));
+			prin->setearXInicial( gestor->posManual->at(0) );
 			prin->agregarObservador(camara);
 			prin->agregarObservador(corazones);
 			prin->agregarObservador(musica);
