@@ -72,7 +72,7 @@ void EstadoJuegoTerminado::actualizar(float delta){
 void EstadoJuegoTerminado::dibujar(SDL_Surface* display){
 	fondo->dibujar(display, 0 ,0);
 	if (ganador) {
-		ganador->dibujar(display, 350, 150);
+		ganador->dibujar(display, 450, 200);
 	}
 }
 
