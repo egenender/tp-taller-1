@@ -78,7 +78,7 @@ class GestorConfiguraciones{
 	private:
 		static GestorConfiguraciones* instancia;
 		GestorConfiguraciones();
-		int margen_scroll;
+		int margen_scroll, margen_scrollY;
 		ConfiguracionPantalla* configPantalla;
 		mapa_prot* tiposProtagonista;
 		mapa_auto* tiposAutomatico;
@@ -108,6 +108,7 @@ class GestorConfiguraciones{
 
 		bool destruir;
 	public:
+		std::vector<int>* posManual;
 		bool esCliente;
 		VistaVarios* vistaProt;
 		unsigned int quienGano;
@@ -175,6 +176,7 @@ class GestorConfiguraciones{
 		int ObtenerAltoPantalla();
 		int ObtenerAnchoPantalla();
 		int ObtenerMargenScroll();
+		int ObtenerMargenScrollY();
 		Superficie* ObtenerFondo();
 		void AgregarAVector(string ruta);
 		void setEsCliente ();
