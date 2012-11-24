@@ -1,7 +1,7 @@
 juego:
   parametros:
     margen_scroll: 350
-    margen_scroll_Y: 80
+    margen_scroll_Y: 150
   tiposProtagonista:
     Charmander:
       ancho: 65
