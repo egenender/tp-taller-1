@@ -28,9 +28,9 @@ void EstadoMenuPrincipal::iniciar(){
 }
 
 void EstadoMenuPrincipal::crearBtns(){
-	btnMultiPlayer = new Boton(100,400,200,40, new ManejadorCambiaEstado(ESTADO_GUI));
+	btnMultiPlayer = new Boton(310,400,200,40, new ManejadorCambiaEstado(ESTADO_GUI));
 	btnMultiPlayer->setearMensaje("Multijugador en red");
-	btnSinglePlayer = new Boton(400,400,200,40, new ManejadorCambiaEstado(ESTADO_SINGLE));
+	btnSinglePlayer = new Boton(700,400,200,40, new ManejadorCambiaEstado(ESTADO_SINGLE));
 	btnSinglePlayer->setearMensaje("Juego en Solitario");
 }
 
@@ -105,7 +105,8 @@ void EstadoMenuPrincipal::dibujar(SDL_Surface* display){
 	}
 
 	fondo->dibujar(display,0,0);
-	titulo->dibujar(display, 200,200);
+	//titulo->dibujar(display, 445,200);
+	titulo->dibujar(display, (ANCHO_ESTANDARD - 321)/2, 200);
 	vistaBtnSingle->dibujar(display);
 	vistaBtnMulti->dibujar(display);
 	/*animacion->dibujar(display, 400,200);
