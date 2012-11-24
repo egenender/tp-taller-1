@@ -316,6 +316,7 @@ void* privEscribir(void* param){
 				//Manejo  lo que sea
 				continue;
 			}
+			delete(saliente);
 		}
 		pthread_mutex_unlock(&mutex);
 		pthread_mutex_destroy(&mutex);
@@ -401,17 +402,12 @@ void Cliente::detener_escribir(){
 	pthread_mutex_init (&mutex , NULL);
 	pthread_mutex_lock(&mutex);
 
+	//void* saliente;
 	while (!cola_salientes.empty()){
+		//saliente = cola_salientes->front();
 		cola_salientes.pop();
+		//delete(saliente);
 	}
-
-//	while (!cola_salientes.empty()){
-//		void* saliente = cola_salientes.front();
-//		cola_salientes.pop();
-//		int tamanio = structCliente_obtener_tamanio();
-//		write(sock,saliente, tamanio);
-//		printf("estado enviado: %d\n", structCliente_obtener_estado((structCliente_t*)saliente));
-//	}
 
 	//pthread_cancel(thread_escritura);
 
