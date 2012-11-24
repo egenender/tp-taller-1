@@ -12,7 +12,8 @@ Manual::~Manual() {
 
 void Manual::saltar(bool autogenerado){
 	if (estaMuerto()) return;
-	if (estado == QUIETODER || estado == CAMINANDODER){
+	int y = obtenerArea()->obtenerPosicion()->obtenerY() + obtenerArea()->obtenerAlto();
+	if (estado == QUIETODER || estado == CAMINANDODER || (puedoSubir && (y <= YTecho || enViga))){
 		estado = SALTANDODER;
 		velocidadY = velocidadSaltoBase;
 		if (saltoAlto && !autogenerado) velocidadY *= 2;
@@ -107,7 +108,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 	int ancho = sup->obtenerAncho();
 	int alto = sup->obtenerAlto();
 
-	int anchoC = (ancho * FACTOR_DE_ESCALA )/100;
+	int anchoC = (ancho * (FACTOR_DE_ESCALA - 20) )/100;
 	int altoC = (alto * FACTOR_DE_ESCALA) / 100;
 	int difAncho = ancho - anchoC;
 	int difAlto = alto - altoC;
@@ -117,7 +118,7 @@ Manual::Manual(const char* nombrecito, Area* sup, int vel, int fuerza):Cuerpo(no
 
 	posAnterior = new Posicion(obtenerArea()->obtenerPosicion()->obtenerX(),obtenerArea()->obtenerPosicion()->obtenerY());
 
-	int anchoE = (ancho * FACTOR_EVOLUCION )/100;
+	int anchoE = (ancho * (FACTOR_EVOLUCION - 20) )/100;
 	int altoE = (alto * FACTOR_EVOLUCION) / 100;
 	difAncho = ancho - anchoE;
 	difAlto = alto - altoE;
@@ -371,6 +372,7 @@ void Manual::chocarConEscalera(Escalera* esc){
 	Cuerpo* e = (Cuerpo*)esc;
 
 	YEscalera = e->obtenerArea()->obtenerPosicion()->obtenerY() + e->obtenerArea()->obtenerAlto();
+	YTecho = e->obtenerArea()->obtenerPosicion()->obtenerY();
 }
 
 void Manual::chocarConCamaElastica(CamaElastica* ce){
