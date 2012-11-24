@@ -1,6 +1,7 @@
 #include "VistaImagen.h"
 #include <math.h>
 #include "../model/Cuerpo.h"
+#include "../controller/GestorConfiguraciones.h"
 
 VistaImagen::VistaImagen() {
 	movY = 0;
@@ -54,6 +55,11 @@ void VistaImagen::actualizar(Observable* observable) {
 		movY = c->obtenerAlto() * sin (angulito);
 		movY += 10;
 	}
+	if(GestorConfiguraciones::getInstance()->esCliente && ( alpha != 0) ){
+//		posicionDibujar->setearX(posicionDibujar->obtenerX() - 10)
+		posicionDibujar->setearY(posicionDibujar->obtenerY() + 16);
+	}
+
 
 }
 
