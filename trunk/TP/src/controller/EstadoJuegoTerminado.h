@@ -5,6 +5,10 @@
 #include "../view/Superficie.h"
 #include <vector>
 #include "../model/Timer.h"
+#include "../gui/view/VistaBoton.h"
+#include "../gui/model/Boton.h"
+#include "ManejadorEstados.h"
+#include "../gui/model/ManejadorCambiaEstado.h"
 #define TIEMPO_GANADOR 1
 
 class EstadoJuegoTerminado: public Estado {
@@ -17,6 +21,8 @@ private:
 	Timer* timer;
 private:
 	EstadoJuegoTerminado();
+	Boton *btnMenu;
+	VistaBoton *vistaMenu;
 public:
 	virtual ~EstadoJuegoTerminado();
 	void manejarEvento(SDL_Event* evento);
