@@ -6,8 +6,8 @@ juego:
     Charmander:
       ancho: 65
       alto: 73
-      vel_personaje: 12
-      salto: 30
+      vel_personaje: 19
+      salto: 35
       animaciones:
         quieto:
           sprites: src/resources/cuerpos/Charmander/charmanderQuieto.bmp
@@ -373,13 +373,13 @@ juego:
       ancho: 2000
       posiciones:
         - jugador: j1
-          posX: 1000
+          posX: 700
         - jugador: j2
           posX: 100
         - jugador: j3
           posX: 400
         - jugador: j4
-          posX: 700
+          posX: 1200
       fondo: src/resources/ph-101661.jpg
       musica: src/resources/estados/musica/Bowser.ogg
       piso: 2450
@@ -528,7 +528,7 @@ juego:
           x: 1500
           y: 1910
         - tipo: cajaRandom
-          x: 1300
+          x: 1150
           y: 2350
         - tipo: cajaRandom
           x: 1300
@@ -537,19 +537,19 @@ juego:
         - tipo: tuberiaHTabajo
           x: 600
           y: 2100
-          eme: 5
+          eme: 7
         - tipo: tuberiaHTabajo
           x: 1400
           y: 2100
-          eme: 5
+          eme: 7
         - tipo: tuberiaHTizquierda
           x: 1820
           y: 2000
-          eme: 3
+          eme: 7
         - tipo: tuberiaHTarriba
           x: 1000
           y: 1750
-          eme: 5
+          eme: 6
         - tipo: tuberiaHTabajo
           x: 850
           y: 280
